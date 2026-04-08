@@ -409,7 +409,7 @@ def main():
                 else:
                     generated_text = word
 
-            print(generated_text)
+            print(generated_text, "\n")
 
     print("\n" + "=" * 70)
 
