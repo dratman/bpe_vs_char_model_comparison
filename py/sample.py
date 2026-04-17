@@ -14,12 +14,25 @@ Usage: python sample.py --model model.pt --prompt "The Roman" --batch
 
 import os
 import sys
+import re
 import argparse
 import pickle
 import torch
 from contextlib import nullcontext
 from model import GPTConfig, GPT
 from tokenizer import load_tokenizer
+
+
+def capitalize_sentences(text):
+    """Capitalize first letter, first letter after sentence-ending punctuation
+    (even through a quote mark), and standalone 'i' before a space."""
+    if not text:
+        return text
+    text = text[0].upper() + text[1:] if len(text) > 1 else text.upper()
+    text = re.sub(r'([.?!])\s*("?)\s*([a-z])',
+                  lambda m: m.group(1) + ' ' + m.group(2) + m.group(3).upper(), text)
+    text = re.sub(r'\bi ', 'I ', text)
+    return text
 
 
 def apply_repetition_penalty(logits, generated_ids, penalty=1.2, window=50):
@@ -228,91 +241,59 @@ def main():
         torch.manual_seed(args.seed)
         if torch.cuda.is_available():
             torch.cuda.manual_seed(args.seed)
-        print(f"Using seed: {args.seed}")
     else:
-        # Use random seed (from system time/entropy)
         import time
         seed = int(time.time() * 1000) % (2**32)
         torch.manual_seed(seed)
         if torch.cuda.is_available():
             torch.cuda.manual_seed(seed)
-        print(f"Using random seed: {seed}")
 
     # Device selection
     device = 'mps' if torch.backends.mps.is_available() else 'cuda' if torch.cuda.is_available() else 'cpu'
-    print(f"Using device: {device}")
 
     # Determine dtype for float16 option
     if args.float16:
-        if device == 'cuda':
-            dtype = torch.float16
-            print("Using float16 precision (CUDA)")
-        elif device == 'mps':
-            # MPS has limited float16 support - try it but warn
-            dtype = torch.float16
-            print("Using float16 precision (MPS - experimental, may not work)")
-        else:
-            print("Warning: float16 not supported on CPU, using float32")
+        if device == 'cpu':
             dtype = torch.float32
+        else:
+            dtype = torch.float16
     else:
         dtype = torch.float32
-        print("Using float32 precision")
 
-    # Load model
-    print(f"Loading model from {args.model}")
+    # Load model (suppress model.py's __init__ print)
     checkpoint = torch.load(args.model, map_location=device, weights_only=False)
-
-    # Initialize model
     model_args = checkpoint['model_args']
-
-    # Check attention type
-    use_linear = model_args.get('use_linear_attention', False)
-    attn_type = "linear" if use_linear else "softmax"
-    print(f"Attention type: {attn_type}")
-
     gptconf = GPTConfig(**model_args)
+    _stdout = sys.stdout
+    sys.stdout = open(os.devnull, 'w')
     model = GPT(gptconf)
+    sys.stdout = _stdout
     model.load_state_dict(checkpoint['model'])
     model.to(device)
 
-    # Convert to float16 if requested
     if dtype == torch.float16:
         model = model.half()
-        print("Model converted to float16")
 
     model.eval()
 
     # Try torch.compile() for speedup (skip on MPS - not supported)
     if not args.no_compile and device != 'mps':
         try:
-            print("Attempting torch.compile()...")
             model = torch.compile(model)
-            print("torch.compile() succeeded")
-        except Exception as e:
-            print(f"torch.compile() failed (this is OK, continuing without): {e}")
-    elif device == 'mps' and not args.no_compile:
-        print("Skipping torch.compile() (not supported on MPS)")
-
-    print(f"Model loaded: {sum(p.numel() for p in model.parameters())/1e6:.2f}M parameters")
+        except Exception:
+            pass
 
     # Load tokenizer
-    print(f"Loading tokenizer from {meta_path}")
     tokenizer = load_tokenizer(meta_path)
-
     vocab_size = tokenizer.vocab_size
     tokenizer_type = tokenizer.tokenizer_type
-    print(f"Tokenizer: {tokenizer_type}")
-    print(f"Vocabulary size: {vocab_size} tokens")
 
     # Load corpus for validation if provided
     corpus_words = None
     if args.corpus:
-        if not os.path.exists(args.corpus):
-            print(f"Warning: Corpus file '{args.corpus}' not found, skipping validation")
-        else:
+        if os.path.exists(args.corpus):
             with open(args.corpus, 'r', encoding='utf-8') as f:
                 corpus_words = set(word.strip() for word in f.read().strip().split('\n') if word.strip())
-            print(f"Loaded corpus: {len(corpus_words)} unique words")
 
     # Determine newline token ID for stopping (default: don't stop at newline)
     stop_token_id = None
@@ -320,9 +301,6 @@ def main():
         newline_ids = tokenizer.encode('\n')
         if newline_ids:
             stop_token_id = newline_ids[0]
-            print(f"Stop token ID (newline): {stop_token_id}")
-        else:
-            print("Warning: Could not find newline token in vocabulary")
 
     # Get prompt
     if args.prompt_file:
@@ -333,21 +311,22 @@ def main():
 
     # Lowercase prompt for lowercase-only vocabularies (unless disabled)
     if not args.no_lowercase:
-        original_prompt = prompt_text
         prompt_text = prompt_text.lower()
-        if original_prompt != prompt_text:
-            print(f"Prompt lowercased: '{original_prompt}' -> '{prompt_text}'")
 
-    print(f"\nPrompt: '{prompt_text[:50]}{'...' if len(prompt_text) > 50 else ''}'")
-    print(f"Generating {args.num_samples} samples...")
-    print(f"Temperature: {args.temperature}, Top-k: {args.top_k}, Rep-penalty: {args.rep_penalty}")
-    if args.batch:
-        print("Mode: BATCHED (all samples generated in parallel)")
-        if args.rep_penalty > 0:
-            print("Warning: Repetition penalty ignored in batched mode")
-    else:
-        print("Mode: SEQUENTIAL (one sample at a time)")
-    print("=" * 70)
+    # Print compact header
+    n_params = sum(p.numel() for p in model.parameters()) / 1e6
+    iter_num = checkpoint.get('iter_num', '?')
+    best_val = checkpoint.get('best_val_loss')
+    val_str = f", val loss {best_val:.4f}" if best_val else ""
+    attn_type = "linear" if model_args.get('use_linear_attention', False) else "softmax"
+    print(f"Model: {n_params:.0f}M params, {attn_type}, {tokenizer_type} (vocab {vocab_size}), iter {iter_num}{val_str}")
+    settings = f"temp={args.temperature}, top_k={args.top_k}"
+    if args.rep_penalty > 0:
+        settings += f", rep_penalty={args.rep_penalty}"
+    print(f"Prompt: '{prompt_text[:60]}{'...' if len(prompt_text) > 60 else ''}' | {settings}")
+    if args.batch and args.rep_penalty > 0:
+        print("Note: rep_penalty ignored in batched mode")
+    print()
 
     # Encode prompt
     prompt_ids = tokenizer.encode(prompt_text)
@@ -361,32 +340,21 @@ def main():
                                    top_k=args.top_k if args.top_k > 0 else None,
                                    device=device)
 
-        # Decode and print each sample
         for i in range(args.num_samples):
             tokens = y_batch[i].tolist()
-
-            # Truncate at stop token if needed
             tokens = truncate_at_stop_token(tokens, stop_token_id, prompt_length)
-
             generated_text = tokenizer.decode(tokens)
+            generated_text = generated_text.replace('\n', ' ')
+            generated_text = capitalize_sentences(generated_text)
 
-            # Capitalize first letter for readability
-            if generated_text:
-                generated_text = generated_text[0].upper() + generated_text[1:] if len(generated_text) > 1 else generated_text.upper()
-
-            # If corpus validation is enabled and we're generating single words
             if corpus_words is not None and args.stop_on_newline:
                 word = generated_text.strip()
-                if word in corpus_words:
-                    generated_text = word + ' *'
-                else:
-                    generated_text = word
+                generated_text = word + ' *' if word in corpus_words else word
 
-            print(generated_text)
+            print(f"  [{i+1}] {generated_text}\n")
     else:
         # Sequential generation - one sample at a time
         for i in range(args.num_samples):
-            # Generate with repetition penalty
             y = generate_local(model, x, args.max_tokens,
                               temperature=args.temperature,
                               top_k=args.top_k if args.top_k > 0 else None,
@@ -394,29 +362,15 @@ def main():
                               device=device,
                               stop_token_id=stop_token_id)
 
-            # Decode and print (one line per sample)
             generated_text = tokenizer.decode(y[0].tolist())
+            generated_text = generated_text.replace('\n', ' ')
+            generated_text = capitalize_sentences(generated_text)
 
-            # Capitalize first letter for readability
-            if generated_text:
-                generated_text = generated_text[0].upper() + generated_text[1:] if len(generated_text) > 1 else generated_text.upper()
-
-            # If corpus validation is enabled and we're generating single words
             if corpus_words is not None and args.stop_on_newline:
                 word = generated_text.strip()
-                if word in corpus_words:
-                    generated_text = word + ' *'
-                else:
-                    generated_text = word
+                generated_text = word + ' *' if word in corpus_words else word
 
-            print(generated_text, "\n")
-
-    print("\n" + "=" * 70)
-
-    if checkpoint.get('iter_num'):
-        print(f"Model trained for {checkpoint['iter_num']} iterations")
-    if checkpoint.get('best_val_loss'):
-        print(f"Best validation loss: {checkpoint['best_val_loss']:.4f}")
+            print(f"  [{i+1}] {generated_text}\n")
 
 
 if __name__ == '__main__':
