@@ -317,13 +317,13 @@ def main():
     n_params = sum(p.numel() for p in model.parameters()) / 1e6
     iter_num = checkpoint.get('iter_num', '?')
     best_val = checkpoint.get('best_val_loss')
-    val_str = f", val loss {best_val:.4f}" if best_val else ""
+    val_str = f", val loss: {best_val:.4f}" if best_val else ""
     attn_type = "linear" if model_args.get('use_linear_attention', False) else "softmax"
-    print(f"Model: {n_params:.0f}M params, {attn_type}, {tokenizer_type} (vocab {vocab_size}), iter {iter_num}{val_str}")
-    settings = f"temp={args.temperature}, top_k={args.top_k}"
+    print(f"params: {n_params:.0f}M, attention: {attn_type}, tokenizer: {tokenizer_type} (vocab: {vocab_size}), iter: {iter_num}{val_str}")
+    settings = f"temp: {args.temperature}, top_k: {args.top_k}"
     if args.rep_penalty > 0:
-        settings += f", rep_penalty={args.rep_penalty}"
-    print(f"Prompt: '{prompt_text[:60]}{'...' if len(prompt_text) > 60 else ''}' | {settings}")
+        settings += f", rep_penalty: {args.rep_penalty}"
+    print(f"prompt: '{prompt_text[:60]}{'...' if len(prompt_text) > 60 else ''}' | {settings}")
     if args.batch and args.rep_penalty > 0:
         print("Note: rep_penalty ignored in batched mode")
     print()
