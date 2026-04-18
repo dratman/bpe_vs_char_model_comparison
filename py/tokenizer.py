@@ -136,7 +136,7 @@ class BPETokenizer(Tokenizer):
         # Set up BPE trainer
         trainer = BpeTrainer(
             vocab_size=self.target_vocab_size,
-            special_tokens=["[UNK]"],
+            special_tokens=["[UNK]", "<|endoftext|>"],
             show_progress=True
         )
         

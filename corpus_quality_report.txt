@@ -1,0 +1,862 @@
+Corpus Quality Scan Report
+Checked 7543 of 7543 files in 44.2 min
+Skipped: 0, Timed out: 0
+
+=== DIALECT-HEAVY FILES (apostrophe fragments per word > 0.02) ===
+Found 65 files:
+
+  0.1139 dialect/word (277 fragments)  4729_Observations_By_Mr_Dooley.txt
+  0.1006 dialect/word (191 fragments)  20181_A_Defective_Santa_Claus.txt
+  0.0995 dialect/word (259 fragments)  20609_The_Voyageur_and_Other_Poems.txt
+  0.0991 dialect/word (247 fragments)  4730_The_Songs_of_a_Sentimental_Bloke.txt
+  0.0988 dialect/word (249 fragments)  17472_Yorkshire_Ditties_First_Series.txt
+  0.0988 dialect/word (240 fragments)  7976_Mr_Dooleys_Philosophy.txt
+  0.0978 dialect/word (250 fragments)  15524_Digger_Smith.txt
+  0.0915 dialect/word (216 fragments)  13784_Mr_Dooley_In_the_Hearts_of_His_Countrymen.txt
+  0.0864 dialect/word (213 fragments)  14684_Mr_Dooley_Says.txt
+  0.0849 dialect/word (215 fragments)  17799_Yorkshire_Ditties_Second_Series.txt
+  0.0762 dialect/word (193 fragments)  12055_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.0751 dialect/word (175 fragments)  22537_Mr_Dooley_in_Peace_and_in_War.txt
+  0.0734 dialect/word (187 fragments)  22282_Uncle_Remus_and_Brer_Rabbit.txt
+  0.0722 dialect/word (185 fragments)  28973_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.0720 dialect/word (184 fragments)  18485_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.0619 dialect/word (161 fragments)  35379_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.0611 dialect/word (138 fragments)  59037_Cantares_gallegos.txt
+  0.0564 dialect/word (126 fragments)  17996_Επτά_επί_Θήβας.txt
+  0.0547 dialect/word (133 fragments)  31219_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.0528 dialect/word (136 fragments)  18176_Yorkshire_Tales_Third_Series.txt
+  0.0524 dialect/word (126 fragments)  38683_Mr_Punchs_Golf_Stories.txt
+  0.0493 dialect/word (120 fragments)  19470_Yorkshire_Lyrics.txt
+  0.0457 dialect/word (106 fragments)  13181_The_Boy_With_the_US_Census.txt
+  0.0447 dialect/word (102 fragments)  23548_The_Raid_Of_The_Guerilla.txt
+  0.0444 dialect/word (101 fragments)  33970_The_Raid_of_The_Guerilla_and_Other_Stories.txt
+  0.0437 dialect/word (115 fragments)  11255_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.0405 dialect/word ( 94 fragments)  19363_Daddy_Do-Funnys_Wisdom_Jingles.txt
+  0.0382 dialect/word ( 88 fragments)  12269_Wee_Macgreegor_Enlists.txt
+  0.0372 dialect/word ( 90 fragments)  11758_Baldy_of_Nome.txt
+  0.0355 dialect/word ( 85 fragments)  507_Adam_Bede.txt
+  0.0351 dialect/word ( 91 fragments)  19932_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.0349 dialect/word ( 87 fragments)  11915_The_Adventures_of_Mr_Mocker.txt
+  0.0337 dialect/word ( 83 fragments)  14732_The_Adventures_of_Unc_Billy_Possum.txt
+  0.0331 dialect/word ( 74 fragments)  17814_Λυσιστράτη.txt
+  0.0330 dialect/word ( 76 fragments)  33261_Bindle_Some_Chapters_in_the_Life_of_Joseph_Bindle.txt
+  0.0318 dialect/word ( 73 fragments)  17440_Amadis_of_Gaul_an_opera.txt
+  0.0315 dialect/word ( 79 fragments)  24430_Nights_With_Uncle_Remus.txt
+  0.0310 dialect/word ( 72 fragments)  19729_Oom_Gert_Vertel_en_Ander_Gedigte.txt
+  0.0305 dialect/word ( 70 fragments)  6768_The_Man_Upstairs_and_Other_Stories.txt
+  0.0304 dialect/word ( 70 fragments)  38586_Mr_Punchs_Cockney_Humour.txt
+  0.0297 dialect/word ( 69 fragments)  21737_The_Garret_and_the_Garden_Or_Low_Life_High_Up.txt
+  0.0296 dialect/word ( 71 fragments)  1012_La_Divina_Commedia_di_Dante.txt
+  0.0291 dialect/word ( 73 fragments)  22976_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.0290 dialect/word ( 69 fragments)  23625_The_Magic_Pudding.txt
+  0.0275 dialect/word ( 60 fragments)  32285_Adventures_of_Bindle.txt
+  0.0270 dialect/word ( 64 fragments)  3330_The_Analects_of_Confucius_from_the_Chinese_Classic.txt
+  0.0262 dialect/word ( 60 fragments)  19469_Poems_Teachers_Ask_For_Book_Two.txt
+  0.0261 dialect/word ( 64 fragments)  6688_The_Mill_on_the_Floss.txt
+  0.0256 dialect/word ( 66 fragments)  18912_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.0251 dialect/word ( 57 fragments)  19648_Mingo_and_Other_Sketches_in_Black_and_White.txt
+  0.0246 dialect/word ( 56 fragments)  42227_A_Witch_Shall_Be_Born.txt
+  0.0245 dialect/word ( 59 fragments)  11709_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.0236 dialect/word ( 51 fragments)  27769_Der_Fliegende_Hollaender.txt
+  0.0233 dialect/word ( 12 fragments)  14081_The_Three_Jovial_Huntsmen.txt
+  0.0232 dialect/word ( 56 fragments)  16543_Trekkerswee.txt
+  0.0231 dialect/word ( 59 fragments)  22166_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.0230 dialect/word ( 54 fragments)  15976_Puck_of_Pooks_Hill.txt
+  0.0230 dialect/word ( 54 fragments)  557_Puck_of_Pooks_Hill.txt
+  0.0229 dialect/word ( 54 fragments)  16355_Combed_Out.txt
+  0.0227 dialect/word ( 52 fragments)  42243_The_Hour_of_the_Dragon.txt
+  0.0227 dialect/word ( 57 fragments)  18217_Chamberss_Elementary_Science_Readers.txt
+  0.0221 dialect/word ( 54 fragments)  1896_Under_the_Red_Robe.txt
+  0.0219 dialect/word ( 50 fragments)  809_Holiday_Romance.txt
+  0.0215 dialect/word ( 49 fragments)  44114_A_Jay_of_Italy.txt
+  0.0203 dialect/word ( 41 fragments)  18236_In_de_Amsterdamsche_Jodenbuurt.txt
+
+=== HIGH APOSTROPHE DENSITY (> 0.12 per word) ===
+Found 23 files:
+
+  0.2359 apos/word (191 fragments)  20181_A_Defective_Santa_Claus.txt
+  0.2288 apos/word (216 fragments)  13784_Mr_Dooley_In_the_Hearts_of_His_Countrymen.txt
+  0.2102 apos/word (247 fragments)  4730_The_Songs_of_a_Sentimental_Bloke.txt
+  0.2085 apos/word (277 fragments)  4729_Observations_By_Mr_Dooley.txt
+  0.2012 apos/word (250 fragments)  15524_Digger_Smith.txt
+  0.1978 apos/word ( 16 fragments)  23424_The_Flag_of_My_Country__Shikéyah_Bidah_Naataí.txt
+  0.1955 apos/word (240 fragments)  7976_Mr_Dooleys_Philosophy.txt
+  0.1924 apos/word ( 88 fragments)  12269_Wee_Macgreegor_Enlists.txt
+  0.1905 apos/word (259 fragments)  20609_The_Voyageur_and_Other_Poems.txt
+  0.1886 apos/word (249 fragments)  17472_Yorkshire_Ditties_First_Series.txt
+  0.1742 apos/word (187 fragments)  22282_Uncle_Remus_and_Brer_Rabbit.txt
+  0.1730 apos/word (215 fragments)  17799_Yorkshire_Ditties_Second_Series.txt
+  0.1671 apos/word (213 fragments)  14684_Mr_Dooley_Says.txt
+  0.1619 apos/word (193 fragments)  12055_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.1535 apos/word (184 fragments)  18485_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.1426 apos/word (175 fragments)  22537_Mr_Dooley_in_Peace_and_in_War.txt
+  0.1374 apos/word ( 79 fragments)  24430_Nights_With_Uncle_Remus.txt
+  0.1343 apos/word (185 fragments)  28973_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.1255 apos/word (106 fragments)  13181_The_Boy_With_the_US_Census.txt
+  0.1240 apos/word ( 23 fragments)  16904_Hello_Soldier.txt
+  0.1237 apos/word ( 91 fragments)  19932_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+  0.1214 apos/word ( 69 fragments)  23625_The_Magic_Pudding.txt
+  0.1204 apos/word (161 fragments)  35379_Slave_Narratives_A_Folk_History_of_Slavery_in_the_.txt
+
+=== HIGH CHARACTER NOISE (> 5 per 1K chars) ===
+Found 759 files:
+
+  94.2/1k (  0 dashes, 1225 noise chars)  21783_A_Manual_of_Pronunciation.txt
+  75.2/1k (  0 dashes,  977 noise chars)  25050_A_Study_of_American_Beers_and_Ales.txt
+  68.9/1k (  0 dashes,  176 noise chars)  22335_Harrisons_New_Nursery_Picture_Book.txt
+  65.0/1k (  0 dashes,  185 noise chars)  23483_Dame_Wonders_Picture_Alphabet.txt
+  57.7/1k (  0 dashes,  481 noise chars)  31109_Taxonomic_Notes_on_Mexican_Bats_of_the_Genus_Rhoge.txt
+  48.6/1k (  0 dashes,  632 noise chars)  26679_Wit_and_Mirth_or_Pills_to_Purge_Melancholy_Vol_5_o.txt
+  47.2/1k (  0 dashes,  160 noise chars)  22201_The_Butterflys_Funeral.txt
+  46.0/1k (  0 dashes,  598 noise chars)  11081_Extracto_de_la_gramatica_mutsun.txt
+  45.5/1k (  0 dashes,  592 noise chars)  13117_The_Nests_and_Eggs_of_Indian_Birds_Volume_1.txt
+  44.2/1k (  0 dashes,  574 noise chars)  17042_Illustration_of_the_Method_of_Recording_Indian_Lan.txt
+  44.1/1k (  0 dashes,  573 noise chars)  35838_Five_Natural_Hybrid_Combinations_in_Minnows_Cyprin.txt
+  44.0/1k (  0 dashes,  572 noise chars)  5762_Grammar_and_Vocabulary_of_the_Lau_Language_Solomon.txt
+  43.1/1k (168 dashes,  392 noise chars)  38536_A_Review_of_Algebra.txt
+  40.8/1k (  0 dashes,  531 noise chars)  14602_War_Brides_A_Play_in_One_Act.txt
+  40.0/1k (  0 dashes,  520 noise chars)  18334_The_Illustrated_War_News_Number_21_Dec_30_1914.txt
+  38.2/1k (  0 dashes,  496 noise chars)  43849_Journal_du_corsaire_Jean_Doublet_de_Honfleur_lieut.txt
+  37.2/1k (  0 dashes,  483 noise chars)  21271_Chocolate_or_An_Indian_Drinke.txt
+  36.2/1k (  0 dashes,  470 noise chars)  18333_The_Illustrated_War_News_Number_15_Nov_18_1914.txt
+  36.2/1k (  0 dashes,  470 noise chars)  24894_The_Emperors_Rout.txt
+  35.8/1k (  0 dashes,  465 noise chars)  36651_The_Castle_of_Andalusia_A_Comic_Opera_in_Three_Act.txt
+  34.4/1k (  0 dashes,  447 noise chars)  19550_Natural_History_of_the_Mammalia_of_India_and_Ceylo.txt
+  33.5/1k (  0 dashes,  435 noise chars)  37210_The_Breeding_Birds_of_Kansas.txt
+  33.2/1k (  0 dashes,  431 noise chars)  16461_A_Birds-Eye_View_of_the_Bible.txt
+  32.5/1k (  0 dashes,  423 noise chars)  3279_Canterbury_Pieces.txt
+  32.0/1k (  0 dashes,  416 noise chars)  22599_The_Hindu-Arabic_Numerals.txt
+  31.6/1k (  0 dashes,  411 noise chars)  23395_Orthography.txt
+  31.5/1k (  0 dashes,  410 noise chars)  18702_The_Ontario_Readers_Fourth_Book.txt
+  30.8/1k (390 dashes,   10 noise chars)  24515_Le_Tour_du_Monde_Athos.txt
+  30.7/1k (389 dashes,   10 noise chars)  22575_Le_Tour_du_Monde_Afrique_Orientale.txt
+  30.7/1k (389 dashes,   10 noise chars)  23615_Le_Tour_du_Monde_Australie.txt
+  30.6/1k (  0 dashes,  398 noise chars)  37809_A_Taxonomic_Revision_of_the_Leptodactylid_Frog_Gen.txt
+  30.6/1k (  0 dashes,  288 noise chars)  31220_A_New_Subspecies_of_Bat_Myotis_velifer_from_Southe.txt
+  30.5/1k (  0 dashes,  396 noise chars)  35699_Fontainbleau_a_comic_opera_In_three_acts.txt
+  30.3/1k (  0 dashes,  394 noise chars)  38956_Argentine_Ornithology_Volume_1_of_2.txt
+  29.9/1k (  2 dashes,  387 noise chars)  29141_Two_New_Pocket_Gophers_from_Wyoming_and_Colorado.txt
+  29.8/1k (  0 dashes,  388 noise chars)  19469_Poems_Teachers_Ask_For_Book_Two.txt
+  29.1/1k (  0 dashes,  378 noise chars)  35413_A_Review_of_the_Middle_American_Tree_Frogs_of_the_.txt
+  28.8/1k (  0 dashes,  375 noise chars)  33918_Mr_Punch_with_the_Children.txt
+  28.8/1k (  0 dashes,  374 noise chars)  8648_War_Poetry_of_the_South.txt
+  28.7/1k (  0 dashes,  373 noise chars)  18909_Poems_Teachers_Ask_For.txt
+  28.6/1k (  0 dashes,  372 noise chars)  29560_M_Ps_in_Session_From_Mr_Punchs_Parliamentary_Portr.txt
+  28.6/1k (  0 dashes,  372 noise chars)  31221_The_Genera_of_Phyllomedusine_Frogs_Anura_Hylidae.txt
+  28.5/1k (  0 dashes,  371 noise chars)  13635_New_York_Times_Current_History_The_European_War_Vo.txt
+  27.8/1k (  0 dashes,  361 noise chars)  41533_The_History_of_Painting_in_Italy_Vol_6_of_6.txt
+  27.6/1k (357 dashes,    2 noise chars)  28926_Diary_from_March_4_1861_to_November_12_1862.txt
+  27.4/1k (  0 dashes,  356 noise chars)  34554_Selected_Records_of_Reptiles_and_Amphibians_from_K.txt
+  27.3/1k (  0 dashes,  355 noise chars)  25034_Report_of_the_Chief_Librarian_for_the_Year_Ended_3.txt
+  27.0/1k (  0 dashes,  351 noise chars)  23294_Catulli_Carmina.txt
+  26.9/1k (  0 dashes,  350 noise chars)  18561_The_Ontario_Readers_Third_Book.txt
+  26.8/1k (  0 dashes,  349 noise chars)  31674_Comments_on_the_Taxonomic_Status_of_Apodemus_penin.txt
+  26.7/1k (  0 dashes,  347 noise chars)  28957_The_Acts_of_the_General_Assemblies_of_the_Church_o.txt
+  26.5/1k (  0 dashes,  344 noise chars)  14065_The_History_of_the_Remarkable_Life_of_John_Sheppar.txt
+  26.5/1k (  0 dashes,  344 noise chars)  27070_Report_of_the_Committee_of_Inquiry_into_the_Variou.txt
+  26.1/1k (  0 dashes,  267 noise chars)  33364_A_New_Subspecies_of_the_Fruit-eating_Bat_Sturnira_.txt
+  26.1/1k (  0 dashes,  298 noise chars)  30217_Pleistocene_Bats_from_San_Josecito_Cave_Nuevo_Leon.txt
+  26.0/1k (  0 dashes,  338 noise chars)  4984_The_Hidden_Children.txt
+  25.9/1k (  0 dashes,  337 noise chars)  31235_Natural_History_of_the_Brush_Mouse_Peromyscus_boyl.txt
+  25.8/1k (  0 dashes,  336 noise chars)  16439_Apicii_librorum_X_qui_dicuntur_De_re_coquinaria_qu.txt
+  25.8/1k (  1 dashes,  335 noise chars)  33508_A_New_Subspecies_of_Lizard_Cnemidophorus_sacki_fro.txt
+  25.6/1k (  2 dashes,  331 noise chars)  20313_Ueber_Riemanns_Theorie_der_Algebraischen_Functione.txt
+  25.6/1k (333 dashes,    0 noise chars)  34843_The_Boys_of_61.txt
+  24.8/1k (  0 dashes,  323 noise chars)  25814_A_Man_of_the_People_A_Drama_of_Abraham_Lincoln.txt
+  24.2/1k (  0 dashes,  314 noise chars)  13265_A_Book_of_Fruits_and_Flowers.txt
+  24.1/1k (  0 dashes,  100 noise chars)  31040_The_Pigmy_Woodrat_Neotoma_goldmani_Its_Distributio.txt
+  24.0/1k (  0 dashes,  312 noise chars)  22718_Cathedrals_and_Cloisters_of_the_South_of_France_Vo.txt
+  23.5/1k (275 dashes,   30 noise chars)  3704_Journal_of_Researches_into_the_Natural_History_and.txt
+  23.1/1k (  0 dashes,  203 noise chars)  13274_A_Little_Catechism_With_Little_Verses_and_Little_S.txt
+  23.0/1k (  0 dashes,  299 noise chars)  57941_Engineer_Port_Repair_Ship.txt
+  23.0/1k (  0 dashes,  252 noise chars)  20181_A_Defective_Santa_Claus.txt
+  22.6/1k (  0 dashes,  294 noise chars)  37276_A_Journal_of_the_Expedition_to_Carthagena_with_Not.txt
+  22.5/1k ( 18 dashes,  274 noise chars)  26276_History_of_Company_E_of_the_Sixth_Minnesota_Regime.txt
+  22.4/1k (  0 dashes,  156 noise chars)  18546_Denslows_Mother_Goose.txt
+  22.2/1k (288 dashes,    0 noise chars)  24596_History_of_the_Thirty-Ninth_Congress_of_the_United.txt
+  22.2/1k (  0 dashes,  288 noise chars)  8998_Paris_as_It_Was_and_as_It_Is.txt
+  21.8/1k (  0 dashes,  284 noise chars)  20288_Edward_the_Second.txt
+  21.8/1k (  0 dashes,  284 noise chars)  23665_The_Peacock_At_Home_AND_The_Butterflys_Ball_AND_Th.txt
+  21.6/1k (279 dashes,    2 noise chars)  24598_A_Modern_History_From_the_Time_of_Luther_to_the_Fa.txt
+  21.6/1k (  0 dashes,  281 noise chars)  39318_Practical_Bookbinding.txt
+  21.5/1k (  0 dashes,   40 noise chars)  10979_Footsteps_on_the_Road_to_Learning_Or_The_Alphabet_.txt
+  21.2/1k (  3 dashes,  273 noise chars)  35344_Third_Biennial_Report_of_the_Oregon_State_Highway_.txt
+  21.1/1k (  0 dashes,   64 noise chars)  24485_A_Floral_Fantasy_in_an_Old_English_Garden.txt
+  21.1/1k (  0 dashes,  274 noise chars)  6731_The_Duenna_A_Comic_Opera.txt
+  20.9/1k (  0 dashes,  272 noise chars)  31830_Genera_of_Leptodactylid_Frogs_in_México.txt
+  20.8/1k (  0 dashes,  270 noise chars)  36036_Metabolic_Adaptation_to_Climate_and_Distribution_o.txt
+  20.8/1k (  0 dashes,  270 noise chars)  40127_Joe_Millers_Jests_or_The_Wits_Vade-Mecum.txt
+  20.6/1k (  0 dashes,  192 noise chars)  11065_Aunt_Marys_Primer.txt
+  20.6/1k (  0 dashes,  268 noise chars)  17404_Kinship_Organisations_and_Group_Marriage_in_Austra.txt
+  20.6/1k (  0 dashes,   66 noise chars)  14077_A_Frog_He_Would_A-Wooing_Go.txt
+  20.5/1k (  0 dashes,  267 noise chars)  32817_A_New_Tortoise_Genus_Gopherus_From_North-central_M.txt
+  20.3/1k (  0 dashes,  264 noise chars)  18867_The_Poems_and_Fragments_of_Catullus.txt
+  20.2/1k (258 dashes,    4 noise chars)  38735_Highways_and_Byways_in_Cambridge_and_Ely.txt
+  19.9/1k (  0 dashes,   22 noise chars)  14184_The_Ladder_to_Learning.txt
+  19.8/1k (  0 dashes,  258 noise chars)  13004_More_Goops_and_How_Not_to_Be_Them_A_Manual_of_Mann.txt
+  19.8/1k (  0 dashes,  258 noise chars)  19945_Bakemono_Yashiki_The_Haunted_House_Retold_from_the.txt
+  19.8/1k (  0 dashes,  258 noise chars)  33824_Mr_Punchs_After-Dinner_Stories.txt
+  19.7/1k (  0 dashes,  256 noise chars)  34532_A_Synopsis_of_the_American_Bats_of_the_Genus_Pipis.txt
+  19.6/1k (  0 dashes,  255 noise chars)  7453_The_Dialect_of_the_West_of_England_Particularly_So.txt
+  19.4/1k (242 dashes,   10 noise chars)  22305_The_Naval_History_of_the_United_States_Volume_1.txt
+  19.4/1k (229 dashes,   23 noise chars)  2811_Letters_of_Pliny.txt
+  19.4/1k (  0 dashes,  252 noise chars)  38827_Journeys_in_Persia_and_Kurdistan_Volume_1_of_2.txt
+  19.3/1k (  0 dashes,  251 noise chars)  6050_The_Roots_of_the_Mountains.txt
+  19.3/1k (  0 dashes,  251 noise chars)  9078_Sanders_Union_Fourth_Reader.txt
+  19.2/1k (  0 dashes,  250 noise chars)  33509_Taxonomic_Status_of_Some_Mice_of_The_Peromyscus_bo.txt
+  19.2/1k (  0 dashes,  142 noise chars)  34311_Geographic_Range_of_the_Hooded_Skunk_Mephitis_macr.txt
+  19.0/1k (  0 dashes,   54 noise chars)  12227_Childs_First_Picture_Book.txt
+  18.9/1k (  0 dashes,  246 noise chars)  36177_Mr_Punch_on_Tour_The_Humour_of_Travel_at_Home_and_.txt
+  18.8/1k (  0 dashes,  245 noise chars)  34604_Middle_American_Frogs_of_the_Hyla_microcephala_Gro.txt
+  18.8/1k (  0 dashes,  244 noise chars)  31574_A_New_Subspecies_of_Slider_Turtle_Pseudemys_script.txt
+  18.5/1k (228 dashes,   12 noise chars)  15644_Thirteen_Months_in_the_Rebel_Army.txt
+  18.5/1k (  0 dashes,  240 noise chars)  18908_Christmas.txt
+  18.5/1k (  4 dashes,  236 noise chars)  22425_Stanford_Achievement_Test_Ed_1922.txt
+  18.5/1k (  0 dashes,  240 noise chars)  31448_Mammals_from_Tamaulipas_Mexico.txt
+  18.4/1k (  0 dashes,   72 noise chars)  31046_A_New_Pocket_Mouse_Genus_Perognathus_from_Kansas.txt
+  18.3/1k (  0 dashes,  238 noise chars)  31570_A_Taxonomic_Study_of_the_Middle_American_Snake_Pit.txt
+  18.2/1k (  0 dashes,  237 noise chars)  31111_Across_Asia_on_a_Bicycle.txt
+  18.2/1k (  0 dashes,  236 noise chars)  25990_Bird_Houses_Boys_Can_Build.txt
+  18.2/1k (  0 dashes,  236 noise chars)  36504_Freshwater_Sponges_Hydroids__Polyzoa.txt
+  18.1/1k (  4 dashes,  231 noise chars)  16938_Pressure_Resistance_and_Stability_of_Earth.txt
+  18.1/1k (  0 dashes,  235 noise chars)  34676_Mr_Punchs_Country_Life_Humours_of_Our_Rustics.txt
+  18.0/1k (  0 dashes,  234 noise chars)  17700_The_Suppression_of_the_African_Slave_Trade_to_the_.txt
+  17.9/1k (  0 dashes,  130 noise chars)  33629_The_Autobiography_of_a_Monkey.txt
+  17.9/1k (  0 dashes,  233 noise chars)  616_Prayers_Written_At_Vailima_and_A_Lowden_Sabbath_Mo.txt
+  17.8/1k (  0 dashes,  232 noise chars)  16379_Childrens_Classics_in_Dramatic_Form_Book_Two.txt
+  17.7/1k (  0 dashes,  230 noise chars)  13926_An_History_of_Birmingham_1783.txt
+  17.7/1k (  0 dashes,  230 noise chars)  16772_The_Story_of_a_Soul_LHistoire_dune_Âme_The_Autobio.txt
+  17.7/1k (  0 dashes,  230 noise chars)  17641_La_monadologie_1909.txt
+  17.5/1k (  0 dashes,  228 noise chars)  31491_The_Baculum_in_the_Chipmunks_of_Western_North_Amer.txt
+  17.5/1k (  0 dashes,  228 noise chars)  33710_Comments_on_the_Taxonomy_and_Geographic_Distributi.txt
+  17.3/1k (  0 dashes,  225 noise chars)  25432_The_Babys_Bouquet_A_Fresh_Bunch_of_Rhymes_and_Tune.txt
+  17.2/1k (  0 dashes,   32 noise chars)  17604_Amusing_Trial_in_which_a_Yankee_Lawyer_Renders_a_J.txt
+  17.0/1k (  6 dashes,  215 noise chars)  31856_Führer_für_Pilzfreunde.txt
+  16.8/1k (  0 dashes,  219 noise chars)  24912_Finger_plays_for_nursery_and_kindergarten.txt
+  16.8/1k ( 40 dashes,  178 noise chars)  15341_Jouluaattona_juomarin_kodissa.txt
+  16.6/1k (  0 dashes,  216 noise chars)  18097_Public_School_Domestic_Science.txt
+  16.6/1k (  0 dashes,   78 noise chars)  33639_The_Subspecific_Status_of_Two_Central_American_Slo.txt
+  16.5/1k (  1 dashes,  214 noise chars)  20159_Catálogo_Instructivo_de_las_Colecciones_Mineralógi.txt
+  16.5/1k (  1 dashes,  214 noise chars)  35241_Notes_on_Philippine_Birds_Collected.txt
+  16.5/1k (  0 dashes,  214 noise chars)  25841_Het_Esperanto_in_Twintig_Lessen.txt
+  16.5/1k (  0 dashes,  214 noise chars)  31224_Geographic_Distribution_of_the_Pocket_Mouse_Perogn.txt
+  16.4/1k (  0 dashes,   43 noise chars)  22818_An_Alphabet_of_Celebrities.txt
+  16.4/1k (  0 dashes,  213 noise chars)  14786_Up_the_Chimney.txt
+  16.3/1k (  0 dashes,  212 noise chars)  31267_Taxonomy_of_the_Chipmunks_Eutamias_quadrivittatus_.txt
+  16.2/1k (  0 dashes,  211 noise chars)  25433_The_Babys_Own_Aesop.txt
+  16.1/1k (  0 dashes,  209 noise chars)  10850_Philaster_Or_Love_Lies_a_Bleeding.txt
+  16.1/1k (201 dashes,    8 noise chars)  21833_Experiences_of_a_Dug-out_1914-1918.txt
+  16.0/1k (  0 dashes,  208 noise chars)  16342_A_Treatise_on_Simple_Counterpoint_in_Forty_Lessons.txt
+  15.9/1k (  0 dashes,  207 noise chars)  35582_The_New_Guide_to_Knitting__Crochet.txt
+  15.8/1k (  0 dashes,  206 noise chars)  13853_New_National_First_Reader.txt
+  15.8/1k (  0 dashes,  206 noise chars)  17478_Great_Pictures_As_Seen_and_Described.txt
+  15.8/1k (  0 dashes,  206 noise chars)  37823_Neotropical_Hylid_Frogs_Genus_Smilisca.txt
+  15.8/1k (  0 dashes,  206 noise chars)  42400_Mr_Punchs_Book_of_Love_Being_the_Humours_of_Courts.txt
+  15.8/1k (  0 dashes,   80 noise chars)  30997_A_New_Bat_Genus_Leptonycteris_From_Coahuila.txt
+  15.8/1k (  0 dashes,  205 noise chars)  39707_Mr_Punchs_Life_in_London.txt
+  15.8/1k (  0 dashes,   84 noise chars)  21784_The_Goblins_Christmas.txt
+  15.7/1k (  0 dashes,  204 noise chars)  12090_The_Lives_of_the_Poets_of_Great_Britain_and_Irelan.txt
+  15.7/1k (  0 dashes,  204 noise chars)  19923_The_Ontario_Readers_The_High_School_Reader_1886.txt
+  15.7/1k (  0 dashes,  204 noise chars)  21252_The_Practical_Distiller.txt
+  15.7/1k (  0 dashes,  204 noise chars)  24519_The_Story_of_Rouen.txt
+  15.7/1k (  0 dashes,  204 noise chars)  30666_Birds_Illustrated.txt
+  15.7/1k (  0 dashes,  204 noise chars)  31683_Noteworthy_Mammals_from_Sinaloa_Mexico.txt
+  15.4/1k (  0 dashes,   42 noise chars)  24609_The_Motor_Car_Dumpy_Book.txt
+  15.3/1k (  0 dashes,  199 noise chars)  35874_Mr_Punch_in_Bohemia.txt
+  15.3/1k (  0 dashes,  162 noise chars)  31089_The_Subspecies_of_the_Mexican_Red-Bellied_Squirrel.txt
+  15.2/1k (  0 dashes,  198 noise chars)  31240_Natural_History_of_the_Salamander_Aneides_hardii.txt
+  15.2/1k (  0 dashes,  198 noise chars)  31679_North_American_Yellow_Bats_Dasypterus_and_a_List_o.txt
+  15.2/1k (  0 dashes,  198 noise chars)  36529_Mr_Punch_at_the_Play_Humours_of_Music_and_the_Dram.txt
+  15.2/1k (  4 dashes,  194 noise chars)  6693_People_of_Africa.txt
+  15.2/1k (  0 dashes,  122 noise chars)  31249_Conspecificity_of_two_pocket_mice_Perognathus_gold.txt
+  15.2/1k (  0 dashes,   16 noise chars)  26512_Description_of_a_New_Vespertilionine_Bat_from_Yuca.txt
+  15.2/1k (145 dashes,   52 noise chars)  29264_Diary_from_November_12_1862_to_October_18_1863.txt
+  15.1/1k (  0 dashes,   30 noise chars)  11073_The_Illustrated_Alphabet_of_Birds.txt
+  15.1/1k (  0 dashes,  151 noise chars)  53655_Telephoning_to_Santa_Claus.txt
+  14.9/1k (  0 dashes,  194 noise chars)  17556_Sextus_Empiricus_and_Greek_Scepticism.txt
+  14.9/1k (  0 dashes,  194 noise chars)  61142_The_Electric_Man.txt
+  14.8/1k (  0 dashes,  193 noise chars)  25418_The_Babys_Opera.txt
+  14.8/1k (  0 dashes,  118 noise chars)  31088_Taxonomy_and_Distribution_of_Some_American_Shrews.txt
+  14.8/1k (  0 dashes,  192 noise chars)  29476_Lettres_de_Mmes_de_Villars_de_Coulanges_et_de_La_F.txt
+  14.8/1k (  0 dashes,  192 noise chars)  32679_Geographic_Variation_in_Red-backed_Mice_Genus_Clet.txt
+  14.8/1k (  0 dashes,  192 noise chars)  7825_Geometrical_Solutions_Derived_from_Mechanics_a_Tre.txt
+  14.8/1k (  0 dashes,   59 noise chars)  30898_A_New_Bog_Lemming_Genus_Synaptomys_From_Nebraska.txt
+  14.7/1k (  0 dashes,  191 noise chars)  16273_The_Manual_of_Heraldry_Fifth_Edition.txt
+  14.6/1k (  0 dashes,  190 noise chars)  20777_R_Caldecotts_First_Collection_of_Pictures_and_Song.txt
+  14.5/1k (  0 dashes,  189 noise chars)  30533_Genera_and_Subgenera_of_Chipmunks.txt
+  14.5/1k (  0 dashes,   50 noise chars)  31020_A_New_Subspecies_of_Pocket_Mouse_from_Kansas.txt
+  14.4/1k (  0 dashes,  187 noise chars)  13240_A_Short_Biographical_Dictionary_of_English_Literat.txt
+  14.4/1k (  0 dashes,  187 noise chars)  24868_The_Cost_of_Living_Among_Wage-Earners.txt
+  14.4/1k (  0 dashes,  187 noise chars)  31152_Pleistocene_Pocket_Gophers_From_San_Josecito_Cave_.txt
+  14.4/1k (  0 dashes,  187 noise chars)  34030_Turning_and_Boring.txt
+  14.4/1k (  0 dashes,   40 noise chars)  33653_A_New_Pocket_Gopher_Genus_Thomomys_From_Wyoming_an.txt
+  14.3/1k (  0 dashes,  186 noise chars)  20158_The_Works_of_Lord_Byron_Vol_4.txt
+  14.3/1k (  0 dashes,  186 noise chars)  28696_Symbolic_Logic.txt
+  14.3/1k (  0 dashes,  186 noise chars)  31987_Territory_in_Bird_Life.txt
+  14.3/1k (  0 dashes,  186 noise chars)  34787_Fish_Populations_Following_a_Drought_in_the_Neosho.txt
+  14.3/1k (  0 dashes,  186 noise chars)  6329_Catalogue_of_British_Columbia_Birds.txt
+  14.2/1k (  0 dashes,  185 noise chars)  18203_Die_prosa_van_die_twede_Afrikaanse_beweging.txt
+  14.2/1k (  0 dashes,  185 noise chars)  32653_A_Review_of_the_Frogs_of_the_Hyla_bistincta_Group.txt
+  14.2/1k (  0 dashes,  185 noise chars)  34556_Phylogeny_of_the_Waxwings_and_Allied_Birds.txt
+  14.2/1k (  0 dashes,  184 noise chars)  33578_Comments_on_the_Taxonomy_and_Geographic_Distributi.txt
+  14.2/1k (  0 dashes,  184 noise chars)  34435_Le_Système_Solaire_se_mouvant.txt
+  14.1/1k (  7 dashes,  176 noise chars)  16595_Charles_Dickens_and_Music.txt
+  14.0/1k ( 13 dashes,  169 noise chars)  17161_Max_und_Moritz_Eine_Bubengeschichte_in_sieben_Stre.txt
+  14.0/1k ( 68 dashes,  114 noise chars)  19449_The_North_American_Indian_Vol_1.txt
+  14.0/1k (  0 dashes,  182 noise chars)  37615_Ocean_to_Ocean_on_Horseback.txt
+  14.0/1k (  0 dashes,  182 noise chars)  8820_A_Treasury_of_War_Poetry_British_and_American_Poem.txt
+  13.8/1k (  0 dashes,   90 noise chars)  18735_The_Little_Red_Hen.txt
+  13.7/1k (  0 dashes,  178 noise chars)  22795_The_Ontario_High_School_Reader.txt
+  13.6/1k (  0 dashes,   78 noise chars)  32159_Mammals_from_Southeastern_Alaska.txt
+  13.6/1k (  0 dashes,  177 noise chars)  25610_A_Childs_Garden_of_Verses.txt
+  13.6/1k (  0 dashes,   96 noise chars)  23794_Mother_Goose_or_the_Old_Nursery_Rhymes.txt
+  13.5/1k (  4 dashes,  171 noise chars)  15937_I_was_there_with_the_Yanks_on_the_western_front_19.txt
+  13.5/1k (  0 dashes,  175 noise chars)  43355_Mr_Punchs_Book_of_Sport.txt
+  13.4/1k (  0 dashes,   36 noise chars)  12109_The_House_That_Jack_Built.txt
+  13.4/1k (  0 dashes,   38 noise chars)  14837_The_Tale_of_Tom_Kitten.txt
+  13.3/1k (  0 dashes,   54 noise chars)  14304_The_Tale_of_Peter_Rabbit.txt
+  13.2/1k (  0 dashes,  172 noise chars)  29563_Geographic_Variation_in_the_Harvest_Mouse_Reithrod.txt
+  13.2/1k (  0 dashes,  172 noise chars)  53126_Specimens_of_British_Trench_Orders.txt
+  13.2/1k (  0 dashes,  171 noise chars)  10147_Americas_War_for_Humanity.txt
+  13.2/1k (  0 dashes,  171 noise chars)  19226_The_Dogs_Book_of_Verse.txt
+  13.2/1k (  0 dashes,  171 noise chars)  20116_The_Belief_in_Immortality_and_the_Worship_of_the_D.txt
+  13.2/1k (  0 dashes,  171 noise chars)  38189_A_Treatise_on_Sheep.txt
+  13.1/1k (  0 dashes,  170 noise chars)  37742_Fishes_of_the_Big_Blue_River_Basin_Kansas.txt
+  13.1/1k (  0 dashes,   70 noise chars)  19361_The_Babes_in_the_Wood.txt
+  12.8/1k (  0 dashes,  116 noise chars)  13035_The_Goop_Directory_of_Juvenile_Offenders_Famous_fo.txt
+  12.8/1k (  0 dashes,  126 noise chars)  31063_Two_New_Moles_Genus_Scalopus_from_Mexico_and_Texas.txt
+  12.8/1k (  0 dashes,   36 noise chars)  17117_An_Elegy_on_the_Glory_of_Her_Sex_Mrs_Mary_Blaize.txt
+  12.8/1k (  0 dashes,  166 noise chars)  13316_The_Theological_Tractates_and_The_Consolation_of_P.txt
+  12.8/1k (  0 dashes,  166 noise chars)  1645_Rhymes_a_la_Mode.txt
+  12.8/1k (  0 dashes,  166 noise chars)  18783_Diario_del_viaje_al_rio_Bermejo.txt
+  12.8/1k (  0 dashes,  166 noise chars)  31325_An_Annotated_Checklist_of_Nebraskan_Bats.txt
+  12.8/1k (  0 dashes,  166 noise chars)  33915_Mammals_taken_Along_the_Alaska_Highway.txt
+  12.8/1k (  0 dashes,  166 noise chars)  38233_Birds_Every_Child_Should_Know.txt
+  12.6/1k (  0 dashes,  164 noise chars)  22083_Myths_and_Legends_of_the_Great_Plains.txt
+  12.6/1k (152 dashes,   12 noise chars)  23733_Incidents_of_the_War_Humorous_Pathetic_and_Descrip.txt
+  12.6/1k (  0 dashes,   64 noise chars)  34315_Two_New_Meadow_Mice_from_Michoacán_Mexico.txt
+  12.5/1k (  0 dashes,  163 noise chars)  14873_Instructions_on_Modern_American_Bridge_Building.txt
+  12.5/1k (  0 dashes,  163 noise chars)  28540_Bibliomania_or_Book-Madness.txt
+  12.5/1k (  0 dashes,  163 noise chars)  34848_Mammals_of_the_San_Gabriel_Mountains_of_California.txt
+  12.5/1k (  0 dashes,  153 noise chars)  28166_Installation_and_Operation_Instructions_For_Custom.txt
+  12.5/1k (  0 dashes,   40 noise chars)  30999_A_New_Chipmunk_Genus_Eutamias_from_the_Black_Hills.txt
+  12.5/1k (  0 dashes,  162 noise chars)  35968_A_Check-List_of_the_Birds_of_Idaho.txt
+  12.5/1k (  0 dashes,  162 noise chars)  38146_Mr_Punch_on_the_Warpath_Humours_of_the_Army_the_Na.txt
+  12.5/1k (  0 dashes,  162 noise chars)  48214_The_Rhinegold__The_Valkyrie.txt
+  12.3/1k (  0 dashes,   74 noise chars)  34326_A_New_Hylid_Frog_from_Eastern_Mexico.txt
+  12.3/1k (  0 dashes,  160 noise chars)  17966_Life_History_of_the_Kangaroo_Rat.txt
+  12.3/1k (  0 dashes,  160 noise chars)  20564_La_Confession_de_Talleyrand_V_1-5.txt
+  12.3/1k (  0 dashes,  160 noise chars)  32623_Geographic_Variation_in_the_Pocket_Gopher_Cratogeo.txt
+  12.3/1k (  0 dashes,  160 noise chars)  34579_Bees_from_British_Guiana.txt
+  12.3/1k (  0 dashes,  160 noise chars)  38586_Mr_Punchs_Cockney_Humour.txt
+  12.2/1k (  0 dashes,  159 noise chars)  22010_The_Tribes_and_Castes_of_the_Central_Provinces_of_.txt
+  12.2/1k (  0 dashes,  158 noise chars)  27477_Astronomical_Instruments_and_Accessories.txt
+  12.1/1k (  0 dashes,  157 noise chars)  38207_On_the_Origin_and_Metamorphoses_of_Insects.txt
+  11.9/1k (  0 dashes,   54 noise chars)  32605_History_of_Beasts.txt
+  11.8/1k ( 12 dashes,  142 noise chars)  14154_The_Tale_of_Terror_A_Study_of_the_Gothic_Romance.txt
+  11.8/1k (  0 dashes,  154 noise chars)  14785_Down_the_Chimney.txt
+  11.8/1k ( 47 dashes,  107 noise chars)  23654_Mémoires_dOutre-Tombe_Tome_2.txt
+  11.8/1k (  0 dashes,  154 noise chars)  37317_Geographic_Variation_in_the_Pocket_Gopher_Thomomys.txt
+  11.8/1k (  0 dashes,  154 noise chars)  57648_Romancero_selecto_del_Cid.txt
+  11.8/1k (  0 dashes,  153 noise chars)  25129_Baboo_Jabberjee_BA.txt
+  11.8/1k (  0 dashes,  153 noise chars)  34523_Fishes_of_Chautauqua_Cowley_and_Elk_Counties_Kansa.txt
+  11.8/1k (  0 dashes,  153 noise chars)  50818_How_to_Make_Friends.txt
+  11.8/1k (  0 dashes,   46 noise chars)  30916_A_New_Long-eared_Myotis_Myotis_evotis_From_Northea.txt
+  11.7/1k (  0 dashes,  152 noise chars)  10451_Life_of_Johnson_Volume_5.txt
+  11.7/1k (  0 dashes,  152 noise chars)  12541_The_American_Indian_as_Participant_in_the_Civil_Wa.txt
+  11.7/1k (  0 dashes,  152 noise chars)  32018_Jaw_Musculature_of_the_Mourning_and_White-winged_D.txt
+  11.7/1k (  0 dashes,  152 noise chars)  34429_Check-list_of_the_Birds_of_Kansas.txt
+  11.7/1k (  0 dashes,  152 noise chars)  39472_Zoological_Illustrations_Volume_2.txt
+  11.6/1k (  0 dashes,   62 noise chars)  34836_A_New_Pocket_Gopher_Genus_Thomomys_from_Eastern_Co.txt
+  11.6/1k (  0 dashes,  151 noise chars)  21608_The_Dawn_of_Reason_or_Mental_Traits_in_the_Lower_A.txt
+  11.6/1k (  0 dashes,  151 noise chars)  34954_Systematic_Status_of_the_Colubrid_Snake_Leptodeira.txt
+  11.5/1k (  3 dashes,  147 noise chars)  32350_Noteworthy_Records_of_Bats_From_Nicaragua_with_a_C.txt
+  11.5/1k ( 57 dashes,   92 noise chars)  214_In_the_Days_When_the_World_Was_Wide_and_Other_Vers.txt
+  11.5/1k (131 dashes,   18 noise chars)  22749_From_Edinburgh_to_India__Burmah.txt
+  11.4/1k (  0 dashes,   62 noise chars)  24258_The_Rubáiyát_of_a_Persian_Kitten.txt
+  11.4/1k (  0 dashes,  148 noise chars)  13646_A_Book_of_Nonsense.txt
+  11.4/1k (  0 dashes,  148 noise chars)  15170_The_Childs_World_Third_Reader.txt
+  11.4/1k (  0 dashes,  148 noise chars)  33874_Wild_Bees_Wasps_and_Ants_and_Other_Stinging_Insect.txt
+  11.4/1k (  0 dashes,  148 noise chars)  39160_Mr_Punch_in_the_Hunting_Field.txt
+  11.4/1k (  0 dashes,  148 noise chars)  51180_Santa_Claus_Gets_His_Wish_A_Christmas_Play_in_One_.txt
+  11.4/1k (  0 dashes,  148 noise chars)  51802_Mémoires_touchant_la_vie_et_les_écrits_de_Marie_de.txt
+  11.3/1k (  0 dashes,   46 noise chars)  18360_The_Farmers_Boy.txt
+  11.3/1k (  0 dashes,   88 noise chars)  23424_The_Flag_of_My_Country__Shikéyah_Bidah_Naataí.txt
+  11.3/1k (  0 dashes,  147 noise chars)  16523_The_Kitáb-i-Aqdas.txt
+  11.2/1k (  0 dashes,  146 noise chars)  10768_Légyptologie.txt
+  11.2/1k (146 dashes,    0 noise chars)  1082_Voyage_of_the_Paper_Canoe.txt
+  11.2/1k (  0 dashes,  145 noise chars)  10811_De_La_Salle_Fifth_Reader.txt
+  11.2/1k (  0 dashes,  145 noise chars)  30802_Commentaries_on_the_Laws_of_England_Book_the_First.txt
+  11.1/1k (  0 dashes,   60 noise chars)  31025_A_New_Species_of_Pocket_Gopher_Genus_Pappogeomys_F.txt
+  11.1/1k (  0 dashes,  144 noise chars)  19042_Animal_Figures_in_the_Maya_Codices.txt
+  11.1/1k (  0 dashes,  144 noise chars)  37400_The_Travels_and_Adventures_of_James_Massey.txt
+  11.1/1k (  0 dashes,  144 noise chars)  38004_Vertebrates_from_the_Barrier_Island_of_Tamaulipas_.txt
+  11.1/1k (  0 dashes,  144 noise chars)  52428_Mémoires_touchant_la_vie_et_les_écrits_de_Marie_de.txt
+  11.1/1k (  0 dashes,  114 noise chars)  35070_Franz_Schubert__The_Story_of_the_Boy_Who_Wrote_Bea.txt
+  11.0/1k (  0 dashes,  143 noise chars)  35027_Mr_Punchs_Railway_Book.txt
+  10.9/1k (  0 dashes,  142 noise chars)  24712_The_Negro_at_Work_in_New_York_City_A_Study_in_Econ.txt
+  10.9/1k (  0 dashes,  142 noise chars)  28419_Twenty-Five_Cent_Dinners_for_Families_of_Six.txt
+  10.9/1k (  0 dashes,   46 noise chars)  17135_Twas_the_Night_before_Christmas_A_Visit_from_St_Ni.txt
+  10.9/1k (  0 dashes,   30 noise chars)  11098_Happy_and_Gay_Marching_Away.txt
+  10.8/1k ( 11 dashes,  130 noise chars)  19460_Handbuch_der_deutschen_Kunstdenkmäler_Bd1_Mittelde.txt
+  10.8/1k (  0 dashes,  141 noise chars)  19826_The_White_Christmas_and_other_Merry_Christmas_Play.txt
+  10.8/1k (  0 dashes,   26 noise chars)  31147_A_New_Bat_Myotis_From_Mexico.txt
+  10.8/1k (  0 dashes,  140 noise chars)  13990_The_Fugitive_Slave_Law_and_Its_Victims.txt
+  10.8/1k (  0 dashes,  140 noise chars)  16260_Nouveau_moyen_de_préparer_la_couche_sensible_des_p.txt
+  10.8/1k (  0 dashes,  140 noise chars)  17379_Quer_Durch_Borneo.txt
+  10.8/1k (  0 dashes,  140 noise chars)  20300_Henry_VIII.txt
+  10.8/1k (  0 dashes,  140 noise chars)  29149_Cogito_Ergo_Sum.txt
+  10.7/1k (  0 dashes,   24 noise chars)  23338_The_Rubaiyat_of_Ohow_Dryyam.txt
+  10.7/1k (  0 dashes,  139 noise chars)  49507_Siegfried__The_Twilight_of_the_Gods.txt
+  10.7/1k (  0 dashes,  118 noise chars)  31175_A_New_Species_of_Frog_Genus_Tomodactylus_from_West.txt
+  10.6/1k (  0 dashes,  138 noise chars)  16410_The_Life-Story_of_Insects.txt
+  10.6/1k (  0 dashes,  138 noise chars)  17709_La_philosophie_sociale_dans_le_theatre_dIbsen.txt
+  10.6/1k ( 72 dashes,   66 noise chars)  22677_Greece_and_the_Allies_1914-1922.txt
+  10.6/1k (  0 dashes,  138 noise chars)  33966_Occurrence_of_the_Garter_Snake_Thamnophis_sirtalis.txt
+  10.6/1k (  0 dashes,  138 noise chars)  34571_The_Pearl_Story_Book_Stories_and_Legends_of_Winter.txt
+  10.6/1k (  0 dashes,  138 noise chars)  8997_Ritchies_Fabulae_Faciles_A_First_Latin_Reader.txt
+  10.5/1k (  0 dashes,  137 noise chars)  22165_My_Studio_Neighbors.txt
+  10.5/1k (  0 dashes,  136 noise chars)  34446_Cottontail_Rabbits_in_Relation_to_Trees_and_Farm_C.txt
+  10.4/1k (  0 dashes,  124 noise chars)  35128_Wagner__The_Story_of_the_Boy_Who_Wrote_Little_Play.txt
+  10.4/1k (  1 dashes,   66 noise chars)  31149_A_New_Piñon_Mouse_Peromyscus_truei_from_Durango_Me.txt
+  10.3/1k (  0 dashes,  134 noise chars)  33531_The_Subspecies_of_the_Mountain_Chickadee.txt
+  10.3/1k (  0 dashes,  134 noise chars)  37566_Natural_History_of_the_Ornate_Box_Turtle_Terrapene.txt
+  10.3/1k (  0 dashes,  134 noise chars)  44807_Baudelaire_et_Sainte-Beuve.txt
+  10.2/1k (  0 dashes,   26 noise chars)  18742_Willie_Mouse.txt
+  10.2/1k (  0 dashes,  133 noise chars)  19393_Plays_of_Near__Far.txt
+  10.2/1k (  0 dashes,  133 noise chars)  24644_Harrys_Ladder_to_Learning.txt
+  10.2/1k (  0 dashes,  133 noise chars)  24790_Early_English_Meals_and_Manners.txt
+  10.2/1k (  0 dashes,  133 noise chars)  32547_Essays_in_Radical_Empiricism.txt
+  10.2/1k (  0 dashes,  133 noise chars)  38290_Speciation_and_Evolution_of_the_Pygmy_Mice_Genus_B.txt
+  10.2/1k (  0 dashes,  132 noise chars)  17440_Amadis_of_Gaul_an_opera.txt
+  10.2/1k (  0 dashes,  132 noise chars)  18818_On_the_Evolution_of_Language.txt
+  10.2/1k (  0 dashes,  132 noise chars)  26427_Cardinal_Newman_as_a_Musician.txt
+  10.2/1k (  0 dashes,  132 noise chars)  54421_Journal_de_Eugène_Delacroix_Tome_2_de_3.txt
+  10.1/1k (  0 dashes,  131 noise chars)  15_Moby-Dick_or_The_Whale.txt
+  10.1/1k (  0 dashes,  131 noise chars)  25951_Fragments_from_France.txt
+  10.0/1k (  0 dashes,   55 noise chars)  14872_The_Tale_of_Squirrel_Nutkin.txt
+  10.0/1k (  0 dashes,  130 noise chars)  16423_A_Coal_From_The_Altar_To_Kindle_The_Holy_Fire_of_Z.txt
+  10.0/1k (  1 dashes,  129 noise chars)  22428_Contributions_to_the_Theory_of_Natural_Selection.txt
+  10.0/1k (130 dashes,    0 noise chars)  2766_The_Red_Acorn.txt
+  10.0/1k (  0 dashes,  130 noise chars)  31293_Systematic_Status_of_a_South_American_Frog_Allophr.txt
+  10.0/1k (  0 dashes,  130 noise chars)  33558_Thoracic_and_Coracoid_Arteries_In_Two_Families_of_.txt
+  10.0/1k (  0 dashes,  130 noise chars)  34449_A_New_Extinct_Emydid_Turtle_from_the_Lower_Pliocen.txt
+  10.0/1k (  0 dashes,  130 noise chars)  36249_Among_the_Canadian_Alps.txt
+  10.0/1k (  0 dashes,  130 noise chars)  45532_History_of_Julius_Cæsar_Vol_2_of_2.txt
+  10.0/1k (  0 dashes,  130 noise chars)  52282_Mémoires_touchant_la_vie_et_les_ecrits_de_Marie_de.txt
+  10.0/1k (  0 dashes,  130 noise chars)  56451_El_Payador_Vol_I.txt
+  9.9/1k (117 dashes,   12 noise chars)  20489_Henry_of_Monmouth_Volume_2.txt
+  9.9/1k (  0 dashes,   20 noise chars)  11095_Fun_and_Nonsense.txt
+  9.8/1k (  0 dashes,  128 noise chars)  16485_A_Years_Journey_through_France_and_Part_of_Spain_V.txt
+  9.8/1k (  0 dashes,  128 noise chars)  20818_On_the_Genesis_of_Species.txt
+  9.8/1k (  0 dashes,  128 noise chars)  22157_Lectures_on_Stellar_Statistics.txt
+  9.8/1k (  0 dashes,  128 noise chars)  26198_South_Africa_and_the_Transvaal_War_Vol_2_of_8.txt
+  9.8/1k (  0 dashes,   44 noise chars)  14220_The_Tale_of_the_Flopsy_Bunnies.txt
+  9.8/1k (  0 dashes,   22 noise chars)  30998_A_New_Bat_Genus_Pipistrellus_from_Northeastern_Mex.txt
+  9.8/1k (  0 dashes,  127 noise chars)  2055_Two_Years_Before_the_Mast.txt
+  9.8/1k (  0 dashes,  127 noise chars)  45590_Les_Villes_tentaculaires_précédées_des_Campagnes_h.txt
+  9.8/1k (  0 dashes,  127 noise chars)  60198_Fuente_Ovejuna.txt
+  9.7/1k (  0 dashes,   92 noise chars)  34314_A_New_Pocket_Gopher_Thomomys_and_A_New_Spiny_Pocke.txt
+  9.7/1k (  0 dashes,  126 noise chars)  10386_Thoughts_on_the_Necessity_of_Improving_the_Conditi.txt
+  9.7/1k (  0 dashes,  126 noise chars)  19944_The_Yotsuya_Kwaidan_or_OIwa_Inari.txt
+  9.7/1k (  0 dashes,  126 noise chars)  25502_Hero-Myths__Legends_of_the_British_Race.txt
+  9.6/1k (  0 dashes,   60 noise chars)  14797_The_Tale_of_Timmy_Tiptoes.txt
+  9.6/1k (  0 dashes,   54 noise chars)  38366_A_New_Subspecies_of_Ground_Squirrel_Spermophilus_s.txt
+  9.6/1k (  0 dashes,  125 noise chars)  13648_More_Nonsense.txt
+  9.6/1k (  0 dashes,  125 noise chars)  15352_Venereal_Diseases_in_New_Zealand_1922.txt
+  9.6/1k (  0 dashes,  125 noise chars)  24263_A_Hundred_Anecdotes_of_Animals.txt
+  9.6/1k (  0 dashes,  125 noise chars)  36286_Natural_History_of_the_Prairie_Vole_Mammalian_Genu.txt
+  9.5/1k ( 36 dashes,   88 noise chars)  417_Dr_Martin_Luthers_Deutsche_Geistliche_Lieder.txt
+  9.5/1k (  0 dashes,  124 noise chars)  779_The_Tragical_History_of_Doctor_Faustus.txt
+  9.5/1k (  0 dashes,  123 noise chars)  30411_English_as_she_is_spoke_or_a_jest_in_sober_earnest.txt
+  9.5/1k (  0 dashes,  123 noise chars)  31280_Mammals_of_the_Grand_Mesa_Colorado.txt
+  9.4/1k (  0 dashes,  122 noise chars)  12974_Christmas_Entertainments.txt
+  9.4/1k (  0 dashes,  122 noise chars)  16250_Tristan_and_Isolda_Opera_in_Three_Acts.txt
+  9.4/1k (  0 dashes,  122 noise chars)  22557_Canada.txt
+  9.4/1k (  0 dashes,  122 noise chars)  23429_On_Handling_the_Data.txt
+  9.4/1k (  0 dashes,  122 noise chars)  31148_A_New_Subspecies_of_Wood_Rat_Neotoma_mexicana_from.txt
+  9.4/1k (  0 dashes,  122 noise chars)  33560_A_New_Genus_of_Pennsylvanian_Fish_Crossopterygii_C.txt
+  9.4/1k (  0 dashes,   26 noise chars)  20113_Nonsense_Drolleries.txt
+  9.3/1k (  0 dashes,  121 noise chars)  15825_New_National_Fourth_Reader.txt
+  9.3/1k (  0 dashes,  121 noise chars)  62051_Notice_bio-bibliographique_sur_La_Boëtie_suivie_de.txt
+  9.3/1k (  0 dashes,  118 noise chars)  35097_Edvard_Grieg__The_Story_of_the_Boy_Who_Made_Music_.txt
+  9.2/1k (  0 dashes,  120 noise chars)  22096_Stories_the_Iroquois_Tell_Their_Children.txt
+  9.2/1k (  0 dashes,  120 noise chars)  26436_Le_specule_des_pecheurs.txt
+  9.2/1k (  0 dashes,  120 noise chars)  29122_Mammals_Obtained.txt
+  9.2/1k (  0 dashes,  120 noise chars)  38597_Martha_or_The_Fair_at_Richmond.txt
+  9.2/1k (  0 dashes,  120 noise chars)  50083_Mémoires_touchant_la_vie_et_les_écrits_de_Marie_de.txt
+  9.2/1k ( 79 dashes,   40 noise chars)  19637_Black_Beauty_-_The_Autobiography_of_a_Horse.txt
+  9.1/1k (  0 dashes,  118 noise chars)  25555_Fairy_Tales_of_the_Slav_Peasants_and_Herdsmen.txt
+  9.1/1k (  0 dashes,  118 noise chars)  27848_Hymns_of_the_Greek_Church.txt
+  9.1/1k (  0 dashes,  118 noise chars)  31427_Miscellaneous_Writings_1883-1896.txt
+  9.1/1k (  0 dashes,  118 noise chars)  32298_Anciennes_loix_des_François_conservées_dans_les_co.txt
+  9.1/1k (  0 dashes,  118 noise chars)  37456_Cycling_and_Shooting_Knickerbocker_Stockings.txt
+  9.1/1k (  0 dashes,  118 noise chars)  57824_Limitation_de_Jésus-Christ.txt
+  9.1/1k (118 dashes,    0 noise chars)  6593_History_of_Tom_Jones_a_Foundling.txt
+  9.1/1k (  0 dashes,   60 noise chars)  38441_A_New_Species_of_Wood_Rat_Neotoma_from_Northeaster.txt
+  9.0/1k (  0 dashes,   66 noise chars)  15137_The_Tale_of_Mrs_Tiggy-Winkle.txt
+  9.0/1k (  0 dashes,  117 noise chars)  29048_The_Fabric_of_Civilization.txt
+  9.0/1k (  0 dashes,   48 noise chars)  14877_The_Tale_of_Ginger_and_Pickles.txt
+  8.9/1k (  0 dashes,  116 noise chars)  13299_Mythes_chaldéens.txt
+  8.9/1k (  0 dashes,  116 noise chars)  14945_Cato_Maior_de_Senectute_with_Introduction_and_Note.txt
+  8.9/1k (  0 dashes,  116 noise chars)  16496_Chronicles_1_of_6_The_Historie_of_England_1_of_8.txt
+  8.9/1k (  0 dashes,  116 noise chars)  22917_Leçons_de_cosmographie.txt
+  8.9/1k (  0 dashes,  116 noise chars)  31136_Distribution_of_Some_Nebraskan_Mammals.txt
+  8.9/1k (  0 dashes,  116 noise chars)  38398_Amphibians_and_Reptiles_of_the_Rainforests_of_Sout.txt
+  8.9/1k (  0 dashes,   60 noise chars)  27468_IBM_1401_Programming_Systems.txt
+  8.8/1k (  1 dashes,  114 noise chars)  22627_German_Science_Reader.txt
+  8.8/1k (  0 dashes,  115 noise chars)  31513_Fishes_of_the_Wakarusa_River_in_Kansas.txt
+  8.8/1k (  0 dashes,   84 noise chars)  23749_The_Mythological_Zoo.txt
+  8.8/1k (  0 dashes,   44 noise chars)  14407_The_Tale_of_Benjamin_Bunny.txt
+  8.8/1k (  0 dashes,  114 noise chars)  13843_Libretto_La_Bohème.txt
+  8.8/1k (  0 dashes,  114 noise chars)  16658_Piano_and_Song.txt
+  8.8/1k (  0 dashes,  114 noise chars)  21528_The_International_Monthly_Magazine_Volume_1__No_1_.txt
+  8.8/1k (  0 dashes,  114 noise chars)  45806_Faust_A_Lyric_Drama_in_Five_Acts.txt
+  8.7/1k (  0 dashes,  113 noise chars)  14713_Noël_dans_les_pays_étrangers.txt
+  8.7/1k (  0 dashes,  113 noise chars)  35722_Ontology_or_the_Theory_of_Being.txt
+  8.6/1k (  0 dashes,   27 noise chars)  14081_The_Three_Jovial_Huntsmen.txt
+  8.6/1k (  0 dashes,  112 noise chars)  16761_Chronicles_of_England_Scotland_and_Ireland_2_of_6_.txt
+  8.6/1k (  0 dashes,  112 noise chars)  17209_A_Treatise_of_Witchcraft.txt
+  8.6/1k (  0 dashes,  112 noise chars)  34340_Three_New_Beavers_from_Utah.txt
+  8.6/1k (  0 dashes,  112 noise chars)  34633_LA_B_C_de_laviation_Biplans_et_monoplans.txt
+  8.5/1k (  0 dashes,  111 noise chars)  46001_A_Parody_on_Iolanthe.txt
+  8.5/1k (  0 dashes,   44 noise chars)  10965_The_World_Turned_Upside_Down.txt
+  8.5/1k (  0 dashes,   74 noise chars)  11979_The_Diverting_History_of_John_Gilpin.txt
+  8.5/1k (  0 dashes,  110 noise chars)  11951_A_Popular_History_of_France_from_the_Earliest_Time.txt
+  8.5/1k (  0 dashes,  110 noise chars)  29425_The_Confessions_of_a_Caricaturist_Vol_1.txt
+  8.5/1k (  0 dashes,  110 noise chars)  40320_Mr_Punch_Afloat_The_Humours_of_Boating_and_Sailing.txt
+  8.5/1k (  0 dashes,  110 noise chars)  44723_Diderot_et_le_Curé_de_Montchauvet.txt
+  8.4/1k (  0 dashes,  109 noise chars)  18932_Mental_Defectives_and_Sexual_Offenders.txt
+  8.4/1k (  0 dashes,  109 noise chars)  26068_The_Bath_Tatting_Book.txt
+  8.4/1k (  0 dashes,  109 noise chars)  28281_Cecilia_Valdés_o_la_Loma_del_Ángel.txt
+  8.4/1k (  0 dashes,  109 noise chars)  60575_The_Seventys_Course_in_Theology_Third_Year.txt
+  8.4/1k (  0 dashes,   59 noise chars)  14320_Landscape_and_Song.txt
+  8.3/1k (  0 dashes,   40 noise chars)  17824_Little_Black_Sambo.txt
+  8.3/1k (  0 dashes,  108 noise chars)  18237_A_Bird_Calendar_for_Northern_India.txt
+  8.3/1k (  0 dashes,  108 noise chars)  19528_Sixty_Years_of_California_Song.txt
+  8.3/1k (  0 dashes,  108 noise chars)  33648_The_Mammals_of_Warren_Woods_Berrien_County_Michiga.txt
+  8.3/1k (  0 dashes,  108 noise chars)  33914_Myology_and_Serology_of_the_Avian_Family_Fringilli.txt
+  8.3/1k (  0 dashes,  108 noise chars)  42131_Traité_sur_la_tolérance.txt
+  8.2/1k (  0 dashes,   24 noise chars)  34371_Pliocene_and_Pleistocene_Records_of_Fossil_Turtles.txt
+  8.2/1k (  0 dashes,  107 noise chars)  36653_Subspeciation_in_Pocket_Gophers_of_Kansas_KU_Vol_1.txt
+  8.2/1k (  0 dashes,  106 noise chars)  16610_Chronicles_1_of_6_The_Historie_of_England_6_of_8.txt
+  8.2/1k (  0 dashes,  106 noise chars)  18273_The_Wild_Tribes_of_Davao_District_Mindanao.txt
+  8.2/1k (  0 dashes,  106 noise chars)  25447_Mysticism_and_Logic_and_Other_Essays.txt
+  8.2/1k (  0 dashes,  106 noise chars)  31141_Four_New_Pocket_Gophers_of_the_Genus_Cratogeomys_f.txt
+  8.2/1k (  0 dashes,  106 noise chars)  37595_Ecological_Studies_of_the_Timber_Wolf_in_Northeast.txt
+  8.2/1k (  0 dashes,  106 noise chars)  9175_The_Art_of_Poetry_an_Epistle_to_the_Pisos.txt
+  8.1/1k (  0 dashes,  105 noise chars)  35013_Chopin__The_Story_of_the_Boy_Who_Made_Beautiful_Me.txt
+  8.0/1k (  0 dashes,  104 noise chars)  14447_Letters_to_The_Times_upon_War_and_Neutrality_1881-.txt
+  8.0/1k (  0 dashes,  104 noise chars)  16936_Parkers_Second_Reader.txt
+  8.0/1k (  0 dashes,  104 noise chars)  18864_Mémoires_dOutre-Tombe_Tome_1.txt
+  8.0/1k (  0 dashes,  104 noise chars)  19098_Christmas_in_Ritual_and_Tradition_Christian_and_Pa.txt
+  8.0/1k (  0 dashes,  104 noise chars)  20377_The_23rd_Service_Battalion_Royal_Fusiliers_First_S.txt
+  8.0/1k (  0 dashes,  104 noise chars)  22016_Vie_de_Benjamin_Franklin_écrite_par_lui-même_-_Tom.txt
+  8.0/1k (  0 dashes,  104 noise chars)  23462_More_Russian_Picture_Tales.txt
+  8.0/1k (  0 dashes,  104 noise chars)  23488_The_Jacobite_Rebellions_1689-1746.txt
+  8.0/1k (  0 dashes,  104 noise chars)  23692_South_Africa_and_the_Transvaal_War_Vol_1_of_8.txt
+  8.0/1k (  0 dashes,  104 noise chars)  24591_Experiments_upon_magnesia_alba_Quicklime_and_some_.txt
+  8.0/1k (  0 dashes,  104 noise chars)  45550_Mémoires_dOutre-Tombe_Tome_3.txt
+  8.0/1k (  0 dashes,  104 noise chars)  55084_The_Homing_Pigeon.txt
+  8.0/1k (  0 dashes,  104 noise chars)  6932_Pictures_Every_Child_Should_Know.txt
+  7.9/1k (  0 dashes,  103 noise chars)  35157_Handel__The_Story_of_a_Little_Boy_who_Practiced_in.txt
+  7.9/1k (  0 dashes,  103 noise chars)  12762_The_Story_of_a_Piece_of_Coal_What_It_Is_Whence_It_.txt
+  7.8/1k (  0 dashes,  102 noise chars)  15234_The_Tale_of_the_Pie_and_the_Patty_Pan.txt
+  7.8/1k (  0 dashes,  102 noise chars)  16749_Chronicles_of_England_Scotland_and_Ireland_2_of_6_.txt
+  7.8/1k (  0 dashes,  102 noise chars)  17074_The_Pianoforte_Sonata.txt
+  7.8/1k (  0 dashes,  102 noise chars)  19721_The_Literary_World_Seventh_Reader.txt
+  7.8/1k (  0 dashes,  102 noise chars)  20750_Journal_of_the_Proceedings_of_the_Linnean_Society_.txt
+  7.8/1k (  0 dashes,  102 noise chars)  22145_A_Book_of_Burlesques.txt
+  7.8/1k ( 45 dashes,   57 noise chars)  25117_With_the_Naval_Brigade_in_Natal_1899-1900_Journal_.txt
+  7.8/1k (  0 dashes,  102 noise chars)  41085_The_New_Life_La_Vita_Nuova.txt
+  7.8/1k (  0 dashes,  102 noise chars)  53779_Vie_de_Henri_Brulard_tome_2_of_2.txt
+  7.8/1k (  0 dashes,   18 noise chars)  18341_Come_Lasses_and_Lads.txt
+  7.8/1k (  0 dashes,   30 noise chars)  14838_The_Tale_of_Peter_Rabbit.txt
+  7.8/1k (  0 dashes,  101 noise chars)  24416_Life_and_Work_in_Benares_and_Kumaon_1839-1877.txt
+  7.8/1k (  0 dashes,  101 noise chars)  37101_Humpback_Whales_in_Glacier_Bay_National_Monument_A.txt
+  7.8/1k (  0 dashes,  101 noise chars)  37166_Mr_Punch_at_the_Seaside.txt
+  7.8/1k (  0 dashes,  101 noise chars)  9893_Le_Comte_Ory_Opéra_en_deux_actes.txt
+  7.7/1k (  0 dashes,  100 noise chars)  1615_Old_English_Libraries.txt
+  7.7/1k (  0 dashes,  100 noise chars)  16488_Debussys_Pelléas_et_Mélisande.txt
+  7.7/1k (  0 dashes,  100 noise chars)  17160_Modern_Prose_And_Poetry_For_Secondary_Schools.txt
+  7.7/1k (  0 dashes,  100 noise chars)  18784_Itinerario_de_Buenos_Aires_a_Cordoba.txt
+  7.7/1k (  0 dashes,  100 noise chars)  18865_Histoire_de_Paris_depuis_le_temps_des_Gaulois_jusq.txt
+  7.7/1k (  0 dashes,  100 noise chars)  23280_The_Shirley_Letters_from_California_Mines_in_1851-.txt
+  7.7/1k (  0 dashes,  100 noise chars)  38356_Speciation_of_the_Wandering_Shrew.txt
+  7.7/1k (  0 dashes,  100 noise chars)  7524_The_Germany_and_the_Agricola_of_Tacitus.txt
+  7.5/1k (  0 dashes,   98 noise chars)  13628_La_Esmeralda.txt
+  7.5/1k (  0 dashes,   98 noise chars)  16760_Chronicles_of_England_Scotland_and_Ireland_2_of_6_.txt
+  7.5/1k (  0 dashes,   98 noise chars)  16994_A_Years_Journey_through_France_and_Part_of_Spain_V.txt
+  7.5/1k (  0 dashes,   98 noise chars)  17833_An_Apologie_for_the_Royal_Party_1659_and_A_Panegyr.txt
+  7.5/1k (  0 dashes,   98 noise chars)  20209_History_of_Steam_on_the_Erie_Canal.txt
+  7.5/1k (  0 dashes,   98 noise chars)  28160_The_Pioneer_Light_Passenger_Locomotive_of_1851.txt
+  7.5/1k (  0 dashes,   98 noise chars)  34420_Riyas_Foundling.txt
+  7.5/1k (  0 dashes,   98 noise chars)  37512_A_Revision_of_Snakes_of_the_Genus_Conophis_Family_.txt
+  7.5/1k (  0 dashes,   98 noise chars)  4763_The_Game_of_Logic.txt
+  7.5/1k (  0 dashes,   98 noise chars)  53383_The_Story_of_Don_John_of_Austria.txt
+  7.5/1k (  0 dashes,   98 noise chars)  56212_Comme_quoi_Napoléon_na_jamais_existé.txt
+  7.5/1k (  0 dashes,   98 noise chars)  654_Grace_Abounding_to_the_Chief_of_Sinners.txt
+  7.5/1k (  0 dashes,   98 noise chars)  9172_A_Study_of_Association_in_Insanity.txt
+  7.5/1k (  0 dashes,   97 noise chars)  31179_Fultons_Steam_Battery_Blockship_and_Catamaran.txt
+  7.4/1k (  0 dashes,   44 noise chars)  23407_The_Tiny_Picture_Book.txt
+  7.4/1k (  0 dashes,   96 noise chars)  14594_Cassells_Vegetarian_Cookery_A_Manual_of_Cheap_and_.txt
+  7.4/1k (  0 dashes,   96 noise chars)  18754_Ohio_Biological_Survey_Bull_10_Vol_11_No_6.txt
+  7.4/1k (  0 dashes,   96 noise chars)  18921_Les_mystères_de_Paris_Tome_I.txt
+  7.4/1k (  0 dashes,   96 noise chars)  22169_The_Story_of_the_Barbary_Corsairs.txt
+  7.4/1k (  0 dashes,   96 noise chars)  22631_An_Account_of_Timbuctoo_and_Housa_Territories_in_t.txt
+  7.4/1k (  0 dashes,   96 noise chars)  31334_Descriptions_of_Two_Species_of_Frogs_Genus_Ptychoh.txt
+  7.4/1k (  0 dashes,   96 noise chars)  32505_The_Systematics_of_the_Frogs_of_the_Hyla_Rubra_Gro.txt
+  7.4/1k (  0 dashes,   96 noise chars)  34701_Steam_Engines.txt
+  7.3/1k (  0 dashes,   95 noise chars)  20927_A_Critical_Exposition_of_the_Popular_Jihád.txt
+  7.3/1k (  0 dashes,   95 noise chars)  33125_Wild_Birds_in_City_Parks.txt
+  7.3/1k (  0 dashes,   50 noise chars)  17089_The_Tale_of_Mrs_Tittlemouse.txt
+  7.2/1k (  0 dashes,   94 noise chars)  21702_Shifting_Winds_A_Tough_Yarn.txt
+  7.2/1k (  0 dashes,   94 noise chars)  21734_The_Golden_Dream_Adventures_in_the_Far_West.txt
+  7.2/1k (  0 dashes,   94 noise chars)  23024_Grimm_Tales_Made_Gay.txt
+  7.2/1k (  0 dashes,   94 noise chars)  24800_Darwin_and_After_Darwin_Volumes_1_and_3.txt
+  7.2/1k (  0 dashes,   94 noise chars)  27773_Mémoires_de_Marmontel_Volume_2_of_3.txt
+  7.2/1k (  0 dashes,   94 noise chars)  27807_Mémoires_de_Marmontel_Volume_3_of_3.txt
+  7.2/1k (  0 dashes,   94 noise chars)  31767_The_Peacemaker.txt
+  7.2/1k (  0 dashes,   94 noise chars)  55175_Eureka.txt
+  7.2/1k (  0 dashes,   93 noise chars)  811_The_Tragical_History_of_Doctor_Faustus.txt
+  7.1/1k (  0 dashes,   92 noise chars)  11283_Plays_of_Gods_and_Men.txt
+  7.1/1k (  0 dashes,   92 noise chars)  12809_Quiet_Talks_about_Jesus.txt
+  7.1/1k (  0 dashes,   92 noise chars)  1997_The_Divine_Comedy_Volume_3_Paradise.txt
+  7.1/1k (  0 dashes,   92 noise chars)  28742_Memorials_of_Old_London_Volume_1_of_2.txt
+  7.0/1k (  0 dashes,   77 noise chars)  23446_Picturesque_Germany.txt
+  7.0/1k (  0 dashes,   91 noise chars)  33935_Food_Habits_of_the_Thrushes_of_the_United_States.txt
+  7.0/1k (  0 dashes,   81 noise chars)  35158_Verdi__The_Story_of_the_Little_Boy_who_Loved_the_H.txt
+  7.0/1k (  0 dashes,   58 noise chars)  20404_All_Round_the_Year.txt
+  6.9/1k (  0 dashes,   90 noise chars)  11533_Theocritus_translated_into_English_Verse.txt
+  6.9/1k (  0 dashes,   90 noise chars)  12956_A_History_of_Indian_Philosophy_Volume_1.txt
+  6.9/1k (  0 dashes,   90 noise chars)  15575_The_Tale_of_Samuel_Whiskers_Or_The_Roly-Poly_Puddi.txt
+  6.9/1k (  0 dashes,   90 noise chars)  15672_Dictionary_of_the_Chinook_Jargon_or_Trade_Language.txt
+  6.9/1k (  0 dashes,   90 noise chars)  22035_Dramatized_Rhythm_Plays.txt
+  6.9/1k (  0 dashes,   90 noise chars)  23545_Songs_of_Childhood.txt
+  6.9/1k (  0 dashes,   90 noise chars)  24219_The_Royal_Guide_to_Wax_Flower_Modelling.txt
+  6.9/1k (  0 dashes,   90 noise chars)  30252_The_Four-Faced_Visitors_of_Ezekiel.txt
+  6.9/1k (  0 dashes,   90 noise chars)  30930_Lidée_de_Dieu_dans_la_philosophie_religieuse_de_la.txt
+  6.9/1k (  0 dashes,   90 noise chars)  9542_Graded_Poetry_Seventh_Year.txt
+  6.8/1k (  0 dashes,   89 noise chars)  19461_Tales_of_Wonder_Every_Child_Should_Know.txt
+  6.8/1k (  0 dashes,   89 noise chars)  33769_The_Harwich_Naval_Forces_Their_Part_in_the_Great_W.txt
+  6.8/1k (  0 dashes,   89 noise chars)  35006_An_Experimental_Translocation_of_the_Eastern_Timbe.txt
+  6.8/1k (  0 dashes,   89 noise chars)  43311_Histoire_de_France_1466-1483_Volume_819.txt
+  6.8/1k (  0 dashes,   88 noise chars)  19807_Sketch_of_Grammar_of_the_Chippeway_Languages.txt
+  6.8/1k (  0 dashes,   88 noise chars)  2018_The_Library.txt
+  6.8/1k (  0 dashes,   88 noise chars)  23200_The_Journal_of_Negro_History_Volume_5_1920.txt
+  6.8/1k (  7 dashes,   81 noise chars)  25575_Mémoires_dOutre-Tombe_Tome_4.txt
+  6.8/1k (  0 dashes,   88 noise chars)  25983_Birds_Illustrated.txt
+  6.8/1k (  0 dashes,   88 noise chars)  27977_Austral_English.txt
+  6.8/1k (  0 dashes,   88 noise chars)  28459_In_Brief_Authority.txt
+  6.8/1k (  0 dashes,   88 noise chars)  34949_Some_Reptiles_and_Amphibians_from_Korea.txt
+  6.7/1k (  0 dashes,   87 noise chars)  12562_Derniers_Contes.txt
+  6.7/1k (  0 dashes,   87 noise chars)  14419_Grammatical_Sketch_of_the_Heve_Language.txt
+  6.7/1k (  0 dashes,   87 noise chars)  21189_Aesop_in_Rhyme_Old_Friends_in_a_New_Dress.txt
+  6.7/1k (  0 dashes,   87 noise chars)  32486_The_Legion_of_Lazarus.txt
+  6.6/1k (  0 dashes,   86 noise chars)  14988_Ciceros_Tusculan_Disputations.txt
+  6.6/1k (  0 dashes,   86 noise chars)  15659_The_Beacon_Second_Reader.txt
+  6.6/1k (  0 dashes,   86 noise chars)  19541_Marigold_Garden.txt
+  6.6/1k (  0 dashes,   86 noise chars)  19915_Slovenly_Betsy.txt
+  6.6/1k (  0 dashes,   86 noise chars)  20860_The_Butterflys_Ball_and_the_Grasshoppers_Feast.txt
+  6.6/1k (  0 dashes,   86 noise chars)  21704_Six_Months_at_the_Cape.txt
+  6.6/1k (  0 dashes,   86 noise chars)  22613_La_Vie_de_M_de_Molière.txt
+  6.6/1k (  0 dashes,   86 noise chars)  25317_La_Argentina.txt
+  6.6/1k (  0 dashes,   86 noise chars)  29677_Heaths_Modern_Language_Series_El_trovador.txt
+  6.6/1k (  0 dashes,   86 noise chars)  31458_Additional_Records_and_Extensions_of_Known_Ranges_.txt
+  6.6/1k (  0 dashes,   86 noise chars)  31951_Geographic_Distribution_and_Taxonomy_of_the_Chipmu.txt
+  6.6/1k (  0 dashes,   86 noise chars)  38687_Zoological_Mythology_or_The_Legends_of_Animals_Vol.txt
+  6.6/1k (  0 dashes,   86 noise chars)  39953_Diane_de_Poitiers.txt
+  6.6/1k ( 44 dashes,   42 noise chars)  41101_Histoire_de_la_Littérature_Anglaise_Volume_3_de_5.txt
+  6.6/1k (  0 dashes,   86 noise chars)  42694_Histoire_de_France_1440-1465_Volume_719.txt
+  6.6/1k (  0 dashes,   86 noise chars)  6087_The_Vampyre_a_Tale.txt
+  6.6/1k (  0 dashes,   86 noise chars)  61485_J_Ogier_de_Gombauld_1570-1666.txt
+  6.6/1k (  0 dashes,   86 noise chars)  8714_Four_Plays_of_Aeschylus.txt
+  6.5/1k (  0 dashes,   85 noise chars)  13244_Punch_or_the_London_Charivari.txt
+  6.5/1k (  0 dashes,   85 noise chars)  16669_Chronicles_1_of_6_The_Historie_of_England_8_of_8.txt
+  6.5/1k (  0 dashes,   85 noise chars)  17170_A_Study_of_Pueblo_Pottery_as_Illustrative_of_Zuñi_.txt
+  6.5/1k ( 11 dashes,   74 noise chars)  20500_A_Short_History_of_Greek_Philosophy.txt
+  6.5/1k (  0 dashes,   84 noise chars)  10912_The_Infants_Delight_Poetry.txt
+  6.5/1k (  0 dashes,   84 noise chars)  11272_The_Anti-Slavery_Examiner_Part_2_of_4.txt
+  6.5/1k (  0 dashes,   84 noise chars)  18724_Hokousaï.txt
+  6.5/1k (  0 dashes,   84 noise chars)  20577_La_Folle_Journée_ou_le_Mariage_de_Figaro.txt
+  6.5/1k (  0 dashes,   84 noise chars)  21591_The_Harbours_of_England.txt
+  6.5/1k (  0 dashes,   84 noise chars)  21751_The_Middy_and_the_Moors_An_Algerine_Story.txt
+  6.5/1k (  0 dashes,   84 noise chars)  229_The_Bucolics_and_Eclogues.txt
+  6.5/1k (  0 dashes,   84 noise chars)  31024_Mine_Pumping_in_Agricolas_Time_and_Later.txt
+  6.5/1k (  0 dashes,   84 noise chars)  31621_Description_of_a_New_Softshell_Turtle_from_the_Sou.txt
+  6.5/1k (  0 dashes,   84 noise chars)  33574_A_Field_Study_of_the_Kansas_Ant-Eating_Frog_Gastro.txt
+  6.5/1k (  0 dashes,   84 noise chars)  33954_Il_libro_della_cucina_del_sec_XIV_testo_di_lingua_.txt
+  6.5/1k (  0 dashes,   84 noise chars)  34546_Additions_to_the_List_of_the_Birds_of_Louisiana.txt
+  6.5/1k (  0 dashes,   84 noise chars)  37993_Climbing_in_The_British_Isles__Vol_1_-_England.txt
+  6.5/1k (  0 dashes,   84 noise chars)  44054_Histoire_des_salons_de_Paris_Tome_46.txt
+  6.5/1k (  0 dashes,   84 noise chars)  9892_La_Muette_de_Portici_Opéra_en_cinq_actes.txt
+  6.4/1k (  0 dashes,   83 noise chars)  25600_Bird_Stories.txt
+  6.4/1k (  0 dashes,   83 noise chars)  49441_Aux_glaces_polaires_Indiens_et_esquimaux.txt
+  6.3/1k (  0 dashes,   82 noise chars)  12423_A_Short_History_of_the_United_States_for_School_Us.txt
+  6.3/1k (  0 dashes,   82 noise chars)  13872_The_Ten_Pleasures_of_Marriage.txt
+  6.3/1k (  0 dashes,   82 noise chars)  14015_The_Discovery_of_Witches.txt
+  6.3/1k (  0 dashes,   82 noise chars)  14591_Faust_part_1_Translated_Into_English_in_the_Origin.txt
+  6.3/1k (  0 dashes,   82 noise chars)  16224_A_Bibliographical_Antiquarian_and_Picturesque_Tour.txt
+  6.3/1k (  0 dashes,   82 noise chars)  19722_A_Childs_Garden_of_Verses.txt
+  6.3/1k (  0 dashes,   82 noise chars)  22780_Voyages_dans_la_basse_et_la_haute_Egypte.txt
+  6.3/1k (  0 dashes,   82 noise chars)  23521_The_Sleeping_Beauty_Picture_Book.txt
+  6.3/1k (  0 dashes,   82 noise chars)  28678_The_Christian_Foundation_Or_Scientific_and_Religio.txt
+  6.3/1k (  0 dashes,   82 noise chars)  29206_Happy_Ending.txt
+  6.3/1k (  0 dashes,   82 noise chars)  36802_The_Romance_of_Polar_Exploration.txt
+  6.2/1k (  0 dashes,   81 noise chars)  14377_The_Queen-like_Closet_or_Rich_Cabinet.txt
+  6.2/1k (  0 dashes,   81 noise chars)  17334_Initiative_Psychic_Energy.txt
+  6.2/1k ( 15 dashes,   66 noise chars)  19529_Nala_and_Damayanti_and_Other_Poems.txt
+  6.2/1k ( 53 dashes,   28 noise chars)  19576_Anne_of_Green_Gables.txt
+  6.2/1k (  0 dashes,   81 noise chars)  20289_Herein_is_Love.txt
+  6.2/1k (  0 dashes,   81 noise chars)  9061_The_Public_Orations_of_Demosthenes_volume_2.txt
+  6.2/1k (  0 dashes,   80 noise chars)  11100_History_of_Modern_Philosophy.txt
+  6.2/1k (  0 dashes,   80 noise chars)  17383_Quer_Durch_Borneo.txt
+  6.2/1k (  0 dashes,   80 noise chars)  18900_A_Text-Book_of_the_History_of_Painting.txt
+  6.2/1k (  0 dashes,   80 noise chars)  19300_A_Travelers_Narrative_Written_to_Illustrate_the_Ep.txt
+  6.2/1k (  0 dashes,   80 noise chars)  19700_Tendresses_impériales.txt
+  6.2/1k (  0 dashes,   80 noise chars)  21733_The_Giant_of_the_North_Pokings_Round_the_Pole.txt
+  6.2/1k (  0 dashes,   80 noise chars)  22327_Development_of_the_Digestive_Canal_of_the_American.txt
+  6.2/1k (  0 dashes,   80 noise chars)  24623_Mother_Goose.txt
+  6.2/1k (  0 dashes,   80 noise chars)  24637_Bromide_Printing_and_Enlarging.txt
+  6.2/1k ( 36 dashes,   44 noise chars)  32048_Cottage_Building_in_Cob_Pisé_Chalk_and_Clay_A_Rena.txt
+  6.2/1k (  0 dashes,   80 noise chars)  34094_Journal_of_Entomology_and_Zoology_Vol_11_No_2_June.txt
+  6.2/1k (  0 dashes,   80 noise chars)  38058_Mémoires_de_Vidocq_chef_de_la_police_de_Sureté_jus.txt
+  6.2/1k (  0 dashes,   80 noise chars)  38308_Natural_History_of_Cottonmouth_Moccasin_Agkistrodo.txt
+  6.2/1k (  0 dashes,   80 noise chars)  56691_Saturday_Night_Thoughts.txt
+  6.1/1k (  0 dashes,   36 noise chars)  14814_The_Tale_of_Jemima_Puddle-Duck.txt
+  6.1/1k (  0 dashes,   79 noise chars)  16140_The_Curious_Book_of_Birds.txt
+  6.1/1k (  0 dashes,   79 noise chars)  18253_Discovery_of_Witches.txt
+  6.0/1k (  0 dashes,   78 noise chars)  10814_Legends_Tales_and_Poems.txt
+  6.0/1k (  0 dashes,   78 noise chars)  11367_A_History_of_China.txt
+  6.0/1k (  0 dashes,   78 noise chars)  2232_The_Duchess_of_Malfi.txt
+  6.0/1k (  0 dashes,   78 noise chars)  22600_How_to_Write_Clearly_Rules_and_Exercises_on_Englis.txt
+  6.0/1k (  0 dashes,   78 noise chars)  24072_First_Italian_Readings.txt
+  6.0/1k (  0 dashes,   78 noise chars)  24612_The_Monitor_and_the_Merrimac.txt
+  6.0/1k (  0 dashes,   78 noise chars)  28323_Travels_in_North_America_From_Modern_Writers.txt
+  6.0/1k (  0 dashes,   78 noise chars)  31691_The_Bacillus_of_Long_Life.txt
+  6.0/1k (  0 dashes,   78 noise chars)  33852_British_Butterflies_Figures_and_Descriptions_of_Ev.txt
+  6.0/1k (  0 dashes,   78 noise chars)  36092_North_Devon_Pottery_and_Its_Export_to_America_in_t.txt
+  6.0/1k (  0 dashes,   78 noise chars)  43289_Hänsel_and_Gretel_A_Fairy_Opera_in_Three_Acts.txt
+  6.0/1k (  0 dashes,   78 noise chars)  48246_A_Parody_on_Princess_Ida.txt
+  6.0/1k (  0 dashes,   78 noise chars)  8418_Hippolytus_The_Bacchae.txt
+  6.0/1k (  0 dashes,   78 noise chars)  8689_The_Eleven_Comedies_Volume_2.txt
+  6.0/1k (  0 dashes,   28 noise chars)  31516_The_Eyes_Have_It.txt
+  5.9/1k (  0 dashes,   77 noise chars)  30321_The_Adductor_Muscles_of_the_Jaw_In_Some_Primitive_.txt
+  5.9/1k (  0 dashes,   77 noise chars)  39342_The_Sea_Its_Stirring_Story_of_Adventure_Peril__Her.txt
+  5.9/1k (  0 dashes,   77 noise chars)  53761_Mademoiselle_de_Scudéry_sa_vie_et_sa_correspondanc.txt
+  5.9/1k (  0 dashes,   58 noise chars)  23433_The_Kittens_Garden_of_Verses.txt
+  5.9/1k (  0 dashes,   75 noise chars)  34737_Beethoven__The_story_of_a_little_boy_who_was_force.txt
+  5.8/1k (  0 dashes,   76 noise chars)  12668_An_Account_of_the_English_Colony_in_New_South_Wale.txt
+  5.8/1k (  0 dashes,   76 noise chars)  14788_La_nuit_de_Noël_dans_tous_les_pays.txt
+  5.8/1k (  0 dashes,   76 noise chars)  16555_Chronicles_1_of_6_The_Historie_of_England_5_of_8.txt
+  5.8/1k (  0 dashes,   76 noise chars)  21699_The_Rover_of_the_Andes_A_Tale_of_Adventure_on_Sout.txt
+  5.8/1k (  0 dashes,   76 noise chars)  22406_The_Little_People_of_the_Snow.txt
+  5.8/1k (  0 dashes,   76 noise chars)  24571_Der_Struwwelpeter.txt
+  5.8/1k (  0 dashes,   76 noise chars)  33967_Descriptions_of_New_Hylid_Frogs_From_Mexico_and_Ce.txt
+  5.8/1k (  0 dashes,   76 noise chars)  38734_Mémoires_du_Baron_de_Bonnefoux_Capitaine_de_vaisse.txt
+  5.8/1k (  0 dashes,   52 noise chars)  35596_Robt_Schumann__The_Story_of_the_Boy_Who_Made_Pictu.txt
+  5.8/1k (  0 dashes,   74 noise chars)  22628_New-Yorker_Staats-Zeitung_16_Oktober_1915.txt
+  5.8/1k (  0 dashes,   75 noise chars)  34131_Butterflies_and_Moths_British.txt
+  5.8/1k (  0 dashes,   75 noise chars)  43321_Histoire_de_France_814-1189_Volume_219.txt
+  5.8/1k (  7 dashes,   68 noise chars)  5095_Vingt_Mille_Lieues_Sous_Les_Mers__Part_1.txt
+  5.8/1k (  0 dashes,   75 noise chars)  5880_Reina_Valera_New_Testament_of_the_Bible_1865.txt
+  5.8/1k (  0 dashes,   75 noise chars)  8864_Mémoires_secrets_de_Fournier_lAméricain.txt
+  5.7/1k (  0 dashes,   60 noise chars)  20378_Christmas_Sunshine.txt
+  5.7/1k (  0 dashes,   74 noise chars)  18157_Fundación_de_la_ciudad_de_Buenos-Aires.txt
+  5.7/1k (  0 dashes,   74 noise chars)  21697_The_Red_Mans_Revenge_A_Tale_of_The_Red_River_Flood.txt
+  5.7/1k (  0 dashes,   74 noise chars)  21729_Dusty_Diamonds_Cut_and_Polished_A_Tale_of_City_Ara.txt
+  5.7/1k (  0 dashes,   74 noise chars)  25454_Introduction_of_the_Locomotive_Safety_Truck.txt
+  5.7/1k ( 10 dashes,   64 noise chars)  28397_La_Navigation_Aérienne_Laviation_Et_La_Direction_D.txt
+  5.7/1k (  0 dashes,   74 noise chars)  37882_Mr_Punch_in_the_Highlands.txt
+  5.7/1k (  0 dashes,   74 noise chars)  38059_Mémoires_de_Vidocq_chef_de_la_police_de_Sureté_jus.txt
+  5.7/1k (  0 dashes,   74 noise chars)  44390_La_Comtesse_Mathieu_de_Noailles.txt
+  5.7/1k (  0 dashes,   74 noise chars)  44717_Forward_Children.txt
+  5.7/1k (  0 dashes,   74 noise chars)  53480_The_Leardo_Map_of_the_World_1452_or_1453.txt
+  5.7/1k (  0 dashes,   74 noise chars)  53523_Chronique_de_1831_à_1862_Tome_4_de_4.txt
+  5.7/1k (  0 dashes,   74 noise chars)  54309_Ancient_Apostles.txt
+  5.6/1k (  0 dashes,   40 noise chars)  11162_The_Story_of_Little_Black_Mingo.txt
+  5.6/1k (  0 dashes,   73 noise chars)  19549_The_Mind_of_the_Child_Part_II.txt
+  5.6/1k (  0 dashes,   73 noise chars)  25544_The_Pioneer_Steamship_Savannah_A_Study_for_a_Scale.txt
+  5.6/1k (  0 dashes,   73 noise chars)  30906_Mémoires_inédits_de_Mademoiselle_George_publiés_da.txt
+  5.6/1k (  0 dashes,   73 noise chars)  36791_The_Mormon_Puzzle_and_How_to_Solve_It.txt
+  5.6/1k (  0 dashes,   73 noise chars)  38003_Color_Key_to_North_American_Birds.txt
+  5.6/1k (  0 dashes,   73 noise chars)  58706_Essais_de_Montaigne_self-édition_-_Volume_IV.txt
+  5.6/1k (  0 dashes,   68 noise chars)  51363_Double_Standard.txt
+  5.5/1k (  0 dashes,   72 noise chars)  10611_An_Essay_on_the_Slavery_and_Commerce_of_the_Human_.txt
+  5.5/1k (  0 dashes,   72 noise chars)  10986_Frederick_Douglass.txt
+  5.5/1k (  0 dashes,   72 noise chars)  13325_Sketches_of_the_Natural_History_of_Ceylon.txt
+  5.5/1k (  0 dashes,   72 noise chars)  16511_Chronicles_1_of_6_The_Historie_of_England_3_of_8.txt
+  5.5/1k (  0 dashes,   72 noise chars)  17853_Ricordi_di_Parigi.txt
+  5.5/1k (  0 dashes,   72 noise chars)  18757_Prince_Henry_the_Navigator_the_Hero_of_Portugal_an.txt
+  5.5/1k (  0 dashes,   72 noise chars)  20566_Rogers-isms_the_Cowboy_Philosopher_on_the_Peace_Co.txt
+  5.5/1k (  0 dashes,   72 noise chars)  21044_The_Willoughby_Captains.txt
+  5.5/1k (  0 dashes,   72 noise chars)  21709_The_Walrus_Hunters_A_Romance_of_the_Realms_of_Ice.txt
+  5.5/1k (  0 dashes,   72 noise chars)  22077_Les_Origines_et_la_Jeunesse_de_Lamartine_1790-1812.txt
+  5.5/1k (  0 dashes,   72 noise chars)  22373_Russian_Fairy_Tales_A_Choice_Collection_of_Muscovi.txt
+  5.5/1k (  0 dashes,   72 noise chars)  23484_La_Bastille_1370-1789_Histoire_Description_Attaque.txt
+  5.5/1k (  0 dashes,   72 noise chars)  24600_Is_Slavery_Sanctioned.txt
+  5.5/1k (  0 dashes,   72 noise chars)  29022_Mr_Punch_Awheel_The_Humours_of_Motoring_and_Cyclin.txt
+  5.5/1k (  0 dashes,   72 noise chars)  29633_The_Beginnings_of_Cheap_Steel.txt
+  5.5/1k (  0 dashes,   72 noise chars)  31084_Neotropical_Bats_from_Western_México.txt
+  5.5/1k (  0 dashes,   72 noise chars)  33659_Mammals_of_Northwestern_South_Dakota.txt
+  5.5/1k (  0 dashes,   72 noise chars)  35421_A_System_of_Logic_Ratiocinative_and_Inductive_7th_.txt
+  5.5/1k (  0 dashes,   72 noise chars)  40953_A_Traveler_in_Time.txt
+  5.5/1k (  0 dashes,   72 noise chars)  44730_Memorabilia_Mathematica_or_the_Philomaths_Quotatio.txt
+  5.5/1k (  0 dashes,   72 noise chars)  9914_The_Babylonian_Legends_of_the_Creation.txt
+  5.5/1k (  0 dashes,   46 noise chars)  24692_A_Bit_of_Sunshine.txt
+  5.5/1k (  0 dashes,   22 noise chars)  19772_Denslows_Three_Bears.txt
+  5.5/1k (  0 dashes,   71 noise chars)  19906_Winning_a_Cause_World_War_Stories.txt
+  5.5/1k (  0 dashes,   71 noise chars)  23162_No_Great_Magic.txt
+  5.5/1k (  0 dashes,   71 noise chars)  40827_La_voz_de_la_conseja_t1.txt
+  5.4/1k (  0 dashes,   70 noise chars)  15694_A_Friend_of_Cæsar_A_Tale_of_the_Fall_of_the_Roman_.txt
+  5.4/1k (  0 dashes,   70 noise chars)  16116_Studies_of_Trees.txt
+  5.4/1k (  0 dashes,   70 noise chars)  16888_Auguste_Comte_et_Herbert_Spencer.txt
+  5.4/1k (  0 dashes,   70 noise chars)  18274_A_Book_of_Natural_History.txt
+  5.4/1k (  0 dashes,   70 noise chars)  18922_Les_mystères_de_Paris_Tome_II.txt
+  5.4/1k (  0 dashes,   70 noise chars)  19474_Uller_Uprising.txt
+  5.4/1k (  0 dashes,   70 noise chars)  20401_Viage_al_Rio_de_La_Plata_y_Paraguay.txt
+  5.4/1k (  0 dashes,   70 noise chars)  21761_Synopsis_of_Some_Genera_of_the_Large_Pyrenomycetes.txt
+  5.4/1k (  0 dashes,   70 noise chars)  25266_Bells_Cathedrals_The_Cathedral_Church_of_Saint_Pau.txt
+  5.4/1k (  0 dashes,   70 noise chars)  27215_Histoire_de_la_vie_et_de_ladministration_de_Colber.txt
+  5.4/1k (  0 dashes,   70 noise chars)  34412_A_New_Species_of_Heteromyid_Rodent_from_the_Middle.txt
+  5.4/1k (  0 dashes,   70 noise chars)  38925_Les_énigmes_de_lUnivers.txt
+  5.4/1k (  0 dashes,   70 noise chars)  44960_Angélique_de_Mackau_Marquise_de_Bombelles_et_la_Co.txt
+  5.4/1k (  0 dashes,   70 noise chars)  4649_Micromégas.txt
+  5.4/1k (  0 dashes,   70 noise chars)  50930_Armand_de_Pontmartin_sa_vie_et_ses_oeuvres_1811-18.txt
+  5.4/1k (  0 dashes,   70 noise chars)  61458_Jehan_de_Paris.txt
+  5.4/1k (  0 dashes,   70 noise chars)  920_Ethics__Part_2.txt
+  5.3/1k (  0 dashes,   69 noise chars)  15861_The_Things_Which_Remain.txt
+  5.3/1k (  5 dashes,   64 noise chars)  19917_Bucolica.txt
+  5.3/1k (  0 dashes,   69 noise chars)  28211_Alfred_de_Musset_et_George_Sand.txt
+  5.3/1k (  0 dashes,   69 noise chars)  51606_La_Marquise_de_Boufflers_et_son_fils_le_chevalier_.txt
+  5.3/1k (  0 dashes,    6 noise chars)  22891_Simple_Simon.txt
+  5.2/1k (  0 dashes,   68 noise chars)  13003_Pioneers_in_Canada.txt
+  5.2/1k (  0 dashes,   68 noise chars)  13988_Fugitive_Slave_Law.txt
+  5.2/1k (  0 dashes,   68 noise chars)  17585_English_Embroidered_Bookbindings.txt
+  5.2/1k (  0 dashes,   68 noise chars)  18127_The_Beginners_American_History.txt
+  5.2/1k (  0 dashes,   68 noise chars)  21935_Prince_Prigio.txt
+  5.2/1k (  0 dashes,   68 noise chars)  21995_Philosophy_and_Religion.txt
+  5.2/1k (  0 dashes,   68 noise chars)  26370_Mémoires_de_Hector_Berlioz.txt
+  5.2/1k (  0 dashes,   68 noise chars)  27101_Life_of_Rear_Admiral_John_Randolph_Tucker.txt
+  5.2/1k (  0 dashes,   68 noise chars)  42604_Stories_of_the_Ships.txt
+  5.2/1k (  0 dashes,   68 noise chars)  52843_Les_mystifications_de_Caillot-Duval.txt
+  5.2/1k (  0 dashes,   68 noise chars)  53082_Les_apôtres.txt
+  5.2/1k (  0 dashes,   68 noise chars)  54035_Aventures_de_labbé_de_Choisy_habillé_en_femme.txt
+  5.2/1k (  0 dashes,   67 noise chars)  10096_The_Trojan_women_of_Euripides.txt
+  5.2/1k (  0 dashes,   67 noise chars)  11553_The_Wonders_of_Prayer.txt
+  5.2/1k (  0 dashes,   67 noise chars)  14322_The_Electra_of_Euripides.txt
+  5.2/1k (  0 dashes,   67 noise chars)  19570_Van_Dyck_A_Collection_of_Fifteen_Pictures_and_a_Po.txt
+  5.2/1k (  0 dashes,   67 noise chars)  20071_Sue_A_Little_Heroine.txt
+  5.1/1k (  0 dashes,   66 noise chars)  15459_Cham_et_Japhet_ou_De_lémigration_des_nègres_chez_l.txt
+  5.1/1k (  0 dashes,   66 noise chars)  16617_Chronicles_1_of_6_The_Historie_of_England_7_of_8.txt
+  5.1/1k (  0 dashes,   66 noise chars)  18050_The_House_Fly_and_How_to_Suppress_It.txt
+  5.1/1k (  0 dashes,   66 noise chars)  19676_Shakespeare_and_Music.txt
+  5.1/1k (  0 dashes,   66 noise chars)  20203_Autobiography_of_Benjamin_Franklin.txt
+  5.1/1k (  0 dashes,   66 noise chars)  20956_In_The_Yule-Log_Glow_Book_IV.txt
+  5.1/1k (  0 dashes,   66 noise chars)  22689_The_Confessions_of_a_Caricaturist_Vol_2.txt
+  5.1/1k (  0 dashes,   66 noise chars)  25281_Briefless_Ballads_and_Legal_Lyrics.txt
+  5.1/1k (  0 dashes,   66 noise chars)  33397_LRL_Accelerators_The_184-Inch_Synchrocyclotron.txt
+  5.1/1k (  0 dashes,   66 noise chars)  33951_The_Ladies_Knitting_and_Netting_Book.txt
+  5.1/1k (  0 dashes,   66 noise chars)  37384_Ma_vie_musicale.txt
+  5.1/1k (  0 dashes,   66 noise chars)  39341_The_Sea_Its_Stirring_Story_of_Adventure_Peril__Her.txt
+  5.1/1k (  0 dashes,   66 noise chars)  60491_The_Seventys_Course_in_Theology_Fourth_Year.txt
