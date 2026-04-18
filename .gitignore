@@ -4,6 +4,5 @@ __pycache__/
 txt_local/
 claude_code_sessions/
 pt/
-terminal_logs/
 *.png
 plots/

@@ -1,0 +1,32 @@
+Command: python -u py/train.py --checkpoints_to "pt" --input txt_local/corpus_of_gutenberg_novels_cleaned_shuffled_2026_03_03_B.txt --output pt/bpe_16L16H.pt --mode continuous --tokenizer bpe --vocab_size 8192 --n_layer 16 --n_head 16 --n_embd 2048 --block_size 1024 --batch_size 16 --max_iters 200000 --learning_rate .0003 --warmup_iters 500 --val_split 0.1 --dropout 0.0
+Started: Sun Apr  5 17:38:53 EDT 2026
+========================================
+[2026-04-05 17:38:54] Using device: mps
+[2026-04-05 17:38:54] Using precision: float32 (requested: float32)
+[2026-04-05 17:38:54] Training mode: continuous
+[2026-04-05 17:38:54] Reading input from txt_local/corpus_of_gutenberg_novels_cleaned_shuffled_2026_03_03_B.txt
+[2026-04-05 17:38:56] Read 8,304,958,066 characters
+[2026-04-05 17:38:56] Training bpe tokenizer...
+BPETokenizer: Training vocabulary of 8192 tokens...
+Training on 8,304,958,066 characters...
+
+
+
+BPETokenizer: Trained vocabulary with 8192 tokens
+[2026-04-05 17:41:21] Tokenizing entire corpus (8,304,958,066 characters)...
+thread '<unnamed>' panicked at /Users/runner/work/tokenizers/tokenizers/tokenizers/src/tokenizer/normalizer.rs:764:30:
+NormalizedString bad split
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Traceback (most recent call last):
+  File "/Users/RalphDratman/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison/py/train.py", line 1105, in <module>
+    main()
+  File "/Users/RalphDratman/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison/py/train.py", line 698, in main
+    all_tokens = prepare_continuous_data(text, tokenizer, args.block_size, debug=args.debug)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/RalphDratman/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison/py/train.py", line 359, in prepare_continuous_data
+    tokens = tokenizer.encode(text)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/RalphDratman/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison/py/tokenizer.py", line 167, in encode
+    return self.tokenizer.encode(text).ids
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pyo3_runtime.PanicException: NormalizedString bad split
