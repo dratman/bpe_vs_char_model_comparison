@@ -610,9 +610,8 @@ def main():
             print(f"[{get_timestamp()}] WARNING: MPS does not support float64. Falling back to CPU.")
             device = 'cpu'
         elif args.precision == 'bfloat16':
-            print(f"[{get_timestamp()}] WARNING: MPS does not support bfloat16. Falling back to float32.")
-            args.precision = 'float32'
-            ptdtype = torch.float32
+            # bfloat16 is supported on MPS with recent PyTorch versions
+            pass
     elif device == 'cuda':
         if args.precision == 'bfloat16' and not torch.cuda.is_bf16_supported():
             print(f"[{get_timestamp()}] WARNING: CUDA device does not support bfloat16. Falling back to float16.")

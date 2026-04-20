@@ -1,6 +1,6 @@
 """
-Plot train and val loss for both old-corpus and new-corpus BPE training runs
-on a single plot. Uses per-iteration train loss (from "iter N: loss X" lines)
+Plot train and val loss for all BPE training runs on a single plot.
+Uses per-iteration train loss (from "iter N: loss X" lines)
 and per-eval val loss (from "Step N | ... val loss X" lines).
 
 Usage:
@@ -12,8 +12,20 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-OLD_LOG = "terminal_logs/terminal_log_for_bpe_16L16H_2026_04_05_1754.txt"
-NEW_LOG = "terminal_logs/terminal_log_for_bpe_16L16H_2026_04_15_1256.txt"
+RUNS = [
+    {
+        'log': 'terminal_logs/terminal_log_for_bpe_16L16H_2026_04_15_1256.txt',
+        'label': '2.5GB unshuffled (block=1024, batch=16)',
+        'train_color': 'coral',
+        'val_color': 'darkred',
+    },
+    {
+        'log': 'terminal_logs/terminal_log_for_bpe_16L16H_2026_04_19_1124.txt',
+        'label': '2.1GB doc-shuf 32K bf16 (block=2048, batch=4)',
+        'train_color': 'limegreen',
+        'val_color': 'darkgreen',
+    },
+]
 
 # "iter 30: loss 6.8562, time 4992.84ms, mfu 5.60%"
 ITER_RE = re.compile(r'^iter\s+(\d+):\s+loss\s+([\d.]+)')
@@ -29,7 +41,6 @@ def parse_log(path):
     iter_steps, iter_losses = [], []
     val_steps, val_epochs, val_train, val_losses = [], [], [], []
     if not os.path.exists(path):
-        print(f"Warning: {path} not found, skipping")
         return (np.array(iter_steps), np.array(iter_losses),
                 np.array(val_steps), np.array(val_epochs),
                 np.array(val_train), np.array(val_losses))
@@ -51,48 +62,52 @@ def parse_log(path):
             np.array(val_train), np.array(val_losses))
 
 
-old_iters, old_iter_loss, old_val_steps, old_val_epochs, old_val_train, old_val_loss = parse_log(OLD_LOG)
-new_iters, new_iter_loss, new_val_steps, new_val_epochs, new_val_train, new_val_loss = parse_log(NEW_LOG)
+# Parse all runs
+parsed = []
+for run in RUNS:
+    iters, iter_loss, val_steps, val_epochs, val_train, val_loss = parse_log(run['log'])
+    parsed.append((iters, iter_loss, val_steps, val_epochs, val_train, val_loss))
+    n_train = len(iters)
+    n_val = len(val_steps)
+    print(f"{run['label']}: {n_train} train points, {n_val} eval points", end="")
+    if n_train:
+        print(f", iters {iters[0]}–{iters[-1]}, loss {iter_loss[0]:.4f} -> {iter_loss[-1]:.4f}")
+    else:
+        print()
 
-# Clip old data to match the range of the new data so both are comparable
-if len(new_iters):
-    max_new_iter = new_iters[-1]
-    old_iter_mask = old_iters <= max_new_iter
-    old_iters = old_iters[old_iter_mask]
-    old_iter_loss = old_iter_loss[old_iter_mask]
-    old_val_mask = old_val_steps <= max_new_iter
-    old_val_steps = old_val_steps[old_val_mask]
-    old_val_train = old_val_train[old_val_mask]
-    old_val_loss = old_val_loss[old_val_mask]
+# Find the latest (currently training) run to set x-axis range
+latest = None
+for i, (iters, _, _, _, _, _) in enumerate(parsed):
+    if len(iters):
+        if latest is None or iters[-1] > parsed[latest][0][-1]:
+            latest = i
 
-print(f"Old corpus (8 GB): {len(old_iters)} train points, {len(old_val_steps)} eval points")
-if len(old_iters):
-    print(f"  Train loss: {old_iter_loss[0]:.4f} -> {old_iter_loss[-1]:.4f} (iters {old_iters[0]}–{old_iters[-1]})")
-if len(old_val_steps):
-    print(f"  Val loss:   {old_val_loss[0]:.4f} -> {old_val_loss[-1]:.4f}")
-
-print(f"New corpus (2.5 GB): {len(new_iters)} train points, {len(new_val_steps)} eval points")
-if len(new_iters):
-    print(f"  Train loss: {new_iter_loss[0]:.4f} -> {new_iter_loss[-1]:.4f} (iters {new_iters[0]}–{new_iters[-1]})")
-if len(new_val_steps):
-    print(f"  Val loss:   {new_val_loss[0]:.4f} -> {new_val_loss[-1]:.4f}")
+# Clip all runs to the range of the latest run
+if latest is not None:
+    max_iter = parsed[latest][0][-1]
+    clipped = []
+    for iters, iter_loss, val_steps, val_epochs, val_train, val_loss in parsed:
+        mask = iters <= max_iter
+        vmask = val_steps <= max_iter if len(val_steps) else np.array([], dtype=bool)
+        clipped.append((
+            iters[mask], iter_loss[mask],
+            val_steps[vmask], val_epochs[vmask],
+            val_train[vmask], val_loss[vmask]
+        ))
+    parsed = clipped
 
 # Plot
 fig, ax = plt.subplots(figsize=(14, 7))
 
-if len(old_iters):
-    ax.plot(old_iters, old_iter_loss, linewidth=0.5, alpha=0.6,
-            color='steelblue', label='Old corpus — train')
-if len(old_val_steps):
-    ax.plot(old_val_steps, old_val_loss, linewidth=1.5, alpha=0.9,
-            color='navy', label='Old corpus — val', linestyle='--')
-
-if len(new_iters):
-    ax.plot(new_iters, new_iter_loss, linewidth=0.5, alpha=0.6,
-            color='coral', label='New corpus — train')
-if len(new_val_steps):
-    ax.plot(new_val_steps, new_val_loss, linewidth=1.5, alpha=0.9,
-            color='darkred', label='New corpus — val', linestyle='--')
+for i, run in enumerate(RUNS):
+    iters, iter_loss, val_steps, val_epochs, val_train, val_loss = parsed[i]
+    if len(iters):
+        ax.plot(iters, iter_loss, linewidth=0.5, alpha=0.6,
+                color=run['train_color'], label=f"{run['label']} — train")
+    if len(val_steps):
+        ax.plot(val_steps, val_loss, linewidth=1.5, alpha=0.9,
+                color=run['val_color'], label=f"{run['label']} — val",
+                linestyle='--')
 
 # Per-character equivalent on right y-axis
 ax2 = ax.twinx()
@@ -103,15 +118,16 @@ ax2.tick_params(axis='y', labelcolor='gray')
 
 ax.set_xlabel('Iteration', fontsize=13)
 ax.set_ylabel('Loss (per BPE token)', fontsize=13)
-ax.set_title('BPE 16L16H — Train & Val Loss: Old vs New Corpus', fontsize=15)
-ax.legend(fontsize=11)
+ax.set_title('BPE 16L16H — Training Loss Comparison', fontsize=15)
+ax.legend(fontsize=9, loc='upper right')
 ax.grid(True, alpha=0.3)
 
-# Show latest new-corpus epoch as text annotation
-if len(new_val_epochs):
-    epoch_text = f'New corpus epoch: {new_val_epochs[-1]:.2f}'
+# Show latest epoch for the current run
+latest_iters, _, _, latest_epochs, _, _ = parsed[-1]
+if len(latest_epochs):
+    epoch_text = f'Current run epoch: {latest_epochs[-1]:.2f}'
     ax.text(0.02, 0.02, epoch_text, transform=ax.transAxes,
-            fontsize=12, color='darkred', verticalalignment='bottom')
+            fontsize=12, color='darkgreen', verticalalignment='bottom')
 
 plt.tight_layout()
 os.makedirs('plots', exist_ok=True)
