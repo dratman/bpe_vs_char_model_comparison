@@ -125,6 +125,10 @@ def parse_args():
     parser.add_argument('--vocab_size', type=int, default=8192,
                        help='Vocabulary size for BPE tokenizer (ignored for char)')
 
+    # Gradient accumulation
+    parser.add_argument('--grad_accum_steps', type=int, default=1,
+                       help='Number of gradient accumulation steps (effective batch = batch_size * grad_accum_steps)')
+
     # Resume option
     parser.add_argument('--resume', type=str, default=None,
                        help='Path to checkpoint to resume training from')
@@ -860,6 +864,9 @@ def main():
     print(f"Precision: {args.precision}")
     print(f"Max iterations: {args.max_iters}")
     print(f"Batch size: {args.batch_size}")
+    if args.grad_accum_steps > 1:
+        print(f"Gradient accumulation steps: {args.grad_accum_steps}")
+        print(f"Effective batch size: {args.batch_size * args.grad_accum_steps}")
     print(f"Block size: {args.block_size}")
     print(f"Learning rate: {args.learning_rate:.2e}")
     print(f"Warmup iters: {args.warmup_iters}")
@@ -902,7 +909,7 @@ def main():
             else:
                 losses = estimate_loss(model, train_blocks, val_blocks,
                                        args.batch_size, args.eval_iters, device)
-            epoch = calculate_epoch(iter_num, args.batch_size, args.block_size, train_tokens)
+            epoch = calculate_epoch(iter_num, args.batch_size * args.grad_accum_steps, args.block_size, train_tokens)
             elapsed = format_elapsed(training_start_time)
             print(f"[{get_timestamp()}] [{elapsed}] Step {iter_num:5d} | Epoch {epoch:6.2f} | train loss {losses['train']:.4f} | val loss {losses['val']:.4f} | lr {lr:.2e}")
 
@@ -951,13 +958,13 @@ def main():
                 'mode': args.mode,
             }
             torch.save(checkpoint, checkpoint_file)
-            epoch = calculate_epoch(iter_num, args.batch_size, args.block_size, train_tokens)
+            epoch = calculate_epoch(iter_num, args.batch_size * args.grad_accum_steps, args.block_size, train_tokens)
             elapsed = format_elapsed(training_start_time)
             print(f"[{get_timestamp()}] [{elapsed}] Saved periodic checkpoint to {checkpoint_file} (iter {iter_num}, epoch {epoch:.2f})")
 
         # Sample from the model periodically
         if iter_num % args.sample_interval == 0 and iter_num > 0:
-            epoch = calculate_epoch(iter_num, args.batch_size, args.block_size, train_tokens)
+            epoch = calculate_epoch(iter_num, args.batch_size * args.grad_accum_steps, args.block_size, train_tokens)
             elapsed = format_elapsed(training_start_time)
             print(f"\n[{get_timestamp()}] [{elapsed}] Sampling at iter {iter_num} (epoch {epoch:.2f}):")
             if args.mode == 'sentence':
@@ -987,28 +994,47 @@ def main():
                 print(f"\nSample (first 200 chars): {sample[:200]}")
             print()
 
-        # Forward backward update
-        with ctx:
-            logits, loss = model(X, Y)
-
-        # Check for NaN
-        if torch.isnan(loss):
-            print(f"\n" + "!" * 60)
-            print(f"WARNING: NaN detected at iteration {iter_num}! Stopping training.")
-            print("!" * 60)
-            break
-
-        # Backward pass
+        # Forward backward update with gradient accumulation
         optimizer.zero_grad(set_to_none=True)
 
+        for micro_step in range(args.grad_accum_steps):
+            with ctx:
+                logits, micro_loss = model(X, Y)
+                # Scale loss by accumulation steps so the average is correct
+                micro_loss = micro_loss / args.grad_accum_steps
+
+            # Check for NaN
+            if torch.isnan(micro_loss):
+                print(f"\n" + "!" * 60)
+                print(f"WARNING: NaN detected at iteration {iter_num}! Stopping training.")
+                print("!" * 60)
+                break
+
+            if scaler is not None:
+                scaler.scale(micro_loss).backward()
+            else:
+                micro_loss.backward()
+
+            # Get next batch for next micro-step (except on last step)
+            if micro_step < args.grad_accum_steps - 1:
+                if args.mode == 'continuous':
+                    X, Y = get_batch_continuous(train_data, args.batch_size, args.block_size, device)
+                else:
+                    X, Y = get_batch(train_blocks, args.batch_size, device)
+
+        # Check if we broke out due to NaN
+        if torch.isnan(micro_loss * args.grad_accum_steps):
+            break
+
+        # Unscaled loss for logging (sum of micro_losses = original scale)
+        loss = micro_loss * args.grad_accum_steps
+
         if scaler is not None:
-            scaler.scale(loss).backward()
             scaler.unscale_(optimizer)
             grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             scaler.step(optimizer)
             scaler.update()
         else:
-            loss.backward()
             grad_norm = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
             optimizer.step()
 
@@ -1020,7 +1046,7 @@ def main():
         # Speed monitoring
         if iter_num % 100 == 0 and iter_num > 0:
             speed_dt = time.time() - speed_t0
-            epoch = calculate_epoch(iter_num, args.batch_size, args.block_size, train_tokens)
+            epoch = calculate_epoch(iter_num, args.batch_size * args.grad_accum_steps, args.block_size, train_tokens)
             elapsed = format_elapsed(training_start_time)
             print(f"[{get_timestamp()}] [{elapsed}] Speed at iter {iter_num} (epoch {epoch:.2f}): {100/speed_dt:.2f} iters/sec")
             speed_t0 = time.time()
@@ -1043,7 +1069,7 @@ def main():
             X, Y = get_batch(train_blocks, args.batch_size, device)
 
     # Final save
-    final_epoch = calculate_epoch(iter_num, args.batch_size, args.block_size, train_tokens)
+    final_epoch = calculate_epoch(iter_num, args.batch_size * args.grad_accum_steps, args.block_size, train_tokens)
     elapsed = format_elapsed(training_start_time)
     print(f"\n[{get_timestamp()}] [{elapsed}] Training complete!")
     print(f"Mode: {args.mode}")
