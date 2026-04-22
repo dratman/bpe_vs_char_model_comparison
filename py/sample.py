@@ -313,6 +313,11 @@ def main():
     if not args.no_lowercase:
         prompt_text = prompt_text.lower()
 
+    # Strip trailing spaces — BPE attaches spaces to the front of the
+    # next word, so a trailing space creates an unnatural token sequence
+    # that produces garbled output.
+    prompt_text = prompt_text.rstrip(' ')
+
     # Print compact header
     n_params = sum(p.numel() for p in model.parameters()) / 1e6
     iter_num = checkpoint.get('iter_num', '?')

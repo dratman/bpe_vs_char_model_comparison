@@ -849,10 +849,15 @@ def main():
     # Set up mixed precision training
     ctx = nullcontext()
     scaler = None
-    if args.precision == 'float16' and device == 'cuda':
-        ctx = torch.amp.autocast(device_type='cuda', dtype=torch.float16)
-        scaler = torch.amp.GradScaler('cuda')
-        print(f"[{get_timestamp()}] Using automatic mixed precision (AMP)")
+    if ptdtype != torch.float32:
+        if device == 'cuda':
+            ctx = torch.amp.autocast(device_type='cuda', dtype=ptdtype)
+            if ptdtype == torch.float16:
+                scaler = torch.amp.GradScaler('cuda')
+            print(f"[{get_timestamp()}] Using automatic mixed precision (AMP) with {args.precision}")
+        elif device == 'mps':
+            ctx = torch.amp.autocast(device_type='mps', dtype=ptdtype)
+            print(f"[{get_timestamp()}] Using {args.precision} precision on MPS")
 
     # Training loop
     print(f"\n[{get_timestamp()}] Starting training...")
