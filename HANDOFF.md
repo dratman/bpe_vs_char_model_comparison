@@ -1,6 +1,6 @@
 # Handoff Document
 
-Last updated: 2026-04-26 01:28 by Claude Code Opus (Mac Studio session)
+Last updated: 2026-04-26 09:23 by Claude Code Opus (Mac Studio session)
 
 ## Current State
 
@@ -46,14 +46,36 @@ Last updated: 2026-04-26 01:28 by Claude Code Opus (Mac Studio session)
   Decoded output collapses to high-frequency tokens (commas, "the", "of").
   The 512-dim bottleneck and/or cosine loss may discard the subtle features
   the back half needs for sharp token decisions.
+- **Second run (2048-dim, stopped early):** Started a 302M-param imitator
+  at full d_model=2048 (no projection bottleneck). Started at cos_sim=0.84
+  due to residual connections acting as identity. Stopped after ~90 iters
+  to explore other questions. Launch script: `sh/train_imitator_L8_full_dim.sh`
+- **Key insight from this session:** Free-running generation produces much
+  more coherent text than forced next-token prediction. The frozen model
+  scores 27% top-1 on a War and Peace passage, but the actual token is in
+  the top 5 about 65% of the time (median rank 3). The model knows English
+  well; it just cannot predict the exact word an author chose. This reframes
+  the imitator experiment — rollout mode (free generation in vector space)
+  may be more informative than compare mode (forced prediction).
+- **Evaluation bug found and fixed:** The original compare script had a
+  causal context error — the back half was missing position 0's context.
+  Fixed by decoding the full sequence through the back half.
 - **Next steps to consider:**
-  1. Bigger imitator (d_model=1024 or 2048)
-  2. Downstream KL loss (optimize token distribution match, not vector match)
-  3. More training (50K+ iters)
+  1. Imitator rollout mode — free generation in vector space, decoded through back half
+  2. Full-dim (2048) imitator training to completion
+  3. Downstream KL loss (optimize token distribution match, not vector match)
   4. Different split layers (2, 4, 12, 14)
   5. Retokenization: cluster predicted vectors into discrete mid-layer tokens
+  6. Try the imitator experiment on a stronger open-source base model (Llama 3B)
 - **M3 repo location:** `/Volumes/RalphDratman/0-Home-Working-on-M3-Pro/bpe_vs_char_model_comparison/`
   (cloned from Mac Studio, contains all source + checkpoint + corpus)
+- **Additional shell scripts on M3:**
+  - `sh/sample_imitator_compare.sh` — compare mode evaluation
+  - `sh/sample_imitator_war_and_peace.sh` — compare on specific Tolstoy passage
+  - `sh/sample_frozen_war_and_peace.sh` — frozen model baseline on Tolstoy
+  - `sh/sample_frozen_detailed.sh` — per-position rank/probability analysis
+  - `sh/sample_frozen_continue.sh` — free generation from Tolstoy prompt
+  - `sh/train_imitator_L8_full_dim.sh` — 302M imitator at full dimension
 
 ### IMPORTANT LESSONS FROM THIS SESSION
 - **Batch size 16 with 32K vocab and block=2048 crashes** from OOM.

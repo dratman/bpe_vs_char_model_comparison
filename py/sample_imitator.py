@@ -131,24 +131,39 @@ def compare_predictions(imitator, small_model, tokenizer, tokens,
             pred_acts.float(), target_acts.float(), dim=-1
         )[0]  # (T-1,)
 
-        # Decode real vectors through the back half to get real next-token logits
-        real_logits = forward_from_layer(
-            small_model, target_acts, split_layer
-        )  # (1, T-1, vocab)
+        # Decode FULL real activation sequence through the back half.
+        # Using all T positions preserves correct causal context — each
+        # position can attend to all positions before it, including position 0.
+        real_logits_full = forward_from_layer(
+            small_model, real_acts, split_layer
+        )  # (1, T, vocab)
+        # Positions 1..T-1 predict tokens 2..T, so slice accordingly
+        real_logits = real_logits_full[:, 1:, :]  # (1, T-1, vocab)
         real_tokens = real_logits[0].argmax(dim=-1)  # (T-1,)
 
-        # Decode imitator vectors through the back half
-        pred_logits = forward_from_layer(
-            small_model, pred_acts.to(real_acts.dtype), split_layer
-        )  # (1, T-1, vocab)
+        # Decode imitator vectors through the back half.
+        # Prepend the real activation at position 0 so the back half has
+        # correct causal context starting from the beginning. The result
+        # is a mixed sequence: [real_pos_0, imitator_pred_for_pos_1,
+        # imitator_pred_for_pos_2, ...].
+        mixed = torch.cat(
+            [real_acts[:, 0:1, :], pred_acts.to(real_acts.dtype)], dim=1
+        )  # (1, T, D)
+        pred_logits_full = forward_from_layer(
+            small_model, mixed, split_layer
+        )  # (1, T, vocab)
+        pred_logits = pred_logits_full[:, 1:, :]  # (1, T-1, vocab)
         pred_tokens = pred_logits[0].argmax(dim=-1)  # (T-1,)
 
-        # The actual tokens that were in the input (shifted by 1)
-        actual_tokens = idx[0, 1:]  # (T-1,)
+        # The actual tokens at positions 2..T (what positions 1..T-1 predict)
+        actual_tokens = idx[0, 2:]  # (T-2,)
 
-        # Token-level match rate
+        # Token-level match rates
         match = (pred_tokens == real_tokens).float().mean().item()
-        match_actual = (pred_tokens == actual_tokens).float().mean().item()
+        # For actual-token comparison, align lengths (T-2 positions)
+        match_actual = (pred_tokens[:-1] == actual_tokens).float().mean().item()
+        # Also compute the frozen model's own accuracy against actual tokens
+        frozen_actual = (real_tokens[:-1] == actual_tokens).float().mean().item()
 
         # Decode to text for display
         input_text = tokenizer.decode(idx[0].tolist())
@@ -170,8 +185,9 @@ def compare_predictions(imitator, small_model, tokenizer, tokens,
         print(f"  Mean cosine similarity (real vs predicted vectors): {cos_sim.mean().item():.4f}")
         print(f"  Min cosine similarity:  {cos_sim.min().item():.4f}")
         print(f"  Max cosine similarity:  {cos_sim.max().item():.4f}")
-        print(f"  Imitator top-1 matches frozen model top-1: {match*100:.1f}%")
-        print(f"  Imitator top-1 matches actual next token:  {match_actual*100:.1f}%")
+        print(f"  Frozen model top-1 matches actual next token: {frozen_actual*100:.1f}%")
+        print(f"  Imitator top-1 matches frozen model top-1:   {match*100:.1f}%")
+        print(f"  Imitator top-1 matches actual next token:    {match_actual*100:.1f}%")
 
         # Show some positions where they disagree
         disagree = (pred_tokens != real_tokens).nonzero(as_tuple=True)[0]
@@ -185,6 +201,100 @@ def compare_predictions(imitator, small_model, tokenizer, tokens,
                 print(f"    pos {j:3d}: cos={cos_sim[j]:.3f}  "
                       f"frozen='{real_tok}'  imitator='{pred_tok}'  "
                       f"after '...{context}'")
+
+
+@torch.no_grad()
+def compare_prompt(imitator, small_model, tokenizer, prompt_text,
+                   split_layer, block_size, device):
+    """
+    Run the compare analysis on a specific text passage rather than
+    random corpus windows.
+    """
+    imitator_dtype = next(imitator.parameters()).dtype
+
+    # Tokenize the prompt
+    token_ids = tokenizer.encode(prompt_text)
+    if len(token_ids) > block_size:
+        print(f"Prompt has {len(token_ids)} tokens, truncating to {block_size}")
+        token_ids = token_ids[:block_size]
+    idx = torch.tensor([token_ids], dtype=torch.long, device=device)  # (1, T)
+    T = idx.size(1)
+
+    # Get real layer-N activations
+    real_acts = forward_to_layer(small_model, idx, split_layer)  # (1, T, D)
+
+    # Imitator predicts next vectors from positions [0..T-2]
+    inp = real_acts[:, :-1, :].to(imitator_dtype)  # (1, T-1, D)
+    pred_acts = imitator(inp)  # (1, T-1, D)
+
+    # Real target vectors at positions [1..T-1]
+    target_acts = real_acts[:, 1:, :]  # (1, T-1, D)
+
+    # Per-position cosine similarity
+    cos_sim = F.cosine_similarity(
+        pred_acts.float(), target_acts.float(), dim=-1
+    )[0]  # (T-1,)
+
+    # Decode FULL real activation sequence through back half
+    real_logits_full = forward_from_layer(
+        small_model, real_acts, split_layer
+    )  # (1, T, vocab)
+    real_logits = real_logits_full[:, 1:, :]  # (1, T-1, vocab)
+    real_tokens = real_logits[0].argmax(dim=-1)  # (T-1,)
+
+    # Decode imitator vectors with real position 0 prepended
+    mixed = torch.cat(
+        [real_acts[:, 0:1, :], pred_acts.to(real_acts.dtype)], dim=1
+    )  # (1, T, D)
+    pred_logits_full = forward_from_layer(
+        small_model, mixed, split_layer
+    )  # (1, T, vocab)
+    pred_logits = pred_logits_full[:, 1:, :]  # (1, T-1, vocab)
+    pred_tokens = pred_logits[0].argmax(dim=-1)  # (T-1,)
+
+    # Actual tokens at positions 2..T (what positions 1..T-1 predict)
+    actual_tokens = idx[0, 2:]  # (T-2,)
+
+    # Match rates
+    match = (pred_tokens == real_tokens).float().mean().item()
+    match_actual = (pred_tokens[:-1] == actual_tokens).float().mean().item()
+    frozen_actual = (real_tokens[:-1] == actual_tokens).float().mean().item()
+
+    # Decode to text
+    input_text = tokenizer.decode(idx[0].tolist())
+    real_decoded = tokenizer.decode(real_tokens.tolist())
+    pred_decoded = tokenizer.decode(pred_tokens.tolist())
+
+    show_chars = 500
+    print(f"\n{'='*70}")
+    print(f"Prompt comparison ({T} tokens)")
+    print(f"{'='*70}")
+    print(f"\nActual input text (first {show_chars} chars):")
+    print(f"  {input_text[:show_chars]}")
+    print(f"\nFrozen model's predictions (decoded from real layer-{split_layer} vectors):")
+    print(f"  {real_decoded[:show_chars]}")
+    print(f"\nImitator's predictions (decoded from predicted layer-{split_layer} vectors):")
+    print(f"  {pred_decoded[:show_chars]}")
+    print(f"\nStatistics:")
+    print(f"  Mean cosine similarity (real vs predicted vectors): {cos_sim.mean().item():.4f}")
+    print(f"  Min cosine similarity:  {cos_sim.min().item():.4f}")
+    print(f"  Max cosine similarity:  {cos_sim.max().item():.4f}")
+    print(f"  Frozen model top-1 matches actual next token: {frozen_actual*100:.1f}%")
+    print(f"  Imitator top-1 matches frozen model top-1:   {match*100:.1f}%")
+    print(f"  Imitator top-1 matches actual next token:    {match_actual*100:.1f}%")
+
+    # Show disagreements
+    disagree = (pred_tokens != real_tokens).nonzero(as_tuple=True)[0]
+    if len(disagree) > 0:
+        print(f"\n  First few disagreements (position: frozen->imitator):")
+        for j in disagree[:10]:
+            j = j.item()
+            context = tokenizer.decode(idx[0, max(0,j-3):j+1].tolist())
+            real_tok = tokenizer.decode([real_tokens[j].item()])
+            pred_tok = tokenizer.decode([pred_tokens[j].item()])
+            print(f"    pos {j:3d}: cos={cos_sim[j]:.3f}  "
+                  f"frozen='{real_tok}'  imitator='{pred_tok}'  "
+                  f"after '...{context}'")
 
 
 # ---------------------------------------------------------------------------
@@ -267,6 +377,7 @@ def compute_stats(imitator, small_model, tokenizer, tokens,
     all_top1_match = []
     all_top5_match = []
     all_actual_match = []
+    all_frozen_actual = []
 
     for batch_idx in range(num_batches):
         # Sample a batch
@@ -287,25 +398,37 @@ def compute_stats(imitator, small_model, tokenizer, tokens,
         )
         all_cos_sims.append(cos_sim.mean().item())
 
-        # Decode both through back half
-        real_logits = forward_from_layer(small_model, target_acts, split_layer)
-        pred_logits = forward_from_layer(
-            small_model, pred_acts.to(real_acts.dtype), split_layer
+        # Decode FULL real activations through back half (correct causal context)
+        real_logits_full = forward_from_layer(small_model, real_acts, split_layer)
+        real_logits = real_logits_full[:, 1:, :]  # positions 1..T-1
+
+        # Decode imitator predictions with real position 0 prepended
+        mixed = torch.cat(
+            [real_acts[:, 0:1, :], pred_acts.to(real_acts.dtype)], dim=1
         )
+        pred_logits_full = forward_from_layer(small_model, mixed, split_layer)
+        pred_logits = pred_logits_full[:, 1:, :]  # positions 1..T-1
 
-        real_top1 = real_logits.argmax(dim=-1)
-        pred_top1 = pred_logits.argmax(dim=-1)
-        actual_next = idx[:, 1:]
+        real_top1 = real_logits.argmax(dim=-1)     # (B, T-1)
+        pred_top1 = pred_logits.argmax(dim=-1)     # (B, T-1)
+        actual_next = idx[:, 2:]                    # (B, T-2) — tokens at positions 2..T-1
 
-        # Top-1 match with frozen model
+        # Top-1 match: imitator vs frozen model
         all_top1_match.append((pred_top1 == real_top1).float().mean().item())
 
-        # Top-1 match with actual corpus tokens
-        all_actual_match.append((pred_top1 == actual_next).float().mean().item())
+        # Top-1 match: imitator vs actual corpus tokens (aligned to T-2)
+        all_actual_match.append(
+            (pred_top1[:, :-1] == actual_next).float().mean().item()
+        )
 
-        # Top-5 match: is the frozen model's top-1 token in the imitator's top 5?
-        pred_top5 = pred_logits.topk(5, dim=-1).indices  # (B, T, 5)
-        real_top1_expanded = real_top1.unsqueeze(-1)  # (B, T, 1)
+        # Frozen model's own accuracy vs actual corpus tokens
+        all_frozen_actual.append(
+            (real_top1[:, :-1] == actual_next).float().mean().item()
+        )
+
+        # Top-5 match: is the frozen model's top-1 in the imitator's top 5?
+        pred_top5 = pred_logits.topk(5, dim=-1).indices  # (B, T-1, 5)
+        real_top1_expanded = real_top1.unsqueeze(-1)       # (B, T-1, 1)
         top5_hit = (pred_top5 == real_top1_expanded).any(dim=-1).float()
         all_top5_match.append(top5_hit.mean().item())
 
@@ -318,11 +441,13 @@ def compute_stats(imitator, small_model, tokenizer, tokens,
     print(f"{'='*70}")
     print(f"  Mean cosine similarity (real vs predicted vectors): "
           f"{np.mean(all_cos_sims):.4f} +/- {np.std(all_cos_sims):.4f}")
-    print(f"  Imitator top-1 matches frozen model top-1:  "
+    print(f"  Frozen model top-1 matches actual corpus token: "
+          f"{np.mean(all_frozen_actual)*100:.1f}%")
+    print(f"  Imitator top-1 matches frozen model top-1:     "
           f"{np.mean(all_top1_match)*100:.1f}%")
-    print(f"  Frozen model top-1 in imitator's top-5:     "
+    print(f"  Frozen model top-1 in imitator's top-5:        "
           f"{np.mean(all_top5_match)*100:.1f}%")
-    print(f"  Imitator top-1 matches actual corpus token:  "
+    print(f"  Imitator top-1 matches actual corpus token:    "
           f"{np.mean(all_actual_match)*100:.1f}%")
 
 
@@ -351,6 +476,10 @@ def main():
     # Compare mode options
     p.add_argument('--num_samples', type=int, default=5,
                    help='Number of samples to show (compare/rollout modes)')
+    p.add_argument('--prompt', type=str, default=None,
+                   help='Specific text to analyze (compare mode; skips random sampling)')
+    p.add_argument('--prompt_file', type=str, default=None,
+                   help='File containing text to analyze (compare mode)')
 
     # Rollout mode options
     p.add_argument('--prefix_tokens', type=int, default=64,
@@ -407,11 +536,25 @@ def main():
     block_size = imit_config.block_size
 
     if args.mode == 'compare':
-        compare_predictions(
-            imitator, small_model, tokenizer, val_tokens,
-            split_layer, block_size, device,
-            num_samples=args.num_samples,
-        )
+        # Check for --prompt or --prompt_file
+        prompt_text = None
+        if args.prompt:
+            prompt_text = args.prompt
+        elif args.prompt_file:
+            with open(args.prompt_file, 'r', encoding='utf-8') as f:
+                prompt_text = f.read()
+
+        if prompt_text is not None:
+            compare_prompt(
+                imitator, small_model, tokenizer, prompt_text,
+                split_layer, block_size, device,
+            )
+        else:
+            compare_predictions(
+                imitator, small_model, tokenizer, val_tokens,
+                split_layer, block_size, device,
+                num_samples=args.num_samples,
+            )
     elif args.mode == 'rollout':
         rollout(
             imitator, small_model, tokenizer, val_tokens,

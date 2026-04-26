@@ -51,8 +51,11 @@ class Imitator(nn.Module):
         super().__init__()
         self.config = config
 
-        # Input projection: map from residual dim to imitator hidden dim
-        self.proj_in = nn.Linear(config.d_residual, config.d_model, bias=config.bias)
+        # Input/output projections: only needed when d_model != d_residual
+        self.needs_projection = (config.d_model != config.d_residual)
+        if self.needs_projection:
+            self.proj_in = nn.Linear(config.d_residual, config.d_model, bias=config.bias)
+            self.proj_out = nn.Linear(config.d_model, config.d_residual, bias=config.bias)
 
         # Transformer blocks -- reuse model.py's Block via a GPTConfig
         # with the imitator's dimensions
@@ -67,9 +70,6 @@ class Imitator(nn.Module):
         )
         self.blocks = nn.ModuleList([Block(block_config) for _ in range(config.n_layer)])
         self.ln_f = nn.LayerNorm(config.d_model, elementwise_affine=config.bias)
-
-        # Output projection: map back up to residual dim
-        self.proj_out = nn.Linear(config.d_model, config.d_residual, bias=config.bias)
 
         # Initialize weights
         self.apply(self._init_weights)
@@ -102,11 +102,13 @@ class Imitator(nn.Module):
             f"Sequence length {T} exceeds imitator block_size {self.config.block_size}"
         )
 
-        x = self.proj_in(x)               # (B, T, d_model)
+        if self.needs_projection:
+            x = self.proj_in(x)            # (B, T, d_model)
         for block in self.blocks:
             x = block(x)
         x = self.ln_f(x)                  # (B, T, d_model)
-        x = self.proj_out(x)              # (B, T, d_residual)
+        if self.needs_projection:
+            x = self.proj_out(x)           # (B, T, d_residual)
         return x
 
     def configure_optimizers(self, weight_decay, learning_rate, betas, device_type):
