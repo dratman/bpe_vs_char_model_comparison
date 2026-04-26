@@ -139,6 +139,12 @@ def parse_args():
     parser.add_argument('--max_sentences', type=int, default=None,
                        help='Maximum number of sentences to use (None = all) [sentence mode only]')
 
+    # Hot-reload overrides
+    parser.add_argument('--accept_overrides', type=str, default=None,
+                       help='Path to a JSON file checked every 1000 iters for '
+                            'on-the-fly changes to learning_rate, log_interval, '
+                            'eval_interval, sample_interval, save_interval, max_iters')
+
     # Debug output
     parser.add_argument('--debug', action='store_true',
                        help='Enable verbose debug output')
@@ -452,6 +458,59 @@ def get_lr(iter_num, learning_rate, warmup_iters, max_iters):
     assert 0 <= decay_ratio <= 1
     coeff = 0.5 * (1.0 + math.cos(math.pi * decay_ratio))
     return min_lr + coeff * (learning_rate - min_lr)
+
+
+def check_overrides(args, override_path, lr_override):
+    """
+    Check for a JSON override file and apply any changes.
+    Called every 100 iterations during training.
+
+    Changeable parameters:
+        learning_rate  — bypasses cosine schedule, uses fixed value
+        log_interval, eval_interval, sample_interval, save_interval
+        max_iters      — extend or shorten the run
+
+    Returns:
+        lr_override — the fixed learning rate if set, or None to use schedule
+
+    The override file is left in place after reading. To revert learning_rate
+    to the cosine schedule, remove the "learning_rate" key from the file
+    (or delete the file entirely).
+    """
+    import json
+    if not os.path.exists(override_path):
+        return lr_override
+    try:
+        with open(override_path, 'r') as f:
+            overrides = json.load(f)
+    except (json.JSONDecodeError, IOError):
+        return lr_override
+
+    changed = []
+    safe_intervals = ['log_interval', 'eval_interval', 'sample_interval',
+                      'save_interval', 'max_iters']
+    for key in safe_intervals:
+        if key in overrides and getattr(args, key) != overrides[key]:
+            old_val = getattr(args, key)
+            setattr(args, key, overrides[key])
+            changed.append(f"{key}: {old_val} -> {overrides[key]}")
+
+    if 'learning_rate' in overrides:
+        new_lr = overrides['learning_rate']
+        if lr_override != new_lr:
+            changed.append(f"learning_rate: override to fixed {new_lr:.2e}")
+            lr_override = new_lr
+    else:
+        if lr_override is not None:
+            changed.append("learning_rate: reverting to cosine schedule")
+            lr_override = None
+
+    if changed:
+        print(f"[{get_timestamp()}] Overrides applied from {override_path}:")
+        for c in changed:
+            print(f"  {c}")
+
+    return lr_override
 
 
 # =============================================================================
@@ -900,9 +959,21 @@ def main():
     local_iter_num = 0
     raw_model = model
 
+    # Hot-reload overrides
+    lr_override = None  # None = use cosine schedule; float = use fixed LR
+    if args.accept_overrides:
+        print(f"[{get_timestamp()}] Will check for overrides at: {args.accept_overrides}")
+
     while iter_num < args.max_iters:
-        # Set learning rate
-        lr = get_lr(iter_num, args.learning_rate, args.warmup_iters, args.max_iters)
+        # Check for override file every 1000 iterations
+        if args.accept_overrides and iter_num % 1000 == 0:
+            lr_override = check_overrides(args, args.accept_overrides, lr_override)
+
+        # Set learning rate (override bypasses schedule)
+        if lr_override is not None:
+            lr = lr_override
+        else:
+            lr = get_lr(iter_num, args.learning_rate, args.warmup_iters, args.max_iters)
         for param_group in optimizer.param_groups:
             param_group['lr'] = lr
 
