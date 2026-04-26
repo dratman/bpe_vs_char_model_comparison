@@ -1,10 +1,10 @@
 # Handoff Document
 
-Last updated: 2026-04-19 12:30 by Claude Opus (Mac Studio session)
+Last updated: 2026-04-26 01:28 by Claude Code Opus (Mac Studio session)
 
 ## Current State
 
-### Training
+### BPE Model Training (Mac Studio)
 - **Training IS running** — launched 2026-04-19 11:24
 - Launch script: `sh/train_bpe_32k_bf16.sh`
 - Log: `terminal_logs/terminal_log_for_bpe_16L16H_2026_04_19_1124.txt`
@@ -17,9 +17,43 @@ Last updated: 2026-04-19 12:30 by Claude Opus (Mac Studio session)
   - learning_rate: 0.00015 (sqrt-scaled for batch=4)
   - warmup_iters: 500
   - max_iters: 400000
-- At iter 11,000 loss is ~4.0, trending down. Memory stable at ~54 GB free.
-- Loss is noisier than previous runs due to small batch size. This is
-  expected and acceptable — the trend is clearly downward.
+- At iter ~176,000, val loss ~3.57. Sample quality is reasonable prose.
+
+### Imitator Experiment (NEW — 2026-04-25/26)
+- **Concept:** Train a small transformer to predict the next residual-stream
+  vector at layer 8 of the frozen BPE model. Feed predicted vectors through
+  the frozen model's back half (layers 8-15) to decode into English.
+- **Origin:** Ralph's idea, developed in conversation with regular Claude,
+  then implemented in Claude Code.
+- **Files created:**
+  - `py/imitator_model.py` — 21M-param vector-to-vector transformer
+    (d_model=512, n_layer=6, n_head=8, no embeddings)
+  - `py/small_model_split.py` — splits frozen GPT at layer N
+  - `py/train_imitator.py` — training loop (cosine + MSE loss)
+  - `py/sample_imitator.py` — compare, rollout, and stats evaluation modes
+  - `sh/train_imitator.sh` — logging wrapper
+  - `sh/train_imitator_L8_first_run.sh` — first run launch script
+  - `sh/sample_imitator_compare.sh` — compare mode launch script
+- **First run completed on M3 Pro (64 GB):**
+  - 5000 iterations, ~70 minutes
+  - Frozen model: `pt/bpe_16L16H_iter170000.pt` (875M params, bfloat16)
+  - Best val loss: 0.1277, val cos_sim: 0.9484 (iter 4400)
+  - Checkpoints: `pt/imitator_L8.pt` (best), `pt/imitator_L8_final.pt`
+  - Log: `terminal_logs/terminal_log_for_imitator_L8_2026_04_25_2346.txt`
+  - Token cache: `txt_local/corpus_tokens_32k.pt` (speeds up reruns)
+- **Key result:** Vector-level cosine similarity is high (0.948) but
+  token-level match is poor (14-20% top-1 match with frozen model).
+  Decoded output collapses to high-frequency tokens (commas, "the", "of").
+  The 512-dim bottleneck and/or cosine loss may discard the subtle features
+  the back half needs for sharp token decisions.
+- **Next steps to consider:**
+  1. Bigger imitator (d_model=1024 or 2048)
+  2. Downstream KL loss (optimize token distribution match, not vector match)
+  3. More training (50K+ iters)
+  4. Different split layers (2, 4, 12, 14)
+  5. Retokenization: cluster predicted vectors into discrete mid-layer tokens
+- **M3 repo location:** `/Volumes/RalphDratman/0-Home-Working-on-M3-Pro/bpe_vs_char_model_comparison/`
+  (cloned from Mac Studio, contains all source + checkpoint + corpus)
 
 ### IMPORTANT LESSONS FROM THIS SESSION
 - **Batch size 16 with 32K vocab and block=2048 crashes** from OOM.
@@ -29,6 +63,12 @@ Last updated: 2026-04-19 12:30 by Claude Opus (Mac Studio session)
   The fix: lr=0.00015 (sqrt scaling: lr *= sqrt(batch/old_batch)).
 - **bfloat16 DOES work on MPS** despite train.py previously having a
   fallback that said it didn't. The fallback was removed.
+- **Cannot run code on M3 from Mac Studio.** Shell commands execute on
+  the Mac Studio even when pointed at the share. Must give Ralph shell
+  scripts to run on the M3 directly.
+- **High cosine similarity does not mean good decoded output.** 94.8%
+  cosine similarity in 2048-dim space still produces 80%+ wrong tokens
+  when decoded through the frozen model's back half.
 
 ### Saved checkpoints from prior runs
 - `old_8_GB_corpus_pt/` — old 8 GB corpus run (iters 10K-160K)
@@ -61,6 +101,8 @@ Last updated: 2026-04-19 12:30 by Claude Opus (Mac Studio session)
 
 ## Recent Decisions
 
+- **Imitator experiment started.** Predict mid-layer residual stream
+  vectors, decode through frozen model's back half. (2026-04-25)
 - **32K vocabulary** replaces 8K. Better information density per token,
   standard for 1B-class models. (2026-04-19)
 - **bfloat16 precision** replaces float32. Halves memory usage with
@@ -81,3 +123,6 @@ Last updated: 2026-04-19 12:30 by Claude Opus (Mac Studio session)
 ## Open Questions
 - Will 32K vocab produce better sample quality than 8K at equivalent loss?
 - Should train.py mask loss at `<|endoftext|>` boundaries?
+- Can downstream KL loss or a larger imitator close the vector→token gap?
+- What do imitators at different split layers reveal about layer-by-layer processing?
+- Can the predicted vectors be retokenized into a discrete mid-layer vocabulary?
