@@ -1,8 +1,22 @@
 # Handoff Document
 
-Last updated: 2026-04-26 09:23 by Claude Code Opus (Mac Studio session)
+Last updated: 2026-04-26 16:26 by Claude Code Opus (Mac Studio session)
 
 ## Current State
+
+### Character Model Training (M3 Pro) — RUNNING
+- **Training IS running** — launched 2026-04-26 ~20:44
+- Script: `sh/train_char_high_quality.sh`
+- Log: `terminal_logs/terminal_log_for_char_high_quality_2026_04_26_2044.txt`
+- Corpus: `txt_local/corpus_high_quality_2026_04_26.txt` (1.42 GB, 4,430 books)
+  - Filtered from the 2.05 GB corpus using Claude Haiku API to judge quality
+  - Removed archaic language, cookbooks, scientific texts, index entries, etc.
+  - 1,768 books removed (29%), 4,430 kept
+- Architecture: 152M params, n_layer=12, n_head=8, n_embd=1024, block_size=512
+- Tokenizer: character-level, vocab=52
+- batch_size=16, learning_rate=3e-4, max_iters=500,000
+- Speed: ~0.5 iter/sec, estimated ~12 days to completion
+- At iter 600, loss ~1.9 and dropping
 
 ### BPE Model Training (Mac Studio)
 - **Training IS running** — launched 2026-04-19 11:24
@@ -67,15 +81,44 @@ Last updated: 2026-04-26 09:23 by Claude Code Opus (Mac Studio session)
   4. Different split layers (2, 4, 12, 14)
   5. Retokenization: cluster predicted vectors into discrete mid-layer tokens
   6. Try the imitator experiment on a stronger open-source base model (Llama 3B)
+- **Per-position prediction analysis (2026-04-26):**
+  - BPE model (875M, iter 170K): 27% top-1, median rank 3, 65% in top 5
+  - Character model B (808M, iter 99K): 77% top-1, median rank 1, 94% in top 5
+  - Key insight: free-running generation is much more coherent than forced
+    prediction because the model always continues from its own output
+- **Corpus quality filtering (2026-04-26):**
+  - Used Claude Haiku API to judge 6,198 book samples
+  - Removed 1,768 books (archaic, recipes, scientific, indexes, etc.)
+  - New corpus: `txt_local/corpus_high_quality_2026_04_26.txt` (1.42 GB, 4,430 books)
+  - Quality decisions saved in `doc/book_quality_decisions.json`
+- **War and Peace character model (2026-04-26):**
+  - 19M params, trained on War and Peace only (3.2M chars)
+  - Reached val loss 1.157 at iter 6000, then started overfitting
+  - Free generation collapsed quickly — too small and too little data
+  - Checkpoint on M3: `pt/char_war_and_peace.pt`
+- **Character models on Mac Studio:**
+  - `../valuable_checkpoints/B_9GB/gutenberg_corpus_MODERN_CLEAN_continuous.pt`
+    — 808M, val loss 0.832, iter 53500 (Model B)
+  - `../study_corpus_and_training_2a/pt/gutenberg_corpus_MODERN_CLEAN_continuous.pt`
+    — 808M, val loss 0.779, iter 99000 (best character model, same arch as B)
+  - `../study_corpus_and_training_2c_char/pt/...continuous.pt`
+    — 51M (n_embd=512), val loss 0.826, iter 1.4M
+  - Copies on M3 as `pt/char_model_B_best.pt` and `pt/char_model_2c_clean.pt`
 - **M3 repo location:** `/Volumes/RalphDratman/0-Home-Working-on-M3-Pro/bpe_vs_char_model_comparison/`
   (cloned from Mac Studio, contains all source + checkpoint + corpus)
-- **Additional shell scripts on M3:**
+- **Shell scripts on M3 (in addition to committed ones):**
   - `sh/sample_imitator_compare.sh` — compare mode evaluation
   - `sh/sample_imitator_war_and_peace.sh` — compare on specific Tolstoy passage
   - `sh/sample_frozen_war_and_peace.sh` — frozen model baseline on Tolstoy
   - `sh/sample_frozen_detailed.sh` — per-position rank/probability analysis
   - `sh/sample_frozen_continue.sh` — free generation from Tolstoy prompt
+  - `sh/sample_char_model_detailed.sh` — character model per-position analysis
+  - `sh/sample_char_model_continue.sh` — character model free generation
+  - `sh/sample_char_2c_continue.sh` — study_2c model free generation
+  - `sh/sample_char_wp_continue.sh` — War and Peace model free generation
   - `sh/train_imitator_L8_full_dim.sh` — 302M imitator at full dimension
+  - `sh/train_char_war_and_peace.sh` — War and Peace character model
+  - `sh/train_char_high_quality.sh` — 152M character model on filtered corpus
 
 ### IMPORTANT LESSONS FROM THIS SESSION
 - **Batch size 16 with 32K vocab and block=2048 crashes** from OOM.
