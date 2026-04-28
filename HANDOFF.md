@@ -1,6 +1,6 @@
 # Handoff Document
 
-Last updated: 2026-04-26 16:26 by Claude Code Opus (Mac Studio session)
+Last updated: 2026-04-27 11:23 by Claude Code Opus (Mac Studio session)
 
 ## Current State
 
@@ -18,8 +18,8 @@ Last updated: 2026-04-26 16:26 by Claude Code Opus (Mac Studio session)
 - Speed: ~0.5 iter/sec, estimated ~12 days to completion
 - At iter 600, loss ~1.9 and dropping
 
-### BPE Model Training (Mac Studio)
-- **Training IS running** — launched 2026-04-19 11:24
+### BPE Model Training (Mac Studio) — STOPPED
+- **Training stopped** 2026-04-27 at iter ~235,000 (epoch 4.48)
 - Launch script: `sh/train_bpe_32k_bf16.sh`
 - Log: `terminal_logs/terminal_log_for_bpe_16L16H_2026_04_19_1124.txt`
 - Corpus: `txt_local/corpus_books_shuffled_2026_04_18.txt` (2.14 GB, 6,496 books)
@@ -31,7 +31,12 @@ Last updated: 2026-04-26 16:26 by Claude Code Opus (Mac Studio session)
   - learning_rate: 0.00015 (sqrt-scaled for batch=4)
   - warmup_iters: 500
   - max_iters: 400000
-- At iter ~176,000, val loss ~3.57. Sample quality is reasonable prose.
+- Final: iter ~235,000, best val loss 3.35 (iter 229,000). Val loss
+  was plateau-ing with only marginal improvement.
+- Best checkpoint: `pt/bpe_16L16H.pt` (val loss 3.35)
+- Also kept: `pt/bpe_16L16H_iter170000.pt` (imitator experiments)
+- Saved to: `../valuable_checkpoints/bpe_16L16H_32k_vocab_best_val3.35_iter229000.pt`
+- Intermediate checkpoints deleted (freed ~215 GB)
 
 ### Imitator Experiment (NEW — 2026-04-25/26)
 - **Concept:** Train a small transformer to predict the next residual-stream
@@ -81,6 +86,20 @@ Last updated: 2026-04-26 16:26 by Claude Code Opus (Mac Studio session)
   4. Different split layers (2, 4, 12, 14)
   5. Retokenization: cluster predicted vectors into discrete mid-layer tokens
   6. Try the imitator experiment on a stronger open-source base model (Llama 3B)
+- **Layer-10 imitator completed on Mac Studio (2026-04-27):**
+  - 302M params, d_model=2048, split_layer=10, 5000 iters
+  - Val cos_sim: 0.932 (lower than layer-8's 0.948 — harder to predict)
+  - Best val loss: 0.359
+  - Checkpoint: `pt/imitator_L10_full.pt`
+  - Compare and rollout not yet run
+- **Copying mechanism discovered (diary 088, 2026-04-27):**
+  - Character model (152M, iter 20K) invented "appalpittidax" and
+    reproduced it exactly 86 characters later
+  - Layer 9 Head 3 sends 46-92% attention to first occurrence
+  - Logit lens: correct character appears at layer 9 (jumps from ~5%
+    to ~80-95% probability in one layer)
+  - Copying is a two-stage process: L9 identifies region and reads
+    ahead, L11 does precise character matching
 - **Per-position prediction analysis (2026-04-26):**
   - BPE model (875M, iter 170K): 27% top-1, median rank 3, 65% in top 5
   - Character model B (808M, iter 99K): 77% top-1, median rank 1, 94% in top 5
