@@ -210,3 +210,26 @@ Last updated: 2026-04-27 11:23 by Claude Code Opus (Mac Studio session)
 - Can downstream KL loss or a larger imitator close the vector→token gap?
 - What do imitators at different split layers reveal about layer-by-layer processing?
 - Can the predicted vectors be retokenized into a discrete mid-layer vocabulary?
+
+## TODO
+
+Review this list at the start of every session. Mark items DONE when complete.
+
+### When training pauses
+- [ ] Consolidate this repo into `small_transformer_research` as a subdirectory.
+  See memory file `project_repo_consolidation.md` for the plan.
+
+### When character model training completes (M3 and/or Mac Studio)
+- [ ] Run per-position prediction analysis (War and Peace passage) on the
+  new character model — compare to the BPE model's 27% and Model B's 77%
+- [ ] Run free generation from the War and Peace prompt — compare to
+  earlier models that collapsed into junk
+- [ ] Try the "appalpittidax" copying analysis on the new model
+
+### Experiments to try
+- [ ] Imitator rollout with a stronger base model (download Llama 3B or similar)
+- [ ] Whole-word tokenizer implementation (diary 089 — 100K word vocab)
+- [ ] Spectral analysis of layer contributions (holographic framing, diary 087)
+- [ ] Imitator with downstream KL loss — fix generalization gap
+- [ ] Imitator at different split layers (4, 6, 12, 14) for comparison
+- [ ] Retokenization: cluster predicted vectors into discrete mid-layer tokens
