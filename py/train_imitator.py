@@ -41,7 +41,7 @@ import torch
 import torch.nn.functional as F
 
 from imitator_model import Imitator, ImitatorConfig
-from small_model_split import load_small_model, forward_to_layer, sanity_check_split
+from small_model_split import load_small_model, forward_to_layer, forward_from_layer, sanity_check_split
 from tokenizer import load_tokenizer
 
 
@@ -138,6 +138,47 @@ def vector_regression_loss(pred, target, lambda_mse=0.1):
     return total, cos_loss.detach(), mse_loss.detach()
 
 
+def downstream_kl_loss(pred, target, small_model, split_layer):
+    """
+    Compute KL divergence between the token distributions produced by
+    the frozen model's back half when given the predicted vectors vs
+    the real vectors.
+
+    pred:   (B, T, D) — imitator's predicted vectors (requires grad)
+    target: (B, T, D) — real layer-N vectors (no grad)
+    small_model: the frozen GPT
+    split_layer: where to feed vectors into the back half
+
+    Returns:
+        kl_loss     — KL(real_distribution || predicted_distribution)
+        cos_loss    (detached, for logging)
+        top1_match  (detached, for logging — fraction of matching top-1 tokens)
+    """
+    # Get target distribution from real vectors (no grad needed)
+    with torch.no_grad():
+        real_logits = forward_from_layer(small_model, target, split_layer)  # (B, T, vocab)
+        real_log_probs = F.log_softmax(real_logits.float(), dim=-1)
+        real_probs = F.softmax(real_logits.float(), dim=-1)
+        real_top1 = real_logits.argmax(dim=-1)  # (B, T)
+
+    # Get predicted distribution (grad flows through this)
+    pred_logits = forward_from_layer(small_model, pred, split_layer)  # (B, T, vocab)
+    pred_log_probs = F.log_softmax(pred_logits.float(), dim=-1)
+
+    # KL divergence: sum over vocab, mean over batch and positions
+    # KL(P || Q) = sum P(x) * (log P(x) - log Q(x))
+    kl = F.kl_div(pred_log_probs, real_probs, reduction='batchmean')
+
+    # Logging metrics
+    with torch.no_grad():
+        cos = F.cosine_similarity(pred.float(), target.float(), dim=-1)
+        cos_loss = (1.0 - cos).mean()
+        pred_top1 = pred_logits.argmax(dim=-1)
+        top1_match = (pred_top1 == real_top1).float().mean()
+
+    return kl, cos_loss.detach(), top1_match.detach()
+
+
 # ---------------------------------------------------------------------------
 # Eval
 # ---------------------------------------------------------------------------
@@ -215,6 +256,13 @@ def parse_args():
     p.add_argument('--grad_clip', type=float, default=1.0)
     p.add_argument('--lambda_mse', type=float, default=0.1,
                    help='Weight on MSE term (cosine similarity is the primary signal)')
+    p.add_argument('--loss_type', type=str, default='cosine',
+                   choices=['cosine', 'kl', 'combined'],
+                   help='Loss type: cosine (vector regression), kl (downstream KL), '
+                        'or combined (cosine + lambda_kl * KL)')
+    p.add_argument('--lambda_kl', type=float, default=0.001,
+                   help='Weight on KL term in combined loss (KL values are large, '
+                        'so this should be small)')
 
     # Eval / logging
     p.add_argument('--eval_interval', type=int, default=500)
@@ -480,9 +528,25 @@ def main():
         optimizer.zero_grad(set_to_none=True)
         with ctx:
             pred = imitator(inp)
-            loss, cos_l, mse_l = vector_regression_loss(
-                pred, tgt, lambda_mse=args.lambda_mse,
-            )
+            if args.loss_type == 'kl':
+                # Downstream KL only
+                loss, cos_l, match_l = downstream_kl_loss(
+                    pred, tgt, small_model, args.split_layer,
+                )
+            elif args.loss_type == 'combined':
+                # Cosine keeps vectors near manifold, KL optimizes decoding
+                cos_loss, cos_l, mse_l = vector_regression_loss(
+                    pred, tgt, lambda_mse=args.lambda_mse,
+                )
+                kl_loss, _, match_l = downstream_kl_loss(
+                    pred, tgt, small_model, args.split_layer,
+                )
+                loss = cos_loss + args.lambda_kl * kl_loss
+                cos_l = cos_l  # already detached
+            else:
+                loss, cos_l, match_l = vector_regression_loss(
+                    pred, tgt, lambda_mse=args.lambda_mse,
+                )
 
         if torch.isnan(loss):
             print(f"!!! NaN at iter {iter_num}, stopping.")
@@ -504,9 +568,18 @@ def main():
             t1 = time.time()
             dt = t1 - t0
             t0 = t1
-            print(f"iter {iter_num:6d}: loss={loss.item():.4f} "
-                  f"cos={cos_l.item():.4f} mse={mse_l.item():.4f} "
-                  f"time={dt*1000:.1f}ms")
+            if args.loss_type == 'kl':
+                print(f"iter {iter_num:6d}: kl={loss.item():.4f} "
+                      f"cos={cos_l.item():.4f} top1_match={match_l.item():.4f} "
+                      f"time={dt*1000:.1f}ms")
+            elif args.loss_type == 'combined':
+                print(f"iter {iter_num:6d}: loss={loss.item():.4f} "
+                      f"cos={cos_l.item():.4f} top1_match={match_l.item():.4f} "
+                      f"time={dt*1000:.1f}ms")
+            else:
+                print(f"iter {iter_num:6d}: loss={loss.item():.4f} "
+                      f"cos={cos_l.item():.4f} mse={match_l.item():.4f} "
+                      f"time={dt*1000:.1f}ms")
 
         if iter_num > 0 and iter_num % 100 == 0:
             speed_dt = time.time() - speed_t0
