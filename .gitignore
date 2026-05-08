@@ -6,3 +6,11 @@ claude_code_sessions/
 pt/
 *.png
 plots/
+
+# Preserved-checkpoint dirs from prior runs (multi-GB)
+*_pt/
+
+# Intercom runtime state (code is committed; mailbox/cursor/instance files are local)
+intercom/channel.txt
+intercom/cursor_*.pos
+intercom/instance_*.id
