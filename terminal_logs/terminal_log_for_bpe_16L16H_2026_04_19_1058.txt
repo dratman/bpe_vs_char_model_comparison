@@ -1,0 +1,87 @@
+Command: python -u py/train.py --checkpoints_to "pt" --input txt_local/corpus_books_shuffled_2026_04_18.txt --output pt/bpe_16L16H.pt --mode continuous --tokenizer bpe --vocab_size 32000 --n_layer 16 --n_head 16 --n_embd 2048 --block_size 2048 --batch_size 8 --max_iters 200000 --learning_rate .0003 --warmup_iters 500 --val_split 0.1 --dropout 0.0 --precision bfloat16
+Started: Sun Apr 19 10:58:01 EDT 2026
+========================================
+[2026-04-19 10:58:02] Using device: mps
+[2026-04-19 10:58:02] Using precision: bfloat16 (requested: bfloat16)
+[2026-04-19 10:58:02] Training mode: continuous
+[2026-04-19 10:58:02] Reading input from txt_local/corpus_books_shuffled_2026_04_18.txt
+[2026-04-19 10:58:03] Read 2,142,487,092 characters
+[2026-04-19 10:58:03] Training bpe tokenizer...
+BPETokenizer: Training vocabulary of 32000 tokens...
+Training on 2,142,487,092 characters...
+
+
+
+BPETokenizer: Trained vocabulary with 32000 tokens
+[2026-04-19 10:58:44] Tokenizing entire corpus (2,142,487,092 characters)...
+  Chunk 1: 0 / 2,142,487,092 characters (0%)
+  Chunk 2: 99,999,463 / 2,142,487,092 characters (4%)
+  Chunk 3: 199,999,389 / 2,142,487,092 characters (9%)
+  Chunk 4: 299,999,385 / 2,142,487,092 characters (14%)
+  Chunk 5: 399,999,182 / 2,142,487,092 characters (18%)
+  Chunk 6: 499,997,606 / 2,142,487,092 characters (23%)
+  Chunk 7: 599,997,313 / 2,142,487,092 characters (28%)
+  Chunk 8: 699,997,294 / 2,142,487,092 characters (32%)
+  Chunk 9: 799,996,518 / 2,142,487,092 characters (37%)
+  Chunk 10: 899,996,362 / 2,142,487,092 characters (42%)
+  Chunk 11: 999,995,670 / 2,142,487,092 characters (46%)
+  Chunk 12: 1,099,995,550 / 2,142,487,092 characters (51%)
+  Chunk 13: 1,199,993,775 / 2,142,487,092 characters (56%)
+  Chunk 14: 1,299,993,554 / 2,142,487,092 characters (60%)
+  Chunk 15: 1,399,993,166 / 2,142,487,092 characters (65%)
+  Chunk 16: 1,499,992,707 / 2,142,487,092 characters (70%)
+  Chunk 17: 1,599,990,508 / 2,142,487,092 characters (74%)
+  Chunk 18: 1,699,990,042 / 2,142,487,092 characters (79%)
+  Chunk 19: 1,799,989,979 / 2,142,487,092 characters (84%)
+  Chunk 20: 1,899,989,743 / 2,142,487,092 characters (88%)
+  Chunk 21: 1,999,989,041 / 2,142,487,092 characters (93%)
+  Chunk 22: 2,099,989,002 / 2,142,487,092 characters (98%)
+  Encoding complete: 477,424,714 tokens from 22 chunks
+[2026-04-19 11:12:07] Tokenization complete: 477,424,714 tokens
+[2026-04-19 11:12:07] Converting to tensor...
+[2026-04-19 11:12:29] Tensor ready: 477,424,714 tokens
+[2026-04-19 11:12:29] Splitting into train and validation sets...
+[2026-04-19 11:12:29] Split complete.
+[2026-04-19 11:12:29] Training tokens: 429,682,243
+[2026-04-19 11:12:29] Validation tokens: 47,742,471
+[2026-04-19 11:12:29] Saving tokenizer to pt/bpe_16L16H_meta.pkl
+Saved BPE tokenizer to pt/bpe_16L16H_meta.pkl and pt/bpe_16L16H_meta.json
+[2026-04-19 11:12:30] Initializing new model...
+  Vocabulary size: 32000
+number of parameters: 871.27M (softmax attention, tied weights)
+num decayed parameter tensors: 66, with 875,036,672 parameters
+num non-decayed parameter tensors: 130, with 430,080 parameters
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+using fused AdamW: False
+
+[2026-04-19 11:12:45] Starting training...
+Mode: continuous
+Tokenizer: bpe
+Vocabulary size: 32000 (+ 1 padding = 32001)
+Padding token ID: 32000
+Attention type: softmax
+Precision: bfloat16
+Max iterations: 200000
+Batch size: 8
+Block size: 2048
+Learning rate: 3.00e-04
+Warmup iters: 500
+Eval interval: 500
+Save interval: 10000
+Log interval: 10
+Sample interval: 500
+Checkpoints will be saved to: pt/bpe_16L16H.pt
+============================================================
+[2026-04-19 11:14:09] [1m] Step     0 | Epoch   0.00 | train loss 10.8040 | val loss 10.8014 | lr 0.00e+00
+iter 0: loss 10.8070, time 92289.12ms, mfu -100.00%
+iter 10: loss 8.4926, time 5908.29ms, mfu 5.36%
+iter 20: loss 7.8777, time 5998.81ms, mfu 5.35%
+iter 30: loss 7.6703, time 6467.43ms, mfu 5.31%
+iter 40: loss 7.4117, time 6300.88ms, mfu 5.28%
+iter 50: loss 6.8346, time 5919.59ms, mfu 5.29%
+iter 60: loss 6.9422, time 5992.57ms, mfu 5.29%
+iter 70: loss 6.6055, time 5965.97ms, mfu 5.29%
+iter 80: loss 6.6734, time 5991.19ms, mfu 5.29%

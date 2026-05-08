@@ -1,0 +1,35 @@
+Command: python3 -u py/train_imitator.py --loss_type kl ...
+Started: Tue Apr 28 09:01:24 EDT 2026
+========================================
+[2026-04-28 09:01:25] Device: mps
+[2026-04-28 09:01:25] Loading small model from pt/bpe_16L16H_iter170000.pt
+Loading small model from pt/bpe_16L16H_iter170000.pt
+Loaded 875.5M-param model: n_layer=16, n_head=16, n_embd=2048, block_size=2048, vocab_size=32000
+[2026-04-28 09:01:41] Split: front half = blocks [0, 8), residual dim = 2048
+[2026-04-28 09:01:41] Running split sanity check...
+Sanity check passed: max |full - split| = 0.00e+00 (atol=0.0001)
+[2026-04-28 09:01:41] Loading tokenizer from pt/bpe_16L16H_meta.pkl
+[2026-04-28 09:01:41] Tokenizer: bpe, vocab=32000
+[2026-04-28 09:01:41] Loading cached tokens from txt_local/corpus_tokens_32k.pt
+[2026-04-28 09:01:42] Loaded 477,424,714 tokens
+[2026-04-28 09:01:42] Train: 429,682,243 tokens | Val: 47,742,471 tokens
+Imitator: 302.2M parameters (d_model=2048, n_layer=6, n_head=16, block_size=512)
+Imitator optimizer: 24 decayed tensors (301,989,888 params), 50 non-decayed (163,840 params)
+
+[2026-04-28 09:01:47] Starting imitator training
+  Imitator: d_model=2048, n_layer=6, n_head=16, block_size=512
+  Imitator precision: float32 (params in torch.float32)
+  Small model precision: bfloat16
+  Split layer: 8 of 16
+  Batch size: 4
+  Max iters: 5000
+  LR: 1.00e-04, warmup: 200
+  Loss: cosine + 0.1 * MSE
+  Output: pt/imitator_L8_kl.pt
+============================================================
+[2026-04-28 09:01:57] [0m] iter      0 | train: loss=0.5309 cos_sim=0.8462 mse=3.7710 | val: loss=0.5328 cos_sim=0.8417 mse=3.7446 | lr=0.00e+00
+(mpsFileLoc): /AppleInternal/Library/BuildRoots/4~CB3qugAPWoQQ_I2wXkxi-sA3MtxVUux44yS4zkY/Library/Caches/com.apple.xbs/Sources/MetalPerformanceShadersGraph/mpsgraph/MetalPerformanceShadersGraph/Core/Files/MPSGraphUtilities.mm:233:0: error: 'mps.add' op requires the same element type for all operands and results
+(mpsFileLoc): /AppleInternal/Library/BuildRoots/4~CB3qugAPWoQQ_I2wXkxi-sA3MtxVUux44yS4zkY/Library/Caches/com.apple.xbs/Sources/MetalPerformanceShadersGraph/mpsgraph/MetalPerformanceShadersGraph/Core/Files/MPSGraphUtilities.mm:233:0: note: see current operation: %7 = "mps.add"(%5, %arg2) : (tensor<4x511x6144xf32>, tensor<6144xbf16>) -> tensor<*xf32>
+(mpsFileLoc): /AppleInternal/Library/BuildRoots/4~CB3qugAPWoQQ_I2wXkxi-sA3MtxVUux44yS4zkY/Library/Caches/com.apple.xbs/Sources/MetalPerformanceShadersGraph/mpsgraph/MetalPerformanceShadersGraph/Core/Files/MPSGraphUtilities.mm:233:0: error: 'mps.add' op requires the same element type for all operands and results
+(mpsFileLoc): /AppleInternal/Library/BuildRoots/4~CB3qugAPWoQQ_I2wXkxi-sA3MtxVUux44yS4zkY/Library/Caches/com.apple.xbs/Sources/MetalPerformanceShadersGraph/mpsgraph/MetalPerformanceShadersGraph/Core/Files/MPSGraphUtilities.mm:233:0: note: see current operation: %7 = "mps.add"(%5, %arg2) : (tensor<4x511x6144xf32>, tensor<6144xbf16>) -> tensor<*xf32>
+/AppleInternal/Library/BuildRoots/4~CB3qugAPWoQQ_I2wXkxi-sA3MtxVUux44yS4zkY/Library/Caches/com.apple.xbs/Sources/MetalPerformanceShadersGraph/mpsgraph/MetalPerformanceShadersGraph/Core/Files/MPSGraphExecutable.mm:1347: failed assertion `original module failed verification'

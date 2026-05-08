@@ -1,0 +1,92 @@
+Loading small model from pt/bpe_16L16H_iter170000.pt
+Loaded 875.5M-param model: n_layer=16, n_head=16, n_embd=2048, block_size=2048, vocab_size=32000
+Loading imitator...
+Imitator: 302.2M parameters (d_model=2048, n_layer=6, n_head=16, block_size=512)
+Imitator loaded: split_layer=8, iter=1600
+Val tokens: 47,742,471
+Evaluating 100 windows...
+  20/100
+  40/100
+  60/100
+  80/100
+  100/100
+
+======================================================================
+Match rate distribution over 100 windows:
+  Min:    0.172
+  25th:   0.215
+  Median: 0.235
+  75th:   0.252
+  Max:    0.299
+  Mean:   0.235
+
+  Low (<35%):   100 windows
+  Mid (35-65%): 0 windows
+  High (>65%):  0 windows
+
+======================================================================
+WORST 10 windows (lowest match rate):
+======================================================================
+  match=0.172  cos=0.346
+  text: , salt, eggs well beaten, crisco and enough flour to knead; knead, let rise again. roll out one-eighth inch thick, spread with melted crisco, sprinkle with sugar, cinnamon and mace, fruit and nuts; ro
+
+  match=0.180  cos=0.306
+  text:  refuge abroad until the political crisis was over. but now cornelia told the queen the true reasons that had led her to be willing to submit to demetrius's friendly kidnapping; and when, in a burst o
+
+  match=0.188  cos=0.304
+  text:  animals cost more than a whole herd of mexican stock, and the ranchers speculated freely as to what "old ed" austin would have said of such extravagance. it was blaze jones, one of the few county res
+
+  match=0.190  cos=0.327
+  text:  part with suitable land to settlers on reasonable terms, they must be made to do so. the example of new zealand must be followed. it is absolutely essential that we should plant out settlers on a lar
+
+  match=0.190  cos=0.321
+  text: 8 or 1.e.9. 1.e.8. you may charge a reasonable fee for copies of or providing access to or distributing project gutenberg-tm electronic works provided that - you pay a royalty fee of 20 of the gross p
+
+  match=0.192  cos=0.323
+  text:  own ill furniture, to bid these strangers in, to whom for sure our best were hardship, men of gentle breed? nay, if the men be gentle, as indeed i deem them, they will take good cheer or ill with eve
+
+  match=0.196  cos=0.310
+  text:  which, across labyrinths of sophistry, and through masses of immaterial facts, go straight to the true point. of his intellect, however, he seldom had the full use. even in civil causes his malevolen
+
+  match=0.196  cos=0.305
+  text: , and we'll seta watch here a' night, in case the gipsies return; but you--ye maun come hame, sir, for my lady's in the dead-thraw.' bertram turned a stupefied and unmeaning eye on the messenger who u
+
+  match=0.198  cos=0.307
+  text: , more or less, an' they've played it double on us both. meant bagging the letter from you to blackmail me with it; that's what they meant! of course, when they failed to bring it off, they'd pitch an
+
+  match=0.198  cos=0.329
+  text: . let folks in high or holy stations be proud of owning such relations; let courtiers hug them in their bosom, as if they were afraid to lose 'em: while i, with humble job, had rather say to corruptio
+
+======================================================================
+BEST 10 windows (highest match rate):
+======================================================================
+  match=0.276  cos=0.307
+  text:  the boys reached the deck they saw wyckoff capering and dancing about on the beach wildly. he was waving his arms in an evident effort to attract attention. a schooner was approaching from the west. 
+
+  match=0.276  cos=0.333
+  text:  stood was always recognisable. on the one hand there was the germ of idealism which was destined to awake to a new life, and on the other, the attempt at absolute negation which was to result in the 
+
+  match=0.284  cos=0.332
+  text:  the flesh. these parasites have come to my notice periodically during the process of skinning birds for mounting during the past number of years, but it was only when they appeared in unusual numbers
+
+  match=0.288  cos=0.329
+  text:  for the conduct of such an expedition, but also enabled them to note and describe with accuracy the various interesting objects in botany and zoology met with in the course of their journey. it is th
+
+  match=0.288  cos=0.302
+  text:  we shall have to part." "well, then, peterkin," replied jack, with a smile, "what would you have?" "have?" said peterkin, "i would have nothing. i didn't say i wanted to have; i said that i wanted to
+
+  match=0.288  cos=0.348
+  text:  122; preparation for, 137; purpose of, 124; "re-baptism," 144; repeated baptisms, 147; required of all, 148; symbolism of, 140. bible, acceptance of by the church, 240; authenticity and genuineness o
+
+  match=0.288  cos=0.323
+  text:  and yet the few forces known to him have brought about miracles and wonders, which but for their actual realization would be beyond belief. these mighty agencies, and the mightier ones still to man u
+
+  match=0.294  cos=0.307
+  text:  his wife was roused by the tumult. she came to her husband's aid and proceeded to bind up his wounds. while she was doing this one of the coolies smashed in the skylight, and would have jumped into t
+
+  match=0.294  cos=0.319
+  text: , he exhorted him to defend the church, and to make war on the infidel; he commended to him his faithful councillors, and is believed to have urged upon him the execution of de la pole, earl of suffol
+
+  match=0.299  cos=0.329
+  text:  troops and the river. many of the enemy were driven into their dugouts and surrendered, and at 9 a.m. the number of prisoners was actually greater than the attacking force. st. pierre divion soon fel
+

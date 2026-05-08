@@ -1,0 +1,155 @@
+=== COMPARE MODE ===
+
+Loading small model from pt/bpe_16L16H_iter170000.pt
+Loaded 875.5M-param model: n_layer=16, n_head=16, n_embd=2048, block_size=2048, vocab_size=32000
+Loading imitator from pt/imitator_L10_full.pt
+Imitator: 302.2M parameters (d_model=2048, n_layer=6, n_head=16, block_size=512)
+Imitator: d_model=2048, n_layer=6, split_layer=10, iter=4000, best_val_loss=0.35862621665000916
+Tokenizer: bpe, vocab=32000
+Loading cached tokens from txt_local/corpus_tokens_32k.pt
+Using 47,742,471 validation tokens
+
+======================================================================
+Sample 1
+======================================================================
+
+Actual input text (first 300 chars):
+   was hardly disguised now. neither dr. sprague nor dr. minchin said that he disliked lydgate's knowledge, or his disposition to improve treatment: what they disliked was his arrogance, which nobody felt to be altogether deniable. they implied that he was insolent, pretentious, and given to that reck
+
+Frozen model's predictions (decoded from real layer-10 vectors):
+   more by.
+ the. jonesague nor dr. sprot had a they had the's conduct of but that being, be it of they he said was the being, and was could, be a naturaluding.
+ were that he was not, andentious, and, to the kind, of which better of a. money. he to more of his wholelatan.
+" doctor "latan, more into th
+
+Imitator's predictions (decoded from predicted layer-10 vectors):
+  ,, the the the the a a the of. a a, and and and,, and of the the was, was- to of and and, in and, and by to to and,,, and she she to of.,. sick to, and. she,,.. to,, the at in, of,,, for, of to of of of of of com of,,,,,, com more,,,,,, of and of dry and dry dry,, a in or. that... labour in by the d
+
+Statistics:
+  Mean cosine similarity (real vs predicted vectors): 0.9307
+  Min cosine similarity:  0.7130
+  Max cosine similarity:  0.9977
+  Frozen model top-1 matches actual next token: 32.0%
+  Imitator top-1 matches frozen model top-1:   7.2%
+  Imitator top-1 matches actual next token:    4.9%
+
+  First few disagreements (position: frozen->imitator):
+    pos   0: cos=0.839  frozen=' more'  imitator=','  after '... was'
+    pos   1: cos=0.800  frozen=' by'  imitator=','  after '... was hardly'
+    pos   2: cos=0.913  frozen='.'  imitator=' the'  after '... was hardly disguised'
+    pos   3: cos=0.973  frozen='
+'  imitator=' the'  after '... was hardly disguised now'
+    pos   5: cos=0.874  frozen='.'  imitator=' the'  after '... disguised now. neither'
+    pos   6: cos=0.980  frozen=' jones'  imitator=' a'  after '... now. neither dr'
+    pos   7: cos=0.771  frozen='ague'  imitator=' a'  after '.... neither dr.'
+    pos   8: cos=0.882  frozen=' nor'  imitator=' the'  after '... neither dr. spr'
+    pos   9: cos=0.931  frozen=' dr'  imitator=' of'  after '... dr. sprague'
+    pos  11: cos=0.985  frozen=' spr'  imitator=' a'  after '... sprague nor dr'
+
+======================================================================
+Sample 2
+======================================================================
+
+Actual input text (first 300 chars):
+   all by herself as one of the girl-graduates at thirlwall hall, st. ambrose's. dr. millar had learnt that she would just be in reasonable time for one of the earlier examinations at the close of the term. having passed it without difficulty, she might compete for one of the thirlwall scholarships. i
+
+Frozen model's predictions (decoded from real layer-10 vectors):
+   the, a of the most'shuates. thezawall.. and. james's,
+. johnsonard, been from the was be be in the time, the of the party meetings, the school of the examination.
+ been the, a, she was be with the of the morelwallsships at
+ she had a,and she had himself to be-- would-- right chance of doing--she wo
+
+Imitator's predictions (decoded from predicted layer-10 vectors):
+   the, the ", people, the that that that, the cock a a ' a, a, that a,, of put ' by not the the the man i the., dear,, which., nor time a
+ that so was the to of.,, cold,, of of that,, which not not by, so,,,, by be more the a a of of the, added had so the, broke, ball at, not, the either and so. all,
+
+Statistics:
+  Mean cosine similarity (real vs predicted vectors): 0.9312
+  Min cosine similarity:  0.7498
+  Max cosine similarity:  0.9932
+  Frozen model top-1 matches actual next token: 33.5%
+  Imitator top-1 matches frozen model top-1:   6.5%
+  Imitator top-1 matches actual next token:    3.1%
+
+  First few disagreements (position: frozen->imitator):
+    pos   2: cos=0.955  frozen=' a'  imitator=' the'  after '... all by herself'
+    pos   3: cos=0.945  frozen=' of'  imitator=' "'  after '... all by herself as'
+    pos   4: cos=0.972  frozen=' the'  imitator=','  after '... by herself as one'
+    pos   5: cos=0.981  frozen=' most'  imitator=' people'  after '... herself as one of'
+    pos   6: cos=0.939  frozen=''s'  imitator=','  after '... as one of the'
+    pos   7: cos=0.939  frozen='h'  imitator=' the'  after '... one of the girl'
+    pos   8: cos=0.840  frozen='uates'  imitator=' that'  after '... of the girl-'
+    pos   9: cos=0.897  frozen='.'  imitator=' that'  after '... the girl-grad'
+    pos  10: cos=0.947  frozen=' the'  imitator=' that'  after '... girl-graduates'
+    pos  11: cos=0.750  frozen='za'  imitator=','  after '...-graduates at'
+
+======================================================================
+Sample 3
+======================================================================
+
+Actual input text (first 300 chars):
+   thought her the golden maiden except that her eyes were still fox's eyes.
+"now leave the maiden outside here hidden in her golden cradle and take me in to the master of the stable. exchange me for the golden horse and make off at once. then pick up the golden maiden in her golden cradle and ride aw
+
+Frozen model's predictions (decoded from real layer-10 vectors):
+  , most crown, the she eyes were closed closedlike eyes.
+"i, me castle,,","," the own castle," come care to your the city of the house," i clothes for a golden maiden and the me with once." i i up the golden bridle and the golden cradle and bring off to leave you will be you."
+"uno's as, well, he too
+
+Imitator's predictions (decoded from predicted layer-10 vectors):
+   the,,, the very to the the the in in in the theth a ' ', in to to a as a, the the to a the and, that of of that but that the that that that the to to that that the that the all all that that the so,, the to that the that all a as to thes the the i the on the, the one by,,,, the a was,,,, a all and,
+
+Statistics:
+  Mean cosine similarity (real vs predicted vectors): 0.9413
+  Min cosine similarity:  0.7260
+  Max cosine similarity:  0.9969
+  Frozen model top-1 matches actual next token: 41.8%
+  Imitator top-1 matches frozen model top-1:   5.1%
+  Imitator top-1 matches actual next token:    4.1%
+
+  First few disagreements (position: frozen->imitator):
+    pos   0: cos=0.947  frozen=','  imitator=' the'  after '... thought'
+    pos   1: cos=0.940  frozen=' most'  imitator=','  after '... thought her'
+    pos   2: cos=0.860  frozen=' crown'  imitator=','  after '... thought her the'
+    pos   5: cos=0.968  frozen=' she'  imitator=' very'  after '... the golden maiden except'
+    pos   6: cos=0.959  frozen=' eyes'  imitator=' to'  after '... golden maiden except that'
+    pos   7: cos=0.912  frozen=' were'  imitator=' the'  after '... maiden except that her'
+    pos   8: cos=0.976  frozen=' closed'  imitator=' the'  after '... except that her eyes'
+    pos   9: cos=0.896  frozen=' closed'  imitator=' the'  after '... that her eyes were'
+    pos  10: cos=0.860  frozen='like'  imitator=' in'  after '... her eyes were still'
+    pos  11: cos=0.935  frozen=' eyes'  imitator=' in'  after '... eyes were still fox'
+
+
+=== ROLLOUT MODE ===
+
+
+======================================================================
+Rollout sample 1
+======================================================================
+
+Prefix (real text, 64 tokens):
+   man clings to the home of his ancestors. as a matter of prudence, he had rented a safety-deposit box at the credit lyonnais in which to keep it. he went for it himself on the afternoon of the day on which his wife wished to wear it, and he, himself, carried it
+
+Imitator rollout (200 tokens, autoregressive in vector space):
+   as so word so so either either either either either either either either either either either either either f either either either either either either f either either f either either f f f either either f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f
+
+======================================================================
+Rollout sample 2
+======================================================================
+
+Prefix (real text, 64 tokens):
+   its infancy, and brick and stone crumbled to ruins before the heavy cannon which had come lately into use.
+under shelter of the darkness earthworks were thrown up, which proved a better protection; but the french on their side planted other batteries, and all tuesday and wednesday the terrible bomb
+
+Imitator rollout (200 tokens, autoregressive in vector space):
+  , so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so so 
+
+======================================================================
+Rollout sample 3
+======================================================================
+
+Prefix (real text, 64 tokens):
+  , although you had entrusted to two travellers, equally, the duty of making these arrangements, yet it is to one alone, my noble friend, m. lichtenstein, that the merit of careful precaution and indefatigable activity is due. out of respect to the scientific spirit which animates the society of germ
+
+Imitator rollout (200 tokens, autoregressive in vector space):
+   and bear f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f f

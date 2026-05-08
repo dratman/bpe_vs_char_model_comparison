@@ -1,0 +1,629 @@
+Command: python3 -u py/train_imitator.py --loss_type combined ...
+Started: Tue Apr 28 10:45:45 EDT 2026
+========================================
+[2026-04-28 10:45:46] Device: mps
+[2026-04-28 10:45:46] Loading small model from pt/bpe_16L16H_iter170000.pt
+Loading small model from pt/bpe_16L16H_iter170000.pt
+Loaded 875.5M-param model: n_layer=16, n_head=16, n_embd=2048, block_size=2048, vocab_size=32000
+[2026-04-28 10:46:02] Split: front half = blocks [0, 8), residual dim = 2048
+[2026-04-28 10:46:02] Running split sanity check...
+Sanity check passed: max |full - split| = 0.00e+00 (atol=0.0001)
+[2026-04-28 10:46:02] Loading tokenizer from pt/bpe_16L16H_meta.pkl
+[2026-04-28 10:46:02] Tokenizer: bpe, vocab=32000
+[2026-04-28 10:46:02] Loading cached tokens from txt_local/corpus_tokens_32k.pt
+[2026-04-28 10:46:02] Loaded 477,424,714 tokens
+[2026-04-28 10:46:02] Train: 429,682,243 tokens | Val: 47,742,471 tokens
+Imitator: 302.2M parameters (d_model=2048, n_layer=6, n_head=16, block_size=512)
+Imitator optimizer: 24 decayed tensors (301,989,888 params), 50 non-decayed (163,840 params)
+
+[2026-04-28 10:46:07] Starting imitator training
+  Imitator: d_model=2048, n_layer=6, n_head=16, block_size=512
+  Imitator precision: float32 (params in torch.float32)
+  Small model precision: float32
+  Split layer: 8 of 16
+  Batch size: 4
+  Max iters: 5000
+  LR: 1.00e-04, warmup: 200
+  Loss: cosine + 0.1 * MSE
+  Output: pt/imitator_L8_combined.pt
+============================================================
+[2026-04-28 10:46:14] [0m] iter      0 | train: loss=0.5308 cos_sim=0.8462 mse=3.7708 | val: loss=0.5329 cos_sim=0.8418 mse=3.7470 | lr=0.00e+00
+iter      0: loss=2.8826 cos=0.1614 top1_match=0.0445 time=7760.0ms
+iter     10: loss=1.9422 cos=0.1152 top1_match=0.3635 time=6860.4ms
+iter     20: loss=1.9557 cos=0.1172 top1_match=0.0626 time=6870.5ms
+iter     30: loss=2.6868 cos=0.1706 top1_match=0.0773 time=6872.7ms
+iter     40: loss=1.7406 cos=0.1449 top1_match=0.3958 time=6876.0ms
+iter     50: loss=1.6686 cos=0.1472 top1_match=0.4080 time=6870.8ms
+iter     60: loss=0.8028 cos=0.0944 top1_match=0.6761 time=6878.3ms
+iter     70: loss=1.6370 cos=0.1156 top1_match=0.4139 time=6870.3ms
+iter     80: loss=1.5860 cos=0.0906 top1_match=0.2671 time=6872.9ms
+iter     90: loss=0.6798 cos=0.0674 top1_match=0.7050 time=6867.8ms
+iter    100: loss=1.5689 cos=0.0917 top1_match=0.4031 time=6866.4ms
+[2026-04-28 10:47:23] [1m] speed: 1.31 iter/s
+iter    110: loss=1.6671 cos=0.0920 top1_match=0.4070 time=6866.8ms
+iter    120: loss=1.6227 cos=0.1197 top1_match=0.4780 time=6867.9ms
+iter    130: loss=1.4788 cos=0.1089 top1_match=0.4506 time=6865.7ms
+iter    140: loss=1.4510 cos=0.0953 top1_match=0.3361 time=6862.7ms
+iter    150: loss=1.5507 cos=0.1095 top1_match=0.3889 time=6869.9ms
+iter    160: loss=1.5285 cos=0.0938 top1_match=0.4163 time=6882.1ms
+iter    170: loss=2.3328 cos=0.1180 top1_match=0.1277 time=6873.9ms
+iter    180: loss=2.3449 cos=0.1116 top1_match=0.1360 time=6879.4ms
+iter    190: loss=2.3991 cos=0.1254 top1_match=0.1306 time=6892.1ms
+[2026-04-28 10:48:38] [2m] iter    200 | train: loss=0.4955 cos_sim=0.8651 mse=3.6058 | val: loss=0.4960 cos_sim=0.8657 mse=3.6171 | lr=1.00e-04
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.4960, cos_sim=0.8657)
+iter    200: loss=2.3337 cos=0.1349 top1_match=0.1531 time=17622.3ms
+[2026-04-28 10:48:43] [2m] speed: 1.26 iter/s
+iter    210: loss=2.4345 cos=0.1265 top1_match=0.1287 time=6903.5ms
+iter    220: loss=2.3681 cos=0.1091 top1_match=0.0616 time=6867.4ms
+iter    230: loss=2.3203 cos=0.1101 top1_match=0.1292 time=6877.2ms
+iter    240: loss=1.3929 cos=0.0891 top1_match=0.4374 time=6878.0ms
+iter    250: loss=1.4670 cos=0.0750 top1_match=0.4364 time=6877.4ms
+iter    260: loss=1.3563 cos=0.0817 top1_match=0.4824 time=6882.9ms
+iter    270: loss=2.1634 cos=0.1094 top1_match=0.1106 time=6894.8ms
+iter    280: loss=2.3474 cos=0.1106 top1_match=0.1164 time=6897.3ms
+iter    290: loss=2.4447 cos=0.1087 top1_match=0.1296 time=6879.2ms
+iter    300: loss=0.6736 cos=0.0490 top1_match=0.7955 time=6879.7ms
+[2026-04-28 10:49:52] [3m] speed: 1.45 iter/s
+iter    310: loss=2.3170 cos=0.1043 top1_match=0.1311 time=6878.9ms
+iter    320: loss=2.2647 cos=0.1005 top1_match=0.1433 time=6877.5ms
+iter    330: loss=1.4211 cos=0.0779 top1_match=0.4227 time=6876.6ms
+iter    340: loss=1.4303 cos=0.0747 top1_match=0.4609 time=6882.1ms
+iter    350: loss=2.1672 cos=0.0971 top1_match=0.1722 time=6886.6ms
+iter    360: loss=1.3432 cos=0.0666 top1_match=0.4295 time=6884.3ms
+iter    370: loss=2.0586 cos=0.0947 top1_match=0.1800 time=6883.1ms
+iter    380: loss=1.4378 cos=0.0744 top1_match=0.2916 time=6876.4ms
+iter    390: loss=1.3420 cos=0.0732 top1_match=0.4413 time=6879.8ms
+[2026-04-28 10:51:07] [4m] iter    400 | train: loss=0.4388 cos_sim=0.8986 mse=3.3737 | val: loss=0.4377 cos_sim=0.8997 mse=3.3740 | lr=9.96e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.4377, cos_sim=0.8997)
+iter    400: loss=2.6706 cos=0.1134 top1_match=0.1164 time=17076.4ms
+[2026-04-28 10:51:11] [5m] speed: 1.27 iter/s
+iter    410: loss=2.0489 cos=0.1007 top1_match=0.1683 time=6882.7ms
+iter    420: loss=0.5845 cos=0.0404 top1_match=0.4711 time=6895.3ms
+iter    430: loss=2.1443 cos=0.1016 top1_match=0.1345 time=6874.1ms
+iter    440: loss=1.2778 cos=0.0707 top1_match=0.4677 time=6872.1ms
+iter    450: loss=0.5352 cos=0.0339 top1_match=0.7299 time=6871.8ms
+iter    460: loss=2.1553 cos=0.0984 top1_match=0.1825 time=6869.3ms
+iter    470: loss=0.5033 cos=0.0353 top1_match=0.7079 time=6870.7ms
+iter    480: loss=2.0286 cos=0.0952 top1_match=0.1761 time=6869.4ms
+iter    490: loss=1.3248 cos=0.0653 top1_match=0.4217 time=6872.0ms
+iter    500: loss=2.0520 cos=0.1008 top1_match=0.1492 time=6890.1ms
+[2026-04-28 10:52:19] [6m] speed: 1.45 iter/s
+iter    510: loss=1.2276 cos=0.0667 top1_match=0.4418 time=6881.1ms
+iter    520: loss=1.1853 cos=0.0665 top1_match=0.4692 time=6889.9ms
+iter    530: loss=1.2786 cos=0.0643 top1_match=0.4506 time=7069.6ms
+iter    540: loss=1.2672 cos=0.0695 top1_match=0.4922 time=7112.2ms
+iter    550: loss=1.2410 cos=0.0645 top1_match=0.4320 time=7162.8ms
+iter    560: loss=1.2599 cos=0.0667 top1_match=0.4702 time=7210.5ms
+iter    570: loss=1.2653 cos=0.0658 top1_match=0.4814 time=7168.2ms
+iter    580: loss=1.8862 cos=0.0983 top1_match=0.1659 time=7167.6ms
+iter    590: loss=0.6531 cos=0.0311 top1_match=0.7446 time=7131.7ms
+[2026-04-28 10:53:37] [7m] iter    600 | train: loss=0.4333 cos_sim=0.8994 mse=3.3271 | val: loss=0.4386 cos_sim=0.8958 mse=3.3446 | lr=9.85e-05
+iter    600: loss=2.0326 cos=0.1024 top1_match=0.1751 time=14220.1ms
+[2026-04-28 10:53:38] [7m] speed: 1.28 iter/s
+iter    610: loss=2.0859 cos=0.1025 top1_match=0.1566 time=7016.0ms
+iter    620: loss=1.2354 cos=0.0660 top1_match=0.4638 time=6979.9ms
+iter    630: loss=1.2037 cos=0.0666 top1_match=0.4648 time=6939.0ms
+iter    640: loss=2.0719 cos=0.1023 top1_match=0.1497 time=6938.9ms
+iter    650: loss=1.9701 cos=0.1010 top1_match=0.1991 time=6925.1ms
+iter    660: loss=1.9888 cos=0.1006 top1_match=0.1448 time=6890.6ms
+iter    670: loss=1.1912 cos=0.0604 top1_match=0.4344 time=6872.9ms
+iter    680: loss=1.2152 cos=0.0636 top1_match=0.4540 time=6868.7ms
+iter    690: loss=1.2130 cos=0.0655 top1_match=0.4251 time=6871.2ms
+iter    700: loss=1.3480 cos=0.0686 top1_match=0.4320 time=6870.6ms
+[2026-04-28 10:54:47] [8m] speed: 1.45 iter/s
+iter    710: loss=1.2864 cos=0.0663 top1_match=0.4584 time=6873.9ms
+iter    720: loss=1.1888 cos=0.0596 top1_match=0.4379 time=6870.9ms
+iter    730: loss=2.0612 cos=0.1014 top1_match=0.1424 time=6871.7ms
+iter    740: loss=1.1723 cos=0.0599 top1_match=0.4491 time=6866.9ms
+iter    750: loss=1.9968 cos=0.0987 top1_match=0.1737 time=6870.2ms
+iter    760: loss=0.4474 cos=0.0267 top1_match=0.8082 time=6871.3ms
+iter    770: loss=1.1766 cos=0.0636 top1_match=0.4486 time=6868.8ms
+iter    780: loss=1.1671 cos=0.0626 top1_match=0.4467 time=6866.2ms
+iter    790: loss=1.2542 cos=0.0645 top1_match=0.4305 time=6869.2ms
+[2026-04-28 10:56:02] [9m] iter    800 | train: loss=0.4209 cos_sim=0.9033 mse=3.2419 | val: loss=0.4290 cos_sim=0.8994 mse=3.2842 | lr=9.66e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.4290, cos_sim=0.8994)
+iter    800: loss=2.0125 cos=0.1045 top1_match=0.1835 time=17009.3ms
+[2026-04-28 10:56:06] [9m] speed: 1.27 iter/s
+iter    810: loss=1.8569 cos=0.0953 top1_match=0.1908 time=6858.0ms
+iter    820: loss=1.2486 cos=0.0613 top1_match=0.4682 time=6858.9ms
+iter    830: loss=1.2233 cos=0.0649 top1_match=0.4662 time=6857.8ms
+iter    840: loss=1.2137 cos=0.0623 top1_match=0.4506 time=6856.2ms
+iter    850: loss=2.0185 cos=0.1020 top1_match=0.1619 time=6857.7ms
+iter    860: loss=1.1335 cos=0.0590 top1_match=0.4506 time=6859.2ms
+iter    870: loss=1.1526 cos=0.0628 top1_match=0.4159 time=6856.0ms
+iter    880: loss=1.1526 cos=0.0610 top1_match=0.4760 time=6856.9ms
+iter    890: loss=2.4086 cos=0.1085 top1_match=0.1429 time=6854.4ms
+iter    900: loss=1.9184 cos=0.0968 top1_match=0.1722 time=6858.0ms
+[2026-04-28 10:57:14] [11m] speed: 1.46 iter/s
+iter    910: loss=1.9839 cos=0.1022 top1_match=0.1737 time=6857.4ms
+iter    920: loss=1.9585 cos=0.1009 top1_match=0.2050 time=6859.8ms
+iter    930: loss=1.9077 cos=0.0951 top1_match=0.1786 time=6869.7ms
+iter    940: loss=1.0979 cos=0.0583 top1_match=0.4393 time=6851.3ms
+iter    950: loss=0.5158 cos=0.0274 top1_match=0.7578 time=6862.6ms
+iter    960: loss=1.9283 cos=0.1004 top1_match=0.1614 time=6860.0ms
+iter    970: loss=1.8011 cos=0.0958 top1_match=0.1756 time=6862.3ms
+iter    980: loss=1.8935 cos=0.0941 top1_match=0.2060 time=6866.0ms
+iter    990: loss=1.9501 cos=0.1002 top1_match=0.1874 time=6869.5ms
+[2026-04-28 10:58:29] [12m] iter   1000 | train: loss=0.4141 cos_sim=0.9043 mse=3.1844 | val: loss=0.4219 cos_sim=0.9003 mse=3.2220 | lr=9.40e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.4219, cos_sim=0.9003)
+[2026-04-28 10:58:36] [12m] Saved periodic checkpoint to pt/imitator_L8_combined_iter1000.pt
+iter   1000: loss=1.7994 cos=0.0962 top1_match=0.1825 time=20581.0ms
+[2026-04-28 10:58:36] [12m] speed: 1.21 iter/s
+iter   1010: loss=1.0927 cos=0.0573 top1_match=0.4702 time=7079.1ms
+iter   1020: loss=1.1126 cos=0.0592 top1_match=0.4765 time=7036.4ms
+iter   1030: loss=1.8112 cos=0.0953 top1_match=0.1477 time=7060.4ms
+iter   1040: loss=1.9426 cos=0.1029 top1_match=0.1473 time=6982.5ms
+iter   1050: loss=1.8588 cos=0.0908 top1_match=0.1703 time=6943.2ms
+iter   1060: loss=1.9530 cos=0.0969 top1_match=0.1492 time=6959.1ms
+iter   1070: loss=1.7795 cos=0.0999 top1_match=0.1991 time=7010.5ms
+iter   1080: loss=1.1554 cos=0.0612 top1_match=0.4716 time=7039.5ms
+iter   1090: loss=1.8961 cos=0.0983 top1_match=0.1800 time=7080.5ms
+iter   1100: loss=1.8493 cos=0.0976 top1_match=0.1820 time=7036.4ms
+[2026-04-28 10:59:47] [13m] speed: 1.42 iter/s
+iter   1110: loss=1.1195 cos=0.0591 top1_match=0.4721 time=7073.8ms
+iter   1120: loss=1.7676 cos=0.0930 top1_match=0.1840 time=7095.3ms
+iter   1130: loss=1.9077 cos=0.0937 top1_match=0.1795 time=7060.4ms
+iter   1140: loss=1.8834 cos=0.0969 top1_match=0.1918 time=7055.4ms
+iter   1150: loss=1.7829 cos=0.0952 top1_match=0.1815 time=7087.2ms
+iter   1160: loss=1.8475 cos=0.0967 top1_match=0.1928 time=7061.8ms
+iter   1170: loss=0.3896 cos=0.0207 top1_match=0.7593 time=7045.4ms
+iter   1180: loss=1.8598 cos=0.0960 top1_match=0.1756 time=7068.8ms
+iter   1190: loss=1.0872 cos=0.0588 top1_match=0.4790 time=6981.4ms
+[2026-04-28 11:01:03] [14m] iter   1200 | train: loss=0.4081 cos_sim=0.9062 mse=3.1438 | val: loss=0.4127 cos_sim=0.9034 mse=3.1605 | lr=9.07e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.4127, cos_sim=0.9034)
+iter   1200: loss=1.8921 cos=0.0980 top1_match=0.2001 time=17087.4ms
+[2026-04-28 11:01:07] [15m] speed: 1.24 iter/s
+iter   1210: loss=1.0938 cos=0.0584 top1_match=0.4907 time=7076.6ms
+iter   1220: loss=1.0421 cos=0.0559 top1_match=0.5068 time=7098.9ms
+iter   1230: loss=1.0863 cos=0.0579 top1_match=0.4604 time=7061.3ms
+iter   1240: loss=1.2565 cos=0.0621 top1_match=0.4790 time=7090.2ms
+iter   1250: loss=1.0604 cos=0.0562 top1_match=0.4814 time=7117.9ms
+iter   1260: loss=1.7705 cos=0.0890 top1_match=0.1898 time=7013.0ms
+iter   1270: loss=1.8453 cos=0.0941 top1_match=0.1913 time=6897.2ms
+iter   1280: loss=1.1131 cos=0.0566 top1_match=0.4672 time=6864.0ms
+iter   1290: loss=1.7919 cos=0.0915 top1_match=0.1698 time=6870.4ms
+iter   1300: loss=1.0784 cos=0.0573 top1_match=0.4667 time=7100.8ms
+[2026-04-28 11:02:17] [16m] speed: 1.42 iter/s
+iter   1310: loss=1.1019 cos=0.0573 top1_match=0.4555 time=7093.5ms
+iter   1320: loss=1.1182 cos=0.0561 top1_match=0.4873 time=7121.1ms
+iter   1330: loss=1.8727 cos=0.1001 top1_match=0.1942 time=7103.5ms
+iter   1340: loss=1.0947 cos=0.0531 top1_match=0.4643 time=7105.6ms
+iter   1350: loss=1.7695 cos=0.0880 top1_match=0.1614 time=7104.1ms
+iter   1360: loss=1.0474 cos=0.0586 top1_match=0.4667 time=7123.8ms
+iter   1370: loss=1.0612 cos=0.0588 top1_match=0.4780 time=7112.9ms
+iter   1380: loss=2.2047 cos=0.1000 top1_match=0.1747 time=7112.0ms
+iter   1390: loss=1.0642 cos=0.0548 top1_match=0.4702 time=7118.4ms
+[2026-04-28 11:03:35] [17m] iter   1400 | train: loss=0.3969 cos_sim=0.9099 mse=3.0677 | val: loss=0.4075 cos_sim=0.9048 mse=3.1233 | lr=8.68e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.4075, cos_sim=0.9048)
+iter   1400: loss=1.8255 cos=0.0912 top1_match=0.1893 time=17387.9ms
+[2026-04-28 11:03:39] [17m] speed: 1.23 iter/s
+iter   1410: loss=1.7983 cos=0.0937 top1_match=0.1747 time=7119.6ms
+iter   1420: loss=0.3750 cos=0.0190 top1_match=0.7118 time=7125.3ms
+iter   1430: loss=1.0316 cos=0.0547 top1_match=0.4726 time=7132.3ms
+iter   1440: loss=1.8182 cos=0.0893 top1_match=0.1668 time=7112.8ms
+iter   1450: loss=1.8635 cos=0.0999 top1_match=0.1619 time=7122.0ms
+iter   1460: loss=1.1450 cos=0.0599 top1_match=0.4878 time=7063.9ms
+iter   1470: loss=1.8070 cos=0.0920 top1_match=0.1722 time=7110.8ms
+iter   1480: loss=1.1152 cos=0.0570 top1_match=0.4804 time=7126.3ms
+iter   1490: loss=1.0646 cos=0.0548 top1_match=0.4863 time=7087.9ms
+iter   1500: loss=0.3473 cos=0.0174 top1_match=0.7779 time=7111.6ms
+[2026-04-28 11:04:50] [18m] speed: 1.41 iter/s
+iter   1510: loss=1.1692 cos=0.0588 top1_match=0.4066 time=7097.3ms
+iter   1520: loss=1.0549 cos=0.0564 top1_match=0.5098 time=7117.9ms
+iter   1530: loss=1.1144 cos=0.0578 top1_match=0.2632 time=7061.6ms
+iter   1540: loss=1.1068 cos=0.0563 top1_match=0.4746 time=7081.2ms
+iter   1550: loss=1.7967 cos=0.0966 top1_match=0.2373 time=7009.5ms
+iter   1560: loss=1.0947 cos=0.0558 top1_match=0.4726 time=7045.5ms
+iter   1570: loss=1.1493 cos=0.0583 top1_match=0.4765 time=7038.5ms
+iter   1580: loss=1.8005 cos=0.0918 top1_match=0.2055 time=7059.0ms
+iter   1590: loss=1.7484 cos=0.0900 top1_match=0.2045 time=7039.5ms
+[2026-04-28 11:06:07] [20m] iter   1600 | train: loss=0.3991 cos_sim=0.9070 mse=3.0608 | val: loss=0.3974 cos_sim=0.9075 mse=3.0490 | lr=8.24e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.3974, cos_sim=0.9075)
+iter   1600: loss=1.7871 cos=0.0912 top1_match=0.2030 time=17324.7ms
+[2026-04-28 11:06:11] [20m] speed: 1.24 iter/s
+iter   1610: loss=1.7385 cos=0.1011 top1_match=0.2148 time=7035.1ms
+iter   1620: loss=1.7719 cos=0.0936 top1_match=0.1859 time=7034.0ms
+iter   1630: loss=1.0729 cos=0.0562 top1_match=0.4687 time=7055.2ms
+iter   1640: loss=1.0394 cos=0.0555 top1_match=0.4775 time=7077.1ms
+iter   1650: loss=1.1010 cos=0.0552 top1_match=0.4716 time=7068.4ms
+iter   1660: loss=1.0645 cos=0.0537 top1_match=0.4702 time=7064.0ms
+iter   1670: loss=1.7957 cos=0.0927 top1_match=0.1898 time=7075.9ms
+iter   1680: loss=1.0570 cos=0.0567 top1_match=0.4785 time=7061.0ms
+iter   1690: loss=1.6974 cos=0.0876 top1_match=0.1639 time=7058.8ms
+iter   1700: loss=1.7707 cos=0.0885 top1_match=0.1840 time=7069.3ms
+[2026-04-28 11:07:21] [21m] speed: 1.42 iter/s
+iter   1710: loss=1.8038 cos=0.0945 top1_match=0.1981 time=7007.0ms
+iter   1720: loss=1.8016 cos=0.0971 top1_match=0.1898 time=6876.5ms
+iter   1730: loss=2.1729 cos=0.1055 top1_match=0.1893 time=6878.0ms
+iter   1740: loss=1.7433 cos=0.0907 top1_match=0.1879 time=6882.0ms
+iter   1750: loss=1.0369 cos=0.0563 top1_match=0.4755 time=6871.3ms
+iter   1760: loss=1.7288 cos=0.0936 top1_match=0.2280 time=6874.4ms
+iter   1770: loss=1.1555 cos=0.0613 top1_match=0.4907 time=6873.0ms
+iter   1780: loss=1.7679 cos=0.0927 top1_match=0.2109 time=6872.5ms
+iter   1790: loss=1.0393 cos=0.0529 top1_match=0.4746 time=6870.6ms
+[2026-04-28 11:08:37] [22m] iter   1800 | train: loss=0.3949 cos_sim=0.9077 mse=3.0262 | val: loss=0.3958 cos_sim=0.9072 mse=3.0297 | lr=7.75e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.3958, cos_sim=0.9072)
+iter   1800: loss=1.6765 cos=0.0915 top1_match=0.2094 time=17005.7ms
+[2026-04-28 11:08:40] [22m] speed: 1.27 iter/s
+iter   1810: loss=1.7845 cos=0.0866 top1_match=0.1683 time=6867.3ms
+iter   1820: loss=1.0438 cos=0.0522 top1_match=0.4760 time=6865.9ms
+iter   1830: loss=1.0749 cos=0.0559 top1_match=0.4819 time=6868.1ms
+iter   1840: loss=1.7258 cos=0.0914 top1_match=0.1795 time=6870.0ms
+iter   1850: loss=1.0447 cos=0.0553 top1_match=0.4555 time=6866.9ms
+iter   1860: loss=1.0559 cos=0.0563 top1_match=0.4643 time=6866.1ms
+iter   1870: loss=1.0910 cos=0.0573 top1_match=0.5000 time=6868.1ms
+iter   1880: loss=1.0264 cos=0.0548 top1_match=0.4907 time=6866.2ms
+iter   1890: loss=1.0420 cos=0.0539 top1_match=0.4922 time=6867.0ms
+iter   1900: loss=1.0403 cos=0.0555 top1_match=0.4604 time=6868.7ms
+[2026-04-28 11:09:49] [23m] speed: 1.46 iter/s
+iter   1910: loss=0.9809 cos=0.0496 top1_match=0.4750 time=6871.3ms
+iter   1920: loss=1.7317 cos=0.0892 top1_match=0.1937 time=6871.0ms
+iter   1930: loss=1.0475 cos=0.0524 top1_match=0.4927 time=6870.1ms
+iter   1940: loss=1.6890 cos=0.0921 top1_match=0.2505 time=6867.5ms
+iter   1950: loss=1.1129 cos=0.0544 top1_match=0.4868 time=6869.1ms
+iter   1960: loss=1.0321 cos=0.0522 top1_match=0.4344 time=6872.8ms
+iter   1970: loss=1.0120 cos=0.0547 top1_match=0.4839 time=6868.8ms
+iter   1980: loss=0.9738 cos=0.0552 top1_match=0.5005 time=6863.8ms
+iter   1990: loss=1.0764 cos=0.0598 top1_match=0.4765 time=6865.6ms
+[2026-04-28 11:11:04] [24m] iter   2000 | train: loss=0.3839 cos_sim=0.9111 mse=2.9497 | val: loss=0.3898 cos_sim=0.9082 mse=2.9803 | lr=7.22e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.3898, cos_sim=0.9082)
+[2026-04-28 11:11:11] [25m] Saved periodic checkpoint to pt/imitator_L8_combined_iter2000.pt
+iter   2000: loss=1.7808 cos=0.0885 top1_match=0.2099 time=20717.3ms
+[2026-04-28 11:11:12] [25m] speed: 1.21 iter/s
+iter   2010: loss=1.0600 cos=0.0527 top1_match=0.4119 time=6871.4ms
+iter   2020: loss=1.0711 cos=0.0582 top1_match=0.4814 time=6872.5ms
+iter   2030: loss=0.3695 cos=0.0206 top1_match=0.8033 time=6868.7ms
+iter   2040: loss=1.0397 cos=0.0534 top1_match=0.4746 time=6869.5ms
+iter   2050: loss=1.8464 cos=0.1012 top1_match=0.1869 time=6870.4ms
+iter   2060: loss=0.9753 cos=0.0506 top1_match=0.5210 time=6871.4ms
+iter   2070: loss=1.0461 cos=0.0556 top1_match=0.5181 time=6870.4ms
+iter   2080: loss=0.3760 cos=0.0181 top1_match=0.6991 time=6868.5ms
+iter   2090: loss=1.6857 cos=0.0889 top1_match=0.1928 time=6867.2ms
+iter   2100: loss=0.9966 cos=0.0527 top1_match=0.5054 time=6869.2ms
+[2026-04-28 11:12:20] [26m] speed: 1.46 iter/s
+iter   2110: loss=1.0418 cos=0.0544 top1_match=0.5020 time=6869.4ms
+iter   2120: loss=1.8414 cos=0.0972 top1_match=0.1972 time=6871.2ms
+iter   2130: loss=1.1307 cos=0.0535 top1_match=0.4795 time=6870.8ms
+iter   2140: loss=1.0487 cos=0.0557 top1_match=0.4706 time=6868.7ms
+iter   2150: loss=0.9696 cos=0.0515 top1_match=0.5015 time=6871.9ms
+iter   2160: loss=1.0755 cos=0.0534 top1_match=0.5029 time=6870.6ms
+iter   2170: loss=0.3413 cos=0.0166 top1_match=0.7520 time=6872.1ms
+iter   2180: loss=1.6382 cos=0.0919 top1_match=0.2035 time=6868.9ms
+iter   2190: loss=0.9905 cos=0.0510 top1_match=0.4672 time=6870.2ms
+[2026-04-28 11:13:35] [27m] iter   2200 | train: loss=0.3923 cos_sim=0.9060 mse=2.9829 | val: loss=0.3899 cos_sim=0.9060 mse=2.9592 | lr=6.66e-05
+iter   2200: loss=1.6994 cos=0.0952 top1_match=0.2123 time=13760.3ms
+[2026-04-28 11:13:36] [27m] speed: 1.32 iter/s
+iter   2210: loss=0.3690 cos=0.0177 top1_match=0.6159 time=6871.6ms
+iter   2220: loss=0.9709 cos=0.0511 top1_match=0.5078 time=6869.2ms
+iter   2230: loss=1.0551 cos=0.0537 top1_match=0.5372 time=6871.8ms
+iter   2240: loss=1.0195 cos=0.0547 top1_match=0.4711 time=6871.3ms
+iter   2250: loss=1.0406 cos=0.0502 top1_match=0.4457 time=6870.7ms
+iter   2260: loss=1.7265 cos=0.0871 top1_match=0.1991 time=6879.6ms
+iter   2270: loss=1.0577 cos=0.0521 top1_match=0.4628 time=6878.7ms
+iter   2280: loss=1.0315 cos=0.0543 top1_match=0.5064 time=6874.5ms
+iter   2290: loss=1.0044 cos=0.0513 top1_match=0.4897 time=6875.4ms
+iter   2300: loss=1.6675 cos=0.0865 top1_match=0.2055 time=6874.4ms
+[2026-04-28 11:14:45] [28m] speed: 1.45 iter/s
+iter   2310: loss=1.6657 cos=0.0873 top1_match=0.2055 time=6872.0ms
+iter   2320: loss=1.0325 cos=0.0525 top1_match=0.4980 time=6876.6ms
+iter   2330: loss=1.7462 cos=0.0941 top1_match=0.2055 time=6876.0ms
+iter   2340: loss=1.0044 cos=0.0511 top1_match=0.4594 time=6872.1ms
+iter   2350: loss=1.7200 cos=0.0877 top1_match=0.2128 time=6874.7ms
+iter   2360: loss=1.6382 cos=0.0860 top1_match=0.1810 time=6871.2ms
+iter   2370: loss=1.6697 cos=0.0863 top1_match=0.1805 time=6872.8ms
+iter   2380: loss=1.0708 cos=0.0525 top1_match=0.4594 time=6873.3ms
+iter   2390: loss=1.6307 cos=0.0924 top1_match=0.2104 time=6874.0ms
+[2026-04-28 11:16:00] [29m] iter   2400 | train: loss=0.3814 cos_sim=0.9101 mse=2.9151 | val: loss=0.3817 cos_sim=0.9099 mse=2.9161 | lr=6.09e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.3817, cos_sim=0.9099)
+iter   2400: loss=1.7005 cos=0.0847 top1_match=0.1937 time=17007.6ms
+[2026-04-28 11:16:04] [29m] speed: 1.27 iter/s
+iter   2410: loss=1.0166 cos=0.0545 top1_match=0.4804 time=6943.3ms
+iter   2420: loss=1.7678 cos=0.0914 top1_match=0.1908 time=7057.3ms
+iter   2430: loss=1.1021 cos=0.0545 top1_match=0.4863 time=7090.6ms
+iter   2440: loss=0.9744 cos=0.0502 top1_match=0.4746 time=7096.8ms
+iter   2450: loss=0.9825 cos=0.0524 top1_match=0.4883 time=7056.2ms
+iter   2460: loss=0.9898 cos=0.0668 top1_match=0.4736 time=7065.3ms
+iter   2470: loss=1.0368 cos=0.0522 top1_match=0.4804 time=6965.8ms
+iter   2480: loss=1.7412 cos=0.0907 top1_match=0.1893 time=6981.8ms
+iter   2490: loss=1.6859 cos=0.0898 top1_match=0.2231 time=6985.0ms
+iter   2500: loss=1.7165 cos=0.0880 top1_match=0.2040 time=7058.2ms
+[2026-04-28 11:17:14] [31m] speed: 1.42 iter/s
+iter   2510: loss=1.0434 cos=0.0554 top1_match=0.5161 time=7103.3ms
+iter   2520: loss=0.9462 cos=0.0509 top1_match=0.4961 time=7065.9ms
+iter   2530: loss=1.7227 cos=0.0872 top1_match=0.2104 time=7098.2ms
+iter   2540: loss=1.1081 cos=0.0643 top1_match=0.4819 time=7117.1ms
+iter   2550: loss=1.0320 cos=0.0514 top1_match=0.4741 time=7126.2ms
+iter   2560: loss=1.7046 cos=0.0888 top1_match=0.1795 time=7071.7ms
+iter   2570: loss=1.6718 cos=0.0890 top1_match=0.1908 time=7126.0ms
+iter   2580: loss=0.9927 cos=0.0526 top1_match=0.4638 time=7130.9ms
+iter   2590: loss=1.6080 cos=0.0879 top1_match=0.2143 time=7059.2ms
+[2026-04-28 11:18:31] [32m] iter   2600 | train: loss=0.3749 cos_sim=0.9123 mse=2.8721 | val: loss=0.3777 cos_sim=0.9107 mse=2.8838 | lr=5.50e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.3777, cos_sim=0.9107)
+iter   2600: loss=1.7018 cos=0.0856 top1_match=0.1942 time=17306.3ms
+[2026-04-28 11:18:35] [32m] speed: 1.23 iter/s
+iter   2610: loss=0.9935 cos=0.0515 top1_match=0.5088 time=7003.7ms
+iter   2620: loss=0.9591 cos=0.0528 top1_match=0.4887 time=7012.2ms
+iter   2630: loss=0.9614 cos=0.0507 top1_match=0.4829 time=7084.6ms
+iter   2640: loss=1.6614 cos=0.0861 top1_match=0.2162 time=7121.4ms
+iter   2650: loss=1.6716 cos=0.0879 top1_match=0.2236 time=7107.2ms
+iter   2660: loss=1.6532 cos=0.0838 top1_match=0.2035 time=7112.0ms
+iter   2670: loss=1.0033 cos=0.0503 top1_match=0.4799 time=7114.3ms
+iter   2680: loss=1.5840 cos=0.0831 top1_match=0.1947 time=7143.8ms
+iter   2690: loss=0.9538 cos=0.0498 top1_match=0.4946 time=6981.6ms
+iter   2700: loss=1.8149 cos=0.0907 top1_match=0.2109 time=6883.7ms
+[2026-04-28 11:19:46] [33m] speed: 1.42 iter/s
+iter   2710: loss=1.6781 cos=0.0890 top1_match=0.2211 time=6884.2ms
+iter   2720: loss=0.9320 cos=0.0502 top1_match=0.4892 time=6883.8ms
+iter   2730: loss=0.9886 cos=0.0515 top1_match=0.4746 time=7057.0ms
+iter   2740: loss=1.6316 cos=0.0861 top1_match=0.2040 time=7123.5ms
+iter   2750: loss=0.9847 cos=0.0545 top1_match=0.5059 time=7118.2ms
+iter   2760: loss=1.6203 cos=0.0923 top1_match=0.2172 time=7113.1ms
+iter   2770: loss=1.6631 cos=0.0856 top1_match=0.1952 time=7126.2ms
+iter   2780: loss=1.0124 cos=0.0527 top1_match=0.5088 time=7113.2ms
+iter   2790: loss=0.9864 cos=0.0496 top1_match=0.4790 time=7102.6ms
+[2026-04-28 11:21:03] [34m] iter   2800 | train: loss=0.3706 cos_sim=0.9137 mse=2.8426 | val: loss=0.3722 cos_sim=0.9119 mse=2.8403 | lr=4.91e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.3722, cos_sim=0.9119)
+iter   2800: loss=1.7230 cos=0.0940 top1_match=0.1903 time=17412.4ms
+[2026-04-28 11:21:07] [34m] speed: 1.24 iter/s
+iter   2810: loss=2.0311 cos=0.1000 top1_match=0.1859 time=7113.5ms
+iter   2820: loss=1.0043 cos=0.0559 top1_match=0.5284 time=7118.2ms
+iter   2830: loss=0.9750 cos=0.0493 top1_match=0.4530 time=7130.0ms
+iter   2840: loss=1.6267 cos=0.0852 top1_match=0.2035 time=7118.8ms
+iter   2850: loss=0.9493 cos=0.0522 top1_match=0.5230 time=7136.6ms
+iter   2860: loss=0.9606 cos=0.0514 top1_match=0.5049 time=7121.7ms
+iter   2870: loss=0.9922 cos=0.0513 top1_match=0.4770 time=7133.2ms
+iter   2880: loss=0.9854 cos=0.0496 top1_match=0.5015 time=7131.2ms
+iter   2890: loss=1.0407 cos=0.0539 top1_match=0.4897 time=7122.7ms
+iter   2900: loss=0.9612 cos=0.0529 top1_match=0.5054 time=7066.2ms
+[2026-04-28 11:22:18] [36m] speed: 1.40 iter/s
+iter   2910: loss=0.9420 cos=0.0505 top1_match=0.5122 time=7139.1ms
+iter   2920: loss=1.6641 cos=0.0849 top1_match=0.2236 time=7136.3ms
+iter   2930: loss=0.9584 cos=0.0490 top1_match=0.4878 time=7108.8ms
+iter   2940: loss=0.3425 cos=0.0178 top1_match=0.8410 time=7110.4ms
+iter   2950: loss=1.6753 cos=0.0878 top1_match=0.2226 time=7122.1ms
+iter   2960: loss=1.7497 cos=0.0888 top1_match=0.1908 time=7108.2ms
+iter   2970: loss=1.0325 cos=0.0525 top1_match=0.4614 time=7063.1ms
+iter   2980: loss=1.6189 cos=0.0865 top1_match=0.2246 time=7076.4ms
+iter   2990: loss=0.9601 cos=0.0516 top1_match=0.5504 time=7047.9ms
+[2026-04-28 11:23:35] [37m] iter   3000 | train: loss=0.3679 cos_sim=0.9141 mse=2.8196 | val: loss=0.3662 cos_sim=0.9139 mse=2.8009 | lr=4.34e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.3662, cos_sim=0.9139)
+[2026-04-28 11:23:42] [37m] Saved periodic checkpoint to pt/imitator_L8_combined_iter3000.pt
+iter   3000: loss=1.6767 cos=0.0910 top1_match=0.2299 time=20872.4ms
+[2026-04-28 11:23:43] [37m] speed: 1.18 iter/s
+iter   3010: loss=0.3012 cos=0.0149 top1_match=0.7378 time=7058.7ms
+iter   3020: loss=0.9241 cos=0.0500 top1_match=0.5210 time=7108.7ms
+iter   3030: loss=0.3044 cos=0.0147 top1_match=0.8077 time=7149.0ms
+iter   3040: loss=0.9739 cos=0.0497 top1_match=0.4980 time=7066.7ms
+iter   3050: loss=0.9115 cos=0.0633 top1_match=0.4594 time=7057.7ms
+iter   3060: loss=1.0066 cos=0.0488 top1_match=0.5049 time=7082.1ms
+iter   3070: loss=1.6267 cos=0.0921 top1_match=0.2123 time=7081.6ms
+iter   3080: loss=1.6266 cos=0.0844 top1_match=0.2094 time=7115.1ms
+iter   3090: loss=0.9104 cos=0.0504 top1_match=0.4868 time=7076.1ms
+iter   3100: loss=1.6634 cos=0.0861 top1_match=0.1986 time=7105.0ms
+[2026-04-28 11:24:53] [38m] speed: 1.41 iter/s
+iter   3110: loss=0.9944 cos=0.0508 top1_match=0.5210 time=7091.4ms
+iter   3120: loss=1.6284 cos=0.0866 top1_match=0.2158 time=7077.0ms
+iter   3130: loss=0.9683 cos=0.0496 top1_match=0.4858 time=7094.0ms
+iter   3140: loss=0.9062 cos=0.0599 top1_match=0.4985 time=7097.5ms
+iter   3150: loss=1.5713 cos=0.0854 top1_match=0.2172 time=7077.7ms
+iter   3160: loss=0.9831 cos=0.0478 top1_match=0.4437 time=7079.5ms
+iter   3170: loss=1.6792 cos=0.0910 top1_match=0.2011 time=7095.1ms
+iter   3180: loss=0.3039 cos=0.0147 top1_match=0.7979 time=7085.7ms
+iter   3190: loss=1.6502 cos=0.0857 top1_match=0.2182 time=7054.6ms
+[2026-04-28 11:26:11] [40m] iter   3200 | train: loss=0.3628 cos_sim=0.9155 mse=2.7827 | val: loss=0.3668 cos_sim=0.9132 mse=2.7994 | lr=3.78e-05
+iter   3200: loss=1.7108 cos=0.0878 top1_match=0.2226 time=14149.9ms
+[2026-04-28 11:26:11] [40m] speed: 1.28 iter/s
+iter   3210: loss=0.9903 cos=0.0508 top1_match=0.5049 time=7078.2ms
+iter   3220: loss=1.7855 cos=0.0871 top1_match=0.1981 time=7042.7ms
+iter   3230: loss=1.6335 cos=0.0835 top1_match=0.2226 time=6881.3ms
+iter   3240: loss=0.9399 cos=0.0500 top1_match=0.4843 time=6870.7ms
+iter   3250: loss=1.6478 cos=0.0856 top1_match=0.2099 time=6869.0ms
+iter   3260: loss=0.9516 cos=0.0469 top1_match=0.4839 time=6867.9ms
+iter   3270: loss=1.0000 cos=0.0525 top1_match=0.4804 time=6872.8ms
+iter   3280: loss=0.9952 cos=0.0486 top1_match=0.4437 time=6869.6ms
+iter   3290: loss=0.9466 cos=0.0489 top1_match=0.5264 time=6872.1ms
+iter   3300: loss=1.6694 cos=0.0874 top1_match=0.2118 time=6870.7ms
+[2026-04-28 11:27:20] [41m] speed: 1.45 iter/s
+iter   3310: loss=1.5935 cos=0.0858 top1_match=0.2148 time=6869.6ms
+iter   3320: loss=1.6861 cos=0.0870 top1_match=0.2021 time=6869.7ms
+iter   3330: loss=0.2908 cos=0.0138 top1_match=0.7617 time=6868.3ms
+iter   3340: loss=1.7202 cos=0.0879 top1_match=0.1962 time=6883.5ms
+iter   3350: loss=1.6880 cos=0.0948 top1_match=0.2363 time=6921.0ms
+iter   3360: loss=1.0228 cos=0.0539 top1_match=0.4932 time=6938.9ms
+iter   3370: loss=0.9423 cos=0.0518 top1_match=0.5132 time=6923.4ms
+iter   3380: loss=1.7170 cos=0.1028 top1_match=0.1722 time=6919.9ms
+iter   3390: loss=1.5955 cos=0.0875 top1_match=0.2329 time=6915.9ms
+[2026-04-28 11:28:36] [42m] iter   3400 | train: loss=0.3659 cos_sim=0.9128 mse=2.7873 | val: loss=0.3638 cos_sim=0.9136 mse=2.7740 | lr=3.25e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.3638, cos_sim=0.9136)
+iter   3400: loss=1.5922 cos=0.0858 top1_match=0.1879 time=17025.4ms
+[2026-04-28 11:28:40] [42m] speed: 1.26 iter/s
+iter   3410: loss=1.6193 cos=0.0859 top1_match=0.2451 time=6922.4ms
+iter   3420: loss=1.6268 cos=0.0837 top1_match=0.2138 time=6918.5ms
+iter   3430: loss=0.8949 cos=0.0529 top1_match=0.4946 time=6920.0ms
+iter   3440: loss=0.9276 cos=0.0471 top1_match=0.4966 time=6921.1ms
+iter   3450: loss=0.9607 cos=0.0503 top1_match=0.5088 time=6920.1ms
+iter   3460: loss=0.2802 cos=0.0135 top1_match=0.7994 time=6918.8ms
+iter   3470: loss=1.0218 cos=0.0505 top1_match=0.5029 time=6919.6ms
+iter   3480: loss=1.6563 cos=0.0821 top1_match=0.1898 time=6925.1ms
+iter   3490: loss=1.5358 cos=0.0872 top1_match=0.2334 time=6912.9ms
+iter   3500: loss=0.2958 cos=0.0151 top1_match=0.7573 time=6921.7ms
+[2026-04-28 11:29:49] [43m] speed: 1.45 iter/s
+iter   3510: loss=0.9458 cos=0.0472 top1_match=0.4790 time=6921.1ms
+iter   3520: loss=1.5910 cos=0.0872 top1_match=0.2158 time=6924.1ms
+iter   3530: loss=0.9952 cos=0.0524 top1_match=0.4936 time=6912.8ms
+iter   3540: loss=1.0445 cos=0.0528 top1_match=0.4946 time=6920.0ms
+iter   3550: loss=1.5553 cos=0.0842 top1_match=0.2231 time=6921.4ms
+iter   3560: loss=0.2790 cos=0.0136 top1_match=0.7979 time=6923.5ms
+iter   3570: loss=0.9969 cos=0.0499 top1_match=0.4961 time=6920.9ms
+iter   3580: loss=1.6864 cos=0.0858 top1_match=0.2035 time=6918.0ms
+iter   3590: loss=1.0238 cos=0.0563 top1_match=0.5528 time=6916.5ms
+[2026-04-28 11:31:04] [44m] iter   3600 | train: loss=0.3627 cos_sim=0.9141 mse=2.7676 | val: loss=0.3637 cos_sim=0.9134 mse=2.7705 | lr=2.76e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.3637, cos_sim=0.9134)
+iter   3600: loss=1.6586 cos=0.0844 top1_match=0.1986 time=17032.9ms
+[2026-04-28 11:31:08] [45m] speed: 1.26 iter/s
+iter   3610: loss=0.9246 cos=0.0537 top1_match=0.5201 time=6922.0ms
+iter   3620: loss=1.5974 cos=0.0845 top1_match=0.2094 time=6921.9ms
+iter   3630: loss=0.2785 cos=0.0132 top1_match=0.7945 time=6922.2ms
+iter   3640: loss=0.9732 cos=0.0481 top1_match=0.5064 time=6921.8ms
+iter   3650: loss=0.8885 cos=0.0485 top1_match=0.5054 time=6917.4ms
+iter   3660: loss=1.6251 cos=0.0842 top1_match=0.2295 time=6918.5ms
+iter   3670: loss=0.9449 cos=0.0496 top1_match=0.4731 time=6921.3ms
+iter   3680: loss=1.6176 cos=0.0836 top1_match=0.2035 time=6920.2ms
+iter   3690: loss=0.9580 cos=0.0502 top1_match=0.4697 time=6922.6ms
+iter   3700: loss=1.0301 cos=0.0580 top1_match=0.5225 time=6920.3ms
+[2026-04-28 11:32:17] [46m] speed: 1.44 iter/s
+iter   3710: loss=0.9615 cos=0.0532 top1_match=0.5303 time=6916.9ms
+iter   3720: loss=0.9086 cos=0.0492 top1_match=0.5108 time=6919.6ms
+iter   3730: loss=0.9455 cos=0.0482 top1_match=0.5357 time=6915.5ms
+iter   3740: loss=1.6147 cos=0.0863 top1_match=0.2133 time=6917.1ms
+iter   3750: loss=1.6625 cos=0.0873 top1_match=0.2006 time=6917.6ms
+iter   3760: loss=0.9536 cos=0.0464 top1_match=0.4658 time=6921.1ms
+iter   3770: loss=1.6862 cos=0.0948 top1_match=0.2045 time=6917.3ms
+iter   3780: loss=0.9736 cos=0.0555 top1_match=0.5132 time=6922.9ms
+iter   3790: loss=1.8664 cos=0.0996 top1_match=0.2368 time=6917.2ms
+[2026-04-28 11:33:33] [47m] iter   3800 | train: loss=0.3640 cos_sim=0.9126 mse=2.7657 | val: loss=0.3638 cos_sim=0.9132 mse=2.7698 | lr=2.32e-05
+iter   3800: loss=1.5839 cos=0.0852 top1_match=0.2387 time=13864.9ms
+[2026-04-28 11:33:33] [47m] speed: 1.31 iter/s
+iter   3810: loss=0.9332 cos=0.0557 top1_match=0.4887 time=6919.5ms
+iter   3820: loss=1.5878 cos=0.0868 top1_match=0.2280 time=6929.6ms
+iter   3830: loss=0.9315 cos=0.0475 top1_match=0.4887 time=6914.6ms
+iter   3840: loss=0.2793 cos=0.0133 top1_match=0.7950 time=6923.1ms
+iter   3850: loss=0.9444 cos=0.0473 top1_match=0.4858 time=6920.1ms
+iter   3860: loss=0.9439 cos=0.0481 top1_match=0.5098 time=6922.9ms
+iter   3870: loss=1.6413 cos=0.0829 top1_match=0.2025 time=6920.1ms
+iter   3880: loss=0.9815 cos=0.0503 top1_match=0.4927 time=6927.1ms
+iter   3890: loss=1.5173 cos=0.0814 top1_match=0.2074 time=6923.3ms
+iter   3900: loss=1.0083 cos=0.0507 top1_match=0.5113 time=6918.4ms
+[2026-04-28 11:34:43] [48m] speed: 1.44 iter/s
+iter   3910: loss=0.9887 cos=0.0533 top1_match=0.5000 time=6919.9ms
+iter   3920: loss=0.9888 cos=0.0536 top1_match=0.4340 time=6919.6ms
+iter   3930: loss=0.9146 cos=0.0465 top1_match=0.5020 time=6919.8ms
+iter   3940: loss=0.9834 cos=0.0510 top1_match=0.5015 time=6917.9ms
+iter   3950: loss=1.6352 cos=0.0866 top1_match=0.2265 time=6917.2ms
+iter   3960: loss=0.2774 cos=0.0132 top1_match=0.7877 time=6921.9ms
+iter   3970: loss=0.9562 cos=0.0499 top1_match=0.4809 time=6922.7ms
+iter   3980: loss=1.6939 cos=0.0898 top1_match=0.1977 time=6919.4ms
+iter   3990: loss=0.9740 cos=0.0510 top1_match=0.4511 time=6922.6ms
+[2026-04-28 11:35:58] [49m] iter   4000 | train: loss=0.3572 cos_sim=0.9165 mse=2.7375 | val: loss=0.3575 cos_sim=0.9158 mse=2.7328 | lr=1.93e-05
+  Saved best to pt/imitator_L8_combined.pt (val_loss=0.3575, cos_sim=0.9158)
+[2026-04-28 11:36:05] [49m] Saved periodic checkpoint to pt/imitator_L8_combined_iter4000.pt
+iter   4000: loss=1.6192 cos=0.0836 top1_match=0.2167 time=20555.8ms
+[2026-04-28 11:36:05] [49m] speed: 1.21 iter/s
+iter   4010: loss=1.7168 cos=0.0898 top1_match=0.2162 time=6920.9ms
+iter   4020: loss=1.9741 cos=0.1035 top1_match=0.2206 time=6920.3ms
+iter   4030: loss=1.5877 cos=0.0838 top1_match=0.2089 time=6922.8ms
+iter   4040: loss=1.6509 cos=0.0884 top1_match=0.2221 time=6917.9ms
+iter   4050: loss=0.9614 cos=0.0533 top1_match=0.4868 time=6922.0ms
+iter   4060: loss=0.8880 cos=0.0455 top1_match=0.5294 time=6919.8ms
+iter   4070: loss=0.9235 cos=0.0493 top1_match=0.4990 time=6914.2ms
+iter   4080: loss=1.6149 cos=0.0877 top1_match=0.2123 time=6925.0ms
+iter   4090: loss=0.9501 cos=0.0482 top1_match=0.5059 time=6921.0ms
+iter   4100: loss=0.2718 cos=0.0132 top1_match=0.8082 time=6919.9ms
+[2026-04-28 11:37:15] [51m] speed: 1.45 iter/s
+iter   4110: loss=0.9413 cos=0.0482 top1_match=0.5108 time=6914.0ms
+iter   4120: loss=0.9179 cos=0.0477 top1_match=0.5064 time=6929.2ms
+iter   4130: loss=1.6032 cos=0.0830 top1_match=0.1957 time=6919.1ms
+iter   4140: loss=1.6320 cos=0.0892 top1_match=0.2006 time=6920.3ms
+iter   4150: loss=1.6201 cos=0.0848 top1_match=0.2417 time=6916.8ms
+iter   4160: loss=1.6290 cos=0.0860 top1_match=0.2045 time=6916.9ms
+iter   4170: loss=1.6482 cos=0.0848 top1_match=0.2138 time=6919.2ms
+iter   4180: loss=0.9354 cos=0.0493 top1_match=0.5201 time=6923.6ms
+iter   4190: loss=0.9547 cos=0.0492 top1_match=0.5308 time=6916.1ms
+[2026-04-28 11:38:30] [52m] iter   4200 | train: loss=0.3599 cos_sim=0.9143 mse=2.7417 | val: loss=0.3654 cos_sim=0.9115 mse=2.7688 | lr=1.60e-05
+iter   4200: loss=1.6347 cos=0.0826 top1_match=0.2045 time=13866.2ms
+[2026-04-28 11:38:31] [52m] speed: 1.31 iter/s
+iter   4210: loss=0.2723 cos=0.0132 top1_match=0.7769 time=6919.3ms
+iter   4220: loss=1.5918 cos=0.0836 top1_match=0.2603 time=6919.3ms
+iter   4230: loss=0.9190 cos=0.0479 top1_match=0.5142 time=6921.8ms
+iter   4240: loss=1.5729 cos=0.0813 top1_match=0.1996 time=6920.6ms
+iter   4250: loss=1.0350 cos=0.0570 top1_match=0.4814 time=6918.0ms
+iter   4260: loss=0.9178 cos=0.0468 top1_match=0.5157 time=6915.9ms
+iter   4270: loss=0.9516 cos=0.0502 top1_match=0.5039 time=6918.9ms
+iter   4280: loss=1.6127 cos=0.0840 top1_match=0.2001 time=6922.8ms
+iter   4290: loss=0.9221 cos=0.0486 top1_match=0.5338 time=6920.6ms
+iter   4300: loss=1.6013 cos=0.0865 top1_match=0.2016 time=6925.3ms
+[2026-04-28 11:39:40] [53m] speed: 1.45 iter/s
+iter   4310: loss=0.2838 cos=0.0146 top1_match=0.7774 time=6918.5ms
+iter   4320: loss=0.9188 cos=0.0502 top1_match=0.4897 time=6924.6ms
+iter   4330: loss=1.5932 cos=0.0822 top1_match=0.2138 time=6921.3ms
+iter   4340: loss=0.8969 cos=0.0476 top1_match=0.5377 time=6918.5ms
+iter   4350: loss=0.9438 cos=0.0506 top1_match=0.5117 time=6923.2ms
+iter   4360: loss=1.0347 cos=0.0549 top1_match=0.5289 time=6920.2ms
+iter   4370: loss=1.6459 cos=0.0864 top1_match=0.2265 time=6914.3ms
+iter   4380: loss=0.9611 cos=0.0499 top1_match=0.5142 time=6916.1ms
+iter   4390: loss=0.2678 cos=0.0126 top1_match=0.8063 time=6917.8ms
+[2026-04-28 11:40:55] [54m] iter   4400 | train: loss=0.3586 cos_sim=0.9151 mse=2.7368 | val: loss=0.3595 cos_sim=0.9138 mse=2.7326 | lr=1.34e-05
+iter   4400: loss=1.6271 cos=0.0896 top1_match=0.2353 time=13868.5ms
+[2026-04-28 11:40:56] [54m] speed: 1.31 iter/s
+iter   4410: loss=1.6782 cos=0.0904 top1_match=0.2177 time=6920.5ms
+iter   4420: loss=0.9477 cos=0.0491 top1_match=0.5186 time=6920.3ms
+iter   4430: loss=0.9481 cos=0.0500 top1_match=0.5127 time=6928.6ms
+iter   4440: loss=0.9513 cos=0.0500 top1_match=0.5093 time=6918.2ms
+iter   4450: loss=0.9254 cos=0.0531 top1_match=0.5196 time=6916.4ms
+iter   4460: loss=0.9116 cos=0.0496 top1_match=0.5083 time=6918.6ms
+iter   4470: loss=0.9005 cos=0.0487 top1_match=0.5127 time=6922.9ms
+iter   4480: loss=0.9370 cos=0.0491 top1_match=0.5181 time=6919.1ms
+iter   4490: loss=0.9298 cos=0.0501 top1_match=0.5201 time=6917.1ms
+iter   4500: loss=0.2680 cos=0.0129 top1_match=0.7627 time=6919.1ms
+[2026-04-28 11:42:05] [55m] speed: 1.45 iter/s
+iter   4510: loss=0.2671 cos=0.0129 top1_match=0.8087 time=6919.7ms
+iter   4520: loss=1.5621 cos=0.0816 top1_match=0.2040 time=6920.3ms
+iter   4530: loss=1.4733 cos=0.0799 top1_match=0.2583 time=6918.1ms
+iter   4540: loss=0.9857 cos=0.0518 top1_match=0.4912 time=6922.8ms
+iter   4550: loss=1.6527 cos=0.0872 top1_match=0.2133 time=6918.6ms
+iter   4560: loss=0.9854 cos=0.0511 top1_match=0.4834 time=6923.7ms
+iter   4570: loss=0.9222 cos=0.0514 top1_match=0.5401 time=6917.5ms
+iter   4580: loss=1.5546 cos=0.0827 top1_match=0.2104 time=6920.9ms
+iter   4590: loss=0.9193 cos=0.0461 top1_match=0.5010 time=6917.8ms
+[2026-04-28 11:43:21] [57m] iter   4600 | train: loss=0.3559 cos_sim=0.9157 mse=2.7161 | val: loss=0.3596 cos_sim=0.9136 mse=2.7325 | lr=1.15e-05
+iter   4600: loss=1.6312 cos=0.0853 top1_match=0.2025 time=13859.8ms
+[2026-04-28 11:43:22] [57m] speed: 1.31 iter/s
+iter   4610: loss=1.6799 cos=0.0870 top1_match=0.1884 time=6924.9ms
+iter   4620: loss=0.9348 cos=0.0521 top1_match=0.5122 time=6919.0ms
+iter   4630: loss=0.9395 cos=0.0487 top1_match=0.5259 time=6918.2ms
+iter   4640: loss=0.9179 cos=0.0486 top1_match=0.5039 time=6917.6ms
+iter   4650: loss=0.9199 cos=0.0483 top1_match=0.4956 time=6922.9ms
+iter   4660: loss=0.9297 cos=0.0544 top1_match=0.5245 time=6917.3ms
+iter   4670: loss=1.5979 cos=0.0828 top1_match=0.2383 time=6918.6ms
+iter   4680: loss=0.9222 cos=0.0517 top1_match=0.5338 time=6921.1ms
+iter   4690: loss=0.9666 cos=0.0506 top1_match=0.4976 time=6917.5ms
+iter   4700: loss=0.9205 cos=0.0483 top1_match=0.5142 time=6924.5ms
+[2026-04-28 11:44:31] [58m] speed: 1.45 iter/s
+iter   4710: loss=0.9091 cos=0.0474 top1_match=0.5088 time=6926.7ms
+iter   4720: loss=0.9401 cos=0.0501 top1_match=0.5259 time=6922.6ms
+iter   4730: loss=0.9609 cos=0.0466 top1_match=0.5132 time=6924.8ms
+iter   4740: loss=0.9399 cos=0.0476 top1_match=0.4682 time=6935.4ms
+iter   4750: loss=0.9542 cos=0.0519 top1_match=0.5161 time=6924.9ms
+iter   4760: loss=1.5463 cos=0.0808 top1_match=0.2177 time=6923.2ms
+iter   4770: loss=1.5813 cos=0.0828 top1_match=0.2099 time=6929.9ms
+iter   4780: loss=1.6222 cos=0.0857 top1_match=0.1888 time=6928.5ms
+iter   4790: loss=0.9519 cos=0.0499 top1_match=0.5083 time=6923.6ms
+[2026-04-28 11:45:46] [59m] iter   4800 | train: loss=0.3551 cos_sim=0.9159 mse=2.7103 | val: loss=0.3582 cos_sim=0.9142 mse=2.7233 | lr=1.04e-05
+iter   4800: loss=1.5937 cos=0.0883 top1_match=0.2348 time=13857.3ms
+[2026-04-28 11:45:47] [59m] speed: 1.31 iter/s
+iter   4810: loss=0.9694 cos=0.0523 top1_match=0.5279 time=6916.6ms
+iter   4820: loss=0.9243 cos=0.0488 top1_match=0.5406 time=6923.4ms
+iter   4830: loss=0.9297 cos=0.0478 top1_match=0.5176 time=6923.5ms
+iter   4840: loss=0.8927 cos=0.0481 top1_match=0.5225 time=6920.9ms
+iter   4850: loss=1.5893 cos=0.0841 top1_match=0.2162 time=6923.7ms
+iter   4860: loss=0.9114 cos=0.0494 top1_match=0.5313 time=6919.0ms
+iter   4870: loss=0.8924 cos=0.0458 top1_match=0.4956 time=6918.0ms
+iter   4880: loss=0.9673 cos=0.0483 top1_match=0.4887 time=6922.6ms
+iter   4890: loss=0.9283 cos=0.0493 top1_match=0.5171 time=6920.7ms
+iter   4900: loss=0.9271 cos=0.0490 top1_match=0.5274 time=6923.0ms
+[2026-04-28 11:46:56] [1h 0m] speed: 1.44 iter/s
+iter   4910: loss=1.5519 cos=0.0931 top1_match=0.2387 time=6922.1ms
+iter   4920: loss=0.9419 cos=0.0504 top1_match=0.5342 time=6917.0ms
+iter   4930: loss=0.2811 cos=0.0130 top1_match=0.8307 time=6915.1ms
+iter   4940: loss=1.5921 cos=0.0905 top1_match=0.2246 time=6918.1ms
+iter   4950: loss=0.2683 cos=0.0128 top1_match=0.8112 time=6921.9ms
+iter   4960: loss=0.8836 cos=0.0470 top1_match=0.5098 time=6922.1ms
+iter   4970: loss=1.0103 cos=0.0562 top1_match=0.5034 time=6918.4ms
+iter   4980: loss=0.8682 cos=0.0477 top1_match=0.5083 time=6923.8ms
+iter   4990: loss=0.9190 cos=0.0472 top1_match=0.4961 time=6922.2ms
+
+[2026-04-28 11:48:08] [1h 2m] Training complete.
+  Final iteration: 5000
+  Best val loss: 0.3575
+  Saved final to pt/imitator_L8_combined_final.pt
+  Best checkpoint at pt/imitator_L8_combined.pt

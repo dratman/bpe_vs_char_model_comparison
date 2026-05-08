@@ -1,0 +1,2698 @@
+Command: python -u py/train.py --checkpoints_to "pt" --input txt_local/corpus_books_shuffled_2026_04_18.txt --output pt/bpe_16L16H.pt --mode continuous --tokenizer bpe --vocab_size 8192 --n_layer 16 --n_head 16 --n_embd 2048 --block_size 2048 --batch_size 4 --max_iters 400000 --learning_rate .0003 --warmup_iters 1000 --val_split 0.1 --dropout 0.0
+Started: Sat Apr 18 16:45:31 EDT 2026
+========================================
+[2026-04-18 16:45:32] Using device: mps
+[2026-04-18 16:45:32] Using precision: float32 (requested: float32)
+[2026-04-18 16:45:32] Training mode: continuous
+[2026-04-18 16:45:32] Reading input from txt_local/corpus_books_shuffled_2026_04_18.txt
+[2026-04-18 16:45:32] Read 2,142,487,092 characters
+[2026-04-18 16:45:32] Training bpe tokenizer...
+BPETokenizer: Training vocabulary of 8192 tokens...
+Training on 2,142,487,092 characters...
+
+
+
+BPETokenizer: Trained vocabulary with 8192 tokens
+[2026-04-18 16:46:09] Tokenizing entire corpus (2,142,487,092 characters)...
+  Chunk 1: 0 / 2,142,487,092 characters (0%)
+  Chunk 2: 99,999,463 / 2,142,487,092 characters (4%)
+  Chunk 3: 199,999,389 / 2,142,487,092 characters (9%)
+  Chunk 4: 299,999,385 / 2,142,487,092 characters (14%)
+  Chunk 5: 399,999,182 / 2,142,487,092 characters (18%)
+  Chunk 6: 499,997,606 / 2,142,487,092 characters (23%)
+  Chunk 7: 599,997,313 / 2,142,487,092 characters (28%)
+  Chunk 8: 699,997,294 / 2,142,487,092 characters (32%)
+  Chunk 9: 799,996,518 / 2,142,487,092 characters (37%)
+  Chunk 10: 899,996,362 / 2,142,487,092 characters (42%)
+  Chunk 11: 999,995,670 / 2,142,487,092 characters (46%)
+  Chunk 12: 1,099,995,550 / 2,142,487,092 characters (51%)
+  Chunk 13: 1,199,993,775 / 2,142,487,092 characters (56%)
+  Chunk 14: 1,299,993,554 / 2,142,487,092 characters (60%)
+  Chunk 15: 1,399,993,166 / 2,142,487,092 characters (65%)
+  Chunk 16: 1,499,992,707 / 2,142,487,092 characters (70%)
+  Chunk 17: 1,599,990,508 / 2,142,487,092 characters (74%)
+  Chunk 18: 1,699,990,042 / 2,142,487,092 characters (79%)
+  Chunk 19: 1,799,989,979 / 2,142,487,092 characters (84%)
+  Chunk 20: 1,899,989,743 / 2,142,487,092 characters (88%)
+  Chunk 21: 1,999,989,041 / 2,142,487,092 characters (93%)
+  Chunk 22: 2,099,989,002 / 2,142,487,092 characters (98%)
+  Encoding complete: 533,154,569 tokens from 22 chunks
+[2026-04-18 16:59:46] Tokenization complete: 533,154,569 tokens
+[2026-04-18 16:59:46] Converting to tensor...
+[2026-04-18 17:00:11] Tensor ready: 533,154,569 tokens
+[2026-04-18 17:00:11] Splitting into train and validation sets...
+[2026-04-18 17:00:11] Split complete.
+[2026-04-18 17:00:11] Training tokens: 479,839,113
+[2026-04-18 17:00:11] Validation tokens: 53,315,456
+[2026-04-18 17:00:11] Saving tokenizer to pt/bpe_16L16H_meta.pkl
+Saved BPE tokenizer to pt/bpe_16L16H_meta.pkl and pt/bpe_16L16H_meta.json
+[2026-04-18 17:00:11] Initializing new model...
+  Vocabulary size: 8192
+number of parameters: 822.51M (softmax attention, tied weights)
+num decayed parameter tensors: 66, with 826,277,888 parameters
+num non-decayed parameter tensors: 130, with 430,080 parameters
+huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
+using fused AdamW: False
+
+[2026-04-18 17:00:25] Starting training...
+Mode: continuous
+Tokenizer: bpe
+Vocabulary size: 8192 (+ 1 padding = 8193)
+Padding token ID: 8192
+Attention type: softmax
+Precision: float32
+Max iterations: 400000
+Batch size: 4
+Block size: 2048
+Learning rate: 3.00e-04
+Warmup iters: 1000
+Eval interval: 500
+Save interval: 10000
+Log interval: 10
+Sample interval: 500
+Checkpoints will be saved to: pt/bpe_16L16H.pt
+============================================================
+[2026-04-18 17:01:06] [0m] Step     0 | Epoch   0.00 | train loss 9.4578 | val loss 9.4632 | lr 0.00e+00
+iter 0: loss 9.4504, time 43664.10ms, mfu -100.00%
+iter 10: loss 7.8097, time 2820.57ms, mfu 5.34%
+iter 20: loss 7.4594, time 2821.46ms, mfu 5.34%
+iter 30: loss 7.2529, time 2827.22ms, mfu 5.34%
+iter 40: loss 7.0851, time 2835.46ms, mfu 5.34%
+iter 50: loss 6.9678, time 2826.31ms, mfu 5.34%
+iter 60: loss 7.0358, time 2891.98ms, mfu 5.33%
+iter 70: loss 6.8162, time 3124.95ms, mfu 5.28%
+iter 80: loss 6.7071, time 3252.94ms, mfu 5.21%
+iter 90: loss 6.5579, time 3185.12ms, mfu 5.16%
+[2026-04-18 17:06:04] [5m] Speed at iter 100 (epoch 0.00): 0.29 iters/sec
+iter 100: loss 6.4279, time 3142.34ms, mfu 5.13%
+iter 110: loss 6.5247, time 3049.48ms, mfu 5.11%
+iter 120: loss 6.2670, time 2995.57ms, mfu 5.10%
+iter 130: loss 6.2848, time 2905.25ms, mfu 5.11%
+iter 140: loss 6.3318, time 2828.40ms, mfu 5.13%
+iter 150: loss 6.2124, time 2826.96ms, mfu 5.15%
+iter 160: loss 6.0884, time 2829.80ms, mfu 5.17%
+iter 170: loss 6.0555, time 2826.67ms, mfu 5.19%
+iter 180: loss 6.3525, time 2831.16ms, mfu 5.20%
+iter 190: loss 6.1948, time 2838.92ms, mfu 5.21%
+[2026-04-18 17:10:54] [10m] Speed at iter 200 (epoch 0.00): 0.35 iters/sec
+iter 200: loss 6.2140, time 2821.64ms, mfu 5.22%
+iter 210: loss 6.0183, time 2826.71ms, mfu 5.23%
+iter 220: loss 6.3219, time 2828.55ms, mfu 5.24%
+iter 230: loss 5.9791, time 2829.97ms, mfu 5.25%
+iter 240: loss 6.2129, time 2822.93ms, mfu 5.26%
+iter 250: loss 5.8057, time 2822.24ms, mfu 5.27%
+iter 260: loss 5.9268, time 2822.67ms, mfu 5.28%
+iter 270: loss 5.7242, time 2827.20ms, mfu 5.28%
+iter 280: loss 5.6590, time 2838.61ms, mfu 5.28%
+iter 290: loss 5.9936, time 2828.50ms, mfu 5.29%
+[2026-04-18 17:15:37] [15m] Speed at iter 300 (epoch 0.01): 0.35 iters/sec
+iter 300: loss 5.9935, time 2827.71ms, mfu 5.29%
+iter 310: loss 5.8015, time 2834.77ms, mfu 5.30%
+iter 320: loss 5.8292, time 2834.58ms, mfu 5.30%
+iter 330: loss 5.9824, time 2821.58ms, mfu 5.30%
+iter 340: loss 5.6430, time 2824.75ms, mfu 5.31%
+iter 350: loss 6.1494, time 2826.03ms, mfu 5.31%
+iter 360: loss 5.7691, time 2821.05ms, mfu 5.31%
+iter 370: loss 5.9796, time 2843.63ms, mfu 5.31%
+iter 380: loss 5.8718, time 2829.36ms, mfu 5.31%
+iter 390: loss 5.8232, time 2844.16ms, mfu 5.31%
+[2026-04-18 17:20:20] [19m] Speed at iter 400 (epoch 0.01): 0.35 iters/sec
+iter 400: loss 5.9053, time 2825.20ms, mfu 5.31%
+iter 410: loss 5.7393, time 2826.92ms, mfu 5.32%
+iter 420: loss 5.6192, time 2830.94ms, mfu 5.32%
+iter 430: loss 5.9906, time 2840.19ms, mfu 5.32%
+iter 440: loss 5.7154, time 2825.51ms, mfu 5.32%
+iter 450: loss 5.7192, time 2828.68ms, mfu 5.32%
+iter 460: loss 5.6412, time 2826.62ms, mfu 5.32%
+iter 470: loss 5.6058, time 2833.21ms, mfu 5.32%
+iter 480: loss 5.7585, time 2827.42ms, mfu 5.32%
+iter 490: loss 5.6564, time 2828.88ms, mfu 5.32%
+[2026-04-18 17:25:41] [25m] Step   500 | Epoch   0.01 | train loss 5.7535 | val loss 5.8236 | lr 1.50e-04
+  Saved checkpoint to pt/bpe_16L16H.pt (best val loss: 5.8236)
+
+[2026-04-18 17:25:50] [25m] Sampling at iter 500 (epoch 0.01):
+  1. , she cried; that he had been a note and her in the man; then; and they said that he must be the good man, "she had said we are the place of the law. 
+  2.  the country and made to the house of the whole of the work of the army of the work of the world or the same years of the works. as of the or from the
+  3. ,, the king; to the power of the english in the most much, the great, is found by the work to be called the king, and the world." this morning. , whic
+
+[2026-04-18 17:26:13] [25m] Speed at iter 500 (epoch 0.01): 0.28 iters/sec
+iter 500: loss 5.6481, time 72877.84ms, mfu 4.81%
+iter 510: loss 5.7471, time 2820.67ms, mfu 4.86%
+iter 520: loss 5.6019, time 2848.53ms, mfu 4.91%
+iter 530: loss 6.0368, time 2813.61ms, mfu 4.95%
+iter 540: loss 5.8095, time 2830.93ms, mfu 4.99%
+iter 550: loss 5.3870, time 2828.98ms, mfu 5.02%
+iter 560: loss 5.5792, time 2820.54ms, mfu 5.05%
+iter 570: loss 5.9430, time 2822.17ms, mfu 5.08%
+iter 580: loss 5.7933, time 2820.80ms, mfu 5.11%
+iter 590: loss 5.3252, time 2826.61ms, mfu 5.13%
+[2026-04-18 17:30:55] [30m] Speed at iter 600 (epoch 0.01): 0.35 iters/sec
+iter 600: loss 5.6975, time 2817.33ms, mfu 5.15%
+iter 610: loss 5.5228, time 2824.28ms, mfu 5.17%
+iter 620: loss 5.6681, time 2827.26ms, mfu 5.19%
+iter 630: loss 5.4957, time 2819.77ms, mfu 5.20%
+iter 640: loss 5.7626, time 2874.44ms, mfu 5.21%
+iter 650: loss 5.8201, time 2864.52ms, mfu 5.21%
+iter 660: loss 5.5794, time 2819.67ms, mfu 5.23%
+iter 670: loss 5.4941, time 2840.04ms, mfu 5.23%
+iter 680: loss 5.7560, time 2822.02ms, mfu 5.24%
+iter 690: loss 5.6308, time 2836.31ms, mfu 5.25%
+[2026-04-18 17:35:38] [35m] Speed at iter 700 (epoch 0.01): 0.35 iters/sec
+iter 700: loss 5.5809, time 2822.20ms, mfu 5.26%
+iter 710: loss 5.4140, time 2835.51ms, mfu 5.27%
+iter 720: loss 5.6910, time 2820.97ms, mfu 5.27%
+iter 730: loss 5.7320, time 2822.10ms, mfu 5.28%
+iter 740: loss 5.6290, time 2837.10ms, mfu 5.28%
+iter 750: loss 5.5770, time 2819.74ms, mfu 5.29%
+iter 760: loss 5.4524, time 2820.57ms, mfu 5.30%
+iter 770: loss 5.7492, time 2830.77ms, mfu 5.30%
+iter 780: loss 5.6047, time 2820.22ms, mfu 5.30%
+iter 790: loss 5.7168, time 2824.93ms, mfu 5.31%
+[2026-04-18 17:40:21] [39m] Speed at iter 800 (epoch 0.01): 0.35 iters/sec
+iter 800: loss 5.7092, time 2818.48ms, mfu 5.31%
+iter 810: loss 5.5008, time 2845.43ms, mfu 5.31%
+iter 820: loss 5.5033, time 2816.71ms, mfu 5.31%
+iter 830: loss 5.6020, time 2824.22ms, mfu 5.32%
+iter 840: loss 5.2333, time 2823.76ms, mfu 5.32%
+iter 850: loss 5.4454, time 2831.07ms, mfu 5.32%
+iter 860: loss 5.4922, time 2818.28ms, mfu 5.32%
+iter 870: loss 5.6305, time 2847.47ms, mfu 5.32%
+iter 880: loss 5.4152, time 2820.48ms, mfu 5.32%
+iter 890: loss 5.2927, time 2832.47ms, mfu 5.32%
+[2026-04-18 17:45:03] [44m] Speed at iter 900 (epoch 0.02): 0.35 iters/sec
+iter 900: loss 5.3842, time 2824.86ms, mfu 5.32%
+iter 910: loss 5.5473, time 2823.79ms, mfu 5.32%
+iter 920: loss 5.4794, time 2829.31ms, mfu 5.32%
+iter 930: loss 5.5770, time 2822.79ms, mfu 5.33%
+iter 940: loss 5.2337, time 2832.65ms, mfu 5.33%
+iter 950: loss 5.5947, time 2824.54ms, mfu 5.33%
+iter 960: loss 5.6640, time 2824.03ms, mfu 5.33%
+iter 970: loss 5.5576, time 2823.85ms, mfu 5.33%
+iter 980: loss 5.5821, time 2834.22ms, mfu 5.33%
+iter 990: loss 5.4469, time 2824.11ms, mfu 5.33%
+[2026-04-18 17:50:24] [49m] Step  1000 | Epoch   0.02 | train loss 5.4248 | val loss 5.4867 | lr 3.00e-04
+  Saved checkpoint to pt/bpe_16L16H.pt (best val loss: 5.4867)
+
+[2026-04-18 17:50:33] [50m] Sampling at iter 1000 (epoch 0.02):
+  1. ," they. "i have been goingled," said, and i'll make me," he could not--and you will get to go to come to say," he said, "this is you have been made m
+  2.  the last to think that was a new york. but there are going again, if i have been found the morning of a newman who, and the same way, and with some o
+  3.  said. and i thought it did not--but i'm going to keep me up me. the man, as my mind--i am quite a little man of me--the road in it. i don you. there 
+
+[2026-04-18 17:50:47] [50m] Speed at iter 1000 (epoch 0.02): 0.29 iters/sec
+iter 1000: loss 5.3166, time 63344.48ms, mfu 4.82%
+iter 1010: loss 5.6024, time 2821.92ms, mfu 4.87%
+iter 1020: loss 5.4140, time 2824.07ms, mfu 4.92%
+iter 1030: loss 5.6643, time 2851.33ms, mfu 4.95%
+iter 1040: loss 5.4534, time 2822.82ms, mfu 4.99%
+iter 1050: loss 5.3466, time 2843.83ms, mfu 5.02%
+iter 1060: loss 5.4264, time 2828.39ms, mfu 5.05%
+iter 1070: loss 5.3072, time 2818.58ms, mfu 5.08%
+iter 1080: loss 5.3709, time 2820.40ms, mfu 5.11%
+iter 1090: loss 5.4555, time 2827.34ms, mfu 5.13%
+[2026-04-18 17:55:29] [55m] Speed at iter 1100 (epoch 0.02): 0.35 iters/sec
+iter 1100: loss 5.7462, time 2824.06ms, mfu 5.15%
+iter 1110: loss 5.3489, time 2824.38ms, mfu 5.17%
+iter 1120: loss 5.3088, time 2826.35ms, mfu 5.19%
+iter 1130: loss 5.2919, time 2823.96ms, mfu 5.20%
+iter 1140: loss 5.4903, time 2840.12ms, mfu 5.21%
+iter 1150: loss 5.2266, time 2823.81ms, mfu 5.23%
+iter 1160: loss 5.1641, time 2823.17ms, mfu 5.24%
+iter 1170: loss 5.4627, time 2845.62ms, mfu 5.24%
+iter 1180: loss 5.3639, time 2853.68ms, mfu 5.25%
+iter 1190: loss 5.4066, time 2843.70ms, mfu 5.25%
+[2026-04-18 18:00:13] [59m] Speed at iter 1200 (epoch 0.02): 0.35 iters/sec
+iter 1200: loss 5.2783, time 2839.53ms, mfu 5.26%
+iter 1210: loss 5.5871, time 2855.88ms, mfu 5.26%
+iter 1220: loss 5.5141, time 2839.71ms, mfu 5.26%
+iter 1230: loss 5.2695, time 2839.54ms, mfu 5.27%
+iter 1240: loss 5.5254, time 2860.54ms, mfu 5.27%
+iter 1250: loss 5.7113, time 2844.30ms, mfu 5.27%
+iter 1260: loss 5.2338, time 2839.82ms, mfu 5.28%
+iter 1270: loss 5.2572, time 2844.48ms, mfu 5.28%
+iter 1280: loss 5.3487, time 2846.34ms, mfu 5.28%
+iter 1290: loss 5.4681, time 2842.82ms, mfu 5.28%
+[2026-04-18 18:04:58] [1h 4m] Speed at iter 1300 (epoch 0.02): 0.35 iters/sec
+iter 1300: loss 5.3097, time 2865.43ms, mfu 5.28%
+iter 1310: loss 5.1043, time 2842.81ms, mfu 5.28%
+iter 1320: loss 5.2911, time 2833.59ms, mfu 5.29%
+iter 1330: loss 5.3160, time 2860.34ms, mfu 5.28%
+iter 1340: loss 5.4314, time 2840.72ms, mfu 5.29%
+iter 1350: loss 5.2688, time 2838.97ms, mfu 5.29%
+iter 1360: loss 5.2816, time 2863.61ms, mfu 5.29%
+iter 1370: loss 5.2722, time 2845.82ms, mfu 5.29%
+iter 1380: loss 5.1887, time 2842.54ms, mfu 5.29%
+iter 1390: loss 4.9589, time 2842.49ms, mfu 5.29%
+[2026-04-18 18:09:42] [1h 9m] Speed at iter 1400 (epoch 0.02): 0.35 iters/sec
+iter 1400: loss 5.4923, time 2842.46ms, mfu 5.29%
+iter 1410: loss 5.4007, time 2841.41ms, mfu 5.29%
+iter 1420: loss 5.2048, time 2846.94ms, mfu 5.29%
+iter 1430: loss 5.1806, time 2836.75ms, mfu 5.29%
+iter 1440: loss 5.0955, time 2834.99ms, mfu 5.30%
+iter 1450: loss 5.5261, time 2871.17ms, mfu 5.29%
+iter 1460: loss 5.1518, time 2845.89ms, mfu 5.29%
+iter 1470: loss 5.0542, time 2845.54ms, mfu 5.29%
+iter 1480: loss 5.1940, time 2846.48ms, mfu 5.29%
+iter 1490: loss 5.4595, time 2842.93ms, mfu 5.29%
+[2026-04-18 18:15:05] [1h 14m] Step  1500 | Epoch   0.03 | train loss 5.2920 | val loss 5.3199 | lr 3.00e-04
+  Saved checkpoint to pt/bpe_16L16H.pt (best val loss: 5.3199)
+
+[2026-04-18 18:15:14] [1h 14m] Sampling at iter 1500 (epoch 0.03):
+  1. ! the house in the house with us not the door with them. and as he stood a good that. "as of the door that. "and. but the house of the door. on, and y
+  2. . "but the door he were in the door-- he was in the air of the way to the man was a little. in a single night, and left his voice was in a heavy water
+  3.  of all he is it. t. i and he was the son of his work and not like a new to find our life, the pah. so long. he was a man. he was a fine young woman a
+
+[2026-04-18 18:15:28] [1h 15m] Speed at iter 1500 (epoch 0.03): 0.29 iters/sec
+iter 1500: loss 5.5058, time 63287.92ms, mfu 4.79%
+iter 1510: loss 5.0713, time 2834.36ms, mfu 4.84%
+iter 1520: loss 5.2225, time 2864.82ms, mfu 4.88%
+iter 1530: loss 5.1808, time 2844.58ms, mfu 4.92%
+iter 1540: loss 5.3801, time 2845.05ms, mfu 4.96%
+iter 1550: loss 5.0756, time 2848.24ms, mfu 5.00%
+iter 1560: loss 5.1908, time 2841.66ms, mfu 5.03%
+iter 1570: loss 5.3713, time 2840.17ms, mfu 5.05%
+iter 1580: loss 5.6416, time 2869.83ms, mfu 5.07%
+iter 1590: loss 5.0991, time 2841.42ms, mfu 5.10%
+[2026-04-18 18:20:13] [1h 19m] Speed at iter 1600 (epoch 0.03): 0.35 iters/sec
+iter 1600: loss 5.2337, time 2832.18ms, mfu 5.12%
+iter 1610: loss 5.2620, time 2868.90ms, mfu 5.13%
+iter 1620: loss 5.1805, time 2846.08ms, mfu 5.15%
+iter 1630: loss 5.4103, time 2844.23ms, mfu 5.16%
+iter 1640: loss 5.0585, time 2869.61ms, mfu 5.17%
+iter 1650: loss 5.2144, time 2840.11ms, mfu 5.19%
+iter 1660: loss 5.0781, time 2841.65ms, mfu 5.20%
+iter 1670: loss 5.2823, time 2851.98ms, mfu 5.21%
+iter 1680: loss 5.2309, time 2845.15ms, mfu 5.22%
+iter 1690: loss 5.3351, time 2845.21ms, mfu 5.22%
+[2026-04-18 18:24:57] [1h 24m] Speed at iter 1700 (epoch 0.03): 0.35 iters/sec
+iter 1700: loss 5.2678, time 2851.91ms, mfu 5.23%
+iter 1710: loss 5.1514, time 2842.93ms, mfu 5.24%
+iter 1720: loss 5.1774, time 2842.68ms, mfu 5.24%
+iter 1730: loss 5.1018, time 2839.77ms, mfu 5.25%
+iter 1740: loss 5.2554, time 2847.21ms, mfu 5.25%
+iter 1750: loss 5.3714, time 2836.20ms, mfu 5.26%
+iter 1760: loss 5.3555, time 2849.13ms, mfu 5.26%
+iter 1770: loss 5.3510, time 2843.87ms, mfu 5.27%
+iter 1780: loss 5.1768, time 2836.75ms, mfu 5.27%
+iter 1790: loss 5.0333, time 2852.63ms, mfu 5.27%
+[2026-04-18 18:29:42] [1h 29m] Speed at iter 1800 (epoch 0.03): 0.35 iters/sec
+iter 1800: loss 5.0419, time 2847.35ms, mfu 5.27%
+iter 1810: loss 5.3744, time 2846.05ms, mfu 5.28%
+iter 1820: loss 5.1588, time 2854.33ms, mfu 5.28%
+iter 1830: loss 5.3199, time 2842.90ms, mfu 5.28%
+iter 1840: loss 5.0302, time 2838.27ms, mfu 5.28%
+iter 1850: loss 5.0784, time 2855.51ms, mfu 5.28%
+iter 1860: loss 5.3411, time 2845.33ms, mfu 5.28%
+iter 1870: loss 5.2933, time 2846.65ms, mfu 5.28%
+iter 1880: loss 5.1874, time 2883.82ms, mfu 5.28%
+iter 1890: loss 5.2265, time 2842.86ms, mfu 5.28%
+[2026-04-18 18:34:27] [1h 34m] Speed at iter 1900 (epoch 0.03): 0.35 iters/sec
+iter 1900: loss 5.2159, time 2840.11ms, mfu 5.28%
+iter 1910: loss 5.3515, time 2852.31ms, mfu 5.28%
+iter 1920: loss 4.9405, time 2846.20ms, mfu 5.29%
+iter 1930: loss 5.1073, time 2844.24ms, mfu 5.29%
+iter 1940: loss 5.3075, time 2850.96ms, mfu 5.29%
+iter 1950: loss 5.3154, time 2843.36ms, mfu 5.29%
+iter 1960: loss 5.0168, time 2842.93ms, mfu 5.29%
+iter 1970: loss 5.0809, time 2851.71ms, mfu 5.29%
+iter 1980: loss 5.2146, time 2837.92ms, mfu 5.29%
+iter 1990: loss 5.3107, time 2818.74ms, mfu 5.30%
+[2026-04-18 18:39:49] [1h 39m] Step  2000 | Epoch   0.03 | train loss 5.1566 | val loss 5.1588 | lr 3.00e-04
+  Saved checkpoint to pt/bpe_16L16H.pt (best val loss: 5.1588)
+
+[2026-04-18 18:39:59] [1h 39m] Sampling at iter 2000 (epoch 0.03):
+  1. 's. "fry----and--and--and--and it has come--and--and here,----and--"i am not--and--and--and,! we shall you go! not your--the only." "if you," said kab
+  2. -be," he asked he continued with his arms he said jack," he"then he said he said, and all this morning," he. he continued in at that, my man, "and, he
+  3. --file, she answered the second and his father, "and why, "what cany," said," she said--and yet it will be a large, i have any. "and well, "that was a
+
+[2026-04-18 18:40:12] [1h 39m] Speed at iter 2000 (epoch 0.03): 0.29 iters/sec
+iter 2000: loss 5.2858, time 62698.80ms, mfu 4.79%
+iter 2010: loss 5.2361, time 2810.34ms, mfu 4.85%
+iter 2020: loss 5.1221, time 2814.85ms, mfu 4.90%
+iter 2030: loss 5.3000, time 2811.40ms, mfu 4.95%
+iter 2040: loss 5.1037, time 2812.19ms, mfu 4.99%
+iter 2050: loss 5.3310, time 2820.00ms, mfu 5.02%
+iter 2060: loss 5.2607, time 2822.59ms, mfu 5.05%
+iter 2070: loss 5.1387, time 2816.44ms, mfu 5.08%
+iter 2080: loss 5.0663, time 2814.65ms, mfu 5.11%
+iter 2090: loss 5.1340, time 2820.61ms, mfu 5.13%
+[2026-04-18 18:44:53] [1h 44m] Speed at iter 2100 (epoch 0.04): 0.35 iters/sec
+iter 2100: loss 5.0752, time 2816.81ms, mfu 5.16%
+iter 2110: loss 5.2773, time 2819.25ms, mfu 5.17%
+iter 2120: loss 5.0309, time 2813.59ms, mfu 5.19%
+iter 2130: loss 5.2611, time 2819.71ms, mfu 5.21%
+iter 2140: loss 5.0916, time 2822.43ms, mfu 5.22%
+iter 2150: loss 5.1913, time 2819.04ms, mfu 5.23%
+iter 2160: loss 5.1508, time 2817.79ms, mfu 5.25%
+iter 2170: loss 5.1667, time 2840.59ms, mfu 5.25%
+iter 2180: loss 5.1082, time 2813.10ms, mfu 5.26%
+iter 2190: loss 5.0949, time 2850.75ms, mfu 5.26%
+[2026-04-18 18:49:36] [1h 49m] Speed at iter 2200 (epoch 0.04): 0.35 iters/sec
+iter 2200: loss 5.0546, time 2821.39ms, mfu 5.27%
+iter 2210: loss 5.1340, time 2817.51ms, mfu 5.28%
+iter 2220: loss 5.1540, time 2836.84ms, mfu 5.28%
+iter 2230: loss 5.3564, time 2821.42ms, mfu 5.29%
+iter 2240: loss 4.9830, time 2815.85ms, mfu 5.30%
+iter 2250: loss 5.0712, time 2826.72ms, mfu 5.30%
+iter 2260: loss 5.0808, time 2814.35ms, mfu 5.30%
+iter 2270: loss 5.1095, time 2840.70ms, mfu 5.30%
+iter 2280: loss 4.8922, time 2819.43ms, mfu 5.31%
+iter 2290: loss 5.2023, time 2817.43ms, mfu 5.31%
+[2026-04-18 18:54:18] [1h 53m] Speed at iter 2300 (epoch 0.04): 0.35 iters/sec
+iter 2300: loss 5.2186, time 2830.18ms, mfu 5.31%
+iter 2310: loss 5.2385, time 2817.37ms, mfu 5.32%
+iter 2320: loss 5.1247, time 2822.06ms, mfu 5.32%
+iter 2330: loss 5.0359, time 2818.07ms, mfu 5.32%
+iter 2340: loss 5.1616, time 2820.25ms, mfu 5.33%
+iter 2350: loss 5.2938, time 2836.77ms, mfu 5.32%
+iter 2360: loss 5.0130, time 2821.22ms, mfu 5.33%
+iter 2370: loss 5.0195, time 2837.65ms, mfu 5.32%
+iter 2380: loss 5.1568, time 2821.64ms, mfu 5.33%
+iter 2390: loss 5.2689, time 2817.10ms, mfu 5.33%
+[2026-04-18 18:59:00] [1h 58m] Speed at iter 2400 (epoch 0.04): 0.35 iters/sec
+iter 2400: loss 5.0602, time 2822.73ms, mfu 5.33%
+iter 2410: loss 5.0282, time 2818.33ms, mfu 5.33%
+iter 2420: loss 4.9489, time 2831.96ms, mfu 5.33%
+iter 2430: loss 5.0428, time 2818.60ms, mfu 5.33%
+iter 2440: loss 4.9286, time 2819.80ms, mfu 5.33%
+iter 2450: loss 5.0448, time 2830.11ms, mfu 5.33%
+iter 2460: loss 5.0938, time 2820.28ms, mfu 5.33%
+iter 2470: loss 5.0019, time 2828.05ms, mfu 5.33%
+iter 2480: loss 5.1105, time 2818.46ms, mfu 5.33%
+iter 2490: loss 5.0608, time 2816.27ms, mfu 5.34%
+[2026-04-18 19:04:20] [2h 3m] Step  2500 | Epoch   0.04 | train loss 5.1279 | val loss 5.1640 | lr 3.00e-04
+
+[2026-04-18 19:04:20] [2h 3m] Sampling at iter 2500 (epoch 0.04):
+  1.  the man must, and the house. t a fellowship, and the time, and he was. he had been at a fellow with the men on the old man was a little woman and a w
+  2. . "i'll see that the old man." "i like--i'll be the bunker-hard, just the other. they're an'm not a lot of the matter--and we'll have the man. i've go
+  3. i's the big man, and had been in his head of the little. i never heard was not see you were a girl. well-dam. i'm the bauguer's a man was a man and a 
+
+[2026-04-18 19:04:34] [2h 4m] Speed at iter 2500 (epoch 0.04): 0.30 iters/sec
+iter 2500: loss 5.1346, time 54143.60ms, mfu 4.83%
+iter 2510: loss 4.9573, time 2823.24ms, mfu 4.88%
+iter 2520: loss 5.1731, time 2822.79ms, mfu 4.93%
+iter 2530: loss 5.1165, time 2836.53ms, mfu 4.97%
+iter 2540: loss 5.0629, time 2829.65ms, mfu 5.00%
+iter 2550: loss 5.3057, time 2869.56ms, mfu 5.03%
+iter 2560: loss 5.1094, time 2824.22ms, mfu 5.06%
+iter 2570: loss 5.0470, time 2821.93ms, mfu 5.09%
+iter 2580: loss 5.2135, time 2826.76ms, mfu 5.11%
+iter 2590: loss 5.3034, time 2827.36ms, mfu 5.13%
+[2026-04-18 19:09:17] [2h 8m] Speed at iter 2600 (epoch 0.04): 0.35 iters/sec
+iter 2600: loss 5.0744, time 2816.44ms, mfu 5.15%
+iter 2610: loss 4.9432, time 2836.06ms, mfu 5.17%
+iter 2620: loss 4.9620, time 2851.98ms, mfu 5.18%
+iter 2630: loss 5.1771, time 2821.98ms, mfu 5.20%
+iter 2640: loss 5.1764, time 2828.84ms, mfu 5.21%
+iter 2650: loss 4.8534, time 2823.15ms, mfu 5.22%
+iter 2660: loss 5.1507, time 2818.21ms, mfu 5.24%
+iter 2670: loss 5.1520, time 2835.40ms, mfu 5.24%
+iter 2680: loss 5.1812, time 2822.41ms, mfu 5.25%
+iter 2690: loss 5.3089, time 2832.36ms, mfu 5.26%
+[2026-04-18 19:14:00] [2h 13m] Speed at iter 2700 (epoch 0.05): 0.35 iters/sec
+iter 2700: loss 4.9886, time 2826.97ms, mfu 5.27%
+iter 2710: loss 4.9969, time 2819.66ms, mfu 5.28%
+iter 2720: loss 5.3072, time 2822.40ms, mfu 5.28%
+iter 2730: loss 5.1145, time 2830.09ms, mfu 5.29%
+iter 2740: loss 5.1228, time 2823.60ms, mfu 5.29%
+iter 2750: loss 4.9897, time 2823.66ms, mfu 5.30%
+iter 2760: loss 5.2860, time 2818.69ms, mfu 5.30%
+iter 2770: loss 4.9445, time 2841.00ms, mfu 5.30%
+iter 2780: loss 5.2037, time 2833.87ms, mfu 5.30%
+iter 2790: loss 5.1230, time 2856.55ms, mfu 5.30%
+[2026-04-18 19:18:43] [2h 18m] Speed at iter 2800 (epoch 0.05): 0.35 iters/sec
+iter 2800: loss 4.9490, time 2819.66ms, mfu 5.31%
+iter 2810: loss 5.0980, time 2822.86ms, mfu 5.31%
+iter 2820: loss 4.9629, time 2819.05ms, mfu 5.31%
+iter 2830: loss 4.8681, time 2828.57ms, mfu 5.31%
+iter 2840: loss 4.9384, time 2819.34ms, mfu 5.32%
+iter 2850: loss 5.1015, time 2829.63ms, mfu 5.32%
+iter 2860: loss 5.0165, time 2823.87ms, mfu 5.32%
+iter 2870: loss 4.8723, time 2819.67ms, mfu 5.32%
+iter 2880: loss 4.9527, time 2818.76ms, mfu 5.33%
+iter 2890: loss 4.9925, time 2825.44ms, mfu 5.33%
+[2026-04-18 19:23:25] [2h 23m] Speed at iter 2900 (epoch 0.05): 0.35 iters/sec
+iter 2900: loss 5.1184, time 2814.96ms, mfu 5.33%
+iter 2910: loss 5.1042, time 2818.58ms, mfu 5.33%
+iter 2920: loss 4.8810, time 2849.61ms, mfu 5.33%
+iter 2930: loss 5.0010, time 2837.00ms, mfu 5.33%
+iter 2940: loss 5.1322, time 2827.11ms, mfu 5.33%
+iter 2950: loss 5.0110, time 2820.08ms, mfu 5.33%
+iter 2960: loss 4.9253, time 2830.54ms, mfu 5.33%
+iter 2970: loss 5.0095, time 2815.61ms, mfu 5.33%
+iter 2980: loss 5.1405, time 2823.16ms, mfu 5.33%
+iter 2990: loss 4.9954, time 2820.16ms, mfu 5.33%
+[2026-04-18 19:28:45] [2h 28m] Step  3000 | Epoch   0.05 | train loss 5.1069 | val loss 5.0499 | lr 3.00e-04
+  Saved checkpoint to pt/bpe_16L16H.pt (best val loss: 5.0499)
+
+[2026-04-18 19:28:55] [2h 28m] Sampling at iter 3000 (epoch 0.05):
+  1. d of the best know. the place of the first. you, you may be very well, i do not be seen you will be not be in them?" with, if you see what you do not 
+  2. ntwahan." "i'll see," he he said to him, "now, "i will be to ask me for the king. i will be at all i may help you will be done. you do not to do. if y
+  3.  and after they were to be a chance that, but he had been able to be able to be a man about that he began to a moment he would be given, whatever she 
+
+[2026-04-18 19:29:08] [2h 28m] Speed at iter 3000 (epoch 0.05): 0.29 iters/sec
+iter 3000: loss 5.0539, time 63036.90ms, mfu 4.82%
+iter 3010: loss 4.9208, time 2816.69ms, mfu 4.88%
+iter 3020: loss 5.1828, time 2824.74ms, mfu 4.92%
+iter 3030: loss 5.1244, time 2817.83ms, mfu 4.96%
+iter 3040: loss 5.1085, time 2818.61ms, mfu 5.00%
+iter 3050: loss 4.8822, time 2831.34ms, mfu 5.03%
+iter 3060: loss 5.3126, time 2821.01ms, mfu 5.07%
+iter 3070: loss 5.1010, time 2820.23ms, mfu 5.09%
+iter 3080: loss 5.0018, time 2838.14ms, mfu 5.12%
+iter 3090: loss 5.0166, time 2821.72ms, mfu 5.14%
+[2026-04-18 19:33:50] [2h 33m] Speed at iter 3100 (epoch 0.05): 0.35 iters/sec
+iter 3100: loss 4.8553, time 2819.64ms, mfu 5.16%
+iter 3110: loss 5.2281, time 2822.38ms, mfu 5.18%
+iter 3120: loss 5.0961, time 2825.44ms, mfu 5.19%
+iter 3130: loss 5.1116, time 2820.21ms, mfu 5.21%
+iter 3140: loss 5.2270, time 2829.22ms, mfu 5.22%
+iter 3150: loss 5.1059, time 2817.42ms, mfu 5.23%
+iter 3160: loss 5.1665, time 2822.72ms, mfu 5.24%
+iter 3170: loss 4.9401, time 2850.05ms, mfu 5.25%
+iter 3180: loss 4.8981, time 2818.15ms, mfu 5.26%
+iter 3190: loss 5.0857, time 2812.09ms, mfu 5.27%
+[2026-04-18 19:38:33] [2h 38m] Speed at iter 3200 (epoch 0.05): 0.35 iters/sec
+iter 3200: loss 5.2418, time 2815.30ms, mfu 5.28%
+iter 3210: loss 5.1017, time 2822.29ms, mfu 5.28%
+iter 3220: loss 5.0943, time 2811.88ms, mfu 5.29%
+iter 3230: loss 4.9940, time 2825.21ms, mfu 5.30%
+iter 3240: loss 5.0224, time 2822.72ms, mfu 5.30%
+iter 3250: loss 5.1721, time 2823.47ms, mfu 5.30%
+iter 3260: loss 5.2345, time 2814.10ms, mfu 5.31%
+iter 3270: loss 5.0131, time 2821.96ms, mfu 5.31%
+iter 3280: loss 4.8167, time 2830.95ms, mfu 5.31%
+iter 3290: loss 4.9515, time 2820.05ms, mfu 5.32%
+[2026-04-18 19:43:15] [2h 42m] Speed at iter 3300 (epoch 0.06): 0.35 iters/sec
+iter 3300: loss 5.0056, time 2841.25ms, mfu 5.32%
+iter 3310: loss 4.8612, time 2821.37ms, mfu 5.32%
+iter 3320: loss 5.0215, time 2817.99ms, mfu 5.32%
+iter 3330: loss 5.0272, time 2818.57ms, mfu 5.32%
+iter 3340: loss 4.9924, time 2841.80ms, mfu 5.32%
+iter 3350: loss 5.0225, time 2832.09ms, mfu 5.32%
+iter 3360: loss 4.9568, time 2831.40ms, mfu 5.32%
+iter 3370: loss 5.0342, time 2832.28ms, mfu 5.32%
+iter 3380: loss 5.1601, time 2868.94ms, mfu 5.31%
+iter 3390: loss 5.1706, time 2831.53ms, mfu 5.32%
+[2026-04-18 19:47:59] [2h 47m] Speed at iter 3400 (epoch 0.06): 0.35 iters/sec
+iter 3400: loss 4.9612, time 2831.76ms, mfu 5.32%
+iter 3410: loss 5.0205, time 2829.80ms, mfu 5.32%
+iter 3420: loss 5.2676, time 2831.43ms, mfu 5.32%
+iter 3430: loss 4.8620, time 2834.48ms, mfu 5.32%
+iter 3440: loss 4.8941, time 2834.26ms, mfu 5.32%
+iter 3450: loss 4.9349, time 2843.84ms, mfu 5.32%
+iter 3460: loss 5.0926, time 2834.83ms, mfu 5.32%
+iter 3470: loss 5.1566, time 2835.71ms, mfu 5.32%
+iter 3480: loss 5.1660, time 2880.81ms, mfu 5.31%
+iter 3490: loss 5.3266, time 2889.16ms, mfu 5.30%
+[2026-04-18 19:53:20] [2h 52m] Step  3500 | Epoch   0.06 | train loss 5.0561 | val loss 5.0551 | lr 3.00e-04
+
+[2026-04-18 19:53:20] [2h 52m] Sampling at iter 3500 (epoch 0.06):
+  1.  he at the place to the boys and have been so that they all, and have been taken their own. they were going to be able to be to help to dock, and his 
+  2.  asked him, i now you saw that you. but i am willing to get the right." "i was going to come out here," cried tom. the little time," answered the chai
+  3.  by, he was on the englishman. he had been no such a visit to the littleened off his house, and his work and put that had thrown aside from paris to t
+
+[2026-04-18 19:53:34] [2h 53m] Speed at iter 3500 (epoch 0.06): 0.30 iters/sec
+iter 3500: loss 5.1045, time 54224.87ms, mfu 4.80%
+iter 3510: loss 4.9884, time 2830.13ms, mfu 4.85%
+iter 3520: loss 5.1778, time 2831.51ms, mfu 4.90%
+iter 3530: loss 4.9568, time 2832.78ms, mfu 4.94%
+iter 3540: loss 4.9331, time 2829.42ms, mfu 4.98%
+iter 3550: loss 5.1748, time 2839.81ms, mfu 5.01%
+iter 3560: loss 4.8143, time 2830.83ms, mfu 5.04%
+iter 3570: loss 5.0203, time 2833.34ms, mfu 5.07%
+iter 3580: loss 4.9210, time 2825.61ms, mfu 5.10%
+iter 3590: loss 4.8495, time 2834.50ms, mfu 5.12%
+[2026-04-18 19:58:18] [2h 57m] Speed at iter 3600 (epoch 0.06): 0.35 iters/sec
+iter 3600: loss 4.9643, time 2835.22ms, mfu 5.14%
+iter 3610: loss 5.1349, time 2829.89ms, mfu 5.16%
+iter 3620: loss 5.2139, time 2834.58ms, mfu 5.17%
+iter 3630: loss 5.3009, time 2848.80ms, mfu 5.18%
+iter 3640: loss 5.1128, time 2837.68ms, mfu 5.20%
+iter 3650: loss 5.1401, time 2848.32ms, mfu 5.21%
+iter 3660: loss 5.3009, time 2838.20ms, mfu 5.22%
+iter 3670: loss 4.9954, time 2829.15ms, mfu 5.23%
+iter 3680: loss 5.2945, time 2837.04ms, mfu 5.24%
+iter 3690: loss 5.0430, time 2824.90ms, mfu 5.25%
+[2026-04-18 20:03:01] [3h 2m] Speed at iter 3700 (epoch 0.06): 0.35 iters/sec
+iter 3700: loss 5.0795, time 2845.46ms, mfu 5.25%
+iter 3710: loss 5.1289, time 2831.96ms, mfu 5.26%
+iter 3720: loss 5.2833, time 2829.05ms, mfu 5.27%
+iter 3730: loss 5.0839, time 2840.38ms, mfu 5.27%
+iter 3740: loss 5.1437, time 2834.79ms, mfu 5.27%
+iter 3750: loss 5.0756, time 2836.92ms, mfu 5.28%
+iter 3760: loss 5.2533, time 2833.36ms, mfu 5.28%
+iter 3770: loss 4.9981, time 2827.02ms, mfu 5.29%
+iter 3780: loss 5.2795, time 2831.73ms, mfu 5.29%
+iter 3790: loss 5.2970, time 2829.32ms, mfu 5.29%
+[2026-04-18 20:07:45] [3h 7m] Speed at iter 3800 (epoch 0.06): 0.35 iters/sec
+iter 3800: loss 5.1227, time 2827.75ms, mfu 5.30%
+iter 3810: loss 5.1140, time 2844.71ms, mfu 5.30%
+iter 3820: loss 5.2150, time 2835.70ms, mfu 5.30%
+iter 3830: loss 5.2152, time 2857.55ms, mfu 5.30%
+iter 3840: loss 5.0335, time 2831.42ms, mfu 5.30%
+iter 3850: loss 4.9524, time 2837.51ms, mfu 5.30%
+iter 3860: loss 5.2360, time 2826.14ms, mfu 5.30%
+iter 3870: loss 4.9113, time 2837.69ms, mfu 5.30%
+iter 3880: loss 5.3229, time 2831.89ms, mfu 5.31%
+iter 3890: loss 5.1634, time 2830.39ms, mfu 5.31%
+[2026-04-18 20:12:29] [3h 12m] Speed at iter 3900 (epoch 0.07): 0.35 iters/sec
+iter 3900: loss 5.1560, time 2830.05ms, mfu 5.31%
+iter 3910: loss 4.9431, time 2834.01ms, mfu 5.31%
+iter 3920: loss 5.1153, time 2827.34ms, mfu 5.31%
+iter 3930: loss 5.1106, time 2834.59ms, mfu 5.31%
+iter 3940: loss 5.0452, time 2843.80ms, mfu 5.31%
+iter 3950: loss 5.1315, time 2846.86ms, mfu 5.31%
+iter 3960: loss 5.0855, time 2839.90ms, mfu 5.31%
+iter 3970: loss 5.0005, time 2867.73ms, mfu 5.30%
+iter 3980: loss 5.2856, time 2866.15ms, mfu 5.30%
+iter 3990: loss 5.1048, time 2857.74ms, mfu 5.30%
+[2026-04-18 20:17:51] [3h 17m] Step  4000 | Epoch   0.07 | train loss 5.1364 | val loss 5.1514 | lr 3.00e-04
+
+[2026-04-18 20:17:51] [3h 17m] Sampling at iter 4000 (epoch 0.07):
+  1. ja, ia? and did he should be very he was the man of the first, and had not be a little by the same place, but even had it was now he had been one he h
+  2. a. we've been a. i don to askin you," saider, as he said he's going to be no matter of the last of that was there. he will he said. but he was no more
+  3. i, kins's.ji'm upi'm, i'll go back to find, and that i said mrs. i don't let it's in the place." i didn't that's that's as i've been a word, i've't ge
+
+[2026-04-18 20:18:04] [3h 17m] Speed at iter 4000 (epoch 0.07): 0.30 iters/sec
+iter 4000: loss 5.1458, time 54356.76ms, mfu 4.80%
+iter 4010: loss 5.2135, time 2831.23ms, mfu 4.85%
+iter 4020: loss 5.0522, time 2834.89ms, mfu 4.90%
+iter 4030: loss 5.0194, time 2861.52ms, mfu 4.93%
+iter 4040: loss 5.2769, time 2877.11ms, mfu 4.96%
+iter 4050: loss 5.1767, time 2870.51ms, mfu 4.99%
+iter 4060: loss 5.0884, time 2853.53ms, mfu 5.02%
+iter 4070: loss 5.0688, time 2849.44ms, mfu 5.05%
+iter 4080: loss 5.2114, time 2835.41ms, mfu 5.07%
+iter 4090: loss 5.3327, time 2833.59ms, mfu 5.10%
+[2026-04-18 20:22:48] [3h 22m] Speed at iter 4100 (epoch 0.07): 0.35 iters/sec
+iter 4100: loss 5.1376, time 2837.61ms, mfu 5.12%
+iter 4110: loss 5.2036, time 2823.71ms, mfu 5.14%
+iter 4120: loss 5.2495, time 2842.81ms, mfu 5.16%
+iter 4130: loss 5.4392, time 2825.85ms, mfu 5.18%
+iter 4140: loss 5.1830, time 2835.08ms, mfu 5.19%
+iter 4150: loss 5.1161, time 2839.93ms, mfu 5.20%
+iter 4160: loss 5.2649, time 2833.32ms, mfu 5.21%
+iter 4170: loss 5.0086, time 2851.64ms, mfu 5.22%
+iter 4180: loss 5.0719, time 2825.17ms, mfu 5.23%
+iter 4190: loss 5.4911, time 2818.16ms, mfu 5.24%
+[2026-04-18 20:27:31] [3h 27m] Speed at iter 4200 (epoch 0.07): 0.35 iters/sec
+iter 4200: loss 5.1295, time 2818.44ms, mfu 5.25%
+iter 4210: loss 5.3297, time 2820.36ms, mfu 5.26%
+iter 4220: loss 5.1863, time 2815.45ms, mfu 5.27%
+iter 4230: loss 5.2548, time 2824.83ms, mfu 5.28%
+iter 4240: loss 5.3153, time 2820.73ms, mfu 5.28%
+iter 4250: loss 5.1476, time 2824.23ms, mfu 5.29%
+iter 4260: loss 5.3219, time 2819.68ms, mfu 5.30%
+iter 4270: loss 5.2252, time 2818.73ms, mfu 5.30%
+iter 4280: loss 5.1560, time 2823.18ms, mfu 5.30%
+iter 4290: loss 5.2049, time 2819.52ms, mfu 5.31%
+[2026-04-18 20:32:13] [3h 31m] Speed at iter 4300 (epoch 0.07): 0.35 iters/sec
+iter 4300: loss 5.1854, time 2820.07ms, mfu 5.31%
+iter 4310: loss 5.1407, time 2825.63ms, mfu 5.31%
+iter 4320: loss 5.4642, time 2821.82ms, mfu 5.32%
+iter 4330: loss 5.4182, time 2817.89ms, mfu 5.32%
+iter 4340: loss 5.2970, time 2817.20ms, mfu 5.32%
+iter 4350: loss 5.5072, time 2825.44ms, mfu 5.32%
+iter 4360: loss 5.1976, time 2816.59ms, mfu 5.33%
+iter 4370: loss 5.0939, time 2820.54ms, mfu 5.33%
+iter 4380: loss 5.1068, time 2823.91ms, mfu 5.33%
+iter 4390: loss 5.0877, time 2818.81ms, mfu 5.33%
+[2026-04-18 20:36:55] [3h 36m] Speed at iter 4400 (epoch 0.08): 0.35 iters/sec
+iter 4400: loss 5.1975, time 2825.60ms, mfu 5.33%
+iter 4410: loss 5.1631, time 2828.61ms, mfu 5.33%
+iter 4420: loss 5.2225, time 2819.15ms, mfu 5.33%
+iter 4430: loss 5.0083, time 2820.60ms, mfu 5.33%
+iter 4440: loss 5.2431, time 2818.46ms, mfu 5.34%
+iter 4450: loss 5.1858, time 2819.26ms, mfu 5.34%
+iter 4460: loss 5.1579, time 2825.71ms, mfu 5.34%
+iter 4470: loss 5.4891, time 2819.69ms, mfu 5.34%
+iter 4480: loss 5.2196, time 2816.96ms, mfu 5.34%
+iter 4490: loss 5.2042, time 2818.81ms, mfu 5.34%
+[2026-04-18 20:42:15] [3h 41m] Step  4500 | Epoch   0.08 | train loss 5.2464 | val loss 5.2590 | lr 3.00e-04
+
+[2026-04-18 20:42:15] [3h 41m] Sampling at iter 4500 (epoch 0.08):
+  1. '." qu a longingly, he heard a more the same time the same time later, but they reached. this," and with it is a girl. dan, he said, and as the young,
+  2.  that were men, they left they had been they had, and they had not a couple, but she was a long time. it was the night before and a few a little. d, f
+  3. i feel, and a, of a thing. the night," he said. but to one." where am something doubt's head she was one in her arms on the bassity. he found the same
+
+[2026-04-18 20:42:28] [3h 42m] Speed at iter 4500 (epoch 0.08): 0.30 iters/sec
+iter 4500: loss 5.3234, time 53596.09ms, mfu 4.83%
+iter 4510: loss 5.2378, time 2819.90ms, mfu 4.88%
+iter 4520: loss 5.1872, time 2829.90ms, mfu 4.93%
+iter 4530: loss 5.3700, time 2818.75ms, mfu 4.97%
+iter 4540: loss 5.1355, time 2818.76ms, mfu 5.01%
+iter 4550: loss 4.9264, time 2821.59ms, mfu 5.04%
+iter 4560: loss 5.1505, time 2815.40ms, mfu 5.07%
+iter 4570: loss 5.3887, time 2824.16ms, mfu 5.10%
+iter 4580: loss 5.1990, time 2820.32ms, mfu 5.12%
+iter 4590: loss 5.3320, time 2818.92ms, mfu 5.15%
+[2026-04-18 20:47:10] [3h 46m] Speed at iter 4600 (epoch 0.08): 0.35 iters/sec
+iter 4600: loss 5.2847, time 2823.10ms, mfu 5.17%
+iter 4610: loss 5.2775, time 2820.25ms, mfu 5.18%
+iter 4620: loss 5.3603, time 2820.93ms, mfu 5.20%
+iter 4630: loss 5.2076, time 2826.07ms, mfu 5.21%
+iter 4640: loss 5.1700, time 2824.15ms, mfu 5.23%
+iter 4650: loss 5.0920, time 2825.95ms, mfu 5.24%
+iter 4660: loss 5.4140, time 2818.86ms, mfu 5.25%
+iter 4670: loss 5.1857, time 2819.00ms, mfu 5.26%
+iter 4680: loss 5.3489, time 2825.06ms, mfu 5.26%
+iter 4690: loss 5.3399, time 2821.82ms, mfu 5.27%
+[2026-04-18 20:51:52] [3h 51m] Speed at iter 4700 (epoch 0.08): 0.35 iters/sec
+iter 4700: loss 5.2922, time 2825.51ms, mfu 5.28%
+iter 4710: loss 5.2525, time 2817.10ms, mfu 5.29%
+iter 4720: loss 5.1851, time 2818.87ms, mfu 5.29%
+iter 4730: loss 5.4688, time 2816.55ms, mfu 5.30%
+iter 4740: loss 5.2909, time 2818.48ms, mfu 5.30%
+iter 4750: loss 5.3287, time 2827.71ms, mfu 5.31%
+iter 4760: loss 5.4152, time 2814.50ms, mfu 5.31%
+iter 4770: loss 4.8174, time 2818.61ms, mfu 5.31%
+iter 4780: loss 5.2273, time 2818.94ms, mfu 5.32%
+iter 4790: loss 5.3377, time 2819.09ms, mfu 5.32%
+[2026-04-18 20:56:33] [3h 56m] Speed at iter 4800 (epoch 0.08): 0.35 iters/sec
+iter 4800: loss 5.3149, time 2820.27ms, mfu 5.32%
+iter 4810: loss 5.3581, time 2823.42ms, mfu 5.32%
+iter 4820: loss 5.5047, time 2819.23ms, mfu 5.33%
+iter 4830: loss 5.2809, time 2830.18ms, mfu 5.33%
+iter 4840: loss 5.3372, time 2819.15ms, mfu 5.33%
+iter 4850: loss 5.0827, time 2820.97ms, mfu 5.33%
+iter 4860: loss 5.1343, time 2818.91ms, mfu 5.33%
+iter 4870: loss 5.2994, time 2818.77ms, mfu 5.33%
+iter 4880: loss 5.4988, time 2820.31ms, mfu 5.33%
+iter 4890: loss 5.4664, time 2818.52ms, mfu 5.34%
+[2026-04-18 21:01:15] [4h 0m] Speed at iter 4900 (epoch 0.08): 0.35 iters/sec
+iter 4900: loss 5.3747, time 2819.03ms, mfu 5.34%
+iter 4910: loss 5.2206, time 2817.15ms, mfu 5.34%
+iter 4920: loss 5.2925, time 2815.10ms, mfu 5.34%
+iter 4930: loss 4.8127, time 2816.01ms, mfu 5.34%
+iter 4940: loss 5.5535, time 2819.94ms, mfu 5.34%
+iter 4950: loss 5.3711, time 2816.67ms, mfu 5.34%
+iter 4960: loss 5.1080, time 2813.98ms, mfu 5.34%
+iter 4970: loss 5.3332, time 2816.47ms, mfu 5.34%
+iter 4980: loss 5.1334, time 2816.34ms, mfu 5.35%
+iter 4990: loss 5.3007, time 2819.46ms, mfu 5.35%
+[2026-04-18 21:06:35] [4h 6m] Step  5000 | Epoch   0.09 | train loss 5.3309 | val loss 5.3110 | lr 3.00e-04
+
+[2026-04-18 21:06:35] [4h 6m] Sampling at iter 5000 (epoch 0.09):
+  1. "of have to the long there is the man of a piece- of our way, as the the one who and if we come! "oh, and it; and i was a little, it, and a whole of t
+  2. "and for the case you had been no use our own to be it is not be anee on the tab of the other to it is not be a man, i to you will not in the world, h
+  3. but " or in," "i, i. "so, thetuer, no, i had thehe's will be the time, and, i may be to the way, for it, and i am not be the law of our father of the 
+
+[2026-04-18 21:06:48] [4h 6m] Speed at iter 5000 (epoch 0.09): 0.30 iters/sec
+iter 5000: loss 5.3581, time 53408.31ms, mfu 4.84%
+iter 5010: loss 5.5444, time 2810.23ms, mfu 4.89%
+iter 5020: loss 5.3851, time 2809.40ms, mfu 4.94%
+iter 5030: loss 5.3852, time 2827.74ms, mfu 4.98%
+iter 5040: loss 5.1396, time 2818.37ms, mfu 5.01%
+iter 5050: loss 5.3208, time 2814.35ms, mfu 5.05%
+iter 5060: loss 5.5657, time 2812.76ms, mfu 5.08%
+iter 5070: loss 5.4604, time 2818.06ms, mfu 5.11%
+iter 5080: loss 5.6940, time 2820.09ms, mfu 5.13%
+iter 5090: loss 5.3104, time 2810.94ms, mfu 5.15%
+[2026-04-18 21:11:30] [4h 11m] Speed at iter 5100 (epoch 0.09): 0.35 iters/sec
+iter 5100: loss 5.3873, time 2813.61ms, mfu 5.17%
+iter 5110: loss 5.2879, time 2820.19ms, mfu 5.19%
+iter 5120: loss 5.2796, time 2824.39ms, mfu 5.21%
+iter 5130: loss 5.5786, time 2821.54ms, mfu 5.22%
+iter 5140: loss 5.3512, time 2818.20ms, mfu 5.23%
+iter 5150: loss 5.3836, time 2831.73ms, mfu 5.24%
+iter 5160: loss 4.9615, time 2827.69ms, mfu 5.25%
+iter 5170: loss 5.4637, time 2816.16ms, mfu 5.26%
+iter 5180: loss 5.4063, time 2816.91ms, mfu 5.27%
+iter 5190: loss 5.2098, time 2825.44ms, mfu 5.28%
+[2026-04-18 21:16:12] [4h 15m] Speed at iter 5200 (epoch 0.09): 0.35 iters/sec
+iter 5200: loss 5.2753, time 2817.59ms, mfu 5.28%
+iter 5210: loss 5.2521, time 2822.56ms, mfu 5.29%
+iter 5220: loss 5.2797, time 2829.89ms, mfu 5.29%
+iter 5230: loss 5.3384, time 2817.74ms, mfu 5.30%
+iter 5240: loss 5.3435, time 2815.13ms, mfu 5.30%
+iter 5250: loss 5.1032, time 2821.14ms, mfu 5.31%
+iter 5260: loss 5.3766, time 2826.99ms, mfu 5.31%
+iter 5270: loss 5.2730, time 2823.96ms, mfu 5.31%
+iter 5280: loss 5.2730, time 2812.08ms, mfu 5.32%
+iter 5290: loss 5.4692, time 2819.09ms, mfu 5.32%
+[2026-04-18 21:20:54] [4h 20m] Speed at iter 5300 (epoch 0.09): 0.35 iters/sec
+iter 5300: loss 5.3351, time 2822.43ms, mfu 5.32%
+iter 5310: loss 5.4803, time 2821.06ms, mfu 5.32%
+iter 5320: loss 5.6368, time 2828.86ms, mfu 5.32%
+iter 5330: loss 5.3176, time 2824.64ms, mfu 5.33%
+iter 5340: loss 5.4084, time 2812.20ms, mfu 5.33%
+iter 5350: loss 5.6372, time 2820.71ms, mfu 5.33%
+iter 5360: loss 5.3768, time 2817.54ms, mfu 5.33%
+iter 5370: loss 5.3580, time 2818.88ms, mfu 5.33%
+iter 5380: loss 5.0393, time 2819.11ms, mfu 5.34%
+iter 5390: loss 5.5018, time 2821.31ms, mfu 5.34%
+[2026-04-18 21:25:36] [4h 25m] Speed at iter 5400 (epoch 0.09): 0.35 iters/sec
+iter 5400: loss 5.4774, time 2818.94ms, mfu 5.34%
+iter 5410: loss 5.5272, time 2817.23ms, mfu 5.34%
+iter 5420: loss 5.4030, time 2822.35ms, mfu 5.34%
+iter 5430: loss 5.4541, time 2822.18ms, mfu 5.34%
+iter 5440: loss 5.7469, time 2818.76ms, mfu 5.34%
+iter 5450: loss 5.5390, time 2820.60ms, mfu 5.34%
+iter 5460: loss 5.4645, time 2820.58ms, mfu 5.34%
+iter 5470: loss 5.5292, time 2821.16ms, mfu 5.34%
+iter 5480: loss 5.5026, time 2814.17ms, mfu 5.34%
+iter 5490: loss 5.5993, time 2821.61ms, mfu 5.34%
+[2026-04-18 21:30:55] [4h 30m] Step  5500 | Epoch   0.09 | train loss 5.4463 | val loss 5.4660 | lr 3.00e-04
+
+[2026-04-18 21:30:55] [4h 30m] Sampling at iter 5500 (epoch 0.09):
+  1.  ""there" said. i am here with. "that, and i believe i mean. "i know you. i am i think we will be your right. i can tell and see you." . "i want to th
+  2. "the thing is the man can do, but that the word; when you, to me?" p of my of heron. 'an say, "well, and i have you will be made to you, i am certain 
+  3. "if. i don't.. don't. i know." we to you can have my little you've got to know how you have a minute." , and then to the door. i'm so much of the time
+
+[2026-04-18 21:31:09] [4h 30m] Speed at iter 5500 (epoch 0.09): 0.30 iters/sec
+iter 5500: loss 5.4716, time 53738.43ms, mfu 4.84%
+iter 5510: loss 5.5844, time 2815.40ms, mfu 4.89%
+iter 5520: loss 5.4911, time 2811.82ms, mfu 4.93%
+iter 5530: loss 5.4764, time 2818.05ms, mfu 4.98%
+iter 5540: loss 5.4882, time 2813.61ms, mfu 5.01%
+iter 5550: loss 5.5861, time 2825.92ms, mfu 5.05%
+iter 5560: loss 5.3048, time 2817.10ms, mfu 5.08%
+iter 5570: loss 5.5310, time 2813.76ms, mfu 5.10%
+iter 5580: loss 5.2727, time 2831.02ms, mfu 5.13%
+iter 5590: loss 5.4102, time 2811.62ms, mfu 5.15%
+[2026-04-18 21:35:51] [4h 35m] Speed at iter 5600 (epoch 0.10): 0.35 iters/sec
+iter 5600: loss 5.4550, time 2848.58ms, mfu 5.16%
+iter 5610: loss 5.5520, time 2812.04ms, mfu 5.18%
+iter 5620: loss 5.5142, time 2824.21ms, mfu 5.20%
+iter 5630: loss 5.5944, time 2817.01ms, mfu 5.21%
+iter 5640: loss 5.5188, time 2818.18ms, mfu 5.23%
+iter 5650: loss 5.4110, time 2823.44ms, mfu 5.24%
+iter 5660: loss 5.5168, time 2816.86ms, mfu 5.25%
+iter 5670: loss 5.5707, time 2816.07ms, mfu 5.26%
+iter 5680: loss 5.2841, time 2825.50ms, mfu 5.27%
+iter 5690: loss 5.6153, time 2815.32ms, mfu 5.28%
+[2026-04-18 21:40:33] [4h 40m] Speed at iter 5700 (epoch 0.10): 0.35 iters/sec
+iter 5700: loss 5.4490, time 2813.18ms, mfu 5.28%
+iter 5710: loss 5.3991, time 2818.62ms, mfu 5.29%
+iter 5720: loss 5.5714, time 2812.98ms, mfu 5.30%
+iter 5730: loss 5.1801, time 2827.01ms, mfu 5.30%
+iter 5740: loss 5.5922, time 2816.14ms, mfu 5.31%
+iter 5750: loss 5.3620, time 2821.19ms, mfu 5.31%
+iter 5760: loss 5.7202, time 2819.47ms, mfu 5.31%
+iter 5770: loss 5.4367, time 2819.40ms, mfu 5.32%
+iter 5780: loss 5.5324, time 2817.67ms, mfu 5.32%
+iter 5790: loss 5.5572, time 2819.75ms, mfu 5.32%
+[2026-04-18 21:45:15] [4h 44m] Speed at iter 5800 (epoch 0.10): 0.35 iters/sec
+iter 5800: loss 5.4533, time 2818.00ms, mfu 5.32%
+iter 5810: loss 5.4710, time 2812.54ms, mfu 5.33%
+iter 5820: loss 5.6419, time 2814.91ms, mfu 5.33%
+iter 5830: loss 5.5891, time 2817.80ms, mfu 5.33%
+iter 5840: loss 5.4151, time 2817.40ms, mfu 5.33%
+iter 5850: loss 5.4063, time 2823.58ms, mfu 5.33%
+iter 5860: loss 5.6189, time 2816.94ms, mfu 5.34%
+iter 5870: loss 5.4330, time 2817.19ms, mfu 5.34%
+iter 5880: loss 5.7505, time 2810.55ms, mfu 5.34%
+iter 5890: loss 5.2676, time 2818.90ms, mfu 5.34%
+[2026-04-18 21:49:56] [4h 49m] Speed at iter 5900 (epoch 0.10): 0.35 iters/sec
+iter 5900: loss 5.3803, time 2816.74ms, mfu 5.34%
+iter 5910: loss 5.6984, time 2817.23ms, mfu 5.34%
+iter 5920: loss 5.5279, time 2810.42ms, mfu 5.34%
+iter 5930: loss 5.4909, time 2818.02ms, mfu 5.35%
+iter 5940: loss 5.6265, time 2817.45ms, mfu 5.35%
+iter 5950: loss 5.5478, time 2815.98ms, mfu 5.35%
+iter 5960: loss 5.5939, time 2818.71ms, mfu 5.35%
+iter 5970: loss 5.5208, time 2820.61ms, mfu 5.35%
+iter 5980: loss 5.4599, time 2817.59ms, mfu 5.35%
+iter 5990: loss 5.5080, time 2814.83ms, mfu 5.35%
+[2026-04-18 21:55:16] [4h 54m] Step  6000 | Epoch   0.10 | train loss 5.5036 | val loss 5.4906 | lr 3.00e-04
+
+[2026-04-18 21:55:16] [4h 54m] Sampling at iter 6000 (epoch 0.10):
+  1. ; at of, and his eyes that  been the your and i say to be too, he; "why say." "you can you be your me of your man we to your brother, then. i shall ne
+  2. , we and his is all he been it to be quite a kinder and which that you have will of a while theto be in the last it is "i i don't you'reise; be going 
+  3.  will he to he said the and said said. it's,. but said in the first is a few times there will be in this, be in the the "yes," said mr. "i't theyi wou
+
+[2026-04-18 21:55:29] [4h 55m] Speed at iter 6000 (epoch 0.10): 0.30 iters/sec
+iter 6000: loss 5.5143, time 53713.87ms, mfu 4.84%
+iter 6010: loss 5.5180, time 2816.48ms, mfu 4.89%
+iter 6020: loss 5.8886, time 2826.27ms, mfu 4.94%
+iter 6030: loss 5.6222, time 2815.11ms, mfu 4.98%
+iter 6040: loss 5.3772, time 2814.17ms, mfu 5.02%
+iter 6050: loss 5.5317, time 2823.34ms, mfu 5.05%
+iter 6060: loss 5.4535, time 2818.61ms, mfu 5.08%
+iter 6070: loss 5.4681, time 2814.30ms, mfu 5.11%
+iter 6080: loss 5.5365, time 2822.86ms, mfu 5.13%
+iter 6090: loss 5.4675, time 2827.06ms, mfu 5.15%
+[2026-04-18 22:00:11] [4h 59m] Speed at iter 6100 (epoch 0.10): 0.35 iters/sec
+iter 6100: loss 5.7231, time 2821.65ms, mfu 5.17%
+iter 6110: loss 5.5621, time 2827.58ms, mfu 5.18%
+iter 6120: loss 5.6173, time 2820.75ms, mfu 5.20%
+iter 6130: loss 5.5714, time 2868.86ms, mfu 5.21%
+iter 6140: loss 5.5704, time 2869.83ms, mfu 5.21%
+iter 6150: loss 5.7505, time 2826.83ms, mfu 5.22%
+iter 6160: loss 5.4706, time 2828.08ms, mfu 5.23%
+iter 6170: loss 5.4633, time 2821.37ms, mfu 5.24%
+iter 6180: loss 5.4784, time 2846.82ms, mfu 5.25%
+iter 6190: loss 5.6175, time 2836.86ms, mfu 5.26%
+[2026-04-18 22:04:55] [5h 4m] Speed at iter 6200 (epoch 0.11): 0.35 iters/sec
+iter 6200: loss 5.7791, time 2839.10ms, mfu 5.26%
+iter 6210: loss 5.6206, time 3078.77ms, mfu 5.22%
+iter 6220: loss 5.6182, time 3061.87ms, mfu 5.19%
+iter 6230: loss 5.4731, time 2829.78ms, mfu 5.21%
+iter 6240: loss 5.4055, time 2818.18ms, mfu 5.22%
+iter 6250: loss 5.7221, time 2828.32ms, mfu 5.23%
+iter 6260: loss 5.5255, time 2821.71ms, mfu 5.24%
+iter 6270: loss 5.6312, time 2831.96ms, mfu 5.25%
+iter 6280: loss 5.9323, time 2816.03ms, mfu 5.26%
+iter 6290: loss 5.6414, time 2821.28ms, mfu 5.27%
+[2026-04-18 22:09:44] [5h 9m] Speed at iter 6300 (epoch 0.11): 0.35 iters/sec
+iter 6300: loss 5.7531, time 2823.75ms, mfu 5.28%
+iter 6310: loss 5.6931, time 2814.53ms, mfu 5.28%
+iter 6320: loss 5.6489, time 2820.04ms, mfu 5.29%
+iter 6330: loss 5.5269, time 2818.97ms, mfu 5.30%
+iter 6340: loss 5.5002, time 2823.65ms, mfu 5.30%
+iter 6350: loss 5.6051, time 2830.87ms, mfu 5.30%
+iter 6360: loss 5.5509, time 2827.60ms, mfu 5.31%
+iter 6370: loss 5.6201, time 2820.72ms, mfu 5.31%
+iter 6380: loss 5.6352, time 2840.35ms, mfu 5.31%
+iter 6390: loss 5.5307, time 2853.54ms, mfu 5.31%
+[2026-04-18 22:14:26] [5h 14m] Speed at iter 6400 (epoch 0.11): 0.35 iters/sec
+iter 6400: loss 5.5146, time 2824.31ms, mfu 5.31%
+iter 6410: loss 5.7299, time 2826.34ms, mfu 5.31%
+iter 6420: loss 5.7119, time 2830.07ms, mfu 5.31%
+iter 6430: loss 5.5929, time 2821.20ms, mfu 5.32%
+iter 6440: loss 5.4030, time 2826.32ms, mfu 5.32%
+iter 6450: loss 5.6361, time 2821.68ms, mfu 5.32%
+iter 6460: loss 5.6007, time 2827.40ms, mfu 5.32%
+iter 6470: loss 5.6024, time 2827.64ms, mfu 5.32%
+iter 6480: loss 5.7347, time 2823.33ms, mfu 5.32%
+iter 6490: loss 5.7876, time 2822.21ms, mfu 5.33%
+[2026-04-18 22:19:47] [5h 19m] Step  6500 | Epoch   0.11 | train loss 5.5577 | val loss 5.5660 | lr 3.00e-04
+
+[2026-04-18 22:19:47] [5h 19m] Sampling at iter 6500 (epoch 0.11):
+  1. 'll be in the only.. orwe of a time before, but it is in whichi was he was to be had can you have not a little was made the house that we he have been
+  2.  we not have to say a long a second a second for have would have had, as a great and man is not to be do in the two man's place to me the little the m
+  3. 's a and a little of not the great of the latter. "he's the man. and said to the king the right was of young. as had been that and i have been for. i 
+
+[2026-04-18 22:20:01] [5h 19m] Speed at iter 6500 (epoch 0.11): 0.30 iters/sec
+iter 6500: loss 5.7100, time 54280.93ms, mfu 4.82%
+iter 6510: loss 6.0074, time 2828.50ms, mfu 4.87%
+iter 6520: loss 5.7921, time 2814.88ms, mfu 4.92%
+iter 6530: loss 5.8300, time 2826.26ms, mfu 4.96%
+iter 6540: loss 5.3859, time 2823.85ms, mfu 5.00%
+iter 6550: loss 5.4623, time 2820.13ms, mfu 5.03%
+iter 6560: loss 5.5302, time 2832.66ms, mfu 5.06%
+iter 6570: loss 5.5915, time 2826.31ms, mfu 5.09%
+iter 6580: loss 5.8306, time 2828.47ms, mfu 5.11%
+iter 6590: loss 5.7141, time 2821.16ms, mfu 5.14%
+[2026-04-18 22:24:44] [5h 24m] Speed at iter 6600 (epoch 0.11): 0.35 iters/sec
+iter 6600: loss 5.7910, time 2827.82ms, mfu 5.16%
+iter 6610: loss 5.4744, time 2817.31ms, mfu 5.17%
+iter 6620: loss 5.8016, time 2831.90ms, mfu 5.19%
+iter 6630: loss 5.5431, time 2819.40ms, mfu 5.21%
+iter 6640: loss 5.5792, time 2824.76ms, mfu 5.22%
+iter 6650: loss 5.6438, time 2817.52ms, mfu 5.23%
+iter 6660: loss 5.7109, time 2848.54ms, mfu 5.24%
+iter 6670: loss 5.7459, time 2816.87ms, mfu 5.25%
+iter 6680: loss 5.4140, time 2823.55ms, mfu 5.26%
+iter 6690: loss 5.5242, time 2819.74ms, mfu 5.27%
+[2026-04-18 22:29:26] [5h 29m] Speed at iter 6700 (epoch 0.11): 0.35 iters/sec
+iter 6700: loss 5.6695, time 2824.68ms, mfu 5.27%
+iter 6710: loss 5.6740, time 2815.21ms, mfu 5.28%
+iter 6720: loss 5.9056, time 2819.12ms, mfu 5.29%
+iter 6730: loss 5.6676, time 2818.94ms, mfu 5.29%
+iter 6740: loss 5.6321, time 2832.38ms, mfu 5.30%
+iter 6750: loss 5.6276, time 2819.18ms, mfu 5.30%
+iter 6760: loss 5.5765, time 2815.22ms, mfu 5.31%
+iter 6770: loss 5.6640, time 2822.63ms, mfu 5.31%
+iter 6780: loss 5.6917, time 2820.65ms, mfu 5.31%
+iter 6790: loss 5.7625, time 2834.72ms, mfu 5.31%
+[2026-04-18 22:34:09] [5h 33m] Speed at iter 6800 (epoch 0.12): 0.35 iters/sec
+iter 6800: loss 5.5807, time 2820.18ms, mfu 5.32%
+iter 6810: loss 5.4923, time 2821.30ms, mfu 5.32%
+iter 6820: loss 5.5535, time 2819.74ms, mfu 5.32%
+iter 6830: loss 5.8569, time 2823.32ms, mfu 5.32%
+iter 6840: loss 5.7982, time 2850.40ms, mfu 5.32%
+iter 6850: loss 5.9213, time 2819.42ms, mfu 5.32%
+iter 6860: loss 5.5163, time 2819.48ms, mfu 5.32%
+iter 6870: loss 5.5593, time 2816.20ms, mfu 5.33%
+iter 6880: loss 5.5978, time 2820.58ms, mfu 5.33%
+iter 6890: loss 5.7890, time 2819.25ms, mfu 5.33%
+[2026-04-18 22:38:51] [5h 38m] Speed at iter 6900 (epoch 0.12): 0.35 iters/sec
+iter 6900: loss 5.9868, time 2821.34ms, mfu 5.33%
+iter 6910: loss 5.7130, time 2816.28ms, mfu 5.33%
+iter 6920: loss 5.9290, time 2818.04ms, mfu 5.34%
+iter 6930: loss 5.8534, time 2818.58ms, mfu 5.34%
+iter 6940: loss 5.7983, time 2817.25ms, mfu 5.34%
+iter 6950: loss 5.5951, time 2857.24ms, mfu 5.33%
+iter 6960: loss 5.7531, time 2829.39ms, mfu 5.33%
+iter 6970: loss 5.7178, time 2817.36ms, mfu 5.33%
+iter 6980: loss 5.8688, time 2833.90ms, mfu 5.33%
+iter 6990: loss 5.7605, time 2956.36ms, mfu 5.31%
+[2026-04-18 22:44:12] [5h 43m] Step  7000 | Epoch   0.12 | train loss 5.7124 | val loss 5.6418 | lr 3.00e-04
+
+[2026-04-18 22:44:12] [5h 43m] Sampling at iter 7000 (epoch 0.12):
+  1.  that the" ,, is the pi have him ini the other the man be'?" and the other--this," says, to come, 'ar in his't go and hisa's of he had shot. ", the bo
+  2.  the in were the next the enemy, the first, to us; their hands place. to the house into the enemy to the kingb were,, the lord, "the first year. at th
+  3.  not us not the time to be the p. if from was it of his " and she was not he. he, it, and as if that time the other, he was not you be found the manho
+
+[2026-04-18 22:44:25] [5h 44m] Speed at iter 7000 (epoch 0.12): 0.30 iters/sec
+iter 7000: loss 5.5423, time 53829.48ms, mfu 4.81%
+iter 7010: loss 5.6514, time 2822.11ms, mfu 4.86%
+iter 7020: loss 5.6528, time 2828.30ms, mfu 4.91%
+iter 7030: loss 5.8936, time 2829.14ms, mfu 4.95%
+iter 7040: loss 5.8051, time 2840.76ms, mfu 4.98%
+iter 7050: loss 5.8246, time 2821.42ms, mfu 5.02%
+iter 7060: loss 5.5214, time 2826.06ms, mfu 5.05%
+iter 7070: loss 5.8933, time 2825.60ms, mfu 5.08%
+iter 7080: loss 5.6590, time 2824.01ms, mfu 5.11%
+iter 7090: loss 5.5462, time 2818.91ms, mfu 5.13%
+[2026-04-18 22:49:09] [5h 48m] Speed at iter 7100 (epoch 0.12): 0.35 iters/sec
+iter 7100: loss 5.7344, time 2820.80ms, mfu 5.15%
+iter 7110: loss 5.6402, time 2822.89ms, mfu 5.17%
+iter 7120: loss 6.0501, time 2822.86ms, mfu 5.19%
+iter 7130: loss 5.7481, time 2823.31ms, mfu 5.20%
+iter 7140: loss 5.7495, time 2828.61ms, mfu 5.21%
+iter 7150: loss 5.6251, time 2847.21ms, mfu 5.22%
+iter 7160: loss 5.7682, time 2819.37ms, mfu 5.23%
+iter 7170: loss 5.6896, time 2831.18ms, mfu 5.24%
+iter 7180: loss 5.7119, time 2820.70ms, mfu 5.25%
+iter 7190: loss 5.6878, time 2829.21ms, mfu 5.26%
+[2026-04-18 22:53:51] [5h 53m] Speed at iter 7200 (epoch 0.12): 0.35 iters/sec
+iter 7200: loss 5.6189, time 2818.25ms, mfu 5.27%
+iter 7210: loss 5.6983, time 2829.14ms, mfu 5.28%
+iter 7220: loss 5.6090, time 2823.47ms, mfu 5.28%
+iter 7230: loss 5.5856, time 2821.74ms, mfu 5.29%
+iter 7240: loss 5.5100, time 2823.41ms, mfu 5.29%
+iter 7250: loss 5.5780, time 2829.43ms, mfu 5.30%
+iter 7260: loss 5.5794, time 2819.23ms, mfu 5.30%
+iter 7270: loss 5.4280, time 2830.17ms, mfu 5.30%
+iter 7280: loss 5.9871, time 2821.91ms, mfu 5.31%
+iter 7290: loss 5.7785, time 2825.16ms, mfu 5.31%
+[2026-04-18 22:58:34] [5h 58m] Speed at iter 7300 (epoch 0.12): 0.35 iters/sec
+iter 7300: loss 5.9188, time 2823.46ms, mfu 5.31%
+iter 7310: loss 5.8001, time 2820.37ms, mfu 5.32%
+iter 7320: loss 5.6521, time 2832.71ms, mfu 5.32%
+iter 7330: loss 5.6722, time 2823.44ms, mfu 5.32%
+iter 7340: loss 5.7705, time 2832.51ms, mfu 5.32%
+iter 7350: loss 5.6062, time 2821.31ms, mfu 5.32%
+iter 7360: loss 5.5372, time 2820.02ms, mfu 5.32%
+iter 7370: loss 5.8884, time 2828.80ms, mfu 5.32%
+iter 7380: loss 5.7022, time 2819.99ms, mfu 5.33%
+iter 7390: loss 5.8187, time 2820.58ms, mfu 5.33%
+[2026-04-18 23:03:16] [6h 2m] Speed at iter 7400 (epoch 0.13): 0.35 iters/sec
+iter 7400: loss 5.8085, time 2840.95ms, mfu 5.33%
+iter 7410: loss 5.7221, time 2834.06ms, mfu 5.32%
+iter 7420: loss 5.7872, time 2821.07ms, mfu 5.33%
+iter 7430: loss 5.8443, time 2852.07ms, mfu 5.32%
+iter 7440: loss 5.6556, time 2820.27ms, mfu 5.32%
+iter 7450: loss 5.6512, time 2881.43ms, mfu 5.32%
+iter 7460: loss 5.9252, time 2860.87ms, mfu 5.31%
+iter 7470: loss 5.8417, time 2873.42ms, mfu 5.30%
+iter 7480: loss 5.5639, time 2815.27ms, mfu 5.31%
+iter 7490: loss 5.9733, time 2832.35ms, mfu 5.31%
+[2026-04-18 23:08:38] [6h 8m] Step  7500 | Epoch   0.13 | train loss 5.6796 | val loss 5.7587 | lr 3.00e-04
+
+[2026-04-18 23:08:38] [6h 8m] Sampling at iter 7500 (epoch 0.13):
+  1. .. the will,., the girl. the the, and,,, and there it, and not to see do all the first, to, and was you know you say, i not, that you will, i have do 
+  2. ,.. . said in the all, will. in they he, and the, as . "i know my is for you will, and, his uncle, but i might go said. the, i see."'t-morrow to that 
+  3. ,, and, i,. so and not, to, i do of this. "they have. "i, you all sure, you, he'd to and, with but i wasmorrow to do i'll take it,"," said. "oh," said
+
+[2026-04-18 23:08:51] [6h 8m] Speed at iter 7500 (epoch 0.13): 0.30 iters/sec
+iter 7500: loss 5.6655, time 53834.88ms, mfu 4.81%
+iter 7510: loss 5.8739, time 2822.84ms, mfu 4.86%
+iter 7520: loss 5.8352, time 2818.56ms, mfu 4.91%
+iter 7530: loss 5.6277, time 2820.42ms, mfu 4.95%
+iter 7540: loss 5.8561, time 2823.01ms, mfu 4.99%
+iter 7550: loss 5.9760, time 2821.21ms, mfu 5.03%
+iter 7560: loss 5.6199, time 2824.80ms, mfu 5.06%
+iter 7570: loss 5.6432, time 2829.25ms, mfu 5.08%
+iter 7580: loss 5.4736, time 2832.56ms, mfu 5.11%
+iter 7590: loss 5.6852, time 2818.34ms, mfu 5.13%
+[2026-04-18 23:13:34] [6h 13m] Speed at iter 7600 (epoch 0.13): 0.35 iters/sec
+iter 7600: loss 5.6154, time 2820.86ms, mfu 5.15%
+iter 7610: loss 5.9698, time 2817.18ms, mfu 5.17%
+iter 7620: loss 5.8396, time 2825.48ms, mfu 5.19%
+iter 7630: loss 5.8872, time 2821.37ms, mfu 5.20%
+iter 7640: loss 5.6241, time 2822.07ms, mfu 5.22%
+iter 7650: loss 5.9524, time 2818.89ms, mfu 5.23%
+iter 7660: loss 5.7556, time 2827.29ms, mfu 5.24%
+iter 7670: loss 5.6361, time 2821.55ms, mfu 5.25%
+iter 7680: loss 5.7572, time 2818.51ms, mfu 5.26%
+iter 7690: loss 5.8760, time 2820.60ms, mfu 5.27%
+[2026-04-18 23:18:16] [6h 17m] Speed at iter 7700 (epoch 0.13): 0.35 iters/sec
+iter 7700: loss 5.6022, time 2823.56ms, mfu 5.28%
+iter 7710: loss 5.6364, time 2818.68ms, mfu 5.28%
+iter 7720: loss 5.9469, time 2826.13ms, mfu 5.29%
+iter 7730: loss 5.9505, time 2833.35ms, mfu 5.29%
+iter 7740: loss 5.5924, time 2819.22ms, mfu 5.30%
+iter 7750: loss 5.7383, time 2829.23ms, mfu 5.30%
+iter 7760: loss 5.7683, time 2819.02ms, mfu 5.30%
+iter 7770: loss 5.5858, time 2833.64ms, mfu 5.31%
+iter 7780: loss 5.7361, time 2820.97ms, mfu 5.31%
+iter 7790: loss 5.5983, time 2850.88ms, mfu 5.31%
+[2026-04-18 23:22:59] [6h 22m] Speed at iter 7800 (epoch 0.13): 0.35 iters/sec
+iter 7800: loss 5.6154, time 2819.01ms, mfu 5.31%
+iter 7810: loss 5.7570, time 2835.14ms, mfu 5.31%
+iter 7820: loss 5.8474, time 2818.76ms, mfu 5.32%
+iter 7830: loss 5.8187, time 2848.74ms, mfu 5.31%
+iter 7840: loss 5.8526, time 2818.35ms, mfu 5.32%
+iter 7850: loss 5.7910, time 2839.39ms, mfu 5.32%
+iter 7860: loss 5.7649, time 2821.39ms, mfu 5.32%
+iter 7870: loss 5.7698, time 2838.50ms, mfu 5.32%
+iter 7880: loss 5.8008, time 2819.55ms, mfu 5.32%
+iter 7890: loss 5.7177, time 2831.22ms, mfu 5.32%
+[2026-04-18 23:27:41] [6h 27m] Speed at iter 7900 (epoch 0.13): 0.35 iters/sec
+iter 7900: loss 5.7937, time 2821.80ms, mfu 5.32%
+iter 7910: loss 5.4241, time 2830.52ms, mfu 5.32%
+iter 7920: loss 5.8671, time 2820.13ms, mfu 5.32%
+iter 7930: loss 5.7098, time 2824.23ms, mfu 5.33%
+iter 7940: loss 5.6775, time 2819.46ms, mfu 5.33%
+iter 7950: loss 5.6206, time 2822.32ms, mfu 5.33%
+iter 7960: loss 5.7187, time 2819.85ms, mfu 5.33%
+iter 7970: loss 5.7084, time 2831.56ms, mfu 5.33%
+iter 7980: loss 5.7611, time 2818.44ms, mfu 5.33%
+iter 7990: loss 5.5747, time 2829.44ms, mfu 5.33%
+[2026-04-18 23:33:01] [6h 32m] Step  8000 | Epoch   0.14 | train loss 5.7598 | val loss 5.7787 | lr 3.00e-04
+
+[2026-04-18 23:33:01] [6h 32m] Sampling at iter 8000 (epoch 0.14):
+  1.  of the the with, and the and had and she a long was in and they were, and that was with, and with the town the other-t; and the the and the to hold- 
+  2.  and not for and the,,.  a of his. i was " the night. the man is. no longer for, they should be friend you the in all to the door when he, the other- 
+  3.  and " was's,ing and.  in. the and, by and and then no the for but not a very but that is a very he. , "for with i did i'd. a great in the was he.  in
+
+[2026-04-18 23:33:14] [6h 32m] Speed at iter 8000 (epoch 0.14): 0.30 iters/sec
+iter 8000: loss 5.5757, time 53362.28ms, mfu 4.83%
+iter 8010: loss 5.7217, time 2821.91ms, mfu 4.88%
+iter 8020: loss 6.1136, time 2819.38ms, mfu 4.92%
+iter 8030: loss 5.7388, time 2825.47ms, mfu 4.97%
+iter 8040: loss 5.6781, time 2820.85ms, mfu 5.00%
+iter 8050: loss 5.7067, time 2820.16ms, mfu 5.04%
+iter 8060: loss 5.6685, time 2816.28ms, mfu 5.07%
+iter 8070: loss 5.8535, time 2839.09ms, mfu 5.09%
+iter 8080: loss 5.8082, time 2819.46ms, mfu 5.12%
+iter 8090: loss 5.5943, time 2817.86ms, mfu 5.14%
+[2026-04-18 23:37:56] [6h 37m] Speed at iter 8100 (epoch 0.14): 0.35 iters/sec
+iter 8100: loss 5.7898, time 2819.69ms, mfu 5.16%
+iter 8110: loss 5.6275, time 2825.23ms, mfu 5.18%
+iter 8120: loss 5.7098, time 2832.92ms, mfu 5.19%
+iter 8130: loss 5.7567, time 2818.73ms, mfu 5.21%
+iter 8140: loss 5.5878, time 2838.20ms, mfu 5.22%
+iter 8150: loss 5.7936, time 2824.95ms, mfu 5.23%
+iter 8160: loss 5.5522, time 2820.53ms, mfu 5.24%
+iter 8170: loss 5.8841, time 2849.02ms, mfu 5.25%
+iter 8180: loss 5.8301, time 2820.07ms, mfu 5.26%
+iter 8190: loss 5.6999, time 2819.67ms, mfu 5.27%
+[2026-04-18 23:42:39] [6h 42m] Speed at iter 8200 (epoch 0.14): 0.35 iters/sec
+iter 8200: loss 5.8426, time 2816.08ms, mfu 5.27%
+iter 8210: loss 5.6837, time 2818.97ms, mfu 5.28%
+iter 8220: loss 5.6599, time 2821.11ms, mfu 5.29%
+iter 8230: loss 5.6324, time 2815.20ms, mfu 5.29%
+iter 8240: loss 5.7678, time 2821.02ms, mfu 5.30%
+iter 8250: loss 5.7735, time 2829.15ms, mfu 5.30%
+iter 8260: loss 5.8476, time 2820.80ms, mfu 5.31%
+iter 8270: loss 5.9442, time 2817.19ms, mfu 5.31%
+iter 8280: loss 5.9161, time 2822.08ms, mfu 5.31%
+iter 8290: loss 5.7336, time 2838.32ms, mfu 5.31%
+[2026-04-18 23:47:21] [6h 46m] Speed at iter 8300 (epoch 0.14): 0.35 iters/sec
+iter 8300: loss 5.8289, time 2848.23ms, mfu 5.31%
+iter 8310: loss 5.6980, time 2816.12ms, mfu 5.32%
+iter 8320: loss 5.5242, time 2820.29ms, mfu 5.32%
+iter 8330: loss 5.7797, time 2858.51ms, mfu 5.31%
+iter 8340: loss 5.9249, time 2817.88ms, mfu 5.32%
+iter 8350: loss 5.8899, time 2839.91ms, mfu 5.32%
+iter 8360: loss 5.7511, time 2839.99ms, mfu 5.32%
+iter 8370: loss 5.8720, time 2859.02ms, mfu 5.31%
+iter 8380: loss 5.5907, time 2837.96ms, mfu 5.31%
+iter 8390: loss 5.8176, time 2840.12ms, mfu 5.31%
+[2026-04-18 23:52:05] [6h 51m] Speed at iter 8400 (epoch 0.14): 0.35 iters/sec
+iter 8400: loss 5.8823, time 2848.51ms, mfu 5.31%
+iter 8410: loss 5.8851, time 2837.28ms, mfu 5.31%
+iter 8420: loss 6.0429, time 2831.72ms, mfu 5.31%
+iter 8430: loss 5.8196, time 2824.61ms, mfu 5.31%
+iter 8440: loss 5.8326, time 2822.42ms, mfu 5.32%
+iter 8450: loss 5.8014, time 2818.62ms, mfu 5.32%
+iter 8460: loss 5.5113, time 2819.73ms, mfu 5.32%
+iter 8470: loss 6.0543, time 2819.79ms, mfu 5.32%
+iter 8480: loss 5.7513, time 2840.62ms, mfu 5.32%
+iter 8490: loss 5.6955, time 2828.06ms, mfu 5.32%
+[2026-04-18 23:57:25] [6h 57m] Step  8500 | Epoch   0.15 | train loss 5.8153 | val loss 5.8509 | lr 3.00e-04
+
+[2026-04-18 23:57:25] [6h 57m] Sampling at iter 8500 (epoch 0.15):
+  1.  the of, et at, was-; in, "and i, i have a not the very a think," said a good time a little to to say about some to a the other a man of as he up firs
+  2.  that a was a next,--''s, a part of the mother in and so well with the whole the same, and whole one he for the north, and, she the great time of the 
+  3. , toll and but i get's sonitable,,,va l. "f"- the ", that i should have seen '." wife in a time, there i amem son't a's son't of her own. " his house.
+
+[2026-04-18 23:57:39] [6h 57m] Speed at iter 8500 (epoch 0.15): 0.30 iters/sec
+iter 8500: loss 5.8013, time 54244.96ms, mfu 4.82%
+iter 8510: loss 5.7586, time 2841.14ms, mfu 4.87%
+iter 8520: loss 5.8962, time 2818.04ms, mfu 4.92%
+iter 8530: loss 5.7750, time 2860.71ms, mfu 4.95%
+iter 8540: loss 5.6404, time 2882.38ms, mfu 4.98%
+iter 8550: loss 5.8172, time 2827.04ms, mfu 5.01%
+iter 8560: loss 5.8028, time 2820.57ms, mfu 5.05%
+iter 8570: loss 5.9404, time 2859.37ms, mfu 5.07%
+iter 8580: loss 5.7513, time 2820.78ms, mfu 5.10%
+iter 8590: loss 5.8450, time 2823.14ms, mfu 5.12%
+[2026-04-19 00:02:23] [7h 1m] Speed at iter 8600 (epoch 0.15): 0.35 iters/sec
+iter 8600: loss 5.7251, time 2818.71ms, mfu 5.14%
+iter 8610: loss 6.0804, time 2843.12ms, mfu 5.16%
+iter 8620: loss 5.5793, time 2818.42ms, mfu 5.18%
+iter 8630: loss 5.9663, time 2822.49ms, mfu 5.19%
+iter 8640: loss 5.9290, time 2858.12ms, mfu 5.20%
+iter 8650: loss 5.7519, time 2818.66ms, mfu 5.22%
+iter 8660: loss 5.8618, time 2837.43ms, mfu 5.23%
+iter 8670: loss 5.9605, time 2822.87ms, mfu 5.24%
+iter 8680: loss 5.7198, time 2814.46ms, mfu 5.25%
+iter 8690: loss 5.6954, time 2834.67ms, mfu 5.26%
+[2026-04-19 00:07:05] [7h 6m] Speed at iter 8700 (epoch 0.15): 0.35 iters/sec
+iter 8700: loss 5.9562, time 2816.57ms, mfu 5.27%
+iter 8710: loss 5.7470, time 2825.63ms, mfu 5.27%
+iter 8720: loss 5.5317, time 2818.63ms, mfu 5.28%
+iter 8730: loss 5.7259, time 2836.62ms, mfu 5.28%
+iter 8740: loss 5.8155, time 2818.34ms, mfu 5.29%
+iter 8750: loss 5.6712, time 2829.53ms, mfu 5.29%
+iter 8760: loss 5.7319, time 2816.03ms, mfu 5.30%
+iter 8770: loss 5.7565, time 2838.41ms, mfu 5.30%
+iter 8780: loss 5.8485, time 2817.83ms, mfu 5.31%
+iter 8790: loss 5.7765, time 2819.23ms, mfu 5.31%
+[2026-04-19 00:11:48] [7h 11m] Speed at iter 8800 (epoch 0.15): 0.35 iters/sec
+iter 8800: loss 5.8943, time 2820.61ms, mfu 5.31%
+iter 8810: loss 5.9045, time 2818.42ms, mfu 5.32%
+iter 8820: loss 6.0214, time 2816.38ms, mfu 5.32%
+iter 8830: loss 5.7243, time 2817.99ms, mfu 5.32%
+iter 8840: loss 5.9561, time 2821.57ms, mfu 5.32%
+iter 8850: loss 6.0313, time 2821.73ms, mfu 5.33%
+iter 8860: loss 5.8922, time 2822.58ms, mfu 5.33%
+iter 8870: loss 5.7088, time 2839.40ms, mfu 5.33%
+iter 8880: loss 5.7646, time 2817.16ms, mfu 5.33%
+iter 8890: loss 5.5760, time 2818.36ms, mfu 5.33%
+[2026-04-19 00:16:30] [7h 16m] Speed at iter 8900 (epoch 0.15): 0.35 iters/sec
+iter 8900: loss 5.8551, time 2818.74ms, mfu 5.33%
+iter 8910: loss 5.6189, time 2816.30ms, mfu 5.33%
+iter 8920: loss 6.0321, time 2818.59ms, mfu 5.34%
+iter 8930: loss 5.6528, time 2833.29ms, mfu 5.33%
+iter 8940: loss 5.7785, time 2820.42ms, mfu 5.33%
+iter 8950: loss 5.8176, time 2816.86ms, mfu 5.34%
+iter 8960: loss 5.9259, time 2817.82ms, mfu 5.34%
+iter 8970: loss 6.0368, time 2838.45ms, mfu 5.33%
+iter 8980: loss 5.9009, time 2820.04ms, mfu 5.34%
+iter 8990: loss 5.7679, time 2817.95ms, mfu 5.34%
+[2026-04-19 00:21:50] [7h 21m] Step  9000 | Epoch   0.15 | train loss 5.8446 | val loss 5.8195 | lr 3.00e-04
+
+[2026-04-19 00:21:50] [7h 21m] Sampling at iter 9000 (epoch 0.15):
+  1. d,--. but the old. thethe by the time to. as, and be the same way over yourer, who's a placeohly'. "we't, or man the first.". come as. i was in a good
+  2.  the had in,,, and for, toat his and, he in to the. ", in the. he put of the the the same as that been to the place, to of. many the world, the othera
+  3.  he to. you, man, i, and' said the same, you. i'd. they i. ' i do you. i should have and i never been in me. he'd for not come up in the other other. 
+
+[2026-04-19 00:22:03] [7h 21m] Speed at iter 9000 (epoch 0.15): 0.30 iters/sec
+iter 9000: loss 5.8220, time 53515.99ms, mfu 4.83%
+iter 9010: loss 5.8371, time 2820.88ms, mfu 4.88%
+iter 9020: loss 6.0286, time 2818.92ms, mfu 4.93%
+iter 9030: loss 5.8349, time 2832.63ms, mfu 4.97%
+iter 9040: loss 5.9785, time 2835.19ms, mfu 5.00%
+iter 9050: loss 5.7551, time 2816.53ms, mfu 5.04%
+iter 9060: loss 5.5526, time 2880.76ms, mfu 5.06%
+iter 9070: loss 5.8632, time 2820.05ms, mfu 5.09%
+iter 9080: loss 5.7579, time 2839.74ms, mfu 5.11%
+iter 9090: loss 5.8530, time 2816.25ms, mfu 5.13%
+[2026-04-19 00:26:46] [7h 26m] Speed at iter 9100 (epoch 0.16): 0.35 iters/sec
+iter 9100: loss 5.9862, time 2821.80ms, mfu 5.15%
+iter 9110: loss 5.6321, time 2817.93ms, mfu 5.17%
+iter 9120: loss 5.8543, time 2820.00ms, mfu 5.19%
+iter 9130: loss 5.9635, time 2819.45ms, mfu 5.21%
+iter 9140: loss 5.8222, time 2817.76ms, mfu 5.22%
+iter 9150: loss 5.9006, time 2817.55ms, mfu 5.23%
+iter 9160: loss 6.1017, time 2823.17ms, mfu 5.24%
+iter 9170: loss 5.6141, time 2819.32ms, mfu 5.25%
+iter 9180: loss 5.6492, time 2851.84ms, mfu 5.26%
+iter 9190: loss 5.8812, time 2814.83ms, mfu 5.27%
+[2026-04-19 00:31:28] [7h 31m] Speed at iter 9200 (epoch 0.16): 0.35 iters/sec
+iter 9200: loss 5.8792, time 2817.97ms, mfu 5.27%
+iter 9210: loss 5.7659, time 2837.61ms, mfu 5.28%
+iter 9220: loss 5.8023, time 2824.64ms, mfu 5.28%
+iter 9230: loss 5.8977, time 2817.31ms, mfu 5.29%
+iter 9240: loss 5.6899, time 2824.48ms, mfu 5.30%
+iter 9250: loss 5.7914, time 2831.06ms, mfu 5.30%
+iter 9260: loss 5.6777, time 2842.53ms, mfu 5.30%
+iter 9270: loss 5.8370, time 2818.18ms, mfu 5.30%
+iter 9280: loss 5.9603, time 2819.58ms, mfu 5.31%
+iter 9290: loss 5.8546, time 2820.52ms, mfu 5.31%
+[2026-04-19 00:36:10] [7h 35m] Speed at iter 9300 (epoch 0.16): 0.35 iters/sec
+iter 9300: loss 5.7699, time 2820.21ms, mfu 5.31%
+iter 9310: loss 5.6527, time 2822.83ms, mfu 5.32%
+iter 9320: loss 6.0118, time 2821.63ms, mfu 5.32%
+iter 9330: loss 5.7804, time 2816.96ms, mfu 5.32%
+iter 9340: loss 5.8965, time 2819.71ms, mfu 5.32%
+iter 9350: loss 6.1708, time 2821.85ms, mfu 5.33%
+iter 9360: loss 5.8778, time 2817.52ms, mfu 5.33%
+iter 9370: loss 5.8812, time 2849.55ms, mfu 5.32%
+iter 9380: loss 5.8788, time 2816.63ms, mfu 5.33%
+iter 9390: loss 5.8830, time 2818.50ms, mfu 5.33%
+[2026-04-19 00:40:53] [7h 40m] Speed at iter 9400 (epoch 0.16): 0.35 iters/sec
+iter 9400: loss 5.9947, time 2819.97ms, mfu 5.33%
+iter 9410: loss 5.9315, time 2817.70ms, mfu 5.33%
+iter 9420: loss 5.9480, time 2831.85ms, mfu 5.33%
+iter 9430: loss 5.8966, time 2840.75ms, mfu 5.33%
+iter 9440: loss 5.8376, time 2824.59ms, mfu 5.33%
+iter 9450: loss 5.7801, time 2840.62ms, mfu 5.33%
+iter 9460: loss 5.8252, time 2845.29ms, mfu 5.32%
+iter 9470: loss 5.8524, time 2820.23ms, mfu 5.33%
+iter 9480: loss 5.8833, time 2858.08ms, mfu 5.32%
+iter 9490: loss 5.8045, time 2840.62ms, mfu 5.32%
+[2026-04-19 00:46:14] [7h 45m] Step  9500 | Epoch   0.16 | train loss 5.8626 | val loss 5.8606 | lr 3.00e-04
+
+[2026-04-19 00:46:14] [7h 45m] Sampling at iter 9500 (epoch 0.16):
+  1.  the be to a is. the it for, his, as a is out his of course and she. place he is in the the and the time of the king the same. s, who the people one h
+  2. . said. of the is to by the. all of the the be of the church and the p. a. there at the life with was which of the be the same which the be in the lan
+  3.  of  of of the. the the she of her the the the the the p the other. old than a these the great the same more to all to the p' to, the country, we'll t
+
+[2026-04-19 00:46:27] [7h 46m] Speed at iter 9500 (epoch 0.16): 0.30 iters/sec
+iter 9500: loss 5.7331, time 53937.41ms, mfu 4.82%
+iter 9510: loss 6.0690, time 2837.70ms, mfu 4.87%
+iter 9520: loss 5.9772, time 2818.61ms, mfu 4.91%
+iter 9530: loss 5.7857, time 2821.30ms, mfu 4.96%
+iter 9540: loss 5.8516, time 2818.20ms, mfu 5.00%
+iter 9550: loss 5.6910, time 2838.95ms, mfu 5.03%
+iter 9560: loss 5.9115, time 2817.78ms, mfu 5.06%
+iter 9570: loss 5.8751, time 2830.50ms, mfu 5.09%
+iter 9580: loss 5.7923, time 2814.93ms, mfu 5.11%
+iter 9590: loss 5.9631, time 2850.97ms, mfu 5.13%
+[2026-04-19 00:51:09] [7h 50m] Speed at iter 9600 (epoch 0.16): 0.35 iters/sec
+iter 9600: loss 5.7851, time 2824.34ms, mfu 5.15%
+iter 9610: loss 5.4413, time 2833.75ms, mfu 5.17%
+iter 9620: loss 6.0290, time 2815.69ms, mfu 5.19%
+iter 9630: loss 5.8275, time 2834.31ms, mfu 5.20%
+iter 9640: loss 5.7716, time 2814.58ms, mfu 5.21%
+iter 9650: loss 6.0361, time 2845.92ms, mfu 5.22%
+iter 9660: loss 5.9111, time 2825.44ms, mfu 5.23%
+iter 9670: loss 6.0361, time 2821.13ms, mfu 5.24%
+iter 9680: loss 6.0341, time 2818.73ms, mfu 5.26%
+iter 9690: loss 5.8195, time 2821.07ms, mfu 5.26%
+[2026-04-19 00:55:52] [7h 55m] Speed at iter 9700 (epoch 0.17): 0.35 iters/sec
+iter 9700: loss 5.8822, time 2818.13ms, mfu 5.27%
+iter 9710: loss 5.7398, time 2818.91ms, mfu 5.28%
+iter 9720: loss 5.8836, time 2824.38ms, mfu 5.29%
+iter 9730: loss 5.9691, time 2822.93ms, mfu 5.29%
+iter 9740: loss 5.9297, time 2817.69ms, mfu 5.30%
+iter 9750: loss 5.9459, time 2817.22ms, mfu 5.30%
+iter 9760: loss 6.0153, time 2819.96ms, mfu 5.31%
+iter 9770: loss 6.0051, time 2820.57ms, mfu 5.31%
+iter 9780: loss 6.0252, time 2820.91ms, mfu 5.31%
+iter 9790: loss 5.9459, time 2824.84ms, mfu 5.32%
+[2026-04-19 01:00:34] [8h 0m] Speed at iter 9800 (epoch 0.17): 0.35 iters/sec
+iter 9800: loss 5.8900, time 2819.45ms, mfu 5.32%
+iter 9810: loss 6.0055, time 2817.02ms, mfu 5.32%
+iter 9820: loss 5.8674, time 2817.99ms, mfu 5.32%
+iter 9830: loss 5.7207, time 2820.93ms, mfu 5.33%
+iter 9840: loss 5.9579, time 2818.64ms, mfu 5.33%
+iter 9850: loss 6.0424, time 2816.94ms, mfu 5.33%
+iter 9860: loss 5.8385, time 2846.73ms, mfu 5.33%
+iter 9870: loss 5.9416, time 2829.38ms, mfu 5.33%
+iter 9880: loss 5.6984, time 2814.13ms, mfu 5.33%
+iter 9890: loss 5.8145, time 2821.61ms, mfu 5.33%
+[2026-04-19 01:05:16] [8h 4m] Speed at iter 9900 (epoch 0.17): 0.35 iters/sec
+iter 9900: loss 5.7959, time 2820.92ms, mfu 5.33%
+iter 9910: loss 5.7159, time 2819.14ms, mfu 5.33%
+iter 9920: loss 5.8034, time 2827.63ms, mfu 5.33%
+iter 9930: loss 5.8879, time 2820.23ms, mfu 5.33%
+iter 9940: loss 5.6932, time 2816.82ms, mfu 5.34%
+iter 9950: loss 6.0393, time 2818.83ms, mfu 5.34%
+iter 9960: loss 5.8777, time 2861.36ms, mfu 5.33%
+iter 9970: loss 6.0044, time 2821.17ms, mfu 5.33%
+iter 9980: loss 6.1778, time 2865.17ms, mfu 5.32%
+iter 9990: loss 6.0159, time 2844.76ms, mfu 5.32%
+[2026-04-19 01:10:37] [8h 10m] Step 10000 | Epoch   0.17 | train loss 5.9176 | val loss 5.8474 | lr 3.00e-04
+[2026-04-19 01:10:46] [8h 10m] Saved periodic checkpoint to pt/bpe_16L16H_iter10000.pt (iter 10000, epoch 0.17)
+
+[2026-04-19 01:10:46] [8h 10m] Sampling at iter 10000 (epoch 0.17):
+  1.  he , me't be a," said to you., said. i and a see them, to the of the if 't be and all, you to the "i's will bring and that would he you, and i was to
+  2.  my, the to,, what ," said said and we, on." i, that's was, to them as you he was about the well, the be." -- can you got the a very get him, have bee
+  3. , it, me to to the, for.  you don have,  i want. be to to it, i that he it was a not be seen, you  what, and were day  you can. . "but own, and had it
+
+[2026-04-19 01:11:00] [8h 10m] Speed at iter 10000 (epoch 0.17): 0.29 iters/sec
+iter 10000: loss 5.9474, time 63258.23ms, mfu 4.81%
+iter 10010: loss 5.9744, time 2842.72ms, mfu 4.86%
+iter 10020: loss 5.8888, time 2840.65ms, mfu 4.91%
+iter 10030: loss 5.8355, time 2849.20ms, mfu 4.94%
+iter 10040: loss 5.4936, time 2847.20ms, mfu 4.98%
+iter 10050: loss 5.8740, time 2838.80ms, mfu 5.01%
+iter 10060: loss 6.1142, time 2857.59ms, mfu 5.04%
+iter 10070: loss 6.0722, time 2841.62ms, mfu 5.07%
+iter 10080: loss 5.6512, time 2845.35ms, mfu 5.09%
+iter 10090: loss 5.9098, time 2844.15ms, mfu 5.11%
+[2026-04-19 01:15:44] [8h 15m] Speed at iter 10100 (epoch 0.17): 0.35 iters/sec
+iter 10100: loss 5.8767, time 2845.98ms, mfu 5.13%
+iter 10110: loss 5.8549, time 2845.85ms, mfu 5.15%
+iter 10120: loss 5.7261, time 2848.06ms, mfu 5.16%
+iter 10130: loss 5.9967, time 2836.32ms, mfu 5.18%
+iter 10140: loss 6.0665, time 2838.15ms, mfu 5.19%
+iter 10150: loss 5.8845, time 2857.28ms, mfu 5.20%
+iter 10160: loss 5.8463, time 2842.13ms, mfu 5.21%
+iter 10170: loss 6.0381, time 2840.62ms, mfu 5.22%
+iter 10180: loss 5.9496, time 2840.05ms, mfu 5.23%
+iter 10190: loss 5.8360, time 2820.59ms, mfu 5.24%
+[2026-04-19 01:20:29] [8h 20m] Speed at iter 10200 (epoch 0.17): 0.35 iters/sec
+iter 10200: loss 6.0578, time 2820.29ms, mfu 5.25%
+iter 10210: loss 6.0460, time 2820.29ms, mfu 5.26%
+iter 10220: loss 5.9303, time 2823.73ms, mfu 5.27%
+iter 10230: loss 5.8382, time 2821.35ms, mfu 5.27%
+iter 10240: loss 5.7524, time 2821.76ms, mfu 5.28%
+iter 10250: loss 6.0444, time 2819.08ms, mfu 5.29%
+iter 10260: loss 5.9020, time 2820.15ms, mfu 5.29%
+iter 10270: loss 5.8700, time 2815.01ms, mfu 5.30%
+iter 10280: loss 5.8032, time 2821.77ms, mfu 5.30%
+iter 10290: loss 5.9513, time 2814.50ms, mfu 5.31%
+[2026-04-19 01:25:11] [8h 24m] Speed at iter 10300 (epoch 0.18): 0.35 iters/sec
+iter 10300: loss 5.8352, time 2828.96ms, mfu 5.31%
+iter 10310: loss 6.0689, time 2819.37ms, mfu 5.31%
+iter 10320: loss 5.9162, time 2817.34ms, mfu 5.32%
+iter 10330: loss 6.1518, time 2820.32ms, mfu 5.32%
+iter 10340: loss 6.0241, time 2816.24ms, mfu 5.32%
+iter 10350: loss 5.7913, time 2812.44ms, mfu 5.33%
+iter 10360: loss 5.9172, time 2840.09ms, mfu 5.32%
+iter 10370: loss 5.6676, time 2821.06ms, mfu 5.33%
+iter 10380: loss 6.2986, time 2814.31ms, mfu 5.33%
+iter 10390: loss 6.0415, time 2820.62ms, mfu 5.33%
+[2026-04-19 01:29:53] [8h 29m] Speed at iter 10400 (epoch 0.18): 0.35 iters/sec
+iter 10400: loss 6.0143, time 2824.44ms, mfu 5.33%
+iter 10410: loss 6.0219, time 2818.98ms, mfu 5.33%
+iter 10420: loss 5.8735, time 2817.78ms, mfu 5.33%
+iter 10430: loss 5.8906, time 2819.82ms, mfu 5.34%
+iter 10440: loss 5.7882, time 2818.49ms, mfu 5.34%
+iter 10450: loss 6.0206, time 2837.09ms, mfu 5.33%
+iter 10460: loss 6.0413, time 2819.71ms, mfu 5.34%
+iter 10470: loss 5.8630, time 2825.49ms, mfu 5.34%
+iter 10480: loss 5.8175, time 2817.50ms, mfu 5.34%
+iter 10490: loss 5.9643, time 2820.52ms, mfu 5.34%
+[2026-04-19 01:35:13] [8h 34m] Step 10500 | Epoch   0.18 | train loss 5.9786 | val loss 5.9607 | lr 3.00e-04
+
+[2026-04-19 01:35:13] [8h 34m] Sampling at iter 10500 (epoch 0.18):
+  1.  i the, that thaton' had'll in a of you--,", and. this'll in this you will,, for--but i know was. but he was, and the said you." ' can he. i don you,"
+  2. . and had the the and was on to as and he answered she, then as. i the as., in to which, this my him. in in.. now and's to give not. the the. you to w
+  3. . i and, all. with whichw. and, and that i said for i don, and--.  do me it, and ---- can! said he was i! his to you, ' her to him out that'd, but to 
+
+[2026-04-19 01:35:27] [8h 35m] Speed at iter 10500 (epoch 0.18): 0.30 iters/sec
+iter 10500: loss 6.0620, time 53841.51ms, mfu 4.83%
+iter 10510: loss 5.8244, time 2813.22ms, mfu 4.88%
+iter 10520: loss 5.8291, time 2816.94ms, mfu 4.93%
+iter 10530: loss 5.8691, time 2817.18ms, mfu 4.97%
+iter 10540: loss 5.7537, time 2816.88ms, mfu 5.01%
+iter 10550: loss 6.0815, time 2823.80ms, mfu 5.04%
+iter 10560: loss 5.9505, time 2821.95ms, mfu 5.07%
+iter 10570: loss 5.7051, time 2815.38ms, mfu 5.10%
+iter 10580: loss 5.8764, time 2821.29ms, mfu 5.13%
+iter 10590: loss 6.1951, time 2821.41ms, mfu 5.15%
+[2026-04-19 01:40:09] [8h 39m] Speed at iter 10600 (epoch 0.18): 0.35 iters/sec
+iter 10600: loss 5.7458, time 2863.48ms, mfu 5.16%
+iter 10610: loss 6.0624, time 2843.46ms, mfu 5.17%
+iter 10620: loss 5.8486, time 2834.42ms, mfu 5.19%
+iter 10630: loss 5.8845, time 2853.07ms, mfu 5.20%
+iter 10640: loss 5.9161, time 2839.06ms, mfu 5.21%
+iter 10650: loss 5.9582, time 2836.11ms, mfu 5.22%
+iter 10660: loss 5.8925, time 2872.97ms, mfu 5.22%
+iter 10670: loss 5.7588, time 2842.45ms, mfu 5.23%
+iter 10680: loss 5.9315, time 2844.63ms, mfu 5.24%
+iter 10690: loss 5.9025, time 2874.72ms, mfu 5.24%
+[2026-04-19 01:44:54] [8h 44m] Speed at iter 10700 (epoch 0.18): 0.35 iters/sec
+iter 10700: loss 5.9867, time 2846.29ms, mfu 5.24%
+iter 10710: loss 6.0078, time 2839.00ms, mfu 5.25%
+iter 10720: loss 5.9549, time 2859.49ms, mfu 5.25%
+iter 10730: loss 6.1502, time 2844.18ms, mfu 5.26%
+iter 10740: loss 5.8289, time 2837.21ms, mfu 5.26%
+iter 10750: loss 6.0297, time 2847.55ms, mfu 5.27%
+iter 10760: loss 6.0292, time 2841.89ms, mfu 5.27%
+iter 10770: loss 5.9168, time 2840.97ms, mfu 5.27%
+iter 10780: loss 5.9084, time 2852.83ms, mfu 5.27%
+iter 10790: loss 5.9863, time 2838.43ms, mfu 5.28%
+[2026-04-19 01:49:39] [8h 49m] Speed at iter 10800 (epoch 0.18): 0.35 iters/sec
+iter 10800: loss 6.0817, time 2841.45ms, mfu 5.28%
+iter 10810: loss 5.7601, time 2854.46ms, mfu 5.28%
+iter 10820: loss 6.0874, time 2843.74ms, mfu 5.28%
+iter 10830: loss 5.9839, time 2834.75ms, mfu 5.29%
+iter 10840: loss 5.9633, time 2860.79ms, mfu 5.28%
+iter 10850: loss 5.8214, time 2836.91ms, mfu 5.29%
+iter 10860: loss 5.9338, time 2839.82ms, mfu 5.29%
+iter 10870: loss 6.2237, time 2855.82ms, mfu 5.29%
+iter 10880: loss 5.9787, time 2839.04ms, mfu 5.29%
+iter 10890: loss 5.7763, time 2837.31ms, mfu 5.29%
+[2026-04-19 01:54:24] [8h 53m] Speed at iter 10900 (epoch 0.19): 0.35 iters/sec
+iter 10900: loss 5.8703, time 2856.79ms, mfu 5.29%
+iter 10910: loss 5.9684, time 2840.96ms, mfu 5.29%
+iter 10920: loss 5.9392, time 2838.32ms, mfu 5.29%
+iter 10930: loss 5.8363, time 2887.91ms, mfu 5.29%
+iter 10940: loss 5.9695, time 2838.69ms, mfu 5.29%
+iter 10950: loss 5.8086, time 2837.25ms, mfu 5.29%
+iter 10960: loss 6.2313, time 2848.85ms, mfu 5.29%
+iter 10970: loss 5.8839, time 2843.98ms, mfu 5.29%
+iter 10980: loss 6.0327, time 2842.83ms, mfu 5.29%
+iter 10990: loss 5.8637, time 2850.11ms, mfu 5.29%
+[2026-04-19 01:59:46] [8h 59m] Step 11000 | Epoch   0.19 | train loss 5.9653 | val loss 6.0506 | lr 3.00e-04
+
+[2026-04-19 01:59:46] [8h 59m] Sampling at iter 11000 (epoch 0.19):
+  1. "  he. he to," have. to the all is the way of the'syou the my i come most of him, as it, and i tell the very not what see the thing, and't work." up a
+  2. , which, the the which. their to and the we, with the other not be our shall, and then the old the two and they and there it will not that.  and the e
+  3.  is he said.  had the of in the same would with the the way of of the other to know the enemy were the end at a the enemy from " name was him, it. the
+
+[2026-04-19 02:00:00] [8h 59m] Speed at iter 11000 (epoch 0.19): 0.30 iters/sec
+iter 11000: loss 6.0237, time 54283.99ms, mfu 4.79%
+iter 11010: loss 5.8918, time 2845.40ms, mfu 4.84%
+iter 11020: loss 5.9701, time 2842.21ms, mfu 4.89%
+iter 11030: loss 6.0253, time 2910.01ms, mfu 4.92%
+iter 11040: loss 5.9814, time 2841.51ms, mfu 4.96%
+iter 11050: loss 6.1623, time 2840.46ms, mfu 4.99%
+iter 11060: loss 6.1503, time 2866.63ms, mfu 5.02%
+iter 11070: loss 6.0239, time 2840.36ms, mfu 5.05%
+iter 11080: loss 5.8457, time 2839.64ms, mfu 5.07%
+iter 11090: loss 6.0627, time 2845.20ms, mfu 5.09%
+[2026-04-19 02:04:45] [9h 4m] Speed at iter 11100 (epoch 0.19): 0.35 iters/sec
+iter 11100: loss 6.0636, time 2844.88ms, mfu 5.12%
+iter 11110: loss 5.9717, time 2843.34ms, mfu 5.13%
+iter 11120: loss 5.9713, time 2865.61ms, mfu 5.15%
+iter 11130: loss 6.0960, time 2863.58ms, mfu 5.16%
+iter 11140: loss 6.0490, time 2967.81ms, mfu 5.15%
+iter 11150: loss 5.9079, time 3043.48ms, mfu 5.13%
+iter 11160: loss 6.0386, time 3060.01ms, mfu 5.11%
+iter 11170: loss 5.9023, time 2821.41ms, mfu 5.13%
+iter 11180: loss 5.9633, time 2824.18ms, mfu 5.15%
+iter 11190: loss 6.3091, time 2837.85ms, mfu 5.17%
+[2026-04-19 02:09:33] [9h 9m] Speed at iter 11200 (epoch 0.19): 0.35 iters/sec
+iter 11200: loss 6.1824, time 2820.73ms, mfu 5.19%
+iter 11210: loss 5.8866, time 2833.00ms, mfu 5.20%
+iter 11220: loss 5.9931, time 2818.46ms, mfu 5.21%
+iter 11230: loss 6.0809, time 2817.87ms, mfu 5.23%
+iter 11240: loss 5.9968, time 2818.70ms, mfu 5.24%
+iter 11250: loss 6.0476, time 2820.85ms, mfu 5.25%
+iter 11260: loss 6.1457, time 2816.91ms, mfu 5.26%
+iter 11270: loss 6.0944, time 2823.50ms, mfu 5.27%
+iter 11280: loss 6.0503, time 2818.96ms, mfu 5.28%
+iter 11290: loss 6.0979, time 2821.25ms, mfu 5.28%
+[2026-04-19 02:14:16] [9h 13m] Speed at iter 11300 (epoch 0.19): 0.35 iters/sec
+iter 11300: loss 6.0189, time 2824.56ms, mfu 5.29%
+iter 11310: loss 6.0137, time 2815.29ms, mfu 5.29%
+iter 11320: loss 5.9288, time 2819.79ms, mfu 5.30%
+iter 11330: loss 6.2304, time 2820.93ms, mfu 5.30%
+iter 11340: loss 5.8972, time 2831.37ms, mfu 5.31%
+iter 11350: loss 5.9589, time 2816.68ms, mfu 5.31%
+iter 11360: loss 5.8708, time 2850.08ms, mfu 5.31%
+iter 11370: loss 6.1760, time 2823.69ms, mfu 5.31%
+iter 11380: loss 6.0184, time 2837.93ms, mfu 5.31%
+iter 11390: loss 6.0759, time 2815.87ms, mfu 5.32%
+[2026-04-19 02:18:58] [9h 18m] Speed at iter 11400 (epoch 0.19): 0.35 iters/sec
+iter 11400: loss 5.9560, time 2832.28ms, mfu 5.32%
+iter 11410: loss 5.8192, time 2819.54ms, mfu 5.32%
+iter 11420: loss 6.1575, time 2828.04ms, mfu 5.32%
+iter 11430: loss 5.8739, time 2829.83ms, mfu 5.32%
+iter 11440: loss 6.1136, time 2838.30ms, mfu 5.32%
+iter 11450: loss 5.9143, time 2820.66ms, mfu 5.32%
+iter 11460: loss 5.8644, time 2822.02ms, mfu 5.32%
+iter 11470: loss 5.9900, time 2822.16ms, mfu 5.33%
+iter 11480: loss 6.0787, time 2820.53ms, mfu 5.33%
+iter 11490: loss 6.0967, time 2821.65ms, mfu 5.33%
+[2026-04-19 02:24:19] [9h 23m] Step 11500 | Epoch   0.20 | train loss 6.0417 | val loss 6.0855 | lr 3.00e-04
+
+[2026-04-19 02:24:19] [9h 23m] Sampling at iter 11500 (epoch 0.20):
+  1.  his the to the but the, and, and i can and you the a and all i the me, the whole, ", but the enemy to, and, he, to my, will the " he may they but the
+  2. , you the all, have , was be all and to be, so  had to have is with. , my left, she of i a said, of the old have the and i, and to you by i have we co
+  3. ,, you see to the fire see up as  have  do a if i have have of i of their way it we were and the for, getthe. "we the way and get dear, as i not when 
+
+[2026-04-19 02:24:32] [9h 24m] Speed at iter 11500 (epoch 0.20): 0.30 iters/sec
+iter 11500: loss 6.0857, time 53692.28ms, mfu 4.82%
+iter 11510: loss 6.0288, time 2845.02ms, mfu 4.87%
+iter 11520: loss 5.9434, time 2818.04ms, mfu 4.92%
+iter 11530: loss 6.0158, time 2816.54ms, mfu 4.96%
+iter 11540: loss 6.0085, time 2815.98ms, mfu 5.00%
+iter 11550: loss 6.2336, time 2819.43ms, mfu 5.04%
+iter 11560: loss 6.1890, time 2817.63ms, mfu 5.07%
+iter 11570: loss 6.2647, time 2817.11ms, mfu 5.10%
+iter 11580: loss 5.9968, time 2822.98ms, mfu 5.12%
+iter 11590: loss 6.2127, time 2824.51ms, mfu 5.14%
+[2026-04-19 02:29:14] [9h 28m] Speed at iter 11600 (epoch 0.20): 0.35 iters/sec
+iter 11600: loss 5.9897, time 2815.88ms, mfu 5.16%
+iter 11610: loss 5.9939, time 2823.84ms, mfu 5.18%
+iter 11620: loss 6.1002, time 2821.46ms, mfu 5.20%
+iter 11630: loss 6.0771, time 2815.54ms, mfu 5.21%
+iter 11640: loss 5.9890, time 2835.21ms, mfu 5.22%
+iter 11650: loss 6.0906, time 2816.94ms, mfu 5.24%
+iter 11660: loss 6.0527, time 2830.96ms, mfu 5.24%
+iter 11670: loss 6.0478, time 2825.46ms, mfu 5.25%
+iter 11680: loss 6.2739, time 2825.81ms, mfu 5.26%
+iter 11690: loss 5.9511, time 2820.17ms, mfu 5.27%
+[2026-04-19 02:33:57] [9h 33m] Speed at iter 11700 (epoch 0.20): 0.35 iters/sec
+iter 11700: loss 6.0415, time 2821.70ms, mfu 5.28%
+iter 11710: loss 6.0137, time 2819.38ms, mfu 5.28%
+iter 11720: loss 5.7542, time 2824.11ms, mfu 5.29%
+iter 11730: loss 6.3207, time 2822.74ms, mfu 5.29%
+iter 11740: loss 6.0478, time 2821.22ms, mfu 5.30%
+iter 11750: loss 6.1109, time 2820.40ms, mfu 5.30%
+iter 11760: loss 5.8491, time 2820.68ms, mfu 5.31%
+iter 11770: loss 6.0283, time 2826.94ms, mfu 5.31%
+iter 11780: loss 5.9450, time 2820.84ms, mfu 5.31%
+iter 11790: loss 5.9848, time 2819.85ms, mfu 5.32%
+[2026-04-19 02:38:39] [9h 38m] Speed at iter 11800 (epoch 0.20): 0.35 iters/sec
+iter 11800: loss 5.9608, time 2824.31ms, mfu 5.32%
+iter 11810: loss 6.1016, time 2816.86ms, mfu 5.32%
+iter 11820: loss 5.7861, time 2821.03ms, mfu 5.32%
+iter 11830: loss 5.9552, time 2844.20ms, mfu 5.32%
+iter 11840: loss 5.8247, time 2819.22ms, mfu 5.32%
+iter 11850: loss 6.2414, time 2853.30ms, mfu 5.32%
+iter 11860: loss 6.0076, time 2821.14ms, mfu 5.32%
+iter 11870: loss 6.1723, time 2819.72ms, mfu 5.32%
+iter 11880: loss 5.9677, time 2851.09ms, mfu 5.32%
+iter 11890: loss 6.1557, time 2821.58ms, mfu 5.32%
+[2026-04-19 02:43:22] [9h 42m] Speed at iter 11900 (epoch 0.20): 0.35 iters/sec
+iter 11900: loss 5.9211, time 2817.79ms, mfu 5.33%
+iter 11910: loss 5.8516, time 2840.43ms, mfu 5.32%
+iter 11920: loss 6.0615, time 2818.23ms, mfu 5.33%
+iter 11930: loss 6.1016, time 2822.34ms, mfu 5.33%
+iter 11940: loss 5.9718, time 2835.19ms, mfu 5.33%
+iter 11950: loss 5.9167, time 2829.36ms, mfu 5.33%
+iter 11960: loss 5.8742, time 2817.56ms, mfu 5.33%
+iter 11970: loss 5.9981, time 2817.54ms, mfu 5.33%
+iter 11980: loss 6.0198, time 2819.77ms, mfu 5.33%
+iter 11990: loss 5.8894, time 2817.35ms, mfu 5.33%
+[2026-04-19 02:48:42] [9h 48m] Step 12000 | Epoch   0.20 | train loss 6.1272 | val loss 6.0133 | lr 2.99e-04
+
+[2026-04-19 02:48:42] [9h 48m] Sampling at iter 12000 (epoch 0.20):
+  1.  a. to, a of, or of of. at, the the of their said us to the, in the r. she. "-- i. the i to a hering and the of a a have i should the he had, it he sa
+  2.  had. of his of a the to., the the, the the the the this all's. out the the. the she to as the this. he saw. he, and the door in a and theirit her. on
+  3.  of some had and fromed be of or the man the to the.. he was in in a to the great the his voice with the old the of the young. for not, hean., the way
+
+[2026-04-19 02:48:55] [9h 48m] Speed at iter 12000 (epoch 0.20): 0.30 iters/sec
+iter 12000: loss 6.1168, time 54055.94ms, mfu 4.83%
+iter 12010: loss 5.9901, time 2826.59ms, mfu 4.88%
+iter 12020: loss 6.0258, time 2820.88ms, mfu 4.93%
+iter 12030: loss 6.2372, time 2821.85ms, mfu 4.97%
+iter 12040: loss 6.0059, time 2827.51ms, mfu 5.00%
+iter 12050: loss 6.3020, time 2845.05ms, mfu 5.03%
+iter 12060: loss 5.9719, time 2832.39ms, mfu 5.06%
+iter 12070: loss 5.9993, time 2836.63ms, mfu 5.09%
+iter 12080: loss 5.9877, time 2837.87ms, mfu 5.11%
+iter 12090: loss 6.1250, time 2833.97ms, mfu 5.13%
+[2026-04-19 02:53:39] [9h 53m] Speed at iter 12100 (epoch 0.21): 0.35 iters/sec
+iter 12100: loss 6.2253, time 2849.38ms, mfu 5.15%
+iter 12110: loss 6.1063, time 2831.15ms, mfu 5.16%
+iter 12120: loss 5.9922, time 2833.65ms, mfu 5.18%
+iter 12130: loss 6.1911, time 2834.86ms, mfu 5.19%
+iter 12140: loss 5.9143, time 2835.94ms, mfu 5.21%
+iter 12150: loss 5.9401, time 2848.65ms, mfu 5.21%
+iter 12160: loss 6.1138, time 2827.79ms, mfu 5.23%
+iter 12170: loss 5.9150, time 2826.49ms, mfu 5.24%
+iter 12180: loss 6.2155, time 2826.54ms, mfu 5.25%
+iter 12190: loss 6.1477, time 2831.45ms, mfu 5.25%
+[2026-04-19 02:58:22] [9h 57m] Speed at iter 12200 (epoch 0.21): 0.35 iters/sec
+iter 12200: loss 6.1854, time 2826.81ms, mfu 5.26%
+iter 12210: loss 6.0219, time 2833.46ms, mfu 5.27%
+iter 12220: loss 6.1567, time 2826.19ms, mfu 5.27%
+iter 12230: loss 6.1383, time 2825.36ms, mfu 5.28%
+iter 12240: loss 6.2592, time 2826.27ms, mfu 5.29%
+iter 12250: loss 6.1004, time 2846.38ms, mfu 5.29%
+iter 12260: loss 6.0502, time 2829.89ms, mfu 5.29%
+iter 12270: loss 6.0193, time 2829.50ms, mfu 5.29%
+iter 12280: loss 6.0931, time 2826.37ms, mfu 5.30%
+iter 12290: loss 6.1096, time 2830.63ms, mfu 5.30%
+[2026-04-19 03:03:05] [10h 2m] Speed at iter 12300 (epoch 0.21): 0.35 iters/sec
+iter 12300: loss 6.0834, time 2837.88ms, mfu 5.30%
+iter 12310: loss 6.0131, time 2828.47ms, mfu 5.30%
+iter 12320: loss 6.0435, time 2833.04ms, mfu 5.31%
+iter 12330: loss 6.2363, time 2829.70ms, mfu 5.31%
+iter 12340: loss 5.8656, time 2846.40ms, mfu 5.31%
+iter 12350: loss 5.9138, time 2828.54ms, mfu 5.31%
+iter 12360: loss 5.8255, time 2829.70ms, mfu 5.31%
+iter 12370: loss 5.9563, time 2874.66ms, mfu 5.30%
+iter 12380: loss 5.9543, time 2857.30ms, mfu 5.30%
+iter 12390: loss 6.1383, time 2826.82ms, mfu 5.30%
+[2026-04-19 03:07:49] [10h 7m] Speed at iter 12400 (epoch 0.21): 0.35 iters/sec
+iter 12400: loss 6.0983, time 2827.31ms, mfu 5.31%
+iter 12410: loss 6.2260, time 2830.44ms, mfu 5.31%
+iter 12420: loss 6.0750, time 2835.11ms, mfu 5.31%
+iter 12430: loss 5.9390, time 2840.01ms, mfu 5.31%
+iter 12440: loss 5.9980, time 2831.41ms, mfu 5.31%
+iter 12450: loss 6.1012, time 2829.26ms, mfu 5.31%
+iter 12460: loss 5.9726, time 2842.01ms, mfu 5.31%
+iter 12470: loss 6.0566, time 2827.91ms, mfu 5.31%
+iter 12480: loss 6.1121, time 2822.95ms, mfu 5.32%
+iter 12490: loss 6.0178, time 2830.16ms, mfu 5.32%
+[2026-04-19 03:13:10] [10h 12m] Step 12500 | Epoch   0.21 | train loss 6.1131 | val loss 6.0109 | lr 2.99e-04
+
+[2026-04-19 03:13:10] [10h 12m] Sampling at iter 12500 (epoch 0.21):
+  1.  hads was. you. if. i in the b will want's for. i've't, a few i had, if was. that if it was days that. what i. it that he could not a, the her a few a
+  2.  was,. fw and. d.. what c not,.. you the the the same,.  all. s for the country in a little the north the way of he could would go to speak to his a g
+  3. .,, was, it,. , to. but the the day they was; and. what i be a little a, with which to be i army to the same to hady of a do as you it, and an all was
+
+[2026-04-19 03:13:23] [10h 12m] Speed at iter 12500 (epoch 0.21): 0.30 iters/sec
+iter 12500: loss 6.1517, time 54105.88ms, mfu 4.81%
+iter 12510: loss 6.1433, time 2849.79ms, mfu 4.86%
+iter 12520: loss 5.9991, time 2833.72ms, mfu 4.91%
+iter 12530: loss 6.1941, time 2829.95ms, mfu 4.95%
+iter 12540: loss 6.2330, time 2826.87ms, mfu 4.99%
+iter 12550: loss 6.0654, time 2830.09ms, mfu 5.02%
+iter 12560: loss 6.0491, time 2856.69ms, mfu 5.05%
+iter 12570: loss 6.2728, time 2827.65ms, mfu 5.07%
+iter 12580: loss 5.9812, time 2828.39ms, mfu 5.10%
+iter 12590: loss 6.3044, time 2831.81ms, mfu 5.12%
+[2026-04-19 03:18:07] [10h 17m] Speed at iter 12600 (epoch 0.22): 0.35 iters/sec
+iter 12600: loss 6.0445, time 2830.27ms, mfu 5.14%
+iter 12610: loss 6.0905, time 2852.67ms, mfu 5.16%
+iter 12620: loss 6.0716, time 2831.17ms, mfu 5.17%
+iter 12630: loss 6.1902, time 2829.08ms, mfu 5.19%
+iter 12640: loss 6.0062, time 2833.18ms, mfu 5.20%
+iter 12650: loss 6.0335, time 2826.05ms, mfu 5.22%
+iter 12660: loss 6.1113, time 2831.25ms, mfu 5.23%
+iter 12670: loss 6.0399, time 2823.58ms, mfu 5.24%
+iter 12680: loss 6.1518, time 2835.71ms, mfu 5.24%
+iter 12690: loss 6.1109, time 2829.95ms, mfu 5.25%
+[2026-04-19 03:22:50] [10h 22m] Speed at iter 12700 (epoch 0.22): 0.35 iters/sec
+iter 12700: loss 6.1195, time 2829.57ms, mfu 5.26%
+iter 12710: loss 6.2186, time 2831.93ms, mfu 5.27%
+iter 12720: loss 6.2857, time 2829.46ms, mfu 5.27%
+iter 12730: loss 6.1227, time 2857.75ms, mfu 5.27%
+iter 12740: loss 6.0801, time 2824.20ms, mfu 5.28%
+iter 12750: loss 6.0628, time 2830.43ms, mfu 5.28%
+iter 12760: loss 6.1039, time 2832.23ms, mfu 5.29%
+iter 12770: loss 6.0898, time 2837.61ms, mfu 5.29%
+iter 12780: loss 6.3002, time 2831.15ms, mfu 5.29%
+iter 12790: loss 6.1900, time 2828.91ms, mfu 5.30%
+[2026-04-19 03:27:33] [10h 27m] Speed at iter 12800 (epoch 0.22): 0.35 iters/sec
+iter 12800: loss 6.0291, time 2826.22ms, mfu 5.30%
+iter 12810: loss 6.1050, time 2819.46ms, mfu 5.30%
+iter 12820: loss 6.2628, time 2822.08ms, mfu 5.31%
+iter 12830: loss 6.1963, time 2819.05ms, mfu 5.31%
+iter 12840: loss 6.2769, time 2823.25ms, mfu 5.31%
+iter 12850: loss 6.2278, time 2827.06ms, mfu 5.32%
+iter 12860: loss 6.1601, time 2821.27ms, mfu 5.32%
+iter 12870: loss 6.0919, time 2818.03ms, mfu 5.32%
+iter 12880: loss 6.1118, time 2820.75ms, mfu 5.32%
+iter 12890: loss 6.2360, time 2822.96ms, mfu 5.33%
+[2026-04-19 03:32:15] [10h 31m] Speed at iter 12900 (epoch 0.22): 0.35 iters/sec
+iter 12900: loss 5.9337, time 2821.53ms, mfu 5.33%
+iter 12910: loss 5.9504, time 2819.44ms, mfu 5.33%
+iter 12920: loss 6.1128, time 2819.47ms, mfu 5.33%
+iter 12930: loss 6.2130, time 2821.55ms, mfu 5.33%
+iter 12940: loss 6.1274, time 2817.58ms, mfu 5.33%
+iter 12950: loss 5.9290, time 2816.76ms, mfu 5.34%
+iter 12960: loss 6.0684, time 2819.76ms, mfu 5.34%
+iter 12970: loss 5.9397, time 2820.89ms, mfu 5.34%
+iter 12980: loss 6.0307, time 2819.02ms, mfu 5.34%
+iter 12990: loss 5.9715, time 2818.38ms, mfu 5.34%
+[2026-04-19 03:37:35] [10h 37m] Step 13000 | Epoch   0.22 | train loss 6.1481 | val loss 6.1090 | lr 2.99e-04
+
+[2026-04-19 03:37:35] [10h 37m] Sampling at iter 13000 (epoch 0.22):
+  1.  but be all. be, i. to and be are, for, in a to the time, and, and the and her the me. "oh, and the, who for for all to be made a time the more, and. 
+  2. , a, which to be, or and, and would with been, but had a the his, a that brought, all the the other, and that he to the only, which all, on, the time 
+  3.  the it,. 't, a from, of the a few.. "you the a and as, and all not i the me to be a and of the were as, and be, and as there he a the the first is, a
+
+[2026-04-19 03:37:48] [10h 37m] Speed at iter 13000 (epoch 0.22): 0.30 iters/sec
+iter 13000: loss 6.0581, time 53220.10ms, mfu 4.83%
+iter 13010: loss 6.0799, time 2816.47ms, mfu 4.89%
+iter 13020: loss 6.0252, time 2818.65ms, mfu 4.93%
+iter 13030: loss 6.0103, time 2820.85ms, mfu 4.97%
+iter 13040: loss 6.0766, time 2827.92ms, mfu 5.01%
+iter 13050: loss 6.0535, time 2819.58ms, mfu 5.04%
+iter 13060: loss 6.2222, time 2818.58ms, mfu 5.07%
+iter 13070: loss 5.9420, time 2821.66ms, mfu 5.10%
+iter 13080: loss 6.4933, time 2821.56ms, mfu 5.12%
+iter 13090: loss 6.2157, time 2818.64ms, mfu 5.15%
+[2026-04-19 03:42:30] [10h 42m] Speed at iter 13100 (epoch 0.22): 0.35 iters/sec
+iter 13100: loss 6.0529, time 2820.31ms, mfu 5.17%
+iter 13110: loss 6.0573, time 2818.94ms, mfu 5.18%
+iter 13120: loss 6.2084, time 2817.36ms, mfu 5.20%
+iter 13130: loss 6.1917, time 2815.30ms, mfu 5.22%
+iter 13140: loss 6.0673, time 2821.99ms, mfu 5.23%
+iter 13150: loss 6.1525, time 2823.65ms, mfu 5.24%
+iter 13160: loss 6.0415, time 2824.71ms, mfu 5.25%
+iter 13170: loss 6.0220, time 2820.26ms, mfu 5.26%
+iter 13180: loss 6.1223, time 2815.95ms, mfu 5.27%
+iter 13190: loss 6.2920, time 2818.01ms, mfu 5.28%
+[2026-04-19 03:47:11] [10h 46m] Speed at iter 13200 (epoch 0.23): 0.35 iters/sec
+iter 13200: loss 6.0991, time 2824.01ms, mfu 5.28%
+iter 13210: loss 6.1529, time 2819.09ms, mfu 5.29%
+iter 13220: loss 6.1271, time 2822.06ms, mfu 5.29%
+iter 13230: loss 6.1120, time 2819.14ms, mfu 5.30%
+iter 13240: loss 6.0481, time 2820.25ms, mfu 5.30%
+iter 13250: loss 6.1288, time 2819.22ms, mfu 5.31%
+iter 13260: loss 6.0119, time 2820.19ms, mfu 5.31%
+iter 13270: loss 6.0773, time 2818.14ms, mfu 5.32%
+iter 13280: loss 5.8523, time 2818.63ms, mfu 5.32%
+iter 13290: loss 6.2291, time 2821.70ms, mfu 5.32%
+[2026-04-19 03:51:53] [10h 51m] Speed at iter 13300 (epoch 0.23): 0.35 iters/sec
+iter 13300: loss 6.2898, time 2818.07ms, mfu 5.32%
+iter 13310: loss 6.1613, time 2819.66ms, mfu 5.33%
+iter 13320: loss 6.1558, time 2818.15ms, mfu 5.33%
+iter 13330: loss 6.0621, time 2819.27ms, mfu 5.33%
+iter 13340: loss 6.2349, time 2815.56ms, mfu 5.33%
+iter 13350: loss 6.2111, time 2818.89ms, mfu 5.33%
+iter 13360: loss 6.0559, time 2819.13ms, mfu 5.33%
+iter 13370: loss 5.9269, time 2819.36ms, mfu 5.34%
+iter 13380: loss 6.1199, time 2820.67ms, mfu 5.34%
+iter 13390: loss 6.1992, time 2820.83ms, mfu 5.34%
+[2026-04-19 03:56:35] [10h 56m] Speed at iter 13400 (epoch 0.23): 0.35 iters/sec
+iter 13400: loss 6.1075, time 2818.12ms, mfu 5.34%
+iter 13410: loss 6.0951, time 2819.42ms, mfu 5.34%
+iter 13420: loss 5.9548, time 2819.15ms, mfu 5.34%
+iter 13430: loss 5.8977, time 2815.03ms, mfu 5.34%
+iter 13440: loss 5.9310, time 2818.37ms, mfu 5.34%
+iter 13450: loss 5.9516, time 2817.29ms, mfu 5.34%
+iter 13460: loss 5.8810, time 2820.51ms, mfu 5.34%
+iter 13470: loss 6.1858, time 2820.81ms, mfu 5.34%
+iter 13480: loss 6.0453, time 2819.53ms, mfu 5.34%
+iter 13490: loss 5.9708, time 2820.95ms, mfu 5.34%
+[2026-04-19 04:01:55] [11h 1m] Step 13500 | Epoch   0.23 | train loss 6.1231 | val loss 6.1428 | lr 2.99e-04
+
+[2026-04-19 04:01:55] [11h 1m] Sampling at iter 13500 (epoch 0.23):
+  1.  is of by the to the at and the a his it of his at to was the same house out " the old in the in the little on the the day, in, to the the life the ho
+  2.  and you the "i of the great do to like are to i. old, and then. in the face, and we, and he." tell,, and the two the great his. and,'m had.". " are t
+  3.  of of of from,, who to as of the country, and the world he, of a of a and the old was the, of to the best, and an had the country from to the house o
+
+[2026-04-19 04:02:08] [11h 1m] Speed at iter 13500 (epoch 0.23): 0.30 iters/sec
+iter 13500: loss 6.2345, time 53175.07ms, mfu 4.84%
+iter 13510: loss 6.0845, time 2814.79ms, mfu 4.89%
+iter 13520: loss 6.1653, time 2816.35ms, mfu 4.94%
+iter 13530: loss 6.1097, time 2819.65ms, mfu 4.98%
+iter 13540: loss 6.1384, time 2815.69ms, mfu 5.01%
+iter 13550: loss 5.8162, time 2816.67ms, mfu 5.05%
+iter 13560: loss 6.1420, time 2815.79ms, mfu 5.08%
+iter 13570: loss 6.2275, time 2818.18ms, mfu 5.11%
+iter 13580: loss 6.1138, time 2821.88ms, mfu 5.13%
+iter 13590: loss 6.1665, time 2822.85ms, mfu 5.15%
+[2026-04-19 04:06:49] [11h 6m] Speed at iter 13600 (epoch 0.23): 0.35 iters/sec
+iter 13600: loss 6.1417, time 2818.32ms, mfu 5.17%
+iter 13610: loss 6.3497, time 2812.18ms, mfu 5.19%
+iter 13620: loss 5.8512, time 2821.79ms, mfu 5.20%
+iter 13630: loss 6.2376, time 2819.29ms, mfu 5.22%
+iter 13640: loss 5.9346, time 2817.23ms, mfu 5.23%
+iter 13650: loss 6.2767, time 2822.40ms, mfu 5.24%
+iter 13660: loss 6.1360, time 2823.66ms, mfu 5.25%
+iter 13670: loss 6.0741, time 2816.79ms, mfu 5.26%
+iter 13680: loss 6.0604, time 2816.88ms, mfu 5.27%
+iter 13690: loss 6.1637, time 2817.32ms, mfu 5.28%
+[2026-04-19 04:11:31] [11h 11m] Speed at iter 13700 (epoch 0.23): 0.35 iters/sec
+iter 13700: loss 5.9833, time 2812.66ms, mfu 5.29%
+iter 13710: loss 5.9419, time 2811.88ms, mfu 5.29%
+iter 13720: loss 6.1162, time 2815.54ms, mfu 5.30%
+iter 13730: loss 6.1445, time 2817.56ms, mfu 5.30%
+iter 13740: loss 6.1261, time 2817.32ms, mfu 5.31%
+iter 13750: loss 6.1942, time 2818.44ms, mfu 5.31%
+iter 13760: loss 5.8978, time 2824.14ms, mfu 5.32%
+iter 13770: loss 6.0826, time 2819.45ms, mfu 5.32%
+iter 13780: loss 6.0028, time 2811.91ms, mfu 5.32%
+iter 13790: loss 6.0232, time 2815.48ms, mfu 5.33%
+[2026-04-19 04:16:13] [11h 15m] Speed at iter 13800 (epoch 0.24): 0.35 iters/sec
+iter 13800: loss 6.0324, time 2812.24ms, mfu 5.33%
+iter 13810: loss 6.2372, time 2815.13ms, mfu 5.33%
+iter 13820: loss 6.1520, time 2818.29ms, mfu 5.33%
+iter 13830: loss 6.2657, time 2814.12ms, mfu 5.34%
+iter 13840: loss 6.0252, time 2815.92ms, mfu 5.34%
+iter 13850: loss 5.8720, time 2819.39ms, mfu 5.34%
+iter 13860: loss 6.0277, time 2819.30ms, mfu 5.34%
+iter 13870: loss 6.0778, time 2816.93ms, mfu 5.34%
+iter 13880: loss 6.2301, time 2814.36ms, mfu 5.34%
+iter 13890: loss 6.2838, time 2815.03ms, mfu 5.34%
+[2026-04-19 04:20:55] [11h 20m] Speed at iter 13900 (epoch 0.24): 0.35 iters/sec
+iter 13900: loss 6.0526, time 2819.81ms, mfu 5.34%
+iter 13910: loss 6.2437, time 2817.03ms, mfu 5.34%
+iter 13920: loss 5.9319, time 2819.33ms, mfu 5.34%
+iter 13930: loss 6.0075, time 2816.29ms, mfu 5.34%
+iter 13940: loss 6.0056, time 2818.30ms, mfu 5.35%
+iter 13950: loss 6.1516, time 2818.31ms, mfu 5.35%
+iter 13960: loss 6.1452, time 2815.97ms, mfu 5.35%
+iter 13970: loss 6.0657, time 2816.31ms, mfu 5.35%
+iter 13980: loss 6.0687, time 2815.71ms, mfu 5.35%
+iter 13990: loss 6.0296, time 2816.50ms, mfu 5.35%
+[2026-04-19 04:26:15] [11h 25m] Step 14000 | Epoch   0.24 | train loss 6.0902 | val loss 6.1187 | lr 2.99e-04
+
+[2026-04-19 04:26:15] [11h 25m] Sampling at iter 14000 (epoch 0.24):
+  1.  the the,. the first  the  said,. . " we,", i the night i can it that, . then. that, " ", the fire on what said was! the other , and to the,, "  that,
+  2.  was of,,, the a the, her the the  was, his", the,, the "i 't see face her do " " " the house." said to be my you,. he. "in i'll in his face his face 
+  3.  of the the the,, of the of these the very.  and and he was the, of was her, for her the the same, all of his his the, the way down to the the morning
+
+[2026-04-19 04:26:28] [11h 26m] Speed at iter 14000 (epoch 0.24): 0.30 iters/sec
+iter 14000: loss 6.0276, time 53455.58ms, mfu 4.84%
+iter 14010: loss 6.1392, time 2823.00ms, mfu 4.89%
+iter 14020: loss 6.0702, time 2823.50ms, mfu 4.94%
+iter 14030: loss 6.1741, time 2822.60ms, mfu 4.98%
+iter 14040: loss 6.0614, time 2822.39ms, mfu 5.01%
+iter 14050: loss 6.0526, time 2819.64ms, mfu 5.05%
+iter 14060: loss 6.0329, time 2840.64ms, mfu 5.07%
+iter 14070: loss 5.9845, time 2823.05ms, mfu 5.10%
+iter 14080: loss 6.1123, time 2813.68ms, mfu 5.12%
+iter 14090: loss 5.9975, time 2823.69ms, mfu 5.15%
+[2026-04-19 04:31:10] [11h 30m] Speed at iter 14100 (epoch 0.24): 0.35 iters/sec
+iter 14100: loss 6.4296, time 2826.37ms, mfu 5.16%
+iter 14110: loss 6.0556, time 2822.12ms, mfu 5.18%
+iter 14120: loss 6.3356, time 2817.03ms, mfu 5.20%
+iter 14130: loss 6.1971, time 2819.20ms, mfu 5.21%
+iter 14140: loss 6.0117, time 2819.76ms, mfu 5.23%
+iter 14150: loss 6.1059, time 2824.81ms, mfu 5.24%
+iter 14160: loss 5.9775, time 2818.17ms, mfu 5.25%
+iter 14170: loss 5.9844, time 2819.44ms, mfu 5.26%
+iter 14180: loss 5.7478, time 2820.96ms, mfu 5.27%
+iter 14190: loss 5.9735, time 2820.28ms, mfu 5.27%
+[2026-04-19 04:35:51] [11h 35m] Speed at iter 14200 (epoch 0.24): 0.35 iters/sec
+iter 14200: loss 6.0726, time 2819.73ms, mfu 5.28%
+iter 14210: loss 5.9070, time 2820.66ms, mfu 5.29%
+iter 14220: loss 6.0849, time 2820.52ms, mfu 5.29%
+iter 14230: loss 5.9938, time 2827.62ms, mfu 5.30%
+iter 14240: loss 6.1089, time 2824.16ms, mfu 5.30%
+iter 14250: loss 6.0896, time 2822.75ms, mfu 5.30%
+iter 14260: loss 6.0784, time 2816.63ms, mfu 5.31%
+iter 14270: loss 6.1452, time 2817.00ms, mfu 5.31%
+iter 14280: loss 6.0765, time 2819.75ms, mfu 5.32%
+iter 14290: loss 5.9867, time 2815.79ms, mfu 5.32%
+[2026-04-19 04:40:33] [11h 40m] Speed at iter 14300 (epoch 0.24): 0.35 iters/sec
+iter 14300: loss 6.0289, time 2819.28ms, mfu 5.32%
+iter 14310: loss 5.9182, time 2815.28ms, mfu 5.33%
+iter 14320: loss 5.9588, time 2824.54ms, mfu 5.33%
+iter 14330: loss 6.2026, time 2818.39ms, mfu 5.33%
+iter 14340: loss 5.8646, time 2818.34ms, mfu 5.33%
+iter 14350: loss 5.9910, time 2819.76ms, mfu 5.33%
+iter 14360: loss 6.2478, time 2815.14ms, mfu 5.33%
+iter 14370: loss 5.9591, time 2817.59ms, mfu 5.34%
+iter 14380: loss 6.1267, time 2817.73ms, mfu 5.34%
+iter 14390: loss 6.0749, time 2817.31ms, mfu 5.34%
+[2026-04-19 04:45:15] [11h 44m] Speed at iter 14400 (epoch 0.25): 0.35 iters/sec
+iter 14400: loss 6.1657, time 2818.28ms, mfu 5.34%
+iter 14410: loss 6.0002, time 2817.30ms, mfu 5.34%
+iter 14420: loss 6.1822, time 2817.89ms, mfu 5.34%
+iter 14430: loss 6.0706, time 2819.40ms, mfu 5.34%
+iter 14440: loss 6.1742, time 2819.73ms, mfu 5.34%
+iter 14450: loss 6.2682, time 2817.13ms, mfu 5.34%
+iter 14460: loss 5.9453, time 2816.84ms, mfu 5.34%
+iter 14470: loss 6.2324, time 2816.22ms, mfu 5.34%
+iter 14480: loss 5.9260, time 2819.53ms, mfu 5.34%
+iter 14490: loss 6.0625, time 2817.24ms, mfu 5.35%
+[2026-04-19 04:50:35] [11h 50m] Step 14500 | Epoch   0.25 | train loss 6.0689 | val loss 6.0741 | lr 2.99e-04
+
+[2026-04-19 04:50:35] [11h 50m] Sampling at iter 14500 (epoch 0.25):
+  1. ., in he. that she , and she ", and a be you see the next i," be," she i'll have should not, you will you, but you be, and i you can have do, and to t
+  2.   with to would my  was the, and't he is can of the ", the it and, he was, if, who, and the way." , with all. of him, for. the little which, and he wa
+  3. , the the the,, and then had he. it, i, and, and i the the ground thems--and, for that, for me he.  "i. i knowed and ians and , in the, in the the bes
+
+[2026-04-19 04:50:48] [11h 50m] Speed at iter 14500 (epoch 0.25): 0.30 iters/sec
+iter 14500: loss 6.2406, time 53373.89ms, mfu 4.84%
+iter 14510: loss 5.9471, time 2819.61ms, mfu 4.89%
+iter 14520: loss 6.0709, time 2819.35ms, mfu 4.94%
+iter 14530: loss 5.8989, time 2825.43ms, mfu 4.98%
+iter 14540: loss 5.9074, time 2812.91ms, mfu 5.01%
+iter 14550: loss 6.1435, time 2811.01ms, mfu 5.05%
+iter 14560: loss 5.9247, time 2816.15ms, mfu 5.08%
+iter 14570: loss 6.1540, time 2819.70ms, mfu 5.11%
+iter 14580: loss 5.9815, time 2822.07ms, mfu 5.13%
+iter 14590: loss 6.1493, time 2817.57ms, mfu 5.15%
+[2026-04-19 04:55:30] [11h 55m] Speed at iter 14600 (epoch 0.25): 0.35 iters/sec
+iter 14600: loss 6.1236, time 2822.83ms, mfu 5.17%
+iter 14610: loss 6.0871, time 2812.93ms, mfu 5.19%
+iter 14620: loss 6.1971, time 2816.18ms, mfu 5.20%
+iter 14630: loss 6.1919, time 2823.72ms, mfu 5.22%
+iter 14640: loss 6.1867, time 2835.97ms, mfu 5.23%
+iter 14650: loss 5.8583, time 2824.48ms, mfu 5.24%
+iter 14660: loss 6.1370, time 2817.02ms, mfu 5.25%
+iter 14670: loss 5.9628, time 2823.30ms, mfu 5.26%
+iter 14680: loss 6.0436, time 2822.72ms, mfu 5.27%
+iter 14690: loss 5.7957, time 2820.54ms, mfu 5.27%
+[2026-04-19 05:00:12] [11h 59m] Speed at iter 14700 (epoch 0.25): 0.35 iters/sec
+iter 14700: loss 5.9792, time 2824.58ms, mfu 5.28%
+iter 14710: loss 5.8207, time 2812.52ms, mfu 5.29%
+iter 14720: loss 5.9351, time 2818.54ms, mfu 5.29%
+iter 14730: loss 6.2116, time 2822.92ms, mfu 5.30%
+iter 14740: loss 6.0272, time 2814.93ms, mfu 5.30%
+iter 14750: loss 6.1022, time 2824.42ms, mfu 5.31%
+iter 14760: loss 6.0342, time 2822.14ms, mfu 5.31%
+iter 14770: loss 6.0852, time 2819.33ms, mfu 5.31%
+iter 14780: loss 6.0583, time 2814.83ms, mfu 5.32%
+iter 14790: loss 6.0488, time 2819.94ms, mfu 5.32%
+[2026-04-19 05:04:53] [12h 4m] Speed at iter 14800 (epoch 0.25): 0.35 iters/sec
+iter 14800: loss 6.0218, time 2827.40ms, mfu 5.32%
+iter 14810: loss 6.2299, time 2822.16ms, mfu 5.32%
+iter 14820: loss 6.0493, time 2821.06ms, mfu 5.33%
+iter 14830: loss 5.9323, time 2821.01ms, mfu 5.33%
+iter 14840: loss 6.3644, time 2819.31ms, mfu 5.33%
+iter 14850: loss 6.0387, time 2819.84ms, mfu 5.33%
+iter 14860: loss 5.9559, time 2820.69ms, mfu 5.33%
+iter 14870: loss 5.9691, time 2820.84ms, mfu 5.33%
+iter 14880: loss 5.8367, time 2819.08ms, mfu 5.33%
+iter 14890: loss 6.0375, time 2820.72ms, mfu 5.34%
+[2026-04-19 05:09:35] [12h 9m] Speed at iter 14900 (epoch 0.25): 0.35 iters/sec
+iter 14900: loss 5.8653, time 2814.25ms, mfu 5.34%
+iter 14910: loss 6.4114, time 2819.68ms, mfu 5.34%
+iter 14920: loss 6.2549, time 2820.39ms, mfu 5.34%
+iter 14930: loss 6.0779, time 2820.18ms, mfu 5.34%
+iter 14940: loss 5.9295, time 2815.71ms, mfu 5.34%
+iter 14950: loss 6.1777, time 2817.60ms, mfu 5.34%
+iter 14960: loss 6.2648, time 2818.18ms, mfu 5.34%
+iter 14970: loss 6.2936, time 2822.25ms, mfu 5.34%
+iter 14980: loss 6.2135, time 2817.76ms, mfu 5.34%
+iter 14990: loss 5.9793, time 2820.09ms, mfu 5.34%
+[2026-04-19 05:14:55] [12h 14m] Step 15000 | Epoch   0.26 | train loss 6.0447 | val loss 6.0759 | lr 2.99e-04
+
+[2026-04-19 05:14:55] [12h 14m] Sampling at iter 15000 (epoch 0.26):
+  1.  they a the otheri and it was the air be to the men,, in the men it an is to a little you't a, and, the other and a dozen in the next in his. he, him,
+  2. , a't, his. his said is not a all of them. the "the the two been't the two said the house. the old. it was isi that, and's it. the town house at so.  
+  3. . his,, i her, you see the man, the  of all of your, and, the to. he there." he is not a, i " be at. as he, was in any was more the i " you would be. 
+
+[2026-04-19 05:15:08] [12h 14m] Speed at iter 15000 (epoch 0.26): 0.30 iters/sec
+iter 15000: loss 6.0929, time 53327.41ms, mfu 4.84%
+iter 15010: loss 5.9998, time 2839.97ms, mfu 4.88%
+iter 15020: loss 6.1205, time 2825.73ms, mfu 4.93%
+iter 15030: loss 5.9332, time 2822.48ms, mfu 4.97%
+iter 15040: loss 6.3441, time 2818.46ms, mfu 5.01%
+iter 15050: loss 6.1954, time 2829.41ms, mfu 5.04%
+iter 15060: loss 6.0951, time 2820.32ms, mfu 5.07%
+iter 15070: loss 5.8820, time 2828.35ms, mfu 5.10%
+iter 15080: loss 6.0093, time 2825.83ms, mfu 5.12%
+iter 15090: loss 6.1529, time 2823.57ms, mfu 5.14%
+[2026-04-19 05:19:50] [12h 19m] Speed at iter 15100 (epoch 0.26): 0.35 iters/sec
+iter 15100: loss 5.8613, time 2818.79ms, mfu 5.16%
+iter 15110: loss 6.1064, time 2826.17ms, mfu 5.18%
+iter 15120: loss 6.1011, time 2817.03ms, mfu 5.20%
+iter 15130: loss 6.0077, time 2827.67ms, mfu 5.21%
+iter 15140: loss 6.0391, time 2816.97ms, mfu 5.22%
+iter 15150: loss 5.9507, time 2817.47ms, mfu 5.24%
+iter 15160: loss 5.8370, time 2818.83ms, mfu 5.25%
+iter 15170: loss 6.2926, time 2814.70ms, mfu 5.26%
+iter 15180: loss 6.0656, time 2818.22ms, mfu 5.27%
+iter 15190: loss 6.2799, time 2813.90ms, mfu 5.28%
+[2026-04-19 05:24:31] [12h 24m] Speed at iter 15200 (epoch 0.26): 0.35 iters/sec
+iter 15200: loss 6.0976, time 2819.81ms, mfu 5.28%
+iter 15210: loss 6.1232, time 2825.92ms, mfu 5.29%
+iter 15220: loss 5.9182, time 2817.44ms, mfu 5.29%
+iter 15230: loss 6.1363, time 2823.96ms, mfu 5.30%
+iter 15240: loss 5.8601, time 2816.91ms, mfu 5.30%
+iter 15250: loss 6.1327, time 2839.69ms, mfu 5.30%
+iter 15260: loss 5.8817, time 2817.93ms, mfu 5.31%
+iter 15270: loss 5.9292, time 2833.08ms, mfu 5.31%
+iter 15280: loss 6.2021, time 2820.45ms, mfu 5.31%
+iter 15290: loss 6.0614, time 2828.10ms, mfu 5.31%
+[2026-04-19 05:29:13] [12h 28m] Speed at iter 15300 (epoch 0.26): 0.35 iters/sec
+iter 15300: loss 5.8849, time 2827.80ms, mfu 5.32%
+iter 15310: loss 5.9818, time 2817.95ms, mfu 5.32%
+iter 15320: loss 5.9818, time 2820.29ms, mfu 5.32%
+iter 15330: loss 5.9824, time 2824.18ms, mfu 5.32%
+iter 15340: loss 5.9545, time 2818.47ms, mfu 5.33%
+iter 15350: loss 6.1303, time 2818.55ms, mfu 5.33%
+iter 15360: loss 6.1359, time 2825.11ms, mfu 5.33%
+iter 15370: loss 5.9913, time 2820.38ms, mfu 5.33%
+iter 15380: loss 6.0219, time 2831.42ms, mfu 5.33%
+iter 15390: loss 6.0828, time 2829.80ms, mfu 5.33%
+[2026-04-19 05:33:55] [12h 33m] Speed at iter 15400 (epoch 0.26): 0.35 iters/sec
+iter 15400: loss 6.1842, time 2821.58ms, mfu 5.33%
+iter 15410: loss 6.0978, time 2822.73ms, mfu 5.33%
+iter 15420: loss 6.0343, time 2829.92ms, mfu 5.33%
+iter 15430: loss 6.0730, time 2832.24ms, mfu 5.33%
+iter 15440: loss 6.1467, time 2821.07ms, mfu 5.33%
+iter 15450: loss 5.8451, time 2817.52ms, mfu 5.33%
+iter 15460: loss 6.0079, time 2819.10ms, mfu 5.33%
+iter 15470: loss 5.7882, time 2830.80ms, mfu 5.33%
+iter 15480: loss 5.9449, time 2812.74ms, mfu 5.34%
+iter 15490: loss 5.9645, time 2822.20ms, mfu 5.34%
+[2026-04-19 05:39:15] [12h 38m] Step 15500 | Epoch   0.26 | train loss 6.0965 | val loss 6.0703 | lr 2.99e-04
+
+[2026-04-19 05:39:15] [12h 38m] Sampling at iter 15500 (epoch 0.26):
+  1.  areoni' de the p in he was the long, for had "ii you to up is, and to of to time to have, and with all of, was to a horse as to, " had a little said 
+  2. , a know, the first it, and i" the has, to. " said the to. ", and. i the other, and the house, at him with it " that the young,, and the little and i 
+  3. .6. of by the c great and of its was a a, that in and he a on of thatb, " he p he out the other the king was had and, and, were house, he he the day o
+
+[2026-04-19 05:39:28] [12h 39m] Speed at iter 15500 (epoch 0.26): 0.30 iters/sec
+iter 15500: loss 6.0353, time 53499.60ms, mfu 4.83%
+iter 15510: loss 6.1407, time 2818.48ms, mfu 4.88%
+iter 15520: loss 5.9972, time 2811.05ms, mfu 4.93%
+iter 15530: loss 6.1569, time 2818.12ms, mfu 4.97%
+iter 15540: loss 6.2082, time 2849.46ms, mfu 5.00%
+iter 15550: loss 5.9255, time 2857.67ms, mfu 5.03%
+iter 15560: loss 6.0694, time 2803.31ms, mfu 5.07%
+iter 15570: loss 6.1649, time 2819.12ms, mfu 5.09%
+iter 15580: loss 6.1406, time 2819.27ms, mfu 5.12%
+iter 15590: loss 6.0564, time 2815.65ms, mfu 5.14%
+[2026-04-19 05:44:09] [12h 43m] Speed at iter 15600 (epoch 0.27): 0.36 iters/sec
+iter 15600: loss 5.9413, time 2814.52ms, mfu 5.16%
+iter 15610: loss 6.0767, time 2815.84ms, mfu 5.18%
+iter 15620: loss 6.0677, time 2808.83ms, mfu 5.20%
+iter 15630: loss 5.9481, time 2812.95ms, mfu 5.22%
+iter 15640: loss 5.7612, time 2811.46ms, mfu 5.23%
+iter 15650: loss 6.0562, time 2810.10ms, mfu 5.24%
+iter 15660: loss 5.9497, time 2817.04ms, mfu 5.25%
+iter 15670: loss 6.1379, time 2809.43ms, mfu 5.27%
+iter 15680: loss 6.0710, time 2814.97ms, mfu 5.27%
+iter 15690: loss 5.9276, time 2823.62ms, mfu 5.28%
+[2026-04-19 05:48:51] [12h 48m] Speed at iter 15700 (epoch 0.27): 0.36 iters/sec
+iter 15700: loss 6.1887, time 2810.90ms, mfu 5.29%
+iter 15710: loss 5.9814, time 2808.07ms, mfu 5.30%
+iter 15720: loss 5.9488, time 2809.27ms, mfu 5.30%
+iter 15730: loss 5.9919, time 2813.42ms, mfu 5.31%
+iter 15740: loss 5.9864, time 2811.90ms, mfu 5.31%
+iter 15750: loss 5.8145, time 2809.46ms, mfu 5.32%
+iter 15760: loss 6.4350, time 2814.69ms, mfu 5.32%
+iter 15770: loss 6.0486, time 2809.38ms, mfu 5.33%
+iter 15780: loss 6.0100, time 2834.90ms, mfu 5.33%
+iter 15790: loss 6.1593, time 2836.98ms, mfu 5.32%
+[2026-04-19 05:53:33] [12h 53m] Speed at iter 15800 (epoch 0.27): 0.35 iters/sec
+iter 15800: loss 6.0415, time 2817.20ms, mfu 5.33%
+iter 15810: loss 6.1420, time 2845.98ms, mfu 5.32%
+iter 15820: loss 5.7416, time 2837.65ms, mfu 5.32%
+iter 15830: loss 6.0687, time 2836.42ms, mfu 5.32%
+iter 15840: loss 6.1845, time 2849.48ms, mfu 5.32%
+iter 15850: loss 6.0507, time 2825.48ms, mfu 5.32%
+iter 15860: loss 6.0321, time 2857.51ms, mfu 5.32%
+iter 15870: loss 5.9706, time 2837.47ms, mfu 5.32%
+iter 15880: loss 6.0239, time 2848.31ms, mfu 5.31%
+iter 15890: loss 5.9686, time 2848.10ms, mfu 5.31%
+[2026-04-19 05:58:15] [12h 57m] Speed at iter 15900 (epoch 0.27): 0.35 iters/sec
+iter 15900: loss 6.0803, time 2817.49ms, mfu 5.31%
+iter 15910: loss 6.1037, time 2835.59ms, mfu 5.31%
+iter 15920: loss 6.1142, time 2829.54ms, mfu 5.32%
+iter 15930: loss 5.8360, time 2828.02ms, mfu 5.32%
+iter 15940: loss 6.1725, time 2819.56ms, mfu 5.32%
+iter 15950: loss 6.0950, time 2826.23ms, mfu 5.32%
+iter 15960: loss 6.0314, time 2822.76ms, mfu 5.32%
+iter 15970: loss 5.8990, time 2833.99ms, mfu 5.32%
+iter 15980: loss 6.0681, time 2846.14ms, mfu 5.32%
+iter 15990: loss 5.9337, time 2824.94ms, mfu 5.32%
+[2026-04-19 06:03:34] [13h 3m] Step 16000 | Epoch   0.27 | train loss 6.0636 | val loss 6.1025 | lr 2.99e-04
+
+[2026-04-19 06:03:34] [13h 3m] Sampling at iter 16000 (epoch 0.27):
+  1. -, the camp not of a one. with the the river by the water of a in but on, theb of the of that in its the north. the people he had been, but of the fir
+  2.  for is and of eyes to of his the next the good of the whole them. they of the only who to the new and the right in of the night the war of the whole 
+  3.  to of the two; been, the world when the war a were, the great the enemy the only and his wife of the war, and had to which. the night of the man of t
+
+[2026-04-19 06:03:47] [13h 3m] Speed at iter 16000 (epoch 0.27): 0.30 iters/sec
+iter 16000: loss 6.1433, time 53498.39ms, mfu 4.82%
+iter 16010: loss 6.3568, time 2809.81ms, mfu 4.87%
+iter 16020: loss 6.1134, time 2817.24ms, mfu 4.92%
+iter 16030: loss 5.9210, time 2822.60ms, mfu 4.96%
+iter 16040: loss 6.3022, time 2808.45ms, mfu 5.00%
+iter 16050: loss 6.1249, time 2817.91ms, mfu 5.04%
+iter 16060: loss 6.0487, time 2818.06ms, mfu 5.07%
+iter 16070: loss 6.0968, time 2812.88ms, mfu 5.10%
+iter 16080: loss 6.0684, time 2817.25ms, mfu 5.12%
+iter 16090: loss 6.0127, time 2812.01ms, mfu 5.15%
+[2026-04-19 06:08:29] [13h 8m] Speed at iter 16100 (epoch 0.27): 0.35 iters/sec
+iter 16100: loss 6.0455, time 2809.70ms, mfu 5.17%
+iter 16110: loss 5.9170, time 2819.24ms, mfu 5.19%
+iter 16120: loss 6.1383, time 2813.65ms, mfu 5.20%
+iter 16130: loss 6.1307, time 2824.80ms, mfu 5.22%
+iter 16140: loss 6.1647, time 2815.74ms, mfu 5.23%
+iter 16150: loss 6.3180, time 2812.24ms, mfu 5.24%
+iter 16160: loss 5.6308, time 2810.19ms, mfu 5.25%
+iter 16170: loss 5.8758, time 2815.84ms, mfu 5.26%
+iter 16180: loss 5.9687, time 2811.58ms, mfu 5.27%
+iter 16190: loss 6.0013, time 2818.18ms, mfu 5.28%
+[2026-04-19 06:13:11] [13h 12m] Speed at iter 16200 (epoch 0.28): 0.35 iters/sec
+iter 16200: loss 6.1022, time 2815.92ms, mfu 5.29%
+iter 16210: loss 6.2512, time 2829.32ms, mfu 5.29%
+iter 16220: loss 6.3164, time 2815.33ms, mfu 5.30%
+iter 16230: loss 6.0146, time 2809.50ms, mfu 5.31%
+iter 16240: loss 5.9263, time 2810.21ms, mfu 5.31%
+iter 16250: loss 6.3001, time 2824.01ms, mfu 5.31%
+iter 16260: loss 6.1462, time 2815.40ms, mfu 5.32%
+iter 16270: loss 6.0773, time 2823.93ms, mfu 5.32%
+iter 16280: loss 5.9627, time 2814.66ms, mfu 5.32%
+iter 16290: loss 6.1251, time 2811.45ms, mfu 5.33%
+[2026-04-19 06:17:53] [13h 17m] Speed at iter 16300 (epoch 0.28): 0.35 iters/sec
+iter 16300: loss 5.9582, time 2809.78ms, mfu 5.33%
+iter 16310: loss 6.1548, time 2815.87ms, mfu 5.33%
+iter 16320: loss 6.0757, time 2819.35ms, mfu 5.33%
+iter 16330: loss 5.9234, time 2814.59ms, mfu 5.34%
+iter 16340: loss 5.9424, time 2814.75ms, mfu 5.34%
+iter 16350: loss 5.9088, time 2817.42ms, mfu 5.34%
+iter 16360: loss 6.1716, time 2820.79ms, mfu 5.34%
+iter 16370: loss 5.9236, time 2816.09ms, mfu 5.34%
+iter 16380: loss 5.9388, time 2816.66ms, mfu 5.34%
+iter 16390: loss 6.1724, time 2810.68ms, mfu 5.34%
+[2026-04-19 06:22:35] [13h 22m] Speed at iter 16400 (epoch 0.28): 0.35 iters/sec
+iter 16400: loss 5.9193, time 2817.18ms, mfu 5.34%
+iter 16410: loss 5.9260, time 2817.80ms, mfu 5.35%
+iter 16420: loss 6.1304, time 2815.16ms, mfu 5.35%
+iter 16430: loss 5.9495, time 2816.15ms, mfu 5.35%
+iter 16440: loss 5.9969, time 2817.17ms, mfu 5.35%
+iter 16450: loss 6.1596, time 2817.81ms, mfu 5.35%
+iter 16460: loss 5.9529, time 2815.67ms, mfu 5.35%
+iter 16470: loss 6.0367, time 2816.18ms, mfu 5.35%
+iter 16480: loss 5.9482, time 2817.07ms, mfu 5.35%
+iter 16490: loss 5.9682, time 2810.03ms, mfu 5.35%
+[2026-04-19 06:27:54] [13h 27m] Step 16500 | Epoch   0.28 | train loss 6.1149 | val loss 6.0566 | lr 2.99e-04
+
+[2026-04-19 06:27:54] [13h 27m] Sampling at iter 16500 (epoch 0.28):
+  1. i, the time but i, and when " i " , as we. i would i don.", i had they said.  to," the morning have. "i was to the same a great two been the and the r
+  2.  the iand of your you have been. but the a great in in, the. for this it, which, so a been the most the next. "i "i haveo the great to him of their it
+  3.  " a. one, too who a to the rest an was not to a a, "?" we as a well?" i see. i said his i was mr in the two man but the door in the the place to the 
+
+[2026-04-19 06:28:07] [13h 27m] Speed at iter 16500 (epoch 0.28): 0.30 iters/sec
+iter 16500: loss 6.0335, time 53443.09ms, mfu 4.84%
+iter 16510: loss 6.0611, time 2824.24ms, mfu 4.89%
+iter 16520: loss 5.9771, time 2817.38ms, mfu 4.94%
+iter 16530: loss 6.1947, time 2816.64ms, mfu 4.98%
+iter 16540: loss 6.4191, time 2823.54ms, mfu 5.02%
+iter 16550: loss 6.2364, time 2817.91ms, mfu 5.05%
+iter 16560: loss 6.0700, time 2834.46ms, mfu 5.08%
+iter 16570: loss 6.0130, time 2824.10ms, mfu 5.10%
+iter 16580: loss 6.0759, time 2819.35ms, mfu 5.13%
+iter 16590: loss 6.1048, time 2821.12ms, mfu 5.15%
+[2026-04-19 06:32:49] [13h 32m] Speed at iter 16600 (epoch 0.28): 0.35 iters/sec
+iter 16600: loss 5.9915, time 2824.01ms, mfu 5.17%
+iter 16610: loss 5.9859, time 2823.02ms, mfu 5.18%
+iter 16620: loss 5.9757, time 2822.12ms, mfu 5.20%
+iter 16630: loss 6.1014, time 2816.73ms, mfu 5.21%
+iter 16640: loss 5.9601, time 2819.25ms, mfu 5.23%
+iter 16650: loss 6.0796, time 2825.62ms, mfu 5.24%
+iter 16660: loss 5.8436, time 2822.16ms, mfu 5.25%
+iter 16670: loss 5.8875, time 2822.45ms, mfu 5.26%
+iter 16680: loss 6.2507, time 2825.73ms, mfu 5.27%
+iter 16690: loss 6.0252, time 2816.98ms, mfu 5.27%
+[2026-04-19 06:37:31] [13h 37m] Speed at iter 16700 (epoch 0.29): 0.35 iters/sec
+iter 16700: loss 5.9484, time 2823.07ms, mfu 5.28%
+iter 16710: loss 5.9790, time 2824.22ms, mfu 5.29%
+iter 16720: loss 6.0223, time 2817.30ms, mfu 5.29%
+iter 16730: loss 5.9935, time 2826.16ms, mfu 5.30%
+iter 16740: loss 6.0037, time 2815.07ms, mfu 5.30%
+iter 16750: loss 6.1406, time 2817.68ms, mfu 5.31%
+iter 16760: loss 6.1852, time 2826.84ms, mfu 5.31%
+iter 16770: loss 5.7297, time 2812.90ms, mfu 5.31%
+iter 16780: loss 6.1898, time 2817.67ms, mfu 5.32%
+iter 16790: loss 5.9905, time 2814.43ms, mfu 5.32%
+[2026-04-19 06:42:13] [13h 41m] Speed at iter 16800 (epoch 0.29): 0.35 iters/sec
+iter 16800: loss 5.9984, time 2817.40ms, mfu 5.32%
+iter 16810: loss 6.1081, time 2819.74ms, mfu 5.33%
+iter 16820: loss 5.9857, time 2818.73ms, mfu 5.33%
+iter 16830: loss 6.0736, time 2819.24ms, mfu 5.33%
+iter 16840: loss 6.0329, time 2820.67ms, mfu 5.33%
+iter 16850: loss 5.7168, time 2815.86ms, mfu 5.33%
+iter 16860: loss 5.9080, time 2817.06ms, mfu 5.34%
+iter 16870: loss 6.0977, time 2811.79ms, mfu 5.34%
+iter 16880: loss 6.0198, time 2820.07ms, mfu 5.34%
+iter 16890: loss 6.3192, time 2815.59ms, mfu 5.34%
+[2026-04-19 06:46:55] [13h 46m] Speed at iter 16900 (epoch 0.29): 0.35 iters/sec
+iter 16900: loss 6.0910, time 2815.80ms, mfu 5.34%
+iter 16910: loss 6.0982, time 2818.64ms, mfu 5.34%
+iter 16920: loss 5.9721, time 2818.12ms, mfu 5.34%
+iter 16930: loss 6.0141, time 2820.75ms, mfu 5.34%
+iter 16940: loss 6.2643, time 2819.06ms, mfu 5.34%
+iter 16950: loss 5.9864, time 2816.15ms, mfu 5.34%
+iter 16960: loss 6.1198, time 2818.20ms, mfu 5.34%
+iter 16970: loss 6.2644, time 2820.12ms, mfu 5.34%
+iter 16980: loss 6.1398, time 2817.67ms, mfu 5.34%
+iter 16990: loss 6.1993, time 2816.62ms, mfu 5.35%
+[2026-04-19 06:52:14] [13h 51m] Step 17000 | Epoch   0.29 | train loss 6.1000 | val loss 6.0937 | lr 2.99e-04
+
+[2026-04-19 06:52:14] [13h 51m] Sampling at iter 17000 (epoch 0.29):
+  1.  in in the was a, and for and he the the light of the the,,. was,, and, on the was in he to. in a,, and the or. on that,. and the the was. it out. at 
+  2. 's or his no-, and, in, and a the old " not that m of the door in the british as of the same that to on a voice, but and, he, and the been, not as," o
+  3.   i you the wholeing it he of the door the first the the way the was he had been to got with to the country of a the light of her to the south a she w
+
+[2026-04-19 06:52:27] [13h 52m] Speed at iter 17000 (epoch 0.29): 0.30 iters/sec
+iter 17000: loss 6.2925, time 53334.33ms, mfu 4.84%
+iter 17010: loss 6.0854, time 2818.04ms, mfu 4.89%
+iter 17020: loss 5.9475, time 2822.46ms, mfu 4.94%
+iter 17030: loss 6.3270, time 2816.51ms, mfu 4.98%
+iter 17040: loss 6.3435, time 2819.87ms, mfu 5.01%
+iter 17050: loss 6.0394, time 2818.06ms, mfu 5.05%
+iter 17060: loss 6.2784, time 2820.09ms, mfu 5.08%
+iter 17070: loss 6.2588, time 2827.77ms, mfu 5.10%
+iter 17080: loss 6.1735, time 2827.49ms, mfu 5.12%
+iter 17090: loss 6.2020, time 2820.26ms, mfu 5.15%
+[2026-04-19 06:57:09] [13h 56m] Speed at iter 17100 (epoch 0.29): 0.35 iters/sec
+iter 17100: loss 6.1449, time 2819.58ms, mfu 5.17%
+iter 17110: loss 6.1845, time 2817.95ms, mfu 5.18%
+iter 17120: loss 6.0492, time 2823.24ms, mfu 5.20%
+iter 17130: loss 6.0564, time 2815.39ms, mfu 5.22%
+iter 17140: loss 6.1253, time 2823.89ms, mfu 5.23%
+iter 17150: loss 6.0304, time 2822.23ms, mfu 5.24%
+iter 17160: loss 6.1410, time 2819.04ms, mfu 5.25%
+iter 17170: loss 5.9735, time 2810.80ms, mfu 5.26%
+iter 17180: loss 5.9754, time 2817.87ms, mfu 5.27%
+iter 17190: loss 6.0884, time 2814.37ms, mfu 5.28%
+[2026-04-19 07:01:51] [14h 1m] Speed at iter 17200 (epoch 0.29): 0.35 iters/sec
+iter 17200: loss 6.0263, time 2823.53ms, mfu 5.28%
+iter 17210: loss 6.0189, time 2815.86ms, mfu 5.29%
+iter 17220: loss 5.9303, time 2813.65ms, mfu 5.30%
+iter 17230: loss 5.9557, time 2821.11ms, mfu 5.30%
+iter 17240: loss 6.2138, time 2824.31ms, mfu 5.31%
+iter 17250: loss 6.0801, time 2821.82ms, mfu 5.31%
+iter 17260: loss 6.1659, time 2818.41ms, mfu 5.31%
+iter 17270: loss 6.1426, time 2816.47ms, mfu 5.32%
+iter 17280: loss 6.0567, time 2812.36ms, mfu 5.32%
+iter 17290: loss 6.1474, time 2823.18ms, mfu 5.32%
+[2026-04-19 07:06:33] [14h 6m] Speed at iter 17300 (epoch 0.30): 0.35 iters/sec
+iter 17300: loss 6.2219, time 2814.63ms, mfu 5.33%
+iter 17310: loss 5.8730, time 2818.59ms, mfu 5.33%
+iter 17320: loss 5.9167, time 2808.96ms, mfu 5.33%
+iter 17330: loss 6.3821, time 2815.61ms, mfu 5.33%
+iter 17340: loss 6.1437, time 2825.88ms, mfu 5.33%
+iter 17350: loss 6.2332, time 2812.34ms, mfu 5.34%
+iter 17360: loss 6.0109, time 2815.50ms, mfu 5.34%
+iter 17370: loss 5.9461, time 2814.96ms, mfu 5.34%
+iter 17380: loss 6.0455, time 2815.11ms, mfu 5.34%
+iter 17390: loss 5.9900, time 2815.74ms, mfu 5.34%
+[2026-04-19 07:11:15] [14h 10m] Speed at iter 17400 (epoch 0.30): 0.35 iters/sec
+iter 17400: loss 6.0793, time 2816.88ms, mfu 5.34%
+iter 17410: loss 6.2314, time 2815.54ms, mfu 5.34%
+iter 17420: loss 6.0198, time 2815.67ms, mfu 5.35%
+iter 17430: loss 5.9649, time 2816.49ms, mfu 5.35%
+iter 17440: loss 6.0377, time 2814.49ms, mfu 5.35%
+iter 17450: loss 6.1186, time 2816.24ms, mfu 5.35%
+iter 17460: loss 6.0840, time 2821.84ms, mfu 5.35%
+iter 17470: loss 5.8751, time 2816.81ms, mfu 5.35%
+iter 17480: loss 6.0525, time 2816.65ms, mfu 5.35%
+iter 17490: loss 6.0708, time 2816.85ms, mfu 5.35%
+[2026-04-19 07:16:34] [14h 16m] Step 17500 | Epoch   0.30 | train loss 6.0942 | val loss 6.0559 | lr 2.99e-04
+
+[2026-04-19 07:16:34] [14h 16m] Sampling at iter 17500 (epoch 0.30):
+  1. . a " in not, "but. " in at, "m. " the same his the p then not of the sun in a moment in the two, and his, and and the water the very of the men was t
+  2.  " had he, he had . he from a that to the we the "and you the's,  are to the last with the old and and that was i were's it, and the two the way of yo
+  3.   in the, and, you the in and and " , of a, he of the the was " of one. " will. "but "  and that ic and the the "it was he in " the great, of the litt
+
+[2026-04-19 07:16:47] [14h 16m] Speed at iter 17500 (epoch 0.30): 0.30 iters/sec
+iter 17500: loss 6.1878, time 53617.90ms, mfu 4.84%
+iter 17510: loss 6.0234, time 2818.14ms, mfu 4.89%
+iter 17520: loss 6.1565, time 2815.00ms, mfu 4.94%
+iter 17530: loss 5.9498, time 2826.86ms, mfu 4.98%
+iter 17540: loss 6.0983, time 2809.93ms, mfu 5.02%
+iter 17550: loss 6.1620, time 2814.48ms, mfu 5.05%
+iter 17560: loss 6.0959, time 2825.91ms, mfu 5.08%
+iter 17570: loss 6.0229, time 2823.29ms, mfu 5.10%
+iter 17580: loss 6.0849, time 2822.07ms, mfu 5.13%
+iter 17590: loss 6.2299, time 2817.93ms, mfu 5.15%
+[2026-04-19 07:21:29] [14h 21m] Speed at iter 17600 (epoch 0.30): 0.35 iters/sec
+iter 17600: loss 6.0698, time 2825.57ms, mfu 5.17%
+iter 17610: loss 6.0088, time 2816.52ms, mfu 5.19%
+iter 17620: loss 6.1050, time 2809.29ms, mfu 5.20%
+iter 17630: loss 5.9762, time 2811.34ms, mfu 5.22%
+iter 17640: loss 6.1516, time 2817.76ms, mfu 5.23%
+iter 17650: loss 6.0607, time 2815.39ms, mfu 5.25%
+iter 17660: loss 6.1445, time 2815.03ms, mfu 5.26%
+iter 17670: loss 6.1274, time 2811.04ms, mfu 5.27%
+iter 17680: loss 6.3198, time 2813.35ms, mfu 5.28%
+iter 17690: loss 6.0886, time 2828.35ms, mfu 5.28%
+[2026-04-19 07:26:11] [14h 25m] Speed at iter 17700 (epoch 0.30): 0.35 iters/sec
+iter 17700: loss 6.2225, time 2816.11ms, mfu 5.29%
+iter 17710: loss 5.9310, time 2816.48ms, mfu 5.29%
+iter 17720: loss 5.9498, time 2812.25ms, mfu 5.30%
+iter 17730: loss 6.1892, time 2827.51ms, mfu 5.30%
+iter 17740: loss 6.1002, time 2816.13ms, mfu 5.31%
+iter 17750: loss 6.0195, time 2811.75ms, mfu 5.31%
+iter 17760: loss 6.0211, time 2823.89ms, mfu 5.32%
+iter 17770: loss 5.8579, time 2818.87ms, mfu 5.32%
+iter 17780: loss 6.0274, time 2821.70ms, mfu 5.32%
+iter 17790: loss 6.0097, time 2815.75ms, mfu 5.32%
+[2026-04-19 07:30:53] [14h 30m] Speed at iter 17800 (epoch 0.30): 0.35 iters/sec
+iter 17800: loss 5.9616, time 2815.35ms, mfu 5.33%
+iter 17810: loss 6.0062, time 2817.24ms, mfu 5.33%
+iter 17820: loss 6.1004, time 2818.28ms, mfu 5.33%
+iter 17830: loss 6.1599, time 2819.38ms, mfu 5.33%
+iter 17840: loss 6.1327, time 2816.84ms, mfu 5.33%
+iter 17850: loss 6.2098, time 2837.46ms, mfu 5.33%
+iter 17860: loss 5.9786, time 2817.08ms, mfu 5.33%
+iter 17870: loss 5.9265, time 2808.26ms, mfu 5.34%
+iter 17880: loss 6.2014, time 2820.05ms, mfu 5.34%
+iter 17890: loss 6.2301, time 2813.05ms, mfu 5.34%
+[2026-04-19 07:35:35] [14h 35m] Speed at iter 17900 (epoch 0.31): 0.35 iters/sec
+iter 17900: loss 6.3751, time 2816.42ms, mfu 5.34%
+iter 17910: loss 6.1170, time 2816.16ms, mfu 5.34%
+iter 17920: loss 6.0370, time 2817.39ms, mfu 5.34%
+iter 17930: loss 5.8727, time 2816.82ms, mfu 5.34%
+iter 17940: loss 6.3830, time 2814.36ms, mfu 5.35%
+iter 17950: loss 6.0700, time 2817.99ms, mfu 5.35%
+iter 17960: loss 5.9343, time 2819.35ms, mfu 5.35%
+iter 17970: loss 6.1830, time 2820.22ms, mfu 5.35%
+iter 17980: loss 5.7324, time 2815.58ms, mfu 5.35%
+iter 17990: loss 6.0892, time 2816.45ms, mfu 5.35%
+[2026-04-19 07:40:55] [14h 40m] Step 18000 | Epoch   0.31 | train loss 6.0683 | val loss 6.0480 | lr 2.99e-04
+
+[2026-04-19 07:40:55] [14h 40m] Sampling at iter 18000 (epoch 0.31):
+  1. -- the the place in the good the people of the a it time it up the other and, and the the man of the same is the "o. the to it is the the long, with t
+  2. - of that,, in and and were the of, the, at the p. he, he the the hey but the was the "you. it the old of, but that of the time, i am, which from more
+  3. s, i of the  it the house; they the place it, but the right of it it mighting "oh, then i it iser from the work to the night, but the man. "i the shes
+
+[2026-04-19 07:41:08] [14h 40m] Speed at iter 18000 (epoch 0.31): 0.30 iters/sec
+iter 18000: loss 5.9530, time 53637.70ms, mfu 4.84%
+iter 18010: loss 6.0023, time 2816.04ms, mfu 4.89%
+iter 18020: loss 6.1714, time 2817.09ms, mfu 4.94%
+iter 18030: loss 5.9302, time 2817.28ms, mfu 4.98%
+iter 18040: loss 6.2154, time 2818.08ms, mfu 5.02%
+iter 18050: loss 5.9742, time 2814.49ms, mfu 5.05%
+iter 18060: loss 6.2292, time 2815.93ms, mfu 5.08%
+iter 18070: loss 6.2476, time 2816.05ms, mfu 5.11%
+iter 18080: loss 6.1811, time 2820.36ms, mfu 5.13%
+iter 18090: loss 5.8879, time 2812.54ms, mfu 5.15%
+[2026-04-19 07:45:50] [14h 45m] Speed at iter 18100 (epoch 0.31): 0.35 iters/sec
+iter 18100: loss 6.1592, time 2816.79ms, mfu 5.17%
+iter 18110: loss 6.0411, time 2817.24ms, mfu 5.19%
+iter 18120: loss 5.8993, time 2817.86ms, mfu 5.21%
+iter 18130: loss 6.0197, time 2816.26ms, mfu 5.22%
+iter 18140: loss 6.0020, time 2813.61ms, mfu 5.23%
+iter 18150: loss 6.0847, time 2816.00ms, mfu 5.25%
+iter 18160: loss 6.1020, time 2815.54ms, mfu 5.26%
+iter 18170: loss 6.0915, time 2817.88ms, mfu 5.27%
+iter 18180: loss 6.0295, time 2814.86ms, mfu 5.28%
+iter 18190: loss 5.9632, time 2817.75ms, mfu 5.28%
+[2026-04-19 07:50:32] [14h 50m] Speed at iter 18200 (epoch 0.31): 0.35 iters/sec
+iter 18200: loss 6.0022, time 2818.58ms, mfu 5.29%
+iter 18210: loss 5.9491, time 2816.27ms, mfu 5.30%
+iter 18220: loss 5.9185, time 2816.86ms, mfu 5.30%
+iter 18230: loss 6.0911, time 2816.72ms, mfu 5.31%
+iter 18240: loss 6.0481, time 2816.56ms, mfu 5.31%
+iter 18250: loss 6.0426, time 2818.20ms, mfu 5.31%
+iter 18260: loss 5.9338, time 2816.61ms, mfu 5.32%
+iter 18270: loss 5.9949, time 2814.69ms, mfu 5.32%
+iter 18280: loss 6.1346, time 2816.80ms, mfu 5.32%
+iter 18290: loss 6.1147, time 2816.80ms, mfu 5.33%
+[2026-04-19 07:55:13] [14h 54m] Speed at iter 18300 (epoch 0.31): 0.35 iters/sec
+iter 18300: loss 6.1563, time 2817.01ms, mfu 5.33%
+iter 18310: loss 5.9875, time 2816.11ms, mfu 5.33%
+iter 18320: loss 6.0264, time 2814.77ms, mfu 5.33%
+iter 18330: loss 5.9293, time 2815.16ms, mfu 5.34%
+iter 18340: loss 6.1275, time 2818.25ms, mfu 5.34%
+iter 18350: loss 6.0966, time 2816.60ms, mfu 5.34%
+iter 18360: loss 6.1286, time 2816.10ms, mfu 5.34%
+iter 18370: loss 6.0186, time 2816.37ms, mfu 5.34%
+iter 18380: loss 6.1973, time 2830.21ms, mfu 5.34%
+iter 18390: loss 6.0156, time 2820.29ms, mfu 5.34%
+[2026-04-19 07:59:55] [14h 59m] Speed at iter 18400 (epoch 0.31): 0.35 iters/sec
+iter 18400: loss 6.2136, time 2821.04ms, mfu 5.34%
+iter 18410: loss 6.2580, time 2823.18ms, mfu 5.34%
+iter 18420: loss 6.0709, time 2819.01ms, mfu 5.34%
+iter 18430: loss 6.1506, time 2820.18ms, mfu 5.34%
+iter 18440: loss 6.1757, time 2817.63ms, mfu 5.34%
+iter 18450: loss 6.2441, time 2818.95ms, mfu 5.34%
+iter 18460: loss 5.9825, time 2814.71ms, mfu 5.34%
+iter 18470: loss 5.9933, time 2817.98ms, mfu 5.34%
+iter 18480: loss 6.1038, time 2819.73ms, mfu 5.34%
+iter 18490: loss 6.0542, time 2814.19ms, mfu 5.35%
+[2026-04-19 08:05:15] [15h 4m] Step 18500 | Epoch   0.32 | train loss 6.0444 | val loss 6.0200 | lr 2.99e-04
+
+[2026-04-19 08:05:15] [15h 4m] Sampling at iter 18500 (epoch 0.32):
+  1.  said a little. "i but and all and a great, you"i"youa of one, ""oh. "",", and. "oh't want and,". how. how but the "" which was but of the man was for
+  2.  was of you, in he " to.  i "that a man for in that is could. " " not you can,", i we,, we have that you tell her the house to. this sort of to-hbing 
+  3.  to good the the matter, but it a word and they can an on the people that a sort. "now, and he place and see a. you have. the morning!" you're of the 
+
+[2026-04-19 08:05:28] [15h 5m] Speed at iter 18500 (epoch 0.32): 0.30 iters/sec
+iter 18500: loss 5.8261, time 53181.89ms, mfu 4.84%
+iter 18510: loss 6.0340, time 2816.97ms, mfu 4.89%
+iter 18520: loss 6.2212, time 2816.93ms, mfu 4.94%
+iter 18530: loss 5.9382, time 2819.81ms, mfu 4.98%
+iter 18540: loss 5.7643, time 2816.46ms, mfu 5.01%
+iter 18550: loss 6.0728, time 2816.45ms, mfu 5.05%
+iter 18560: loss 5.9678, time 2816.41ms, mfu 5.08%
+iter 18570: loss 6.1433, time 2816.01ms, mfu 5.11%
+iter 18580: loss 5.7821, time 2816.05ms, mfu 5.13%
+iter 18590: loss 5.8987, time 2817.18ms, mfu 5.15%
+[2026-04-19 08:10:09] [15h 9m] Speed at iter 18600 (epoch 0.32): 0.35 iters/sec
+iter 18600: loss 6.0834, time 2816.44ms, mfu 5.17%
+iter 18610: loss 5.9712, time 2817.30ms, mfu 5.19%
+iter 18620: loss 6.0772, time 2817.83ms, mfu 5.21%
+iter 18630: loss 5.7390, time 2817.62ms, mfu 5.22%
+iter 18640: loss 6.0166, time 2816.24ms, mfu 5.23%
+iter 18650: loss 5.9878, time 2815.00ms, mfu 5.25%
+iter 18660: loss 6.0721, time 2815.31ms, mfu 5.26%
+iter 18670: loss 6.1211, time 2817.68ms, mfu 5.27%
+iter 18680: loss 5.8959, time 2817.09ms, mfu 5.27%
+iter 18690: loss 6.2363, time 2816.74ms, mfu 5.28%
+[2026-04-19 08:14:51] [15h 14m] Speed at iter 18700 (epoch 0.32): 0.35 iters/sec
+iter 18700: loss 5.9251, time 2815.15ms, mfu 5.29%
+iter 18710: loss 6.1312, time 2815.79ms, mfu 5.30%
+iter 18720: loss 5.7176, time 2816.78ms, mfu 5.30%
+iter 18730: loss 5.8838, time 2815.71ms, mfu 5.31%
+iter 18740: loss 6.0981, time 2815.12ms, mfu 5.31%
+iter 18750: loss 5.8104, time 2815.34ms, mfu 5.32%
+iter 18760: loss 5.9265, time 2816.96ms, mfu 5.32%
+iter 18770: loss 6.4050, time 2817.05ms, mfu 5.32%
+iter 18780: loss 6.3058, time 2816.77ms, mfu 5.32%
+iter 18790: loss 6.0340, time 2815.36ms, mfu 5.33%
+[2026-04-19 08:19:33] [15h 19m] Speed at iter 18800 (epoch 0.32): 0.35 iters/sec
+iter 18800: loss 6.1299, time 2819.02ms, mfu 5.33%
+iter 18810: loss 5.8770, time 2818.26ms, mfu 5.33%
+iter 18820: loss 5.6959, time 2815.16ms, mfu 5.33%
+iter 18830: loss 6.0388, time 2815.00ms, mfu 5.34%
+iter 18840: loss 5.9422, time 2817.92ms, mfu 5.34%
+iter 18850: loss 5.9800, time 2815.82ms, mfu 5.34%
+iter 18860: loss 5.9593, time 2815.30ms, mfu 5.34%
+iter 18870: loss 6.1752, time 2818.38ms, mfu 5.34%
+iter 18880: loss 6.0790, time 2819.35ms, mfu 5.34%
+iter 18890: loss 6.0727, time 2816.82ms, mfu 5.34%
+[2026-04-19 08:24:15] [15h 23m] Speed at iter 18900 (epoch 0.32): 0.35 iters/sec
+iter 18900: loss 6.0437, time 2814.44ms, mfu 5.34%
+iter 18910: loss 5.8791, time 2816.40ms, mfu 5.34%
+iter 18920: loss 6.0780, time 2814.38ms, mfu 5.35%
+iter 18930: loss 6.1315, time 2815.85ms, mfu 5.35%
+iter 18940: loss 5.9392, time 2816.80ms, mfu 5.35%
+iter 18950: loss 6.0094, time 2815.56ms, mfu 5.35%
+iter 18960: loss 6.0034, time 2815.40ms, mfu 5.35%
+iter 18970: loss 5.8875, time 2814.72ms, mfu 5.35%
+iter 18980: loss 5.8951, time 2819.06ms, mfu 5.35%
+iter 18990: loss 6.0552, time 2816.15ms, mfu 5.35%
+[2026-04-19 08:29:35] [15h 29m] Step 19000 | Epoch   0.32 | train loss 5.9823 | val loss 5.9506 | lr 2.99e-04
+
+[2026-04-19 08:29:35] [15h 29m] Sampling at iter 19000 (epoch 0.32):
+  1.  i the his of the wouldingion his; an their. that and the  to us the "mitting of the great on, and an. the only the ground of this the same, and. the 
+  2.  the the but in the was a great a little in a man. i the this s asked, they have a great the next of the is voice. the so, they she he not their the d
+  3. , many,. i in, and to  was a woman of the would they said the, it's . i'd. said been. soic, and the time. "'s. he to make the other. the b was for and
+
+[2026-04-19 08:29:47] [15h 29m] Speed at iter 19000 (epoch 0.32): 0.30 iters/sec
+iter 19000: loss 5.8304, time 53071.84ms, mfu 4.84%
+iter 19010: loss 5.7291, time 2813.50ms, mfu 4.89%
+iter 19020: loss 5.9874, time 2817.03ms, mfu 4.94%
+iter 19030: loss 5.9430, time 2815.82ms, mfu 4.98%
+iter 19040: loss 5.8850, time 2816.73ms, mfu 5.02%
+iter 19050: loss 5.9874, time 2816.38ms, mfu 5.05%
+iter 19060: loss 5.8845, time 2815.94ms, mfu 5.08%
+iter 19070: loss 6.0298, time 2818.85ms, mfu 5.11%
+iter 19080: loss 5.8810, time 2815.49ms, mfu 5.13%
+iter 19090: loss 6.0016, time 2819.18ms, mfu 5.15%
+[2026-04-19 08:34:29] [15h 34m] Speed at iter 19100 (epoch 0.33): 0.35 iters/sec
+iter 19100: loss 6.1194, time 2816.78ms, mfu 5.17%
+iter 19110: loss 6.1616, time 2815.60ms, mfu 5.19%
+iter 19120: loss 5.8429, time 2818.11ms, mfu 5.21%
+iter 19130: loss 5.9826, time 2817.65ms, mfu 5.22%
+iter 19140: loss 6.0316, time 2814.68ms, mfu 5.23%
+iter 19150: loss 6.1129, time 2815.97ms, mfu 5.25%
+iter 19160: loss 5.9669, time 2818.77ms, mfu 5.26%
+iter 19170: loss 5.9465, time 2815.97ms, mfu 5.27%
+iter 19180: loss 6.0835, time 2817.30ms, mfu 5.27%
+iter 19190: loss 5.8152, time 2817.08ms, mfu 5.28%
+[2026-04-19 08:39:11] [15h 38m] Speed at iter 19200 (epoch 0.33): 0.35 iters/sec
+iter 19200: loss 5.9188, time 2816.46ms, mfu 5.29%
+iter 19210: loss 5.8765, time 2816.34ms, mfu 5.30%
+iter 19220: loss 5.9916, time 2818.89ms, mfu 5.30%
+iter 19230: loss 5.8861, time 2816.51ms, mfu 5.31%
+iter 19240: loss 5.8460, time 2818.13ms, mfu 5.31%
+iter 19250: loss 6.1789, time 2817.99ms, mfu 5.31%
+iter 19260: loss 5.9801, time 2817.31ms, mfu 5.32%
+iter 19270: loss 5.8040, time 2818.94ms, mfu 5.32%
+iter 19280: loss 6.0457, time 2819.70ms, mfu 5.32%
+iter 19290: loss 5.9213, time 2822.73ms, mfu 5.32%
+[2026-04-19 08:43:53] [15h 43m] Speed at iter 19300 (epoch 0.33): 0.35 iters/sec
+iter 19300: loss 5.8764, time 2816.16ms, mfu 5.33%
+iter 19310: loss 5.9805, time 2817.77ms, mfu 5.33%
+iter 19320: loss 5.9220, time 2817.48ms, mfu 5.33%
+iter 19330: loss 5.9403, time 2816.24ms, mfu 5.33%
+iter 19340: loss 6.0069, time 2815.16ms, mfu 5.34%
+iter 19350: loss 6.0473, time 2816.51ms, mfu 5.34%
+iter 19360: loss 6.0332, time 2816.75ms, mfu 5.34%
+iter 19370: loss 6.0312, time 2819.65ms, mfu 5.34%
+iter 19380: loss 5.9731, time 2816.21ms, mfu 5.34%
+iter 19390: loss 6.0366, time 2815.61ms, mfu 5.34%
+[2026-04-19 08:48:35] [15h 48m] Speed at iter 19400 (epoch 0.33): 0.35 iters/sec
+iter 19400: loss 6.1426, time 2817.41ms, mfu 5.34%
+iter 19410: loss 6.0664, time 2818.01ms, mfu 5.34%
+iter 19420: loss 6.0489, time 2817.47ms, mfu 5.34%
+iter 19430: loss 6.0235, time 2815.81ms, mfu 5.34%
+iter 19440: loss 5.9112, time 2820.81ms, mfu 5.34%
+iter 19450: loss 5.8331, time 2815.23ms, mfu 5.35%
+iter 19460: loss 6.0456, time 2820.38ms, mfu 5.35%
+iter 19470: loss 6.1218, time 2817.65ms, mfu 5.35%
+iter 19480: loss 5.9088, time 2817.21ms, mfu 5.35%
+iter 19490: loss 5.9964, time 2817.76ms, mfu 5.35%
+[2026-04-19 08:53:54] [15h 53m] Step 19500 | Epoch   0.33 | train loss 5.9951 | val loss 5.9846 | lr 2.99e-04
+
+[2026-04-19 08:53:54] [15h 53m] Sampling at iter 19500 (epoch 0.33):
+  1.  was no you not but were at by, that you him in ". "that"g. i.i it?" "you be very.--"." i,"  i said you're. " "what he certain of his master the the y
+  2.  be said a, as the long, and and and the sea to it, i be. and a "i are a man. then. you--," " that you'll know, i've, when very her was for i take the
+  3.  was had, anded said to the same, but his way of the same his face.c it't, made of these was his hearts they had been in a large the small the latter 
+
+[2026-04-19 08:54:07] [15h 53m] Speed at iter 19500 (epoch 0.33): 0.30 iters/sec
+iter 19500: loss 5.9391, time 53078.16ms, mfu 4.84%
+iter 19510: loss 6.1239, time 2819.53ms, mfu 4.89%
+iter 19520: loss 6.0111, time 2819.66ms, mfu 4.94%
+iter 19530: loss 5.8511, time 2819.19ms, mfu 4.98%
+iter 19540: loss 5.8424, time 2822.05ms, mfu 5.01%
+iter 19550: loss 6.1485, time 2820.73ms, mfu 5.05%
+iter 19560: loss 5.9109, time 2817.86ms, mfu 5.08%
+iter 19570: loss 5.9942, time 2823.36ms, mfu 5.10%
+iter 19580: loss 5.9979, time 2820.05ms, mfu 5.13%
+iter 19590: loss 5.9287, time 2822.13ms, mfu 5.15%
+[2026-04-19 08:58:49] [15h 58m] Speed at iter 19600 (epoch 0.33): 0.35 iters/sec
+iter 19600: loss 5.9742, time 2819.68ms, mfu 5.17%
+iter 19610: loss 5.8845, time 2819.19ms, mfu 5.19%
+iter 19620: loss 5.9986, time 2820.89ms, mfu 5.20%
+iter 19630: loss 6.1500, time 2818.97ms, mfu 5.22%
+iter 19640: loss 6.0008, time 2815.83ms, mfu 5.23%
+iter 19650: loss 5.8663, time 2817.37ms, mfu 5.24%
+iter 19660: loss 6.1909, time 2817.79ms, mfu 5.25%
+iter 19670: loss 5.9740, time 2817.69ms, mfu 5.26%
+iter 19680: loss 6.0265, time 2817.61ms, mfu 5.27%
+iter 19690: loss 5.8991, time 2821.80ms, mfu 5.28%
+[2026-04-19 09:03:31] [16h 3m] Speed at iter 19700 (epoch 0.34): 0.35 iters/sec
+iter 19700: loss 6.5164, time 2820.83ms, mfu 5.28%
+iter 19710: loss 5.9857, time 2817.80ms, mfu 5.29%
+iter 19720: loss 5.9516, time 2819.11ms, mfu 5.30%
+iter 19730: loss 6.0272, time 2817.05ms, mfu 5.30%
+iter 19740: loss 6.2316, time 2816.99ms, mfu 5.31%
+iter 19750: loss 5.9419, time 2817.31ms, mfu 5.31%
+iter 19760: loss 6.0185, time 2816.28ms, mfu 5.32%
+iter 19770: loss 6.0383, time 2816.81ms, mfu 5.32%
+iter 19780: loss 5.9990, time 2817.81ms, mfu 5.32%
+iter 19790: loss 6.1856, time 2818.78ms, mfu 5.32%
+[2026-04-19 09:08:13] [16h 7m] Speed at iter 19800 (epoch 0.34): 0.35 iters/sec
+iter 19800: loss 5.9338, time 2819.81ms, mfu 5.33%
+iter 19810: loss 6.1963, time 2818.45ms, mfu 5.33%
+iter 19820: loss 5.7832, time 2816.19ms, mfu 5.33%
+iter 19830: loss 5.8946, time 2817.46ms, mfu 5.33%
+iter 19840: loss 5.8393, time 2819.04ms, mfu 5.33%
+iter 19850: loss 5.9359, time 2818.02ms, mfu 5.34%
+iter 19860: loss 6.1173, time 2816.83ms, mfu 5.34%
+iter 19870: loss 6.1866, time 2816.95ms, mfu 5.34%
+iter 19880: loss 6.1467, time 2815.82ms, mfu 5.34%
+iter 19890: loss 6.0676, time 2818.19ms, mfu 5.34%
+[2026-04-19 09:12:54] [16h 12m] Speed at iter 19900 (epoch 0.34): 0.35 iters/sec
+iter 19900: loss 5.9346, time 2817.85ms, mfu 5.34%
+iter 19910: loss 6.2169, time 2817.05ms, mfu 5.34%
+iter 19920: loss 5.9203, time 2816.31ms, mfu 5.34%
+iter 19930: loss 6.0352, time 2817.87ms, mfu 5.34%
+iter 19940: loss 6.2786, time 2816.36ms, mfu 5.34%
+iter 19950: loss 6.1127, time 2817.04ms, mfu 5.35%
+iter 19960: loss 5.8280, time 2818.94ms, mfu 5.35%
+iter 19970: loss 6.0785, time 2817.75ms, mfu 5.35%
+iter 19980: loss 5.8368, time 2818.48ms, mfu 5.35%
+iter 19990: loss 6.0163, time 2816.87ms, mfu 5.35%
+[2026-04-19 09:18:14] [16h 17m] Step 20000 | Epoch   0.34 | train loss 6.0395 | val loss 6.0485 | lr 2.98e-04
+[2026-04-19 09:18:24] [16h 17m] Saved periodic checkpoint to pt/bpe_16L16H_iter20000.pt (iter 20000, epoch 0.34)
+
+[2026-04-19 09:18:24] [16h 17m] Sampling at iter 20000 (epoch 0.34):
+  1.  all in he could the out. a " said was very the, when  not that have she he had was. to and then this is was to be not a few and have been of to asked
+  2.  are that, for with he i for of you on i'll not more not, and what and have a and, and then will i could as he was no your that of it was a ii; a i wa
+  3.  is he said in, and atar as is and the day on this it the all the of he to be the great he is in.  it from a very in been not to the a place, with the
+
+[2026-04-19 09:18:36] [16h 18m] Speed at iter 20000 (epoch 0.34): 0.29 iters/sec
+iter 20000: loss 6.0443, time 62689.47ms, mfu 4.84%
+iter 20010: loss 5.8620, time 2811.99ms, mfu 4.89%
+iter 20020: loss 5.8642, time 2810.24ms, mfu 4.94%
+iter 20030: loss 6.0454, time 2813.73ms, mfu 4.98%
+iter 20040: loss 5.8924, time 2847.28ms, mfu 5.01%
+iter 20050: loss 5.8842, time 2813.14ms, mfu 5.04%
+iter 20060: loss 5.8409, time 2811.82ms, mfu 5.08%
+iter 20070: loss 6.0093, time 2809.71ms, mfu 5.10%
+iter 20080: loss 6.0235, time 2814.04ms, mfu 5.13%
+iter 20090: loss 6.0270, time 2810.11ms, mfu 5.15%
+[2026-04-19 09:23:18] [16h 22m] Speed at iter 20100 (epoch 0.34): 0.36 iters/sec
+iter 20100: loss 6.1572, time 2814.71ms, mfu 5.17%
+iter 20110: loss 5.7731, time 2809.87ms, mfu 5.19%
+iter 20120: loss 6.0027, time 2808.60ms, mfu 5.21%
+iter 20130: loss 6.0128, time 2815.84ms, mfu 5.22%
+iter 20140: loss 5.9426, time 2813.25ms, mfu 5.24%
+iter 20150: loss 6.0792, time 2815.99ms, mfu 5.25%
+iter 20160: loss 6.1085, time 2812.82ms, mfu 5.26%
+iter 20170: loss 5.7668, time 2812.62ms, mfu 5.27%
+iter 20180: loss 6.0077, time 2833.75ms, mfu 5.27%
+iter 20190: loss 5.8144, time 2812.91ms, mfu 5.28%
+[2026-04-19 09:27:59] [16h 27m] Speed at iter 20200 (epoch 0.34): 0.36 iters/sec
+iter 20200: loss 6.0187, time 2808.59ms, mfu 5.29%
+iter 20210: loss 6.0305, time 2810.09ms, mfu 5.30%
+iter 20220: loss 5.8851, time 2812.62ms, mfu 5.30%
+iter 20230: loss 6.0562, time 2809.99ms, mfu 5.31%
+iter 20240: loss 5.9950, time 2812.44ms, mfu 5.32%
+iter 20250: loss 6.1301, time 2812.19ms, mfu 5.32%
+iter 20260: loss 6.1015, time 2811.48ms, mfu 5.32%
+iter 20270: loss 5.9673, time 2813.43ms, mfu 5.33%
+iter 20280: loss 6.0655, time 2814.21ms, mfu 5.33%
+iter 20290: loss 5.8928, time 2813.65ms, mfu 5.33%
+[2026-04-19 09:32:41] [16h 32m] Speed at iter 20300 (epoch 0.35): 0.35 iters/sec
+iter 20300: loss 6.1288, time 2814.63ms, mfu 5.33%
+iter 20310: loss 5.9623, time 2812.73ms, mfu 5.34%
+iter 20320: loss 6.2302, time 2813.19ms, mfu 5.34%
+iter 20330: loss 6.2257, time 2813.92ms, mfu 5.34%
+iter 20340: loss 6.1201, time 2812.17ms, mfu 5.34%
+iter 20350: loss 5.8299, time 2813.75ms, mfu 5.34%
+iter 20360: loss 5.9914, time 2812.89ms, mfu 5.35%
+iter 20370: loss 6.0210, time 2813.12ms, mfu 5.35%
+iter 20380: loss 6.0955, time 2813.37ms, mfu 5.35%
+iter 20390: loss 6.1177, time 2813.33ms, mfu 5.35%
+[2026-04-19 09:37:23] [16h 36m] Speed at iter 20400 (epoch 0.35): 0.35 iters/sec
+iter 20400: loss 5.9537, time 2812.09ms, mfu 5.35%
+iter 20410: loss 6.1858, time 2832.99ms, mfu 5.35%
+iter 20420: loss 6.0138, time 2833.26ms, mfu 5.34%
+iter 20430: loss 5.9259, time 2817.80ms, mfu 5.34%
+iter 20440: loss 6.1319, time 2843.94ms, mfu 5.34%
+iter 20450: loss 6.2378, time 2864.20ms, mfu 5.33%
+iter 20460: loss 5.8053, time 2849.77ms, mfu 5.33%
+iter 20470: loss 6.1534, time 2818.03ms, mfu 5.33%
+iter 20480: loss 6.1317, time 2818.95ms, mfu 5.33%
+iter 20490: loss 5.8844, time 2834.43ms, mfu 5.33%
+[2026-04-19 09:42:44] [16h 42m] Step 20500 | Epoch   0.35 | train loss 6.1006 | val loss 6.0214 | lr 2.98e-04
+
+[2026-04-19 09:42:44] [16h 42m] Sampling at iter 20500 (epoch 0.35):
+  1. , with he the the back, "i you would him of a good far!" i get i. you and they i?" " and as! it " the old, "oh's as.  had done, for you will the doorc
+  2.  he is this his they of by. that the, " man, and it, and i be. " in which. i, as, ". "i a good,, and i back. we. i.  old." "i you know you it of the. 
+  3.  her, and in and with the man, to on the most were. "i the the morning on the day him for to be. "i you it is to get in that the room, "i in your "the
+
+[2026-04-19 09:42:57] [16h 42m] Speed at iter 20500 (epoch 0.35): 0.30 iters/sec
+iter 20500: loss 6.2054, time 53510.54ms, mfu 4.83%
+iter 20510: loss 5.9642, time 2821.11ms, mfu 4.88%
+iter 20520: loss 6.1738, time 2822.24ms, mfu 4.92%
+iter 20530: loss 6.1291, time 2823.84ms, mfu 4.96%
+iter 20540: loss 6.2943, time 2820.42ms, mfu 5.00%
+iter 20550: loss 5.9262, time 2824.60ms, mfu 5.04%
+iter 20560: loss 6.0748, time 2843.44ms, mfu 5.06%
+iter 20570: loss 5.9755, time 2822.73ms, mfu 5.09%
+iter 20580: loss 6.0552, time 2830.14ms, mfu 5.11%
+iter 20590: loss 5.8740, time 2871.67ms, mfu 5.13%
+[2026-04-19 09:47:40] [16h 47m] Speed at iter 20600 (epoch 0.35): 0.35 iters/sec
+iter 20600: loss 6.1977, time 2885.67ms, mfu 5.14%
+iter 20610: loss 6.0197, time 2894.84ms, mfu 5.14%
+iter 20620: loss 6.1457, time 2871.05ms, mfu 5.15%
+iter 20630: loss 6.0690, time 2889.94ms, mfu 5.16%
+iter 20640: loss 5.9570, time 2881.48ms, mfu 5.17%
+iter 20650: loss 5.9805, time 2873.72ms, mfu 5.18%
+iter 20660: loss 6.0557, time 2871.20ms, mfu 5.18%
+iter 20670: loss 5.8429, time 2876.88ms, mfu 5.19%
+iter 20680: loss 6.2520, time 2872.16ms, mfu 5.19%
+iter 20690: loss 5.9451, time 2886.29ms, mfu 5.20%
+[2026-04-19 09:52:29] [16h 52m] Speed at iter 20700 (epoch 0.35): 0.35 iters/sec
+iter 20700: loss 6.0796, time 2882.20ms, mfu 5.20%
+iter 20710: loss 6.0483, time 2873.02ms, mfu 5.20%
+iter 20720: loss 5.9493, time 2879.69ms, mfu 5.21%
+iter 20730: loss 6.3155, time 2884.78ms, mfu 5.21%
+iter 20740: loss 6.0021, time 2882.95ms, mfu 5.21%
+iter 20750: loss 5.9663, time 2890.05ms, mfu 5.21%
+iter 20760: loss 6.0689, time 2893.93ms, mfu 5.21%
+iter 20770: loss 5.9409, time 2881.04ms, mfu 5.21%
+iter 20780: loss 6.0472, time 2892.27ms, mfu 5.21%
+iter 20790: loss 6.1292, time 2880.77ms, mfu 5.22%
+[2026-04-19 09:57:17] [16h 56m] Speed at iter 20800 (epoch 0.36): 0.35 iters/sec
+iter 20800: loss 6.1613, time 2876.58ms, mfu 5.22%
+iter 20810: loss 6.1977, time 2878.82ms, mfu 5.22%
+iter 20820: loss 5.9578, time 2870.96ms, mfu 5.22%
+iter 20830: loss 5.9791, time 2874.60ms, mfu 5.22%
+iter 20840: loss 6.1531, time 2873.67ms, mfu 5.23%
+iter 20850: loss 6.0549, time 2890.58ms, mfu 5.23%
+iter 20860: loss 6.2173, time 2867.80ms, mfu 5.23%
+iter 20870: loss 6.0892, time 2859.16ms, mfu 5.23%
+iter 20880: loss 6.0311, time 2861.02ms, mfu 5.24%
+iter 20890: loss 6.2017, time 2858.67ms, mfu 5.24%
+[2026-04-19 10:02:04] [17h 1m] Speed at iter 20900 (epoch 0.36): 0.35 iters/sec
+iter 20900: loss 6.2189, time 2855.30ms, mfu 5.24%
+iter 20910: loss 5.9257, time 2856.63ms, mfu 5.25%
+iter 20920: loss 6.0918, time 2858.21ms, mfu 5.25%
+iter 20930: loss 6.2280, time 2856.29ms, mfu 5.25%
+iter 20940: loss 6.1014, time 2853.60ms, mfu 5.26%
+iter 20950: loss 6.0706, time 2865.51ms, mfu 5.26%
+iter 20960: loss 6.1426, time 2856.77ms, mfu 5.26%
+iter 20970: loss 5.7981, time 2860.20ms, mfu 5.26%
+iter 20980: loss 5.9973, time 2852.11ms, mfu 5.26%
+iter 20990: loss 6.0452, time 2855.20ms, mfu 5.26%
+[2026-04-19 10:07:29] [17h 7m] Step 21000 | Epoch   0.36 | train loss 5.9890 | val loss 6.0037 | lr 2.98e-04
+
+[2026-04-19 10:07:29] [17h 7m] Sampling at iter 21000 (epoch 0.36):
+  1.  of to he little the country there in of  said he could in, that she he must, he could, he would have up of so of. he was the great which when he the 
+  2. . her to at and the so, and from the she the water in. if he the my, and of the rest, " the world with was in this the next the room, and a great a th
+  3.  as a been, to. it to him, to the air to them and if the ground the river to the the way the the day there of the he man and of their she the next. , 
+
+[2026-04-19 10:08:34] [17h 8m] Speed at iter 21000 (epoch 0.36): 0.26 iters/sec
+iter 21000: loss 5.7900, time 106216.76ms, mfu 4.75%
+iter 21010: loss 5.8628, time 3428.36ms, mfu 4.72%
+iter 21020: loss 6.0652, time 3255.73ms, mfu 4.71%
+iter 21030: loss 5.9219, time 3338.25ms, mfu 4.69%
+iter 21040: loss 6.0514, time 3752.53ms, mfu 4.62%
+iter 21050: loss 6.0028, time 3118.69ms, mfu 4.64%
+iter 21060: loss 5.9531, time 3167.72ms, mfu 4.65%
+iter 21070: loss 5.8749, time 3339.55ms, mfu 4.64%
+iter 21080: loss 6.1305, time 3350.53ms, mfu 4.63%
