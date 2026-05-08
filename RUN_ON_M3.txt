@@ -1,0 +1,52 @@
+IMITATOR EXPERIMENT — Instructions for M3 Mac
+==============================================
+
+Prerequisites:
+  - Python 3.12 via miniforge (check: which python3 or ~/miniforge3/bin/python3)
+  - PyTorch with MPS support (check: python3 -c "import torch; print(torch.backends.mps.is_available())")
+  - The 'tokenizers' package (check: python3 -c "from tokenizers import Tokenizer")
+
+If missing, install:
+  pip install torch tokenizers
+
+Quick test (verifies everything loads):
+  cd /path/to/imitator_experiment
+  python3 -c "
+  import sys; sys.path.insert(0, 'py')
+  from small_model_split import load_small_model, sanity_check_split
+  import torch
+  model, args = load_small_model('pt/bpe_16L16H_iter170000.pt', device='mps', dtype=torch.bfloat16)
+  idx = torch.randint(0, args['vocab_size'], (2, 64), device='mps')
+  sanity_check_split(model, idx, 8)
+  "
+
+First training run (5000 iters, ~21M param imitator, should take a few hours):
+
+  cd /path/to/imitator_experiment
+  python3 -u py/train_imitator.py \
+      --small_model pt/bpe_16L16H_iter170000.pt \
+      --input txt_local/corpus_books_shuffled_2026_04_18.txt \
+      --output pt/imitator_L8.pt \
+      --token_cache txt_local/corpus_tokens_32k.pt \
+      --split_layer 8 \
+      --d_model 512 --n_layer 6 --n_head 8 \
+      --block_size 512 --batch_size 8 \
+      --max_iters 5000 --learning_rate 3e-4 \
+      --warmup_iters 200 --eval_interval 200 --log_interval 20 \
+      --sanity_check
+
+What to look for:
+  - At iter 0, cosine similarity will be near 0 (random initialization)
+  - If cos_sim climbs toward 0.3+ within a few thousand iters, it's working
+  - If it stays flat near 0, something is wrong — stop and investigate
+  - The first run will create a token cache (corpus_tokens_32k.pt)
+    which speeds up subsequent runs
+
+Output files:
+  pt/imitator_L8.pt        — best checkpoint (by val loss)
+  pt/imitator_L8_iter*.pt  — periodic checkpoints
+  pt/imitator_L8_final.pt  — final checkpoint
+
+Memory: The frozen 875M model in bfloat16 needs ~1.75 GB for weights.
+Forward passes through 8 layers at batch=8, block=512 will need additional
+activation memory. Total should be well under 36 GB (M3 Pro).
