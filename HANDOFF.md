@@ -1,13 +1,17 @@
 # Handoff Document
 
-Last updated: 2026-04-27 11:23 by Claude Code Opus (Mac Studio session)
+Last updated: 2026-05-08 by Claude Code Opus (Mac Studio session)
 
 ## Current State
 
-### Character Model Training (M3 Pro) — RUNNING
-- **Training IS running** — launched 2026-04-26 ~20:44
-- Script: `sh/train_char_high_quality.sh`
-- Log: `terminal_logs/terminal_log_for_char_high_quality_2026_04_26_2044.txt`
+### Character Model Training (M3 Pro) — COMPLETED 2026-05-07
+- **Training complete** — launched 2026-04-26 20:44, finished 2026-05-07 23:58
+  (11 days 3 hours)
+- Script: `sh/train_char_high_quality.sh` (lived on M3; brought into Studio
+  pt/ and terminal_logs/ on 2026-05-08 from `../bpe_vs_char_model_comparison_M3_2026_05_08/`)
+- Logs:
+  - `terminal_logs/terminal_log_for_char_high_quality_2026_04_26_2044.txt` (initial launch)
+  - `terminal_logs/terminal_log_from_2026-04-26_through_2026_05_08.txt` (full run, ends with "Training complete!")
 - Corpus: `txt_local/corpus_high_quality_2026_04_26.txt` (1.42 GB, 4,430 books)
   - Filtered from the 2.05 GB corpus using Claude Haiku API to judge quality
   - Removed archaic language, cookbooks, scientific texts, index entries, etc.
@@ -15,8 +19,14 @@ Last updated: 2026-04-27 11:23 by Claude Code Opus (Mac Studio session)
 - Architecture: 152M params, n_layer=12, n_head=8, n_embd=1024, block_size=512
 - Tokenizer: character-level, vocab=52
 - batch_size=16, learning_rate=3e-4, max_iters=500,000
-- Speed: ~0.5 iter/sec, estimated ~12 days to completion
-- At iter 600, loss ~1.9 and dropping
+- Final: iter 500,000 (epoch 3.21), best validation loss **0.8225**
+- Checkpoints in `pt/` (copied from M3 2026-05-08):
+  - `char_high_quality.pt`
+  - `char_high_quality_final.pt`
+  - `char_high_quality_iter480000.pt`
+  - `char_high_quality_meta.pkl`
+- Final samples in the run log are coherent multi-sentence 19th-century-style
+  prose (see tail of `terminal_log_from_2026-04-26_through_2026_05_08.txt`)
 
 ### BPE Model Training (Mac Studio) — STOPPED
 - **Training stopped** 2026-04-27 at iter ~235,000 (epoch 4.48)
