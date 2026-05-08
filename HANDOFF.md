@@ -149,6 +149,27 @@ Last updated: 2026-05-08 by Claude Code Opus (Mac Studio session)
   `/Volumes/RalphDratman/0-Home-Working-on-M3-Pro/bpe_vs_char_model_comparison/`,
   not currently active.
 
+- **Working-tree cleanup (2026-05-08).** Studio's working tree had
+  accumulated a long list of untracked files and ~240 GB of preserved
+  checkpoint dirs. Resolved in four commits (`2d65d47`, `de2d593`,
+  `ef5494d`, `60cd051`):
+  - `.gitignore` extended: `*_pt/` (covers `old_8_GB_corpus_pt/`,
+    `unshuffled_corpus_pt/`, `doc_shuffled_batch4_pt/`) and intercom
+    runtime state (`channel.txt`, `cursor_*.pos`, `instance_*.id`).
+  - Committed: 4 py utility scripts, `sh/claude.sh` (session-logging
+    wrapper), intercom code, `stop_words.txt`, 7 doc/ chat transcripts
+    and analyses, 12 prior-session terminal logs, plus a small
+    `sh/sample_imitator_L10_compare.sh` tweak.
+  - Deleted: `word_counts_clean_corpus_OLD.txt` and a misplaced
+    near-duplicate `terminal_log_for_char_full_corpus_*.txt` that was
+    sitting under `doc/`.
+  - Moved into `txt_local/`: `reduced_corpus.txt` (1.59 GB),
+    `word_counts_for_corpus_books_shuffled_2026_04_18.txt`,
+    `stop_words_from_corpus_books_shuffled_2026_04_18.txt`.
+  - Renamed: `doc/imitator_training_begun_20236_04_28.txt.txt` →
+    `doc/imitator_training_begun_2026_04_28.txt` (typo fix).
+  - `git status` is now clean.
+
 ### IMPORTANT LESSONS FROM THIS SESSION
 - **Batch size 16 with 32K vocab and block=2048 crashes** from OOM.
   Batch=8 runs but memory is tight. Batch=4 is safe.
