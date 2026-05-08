@@ -1,0 +1,352 @@
+Thu Apr 23 23:59:57 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.15 --max_tokens 130 --prompt 'the old woman' --num_samples 6
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 103000, val loss: 3.5243
+prompt: 'the old woman' | temp: 0.8, top_k: 40, rep_penalty: 1.15
+
+  [1] The old woman's story was, that the old man had carried all of his children away in a basket on his back. He was very glad to hear it, for he knew what kind of trouble they were to get. After mrs. Weatherbee's death it was decided all the boys would come out together and see her, and there she would be to stay until the doctor heard from that effect. So mr. Day was to have them all in town with him in a few days; and every day mr. Frost came down from time to time, for there seemed no necessity for them any longer on their way home by herself or by themselves: but
+
+  [2] The old woman," he added, "I cannot help it. I cannot go about the country, and I don't know how far up the rivers there may lead me." "but if we go in canoes now, eh? "She asked. "We can see the way round by them in daylight--let us try to find their way down along those rivers. "Then he told her that when they arrived at a village they were to send a boat for him. It would be late for them to return, as there was no one on board who could tell where they were going; and when so much time had elapsed without any sign of their coming back
+
+  [3] The old woman--my old nurse; there are all the children. I've been to see my old nurse once, and she's just like her father. Her hair is the colour of gold, and she's a sweet girl; but it can't stand any more." "I never meant to have you take a doctor," said jacky grumpily. "She seems so young. "Mr bell laughed heartily at their words and smiled as he tried a small button on his nose that lay in an oval piece of silk upon his breast piece: the last he had seen of him was two long white powder-bags in which there were several different blue
+
+  [4] The old woman's death--he's in the house now, and they'll have to come over by train, you can guess. I'd give my life for that young man. He had to work a little when he was a boy. Oh! I'm sure he wouldn't be long now. "A low voice of anxiety answered; and an answering cry of despair escaped the girl's lips as she saw her friend before her eyes, where his hands were clasped fast upon those of his friend, who was kneeling beside him gazing at him with tearful eyes. It was very evident that their hearts beat fast when they realized that here at last were their hopes realized
+
+  [5] The old woman, who was in the background looking at us. "She is very beautiful," he said, "so thin that you can see her from your hand as much as any of her own people. "After a while I took him with me. He was all white and almost white with his skin and his eyes; a little grey line ran across his forehead. It was very strange that he should have become almost black-rimmed, but in spite of this there seemed to be no sign of suffering or fear. Then I told him that I could not stand on very well on account of my skin if it would let me stay as long among
+
+  [6] The old woman, who was one of the best-known and most popular characters in europe. She was also distinguished by her wit, wit and knowledge of music; but all this showed that there were many other pieces which she thought worthy to have written for the piano. "The princess had been married a few months during this year to his second wife; and his second wife, although somewhat younger than himself, was still pretty good looking enough to make a considerable amount of money about her. He continued at work much longer than she wished him to begin; by which time they knew that it would be necessary for him to take advantage of their education. Accordingly they
+
+Fri Apr 24 00:02:44 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.15 --max_tokens 130 --prompt 'add this to the mixture' --num_samples 6
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 103000, val loss: 3.5243
+prompt: 'add this to the mixture' | temp: 0.8, top_k: 40, rep_penalty: 1.15
+
+  [1] Add this to the mixture. The idea of a simple form of mind can be found in several works, which should always have an aim and aim, for it is not always possible to get around to the point at which we are looking. In this way they can find pleasure by searching with our eyes out every little fact or event that has passed around them; and in the end we must have a real purpose if we do not use it as an basis for it, but simply because it is really important and useful to us. We must know more about them than their importance demands or necessity demands; for such facts are very important for us in determining what they are and how
+
+  [2] Add this to the mixture of the two, and this to be employed in ascertaining. But the question is--how? But it is not worth while to consider this question in detail, that the process of a "facility" has been so often attempted by writers who have tried to give to each story its proper name. And that it should be so sometimes repeated would almost necessarily lead up into a serious quarrel between them; for instance: suppose one of a series of two stories which are connected together, the author knows not where he can get any satisfactory explanation; or if he had found no words in which they were expressed by the "facility. "Still
+
+  [3] Add this to the mixture of the two or more widely separated and distinct parts of this mixture. With regard to the whole, it is clear that this substance must be carried a very little beyond the one-sixth part of its bulk which is contained in its body: or a less degree within that half which is contained therein. And what do we find? As if these bodies were no longer in motion; though I am inclined to believe they have been so for some time after their own existence. How can any difference exist between them for so long a time after their removal from each other? Do they continue together as long as there can be no difference arising with respect to
+
+  [4] Add this to the mixture: it is thus that the combination of these two, and perhaps three more, are brought to bear on the composition. It would be a waste of time before we can bring our materials together into the form in which they were originally placed. For here we find some very important reasons; for, as we know to have been once found rich in cornfields and rich in vegetables, so this mode of preparing is known as an excellent one; and there being no lack of material on hand by our neighbours for their cornfields, which are not so many miles from any part of their own country as those at home. The other reason may prove
+
+  [5] Add this to the mixture of two. The result is, that if a piece of the stuff is worked into any piece by hardening it over an edge, it is found that the particles are made up by hardening; if this be removed it must be worked out as quickly as possible." "it's very simple," said dick; "but I never forget to watch to see whether any one else has been working. "So he looked at his watch and saw that the time had been taken for the first experiment with which he was not acquainted. Then he picked out something in each hand-piece--the bit of chalk which had escaped from its place between their strips
+
+  [6] Add this to the mixture, and so to make of it a proper mixture; and thus the process has been called in for some other preparation, which has, however, always been used. In order to produce an exact compound of any particular composition (as for instance the mixture), it is necessary that its proportions should be exactly equal. The proportions should therefore be equal when those measures are in their smallest degrees--that is to say they must always be equal with one another! 4.--that all these things are to agree together, is most probable by all, both on account of their distance apart from each other; as this would appear from their being of any assistance
+
+Fri Apr 24 05:40:31 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'the boys' --num_samples 6
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 103000, val loss: 3.5243
+prompt: 'the boys' | temp: 0.8, top_k: 40, rep_penalty: 1.2
+
+  [1] The boys are in the habit of coming to me. They are very fond of me, they say; I shall let them off easy; and my wife is a good girl." "very kind," said aunt sarah after this. "It will please you, mother; but we must not speak of that when he goes away--indeed we may not. If there should happen an accident while he is in london, he has so much more influence with people than others have. "About half-an-hour before morning on march 21st lord bellwood entered his study as one who might expect him either some time or other from reading his letters of yesterday
+
+  [2] The boys are going on. And i'd like to give them an entertainment." "i'm afraid you can't do it. If we were only going into this business it wouldn't be such a pleasant place for us, either, but I think i'll just take care of myself," said dickon in a disappointed voice, and he and his father walked away to their own room together the next day. That night they slept near mr. Smith's in what was now known as "the circus," which had been built by young robert lee during the long absence of jackson from washington on account of some money or other; but it was the latter part
+
+  [3] The boys in the home," he said. "I don't know what you think of it." "well, i'm sure I should like to go with you," answered mr. Brown and his brother, as they returned from their day's work; "but we can't make out anything about it. "The next morning when the twins were at home mr. Brown said: "it seems a big place at this time of year for them all to come up here together. "But when all that happened they never noticed any one else than themselves, the two twins always thought there was some difference between them--and then they wanted to see if it
+
+  [4] The boys, with the assistance of a few others, had had their breakfast; and as it was still dark there would be no fear for them; but every hour increased our anxiety till the sun rose bright. The sun again rose bright, and soon we were in motion to and fro over high hills, covered with snow. We were now within sight of mount tarrenhower at four miles' distance. This was near its summit; but it did not appear more than half a mile away at any point where he could have got to the most direct communication from his companions--there was an extremely broad plain on either side--in some places was so
+
+  [5] The boys will do well," laughed tom. "But we must have a good time before the winter's end. "The snow lay deep and firm in places, but it was not so thick as at first supposed, and there were no signs of any recent habitation of man or beast. The weather was very cold indeed; indeed, for two days it had been calm enough to make one of our party feel chilled all through by the heat. We felt that the only thing left us seemed to be a relief after this day's work was over and we resumed our duties without further delay; for I did not wish my companion on these occasions to lose one thought
+
+  [6] The boys," he shouted. "We're going to be friends again. "As the boy spoke, the boy caught his breath a good few minutes before. In fact, he had already had several occasions to go away from home. They were so strong that there seemed an almost irresistible desire to take him with them, and take back their thanks when they had been pressed a little more closely and was beginning once again to talk of friendship when they passed into one another's company; but as soon as he could get outside--or down into the next room--he turned on another chair and began looking about him for something better. It must have been close upon
+
+Fri Apr 24 05:45:40 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt '"the boys' --num_samples 6 
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 103000, val loss: 3.5243
+prompt: '"the boys' | temp: 0.8, top_k: 40, rep_penalty: 1.2
+
+  [1] "the boys," I answered; "i've been working in the city several times, but i'm not going to stand it any longer." "you're not going to go back here? "Asked fred. We were all at sea now. The boat was about fifty yards from the shore as fred opened his eyes for a few moments ago, and we saw that he was about thirty feet away--for his age. It certainly struck me that he must be some sort of a chap who might have been born there a thousand years before--or even then he might be dead. "In fact there was no other human being on board than our captain's
+
+  [2] "the boys," the captain went on, "the colonel and lieutenant are going to leave in a short time. There may be mischief to us all here." "very good," captain martin said with an expression of mingled regret and fear. "What have we lost? "It was evident that mr. O'brienley's calculations were not very satisfactory; for without one word he dropped his gun as if shot from an enemy, and walked quietly across the deck toward where he was alone watching them until they left the battery on their way up behind him into his cabin; then he returned slowly for another look through a hole in some of which they had not
+
+  [3] "the boys," said the colonel. "We must start in three hours, but before that we shall have to go a little ahead with our work." "it's an ill-omened country," said jack, as he rode slowly back and forth between his father and mother. "I should like to be out of it altogether. It isn't likely any one will ever come near us. "They had now reached their destination, which was several miles from where they had left their train with major robinson; here they were to bid farewell till the boys had left for home for safety after having spent so many pleasant days in close companionship on that wild western
+
+  [4] "the boys" (and if she does not like it, for they have to do their work out of doors, and they are not to be punished in the sight of the world). We have a sort of a way of accomplishing this. We call it "an active life". We have an electric motor-car which puts everything into motion directly upon its return. If the car is very big and has three or four horses and four dogs, a single carriage is quite enough for us; but then there are other cars besides ourselves (for every one is large enough like our own--more than two miles each side). The electric car belongs to mr
+
+  [5] "the boys," said the old soldier, "it is not all fun for us to play and sing when we're not playing. I should like you to learn some of your songs. "The boys played along all night; there were some of them still in their mouths, but their voices sounded loud enough to be heard by everybody outside in the room. They played what they could call a kind of tune; there was no singing, and there was only silence as the boys sat smoking with their guns beside them on both sides, each smoking his pipe. But then they all sang one song: "come out! Come out! "And then went home again
+
+  [6] "the boys," he said; "you seem to be a gentleman, and I know the way you feel. Why do they call it a 'fun." "it looks like you don't mind it," says mr. Marlow, putting his hands in his pockets and speaking of other people's affairs too--in his wife's and her own. "What is become of my family?" "he's gone out into the world with no folks who look after him," says mrs. Brown in answer to this description of one-sidednessed question that had been put before mr. Marlow in answer to another asking for an explanation about himself
+
+Fri Apr 24 05:52:16 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt '"the boys' --num_samples 5 --temperature 0.9
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 103000, val loss: 3.5243
+prompt: '"the boys' | temp: 0.9, top_k: 40, rep_penalty: 1.2
+
+  [1] "the boys," he said. "We can't work it out, and then we've got to do what we're doing. "The next day they went to the bank with their bags of bread. Mr. Brown felt a little sorry for the boys, but after a few hours he began looking about him. There was no sign of any attempt at rescue; so down they came again in less than an hour after dark, having eaten nothing since breakfast--a meal that mr brown did not know how good it is until one is hungry all through with hunger--" "i've had my supper in my room this morning," replied captain jack's wife as
+
+  [2] "the boys," he said, "we can't live in a new country without the children." "well, i'm glad you're not here to let us. It's our own fault; we don't like babies; they always take care of themselves. We only learn how to run up and down trees. "It was evident that all this argument had gone astray, and nothing was heard of them. But at last the truth came out--that there are no babies in existence, or on what do they look? The poor little souls were too much afflicted with their condition before starting for home in safety. There were other things besides their own good
+
+  [3] "the boys," said tom, and he went out. The boys looked at him in astonishment. "But what in the world, tom? "Queried harry suddenly when they were alone for a little while; but as soon as they could get them to talk about this treasure they told their father about it. Tom's father was greatly pleased with what had happened that morning from mr carrington himself. His mother and uncle mr ford were very glad that there was no more gold to be found there; but tom did not know of any such thing, for a few days before he got back home his uncle's money was gone with him into my old office for
+
+  [4] "the boys," said the doctor, "i'll come again at once. I want to take your hand--not it, mind?" "you won't come! "She cried out loud enough for all the boys inside to hear her; and they held her hand very near. Then she held it in both hands so as not to go on forever together, but she couldn't keep it long enough then. She was a little silly for two hours; but the doctor said that a little longer stay and rest would do no harm whatever if there was another attack soon that day in less than twenty-four hours; he had come every night as an old
+
+  [5] "the boys, are you going to give me a lesson? Just give me your hand," continued the voice which had before been heard. "That's it, my boy! "Cried mr. Brown; "i'll teach ye a new set of boots and put on yerself. "At this moment there was another sound from without--they heard mr. Brown talking in his cabin as he stood with his back turned toward the front door for he had just parted from frank when they were both gazing down through their pipes at an immense box of candy; for it was still full ripe enough to contain all sorts of vegetables and other vegetables that would be required or
+
+Fri Apr 24 05:58:01 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt the --num_samples 5 --temperature 0.9
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 103000, val loss: 3.5243
+prompt: 'the' | temp: 0.9, top_k: 40, rep_penalty: 1.2
+
+  [1] The was about a mile from the city--but this is only some two miles, perhaps. No doubt they will attack by night; but if so, we shall know what it means." "thank god! "Exclaimed the captain, "that's another plan! "And he pointed to his watch on the river. It did not take long at first for one of those who had started up said: "we are going all right now; that seems like taking an enemy in surprise. "But there is reason in such cases where even one can find a certain amount--the chances of escape being rare are always very much against one's self-respect
+
+  [2] The life of a poet the most eloquent, his intellectual and moral life the most precious to him, it is necessary that we should be always faithful and patient to our task. There are no means or means by which we can possibly afford to support us at large upon such a subject; but I am certain that those whom I have most reason for being in demand, as well as those who have most experience of their professionals and politics, are not generally found among those whose religious opinions are worth any great work." (life of thomas jefferson in new-york city) 4. "It seems now," says john adams in his letter from virginia (
+
+  [3] The is to be the second and third of the series, but it may do much damage by carrying off in a somewhat careless fashion. It is a curious thing that those who go out late at night should spend their entire time on what they have to get for supper--the food and other things which we had eaten and drank in our kitchen for this morning; also it has been suggested that we could have made ourselves very comfortable under a bedclothes or blankets under one sofa, so as not to attract observation. To-morrow afternoon I shall make an attempt to describe how things turn out when this afternoon's dinner was served with such success as can
+
+  [4] The will be a big change," he said. "Do you know anything about the secret life in florida?" "I never knew of it," admitted his old friend. "There are always those who say that I shall give myself up as lost; but there's others who say, 'don't lose your temper then.' perhaps we won't have another chance. "He went to work, and after one or two hours of hard toil was able to find what he wanted. His friends were beginning to wonder whether they could make their escape out for the time being without a sound and hearing the shouts of men of both sides. Even now he did
+
+  [5] The one and the other, and the last of them--a great man!" "yes," said he. "It can be done. "The girl went forward to help him. They were still talking about some people who had lately been lost, when suddenly a cry rose on their ears--a sound as of a great many voices crying out in agony and death! She came up from her knees in a moment of terror and horror; but before she could speak any words again her brother's voice was heard at hand where there could be no mistake! His voice was lost to view--in his eyes; it could not have been heard for weeks
+
+Fri Apr 24 06:40:27 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'a portrait of' --num_samples 5 --temperature 0.9
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 103000, val loss: 3.5243
+prompt: 'a portrait of' | temp: 0.9, top_k: 40, rep_penalty: 1.2
+
+  [1] A portrait of the emperor. To be sure, we are not likely to have a general feeling of interest at this point; for though the king has been here nearly four years (since our return) he seems rather glad to know that we have seen "something" in his person; and that a stranger is not likely, indeed, much more willing than ever to show him everything but us his visit: this was our impression upon you: and yet it is all very well known. When I first came from france--it was in december, and after being detained till several months until my arrival--I found myself alone with my visitor: she had a little
+
+  [2] A portrait of george the fourth, by which, in the last year of his age and life, he has been restored to health. I shall, therefore; and though this is not an occasion for rejoicing at my defeat by any slight acquaintance with such a noble genius in civil life as william of orange and mary queen elizabeth cannot do without that lady's knowledge or assistance. "Mr. Sidney was now fully recovered from his wound. He had become seriously ill; and one morning that day mr joseph could find no relief till some hours after they had started on their way into london to look over those papers which would be found in the possession of sir robert peel before long
+
+  [3] A portrait of a man whose life is to be lived in such a place, the death of such men as dr. James and john gurney may be looked upon here (in this house), but the most famous of them as witnesses to their deeds. Dr. George nye's work has brought out great fame in literature; and mr auberly's poetry is one of literary beauty that has won all the praise which it deserved. He can do justice, however, by calling attention wholly devoted to poetry; for poets are not made without gifts. Poets are made only by virtue of their ability and experience; not being able always either from poverty or
+
+  [4] A portrait of the late prince of hesse, and which will probably be in the british museum. The portrait of a king upon which were painted (as it was in one large block of it from top to bottom) is now in my possession. I have a great desire for more than two hundred years the life of that man. The statue is the finest specimen that has been seen for many centuries, with its high-coloured marble and fine white plaster at intervals during several periods of twelve or twenty years: as also its fine proportions; though this statue was composed chiefly when he came into personal contact with his contemporaries. I should say much more about this
+
+  [5] A portrait of the prince, which was in a somewhat poor condition. "You would have been surprised at the truth of this story," said monsieur de saint-fresher. "I know that you are going to see us; and I ask that I may come too. "It appeared with very little explanation of the strange circumstances which had obliged him to communicate it to his sister-in-law with albert d'hargolois. But when she heard a little story of what he had told her, she took courage again in telling about them all; and when she learned how monsieur de saint marat was being pressed on every side for money
+
+Fri Apr 24 06:44:45 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'a portrait of' --num_samples 5 --temperature 0.9
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 137000, val loss: 3.4956
+prompt: 'a portrait of' | temp: 0.9, top_k: 40, rep_penalty: 1.2
+
+  [1] A portrait of washington was seen first, and the figure at a distance of three feet, by two girls, was that of miss h. B. Franklin as she had quitted it a short time before in her little brown dress--which did not look so beautiful nor curious as it should have done--was the young girl to be seen next morning on horseback as I came up. "What can you do? "Asked mr gordon, who, now that he had made himself comfortable and gone into work with me on my knees and on my head--he always said before starting off. Just then I began to feel uneasy about something; but it was no longer
+
+  [2] A portrait of the emperor of russia, to illustrate his personal character. I shall take pains, however, to treat his portraits with much grace in my life and words. In the face of such a picture as this one shows us he is not alone; for, on a wall looking into an inner chamber where he has seen something that I can only guess at of what kind was being shown up and why. But if he knew of it, that is where my reader began; and what followed will probably be related in this place hereafter after you have passed through several little rooms where nothing was so fine or fine as some pictures which I have seen here as they
+
+  [3] A portrait of mr. W. C., in the cabinet; which is in fact a copy of that "quantity" or "sale to-day," and I suppose he is to be regarded by others as having a real existence somewhere on our list, the only way we can account for it being either that there are two things we do not at all--to call them both alike, and to have a different sort of right-of-way and right-way, the last having to call them both alike. I suppose those two objects are the first thing we must think of as a sort of double set--which is an easy enough plan
+
+  [4] A portrait of the lady anne barrington-dubvis and his family, was shown him by her husband; this man, however, never saw her. He saw elizabeth barridge at a distance in her house--the whole world had changed to view! Of course there were no strangers to be seen with me. Mr rogers's disappearance was as dramatic as the disappearance of sir john fenwick--with none on it of a piece that called for the name. But mrs baily had no sooner taken shelter than she went straight upstairs and into bed behind my dressing-gown (it did not really go out). She could have slept there for forty hours if
+
+  [5] A portrait of the duke of guienne in paris. It seems to me that napoleon was deeply interested in the affair, and that he was not in the least apprehensive at all of his own personal interest. I am told by lord pailde, mr parkes, dr wilson's surgeon (though this gentleman was not a great man), that during his stay he saw a copy of what had been brought down from versailles, by de crecy; he could understand nothing about it; but in one place at least, when one day whilst talking with him on politics with an old friend of his early manhood--when he had had as good a sight of an evening
+
+Fri Apr 24 19:22:13 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'On the horizon there was' --num_samples 5 --temperature 0.9
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 154500, val loss: 3.4596
+prompt: 'on the horizon there was' | temp: 0.9, top_k: 40, rep_penalty: 1.2
+
+  [1] On the horizon there was just enough of a good deal of blue to make this the most interesting and exciting spot he ever was to study. He tried, first of all with the glasses, then with his glass on two or three details. His eye took in everything at once, and it grew stronger each day. He studied carefully and studied the images that were there; but nothing could give him enough more than what he had already seen; so that evening when they came out into one of those endless problems that come one after another into the life's work--that in these studies, as I have said. And even when they talked--not as a man or
+
+  [2] On the horizon there was no sign of the presence of any of his comrades, but there was nothing to be seen, and if a fire had been lighted by accident the flames would have been extinguished. To go back to our companions was too exciting an undertaking for us; we turned about and hastened toward re-entering camp when something stirred in our rear; it was a slight movement toward a fire which burned up on top of some rocks. We stopped short, but not until I had reached home. The men were coming on with their guns drawn upon their shoulders on to receive us. They held them up through front and rear, until the sound ceased was heard
+
+  [3] On the horizon there was a new man in his group, a young american who did not belong to the corps of engineers who were making the war. "The engineer in the ranks of this army has in hand a large number of men engaged in his various branches in the business of his profession; a good many he has brought or can be made, and the remainder have all fought to save life. He is a soldier, but of late has lost his wife and family. "A number of americans, who had been wounded by german shells, were sent into france. All of these men came from america. On september 14th an american gun was fired on an
+
+  [4] On the horizon there was a light which cast by the ship's side. The sea was quite smooth; and the line of roofs of houses, built of brick, at a distance on each side by buildings, was marked with several very prominent figures in relief against the sky. It seemed to me that there must be men on board at some part or other in this group. I can see none more prominent than about three miles astern; certainly none, I think, is more distinguished for height, and for peculiar character. They are evidently irish and irish enough to know the distinction between english and american ships for, at their own game with mankind, we can make them see that
+
+  [5] On the horizon there was nothing before us but a green and misty landscape to the south, where we could see our way clearly through woods. As it became clear to all the troops in this region, however, there were more or less evident indications that we had been taken by surprise. When two hundred wagons with their horses pulled up their teams, and we met these trains of cars coming down from sydney, it was plain that our own escort wouldn't have sufficient room for all the men of his division to do duty there. The men that remained were evidently "to go. "We got over the ground in front of a line of infantry to make a wide detour to get
+
+Sat Apr 25 06:58:46 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'Where is he?' --num_samples 5 --temperature 0.9
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 154500, val loss: 3.4596
+prompt: 'where is he?' | temp: 0.9, top_k: 40, rep_penalty: 1.2
+
+  [1] Where is he? And is not the father he was called? Can there be a son he is not worthy of himself? I doubt if a king, who made his own sons and their brothers' fathers, could have made any one but them to become worthy of him. "What would you do, my lord! "Exclaimed m. De baisgees; "we only come from the queen." "if I go with no other person," answered louis xv in his turn, "the fact is, that we have lost a most accomplished gentleman, our king louis xv. "And m. De baisgees, taking off his hat with great care on
+
+  [2] Where is he? And this one which is very good of him, which was once so kind and gentle, never went out and had no relations, nor will he again go." "that be more than you think," said the queen. "I have a great mind to let his people know that I am not able to answer them. But I will say this: that, if there were not in my power to give answer, I could not do so. For in the past my chief desire had been to learn in some way what happiness can be offered in happiness. Not that I had ever thought of it but that he--I had been thinking, i
+
+  [3] Where is he? Not one of them! I shall ask him to be sent to me directly from paris, which he cannot do if he is not taken to london to-day! No. "And he drew a chair up beside the bed on which sat his wife, saying with an air of calm dignity: "I am sure I shall make no objection whatever unless we find out more fully how things can be arranged. I think you have the honor, of course, and the right. I cannot say to you to-night how much you are, of what importance, of what benefit to me to know, how I may best promote your welfare and prosperity to your
+
+  [4] Where is he? Is it possible that he could have been mistaken in me? Did not his words reach you, and his voice aroused your suspicions? Tell me that I am right in this. Do you think me capable of such an action? I cannot answer. "Well, but you are wronging in saying that my suspicions were unjustifiable." "but it would take time for the facts to appear there. It must be of considerable importance for us to know something of a murder, and the man who was murdered is not the man. We know no more about him than if we had followed our own tracks and discovered a very slight wound on our person
+
+  [5] Where is he? Why, why, he is very particular. He is very particular.' I felt rather sorry now that I had never thought of any of our old acquaintances. However, my spirits were not so happy as usual for the moment. We had been sitting in a corner here all day watching james going off with his father from london; and the day he went away he was one fine afternoon: the place was lovely now he became quite a favourite at an inn on piccadilly; so we took tea together and talked very pleasantly all round--there being no one else present, the inn being one of those large public buildings in town--and james asked
+
+Sat Apr 25 07:06:51 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'Napoleon stood up' --num_samples 3 --temperature 0.9
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 163500, val loss: 3.4008
+prompt: 'napoleon stood up' | temp: 0.9, top_k: 40, rep_penalty: 1.2
+
+  [1] Napoleon stood up, and said, without rising. The king could tell that he was very well off himself, and, finding that the people of the country knew him very well indeed, as the king had commanded. And his majesty was pleased with this. "We did all we could," said he to me, "but there is that that is more important than all. One man more is needed than two." "I shall ask you, o queen," answered I in a quiet voice: "have you ever seen your wife alive? "For at those days king charles heard nothing about these things, but could give them out. Now it happened one
+
+  [2] Napoleon stood up to say that he was not able to do things by night and by day, and he did not know that night. "It was to him that the stars fell when the great war broke out, but the people knew that they had many a task before them, and the people who followed their traditions would remember them, and be grateful for it, because we have given up this work and gone on working in peace time. Therefore it is not fitting for you to live here in peace again. In order not to leave anything here I will make you a visit in my place. I shall give you, however, some news which may help them
+
+  [3] Napoleon stood up by the fire and said in a loud voice-- "it was the greatest coward who ever rode so near me. "A thrill of amazement followed his words, but he continued:-- "I remember you were a fine horse-pistol. Well, then, if I had never been in your country I would have been more than an enemy, or I should have killed you with my own hand. You are of no use here, nor you anywhere else; the whole world is full of such folly and madness; there are no end to it, it will soon be worse than death itself; and, o god! What shall I do to
+
+Sat Apr 25 08:17:56 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'The weather was about to turn' --num_samples 3 --temperature 0.9
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 163500, val loss: 3.4008
+prompt: 'the weather was about to turn' | temp: 0.9, top_k: 40, rep_penalty: 1.2
+
+  [1] The weather was about to turn a point of attack. "It would be like throwing me into the river," he said to himself, "and the thought has given me wings! "His first impulse was to try and make the necessary preparations to hold on for some time, and with all speed he set out for his victim's face. Then he saw that it would be best to have an exact point in this great city. The city was very beautiful as far as its buildings were concerned, for they were situated so close that they made a sharp bend in the river just below them and nearly met at right angles where they touched it. Thus there are many points which
+
+  [2] The weather was about to turn out very hot in our quarters. A general idea for our general's comfort was to lie on the floor and sleep there; but a large fire was built across part of the building, outside the building and near one end of it, which had long been used as an hospital. We had been lying under some bushes in front of us when all this excitement was over, as we looked out far into a wide field where were many woods which stretched before us like so many stagey monsters, not to say tree-clad little holes with their roots projecting above tree trunks like enormous pillars which came close up out into earth on that side of the field
+
+  [3] The weather was about to turn out to be warm and it would require all of the men to get through all night. At four o'clock in the afternoon we were under arms, ready for sea. As there was nothing to prevent the ships from setting fire to us on our passage across, I determined to go on board, for the ship was lying under full sail when a light came off; and as soon as I reached her she had not set at her full speed. Just before we got round she was abreast of some island and then she had not gone very far; but I knew that her course must be north-west, if the wind had changed her course
+
+Sat Apr 25 08:20:33 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'By the time we started out it was already almost noon' --num_samples 3 --temperature 0.9
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 163500, val loss: 3.4008
+prompt: 'by the time we started out it was already almost noon' | temp: 0.9, top_k: 40, rep_penalty: 1.2
+
+  [1] By the time we started out it was already almost noon, and I had to run as hard as I could on to find the road again before I was out of breath. I knew where I should be next day, for my father was a very honest man, a farmer; but I knew I should get my death-blow, if that boy were a rich man. Now, however, there is this objection to going to chicago and having a good horse with me, which is quite common in kentucky in the south. So we are bound to have one. The boy's father was a farmer in illinois in the last year of his life, having been born in illinois in 1759
+
+  [2] By the time we started out it was already almost noon before that spot was made known. About five miles from us our train began to pass some time before we reached the spot where we saw mr. John lewis and the family of two brothers, who had been with the party at lake torrens, on their trip to america. As they appeared not to be much interested in my company, I gave them some refreshment. In a little while we had dinner we heard voices near by say they were talking together like old friends. From what I could make of this talk some kind of a desire arose in me that I might at length give it up for an effort I intended for that purpose for the last time
+
+b  [3] By the time we started out it was already almost noon. I got a glimpse of the river as it ran among the trees and shrubs at a great height above its level, and soon reached the water, which was salt when I first saw it. I could see by its appearance that there must be some great width of water at this spot and that in summer time the stream rose to such an alarming height that, a few miles above, in one place as far as we could see on either part of the horizon, it came down to about fifty feet, so near, that there was no longer an easy passage across the river. The stream had risen to more than twenty-five feet and stood
+
+Sat Apr 25 08:23:09 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'there was no longer an easy passage across the river' --num_samples 3 --temperature 0.9
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 163500, val loss: 3.4008
+prompt: 'there was no longer an easy passage across the river' | temp: 0.9, top_k: 40, rep_penalty: 1.2
+
+  [1] There was no longer an easy passage across the river under the steep banks of a river bank. The road crossed by our boat, and after riding three stages across a level field for about fifteen miles, we came to some little villages; but the grass was dry; and as we approached them I caught sight of several families standing in front of them with their children behind. From these we were led to an open space on one side and a village; but though it was the chief's own ground, it had, for other purposes in view, little grass around it; it being about ten yards long. At length I turned round before I was out of my saddle and saluted this people with one
+
+  [2] There was no longer an easy passage across the river, owing to their steep banks. By a narrow part of the river they would have been able to cross a dry and sandy bed of which the bottom was so hard that the boat would not pass across it. When they came opposite banks they saw forded so quickly with logs, branches, and small sticks that even our indians had found growing on them and which were in some places too high above water. As there was not time which one could land they pushed off from another point with such force that the boat broke before it touched bottom again up stream by its side--as if they had no idea that it could ever be safely kept afloat--
+
+  [3] There was no longer an easy passage across the river, and the river was very high, which rendered it impracticable to cross. But we had already passed several narrow islands and islands, all of which were rocky; so that nothing remained but to make a complete examination of these points. We had now got into the river where the land is low. I did not perceive a creek or creek by me more than four feet broad, and was obliged to walk about forty-two miles before I could find any; it was so dark that nothing was seen but an immense rock rising abruptly from its centre in one place at least. The country we crossed on our journey from port jackson led me on several
+
+Sat Apr 25 08:25:50 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'As we approached the castle' --num_samples 3 --temperature 1.0 
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 163500, val loss: 3.4008
+prompt: 'as we approached the castle' | temp: 1.0, top_k: 40, rep_penalty: 1.2
+
+  [1] As we approached the castle of bali-taileen, with the two towers, and a castle over the narrow way that separated them from it. When we arrived, they told me that the castle at bali-taileen had a beautiful and stately appearance; but balin could not understand how such a beautiful place would be situated in so many different parts, without ever entering into conversation with any one. My guide gave me some reasons for desiring to see those parts. 'this is just a very difficult and troublesome life; because, like everything I have seen since I left you and travelled about three days ago, nothing can seem to pass away.' 
+
+  [2] As we approached the castle of comines. The next morning a company of troops, which we had met on our march, marched for a spot before us so concealed as to cover the rear. We found the wall with all its massive columns standing open, and was thus enabled to give cover for a column, which might march up if necessary. In this manner our advance reached its destination. It was, however, soon perceived by my detachment as I advanced towards them. I immediately formed at once into order the order of my troops being led into order by an officer whom this order was to have saved him from the fury of their enemies who were ravaging italy and striking her
+
+  [3] As we approached the castle, and the doors were flung back. We passed on to a court, at the end of which stands a huge structure. It is very similar to the castle of torksey in respect of architecture, or very beautiful and majestic; but the gate is not so massive; in fact, it has a great air about it--as if it had been opened with an axe. I have never seen anything like it among my fellow-creatures; and the passage to torksey at this place was a complete quireneuf or square tower with very high columns springing up near its top.... "We came away from our own world; but while
+
+Sat Apr 25 08:32:12 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'As we approached the castle' --num_samples 3 --temperature 1.0 
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 202500, val loss: 3.3713
+prompt: 'as we approached the castle' | temp: 1.0, top_k: 40, rep_penalty: 1.2
+
+  [1] As we approached the castle. We were received; and as he was in general my friend mr. Hallblower, who, of course I was acquainted with him. Mr. Burges is an old acquaintance on this place, but a tall man with rather a commanding appearance and bearing--a figure very striking at any time to-day in the midst of his family. "We made an excursion into the ruins of udolpho and other towns; but were disappointed by not finding there some ancient remains or curiosities discovered for many years prior to this period. They appear to have been those buried or unburied implements which were supposed to be hidden buried here or where such
+
+  [2] As we approached the castle. It was not without curiosity that I examined its walls, finding them as hard as stone. The outer court contained some twenty dozen chambers or apartments, each having four large cells,--all of which were used only for military purposes, in one of which the governor was constantly staying,--but there was also a gallery above. Near this staircase the governor was stationed. We then ascended through a trapdoor into another part of castle hall; where an office in each apartment was connected with every department,--and we found ourselves on board; which from our high point of view gave us an idea of military architecture: and accordingly we proceeded to view all within,
+
+  [3] As we approached the castle, and the people, with still more dangerous weapons at their disposal in such places as we approached, stood prepared for flight. The king and queen were on horseback in advance in order to intercept them, nor could we see where they did not encounter the forces of st. Peter. "The door was soon opened--a few men rushed down--they succeeded in reaching a position which could only be approached on one side by one or both hands immediately upon it; but from this time forth such dreadful threats were used that few ventured to venture out of range before dark. Two only remained behind the gate which would have led us into safety if an explosion
+
+Sun Apr 26 21:15:40 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'As we approached the castle' --num_samples 3 --temperature 1.0 
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 215500, val loss: 3.3536
+prompt: 'as we approached the castle' | temp: 1.0, top_k: 40, rep_penalty: 1.2
+
+  [1] As we approached the castle, and found it surrounded by a strong guard of armed men. Immediately after the arrival of these troops we proceeded to make ourselves known. "We were informed he had been attacked by three thousand armed men and twelve cannon; we had suffered terrible losses at their hands, but had come prepared and made preparation to meet them. But this was only some small success. On a sudden the governor ordered me to go into his house and bring my sword with me. As I reached the door by which I had entered, a party of indians came suddenly from all directions, and the leader went out into their country with his family, who were then in his
+
+  [2] As we approached the castle. As the tide had not yet quite risen, and the weather was mild; we crossed on to a little island in its mouth, which appeared to be about ten miles in diameter. This is surrounded by high rocks and sand-storms. At half past three o'clock we crossed a small bay or creek called wye-meel or rockman and proceeded along it on our left until we came out into an open grassy country with low hills covered with a dense forest of gigantic beech; at six o'clock in the morning had scarcely any ground for our tent before an empty barrel was put up for shelter under ground which is covered with thick
+
+  [3] As we approached the castle and walked into the courtyard. He was in his shirt collar sitting upright on a table, apparently lost when I approached him and took me in behind him, and he then looked up at us all with an air of extreme interest. His eyes had become round from habit to slaver under a thick dark settee handkerchief, which gave an impression of quiet contentment as well as dignity on his thin face. My companion spoke not any words at first, when I perceived it was not for something very remarkable about him. So soon as it grew dark we made ready for going to bed--a step which seemed natural under such circumstances of unusual excitement and curiosity
+
+Mon Apr 27 13:18:21 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H_iter220000.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'As we approached the castle' --num_samples 3 --temperature 1.0 
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 220000
+prompt: 'as we approached the castle' | temp: 1.0, top_k: 40, rep_penalty: 1.2
+
+  [1] As we approached the castle by the path. It was in a deep valley, between rocks and the water of a clear run between high cliffs. But it had scarcely emerged into an open field for some distance when darkness fell upon us--so dark that we could hear at first only our own voices; then at length our sounds died away like faint echoes to deafen us, or as I thought them, and the mist of fear began to obscure the sight of us. I listened through my key-hole till quite silent. Suddenly I heard shouts; and a great man came running from behind and, with his hand outstretched, ran into our midst of him with such haste
+
+  [2] As we approached the castle with much hesitation, and it was difficult to understand why these men had ventured thus suddenly from the gates of their native land. The appearance, however, of the young knight was so unexpected that all present exclaimed simultaneously. "I know him, good mine! "Murmured the king; "but you will let him come through your lines to us. "Then he turned towards his men. As they approached their general gave a shout. But they were but too much occupied with one thing to notice its origin, or if the young knight's voice betrayed any emotion in its utterance; he did not even raise his arm as he entered the tent; the soldiers
+
+  [3] As we approached the castle, and entered within a few yards of the gate. "What is wanted? "Asked lady margaret, as she looked about her in amazement. "We have been ordered to take down the horses," was mrs. O'grathar's reply, "and leave you here. "As they passed along her husband's room his wife said: "he would not like it very much; and I was going up the castle path to give him an order when something happened. "In his surprise he had forgotten that it was only for some minutes before he heard her speak of a matter which had disturbed their secret joy. Then, suddenly, his
+
+Mon Apr 27 13:25:31 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H_iter220000.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'As we approached the castle' --num_samples 3 --temperature 1.0 
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 220000
+prompt: 'as we approached the castle' | temp: 1.0, top_k: 40, rep_penalty: 1.2
+
+  [1] As we approached the castle of st. James, situated on the side of a deep and rapid river--a mere thread of water; it was not more than half a mile distant. The entrance to another small gate had just been gained by a party of indians a few days before, who had left in haste, a number in advance, so as to afford us an opportunity of entering without delay. The gate had not been opened for the sake either of safety or convenience, but in that case we should naturally have found ourselves in strong opposition instead of attacking it by our force; as this would necessarily expose us to every disadvantage which might arise from approaching the castle with some
+
+  [2] As we approached the castle, and found the house of god to be of pure gold. We arrived at a small court surrounded by noble trees, so that we were obliged to walk about in quest of refreshments; to this court our guide directed us. Our horses were tired with the long journeys, for not only had they to travel with ease, but not only had they no burdens upon their backs, which enabled them freely at night to carry all they wanted without stopping when asleep. The approach of night afforded us an effectual relief from some apprehensions of pursuit by following an armed party from another castle than by following it by day. Accordingly we chose the latter. About eleven
+
+  [3] As we approached the castle of st. Peter's, at which were assembled many nobles and knights who had come from all parts to witness our proceedings against the countess and my father; but being resolved that if any harm befall his majesty he would do vengeance on the earl, he resolved to make his peace, and said that if any of my people were about to give him any account of their words, or fail of justice in his quarrel with none but a stranger that might have come as an envoy from a proud lady who was seeking refuge in her castle against me; that it was very true my father did say he should pay court by giving up many men-at-arms
+
+Mon Apr 27 21:07:17 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H_iter220000.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'As we approached the castle' --num_samples 3 --temperature 1.0 
+Error: Model file 'pt/bpe_16L16H_iter220000.pt' not found
+Wed Apr 29 21:25:17 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->ls pt
+bpe_16L16H_iter170000.pt		imitator_L10_full_iter2000.pt		imitator_L8_combined_iter4000.pt
+bpe_16L16H_meta.json			imitator_L10_full_iter3000.pt		imitator_L8_combined.pt
+bpe_16L16H_meta.pkl			imitator_L10_full_iter4000.pt		imitator_L8_kl_final.pt
+bpe_16L16H.pt				imitator_L10_full.pt			imitator_L8_kl_iter1000.pt
+char_full_corpus_meta.pkl		imitator_L8_combined_final.pt		imitator_L8_kl_iter2000.pt
+char_full_corpus.pt			imitator_L8_combined_iter1000.pt	imitator_L8_kl_iter3000.pt
+imitator_L10_full_final.pt		imitator_L8_combined_iter2000.pt	imitator_L8_kl_iter4000.pt
+imitator_L10_full_iter1000.pt		imitator_L8_combined_iter3000.pt	imitator_L8_kl.pt
+Wed Apr 29 21:25:37 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'As we approached the castle' --num_samples 3 --temperature 1.0 
+^CTraceback (most recent call last):
+  File "/Users/RalphDratman/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison/py/sample.py", line 382, in <module>
+    main()
+  File "/Users/RalphDratman/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison/py/sample.py", line 264, in main
+    checkpoint = torch.load(args.model, map_location=device, weights_only=False)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/RalphDratman/miniforge3/lib/python3.12/site-packages/torch/serialization.py", line 1360, in load
+    return _load(
+           ^^^^^^
+  File "/Users/RalphDratman/miniforge3/lib/python3.12/site-packages/torch/serialization.py", line 1848, in _load
+    result = unpickler.load()
+             ^^^^^^^^^^^^^^^^
+  File "/Users/RalphDratman/miniforge3/lib/python3.12/site-packages/torch/serialization.py", line 1812, in persistent_load
+    typed_storage = load_tensor(
+                    ^^^^^^^^^^^^
+  File "/Users/RalphDratman/miniforge3/lib/python3.12/site-packages/torch/serialization.py", line 1772, in load_tensor
+    zip_file.get_storage_from_record(name, numel, torch.UntypedStorage)
+KeyboardInterrupt
+
+Wed Apr 29 21:27:40 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->python py/sample.py --model pt/bpe_16L16H.pt --rep_penalty 1.2 --max_tokens 130 --prompt 'As we approached the castle' --num_samples 3 --temperature 1.0 
+params: 875M, attention: softmax, tokenizer: bpe (vocab: 32000), iter: 229000, val loss: 3.3477
+prompt: 'as we approached the castle' | temp: 1.0, top_k: 40, rep_penalty: 1.2
+
+  [1] As we approached the castle, the door was closed to us. We passed into the garden, and there we saw old david walking along his own path from tree to tree. He was pale-faced and worn; but he smiled like a child, as much as an ox; for as he turned round I saw that from behind some bushes which stood about two feet before him I heard a sweet noise in it that set my blood whirling with joy. "Who is there? "Cried old david with one voice, in his tone of voice so weak and yet so full of fire--for all within its stillness were gone--that no breath could have trembled, any human
+
+  [2] As we approached the castle, the family were delighted to see mr. Park's daughter, miss st. John! She arrived in good time with her nurse; and the little girl was very gracious to everyone, after what she had suffered from mr. Park's hospitality; though they both felt sure that there was no such thing as a separate between them--though how could they have any doubt of his honour being done out here. But what more would I say? And when this young lady came out of the hall to ask miss st.-- for a glass of something cool he had brought along under his arm, at least in some measure returned a kind invitation: but
+
+  [3] As we approached the castle. As I approached the garden wall of the place a white man came running from among the rocks. 'now, if you please, sir,' he cried, 'come before me and thank our god for your hospitality.' the knight advanced a few steps further to where old david stood behind him with his daughter in his arms; and this they did not escape altogether; for as fast as those who had entered upon this affair, both men kept them back from making another assault upon an honest man and a girl who had no great claim on their hand. All at once it began to strike so sharply that poor richard was half frightened off her!
+
+Wed Apr 29 21:28:50 EDT 2026 
+RalphDratman@Mac
+~/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison
+--->
