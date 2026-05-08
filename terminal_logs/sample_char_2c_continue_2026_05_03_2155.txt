@@ -1,0 +1,9 @@
+params: 152M, attention: softmax, tokenizer: char (vocab: 52), iter: 312000, val loss: 0.8727
+prompt: 'Pierre' | temp: 0.8, top_k: 10
+
+  [1]  ierreland there must be represented as having been the result of a so-rapid and successful submission, because of the strength of british intervals, in the fiber and effect of the pacific coast. The country was then thronged with the conservative party and the colonies, and the subsidiary parties which were then establishing themselves in ireland seemed to mean the falling of the foreign state. The day on which these resolutions were read the peace and prosperity of the colonies was assured, and in t
+
+  [2]  ierregotten was the first to descend the tree when they arrived at the cave. They were all supported by mr. Park, whom they arranged with every nervous and excited instinct possible in the case of their father. "The man is going to take a challenge, mr. Rover, a daring challenge," said tom smith. "No, sloan, the man is a dare," said mr. Rover. "I don't want to tell you of this, either. I want to know what he does to take it back." "bah! "Exclaimed mr. Rover, "shoot him! If you saw him stand up there 
+
+  [3]  ierrepaid and the trained steeple. Thither still see the fashioned stand, and before it see the well-to-do following. The little heavens over the spire are thick with the scattered winds. Heaven anointed the scourge of the promised and wealthy ages. The streets are deep in the shining wealth of the ancient albert, the south of the saxe-wissenhof, which the ancient stand, the spire at the top, the stand at the foot, the stand at the bottom, the stand of the ancient tower. The top lies slightly out of 
+

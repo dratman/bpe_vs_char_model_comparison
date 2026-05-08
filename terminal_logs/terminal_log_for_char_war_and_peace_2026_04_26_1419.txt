@@ -1,0 +1,226 @@
+Command: python3 -u py/train.py --input txt_local/war_and_peace.txt ...
+Started: Sun Apr 26 14:19:16 EDT 2026
+========================================
+[2026-04-26 14:19:16] Using device: mps
+[2026-04-26 14:19:16] Using precision: float32 (requested: float32)
+[2026-04-26 14:19:16] Training mode: continuous
+[2026-04-26 14:19:16] Reading input from txt_local/war_and_peace.txt
+[2026-04-26 14:19:16] Read 3,182,154 characters
+[2026-04-26 14:19:16] Training char tokenizer...
+CharTokenizer: Built vocabulary of 79 characters
+[2026-04-26 14:19:17] Tokenizing entire corpus (3,182,154 characters)...
+[2026-04-26 14:19:17] Tokenization complete: 3,182,154 tokens
+[2026-04-26 14:19:17] Converting to tensor...
+[2026-04-26 14:19:17] Tensor ready: 3,182,154 tokens
+[2026-04-26 14:19:17] Splitting into train and validation sets...
+[2026-04-26 14:19:17] Split complete.
+[2026-04-26 14:19:17] Training tokens: 2,863,939
+[2026-04-26 14:19:17] Validation tokens: 318,215
+[2026-04-26 14:19:17] Saving tokenizer to pt/char_war_and_peace_meta.pkl
+[2026-04-26 14:19:17] Initializing new model...
+  Vocabulary size: 79
+number of parameters: 18.96M (softmax attention, tied weights)
+num decayed parameter tensors: 26, with 19,045,888 parameters
+num non-decayed parameter tensors: 50, with 40,960 parameters
+using fused AdamW: False
+
+[2026-04-26 14:19:18] Starting training...
+Mode: continuous
+Tokenizer: char
+Vocabulary size: 79 (+ 1 padding = 80)
+Padding token ID: 79
+Attention type: softmax
+Precision: float32
+Max iterations: 200000
+Batch size: 16
+Block size: 256
+Learning rate: 3.00e-04
+Warmup iters: 1000
+Eval interval: 1000
+Save interval: 10000
+Log interval: 100
+Sample interval: 5000
+Checkpoints will be saved to: pt/char_war_and_peace.pt
+============================================================
+[2026-04-26 14:19:20] [0m] Step     0 | Epoch   0.00 | train loss 4.3943 | val loss 4.3987 | lr 0.00e+00
+iter 0: loss 4.3875, time 2198.33ms, mfu -100.00%
+[2026-04-26 14:19:35] [0m] Speed at iter 100 (epoch 0.14): 5.85 iters/sec
+iter 100: loss 2.4936, time 148.28ms, mfu 1.09%
+[2026-04-26 14:19:50] [0m] Speed at iter 200 (epoch 0.29): 6.57 iters/sec
+iter 200: loss 2.3916, time 150.54ms, mfu 1.09%
+[2026-04-26 14:20:06] [0m] Speed at iter 300 (epoch 0.43): 6.52 iters/sec
+iter 300: loss 2.3392, time 151.46ms, mfu 1.09%
+[2026-04-26 14:20:21] [1m] Speed at iter 400 (epoch 0.57): 6.46 iters/sec
+iter 400: loss 2.3000, time 151.19ms, mfu 1.09%
+[2026-04-26 14:20:37] [1m] Speed at iter 500 (epoch 0.72): 6.47 iters/sec
+iter 500: loss 2.2357, time 151.57ms, mfu 1.08%
+[2026-04-26 14:20:52] [1m] Speed at iter 600 (epoch 0.86): 6.43 iters/sec
+iter 600: loss 1.9973, time 153.04ms, mfu 1.08%
+[2026-04-26 14:21:08] [1m] Speed at iter 700 (epoch 1.00): 6.28 iters/sec
+iter 700: loss 1.9170, time 157.05ms, mfu 1.08%
+[2026-04-26 14:21:24] [2m] Speed at iter 800 (epoch 1.14): 6.26 iters/sec
+iter 800: loss 1.6480, time 156.38ms, mfu 1.07%
+[2026-04-26 14:21:40] [2m] Speed at iter 900 (epoch 1.29): 6.25 iters/sec
+iter 900: loss 1.7093, time 158.40ms, mfu 1.07%
+[2026-04-26 14:21:58] [2m] Step  1000 | Epoch   1.43 | train loss 1.5769 | val loss 1.6128 | lr 3.00e-04
+  Saved checkpoint to pt/char_war_and_peace.pt (best val loss: 1.6128)
+[2026-04-26 14:21:58] [2m] Speed at iter 1000 (epoch 1.43): 5.40 iters/sec
+iter 1000: loss 1.5194, time 2634.53ms, mfu 0.97%
+[2026-04-26 14:22:15] [2m] Speed at iter 1100 (epoch 1.57): 6.23 iters/sec
+iter 1100: loss 1.5068, time 156.94ms, mfu 0.97%
+[2026-04-26 14:22:31] [3m] Speed at iter 1200 (epoch 1.72): 6.20 iters/sec
+iter 1200: loss 1.5158, time 160.49ms, mfu 0.98%
+[2026-04-26 14:22:47] [3m] Speed at iter 1300 (epoch 1.86): 6.21 iters/sec
+iter 1300: loss 1.4729, time 157.82ms, mfu 0.98%
+[2026-04-26 14:23:03] [3m] Speed at iter 1400 (epoch 2.00): 6.22 iters/sec
+iter 1400: loss 1.3878, time 157.22ms, mfu 0.99%
+[2026-04-26 14:23:19] [4m] Speed at iter 1500 (epoch 2.15): 6.21 iters/sec
+iter 1500: loss 1.3790, time 157.80ms, mfu 0.99%
+[2026-04-26 14:23:35] [4m] Speed at iter 1600 (epoch 2.29): 6.21 iters/sec
+iter 1600: loss 1.2901, time 157.89ms, mfu 0.99%
+[2026-04-26 14:23:51] [4m] Speed at iter 1700 (epoch 2.43): 6.20 iters/sec
+iter 1700: loss 1.2620, time 159.26ms, mfu 1.00%
+[2026-04-26 14:24:07] [4m] Speed at iter 1800 (epoch 2.57): 6.20 iters/sec
+iter 1800: loss 1.2807, time 157.34ms, mfu 1.00%
+[2026-04-26 14:24:23] [5m] Speed at iter 1900 (epoch 2.72): 6.18 iters/sec
+iter 1900: loss 1.2659, time 173.53ms, mfu 0.99%
+[2026-04-26 14:24:41] [5m] Step  2000 | Epoch   2.86 | train loss 1.2426 | val loss 1.3044 | lr 3.00e-04
+  Saved checkpoint to pt/char_war_and_peace.pt (best val loss: 1.3044)
+[2026-04-26 14:24:42] [5m] Speed at iter 2000 (epoch 2.86): 5.44 iters/sec
+iter 2000: loss 1.3117, time 2397.04ms, mfu 0.90%
+[2026-04-26 14:24:58] [5m] Speed at iter 2100 (epoch 3.00): 6.23 iters/sec
+iter 2100: loss 1.2214, time 158.47ms, mfu 0.91%
+[2026-04-26 14:25:14] [5m] Speed at iter 2200 (epoch 3.15): 6.17 iters/sec
+iter 2200: loss 1.2913, time 159.00ms, mfu 0.92%
+[2026-04-26 14:25:30] [6m] Speed at iter 2300 (epoch 3.29): 6.17 iters/sec
+iter 2300: loss 1.1554, time 160.13ms, mfu 0.93%
+[2026-04-26 14:25:47] [6m] Speed at iter 2400 (epoch 3.43): 6.03 iters/sec
+iter 2400: loss 1.1923, time 140.88ms, mfu 0.95%
+[2026-04-26 14:26:03] [6m] Speed at iter 2500 (epoch 3.58): 6.05 iters/sec
+iter 2500: loss 1.1892, time 159.04ms, mfu 0.96%
+[2026-04-26 14:26:20] [7m] Speed at iter 2600 (epoch 3.72): 6.02 iters/sec
+iter 2600: loss 1.1750, time 160.62ms, mfu 0.96%
+[2026-04-26 14:26:37] [7m] Speed at iter 2700 (epoch 3.86): 6.04 iters/sec
+iter 2700: loss 1.2127, time 160.72ms, mfu 0.97%
+[2026-04-26 14:26:53] [7m] Speed at iter 2800 (epoch 4.00): 6.03 iters/sec
+iter 2800: loss 1.1466, time 161.81ms, mfu 0.97%
+[2026-04-26 14:27:10] [7m] Speed at iter 2900 (epoch 4.15): 6.03 iters/sec
+iter 2900: loss 1.1338, time 194.75ms, mfu 0.96%
+[2026-04-26 14:27:28] [8m] Step  3000 | Epoch   4.29 | train loss 1.1530 | val loss 1.2279 | lr 3.00e-04
+  Saved checkpoint to pt/char_war_and_peace.pt (best val loss: 1.2279)
+[2026-04-26 14:27:29] [8m] Speed at iter 3000 (epoch 4.29): 5.29 iters/sec
+iter 3000: loss 1.1442, time 2455.19ms, mfu 0.87%
+[2026-04-26 14:27:45] [8m] Speed at iter 3100 (epoch 4.43): 6.00 iters/sec
+iter 3100: loss 1.1788, time 158.20ms, mfu 0.88%
+[2026-04-26 14:28:02] [8m] Speed at iter 3200 (epoch 4.58): 6.03 iters/sec
+iter 3200: loss 1.1225, time 171.88ms, mfu 0.89%
+[2026-04-26 14:28:18] [9m] Speed at iter 3300 (epoch 4.72): 6.06 iters/sec
+iter 3300: loss 1.1428, time 160.12ms, mfu 0.90%
+[2026-04-26 14:28:35] [9m] Speed at iter 3400 (epoch 4.86): 6.06 iters/sec
+iter 3400: loss 1.1163, time 159.57ms, mfu 0.91%
+[2026-04-26 14:28:53] [9m] Speed at iter 3500 (epoch 5.01): 5.45 iters/sec
+iter 3500: loss 1.1530, time 189.51ms, mfu 0.91%
+[2026-04-26 14:29:14] [9m] Speed at iter 3600 (epoch 5.15): 4.86 iters/sec
+iter 3600: loss 1.1269, time 210.90ms, mfu 0.89%
+[2026-04-26 14:29:38] [10m] Speed at iter 3700 (epoch 5.29): 4.22 iters/sec
+iter 3700: loss 1.0858, time 232.49ms, mfu 0.87%
+[2026-04-26 14:30:04] [10m] Speed at iter 3800 (epoch 5.43): 3.84 iters/sec
+iter 3800: loss 1.0835, time 258.98ms, mfu 0.85%
+[2026-04-26 14:30:32] [11m] Speed at iter 3900 (epoch 5.58): 3.57 iters/sec
+iter 3900: loss 1.0591, time 315.81ms, mfu 0.81%
+[2026-04-26 14:31:00] [11m] Step  4000 | Epoch   5.72 | train loss 1.0897 | val loss 1.1800 | lr 3.00e-04
+  Saved checkpoint to pt/char_war_and_peace.pt (best val loss: 1.1800)
+[2026-04-26 14:31:01] [11m] Speed at iter 4000 (epoch 5.72): 3.45 iters/sec
+iter 4000: loss 1.0610, time 3070.38ms, mfu 0.74%
+[2026-04-26 14:31:25] [12m] Speed at iter 4100 (epoch 5.86): 4.18 iters/sec
+iter 4100: loss 1.0922, time 240.31ms, mfu 0.73%
+[2026-04-26 14:31:46] [12m] Speed at iter 4200 (epoch 6.01): 4.60 iters/sec
+iter 4200: loss 1.0767, time 187.01ms, mfu 0.74%
+[2026-04-26 14:32:06] [12m] Speed at iter 4300 (epoch 6.15): 5.06 iters/sec
+iter 4300: loss 1.0520, time 228.30ms, mfu 0.74%
+[2026-04-26 14:32:23] [13m] Speed at iter 4400 (epoch 6.29): 5.77 iters/sec
+iter 4400: loss 1.0375, time 159.45ms, mfu 0.77%
+[2026-04-26 14:32:40] [13m] Speed at iter 4500 (epoch 6.44): 6.12 iters/sec
+iter 4500: loss 1.0458, time 152.80ms, mfu 0.80%
+[2026-04-26 14:32:55] [13m] Speed at iter 4600 (epoch 6.58): 6.40 iters/sec
+iter 4600: loss 1.0965, time 151.58ms, mfu 0.82%
+[2026-04-26 14:33:11] [13m] Speed at iter 4700 (epoch 6.72): 6.32 iters/sec
+iter 4700: loss 1.0433, time 151.94ms, mfu 0.85%
+[2026-04-26 14:33:27] [14m] Speed at iter 4800 (epoch 6.86): 6.25 iters/sec
+iter 4800: loss 1.0603, time 157.59ms, mfu 0.87%
+[2026-04-26 14:33:43] [14m] Speed at iter 4900 (epoch 7.01): 6.20 iters/sec
+iter 4900: loss 1.0301, time 154.09ms, mfu 0.88%
+[2026-04-26 14:34:01] [14m] Step  5000 | Epoch   7.15 | train loss 1.0277 | val loss 1.1615 | lr 3.00e-04
+  Saved checkpoint to pt/char_war_and_peace.pt (best val loss: 1.1615)
+
+[2026-04-26 14:34:02] [14m] Sampling at iter 5000 (epoch 7.15):
+  1. Though the two guns in a salvate of battle Pierre was explaining in his dressing gown, not still distinguished and knowing how he had reached, when th
+  2. Who is to be wanted"? he shouted. "Princess... but what happen they don't let thank me so"! thought Pierre. "Perhaps I shall call now be at all brough
+  3. The don't know absent-minded of the Emperor"? asked Pierre. "They'd to set something and despite the Itelian steneet nothing"! said the ground. "Get u
+
+[2026-04-26 14:34:15] [14m] Speed at iter 5000 (epoch 7.15): 3.15 iters/sec
+iter 5000: loss 1.0261, time 15722.67ms, mfu 0.80%
+[2026-04-26 14:34:31] [15m] Speed at iter 5100 (epoch 7.29): 6.31 iters/sec
+iter 5100: loss 1.0047, time 156.47ms, mfu 0.82%
+[2026-04-26 14:34:47] [15m] Speed at iter 5200 (epoch 7.44): 6.29 iters/sec
+iter 5200: loss 1.0463, time 155.43ms, mfu 0.84%
+[2026-04-26 14:35:03] [15m] Speed at iter 5300 (epoch 7.58): 6.18 iters/sec
+iter 5300: loss 0.9796, time 187.30ms, mfu 0.84%
+[2026-04-26 14:35:19] [16m] Speed at iter 5400 (epoch 7.72): 6.20 iters/sec
+iter 5400: loss 1.0092, time 154.23ms, mfu 0.87%
+[2026-04-26 14:35:35] [16m] Speed at iter 5500 (epoch 7.87): 6.17 iters/sec
+iter 5500: loss 1.0345, time 158.68ms, mfu 0.88%
+[2026-04-26 14:35:52] [16m] Speed at iter 5600 (epoch 8.01): 6.16 iters/sec
+iter 5600: loss 1.0219, time 157.49ms, mfu 0.90%
+[2026-04-26 14:36:08] [16m] Speed at iter 5700 (epoch 8.15): 6.16 iters/sec
+iter 5700: loss 1.0059, time 155.66ms, mfu 0.91%
+[2026-04-26 14:36:24] [17m] Speed at iter 5800 (epoch 8.30): 6.15 iters/sec
+iter 5800: loss 1.0188, time 154.89ms, mfu 0.92%
+[2026-04-26 14:36:40] [17m] Speed at iter 5900 (epoch 8.44): 6.19 iters/sec
+iter 5900: loss 0.9927, time 155.84ms, mfu 0.93%
+[2026-04-26 14:36:58] [17m] Step  6000 | Epoch   8.58 | train loss 0.9855 | val loss 1.1571 | lr 3.00e-04
+  Saved checkpoint to pt/char_war_and_peace.pt (best val loss: 1.1571)
+[2026-04-26 14:36:59] [17m] Speed at iter 6000 (epoch 8.58): 5.47 iters/sec
+iter 6000: loss 0.9807, time 2398.58ms, mfu 0.85%
+[2026-04-26 14:37:14] [17m] Speed at iter 6100 (epoch 8.72): 6.32 iters/sec
+iter 6100: loss 0.9733, time 153.59ms, mfu 0.87%
+[2026-04-26 14:37:31] [18m] Speed at iter 6200 (epoch 8.87): 6.09 iters/sec
+iter 6200: loss 0.9253, time 156.77ms, mfu 0.88%
+[2026-04-26 14:37:47] [18m] Speed at iter 6300 (epoch 9.01): 6.14 iters/sec
+iter 6300: loss 0.9977, time 153.82ms, mfu 0.90%
+[2026-04-26 14:38:03] [18m] Speed at iter 6400 (epoch 9.15): 6.13 iters/sec
+iter 6400: loss 0.9536, time 159.60ms, mfu 0.91%
+[2026-04-26 14:38:20] [19m] Speed at iter 6500 (epoch 9.30): 6.11 iters/sec
+iter 6500: loss 0.9712, time 160.28ms, mfu 0.92%
+[2026-04-26 14:38:36] [19m] Speed at iter 6600 (epoch 9.44): 6.13 iters/sec
+iter 6600: loss 0.9583, time 156.70ms, mfu 0.93%
+[2026-04-26 14:38:52] [19m] Speed at iter 6700 (epoch 9.58): 6.10 iters/sec
+iter 6700: loss 0.9946, time 199.41ms, mfu 0.92%
+[2026-04-26 14:39:09] [19m] Speed at iter 6800 (epoch 9.73): 6.13 iters/sec
+iter 6800: loss 0.9690, time 159.80ms, mfu 0.93%
+[2026-04-26 14:39:25] [20m] Speed at iter 6900 (epoch 9.87): 6.13 iters/sec
+iter 6900: loss 0.9457, time 156.76ms, mfu 0.94%
+[2026-04-26 14:39:44] [20m] Step  7000 | Epoch  10.01 | train loss 0.9535 | val loss 1.1611 | lr 2.99e-04
+[2026-04-26 14:39:44] [20m] Speed at iter 7000 (epoch 10.01): 5.37 iters/sec
+iter 7000: loss 0.9439, time 2135.07ms, mfu 0.85%
+[2026-04-26 14:40:00] [20m] Speed at iter 7100 (epoch 10.15): 6.12 iters/sec
+iter 7100: loss 0.9223, time 188.66ms, mfu 0.85%
+[2026-04-26 14:40:16] [20m] Speed at iter 7200 (epoch 10.30): 6.09 iters/sec
+iter 7200: loss 0.8960, time 156.38ms, mfu 0.87%
+[2026-04-26 14:40:33] [21m] Speed at iter 7300 (epoch 10.44): 6.17 iters/sec
+iter 7300: loss 0.9380, time 155.52ms, mfu 0.89%
+[2026-04-26 14:40:49] [21m] Speed at iter 7400 (epoch 10.58): 6.27 iters/sec
+iter 7400: loss 0.9239, time 160.03ms, mfu 0.90%
+[2026-04-26 14:41:05] [21m] Speed at iter 7500 (epoch 10.73): 6.14 iters/sec
+iter 7500: loss 0.9021, time 156.16ms, mfu 0.91%
+[2026-04-26 14:41:21] [22m] Speed at iter 7600 (epoch 10.87): 6.12 iters/sec
+iter 7600: loss 0.9734, time 157.77ms, mfu 0.93%
+[2026-04-26 14:41:38] [22m] Speed at iter 7700 (epoch 11.01): 6.12 iters/sec
+iter 7700: loss 0.9353, time 157.36ms, mfu 0.94%
+[2026-04-26 14:41:54] [22m] Speed at iter 7800 (epoch 11.16): 6.13 iters/sec
+iter 7800: loss 0.9107, time 158.19ms, mfu 0.94%
+[2026-04-26 14:42:10] [22m] Speed at iter 7900 (epoch 11.30): 6.08 iters/sec
+iter 7900: loss 0.8858, time 200.40ms, mfu 0.93%
+[2026-04-26 14:42:28] [23m] Step  8000 | Epoch  11.44 | train loss 0.9072 | val loss 1.1663 | lr 2.99e-04
+[2026-04-26 14:42:29] [23m] Speed at iter 8000 (epoch 11.44): 5.46 iters/sec
+iter 8000: loss 0.9214, time 2125.87ms, mfu 0.85%

@@ -1,0 +1,89 @@
+Loading small model from pt/bpe_16L16H_iter170000.pt
+Loaded 875.5M-param model: n_layer=16, n_head=16, n_embd=2048, block_size=2048, vocab_size=32000
+Passage: 75 tokens
+
+ Pos                    Context      Actual next      Model top-1   Rank   P(actual)    P(top-1)  Match
+--------------------------------------------------------------------------------------------------------------
+   0                     prince        ' andrew'              ','   8870      0.0000      0.1166       
+   1              prince andrew       ' screwed'              ','  23829      0.0000      0.2492       
+   2      prince andrew screwed            ' up'              ','     66      0.0013      0.1828       
+   3   prince andrew screwed up           ' his'            ' to'      8      0.0276      0.2502       
+   4      andrew screwed up his          ' eyes'          ' hair'     19      0.0067      0.0295       
+   5        screwed up his eyes           ' and'              ','      3      0.1594      0.2392       
+   6            up his eyes and        ' turned'        ' looked'      5      0.0263      0.0760       
+   7        his eyes and turned          ' away'           ' his'      4      0.0799      0.1746       
+   8       eyes and turned away              '.'              '.'      1      0.4664      0.4664    YES
+   9           and turned away.        ' pierre'             '\n'   1317      0.0000      0.4890       
+  10        turned away. pierre              ','        ' turned'      3      0.0590      0.0973       
+  11              away. pierre,           ' who'           ' who'      1      0.0816      0.0816    YES
+  12              . pierre, who          ' from'           ' had'    102      0.0003      0.5638       
+  13           pierre, who from           ' the'           ' the'      1      0.3637      0.3637    YES
+  14             , who from the        ' moment'         ' first'      2      0.0992      0.1197       
+  15        who from the moment        ' prince'            ' of'    142      0.0000      0.5277       
+  16     from the moment prince        ' andrew'        ' andrew'      1      0.6770      0.6770    YES
+  17   the moment prince andrew       ' entered'           ' had'      5      0.0323      0.2466       
+  18  ... prince andrew entered           ' the'           ' the'      1      0.7089      0.7089    YES
+  19  ...nce andrew entered the          ' room'          ' room'      1      0.5843      0.5843    YES
+  20    andrew entered the room           ' had'              ','      2      0.2902      0.3089       
+  21       entered the room had       ' watched'          ' been'     16      0.0092      0.1457       
+  22       the room had watched           ' him'           ' the'      3      0.1153      0.3136       
+  23       room had watched him          ' with'              ','      2      0.1593      0.2046       
+  24       had watched him with          ' glad'             ' a'    831      0.0000      0.2750       
+  25      watched him with glad              ','          ' eyes'      4      0.0402      0.3369       
+  26             him with glad,  ' affectionate'     ' inquiring'     38      0.0035      0.0362       
+  27    with glad, affectionate          ' eyes'          ' eyes'      1      0.7417      0.7417    YES
+  28    glad, affectionate eyes              ','              ','      1      0.6950      0.6950    YES
+  29       , affectionate eyes,           ' now'           ' and'      3      0.0546      0.4161       
+  30     affectionate eyes, now          ' came'        ' turned'     13      0.0146      0.1079       
+  31             eyes, now came            ' up'            ' to'      3      0.0794      0.2159       
+  32              , now came up           ' and'            ' to'      2      0.1172      0.6745       
+  33            now came up and          ' took'         ' stood'      3      0.0744      0.1188       
+  34           came up and took           ' his'           ' his'      1      0.4918      0.4918    YES
+  35            up and took his           ' arm'         ' place'      3      0.0803      0.1700       
+  36           and took his arm              '.'              '.'      1      0.5051      0.5051    YES
+  37              took his arm.        ' before'             '\n'     52      0.0003      0.6749       
+  38            his arm. before            ' he'            ' he'      1      0.2860      0.2860    YES
+  39             arm. before he        ' looked'           ' had'     15      0.0046      0.4801       
+  40         . before he looked         ' round'            ' at'      5      0.0376      0.4439       
+  41     before he looked round        ' prince'              ','      5      0.0577      0.3764       
+  42     he looked round prince        ' andrew'        ' andrew'      1      0.9974      0.9974    YES
+  43  ...ed round prince andrew       ' frowned'             "'s"    475      0.0001      0.2459       
+  44  ... prince andrew frowned         ' again'              '.'      8      0.0235      0.2375       
+  45  ...e andrew frowned again              ','              '.'      2      0.2815      0.4641       
+  46      andrew frowned again,    ' expressing'           ' and'   2859      0.0000      0.5751       
+  47  ...wned again, expressing           ' his'           ' his'      1      0.3130      0.3130    YES
+  48      again, expressing his     ' annoyance'      ' surprise'     28      0.0075      0.0778       
+  49  ...pressing his annoyance          ' with'              '.'      3      0.1461      0.3505       
+  50  ...ing his annoyance with       ' whoever'           ' the'  14813      0.0000      0.3844       
+  51  ...annoyance with whoever           ' was'            ' he'      2      0.1670      0.2754       
+  52  ...yance with whoever was      ' touching'         ' there'    471      0.0001      0.1136       
+  53  ...h whoever was touching           ' his'           ' him'      2      0.1108      0.7223       
+  54   whoever was touching his           ' arm'           ' arm'      1      0.1164      0.1164    YES
+  55       was touching his arm              ','              '.'      2      0.2136      0.6180       
+  56          touching his arm,           ' but'           ' and'      2      0.0682      0.5713       
+  57               his arm, but          ' when'            ' he'      8      0.0215      0.1636       
+  58              arm, but when            ' he'            ' he'      1      0.4816      0.4816    YES
+  59              , but when he           ' saw'        ' turned'      2      0.1551      0.2638       
+  60            but when he saw        ' pierre'           ' the'      3      0.1416      0.3850       
+  61         when he saw pierre             "'s"             "'s"      1      0.2969      0.2969    YES
+  62            he saw pierre's       ' beaming'          ' face'    298      0.0002      0.2455       
+  63       saw pierre's beaming          ' face'          ' face'      1      0.5514      0.5514    YES
+  64      pierre's beaming face            ' he'            ' he'      1      0.3790      0.3790    YES
+  65         's beaming face he          ' gave'           ' was'      9      0.0216      0.1169       
+  66       beaming face he gave           ' him'             ' a'      2      0.2248      0.3073       
+  67           face he gave him            ' an'             ' a'      3      0.0574      0.7212       
+  68             he gave him an  ' unexpectedly'  ' affectionate'   9594      0.0000      0.3164       
+  69   gave him an unexpectedly          ' kind'       ' cordial'     47      0.0025      0.0764       
+  70   him an unexpectedly kind           ' and'         ' smile'      4      0.0199      0.6998       
+  71   an unexpectedly kind and      ' pleasant'      ' friendly'      7      0.0154      0.2263       
+  72  ...edly kind and pleasant         ' smile'         ' smile'      1      0.9523      0.9523    YES
+  73    kind and pleasant smile              '.'              '.'      1      0.7391      0.7391    YES
+
+======================================================================
+Top-1 accuracy: 20/74 = 27.0%
+Mean rank of actual token: 865.4
+Median rank of actual token: 3
+Actual token in top 5:  64.9%
+Actual token in top 10: 71.6%
+Mean P(actual token): 0.1856
+======================================================================

@@ -1,0 +1,413 @@
+Loading character model...
+Loaded 807.9M params, n_layer=16, n_embd=2048, vocab=52
+iter=99000, best_val_loss=0.7792
+Tokenizer: char, vocab=52
+Passage: 388 characters
+
+ Pos                    Context    Actual     Top-1   Rank   P(actual)    P(top-1)  Match
+-------------------------------------------------------------------------------------
+   0                          p       'r'       'e'      2      0.1283      0.2436       
+   1                         pr       'i'       'o'      3      0.1588      0.4315       
+   2                        pri       'n'       'n'      1      0.3074      0.3074    YES
+   3                       prin       'c'       'c'      1      0.5075      0.5075    YES
+   4                      princ       'e'       'e'      1      0.5459      0.5459    YES
+   5                     prince       ' '       ' '      1      0.4424      0.4424    YES
+   6                    prince        'a'       'o'      2      0.1157      0.2373       
+   7                   prince a       'n'       'n'      1      0.5368      0.5368    YES
+   8                  prince an       'd'       'd'      1      0.9526      0.9526    YES
+   9                 prince and       'r'       ' '      2      0.0026      0.9946       
+  10                prince andr       'e'       'e'      1      0.8183      0.8183    YES
+  11               prince andre       'w'       'w'      1      0.5407      0.5407    YES
+  12              prince andrew       ' '       ' '      1      0.6009      0.6009    YES
+  13             prince andrew        's'       'o'      5      0.0644      0.1204       
+  14            prince andrew s       'c'       'a'     10      0.0245      0.2554       
+  15           prince andrew sc       'r'       'o'      4      0.0432      0.5436       
+  16          prince andrew scr       'e'       'i'      3      0.1276      0.3931       
+  17         prince andrew scre       'w'       'a'      3      0.1492      0.6688       
+  18        prince andrew screw       'e'       'e'      1      0.8119      0.8119    YES
+  19       prince andrew screwe       'd'       'd'      1      0.9964      0.9964    YES
+  20      prince andrew screwed       ' '       ' '      1      0.9969      0.9969    YES
+  21      rince andrew screwed        'u'       'u'      1      0.3269      0.3269    YES
+  22      ince andrew screwed u       'p'       'p'      1      0.9964      0.9964    YES
+  23      nce andrew screwed up       ' '       ' '      1      0.9669      0.9669    YES
+  24      ce andrew screwed up        'h'       'h'      1      0.6208      0.6208    YES
+  25      e andrew screwed up h       'i'       'i'      1      0.9635      0.9635    YES
+  26       andrew screwed up hi       's'       's'      1      0.9997      0.9997    YES
+  27      andrew screwed up his       ' '       ' '      1      0.9997      0.9997    YES
+  28      ndrew screwed up his        'e'       'e'      1      0.3977      0.3977    YES
+  29      drew screwed up his e       'y'       'y'      1      0.9604      0.9604    YES
+  30      rew screwed up his ey       'e'       'e'      1      1.0000      1.0000    YES
+  31      ew screwed up his eye       's'       's'      1      0.8460      0.8460    YES
+  32      w screwed up his eyes       ' '       ' '      1      0.6306      0.6306    YES
+  33       screwed up his eyes        'a'       'a'      1      0.3638      0.3638    YES
+  34      screwed up his eyes a       'n'       'n'      1      0.6852      0.6852    YES
+  35      crewed up his eyes an       'd'       'd'      1      0.9867      0.9867    YES
+  36      rewed up his eyes and       ' '       ' '      1      0.9894      0.9894    YES
+  37      ewed up his eyes and        't'       's'      3      0.0725      0.2694       
+  38      wed up his eyes and t       'u'       'h'      3      0.1812      0.4083       
+  39      ed up his eyes and tu       'r'       'r'      1      0.9570      0.9570    YES
+  40      d up his eyes and tur       'n'       'n'      1      0.9998      0.9998    YES
+  41       up his eyes and turn       'e'       'e'      1      0.9793      0.9793    YES
+  42      up his eyes and turne       'd'       'd'      1      1.0000      1.0000    YES
+  43      p his eyes and turned       ' '       ' '      1      0.9881      0.9881    YES
+  44       his eyes and turned        'a'       't'      3      0.1800      0.3469       
+  45      his eyes and turned a       'w'       'w'      1      0.6036      0.6036    YES
+  46      is eyes and turned aw       'a'       'a'      1      0.9988      0.9988    YES
+  47      s eyes and turned awa       'y'       'y'      1      1.0000      1.0000    YES
+  48       eyes and turned away       '.'       '.'      1      0.4290      0.4290    YES
+  49      eyes and turned away.       ' '      '\n'      7      0.0000      0.9951       
+  50      yes and turned away.        'p'       '"'     19      0.0079      0.4005       
+  51      es and turned away. p       'i'       'r'      6      0.0314      0.3217       
+  52      s and turned away. pi       'e'       'c'      2      0.2572      0.2653       
+  53       and turned away. pie       'r'       'r'      1      0.8821      0.8821    YES
+  54      and turned away. pier       'r'       'r'      1      0.6035      0.6035    YES
+  55      nd turned away. pierr       'e'       'e'      1      0.9211      0.9211    YES
+  56      d turned away. pierre       ','       ' '      3      0.0667      0.7637       
+  57       turned away. pierre,       ' '       ' '      1      0.9986      0.9986    YES
+  58      turned away. pierre,        'w'       'w'      1      0.2089      0.2089    YES
+  59      urned away. pierre, w       'h'       'h'      1      0.7205      0.7205    YES
+  60      rned away. pierre, wh       'o'       'o'      1      0.9268      0.9268    YES
+  61      ned away. pierre, who       ' '       ' '      1      0.8649      0.8649    YES
+  62      ed away. pierre, who        'f'       'h'     11      0.0143      0.4292       
+  63      d away. pierre, who f       'r'       'e'      5      0.0522      0.4370       
+  64       away. pierre, who fr       'o'       'o'      1      0.8950      0.8950    YES
+  65      away. pierre, who fro       'm'       'm'      1      0.9771      0.9771    YES
+  66      way. pierre, who from       ' '       ' '      1      0.9998      0.9998    YES
+  67      ay. pierre, who from        't'       't'      1      0.3831      0.3831    YES
+  68      y. pierre, who from t       'h'       'h'      1      0.8201      0.8201    YES
+  69      . pierre, who from th       'e'       'e'      1      0.7707      0.7707    YES
+  70       pierre, who from the       ' '       ' '      1      0.9877      0.9877    YES
+  71      pierre, who from the        'm'       'f'      2      0.0739      0.2833       
+  72      ierre, who from the m       'o'       'o'      1      0.6298      0.6298    YES
+  73      erre, who from the mo       'm'       'm'      1      0.9374      0.9374    YES
+  74      rre, who from the mom       'e'       'e'      1      0.9999      0.9999    YES
+  75      re, who from the mome       'n'       'n'      1      1.0000      1.0000    YES
+  76      e, who from the momen       't'       't'      1      1.0000      1.0000    YES
+  77      , who from the moment       ' '       ' '      1      0.9981      0.9981    YES
+  78       who from the moment        'p'       'h'     11      0.0028      0.4806       
+  79      who from the moment p       'r'       'e'      3      0.1236      0.3360       
+  80      ho from the moment pr       'i'       'e'      2      0.3458      0.3681       
+  81      o from the moment pri       'n'       'n'      1      0.9408      0.9408    YES
+  82       from the moment prin       'c'       'c'      1      0.9986      0.9986    YES
+  83      from the moment princ       'e'       'e'      1      0.9997      0.9997    YES
+  84      rom the moment prince       ' '       ' '      1      0.9356      0.9356    YES
+  85      om the moment prince        'a'       'a'      1      0.3045      0.3045    YES
+  86      m the moment prince a       'n'       'n'      1      0.8997      0.8997    YES
+  87       the moment prince an       'd'       'd'      1      0.9922      0.9922    YES
+  88      the moment prince and       'r'       'r'      1      0.8972      0.8972    YES
+  89      he moment prince andr       'e'       'e'      1      0.9957      0.9957    YES
+  90      e moment prince andre       'w'       'w'      1      0.9972      0.9972    YES
+  91       moment prince andrew       ' '       ' '      1      0.9728      0.9728    YES
+  92      moment prince andrew        'e'       's'     12      0.0151      0.3993       
+  93      oment prince andrew e       'n'       'n'      1      0.8072      0.8072    YES
+  94      ment prince andrew en       't'       't'      1      0.9496      0.9496    YES
+  95      ent prince andrew ent       'e'       'e'      1      0.9983      0.9983    YES
+  96      nt prince andrew ente       'r'       'r'      1      1.0000      1.0000    YES
+  97      t prince andrew enter       'e'       'e'      1      0.9841      0.9841    YES
+  98       prince andrew entere       'd'       'd'      1      1.0000      1.0000    YES
+  99      prince andrew entered       ' '       ' '      1      0.7975      0.7975    YES
+ 100      rince andrew entered        't'       't'      1      0.6862      0.6862    YES
+ 101      ince andrew entered t       'h'       'h'      1      0.9872      0.9872    YES
+ 102      nce andrew entered th       'e'       'e'      1      0.9837      0.9837    YES
+ 103      ce andrew entered the       ' '       ' '      1      0.9940      0.9940    YES
+ 104      e andrew entered the        'r'       'r'      1      0.4905      0.4905    YES
+ 105       andrew entered the r       'o'       'o'      1      0.9827      0.9827    YES
+ 106      andrew entered the ro       'o'       'o'      1      0.9982      0.9982    YES
+ 107      ndrew entered the roo       'm'       'm'      1      1.0000      1.0000    YES
+ 108      drew entered the room       ' '       ','      2      0.2559      0.7403       
+ 109      rew entered the room        'h'       'w'      4      0.0819      0.2902       
+ 110      ew entered the room h       'a'       'a'      1      0.8793      0.8793    YES
+ 111      w entered the room ha       'd'       'd'      1      0.9656      0.9656    YES
+ 112       entered the room had       ' '       ' '      1      0.9965      0.9965    YES
+ 113      entered the room had        'w'       'b'     18      0.0126      0.1567       
+ 114      ntered the room had w       'a'       'a'      1      0.5019      0.5019    YES
+ 115      tered the room had wa       't'       'l'      2      0.2451      0.2528       
+ 116      ered the room had wat       'c'       'c'      1      0.9952      0.9952    YES
+ 117      red the room had watc       'h'       'h'      1      1.0000      1.0000    YES
+ 118      ed the room had watch       'e'       'e'      1      0.9976      0.9976    YES
+ 119      d the room had watche       'd'       'd'      1      1.0000      1.0000    YES
+ 120       the room had watched       ' '       ' '      1      0.9918      0.9918    YES
+ 121      the room had watched        'h'       'h'      1      0.4022      0.4022    YES
+ 122      he room had watched h       'i'       'i'      1      0.7265      0.7265    YES
+ 123      e room had watched hi       'm'       'm'      1      0.7051      0.7051    YES
+ 124       room had watched him       ' '       ' '      1      0.7462      0.7462    YES
+ 125      room had watched him        'w'       'w'      1      0.1922      0.1922    YES
+ 126      oom had watched him w       'i'       'i'      1      0.9144      0.9144    YES
+ 127      om had watched him wi       't'       't'      1      0.9885      0.9885    YES
+ 128      m had watched him wit       'h'       'h'      1      0.9998      0.9998    YES
+ 129       had watched him with       ' '       ' '      1      0.9544      0.9544    YES
+ 130      had watched him with        'g'       'a'      6      0.0426      0.3677       
+ 131      ad watched him with g       'l'       'r'      2      0.0847      0.8553       
+ 132      d watched him with gl       'a'       'a'      1      0.5631      0.5631    YES
+ 133       watched him with gla       'd'       'd'      1      0.5121      0.5121    YES
+ 134      watched him with glad       ','       'n'      5      0.0115      0.5200       
+ 135      atched him with glad,       ' '       ' '      1      0.9991      0.9991    YES
+ 136      tched him with glad,        'a'       'a'      1      0.1209      0.1209    YES
+ 137      ched him with glad, a       'f'       'n'      4      0.0616      0.6027       
+ 138      hed him with glad, af       'f'       'f'      1      0.8320      0.8320    YES
+ 139      ed him with glad, aff       'e'       'e'      1      0.9153      0.9153    YES
+ 140      d him with glad, affe       'c'       'c'      1      1.0000      1.0000    YES
+ 141       him with glad, affec       't'       't'      1      1.0000      1.0000    YES
+ 142      him with glad, affect       'i'       'i'      1      0.9889      0.9889    YES
+ 143      im with glad, affecti       'o'       'o'      1      0.9875      0.9875    YES
+ 144      m with glad, affectio       'n'       'n'      1      0.9999      0.9999    YES
+ 145       with glad, affection       'a'       'a'      1      0.9987      0.9987    YES
+ 146      with glad, affectiona       't'       't'      1      0.9999      0.9999    YES
+ 147      ith glad, affectionat       'e'       'e'      1      1.0000      1.0000    YES
+ 148      th glad, affectionate       ' '       ' '      1      0.9700      0.9700    YES
+ 149      h glad, affectionate        'e'       'e'      1      0.2505      0.2505    YES
+ 150       glad, affectionate e       'y'       'y'      1      0.9086      0.9086    YES
+ 151      glad, affectionate ey       'e'       'e'      1      1.0000      1.0000    YES
+ 152      lad, affectionate eye       's'       's'      1      0.9883      0.9883    YES
+ 153      ad, affectionate eyes       ','       ','      1      0.7246      0.7246    YES
+ 154      d, affectionate eyes,       ' '       ' '      1      0.9984      0.9984    YES
+ 155      , affectionate eyes,        'n'       'a'      9      0.0291      0.4306       
+ 156       affectionate eyes, n       'o'       'o'      1      0.8961      0.8961    YES
+ 157      affectionate eyes, no       'w'       'w'      1      0.5738      0.5738    YES
+ 158      ffectionate eyes, now       ' '       ' '      1      0.9810      0.9810    YES
+ 159      fectionate eyes, now        'c'       's'      6      0.0508      0.1469       
+ 160      ectionate eyes, now c       'a'       'l'      3      0.2432      0.3325       
+ 161      ctionate eyes, now ca       'm'       's'      5      0.0297      0.5596       
+ 162      tionate eyes, now cam       'e'       'e'      1      0.9986      0.9986    YES
+ 163      ionate eyes, now came       ' '       ' '      1      0.9932      0.9932    YES
+ 164      onate eyes, now came        'u'       't'      5      0.0603      0.3013       
+ 165      nate eyes, now came u       'p'       'p'      1      0.9653      0.9653    YES
+ 166      ate eyes, now came up       ' '       ' '      1      0.7210      0.7210    YES
+ 167      te eyes, now came up        'a'       't'      2      0.1612      0.4814       
+ 168      e eyes, now came up a       'n'       'n'      1      0.7055      0.7055    YES
+ 169       eyes, now came up an       'd'       'd'      1      0.9979      0.9979    YES
+ 170      eyes, now came up and       ' '       ' '      1      0.9838      0.9838    YES
+ 171      yes, now came up and        't'       's'      2      0.0917      0.2455       
+ 172      es, now came up and t       'o'       'o'      1      0.6891      0.6891    YES
+ 173      s, now came up and to       'o'       'o'      1      0.6653      0.6653    YES
+ 174      , now came up and too       'k'       'k'      1      0.9997      0.9997    YES
+ 175       now came up and took       ' '       ' '      1      0.9998      0.9998    YES
+ 176      now came up and took        'h'       'h'      1      0.4042      0.4042    YES
+ 177      ow came up and took h       'i'       'i'      1      0.8753      0.8753    YES
+ 178      w came up and took hi       's'       's'      1      0.9462      0.9462    YES
+ 179       came up and took his       ' '       ' '      1      0.9994      0.9994    YES
+ 180      came up and took his        'a'       's'      5      0.0582      0.2162       
+ 181      ame up and took his a       'r'       'r'      1      0.7985      0.7985    YES
+ 182      me up and took his ar       'm'       'm'      1      0.9987      0.9987    YES
+ 183      e up and took his arm       '.'       '.'      1      0.5477      0.5477    YES
+ 184       up and took his arm.       ' '      '\n'      2      0.0787      0.9008       
+ 185      up and took his arm.        'b'       '"'      8      0.0406      0.1872       
+ 186      p and took his arm. b       'e'       'u'      3      0.1768      0.3103       
+ 187       and took his arm. be       'f'       'r'      7      0.0405      0.2155       
+ 188      and took his arm. bef       'o'       'o'      1      0.9990      0.9990    YES
+ 189      nd took his arm. befo       'r'       'r'      1      0.9999      0.9999    YES
+ 190      d took his arm. befor       'e'       'e'      1      0.9999      0.9999    YES
+ 191       took his arm. before       ' '       ' '      1      0.9971      0.9971    YES
+ 192      took his arm. before        'h'       't'      2      0.2675      0.3177       
+ 193      ook his arm. before h       'e'       'e'      1      0.8592      0.8592    YES
+ 194      ok his arm. before he       ' '       ' '      1      0.9576      0.9576    YES
+ 195      k his arm. before he        'l'       'c'      7      0.0565      0.3683       
+ 196       his arm. before he l       'o'       'e'      2      0.1769      0.7449       
+ 197      his arm. before he lo       'o'       'o'      1      0.8700      0.8700    YES
+ 198      is arm. before he loo       'k'       'k'      1      0.9963      0.9963    YES
+ 199      s arm. before he look       'e'       'e'      1      0.9980      0.9980    YES
+ 200       arm. before he looke       'd'       'd'      1      1.0000      1.0000    YES
+ 201      arm. before he looked       ' '       ' '      1      0.9745      0.9745    YES
+ 202      rm. before he looked        'r'       'a'      4      0.0373      0.5565       
+ 203      m. before he looked r       'o'       'o'      1      0.9787      0.9787    YES
+ 204      . before he looked ro       'u'       'u'      1      0.9985      0.9985    YES
+ 205       before he looked rou       'n'       'n'      1      0.9999      0.9999    YES
+ 206      before he looked roun       'd'       'd'      1      0.9998      0.9998    YES
+ 207      efore he looked round       ' '       ' '      1      0.5594      0.5594    YES
+ 208      fore he looked round        'p'       'h'     14      0.0064      0.4168       
+ 209      ore he looked round p       'r'       'i'      2      0.2067      0.3984       
+ 210      re he looked round pr       'i'       'i'      1      0.8948      0.8948    YES
+ 211      e he looked round pri       'n'       'n'      1      0.9827      0.9827    YES
+ 212       he looked round prin       'c'       'c'      1      0.9996      0.9996    YES
+ 213      he looked round princ       'e'       'e'      1      0.9999      0.9999    YES
+ 214      e looked round prince       ' '       ' '      1      0.9354      0.9354    YES
+ 215       looked round prince        'a'       'a'      1      0.9185      0.9185    YES
+ 216      looked round prince a       'n'       'n'      1      0.9688      0.9688    YES
+ 217      ooked round prince an       'd'       'd'      1      0.9826      0.9826    YES
+ 218      oked round prince and       'r'       'r'      1      0.9782      0.9782    YES
+ 219      ked round prince andr       'e'       'e'      1      0.9982      0.9982    YES
+ 220      ed round prince andre       'w'       'w'      1      0.9995      0.9995    YES
+ 221      d round prince andrew       ' '       ' '      1      0.8553      0.8553    YES
+ 222       round prince andrew        'f'       's'      9      0.0304      0.2030       
+ 223      round prince andrew f       'r'       'e'      6      0.0281      0.4265       
+ 224      ound prince andrew fr       'o'       'o'      1      0.7361      0.7361    YES
+ 225      und prince andrew fro       'w'       'w'      1      0.5325      0.5325    YES
+ 226      nd prince andrew frow       'n'       'n'      1      0.9798      0.9798    YES
+ 227      d prince andrew frown       'e'       'e'      1      0.9792      0.9792    YES
+ 228       prince andrew frowne       'd'       'd'      1      0.9984      0.9984    YES
+ 229      prince andrew frowned       ' '       ' '      1      0.5977      0.5977    YES
+ 230      rince andrew frowned        'a'       'a'      1      0.5236      0.5236    YES
+ 231      ince andrew frowned a       'g'       'n'      5      0.0471      0.4327       
+ 232      nce andrew frowned ag       'a'       'a'      1      0.9789      0.9789    YES
+ 233      ce andrew frowned aga       'i'       'i'      1      0.9998      0.9998    YES
+ 234      e andrew frowned agai       'n'       'n'      1      1.0000      1.0000    YES
+ 235       andrew frowned again       ','       '.'      2      0.2694      0.5033       
+ 236      andrew frowned again,       ' '       ' '      1      0.9972      0.9972    YES
+ 237      ndrew frowned again,        'e'       'a'     17      0.0067      0.5395       
+ 238      drew frowned again, e       'x'       'v'      2      0.3194      0.3734       
+ 239      rew frowned again, ex       'p'       'c'      2      0.2802      0.5573       
+ 240      ew frowned again, exp       'r'       'r'      1      0.4833      0.4833    YES
+ 241      w frowned again, expr       'e'       'e'      1      1.0000      1.0000    YES
+ 242       frowned again, expre       's'       's'      1      1.0000      1.0000    YES
+ 243      frowned again, expres       's'       's'      1      0.9996      0.9996    YES
+ 244      rowned again, express       'i'       'i'      1      0.8417      0.8417    YES
+ 245      owned again, expressi       'n'       'n'      1      0.9225      0.9225    YES
+ 246      wned again, expressin       'g'       'g'      1      0.9999      0.9999    YES
+ 247      ned again, expressing       ' '       ' '      1      0.9893      0.9893    YES
+ 248      ed again, expressing        'h'       'a'      2      0.2484      0.2728       
+ 249      d again, expressing h       'i'       'i'      1      0.9657      0.9657    YES
+ 250       again, expressing hi       's'       's'      1      0.9710      0.9710    YES
+ 251      again, expressing his       ' '       ' '      1      0.9999      0.9999    YES
+ 252      gain, expressing his        'a'       's'      2      0.1415      0.1554       
+ 253      ain, expressing his a       'n'       's'      4      0.1146      0.2351       
+ 254      in, expressing his an       'n'       'x'      4      0.0483      0.6066       
+ 255      n, expressing his ann       'o'       'o'      1      0.9977      0.9977    YES
+ 256      , expressing his anno       'y'       'y'      1      0.9988      0.9988    YES
+ 257       expressing his annoy       'a'       'a'      1      0.9805      0.9805    YES
+ 258      expressing his annoya       'n'       'n'      1      1.0000      1.0000    YES
+ 259      xpressing his annoyan       'c'       'c'      1      1.0000      1.0000    YES
+ 260      pressing his annoyanc       'e'       'e'      1      0.9997      0.9997    YES
+ 261      ressing his annoyance       ' '       ' '      1      0.7336      0.7336    YES
+ 262      essing his annoyance        'w'       'a'      2      0.1688      0.4379       
+ 263      ssing his annoyance w       'i'       'i'      1      0.8598      0.8598    YES
+ 264      sing his annoyance wi       't'       't'      1      0.9992      0.9992    YES
+ 265      ing his annoyance wit       'h'       'h'      1      1.0000      1.0000    YES
+ 266      ng his annoyance with       ' '       ' '      1      0.9659      0.9659    YES
+ 267      g his annoyance with        'w'       'a'     13      0.0148      0.3234       
+ 268       his annoyance with w       'h'       'h'      1      0.3729      0.3729    YES
+ 269      his annoyance with wh       'o'       'a'      3      0.0071      0.8767       
+ 270      is annoyance with who       'e'       'm'      5      0.0212      0.4971       
+ 271      s annoyance with whoe       'v'       'v'      1      0.9981      0.9981    YES
+ 272       annoyance with whoev       'e'       'e'      1      1.0000      1.0000    YES
+ 273      annoyance with whoeve       'r'       'r'      1      1.0000      1.0000    YES
+ 274      nnoyance with whoever       ' '       ' '      1      0.9978      0.9978    YES
+ 275      noyance with whoever        'w'       'w'      1      0.2508      0.2508    YES
+ 276      oyance with whoever w       'a'       'a'      1      0.7321      0.7321    YES
+ 277      yance with whoever wa       's'       's'      1      0.8834      0.8834    YES
+ 278      ance with whoever was       ' '       ' '      1      0.9905      0.9905    YES
+ 279      nce with whoever was        't'       'a'      5      0.0881      0.1365       
+ 280      ce with whoever was t       'o'       'h'      4      0.0924      0.4693       
+ 281      e with whoever was to       'u'       ' '      3      0.0211      0.8972       
+ 282       with whoever was tou       'c'       'c'      1      0.9916      0.9916    YES
+ 283      with whoever was touc       'h'       'h'      1      1.0000      1.0000    YES
+ 284      ith whoever was touch       'i'       'e'      2      0.4851      0.4851       
+ 285      th whoever was touchi       'n'       'n'      1      0.9998      0.9998    YES
+ 286      h whoever was touchin       'g'       'g'      1      0.9998      0.9998    YES
+ 287       whoever was touching       ' '       ' '      1      0.9876      0.9876    YES
+ 288      whoever was touching        'h'       'h'      1      0.6533      0.6533    YES
+ 289      hoever was touching h       'i'       'i'      1      0.9930      0.9930    YES
+ 290      oever was touching hi       's'       'm'      2      0.1824      0.8174       
+ 291      ever was touching his       ' '       ' '      1      0.9967      0.9967    YES
+ 292      ver was touching his        'a'       'h'      2      0.1323      0.2395       
+ 293      er was touching his a       'r'       'r'      1      0.8821      0.8821    YES
+ 294      r was touching his ar       'm'       'm'      1      0.9902      0.9902    YES
+ 295       was touching his arm       ','       '.'      2      0.1056      0.7559       
+ 296      was touching his arm,       ' '       ' '      1      0.9932      0.9932    YES
+ 297      as touching his arm,        'b'       'a'      2      0.0907      0.5554       
+ 298      s touching his arm, b       'u'       'u'      1      0.8933      0.8933    YES
+ 299       touching his arm, bu       't'       't'      1      0.9981      0.9981    YES
+ 300      touching his arm, but       ' '       ' '      1      0.9843      0.9843    YES
+ 301      ouching his arm, but        'w'       'h'      2      0.1293      0.1511       
+ 302      uching his arm, but w       'h'       'i'      2      0.2446      0.5869       
+ 303      ching his arm, but wh       'e'       'e'      1      0.5345      0.5345    YES
+ 304      hing his arm, but whe       'n'       'n'      1      0.8288      0.8288    YES
+ 305      ing his arm, but when       ' '       ' '      1      0.9835      0.9835    YES
+ 306      ng his arm, but when        'h'       'h'      1      0.5974      0.5974    YES
+ 307      g his arm, but when h       'e'       'e'      1      0.9421      0.9421    YES
+ 308       his arm, but when he       ' '       ' '      1      0.9964      0.9964    YES
+ 309      his arm, but when he        's'       's'      1      0.2922      0.2922    YES
+ 310      is arm, but when he s       'a'       'a'      1      0.6847      0.6847    YES
+ 311      s arm, but when he sa       'w'       'w'      1      0.9401      0.9401    YES
+ 312       arm, but when he saw       ' '       ' '      1      0.9935      0.9935    YES
+ 313      arm, but when he saw        'p'       't'      4      0.0427      0.3867       
+ 314      rm, but when he saw p       'i'       'i'      1      0.7547      0.7547    YES
+ 315      m, but when he saw pi       'e'       'e'      1      0.9943      0.9943    YES
+ 316      , but when he saw pie       'r'       'r'      1      0.9975      0.9975    YES
+ 317       but when he saw pier       'r'       'r'      1      0.9990      0.9990    YES
+ 318      but when he saw pierr       'e'       'e'      1      0.9969      0.9969    YES
+ 319      ut when he saw pierre       "'"       ' '      3      0.0692      0.6366       
+ 320      t when he saw pierre'       's'       's'      1      0.9999      0.9999    YES
+ 321       when he saw pierre's       ' '       ' '      1      0.9809      0.9809    YES
+ 322      when he saw pierre's        'b'       'f'      6      0.0368      0.2847       
+ 323      hen he saw pierre's b       'e'       'r'      3      0.1843      0.2599       
+ 324      en he saw pierre's be       'a'       'a'      1      0.6092      0.6092    YES
+ 325      n he saw pierre's bea       'm'       'u'      3      0.1051      0.4565       
+ 326       he saw pierre's beam       'i'       'i'      1      0.9461      0.9461    YES
+ 327      he saw pierre's beami       'n'       'n'      1      0.9995      0.9995    YES
+ 328      e saw pierre's beamin       'g'       'g'      1      0.9989      0.9989    YES
+ 329       saw pierre's beaming       ' '       ' '      1      0.9715      0.9715    YES
+ 330      saw pierre's beaming        'f'       'f'      1      0.5185      0.5185    YES
+ 331      aw pierre's beaming f       'a'       'a'      1      0.9598      0.9598    YES
+ 332      w pierre's beaming fa       'c'       'c'      1      0.9988      0.9988    YES
+ 333       pierre's beaming fac       'e'       'e'      1      1.0000      1.0000    YES
+ 334      pierre's beaming face       ' '       ' '      1      0.6097      0.6097    YES
+ 335      ierre's beaming face        'h'       'a'      2      0.1952      0.2586       
+ 336      erre's beaming face h       'e'       'e'      1      0.8689      0.8689    YES
+ 337      rre's beaming face he       ' '       ' '      1      0.9874      0.9874    YES
+ 338      re's beaming face he        'g'       's'     12      0.0330      0.2103       
+ 339      e's beaming face he g       'a'       'a'      1      0.5159      0.5159    YES
+ 340      's beaming face he ga       'v'       'v'      1      0.9174      0.9174    YES
+ 341      s beaming face he gav       'e'       'e'      1      1.0000      1.0000    YES
+ 342       beaming face he gave       ' '       ' '      1      0.9994      0.9994    YES
+ 343      beaming face he gave        'h'       'a'      2      0.1781      0.4549       
+ 344      eaming face he gave h       'i'       'i'      1      0.9735      0.9735    YES
+ 345      aming face he gave hi       'm'       'm'      1      0.7547      0.7547    YES
+ 346      ming face he gave him       ' '       ' '      1      0.9294      0.9294    YES
+ 347      ing face he gave him        'a'       'a'      1      0.5132      0.5132    YES
+ 348      ng face he gave him a       'n'       ' '      2      0.1235      0.8573       
+ 349      g face he gave him an       ' '       ' '      1      0.7337      0.7337    YES
+ 350       face he gave him an        'u'       'a'      5      0.0822      0.3053       
+ 351      face he gave him an u       'n'       'n'      1      0.6678      0.6678    YES
+ 352      ace he gave him an un       'e'       'e'      1      0.1475      0.1475    YES
+ 353      ce he gave him an une       'x'       'x'      1      0.5653      0.5653    YES
+ 354      e he gave him an unex       'p'       'p'      1      0.9963      0.9963    YES
+ 355       he gave him an unexp       'e'       'e'      1      0.9876      0.9876    YES
+ 356      he gave him an unexpe       'c'       'c'      1      0.9999      0.9999    YES
+ 357      e gave him an unexpec       't'       't'      1      1.0000      1.0000    YES
+ 358       gave him an unexpect       'e'       'e'      1      0.9999      0.9999    YES
+ 359      gave him an unexpecte       'd'       'd'      1      1.0000      1.0000    YES
+ 360      ave him an unexpected       'l'       ' '      2      0.0123      0.9772       
+ 361      ve him an unexpectedl       'y'       'y'      1      1.0000      1.0000    YES
+ 362      e him an unexpectedly       ' '       ' '      1      0.9804      0.9804    YES
+ 363       him an unexpectedly        'k'       's'     16      0.0261      0.1639       
+ 364      him an unexpectedly k       'i'       'i'      1      0.9575      0.9575    YES
+ 365      im an unexpectedly ki       'n'       'n'      1      0.9736      0.9736    YES
+ 366      m an unexpectedly kin       'd'       'd'      1      0.9986      0.9986    YES
+ 367       an unexpectedly kind       ' '       ' '      1      0.8814      0.8814    YES
+ 368      an unexpectedly kind        'a'       'g'      6      0.0606      0.2288       
+ 369      n unexpectedly kind a       'n'       'n'      1      0.8202      0.8202    YES
+ 370       unexpectedly kind an       'd'       'd'      1      0.8761      0.8761    YES
+ 371      unexpectedly kind and       ' '       ' '      1      0.9967      0.9967    YES
+ 372      nexpectedly kind and        'p'       'g'      8      0.0430      0.2152       
+ 373      expectedly kind and p       'l'       'l'      1      0.4562      0.4562    YES
+ 374      xpectedly kind and pl       'e'       'e'      1      0.8561      0.8561    YES
+ 375      pectedly kind and ple       'a'       'a'      1      0.9977      0.9977    YES
+ 376      ectedly kind and plea       's'       's'      1      0.9973      0.9973    YES
+ 377      ctedly kind and pleas       'a'       'a'      1      0.7856      0.7856    YES
+ 378      tedly kind and pleasa       'n'       'n'      1      0.9999      0.9999    YES
+ 379      edly kind and pleasan       't'       't'      1      1.0000      1.0000    YES
+ 380      dly kind and pleasant       ' '       ' '      1      0.9860      0.9860    YES
+ 381      ly kind and pleasant        's'       's'      1      0.3328      0.3328    YES
+ 382      y kind and pleasant s       'm'       'm'      1      0.9560      0.9560    YES
+ 383       kind and pleasant sm       'i'       'i'      1      0.9983      0.9983    YES
+ 384      kind and pleasant smi       'l'       'l'      1      0.9954      0.9954    YES
+ 385      ind and pleasant smil       'e'       'e'      1      0.9984      0.9984    YES
+ 386      nd and pleasant smile       '.'       '.'      1      0.6689      0.6689    YES
+
+======================================================================
+Top-1 accuracy: 298/387 = 77.0%
+Mean rank of actual character: 1.9
+Median rank of actual character: 1
+Actual character in top 3: 89.1%
+Actual character in top 5: 93.8%
+Mean P(actual character): 0.6904
+Vocab size: 52 characters
+======================================================================
+
+Original:
+  prince andrew screwed up his eyes and turned away. pierre, who from the moment prince andrew entered the room had watched him with glad, affectionate eyes, now came up and took his arm. before he looked round prince andrew frowned again, expressing his annoyance with whoever was touching his arm, but when he saw pierre's beaming face he gave him an unexpectedly kind and pleasant smile.
+
+Model top-1 predictions (character by character):
+  eonce ond ew oaoiaed up his eyes and shrned tway.
+"rcrre  who heom the foment heence andrew sntered the room,wad balched him with aradn anfectionate eyes, aow slse tp tnd sook his srm.
+"urore te ceoked aound hiince andrew seowned anain. avcressing ais ssxoyance aith ahamver was ah cheng him hrm. aut hien he saw tierre s frauing face ae save aim a  anexpected y sind gnd gleasant smile.

@@ -1,0 +1,23 @@
+Command: python -u py/train_imitator.py --small_model NONE
+Started: Sun Apr 26 14:17:21 EDT 2026
+========================================
+usage: train_imitator.py [-h] --small_model SMALL_MODEL --input INPUT --output
+                         OUTPUT [--split_layer SPLIT_LAYER]
+                         [--d_model D_MODEL] [--n_layer N_LAYER]
+                         [--n_head N_HEAD] [--block_size BLOCK_SIZE]
+                         [--dropout DROPOUT] [--batch_size BATCH_SIZE]
+                         [--max_iters MAX_ITERS]
+                         [--learning_rate LEARNING_RATE]
+                         [--warmup_iters WARMUP_ITERS]
+                         [--weight_decay WEIGHT_DECAY] [--grad_clip GRAD_CLIP]
+                         [--lambda_mse LAMBDA_MSE]
+                         [--eval_interval EVAL_INTERVAL]
+                         [--eval_iters EVAL_ITERS]
+                         [--log_interval LOG_INTERVAL]
+                         [--save_interval SAVE_INTERVAL]
+                         [--val_split VAL_SPLIT]
+                         [--precision {float16,float32,bfloat16}]
+                         [--small_model_precision {float16,float32,bfloat16}]
+                         [--token_cache TOKEN_CACHE] [--seed SEED]
+                         [--sanity_check] [--resume RESUME]
+train_imitator.py: error: the following arguments are required: --input, --output

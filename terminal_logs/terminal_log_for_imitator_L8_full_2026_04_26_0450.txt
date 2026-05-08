@@ -1,0 +1,66 @@
+Command: python -u py/train_imitator.py --small_model pt/bpe_16L16H_iter170000.pt --input txt_local/corpus_books_shuffled_2026_04_18.txt --output pt/imitator_L8_full.pt --token_cache txt_local/corpus_tokens_32k.pt --split_layer 8 --d_model 2048 --n_layer 6 --n_head 16 --block_size 512 --batch_size 4 --max_iters 2000 --learning_rate 1e-4 --warmup_iters 200 --eval_interval 100 --log_interval 10 --save_interval 500 --sanity_check
+Started: Sun Apr 26 04:50:48 EDT 2026
+========================================
+[2026-04-26 04:50:49] Device: mps
+[2026-04-26 04:50:49] Loading small model from pt/bpe_16L16H_iter170000.pt
+Loading small model from pt/bpe_16L16H_iter170000.pt
+Loaded 875.5M-param model: n_layer=16, n_head=16, n_embd=2048, block_size=2048, vocab_size=32000
+[2026-04-26 04:51:12] Split: front half = blocks [0, 8), residual dim = 2048
+[2026-04-26 04:51:12] Running split sanity check...
+Sanity check passed: max |full - split| = 0.00e+00 (atol=0.0001)
+[2026-04-26 04:51:12] Loading tokenizer from pt/bpe_16L16H_meta.pkl
+[2026-04-26 04:51:12] Tokenizer: bpe, vocab=32000
+[2026-04-26 04:51:12] Loading cached tokens from txt_local/corpus_tokens_32k.pt
+[2026-04-26 04:51:13] Loaded 477,424,714 tokens
+[2026-04-26 04:51:13] Train: 429,682,243 tokens | Val: 47,742,471 tokens
+Imitator: 302.2M parameters (d_model=2048, n_layer=6, n_head=16, block_size=512)
+Imitator optimizer: 24 decayed tensors (301,989,888 params), 50 non-decayed (163,840 params)
+
+[2026-04-26 04:51:19] Starting imitator training
+  Imitator: d_model=2048, n_layer=6, n_head=16, block_size=512
+  Imitator precision: float32 (params in torch.float32)
+  Small model precision: bfloat16
+  Split layer: 8 of 16
+  Batch size: 4
+  Max iters: 2000
+  LR: 1.00e-04, warmup: 200
+  Loss: cosine + 0.1 * MSE
+  Output: pt/imitator_L8_full.pt
+============================================================
+[2026-04-26 04:51:39] [0m] iter      0 | train: loss=0.5347 cos_sim=0.8418 mse=3.7650 | val: loss=0.5352 cos_sim=0.8411 mse=3.7634 | lr=0.00e+00
+iter      0: loss=0.5343 cos=0.1589 mse=3.7537 time=20667.9ms
+iter     10: loss=0.4923 cos=0.1297 mse=3.6256 time=11642.5ms
+iter     20: loss=0.4657 cos=0.1134 mse=3.5226 time=11811.5ms
+iter     30: loss=0.4595 cos=0.1041 mse=3.5546 time=12132.3ms
+iter     40: loss=0.4339 cos=0.0921 mse=3.4177 time=12454.0ms
+iter     50: loss=0.4236 cos=0.0859 mse=3.3773 time=12488.1ms
+iter     60: loss=0.4194 cos=0.0788 mse=3.4062 time=12563.5ms
+iter     70: loss=0.4126 cos=0.0772 mse=3.3540 time=12707.8ms
+iter     80: loss=0.4063 cos=0.0767 mse=3.2955 time=12777.0ms
+iter     90: loss=0.4005 cos=0.0721 mse=3.2839 time=12863.8ms
+[2026-04-26 04:54:04] [2m] iter    100 | train: loss=0.3994 cos_sim=0.9293 mse=3.2872 | val: loss=0.3991 cos_sim=0.9294 mse=3.2855 | lr=5.00e-05
+  Saved best to pt/imitator_L8_full.pt (val_loss=0.3991, cos_sim=0.9294)
+iter    100: loss=0.3963 cos=0.0713 mse=3.2506 time=39381.5ms
+[2026-04-26 04:54:12] [2m] speed: 0.58 iter/s
+iter    110: loss=0.3929 cos=0.0652 mse=3.2773 time=13242.9ms
+iter    120: loss=0.3927 cos=0.0675 mse=3.2515 time=12895.5ms
+iter    130: loss=0.3875 cos=0.0652 mse=3.2229 time=12988.5ms
+iter    140: loss=0.4066 cos=0.0725 mse=3.3403 time=12895.7ms
+iter    150: loss=0.3929 cos=0.0653 mse=3.2759 time=13119.2ms
+iter    160: loss=0.3860 cos=0.0636 mse=3.2244 time=12918.2ms
+iter    170: loss=0.3947 cos=0.0666 mse=3.2816 time=13040.7ms
+iter    180: loss=0.3908 cos=0.0654 mse=3.2542 time=12976.3ms
+iter    190: loss=0.3861 cos=0.0626 mse=3.2346 time=12995.7ms
+[2026-04-26 04:56:41] [5m] iter    200 | train: loss=0.3889 cos_sim=0.9348 mse=3.2372 | val: loss=0.3854 cos_sim=0.9363 mse=3.2172 | lr=1.00e-04
+  Saved best to pt/imitator_L8_full.pt (val_loss=0.3854, cos_sim=0.9363)
+iter    200: loss=0.3822 cos=0.0627 mse=3.1957 time=38887.0ms
+[2026-04-26 04:56:48] [5m] speed: 0.64 iter/s
+iter    210: loss=0.4413 cos=0.0831 mse=3.5821 time=13269.8ms
+iter    220: loss=0.3858 cos=0.0656 mse=3.2019 time=12917.3ms
+iter    230: loss=0.3790 cos=0.0609 mse=3.1808 time=12771.5ms
+iter    240: loss=0.3806 cos=0.0634 mse=3.1715 time=12869.2ms
+iter    250: loss=0.3839 cos=0.0654 mse=3.1853 time=13659.8ms
+iter    260: loss=0.3784 cos=0.0601 mse=3.1829 time=12672.2ms
+iter    270: loss=0.3890 cos=0.0661 mse=3.2284 time=12733.0ms
+iter    280: loss=0.3912 cos=0.0661 mse=3.2505 time=13048.8ms
+iter    290: loss=0.3711 cos=0.0577 mse=3.1332 time=13358.0ms

@@ -1,0 +1,232 @@
+Device: mps
+Loading small model from pt/bpe_16L16H_iter170000.pt
+Loaded 875.5M-param model: n_layer=16, n_head=16, n_embd=2048, block_size=2048, vocab_size=32000
+Loading imitator from pt/imitator_L8.pt
+Imitator: 21.0M parameters (d_model=512, n_layer=6, n_head=8, block_size=512)
+Imitator: d_model=512, n_layer=6, split_layer=8, iter=4400, best_val_loss=0.12768594920635223
+Tokenizer: bpe, vocab=32000
+Loading cached tokens from txt_local/corpus_tokens_32k.pt
+Using 47,742,471 validation tokens
+
+======================================================================
+Sample 1
+======================================================================
+
+Actual input text (first 300 chars):
+   is falling, and the shadows of the woods thicken into solid gloom that teems with mysterious horrors, which stretch their intangible claws through the darkness to chill the backs of the timid with an icy touch, and the silence is terrible with unuttered howlings of imaginary beasts.
+each one is rea
+
+Frozen model's predictions (decoded from real layer-8 vectors):
+   into and the whole of the trees are. the shadows. wasemed with the shadows. and the from longegible length into the gloom. the the blood of the dead. a icy wind. and to gloom of broken to thespeak crieslings. the terrors.
+the of of wrapped to turn the other, the mistake misfortune. but the are even
+
+Imitator's predictions (decoded from predicted layer-8 vectors):
+   that the the the of, same. the the image of
+,, the the, the the, the,,,, the image. the... the soul..... the the, of the in
+.,,, the,, of,, is,, be, to of to to to to to to to to to to to to to to to to be. to of to to to to to, to to to to to to to.. the,..
+ to to to to, to be to to, to,, to to of
+
+Statistics:
+  Mean cosine similarity (real vs predicted vectors): 0.9382
+  Min cosine similarity:  0.8070
+  Max cosine similarity:  0.9975
+  Frozen model top-1 matches actual next token: 26.3%
+  Imitator top-1 matches frozen model top-1:   15.7%
+  Imitator top-1 matches actual next token:    9.0%
+
+  First few disagreements (position: frozen->imitator):
+    pos   0: cos=0.871  frozen=' into'  imitator=' that'  after '... is'
+    pos   1: cos=0.972  frozen=' and'  imitator=' the'  after '... is falling'
+    pos   3: cos=0.969  frozen=' whole'  imitator=' the'  after '... is falling, and'
+    pos   5: cos=0.977  frozen=' the'  imitator=','  after '..., and the shadows'
+    pos   6: cos=0.986  frozen=' trees'  imitator=' same'  after '... and the shadows of'
+    pos   7: cos=0.913  frozen=' are'  imitator='.'  after '... the shadows of the'
+    pos   8: cos=0.888  frozen='.'  imitator=' the'  after '... shadows of the woods'
+    pos  10: cos=0.833  frozen=' shadows'  imitator=' image'  after '... the woods thicken into'
+    pos  11: cos=0.913  frozen='.'  imitator=' of'  after '... woods thicken into solid'
+    pos  12: cos=0.976  frozen=' was'  imitator='
+'  after '... thicken into solid gloom'
+
+======================================================================
+Sample 2
+======================================================================
+
+Actual input text (first 300 chars):
+  atemoc, for the gods have smitten my father with a madness as you smote him with your arrow, and it is best that he should die, both for his own sake and for that of his people. still, guatemoc, i am sure of this, that your crime will not go unpunished, and that in payment for this sacrilege, you sh
+
+Frozen model's predictions (decoded from real layer-8 vectors):
+  o and the purpose are been the people, a curse. great have me. a hand. and he is not that he should die by for for you son and and for the of the son.
+, ielala, i will not that it, that i son is be be unreunished." for that you the of the crime you you will have be safe the better end.
+"i is be so,"
+
+Imitator's predictions (decoded from predicted layer-8 vectors):
+   the, " " of ",,,
+,,
+,, the
+,,
+ the, not, be, not to the to the,,,
+,,...
+, the,,,,,,, the being, the is, not,,...
+ to,,, the,,. to be to. be..,
+",, the, that, the,, " "that is is is is be to to
+..
+
+ ", to"it is, to,. the was to " was, to,, and being the the was being of.,..
+
+ the the to the,, and. t
+
+Statistics:
+  Mean cosine similarity (real vs predicted vectors): 0.9530
+  Min cosine similarity:  0.8243
+  Max cosine similarity:  0.9969
+  Frozen model top-1 matches actual next token: 33.1%
+  Imitator top-1 matches frozen model top-1:   14.1%
+  Imitator top-1 matches actual next token:    9.4%
+
+  First few disagreements (position: frozen->imitator):
+    pos   0: cos=0.824  frozen='o'  imitator=' the'  after '...atem'
+    pos   1: cos=0.965  frozen=' and'  imitator=','  after '...atemoc'
+    pos   2: cos=0.965  frozen=' the'  imitator=' "'  after '...atemoc,'
+    pos   3: cos=0.975  frozen=' purpose'  imitator=' "'  after '...atemoc, for'
+    pos   4: cos=0.896  frozen=' are'  imitator=' of'  after '...oc, for the'
+    pos   5: cos=0.962  frozen=' been'  imitator=' "'  after '..., for the gods'
+    pos   6: cos=0.906  frozen=' the'  imitator=','  after '... for the gods have'
+    pos   7: cos=0.957  frozen=' people'  imitator=','  after '... the gods have smitten'
+    pos   9: cos=0.968  frozen=' a'  imitator='
+'  after '... have smitten my father'
+    pos  10: cos=0.972  frozen=' curse'  imitator=','  after '... smitten my father with'
+
+======================================================================
+Sample 3
+======================================================================
+
+Actual input text (first 300 chars):
+   had himself carried. his only outings towards the end of his life consisted in his visits to the cathedral or in short walks along the paths of his garden. whenever his health permitted, he loved to be present at the funerals of those who died in the town; those consolations which he deigned to giv
+
+Frozen model's predictions (decoded from real layer-8 vectors):
+   to off
+ body weapon- were the camp of the journey were in the own to the various, the the visits in the streets, the own. he he eyes was, he was to be with at the servicesals of the who had in his service. and whoers of he had to share to the poor,, witness to the goodness of his heart.
+i is a to,"
+
+Imitator's predictions (decoded from predicted layer-8 vectors):
+   to,.,,,, to other, the world. and the,. the.. and the.. and " of the..
+ the was, of to was to to, to the the of of the,. the the.. the,,,, to to be the.. of. the the the.. the..
+,, the,, the to,, " "and is,,, the to to,, the,." the, of the."."." of,
+ to to,,,, of of the,, the, of the.",
+ to, the,,,
+
+Statistics:
+  Mean cosine similarity (real vs predicted vectors): 0.9513
+  Min cosine similarity:  0.8103
+  Max cosine similarity:  0.9969
+  Frozen model top-1 matches actual next token: 35.3%
+  Imitator top-1 matches frozen model top-1:   21.3%
+  Imitator top-1 matches actual next token:    12.7%
+
+  First few disagreements (position: frozen->imitator):
+    pos   1: cos=0.927  frozen=' off'  imitator=','  after '... had himself'
+    pos   2: cos=0.966  frozen='
+'  imitator='.'  after '... had himself carried'
+    pos   3: cos=0.965  frozen=' body'  imitator=','  after '... had himself carried.'
+    pos   4: cos=0.930  frozen=' weapon'  imitator=','  after '... himself carried. his'
+    pos   5: cos=0.928  frozen='-'  imitator=','  after '... carried. his only'
+    pos   6: cos=0.941  frozen=' were'  imitator=','  after '.... his only out'
+    pos   7: cos=0.911  frozen=' the'  imitator=' to'  after '... his only outings'
+    pos   8: cos=0.984  frozen=' camp'  imitator=' other'  after '... only outings towards'
+    pos   9: cos=0.909  frozen=' of'  imitator=','  after '... outings towards the'
+    pos  11: cos=0.974  frozen=' journey'  imitator=' world'  after '... towards the end of'
+
+======================================================================
+Sample 4
+======================================================================
+
+Actual input text (first 300 chars):
+   the boy replied: "i have just come from school. what are you looking for?"
+"why did n't you tell me that before," asked juan. "wait a minute," and he took his little book from his pocket and, looking into it, said: "our cows are in such a place in the forest, tied together. go and get them." so his
+
+Frozen model's predictions (decoded from real layer-8 vectors):
+  ,,
+i don been come from the, i do you doing for?"
+"i, you't you tell me?" you?" said the.
+i a minute. he he told a cap friend from his breast and began turning at the, read: "i teacher are all the a hurry that the country that that up with i and get them,
+ the father went to the cow where the had he
+
+Imitator's predictions (decoded from predicted layer-8 vectors):
+   of the "",,,, be,." was not, to.."i, you,,, to, you you you the. "and you you, you the ",... "..
+....
+. "and,, not,,., a,, the the the the is, to,." was,,,,, and was, ",,,,,., was a. the was.......
+ was was. not.
+..
+..
+
+, " was,, wasous.ous.,,ous the....
+
+....
+...
+.....
+
+.
+ thing.
+ was,ousousousous
+
+Statistics:
+  Mean cosine similarity (real vs predicted vectors): 0.9566
+  Min cosine similarity:  0.8274
+  Max cosine similarity:  0.9981
+  Frozen model top-1 matches actual next token: 45.1%
+  Imitator top-1 matches frozen model top-1:   16.6%
+  Imitator top-1 matches actual next token:    12.2%
+
+  First few disagreements (position: frozen->imitator):
+    pos   0: cos=0.941  frozen=','  imitator=' of'  after '... the'
+    pos   1: cos=0.930  frozen=','  imitator=' the'  after '... the boy'
+    pos   2: cos=0.968  frozen='
+'  imitator=' "'  after '... the boy replied'
+    pos   3: cos=0.980  frozen='i'  imitator='"'  after '... the boy replied:'
+    pos   4: cos=0.969  frozen=' don'  imitator=','  after '... boy replied: "'
+    pos   5: cos=0.967  frozen=' been'  imitator=','  after '... replied: "i'
+    pos   6: cos=0.906  frozen=' come'  imitator=','  after '...: "i have'
+    pos   7: cos=0.942  frozen=' from'  imitator=','  after '... "i have just'
+    pos   8: cos=0.963  frozen=' the'  imitator=' be'  after '...i have just come'
+    pos  10: cos=0.983  frozen=' i'  imitator='."'  after '... just come from school'
+
+======================================================================
+Sample 5
+======================================================================
+
+Actual input text (first 300 chars):
+   under the administration of his mother, and went to govern that of the king of samandal, whom he continued to keep under great vigilance, though with all due respect to his rank.
+the same day that king saleh returned to the kingdom of samandal, queen gulnare, mother to king beder, arrived at the co
+
+Frozen model's predictions (decoded from real layer-8 vectors):
+   same of the majesty, and the to the the kingdom his state. franceosar, and he had to treat in his difficulty. and he a the humility to the person.
+the king year, the henryh had to sam city of samandal, he saleabothl the of the salewin, and in the city of the king of daughter, the queen, a only all 
+
+Imitator's predictions (decoded from predicted layer-8 vectors):
+   the of the state, and the the the the the,. of
+,,,
+ to was to be to the. of the to to to in of the.. and,, of of the to, to, the, of the,,, of of,,, to of the.,, of of the, of the,, of, of, of, to to of, the,,, to, the the of
+
+ to the the to to to to the, be the the the. to be.. the,,
+ to was was t
+
+Statistics:
+  Mean cosine similarity (real vs predicted vectors): 0.9537
+  Min cosine similarity:  0.8317
+  Max cosine similarity:  0.9971
+  Frozen model top-1 matches actual next token: 34.9%
+  Imitator top-1 matches frozen model top-1:   15.9%
+  Imitator top-1 matches actual next token:    10.6%
+
+  First few disagreements (position: frozen->imitator):
+    pos   0: cos=0.975  frozen=' same'  imitator=' the'  after '... under'
+    pos   3: cos=0.968  frozen=' majesty'  imitator=' state'  after '... under the administration of'
+    pos   7: cos=0.948  frozen=' to'  imitator=' the'  after '... his mother, and'
+    pos  10: cos=0.979  frozen=' kingdom'  imitator=' the'  after '... and went to govern'
+    pos  11: cos=0.963  frozen=' his'  imitator=','  after '... went to govern that'
+    pos  12: cos=0.976  frozen=' state'  imitator='.'  after '... to govern that of'
+    pos  13: cos=0.939  frozen='.'  imitator=' of'  after '... govern that of the'
+    pos  14: cos=0.975  frozen=' france'  imitator='
+'  after '... that of the king'
+    pos  15: cos=0.870  frozen='os'  imitator=','  after '... of the king of'
+    pos  16: cos=0.945  frozen='ar'  imitator=','  after '... the king of sam'

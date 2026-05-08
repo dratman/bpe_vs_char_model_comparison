@@ -1,0 +1,9 @@
+params: 152M, attention: softmax, tokenizer: char (vocab: 52), iter: 262000, val loss: 0.8849
+prompt: 'pierre' | temp: 0.8, top_k: 10
+
+  [1] Pierre; but the strong sinking of the truck offered to them in the bayonets. The former had been recognized by the other actors as to the difference between the two armies in russia, and the latter, inflicting the difference of course. The former was a german army officer. The latter was in the army of the black boots, and was in front of the boots because of his steadiness and power of manner. In this boots were those of the two boots the two had put together, and had gone about the country in person
+
+  [2] Pierre, and bouillon, in which he set to work to bring the works of the peltry of ammunition that the germans had provided for their army. All the month he had been waiting for this important decision, and the possibility of the spring of battle had once more arrived from the town. On and on he came to an end, when he saw an opening leading into a cave in the roof of a house. At first he was stunned at the sight of the operation, and, taking an eye on it, he secured a little point on the portions as t
+
+  [3] Pierre two days ago, had been sent to america. He now reached the south in twenty-five days, and had sunk at sutoto island and sent home an expedition of four hundred men. He had succeeded in reaching the island of mexico before august the 19th of january. When he arrived he found the land in great demand and expense. He was, as he had expected, the only object of his search being concerned in the expedition. He had sent word to his colleagues, that he had completed his purpose against them. This he r
+

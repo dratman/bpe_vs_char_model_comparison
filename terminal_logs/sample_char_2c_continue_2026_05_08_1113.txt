@@ -1,0 +1,9 @@
+params: 152M, attention: softmax, tokenizer: char (vocab: 52), iter: 496000, val loss: 0.8225
+prompt: 'a stone wall' | temp: 0.8, top_k: 10
+
+  [1] A stone wall along the side of the broad river, and a pale light in the sky was shining upon this land of fair stones. A large canoe was stationed at the forks of the river, which was built a little above the lake, but the warriors paddled the oars to the edge of the water, so that they might almost see and hear the morning light floating across the water, while the warriors themselves stood upon the opposite bank and looked down upon the broad open, with one fixed bark at its surface. "What a strange thing
+
+  [2] A stone wall of the brick house. "There's aunt louisa bossewitt! "He said. "I remember hearing her say it this morning. She was about four years old, and she wanted to see mr. Carrington in the social world. I have never before seen the girl before, and I am afraid she will not let old miss bossewitt know she has gone to be a bossewitt. There is one man who will take her to be our best sweetheart whose blood is sure to strike him. I am glad there is no one in the world but her. I am glad there is no one. Sh
+
+  [3] A stone wall, which surrounded the lofty castle of agnarra, though still standing on a hill on the left bank; and here, all seated in such a projecting casemate, the scroll was pinned fast to the wall, where it was traced along a single angle, and which was explained by the fact, that the call stones were the first mention of this hill in my experience, that it was the first mention of it I had heard of. The sight, however, of the hill, beyond the town, prevented me from recognising it as a place of safety 
+

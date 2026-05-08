@@ -1,0 +1,9 @@
+params: 152M, attention: softmax, tokenizer: char (vocab: 52), iter: 380000, val loss: 0.8468
+prompt: 'a stone wall' | temp: 0.8, top_k: 10
+
+  [1] A stone wall and the rest of the ward could not be seen from the chimney. "This is the last thing to be afraid of, my love," answered the sailor, apologetically. "It will bring the block and the ship to pretty quick. And if the door should be opened, and the sea smell that creeper beat the air, then, who knows but those myriads may be able to torment the head in the tempest? "The sailor walked to a seat near the chimney. There was not even an air about the room, and the sailor sat down and began to read. Th
+
+  [2] A stone wall. The scarcity of places where a could not be true was the same. The space of time he had wisely postponed to a few days was the same. But the moment it was not true the wall was open, and there lay the stone itself, with the dead on the floor. A dozen times it had been removed and the silent face had been removed. It was dead men who held to their oaths, in spite of the wise things they had done for their sakes. To say the truth, he felt as if the sun was suddenly shining in a cloud at the cent
+
+  [3] A stone wall was raised up and the ground sloping down stream, at a distance of about two huge metal canoes; the sea was then at its height and the shore soon became more distinct. The little canoe appeared on the surface of a swamp shaded by a short black rock and indian grass. A chasm-like bay had been chosen by mr. Haddock and mr. Waterford. The ladies of both sexes, and the ladies of the indian girls, stood in the dim shadow, and the child sat in the midst of their grandmother. Her face was deathly whit
+

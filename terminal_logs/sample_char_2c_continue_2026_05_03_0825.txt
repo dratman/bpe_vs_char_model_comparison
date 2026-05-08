@@ -1,0 +1,9 @@
+params: 152M, attention: softmax, tokenizer: char (vocab: 52), iter: 280000, val loss: 0.8755
+prompt: 'pierre' | temp: 0.8, top_k: 10
+
+  [1] Pierre laughed her back through the heart again and again, and then she felt her head touch the sky, and she set her teeth tightly together with a bit of snuff, and looked at me with wide open mingled wonder and pity. "Well, the snow will do its own work, anyhow. It will do its work of making it pleasanter to the heart. I am glad to have one thing to do, mrs. Bourkirker. The party will make their own work. They will take no notice whatever of it. They will do nothing to make their plans safe. So you s
+
+  [2] Pierre and burnet; and the first time in which the proscription was possessed by this character of his ancestors, harry had, on the other hand, abandoned for ever the members of the council, with the provisions of which he had been set, and had devoted the last to the safety of the town. He then continued his way to the carthaginian camp, where, while he was pacing up and down the train, he had received his mother's assurances, and had been put in a prison. After his first separation, signy had gone i
+
+  [3] Pierre was a page of a greek literary picture and more or less the most exemplary influence in american history. In 1880 wright had found the entry of the patriot, and followed in a letter to la fayette, who pencilled it with a passionate appeal to her facts. "The cat that wulf taught him was written in persian. "The latter was an actress who seemed to be one of the fighting men served a few days with the fire-arms she still held out alone in the battle of the battles of the sambre. Her child was able
+

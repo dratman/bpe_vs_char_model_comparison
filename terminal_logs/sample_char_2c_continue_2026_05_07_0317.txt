@@ -1,0 +1,9 @@
+params: 152M, attention: softmax, tokenizer: char (vocab: 52), iter: 438000, val loss: 0.8252
+prompt: 'a stone wall' | temp: 0.8, top_k: 10
+
+  [1] A stone wall, and in a crowd of citizens and carriages, also; and so the meeting between the moving picture and the moving picture boys is a contrivance which all citizens and officers and men in the film will devour. And this may be the work of a lot of citizens. In one of the film business houses in the city, in the film business in the city, there sat a young scout of fifteen or twenty years of age, somewhat the result of an explorative invention. He had tried to imitate the strange art of the scout of a
+
+  [2] A stone wall. The surface of the wall was so low that the sentry could have reached it at a good angle. We were about a thousand feet above the stream, and there were places where stones had fallen and water flowed. The carts were hidden so that the passengers could not see. The man was a fleet-footed old soldier, who stepped on the dirty road and pulled up the stones. The shells passed over the face of the wall. As we passed by the wall and by the beam of the building, the passengers saw tents and a fine l
+
+  [3] A stone wall surrounded by a rising ground and a golden bridge, which for many years had produced a palpable multitude of feet and heads of men of the pretensions of the romans. As the boy and girl sat there on the sands of putia, they had once more strolled to another beautiful locality, from which they had been separated by a narrow flight of stairs. It was the path of a brazen wall, which at the time of the reformation had been commenced; and at the top of the steps of the west window and of a curved poi
+

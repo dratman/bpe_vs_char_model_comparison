@@ -1,0 +1,363 @@
+Loading model from iter 20000 checkpoint...
+Loaded: n_layer=12, n_embd=1024
+Tokenizer: vocab=52
+Text length: 150 characters
+Text: illustration: appalpittidax and marsilla heights by says regeneration of books (the early principal appalpittidax) had the great sensations for the ti
+
+First occurrence: positions 14-27
+Second occurrence: positions 100-113
+
+Captured attention weights for 12 layers
+Each layer: torch.Size([8, 150, 150])
+
+======================================================================
+Attention analysis for second occurrence (positions 100-112)
+======================================================================
+
+Position 100 (char "a", #0 in word):
+  L0H0: attn to first occurrence=0.138, to corresponding char=0.010, top pos=0("i") val=0.012
+  L0H1: attn to first occurrence=0.141, to corresponding char=0.010, top pos=0("i") val=0.012
+  L0H2: attn to first occurrence=0.139, to corresponding char=0.010, top pos=0("i") val=0.013
+  L0H3: attn to first occurrence=0.139, to corresponding char=0.010, top pos=0("i") val=0.011
+  L0H4: attn to first occurrence=0.141, to corresponding char=0.010, top pos=0("i") val=0.012
+  L0H5: attn to first occurrence=0.140, to corresponding char=0.010, top pos=0("i") val=0.013
+  L0H6: attn to first occurrence=0.140, to corresponding char=0.010, top pos=0("i") val=0.012
+  L0H7: attn to first occurrence=0.140, to corresponding char=0.010, top pos=0("i") val=0.012
+  L6H2: attn to first occurrence=0.126, to corresponding char=0.001, top pos=88("y") val=0.202
+  L8H1: attn to first occurrence=0.147, to corresponding char=0.001, top pos=26("x") val=0.095
+  L8H5: attn to first occurrence=0.103, to corresponding char=0.001, top pos=79("(") val=0.118
+  L9H3: attn to first occurrence=0.185, to corresponding char=0.001, top pos=0("i") val=0.187
+  L9H5: attn to first occurrence=0.303, to corresponding char=0.000, top pos=26("x") val=0.270
+  L10H1: attn to first occurrence=0.132, to corresponding char=0.001, top pos=96("p") val=0.189
+  L10H4: attn to first occurrence=0.313, to corresponding char=0.001, top pos=26("x") val=0.194
+  L10H5: attn to first occurrence=0.150, to corresponding char=0.016, top pos=0("i") val=0.170
+  L11H0: attn to first occurrence=0.147, to corresponding char=0.028, top pos=13(" ") val=0.138
+  L11H3: attn to first occurrence=0.107, to corresponding char=0.001, top pos=89(" ") val=0.059
+  L11H4: attn to first occurrence=0.169, to corresponding char=0.002, top pos=0("i") val=0.128
+
+Position 101 (char "p", #1 in word):
+  L0H0: attn to first occurrence=0.140, to corresponding char=0.010, top pos=12(":") val=0.012
+  L0H1: attn to first occurrence=0.142, to corresponding char=0.010, top pos=12(":") val=0.013
+  L0H2: attn to first occurrence=0.138, to corresponding char=0.010, top pos=0("i") val=0.011
+  L0H3: attn to first occurrence=0.139, to corresponding char=0.010, top pos=12(":") val=0.011
+  L0H4: attn to first occurrence=0.140, to corresponding char=0.010, top pos=12(":") val=0.011
+  L0H5: attn to first occurrence=0.142, to corresponding char=0.010, top pos=0("i") val=0.013
+  L0H6: attn to first occurrence=0.140, to corresponding char=0.010, top pos=0("i") val=0.012
+  L0H7: attn to first occurrence=0.138, to corresponding char=0.010, top pos=0("i") val=0.012
+  L6H2: attn to first occurrence=0.219, to corresponding char=0.000, top pos=98("l") val=0.243
+  L7H3: attn to first occurrence=0.146, to corresponding char=0.000, top pos=76("k") val=0.220
+  L8H0: attn to first occurrence=0.140, to corresponding char=0.001, top pos=88("y") val=0.148
+  L8H1: attn to first occurrence=0.187, to corresponding char=0.003, top pos=76("k") val=0.082
+  L9H0: attn to first occurrence=0.108, to corresponding char=0.011, top pos=0("i") val=0.275
+  L9H1: attn to first occurrence=0.122, to corresponding char=0.003, top pos=40(" ") val=0.155
+  L9H2: attn to first occurrence=0.115, to corresponding char=0.004, top pos=0("i") val=0.146
+  L9H3: attn to first occurrence=0.562, to corresponding char=0.001, top pos=16("p") val=0.497
+  L9H5: attn to first occurrence=0.207, to corresponding char=0.002, top pos=0("i") val=0.211
+  L10H0: attn to first occurrence=0.152, to corresponding char=0.029, top pos=76("k") val=0.199
+  L10H1: attn to first occurrence=0.167, to corresponding char=0.016, top pos=96("p") val=0.097
+  L10H4: attn to first occurrence=0.147, to corresponding char=0.006, top pos=87("l") val=0.084
+  L10H5: attn to first occurrence=0.168, to corresponding char=0.031, top pos=0("i") val=0.186
+  L11H0: attn to first occurrence=0.183, to corresponding char=0.002, top pos=13(" ") val=0.117
+  L11H2: attn to first occurrence=0.107, to corresponding char=0.002, top pos=83(" ") val=0.234
+  L11H3: attn to first occurrence=0.115, to corresponding char=0.013, top pos=99(" ") val=0.117
+  L11H4: attn to first occurrence=0.172, to corresponding char=0.003, top pos=0("i") val=0.080
+
+Position 102 (char "p", #2 in word):
+  L0H0: attn to first occurrence=0.140, to corresponding char=0.010, top pos=12(":") val=0.013
+  L0H1: attn to first occurrence=0.141, to corresponding char=0.011, top pos=0("i") val=0.012
+  L0H2: attn to first occurrence=0.137, to corresponding char=0.010, top pos=0("i") val=0.011
+  L0H3: attn to first occurrence=0.137, to corresponding char=0.010, top pos=0("i") val=0.011
+  L0H4: attn to first occurrence=0.138, to corresponding char=0.010, top pos=0("i") val=0.011
+  L0H5: attn to first occurrence=0.141, to corresponding char=0.010, top pos=0("i") val=0.015
+  L0H6: attn to first occurrence=0.140, to corresponding char=0.010, top pos=0("i") val=0.013
+  L0H7: attn to first occurrence=0.137, to corresponding char=0.010, top pos=0("i") val=0.012
+  L6H2: attn to first occurrence=0.139, to corresponding char=0.000, top pos=88("y") val=0.395
+  L7H3: attn to first occurrence=0.122, to corresponding char=0.000, top pos=76("k") val=0.309
+  L8H1: attn to first occurrence=0.198, to corresponding char=0.005, top pos=76("k") val=0.053
+  L9H1: attn to first occurrence=0.117, to corresponding char=0.001, top pos=40(" ") val=0.148
+  L9H3: attn to first occurrence=0.762, to corresponding char=0.003, top pos=17("a") val=0.681
+  L9H5: attn to first occurrence=0.173, to corresponding char=0.008, top pos=26("x") val=0.110
+  L9H6: attn to first occurrence=0.118, to corresponding char=0.037, top pos=102("p") val=0.136
+  L10H0: attn to first occurrence=0.138, to corresponding char=0.004, top pos=76("k") val=0.374
+  L10H1: attn to first occurrence=0.160, to corresponding char=0.010, top pos=96("p") val=0.091
+  L10H2: attn to first occurrence=0.166, to corresponding char=0.008, top pos=0("i") val=0.160
+  L10H4: attn to first occurrence=0.310, to corresponding char=0.020, top pos=26("x") val=0.156
+  L10H5: attn to first occurrence=0.123, to corresponding char=0.036, top pos=0("i") val=0.277
+  L11H0: attn to first occurrence=0.181, to corresponding char=0.000, top pos=13(" ") val=0.187
+  L11H2: attn to first occurrence=0.121, to corresponding char=0.001, top pos=83(" ") val=0.258
+  L11H3: attn to first occurrence=0.134, to corresponding char=0.049, top pos=4("s") val=0.099
+  L11H4: attn to first occurrence=0.163, to corresponding char=0.009, top pos=13(" ") val=0.079
+  L11H5: attn to first occurrence=0.153, to corresponding char=0.001, top pos=0("i") val=0.451
+
+Position 103 (char "a", #3 in word):
+  L0H0: attn to first occurrence=0.137, to corresponding char=0.011, top pos=0("i") val=0.013
+  L0H1: attn to first occurrence=0.138, to corresponding char=0.010, top pos=0("i") val=0.013
+  L0H2: attn to first occurrence=0.136, to corresponding char=0.010, top pos=0("i") val=0.013
+  L0H3: attn to first occurrence=0.136, to corresponding char=0.010, top pos=0("i") val=0.011
+  L0H4: attn to first occurrence=0.137, to corresponding char=0.010, top pos=0("i") val=0.012
+  L0H5: attn to first occurrence=0.137, to corresponding char=0.010, top pos=0("i") val=0.015
+  L0H6: attn to first occurrence=0.136, to corresponding char=0.010, top pos=0("i") val=0.013
+  L0H7: attn to first occurrence=0.136, to corresponding char=0.010, top pos=0("i") val=0.012
+  L6H2: attn to first occurrence=0.131, to corresponding char=0.004, top pos=88("y") val=0.150
+  L7H3: attn to first occurrence=0.186, to corresponding char=0.001, top pos=76("k") val=0.137
+  L8H0: attn to first occurrence=0.153, to corresponding char=0.000, top pos=98("l") val=0.105
+  L8H1: attn to first occurrence=0.185, to corresponding char=0.002, top pos=26("x") val=0.073
+  L9H1: attn to first occurrence=0.210, to corresponding char=0.000, top pos=26("x") val=0.128
+  L9H3: attn to first occurrence=0.797, to corresponding char=0.023, top pos=18("l") val=0.761
+  L9H5: attn to first occurrence=0.259, to corresponding char=0.018, top pos=26("x") val=0.174
+  L10H0: attn to first occurrence=0.128, to corresponding char=0.001, top pos=76("k") val=0.421
+  L10H1: attn to first occurrence=0.215, to corresponding char=0.005, top pos=26("x") val=0.106
+  L10H2: attn to first occurrence=0.130, to corresponding char=0.001, top pos=0("i") val=0.244
+  L10H3: attn to first occurrence=0.102, to corresponding char=0.024, top pos=91("r") val=0.042
+  L10H4: attn to first occurrence=0.273, to corresponding char=0.021, top pos=26("x") val=0.129
+  L10H5: attn to first occurrence=0.149, to corresponding char=0.019, top pos=6("r") val=0.094
+  L11H0: attn to first occurrence=0.288, to corresponding char=0.001, top pos=25("a") val=0.117
+  L11H2: attn to first occurrence=0.166, to corresponding char=0.001, top pos=83(" ") val=0.245
+  L11H4: attn to first occurrence=0.128, to corresponding char=0.004, top pos=13(" ") val=0.084
+  L11H5: attn to first occurrence=0.127, to corresponding char=0.000, top pos=0("i") val=0.219
+
+Position 104 (char "l", #4 in word):
+  L0H0: attn to first occurrence=0.137, to corresponding char=0.009, top pos=0("i") val=0.013
+  L0H1: attn to first occurrence=0.137, to corresponding char=0.009, top pos=0("i") val=0.013
+  L0H2: attn to first occurrence=0.134, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H3: attn to first occurrence=0.134, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H4: attn to first occurrence=0.136, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H5: attn to first occurrence=0.136, to corresponding char=0.009, top pos=0("i") val=0.016
+  L0H6: attn to first occurrence=0.134, to corresponding char=0.009, top pos=0("i") val=0.013
+  L0H7: attn to first occurrence=0.134, to corresponding char=0.009, top pos=0("i") val=0.011
+  L6H2: attn to first occurrence=0.137, to corresponding char=0.113, top pos=104("l") val=0.366
+  L6H4: attn to first occurrence=0.165, to corresponding char=0.008, top pos=7("a") val=0.106
+  L7H3: attn to first occurrence=0.124, to corresponding char=0.004, top pos=61("n") val=0.048
+  L7H4: attn to first occurrence=0.101, to corresponding char=0.087, top pos=104("l") val=0.671
+  L7H7: attn to first occurrence=0.190, to corresponding char=0.123, top pos=104("l") val=0.313
+  L8H1: attn to first occurrence=0.124, to corresponding char=0.002, top pos=69(" ") val=0.089
+  L9H0: attn to first occurrence=0.108, to corresponding char=0.018, top pos=104("l") val=0.077
+  L9H3: attn to first occurrence=0.492, to corresponding char=0.015, top pos=19("p") val=0.407
+  L10H0: attn to first occurrence=0.123, to corresponding char=0.005, top pos=0("i") val=0.173
+  L10H1: attn to first occurrence=0.185, to corresponding char=0.030, top pos=26("x") val=0.057
+  L10H2: attn to first occurrence=0.265, to corresponding char=0.051, top pos=0("i") val=0.162
+  L10H4: attn to first occurrence=0.163, to corresponding char=0.003, top pos=26("x") val=0.102
+  L10H5: attn to first occurrence=0.116, to corresponding char=0.003, top pos=0("i") val=0.083
+  L11H0: attn to first occurrence=0.251, to corresponding char=0.003, top pos=13(" ") val=0.071
+  L11H2: attn to first occurrence=0.170, to corresponding char=0.000, top pos=83(" ") val=0.295
+  L11H4: attn to first occurrence=0.167, to corresponding char=0.003, top pos=13(" ") val=0.137
+
+Position 105 (char "p", #5 in word):
+  L0H0: attn to first occurrence=0.135, to corresponding char=0.011, top pos=12(":") val=0.012
+  L0H1: attn to first occurrence=0.137, to corresponding char=0.011, top pos=0("i") val=0.012
+  L0H2: attn to first occurrence=0.133, to corresponding char=0.010, top pos=0("i") val=0.011
+  L0H3: attn to first occurrence=0.133, to corresponding char=0.010, top pos=12(":") val=0.010
+  L0H4: attn to first occurrence=0.134, to corresponding char=0.011, top pos=12(":") val=0.011
+  L0H5: attn to first occurrence=0.137, to corresponding char=0.010, top pos=0("i") val=0.014
+  L0H6: attn to first occurrence=0.135, to corresponding char=0.010, top pos=0("i") val=0.012
+  L0H7: attn to first occurrence=0.133, to corresponding char=0.010, top pos=0("i") val=0.012
+  L6H2: attn to first occurrence=0.298, to corresponding char=0.000, top pos=104("l") val=0.676
+  L7H0: attn to first occurrence=0.191, to corresponding char=0.173, top pos=105("p") val=0.745
+  L7H5: attn to first occurrence=0.123, to corresponding char=0.032, top pos=62("e") val=0.095
+  L8H0: attn to first occurrence=0.157, to corresponding char=0.011, top pos=0("i") val=0.080
+  L8H1: attn to first occurrence=0.179, to corresponding char=0.031, top pos=0("i") val=0.237
+  L9H0: attn to first occurrence=0.130, to corresponding char=0.004, top pos=95("i") val=0.259
+  L9H2: attn to first occurrence=0.113, to corresponding char=0.007, top pos=86("r") val=0.085
+  L9H3: attn to first occurrence=0.881, to corresponding char=0.001, top pos=20("i") val=0.822
+  L9H6: attn to first occurrence=0.114, to corresponding char=0.010, top pos=103("a") val=0.265
+  L10H1: attn to first occurrence=0.234, to corresponding char=0.007, top pos=26("x") val=0.142
+  L10H2: attn to first occurrence=0.107, to corresponding char=0.053, top pos=0("i") val=0.613
+  L10H3: attn to first occurrence=0.210, to corresponding char=0.005, top pos=20("i") val=0.091
+  L10H4: attn to first occurrence=0.123, to corresponding char=0.000, top pos=32("m") val=0.098
+  L10H5: attn to first occurrence=0.157, to corresponding char=0.006, top pos=0("i") val=0.182
+  L11H0: attn to first occurrence=0.599, to corresponding char=0.013, top pos=26("x") val=0.287
+  L11H2: attn to first occurrence=0.205, to corresponding char=0.013, top pos=0("i") val=0.221
+  L11H4: attn to first occurrence=0.504, to corresponding char=0.000, top pos=25("a") val=0.290
+
+Position 106 (char "i", #6 in word):
+  L0H0: attn to first occurrence=0.134, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H1: attn to first occurrence=0.135, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H2: attn to first occurrence=0.132, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H3: attn to first occurrence=0.131, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H4: attn to first occurrence=0.133, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H5: attn to first occurrence=0.134, to corresponding char=0.009, top pos=0("i") val=0.013
+  L0H6: attn to first occurrence=0.132, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H7: attn to first occurrence=0.132, to corresponding char=0.009, top pos=0("i") val=0.011
+  L6H2: attn to first occurrence=0.241, to corresponding char=0.000, top pos=104("l") val=0.661
+  L6H4: attn to first occurrence=0.113, to corresponding char=0.011, top pos=36("i") val=0.085
+  L7H0: attn to first occurrence=0.112, to corresponding char=0.002, top pos=105("p") val=0.818
+  L7H1: attn to first occurrence=0.106, to corresponding char=0.010, top pos=105("p") val=0.070
+  L7H3: attn to first occurrence=0.107, to corresponding char=0.018, top pos=105("p") val=0.059
+  L7H4: attn to first occurrence=0.108, to corresponding char=0.006, top pos=104("l") val=0.378
+  L7H5: attn to first occurrence=0.149, to corresponding char=0.004, top pos=105("p") val=0.081
+  L7H6: attn to first occurrence=0.100, to corresponding char=0.014, top pos=32("m") val=0.060
+  L8H0: attn to first occurrence=0.147, to corresponding char=0.009, top pos=31(" ") val=0.101
+  L9H0: attn to first occurrence=0.366, to corresponding char=0.066, top pos=15("p") val=0.110
+  L9H2: attn to first occurrence=0.167, to corresponding char=0.018, top pos=86("r") val=0.062
+  L9H3: attn to first occurrence=0.907, to corresponding char=0.025, top pos=21("t") val=0.747
+  L9H7: attn to first occurrence=0.103, to corresponding char=0.013, top pos=106("i") val=0.050
+  L10H1: attn to first occurrence=0.201, to corresponding char=0.000, top pos=105("p") val=0.453
+  L10H2: attn to first occurrence=0.148, to corresponding char=0.006, top pos=0("i") val=0.442
+  L10H3: attn to first occurrence=0.174, to corresponding char=0.062, top pos=106("i") val=0.285
+  L10H4: attn to first occurrence=0.182, to corresponding char=0.008, top pos=4("s") val=0.055
+  L10H5: attn to first occurrence=0.143, to corresponding char=0.003, top pos=6("r") val=0.083
+  L11H0: attn to first occurrence=0.176, to corresponding char=0.000, top pos=105("p") val=0.719
+  L11H2: attn to first occurrence=0.199, to corresponding char=0.000, top pos=0("i") val=0.241
+  L11H4: attn to first occurrence=0.390, to corresponding char=0.001, top pos=46("t") val=0.188
+  L11H5: attn to first occurrence=0.159, to corresponding char=0.029, top pos=19("p") val=0.083
+  L11H6: attn to first occurrence=0.171, to corresponding char=0.000, top pos=105("p") val=0.656
+
+Position 107 (char "t", #7 in word):
+  L0H0: attn to first occurrence=0.132, to corresponding char=0.008, top pos=0("i") val=0.012
+  L0H1: attn to first occurrence=0.132, to corresponding char=0.009, top pos=0("i") val=0.013
+  L0H2: attn to first occurrence=0.131, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H3: attn to first occurrence=0.130, to corresponding char=0.009, top pos=0("i") val=0.010
+  L0H4: attn to first occurrence=0.132, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H5: attn to first occurrence=0.132, to corresponding char=0.009, top pos=0("i") val=0.014
+  L0H6: attn to first occurrence=0.131, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H7: attn to first occurrence=0.131, to corresponding char=0.009, top pos=0("i") val=0.011
+  L6H2: attn to first occurrence=0.239, to corresponding char=0.002, top pos=104("l") val=0.709
+  L6H4: attn to first occurrence=0.114, to corresponding char=0.001, top pos=36("i") val=0.092
+  L8H0: attn to first occurrence=0.155, to corresponding char=0.003, top pos=72(" ") val=0.044
+  L9H0: attn to first occurrence=0.114, to corresponding char=0.004, top pos=13(" ") val=0.092
+  L9H2: attn to first occurrence=0.161, to corresponding char=0.004, top pos=87("l") val=0.096
+  L9H3: attn to first occurrence=0.873, to corresponding char=0.009, top pos=22("t") val=0.717
+  L10H1: attn to first occurrence=0.230, to corresponding char=0.008, top pos=87("l") val=0.139
+  L10H2: attn to first occurrence=0.137, to corresponding char=0.006, top pos=0("i") val=0.368
+  L10H3: attn to first occurrence=0.199, to corresponding char=0.001, top pos=106("i") val=0.333
+  L10H4: attn to first occurrence=0.199, to corresponding char=0.003, top pos=32("m") val=0.085
+  L10H5: attn to first occurrence=0.126, to corresponding char=0.000, top pos=66("i") val=0.069
+  L11H0: attn to first occurrence=0.746, to corresponding char=0.033, top pos=22("t") val=0.325
+  L11H2: attn to first occurrence=0.154, to corresponding char=0.000, top pos=83(" ") val=0.360
+  L11H4: attn to first occurrence=0.423, to corresponding char=0.015, top pos=46("t") val=0.148
+  L11H6: attn to first occurrence=0.115, to corresponding char=0.004, top pos=105("p") val=0.264
+
+Position 108 (char "t", #8 in word):
+  L0H0: attn to first occurrence=0.131, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H1: attn to first occurrence=0.129, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H2: attn to first occurrence=0.129, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H3: attn to first occurrence=0.129, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H4: attn to first occurrence=0.131, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H5: attn to first occurrence=0.128, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H6: attn to first occurrence=0.128, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H7: attn to first occurrence=0.130, to corresponding char=0.009, top pos=0("i") val=0.012
+  L6H2: attn to first occurrence=0.203, to corresponding char=0.001, top pos=104("l") val=0.664
+  L6H4: attn to first occurrence=0.105, to corresponding char=0.002, top pos=36("i") val=0.104
+  L9H0: attn to first occurrence=0.165, to corresponding char=0.002, top pos=13(" ") val=0.151
+  L9H2: attn to first occurrence=0.143, to corresponding char=0.003, top pos=88("y") val=0.129
+  L9H3: attn to first occurrence=0.833, to corresponding char=0.004, top pos=23("i") val=0.635
+  L10H1: attn to first occurrence=0.455, to corresponding char=0.042, top pos=26("x") val=0.338
+  L10H2: attn to first occurrence=0.114, to corresponding char=0.004, top pos=0("i") val=0.475
+  L10H3: attn to first occurrence=0.151, to corresponding char=0.001, top pos=106("i") val=0.273
+  L10H4: attn to first occurrence=0.225, to corresponding char=0.009, top pos=26("x") val=0.067
+  L11H0: attn to first occurrence=0.812, to corresponding char=0.228, top pos=25("a") val=0.450
+  L11H2: attn to first occurrence=0.176, to corresponding char=0.000, top pos=83(" ") val=0.410
+  L11H4: attn to first occurrence=0.493, to corresponding char=0.090, top pos=25("a") val=0.129
+
+Position 109 (char "i", #9 in word):
+  L0H0: attn to first occurrence=0.132, to corresponding char=0.009, top pos=0("i") val=0.013
+  L0H1: attn to first occurrence=0.130, to corresponding char=0.010, top pos=0("i") val=0.012
+  L0H2: attn to first occurrence=0.128, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H3: attn to first occurrence=0.128, to corresponding char=0.009, top pos=0("i") val=0.010
+  L0H4: attn to first occurrence=0.129, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H5: attn to first occurrence=0.128, to corresponding char=0.010, top pos=0("i") val=0.013
+  L0H6: attn to first occurrence=0.128, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H7: attn to first occurrence=0.129, to corresponding char=0.009, top pos=0("i") val=0.010
+  L6H2: attn to first occurrence=0.179, to corresponding char=0.000, top pos=104("l") val=0.477
+  L8H0: attn to first occurrence=0.117, to corresponding char=0.008, top pos=0("i") val=0.037
+  L8H1: attn to first occurrence=0.117, to corresponding char=0.009, top pos=0("i") val=0.354
+  L9H0: attn to first occurrence=0.227, to corresponding char=0.034, top pos=106("i") val=0.136
+  L9H1: attn to first occurrence=0.250, to corresponding char=0.004, top pos=0("i") val=0.112
+  L9H2: attn to first occurrence=0.153, to corresponding char=0.006, top pos=87("l") val=0.128
+  L9H3: attn to first occurrence=0.834, to corresponding char=0.029, top pos=24("d") val=0.482
+  L10H1: attn to first occurrence=0.513, to corresponding char=0.000, top pos=26("x") val=0.454
+  L10H2: attn to first occurrence=0.147, to corresponding char=0.007, top pos=0("i") val=0.326
+  L10H3: attn to first occurrence=0.133, to corresponding char=0.015, top pos=106("i") val=0.257
+  L10H4: attn to first occurrence=0.214, to corresponding char=0.011, top pos=4("s") val=0.060
+  L10H5: attn to first occurrence=0.107, to corresponding char=0.002, top pos=7("a") val=0.094
+  L11H0: attn to first occurrence=0.324, to corresponding char=0.002, top pos=108("t") val=0.257
+  L11H2: attn to first occurrence=0.252, to corresponding char=0.000, top pos=27(" ") val=0.245
+  L11H4: attn to first occurrence=0.282, to corresponding char=0.028, top pos=27(" ") val=0.138
+
+Position 110 (char "d", #10 in word):
+  L0H0: attn to first occurrence=0.128, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H1: attn to first occurrence=0.128, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H2: attn to first occurrence=0.127, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H3: attn to first occurrence=0.127, to corresponding char=0.009, top pos=0("i") val=0.010
+  L0H4: attn to first occurrence=0.128, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H5: attn to first occurrence=0.127, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H6: attn to first occurrence=0.126, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H7: attn to first occurrence=0.127, to corresponding char=0.009, top pos=0("i") val=0.011
+  L6H2: attn to first occurrence=0.165, to corresponding char=0.002, top pos=107("t") val=0.520
+  L6H4: attn to first occurrence=0.120, to corresponding char=0.001, top pos=88("y") val=0.104
+  L8H0: attn to first occurrence=0.133, to corresponding char=0.001, top pos=45("h") val=0.064
+  L8H1: attn to first occurrence=0.142, to corresponding char=0.001, top pos=0("i") val=0.125
+  L9H0: attn to first occurrence=0.115, to corresponding char=0.004, top pos=106("i") val=0.109
+  L9H1: attn to first occurrence=0.196, to corresponding char=0.021, top pos=40(" ") val=0.184
+  L9H2: attn to first occurrence=0.104, to corresponding char=0.006, top pos=88("y") val=0.094
+  L9H3: attn to first occurrence=0.922, to corresponding char=0.001, top pos=25("a") val=0.915
+  L10H0: attn to first occurrence=0.173, to corresponding char=0.007, top pos=0("i") val=0.094
+  L10H1: attn to first occurrence=0.231, to corresponding char=0.016, top pos=108("t") val=0.204
+  L10H3: attn to first occurrence=0.239, to corresponding char=0.001, top pos=106("i") val=0.187
+  L10H4: attn to first occurrence=0.172, to corresponding char=0.001, top pos=26("x") val=0.060
+  L11H0: attn to first occurrence=0.733, to corresponding char=0.004, top pos=25("a") val=0.356
+  L11H2: attn to first occurrence=0.172, to corresponding char=0.000, top pos=83(" ") val=0.259
+  L11H4: attn to first occurrence=0.214, to corresponding char=0.011, top pos=13(" ") val=0.145
+  L11H5: attn to first occurrence=0.161, to corresponding char=0.001, top pos=19("p") val=0.114
+
+Position 111 (char "a", #11 in word):
+  L0H0: attn to first occurrence=0.127, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H1: attn to first occurrence=0.132, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H2: attn to first occurrence=0.127, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H3: attn to first occurrence=0.127, to corresponding char=0.009, top pos=0("i") val=0.010
+  L0H4: attn to first occurrence=0.129, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H5: attn to first occurrence=0.132, to corresponding char=0.009, top pos=0("i") val=0.014
+  L0H6: attn to first occurrence=0.130, to corresponding char=0.009, top pos=0("i") val=0.012
+  L0H7: attn to first occurrence=0.127, to corresponding char=0.009, top pos=0("i") val=0.012
+  L6H2: attn to first occurrence=0.170, to corresponding char=0.002, top pos=107("t") val=0.306
+  L8H1: attn to first occurrence=0.134, to corresponding char=0.005, top pos=0("i") val=0.509
+  L9H0: attn to first occurrence=0.112, to corresponding char=0.002, top pos=106("i") val=0.120
+  L9H1: attn to first occurrence=0.165, to corresponding char=0.004, top pos=0("i") val=0.133
+  L9H3: attn to first occurrence=0.671, to corresponding char=0.077, top pos=26("x") val=0.571
+  L10H0: attn to first occurrence=0.119, to corresponding char=0.004, top pos=0("i") val=0.163
+  L10H1: attn to first occurrence=0.912, to corresponding char=0.001, top pos=26("x") val=0.895
+  L10H2: attn to first occurrence=0.302, to corresponding char=0.003, top pos=87("l") val=0.107
+  L10H5: attn to first occurrence=0.139, to corresponding char=0.014, top pos=13(" ") val=0.056
+  L11H0: attn to first occurrence=0.604, to corresponding char=0.224, top pos=25("a") val=0.224
+  L11H4: attn to first occurrence=0.301, to corresponding char=0.037, top pos=46("t") val=0.174
+
+Position 112 (char "x", #12 in word):
+  L0H0: attn to first occurrence=0.126, to corresponding char=0.009, top pos=12(":") val=0.011
+  L0H1: attn to first occurrence=0.127, to corresponding char=0.010, top pos=0("i") val=0.012
+  L0H2: attn to first occurrence=0.124, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H3: attn to first occurrence=0.125, to corresponding char=0.009, top pos=0("i") val=0.010
+  L0H4: attn to first occurrence=0.127, to corresponding char=0.010, top pos=0("i") val=0.011
+  L0H5: attn to first occurrence=0.126, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H6: attn to first occurrence=0.125, to corresponding char=0.009, top pos=0("i") val=0.011
+  L0H7: attn to first occurrence=0.125, to corresponding char=0.009, top pos=0("i") val=0.010
+  L6H2: attn to first occurrence=0.152, to corresponding char=0.004, top pos=104("l") val=0.188
+  L8H1: attn to first occurrence=0.243, to corresponding char=0.027, top pos=0("i") val=0.345
+  L9H0: attn to first occurrence=0.106, to corresponding char=0.006, top pos=13(" ") val=0.106
+  L9H1: attn to first occurrence=0.141, to corresponding char=0.010, top pos=40(" ") val=0.184
+  L9H2: attn to first occurrence=0.170, to corresponding char=0.038, top pos=112("x") val=0.098
+  L9H3: attn to first occurrence=0.460, to corresponding char=0.033, top pos=27(" ") val=0.415
+  L9H5: attn to first occurrence=0.114, to corresponding char=0.048, top pos=0("i") val=0.394
+  L9H6: attn to first occurrence=0.107, to corresponding char=0.006, top pos=111("a") val=0.323
+  L10H0: attn to first occurrence=0.137, to corresponding char=0.002, top pos=0("i") val=0.058
+  L10H1: attn to first occurrence=0.120, to corresponding char=0.009, top pos=0("i") val=0.278
+  L10H2: attn to first occurrence=0.109, to corresponding char=0.007, top pos=50("y") val=0.065
+  L10H3: attn to first occurrence=0.145, to corresponding char=0.026, top pos=101("p") val=0.095
+  L11H0: attn to first occurrence=0.266, to corresponding char=0.169, top pos=112("x") val=0.311
+  L11H4: attn to first occurrence=0.186, to corresponding char=0.023, top pos=13(" ") val=0.083
+  L11H7: attn to first occurrence=0.250, to corresponding char=0.093, top pos=77("s") val=0.133
+
+======================================================================
+Summary: mean attention to first occurrence region, by layer
+======================================================================
+  Layer  0: mean attention to first occurrence = 0.1330
+  Layer  1: mean attention to first occurrence = 0.0125
+  Layer  2: mean attention to first occurrence = 0.0000
+  Layer  3: mean attention to first occurrence = 0.0000
+  Layer  4: mean attention to first occurrence = 0.0000
+  Layer  5: mean attention to first occurrence = 0.0014
+  Layer  6: mean attention to first occurrence = 0.0393
+  Layer  7: mean attention to first occurrence = 0.0402
+  Layer  8: mean attention to first occurrence = 0.0522
+  Layer  9: mean attention to first occurrence = 0.1588
+  Layer 10: mean attention to first occurrence = 0.1341
+  Layer 11: mean attention to first occurrence = 0.1483

@@ -1,0 +1,400 @@
+Command: python -u py/train_imitator.py --small_model pt/bpe_16L16H_iter170000.pt --input txt_local/corpus_books_shuffled_2026_04_18.txt --output pt/imitator_L8.pt --token_cache txt_local/corpus_tokens_32k.pt --split_layer 8 --d_model 512 --n_layer 6 --n_head 8 --block_size 512 --batch_size 8 --max_iters 5000 --learning_rate 3e-4 --warmup_iters 200 --eval_interval 200 --log_interval 20 --save_interval 2000 --sanity_check
+Started: Sat Apr 25 23:46:03 EDT 2026
+========================================
+[2026-04-25 23:46:04] Device: mps
+[2026-04-25 23:46:04] Loading small model from pt/bpe_16L16H_iter170000.pt
+Loading small model from pt/bpe_16L16H_iter170000.pt
+Loaded 875.5M-param model: n_layer=16, n_head=16, n_embd=2048, block_size=2048, vocab_size=32000
+[2026-04-25 23:46:30] Split: front half = blocks [0, 8), residual dim = 2048
+[2026-04-25 23:46:30] Running split sanity check...
+Sanity check passed: max |full - split| = 0.00e+00 (atol=0.0001)
+[2026-04-25 23:46:32] Loading tokenizer from pt/bpe_16L16H_meta.pkl
+[2026-04-25 23:46:32] Tokenizer: bpe, vocab=32000
+[2026-04-25 23:46:32] Reading corpus from txt_local/corpus_books_shuffled_2026_04_18.txt
+[2026-04-25 23:46:33] Read 2,142,487,092 characters; tokenizing...
+  Chunk 1: 0 / 2,142,487,092 characters (0%)
+  Chunk 2: 99,999,463 / 2,142,487,092 characters (4%)
+  Chunk 3: 199,999,389 / 2,142,487,092 characters (9%)
+  Chunk 4: 299,999,385 / 2,142,487,092 characters (14%)
+  Chunk 5: 399,999,182 / 2,142,487,092 characters (18%)
+  Chunk 6: 499,997,606 / 2,142,487,092 characters (23%)
+  Chunk 7: 599,997,313 / 2,142,487,092 characters (28%)
+  Chunk 8: 699,997,294 / 2,142,487,092 characters (32%)
+  Chunk 9: 799,996,518 / 2,142,487,092 characters (37%)
+  Chunk 10: 899,996,362 / 2,142,487,092 characters (42%)
+  Chunk 11: 999,995,670 / 2,142,487,092 characters (46%)
+  Chunk 12: 1,099,995,550 / 2,142,487,092 characters (51%)
+  Chunk 13: 1,199,993,775 / 2,142,487,092 characters (56%)
+  Chunk 14: 1,299,993,554 / 2,142,487,092 characters (60%)
+  Chunk 15: 1,399,993,166 / 2,142,487,092 characters (65%)
+  Chunk 16: 1,499,992,707 / 2,142,487,092 characters (70%)
+  Chunk 17: 1,599,990,508 / 2,142,487,092 characters (74%)
+  Chunk 18: 1,699,990,042 / 2,142,487,092 characters (79%)
+  Chunk 19: 1,799,989,979 / 2,142,487,092 characters (84%)
+  Chunk 20: 1,899,989,743 / 2,142,487,092 characters (88%)
+  Chunk 21: 1,999,989,041 / 2,142,487,092 characters (93%)
+  Chunk 22: 2,099,989,002 / 2,142,487,092 characters (98%)
+  Encoding complete: 477,424,714 tokens from 22 chunks
+[2026-04-26 00:06:57] Tokenized to 477,424,714 tokens
+[2026-04-26 00:06:57] Caching tokens to txt_local/corpus_tokens_32k.pt
+[2026-04-26 00:07:05] Train: 429,682,243 tokens | Val: 47,742,471 tokens
+Imitator: 21.0M parameters (d_model=512, n_layer=6, n_head=8, block_size=512)
+Imitator optimizer: 26 decayed tensors (20,971,520 params), 52 non-decayed (43,520 params)
+
+[2026-04-26 00:07:07] Starting imitator training
+  Imitator: d_model=512, n_layer=6, n_head=8, block_size=512
+  Imitator precision: float32 (params in torch.float32)
+  Small model precision: bfloat16
+  Split layer: 8 of 16
+  Batch size: 8
+  Max iters: 5000
+  LR: 3.00e-04, warmup: 200
+  Loss: cosine + 0.1 * MSE
+  Output: pt/imitator_L8.pt
+============================================================
+[2026-04-26 00:07:32] [0m] iter      0 | train: loss=1.7495 cos_sim=-0.0004 mse=7.4908 | val: loss=1.7492 cos_sim=-0.0004 mse=7.4887 | lr=0.00e+00
+iter      0: loss=1.7465 cos=0.9983 mse=7.4817 time=25855.6ms
+iter     20: loss=1.4504 cos=0.7585 mse=6.9186 time=13848.2ms
+iter     40: loss=0.9643 cos=0.3359 mse=6.2833 time=13882.4ms
+iter     60: loss=0.7310 cos=0.1077 mse=6.2322 time=13854.2ms
+iter     80: loss=0.6915 cos=0.0830 mse=6.0847 time=14027.4ms
+iter    100: loss=0.6668 cos=0.0767 mse=5.9010 time=13962.1ms
+[2026-04-26 00:08:43] [1m] speed: 1.05 iter/s
+iter    120: loss=0.6469 cos=0.0734 mse=5.7350 time=14102.5ms
+iter    140: loss=0.6358 cos=0.0759 mse=5.5997 time=14120.3ms
+iter    160: loss=0.6111 cos=0.0743 mse=5.3679 time=14072.7ms
+iter    180: loss=0.5832 cos=0.0746 mse=5.0854 time=14192.8ms
+[2026-04-26 00:10:16] [3m] iter    200 | train: loss=0.5527 cos_sim=0.9280 mse=4.8064 | val: loss=0.5503 cos_sim=0.9290 mse=4.7927 | lr=3.00e-04
+  Saved best to pt/imitator_L8.pt (val_loss=0.5503, cos_sim=0.9290)
+iter    200: loss=0.5522 cos=0.0709 mse=4.8134 time=38046.3ms
+[2026-04-26 00:10:17] [3m] speed: 1.06 iter/s
+iter    220: loss=0.5251 cos=0.0715 mse=4.5363 time=14054.6ms
+iter    240: loss=0.4795 cos=0.0702 mse=4.0924 time=14198.0ms
+iter    260: loss=0.4520 cos=0.0691 mse=3.8292 time=14185.5ms
+iter    280: loss=0.4350 cos=0.0750 mse=3.6001 time=14476.5ms
+iter    300: loss=0.3990 cos=0.0713 mse=3.2774 time=14166.6ms
+[2026-04-26 00:11:29] [4m] speed: 1.41 iter/s
+iter    320: loss=0.3751 cos=0.0719 mse=3.0325 time=14231.8ms
+iter    340: loss=0.3551 cos=0.0714 mse=2.8371 time=14254.4ms
+iter    360: loss=0.3251 cos=0.0684 mse=2.5673 time=14254.1ms
+iter    380: loss=0.3082 cos=0.0711 mse=2.3714 time=14184.8ms
+[2026-04-26 00:13:02] [5m] iter    400 | train: loss=0.2798 cos_sim=0.9323 mse=2.1212 | val: loss=0.2778 cos_sim=0.9330 mse=2.1076 | lr=2.99e-04
+  Saved best to pt/imitator_L8.pt (val_loss=0.2778, cos_sim=0.9330)
+iter    400: loss=0.2803 cos=0.0666 mse=2.1375 time=37829.9ms
+[2026-04-26 00:13:03] [5m] speed: 1.05 iter/s
+iter    420: loss=0.2595 cos=0.0664 mse=1.9307 time=14307.4ms
+iter    440: loss=0.2485 cos=0.0686 mse=1.7994 time=14329.5ms
+iter    460: loss=0.2216 cos=0.0651 mse=1.5658 time=14310.1ms
+iter    480: loss=0.2041 cos=0.0625 mse=1.4162 time=14300.8ms
+iter    500: loss=0.2140 cos=0.0705 mse=1.4353 time=14632.6ms
+[2026-04-26 00:14:15] [7m] speed: 1.39 iter/s
+iter    520: loss=0.1816 cos=0.0620 mse=1.1958 time=15987.8ms
+iter    540: loss=0.1666 cos=0.0596 mse=1.0702 time=17913.5ms
+iter    560: loss=0.1688 cos=0.0625 mse=1.0630 time=22131.8ms
+iter    580: loss=0.1536 cos=0.0595 mse=0.9412 time=28949.9ms
+[2026-04-26 00:17:00] [9m] iter    600 | train: loss=0.1549 cos_sim=0.9390 mse=0.9396 | val: loss=0.1559 cos_sim=0.9387 mse=0.9455 | lr=2.95e-04
+  Saved best to pt/imitator_L8.pt (val_loss=0.1559, cos_sim=0.9387)
+iter    600: loss=0.1487 cos=0.0584 mse=0.9029 time=81370.5ms
+[2026-04-26 00:17:02] [9m] speed: 0.60 iter/s
+iter    620: loss=0.1472 cos=0.0587 mse=0.8846 time=20595.3ms
+iter    640: loss=0.1539 cos=0.0621 mse=0.9182 time=18368.4ms
+iter    660: loss=0.1444 cos=0.0586 mse=0.8583 time=16791.2ms
+iter    680: loss=0.1435 cos=0.0582 mse=0.8533 time=15598.1ms
+iter    700: loss=0.1463 cos=0.0593 mse=0.8694 time=16768.4ms
+[2026-04-26 00:18:30] [11m] speed: 1.14 iter/s
+iter    720: loss=0.1357 cos=0.0551 mse=0.8053 time=14307.2ms
+iter    740: loss=0.1509 cos=0.0612 mse=0.8964 time=13647.7ms
+iter    760: loss=0.1389 cos=0.0563 mse=0.8263 time=13920.7ms
+iter    780: loss=0.1432 cos=0.0581 mse=0.8508 time=13989.2ms
+[2026-04-26 00:20:04] [12m] iter    800 | train: loss=0.1469 cos_sim=0.9406 mse=0.8749 | val: loss=0.1427 cos_sim=0.9422 mse=0.8488 | lr=2.90e-04
+  Saved best to pt/imitator_L8.pt (val_loss=0.1427, cos_sim=0.9422)
+iter    800: loss=0.1351 cos=0.0551 mse=0.8001 time=39178.4ms
+[2026-04-26 00:20:05] [12m] speed: 1.05 iter/s
+iter    820: loss=0.1573 cos=0.0633 mse=0.9399 time=14408.4ms
+iter    840: loss=0.1533 cos=0.0621 mse=0.9125 time=14287.8ms
+iter    860: loss=0.1425 cos=0.0577 mse=0.8475 time=14071.0ms
+iter    880: loss=0.1464 cos=0.0592 mse=0.8722 time=14051.0ms
+iter    900: loss=0.1320 cos=0.0533 mse=0.7874 time=14418.7ms
+[2026-04-26 00:21:16] [14m] speed: 1.40 iter/s
+iter    920: loss=0.1435 cos=0.0584 mse=0.8513 time=14124.8ms
+iter    940: loss=0.1468 cos=0.0597 mse=0.8711 time=14145.5ms
+iter    960: loss=0.1345 cos=0.0547 mse=0.7976 time=14063.1ms
+iter    980: loss=0.1431 cos=0.0582 mse=0.8498 time=14126.2ms
+[2026-04-26 00:22:49] [15m] iter   1000 | train: loss=0.1402 cos_sim=0.9432 mse=0.8340 | val: loss=0.1388 cos_sim=0.9438 mse=0.8263 | lr=2.82e-04
+  Saved best to pt/imitator_L8.pt (val_loss=0.1388, cos_sim=0.9438)
+iter   1000: loss=0.1420 cos=0.0575 mse=0.8450 time=37266.8ms
+[2026-04-26 00:22:50] [15m] speed: 1.07 iter/s
+iter   1020: loss=0.1422 cos=0.0574 mse=0.8474 time=14147.8ms
+iter   1040: loss=0.1407 cos=0.0573 mse=0.8342 time=14127.6ms
+iter   1060: loss=0.1375 cos=0.0556 mse=0.8197 time=14085.9ms
+iter   1080: loss=0.1437 cos=0.0579 mse=0.8582 time=14321.3ms
+iter   1100: loss=0.1291 cos=0.0524 mse=0.7673 time=14428.6ms
+[2026-04-26 00:24:01] [16m] speed: 1.41 iter/s
+iter   1120: loss=0.1361 cos=0.0551 mse=0.8092 time=14140.5ms
+iter   1140: loss=0.1319 cos=0.0533 mse=0.7858 time=14080.5ms
+iter   1160: loss=0.1542 cos=0.0623 mse=0.9183 time=14152.2ms
+iter   1180: loss=0.1348 cos=0.0545 mse=0.8025 time=14155.9ms
+[2026-04-26 00:25:34] [18m] iter   1200 | train: loss=0.1401 cos_sim=0.9434 mse=0.8343 | val: loss=0.1370 cos_sim=0.9446 mse=0.8158 | lr=2.72e-04
+  Saved best to pt/imitator_L8.pt (val_loss=0.1370, cos_sim=0.9446)
+iter   1200: loss=0.1336 cos=0.0542 mse=0.7939 time=37591.5ms
+[2026-04-26 00:25:35] [18m] speed: 1.06 iter/s
+iter   1220: loss=0.1377 cos=0.0557 mse=0.8200 time=14207.7ms
+iter   1240: loss=0.1363 cos=0.0551 mse=0.8115 time=14175.1ms
+iter   1260: loss=0.1361 cos=0.0548 mse=0.8131 time=14107.2ms
+iter   1280: loss=0.1334 cos=0.0542 mse=0.7920 time=14164.5ms
+iter   1300: loss=0.1506 cos=0.0613 mse=0.8928 time=14110.7ms
+[2026-04-26 00:26:46] [19m] speed: 1.41 iter/s
+iter   1320: loss=0.1333 cos=0.0541 mse=0.7911 time=14173.5ms
+iter   1340: loss=0.1315 cos=0.0533 mse=0.7816 time=14036.3ms
+iter   1360: loss=0.1365 cos=0.0552 mse=0.8126 time=14139.0ms
+iter   1380: loss=0.1368 cos=0.0555 mse=0.8131 time=14091.0ms
+[2026-04-26 00:28:20] [21m] iter   1400 | train: loss=0.1369 cos_sim=0.9447 mse=0.8156 | val: loss=0.1367 cos_sim=0.9447 mse=0.8140 | lr=2.60e-04
+  Saved best to pt/imitator_L8.pt (val_loss=0.1367, cos_sim=0.9447)
+iter   1400: loss=0.1343 cos=0.0545 mse=0.7988 time=38628.3ms
+[2026-04-26 00:28:21] [21m] speed: 1.05 iter/s
+iter   1420: loss=0.1304 cos=0.0529 mse=0.7753 time=14346.5ms
+iter   1440: loss=0.1526 cos=0.0615 mse=0.9108 time=14337.5ms
+iter   1460: loss=0.1375 cos=0.0557 mse=0.8185 time=14014.4ms
+iter   1480: loss=0.1425 cos=0.0577 mse=0.8474 time=14057.4ms
+iter   1500: loss=0.1284 cos=0.0520 mse=0.7646 time=14054.0ms
+[2026-04-26 00:29:32] [22m] speed: 1.41 iter/s
+iter   1520: loss=0.1321 cos=0.0535 mse=0.7858 time=14041.3ms
+iter   1540: loss=0.1317 cos=0.0532 mse=0.7851 time=13957.0ms
+iter   1560: loss=0.1369 cos=0.0554 mse=0.8146 time=13993.8ms
+iter   1580: loss=0.1333 cos=0.0538 mse=0.7948 time=14308.5ms
+[2026-04-26 00:31:04] [23m] iter   1600 | train: loss=0.1368 cos_sim=0.9447 mse=0.8146 | val: loss=0.1340 cos_sim=0.9458 mse=0.7976 | lr=2.47e-04
+  Saved best to pt/imitator_L8.pt (val_loss=0.1340, cos_sim=0.9458)
+iter   1600: loss=0.1240 cos=0.0502 mse=0.7385 time=36962.4ms
+[2026-04-26 00:31:05] [23m] speed: 1.07 iter/s
+iter   1620: loss=0.1560 cos=0.0629 mse=0.9309 time=14266.1ms
+iter   1640: loss=0.1430 cos=0.0576 mse=0.8537 time=13916.8ms
+iter   1660: loss=0.1277 cos=0.0517 mse=0.7602 time=13977.7ms
+iter   1680: loss=0.1358 cos=0.0552 mse=0.8059 time=13952.6ms
+iter   1700: loss=0.1359 cos=0.0550 mse=0.8089 time=13902.2ms
+[2026-04-26 00:32:15] [25m] speed: 1.43 iter/s
+iter   1720: loss=0.1402 cos=0.0565 mse=0.8374 time=13935.4ms
+iter   1740: loss=0.1378 cos=0.0558 mse=0.8200 time=13969.8ms
+iter   1760: loss=0.1460 cos=0.0584 mse=0.8764 time=13960.9ms
+iter   1780: loss=0.1372 cos=0.0552 mse=0.8196 time=13888.9ms
+[2026-04-26 00:33:46] [26m] iter   1800 | train: loss=0.1348 cos_sim=0.9454 mse=0.8023 | val: loss=0.1332 cos_sim=0.9460 mse=0.7924 | lr=2.32e-04
+  Saved best to pt/imitator_L8.pt (val_loss=0.1332, cos_sim=0.9460)
+iter   1800: loss=0.1340 cos=0.0543 mse=0.7974 time=36756.7ms
+[2026-04-26 00:33:47] [26m] speed: 1.08 iter/s
+iter   1820: loss=0.1362 cos=0.0551 mse=0.8109 time=13946.9ms
+iter   1840: loss=0.1337 cos=0.0544 mse=0.7936 time=13933.6ms
+iter   1860: loss=0.1368 cos=0.0552 mse=0.8161 time=13946.9ms
+iter   1880: loss=0.1298 cos=0.0527 mse=0.7711 time=13895.6ms
+iter   1900: loss=0.1334 cos=0.0539 mse=0.7946 time=13926.3ms
+[2026-04-26 00:34:57] [27m] speed: 1.44 iter/s
+iter   1920: loss=0.1401 cos=0.0570 mse=0.8303 time=13944.0ms
+iter   1940: loss=0.1371 cos=0.0554 mse=0.8171 time=13874.7ms
+iter   1960: loss=0.1380 cos=0.0559 mse=0.8207 time=13911.0ms
+iter   1980: loss=0.1418 cos=0.0570 mse=0.8480 time=13934.2ms
+[2026-04-26 00:36:28] [29m] iter   2000 | train: loss=0.1337 cos_sim=0.9459 mse=0.7961 | val: loss=0.1327 cos_sim=0.9463 mse=0.7899 | lr=2.17e-04
+  Saved best to pt/imitator_L8.pt (val_loss=0.1327, cos_sim=0.9463)
+[2026-04-26 00:36:29] [29m] Saved periodic checkpoint to pt/imitator_L8_iter2000.pt
+iter   2000: loss=0.1331 cos=0.0540 mse=0.7905 time=37557.4ms
+[2026-04-26 00:36:30] [29m] speed: 1.07 iter/s
+iter   2020: loss=0.1388 cos=0.0561 mse=0.8277 time=13867.8ms
+iter   2040: loss=0.1433 cos=0.0574 mse=0.8590 time=13848.9ms
+iter   2060: loss=0.1337 cos=0.0540 mse=0.7963 time=13904.3ms
+iter   2080: loss=0.1323 cos=0.0535 mse=0.7887 time=13905.5ms
+iter   2100: loss=0.1334 cos=0.0537 mse=0.7964 time=13858.5ms
+[2026-04-26 00:37:40] [30m] speed: 1.44 iter/s
+iter   2120: loss=0.1378 cos=0.0557 mse=0.8209 time=13921.2ms
+iter   2140: loss=0.1699 cos=0.0683 mse=1.0168 time=13959.1ms
+iter   2160: loss=0.1412 cos=0.0565 mse=0.8465 time=13938.3ms
+iter   2180: loss=0.1394 cos=0.0568 mse=0.8265 time=13949.8ms
+[2026-04-26 00:39:11] [32m] iter   2200 | train: loss=0.1342 cos_sim=0.9458 mse=0.7995 | val: loss=0.1305 cos_sim=0.9472 mse=0.7770 | lr=2.00e-04
+  Saved best to pt/imitator_L8.pt (val_loss=0.1305, cos_sim=0.9472)
+iter   2200: loss=0.1375 cos=0.0557 mse=0.8184 time=36923.9ms
+[2026-04-26 00:39:12] [32m] speed: 1.08 iter/s
+iter   2220: loss=0.1391 cos=0.0566 mse=0.8242 time=14016.6ms
+iter   2240: loss=0.1338 cos=0.0540 mse=0.7986 time=13947.3ms
+iter   2260: loss=0.1316 cos=0.0534 mse=0.7820 time=13949.2ms
+iter   2280: loss=0.1362 cos=0.0551 mse=0.8103 time=14101.6ms
+iter   2300: loss=0.1308 cos=0.0530 mse=0.7772 time=14209.0ms
+[2026-04-26 00:40:22] [33m] speed: 1.42 iter/s
+iter   2320: loss=0.1313 cos=0.0530 mse=0.7835 time=14047.0ms
+iter   2340: loss=0.1342 cos=0.0544 mse=0.7978 time=13918.0ms
+iter   2360: loss=0.1356 cos=0.0546 mse=0.8104 time=13958.3ms
+iter   2380: loss=0.1344 cos=0.0542 mse=0.8012 time=14053.1ms
+[2026-04-26 00:41:56] [34m] iter   2400 | train: loss=0.1326 cos_sim=0.9463 mse=0.7887 | val: loss=0.1320 cos_sim=0.9465 mse=0.7853 | lr=1.83e-04
+iter   2400: loss=0.1292 cos=0.0520 mse=0.7722 time=37961.7ms
+[2026-04-26 00:41:56] [34m] speed: 1.06 iter/s
+iter   2420: loss=0.1331 cos=0.0537 mse=0.7942 time=14257.8ms
+iter   2440: loss=0.1341 cos=0.0543 mse=0.7986 time=14133.6ms
+iter   2460: loss=0.1287 cos=0.0521 mse=0.7653 time=13958.5ms
+iter   2480: loss=0.1229 cos=0.0499 mse=0.7300 time=13983.1ms
+iter   2500: loss=0.1332 cos=0.0539 mse=0.7930 time=14034.6ms
+[2026-04-26 00:43:07] [35m] speed: 1.42 iter/s
+iter   2520: loss=0.1317 cos=0.0534 mse=0.7831 time=13999.5ms
+iter   2540: loss=0.1415 cos=0.0571 mse=0.8444 time=13993.5ms
+iter   2560: loss=0.1341 cos=0.0542 mse=0.7990 time=14063.2ms
+iter   2580: loss=0.1370 cos=0.0555 mse=0.8155 time=14045.0ms
+[2026-04-26 00:44:39] [37m] iter   2600 | train: loss=0.1305 cos_sim=0.9472 mse=0.7768 | val: loss=0.1322 cos_sim=0.9466 mse=0.7871 | lr=1.65e-04
+iter   2600: loss=0.1415 cos=0.0568 mse=0.8466 time=36775.8ms
+[2026-04-26 00:44:40] [37m] speed: 1.08 iter/s
+iter   2620: loss=0.1248 cos=0.0506 mse=0.7424 time=14054.9ms
+iter   2640: loss=0.1422 cos=0.0572 mse=0.8492 time=14055.0ms
+iter   2660: loss=0.1372 cos=0.0555 mse=0.8169 time=14053.9ms
+iter   2680: loss=0.1284 cos=0.0521 mse=0.7638 time=14039.6ms
+iter   2700: loss=0.1291 cos=0.0522 mse=0.7692 time=14213.6ms
+[2026-04-26 00:45:50] [38m] speed: 1.42 iter/s
+iter   2720: loss=0.1261 cos=0.0508 mse=0.7529 time=14160.0ms
+iter   2740: loss=0.1297 cos=0.0525 mse=0.7723 time=14212.5ms
+iter   2760: loss=0.1239 cos=0.0501 mse=0.7382 time=14104.2ms
+iter   2780: loss=0.1331 cos=0.0541 mse=0.7900 time=14053.1ms
+[2026-04-26 00:47:23] [40m] iter   2800 | train: loss=0.1319 cos_sim=0.9467 mse=0.7853 | val: loss=0.1307 cos_sim=0.9471 mse=0.7783 | lr=1.47e-04
+iter   2800: loss=0.1351 cos=0.0547 mse=0.8038 time=36862.8ms
+[2026-04-26 00:47:23] [40m] speed: 1.07 iter/s
+iter   2820: loss=0.1311 cos=0.0529 mse=0.7827 time=14056.2ms
+iter   2840: loss=0.1324 cos=0.0535 mse=0.7883 time=14093.6ms
+iter   2860: loss=0.1281 cos=0.0516 mse=0.7648 time=14101.1ms
+iter   2880: loss=0.1423 cos=0.0575 mse=0.8472 time=14122.1ms
+iter   2900: loss=0.1428 cos=0.0577 mse=0.8510 time=14041.5ms
+[2026-04-26 00:48:34] [41m] speed: 1.42 iter/s
+iter   2920: loss=0.1300 cos=0.0525 mse=0.7750 time=14363.9ms
+iter   2940: loss=0.1325 cos=0.0539 mse=0.7862 time=14096.9ms
+iter   2960: loss=0.1272 cos=0.0514 mse=0.7579 time=14039.5ms
+iter   2980: loss=0.1373 cos=0.0554 mse=0.8186 time=14060.6ms
+[2026-04-26 00:50:07] [42m] iter   3000 | train: loss=0.1323 cos_sim=0.9465 mse=0.7880 | val: loss=0.1313 cos_sim=0.9469 mse=0.7819 | lr=1.30e-04
+iter   3000: loss=0.1227 cos=0.0496 mse=0.7302 time=36835.9ms
+[2026-04-26 00:50:07] [42m] speed: 1.07 iter/s
+iter   3020: loss=0.1322 cos=0.0535 mse=0.7871 time=14057.1ms
+iter   3040: loss=0.1270 cos=0.0513 mse=0.7568 time=14081.1ms
+iter   3060: loss=0.1369 cos=0.0555 mse=0.8137 time=14107.5ms
+iter   3080: loss=0.1291 cos=0.0521 mse=0.7697 time=14157.7ms
+iter   3100: loss=0.1275 cos=0.0516 mse=0.7591 time=14231.6ms
+[2026-04-26 00:51:18] [44m] speed: 1.42 iter/s
+iter   3120: loss=0.1391 cos=0.0562 mse=0.8283 time=14077.7ms
+iter   3140: loss=0.1359 cos=0.0551 mse=0.8083 time=14059.5ms
+iter   3160: loss=0.1319 cos=0.0533 mse=0.7862 time=14076.1ms
+iter   3180: loss=0.1327 cos=0.0536 mse=0.7916 time=14088.4ms
+[2026-04-26 00:52:50] [45m] iter   3200 | train: loss=0.1329 cos_sim=0.9462 mse=0.7912 | val: loss=0.1299 cos_sim=0.9474 mse=0.7727 | lr=1.13e-04
+  Saved best to pt/imitator_L8.pt (val_loss=0.1299, cos_sim=0.9474)
+iter   3200: loss=0.1367 cos=0.0550 mse=0.8169 time=37138.8ms
+[2026-04-26 00:52:51] [45m] speed: 1.07 iter/s
+iter   3220: loss=0.1351 cos=0.0549 mse=0.8021 time=14079.5ms
+iter   3240: loss=0.1332 cos=0.0540 mse=0.7919 time=14062.8ms
+iter   3260: loss=0.1321 cos=0.0531 mse=0.7896 time=14027.7ms
+iter   3280: loss=0.1308 cos=0.0530 mse=0.7777 time=14049.2ms
+iter   3300: loss=0.1297 cos=0.0525 mse=0.7718 time=14072.2ms
+[2026-04-26 00:54:02] [46m] speed: 1.42 iter/s
+iter   3320: loss=0.1279 cos=0.0518 mse=0.7601 time=14065.4ms
+iter   3340: loss=0.1340 cos=0.0544 mse=0.7965 time=14046.9ms
+iter   3360: loss=0.1298 cos=0.0524 mse=0.7732 time=14086.2ms
+iter   3380: loss=0.1376 cos=0.0551 mse=0.8253 time=14057.4ms
+[2026-04-26 00:55:34] [48m] iter   3400 | train: loss=0.1334 cos_sim=0.9461 mse=0.7948 | val: loss=0.1308 cos_sim=0.9471 mse=0.7791 | lr=9.75e-05
+iter   3400: loss=0.1370 cos=0.0554 mse=0.8160 time=37141.5ms
+[2026-04-26 00:55:35] [48m] speed: 1.07 iter/s
+iter   3420: loss=0.1462 cos=0.0590 mse=0.8727 time=14063.4ms
+iter   3440: loss=0.1431 cos=0.0577 mse=0.8539 time=14031.3ms
+iter   3460: loss=0.1417 cos=0.0571 mse=0.8461 time=14096.6ms
+iter   3480: loss=0.1263 cos=0.0509 mse=0.7543 time=14082.6ms
+iter   3500: loss=0.1383 cos=0.0558 mse=0.8249 time=14065.8ms
+[2026-04-26 00:56:45] [49m] speed: 1.42 iter/s
+iter   3520: loss=0.1382 cos=0.0555 mse=0.8269 time=14172.7ms
+iter   3540: loss=0.1304 cos=0.0528 mse=0.7764 time=15092.3ms
+iter   3560: loss=0.1240 cos=0.0500 mse=0.7401 time=14364.2ms
+iter   3580: loss=0.1331 cos=0.0538 mse=0.7933 time=14369.9ms
+[2026-04-26 00:58:20] [51m] iter   3600 | train: loss=0.1348 cos_sim=0.9456 mse=0.8033 | val: loss=0.1312 cos_sim=0.9469 mse=0.7816 | lr=8.28e-05
+iter   3600: loss=0.1329 cos=0.0539 mse=0.7896 time=37716.3ms
+[2026-04-26 00:58:21] [51m] speed: 1.05 iter/s
+iter   3620: loss=0.1374 cos=0.0555 mse=0.8193 time=14076.6ms
+iter   3640: loss=0.1317 cos=0.0531 mse=0.7858 time=14010.9ms
+iter   3660: loss=0.1337 cos=0.0541 mse=0.7952 time=14033.0ms
+iter   3680: loss=0.1407 cos=0.0563 mse=0.8440 time=14078.1ms
+iter   3700: loss=0.1268 cos=0.0512 mse=0.7559 time=14061.6ms
+[2026-04-26 00:59:31] [52m] speed: 1.42 iter/s
+iter   3720: loss=0.1292 cos=0.0523 mse=0.7681 time=14029.7ms
+iter   3740: loss=0.1312 cos=0.0532 mse=0.7801 time=14074.6ms
+iter   3760: loss=0.1246 cos=0.0505 mse=0.7414 time=14074.3ms
+iter   3780: loss=0.1274 cos=0.0518 mse=0.7560 time=14046.8ms
+[2026-04-26 01:01:04] [53m] iter   3800 | train: loss=0.1295 cos_sim=0.9476 mse=0.7713 | val: loss=0.1297 cos_sim=0.9475 mse=0.7723 | lr=6.95e-05
+  Saved best to pt/imitator_L8.pt (val_loss=0.1297, cos_sim=0.9475)
+iter   3800: loss=0.1305 cos=0.0528 mse=0.7767 time=37202.8ms
+[2026-04-26 01:01:05] [53m] speed: 1.07 iter/s
+iter   3820: loss=0.1353 cos=0.0544 mse=0.8092 time=14322.8ms
+iter   3840: loss=0.1284 cos=0.0519 mse=0.7657 time=14062.9ms
+iter   3860: loss=0.1269 cos=0.0513 mse=0.7559 time=14082.8ms
+iter   3880: loss=0.1310 cos=0.0532 mse=0.7786 time=14074.3ms
+iter   3900: loss=0.1320 cos=0.0535 mse=0.7856 time=14035.6ms
+[2026-04-26 01:02:15] [55m] speed: 1.42 iter/s
+iter   3920: loss=0.1310 cos=0.0531 mse=0.7787 time=14079.1ms
+iter   3940: loss=0.1257 cos=0.0507 mse=0.7494 time=14066.5ms
+iter   3960: loss=0.1304 cos=0.0525 mse=0.7788 time=14085.4ms
+iter   3980: loss=0.1423 cos=0.0577 mse=0.8459 time=14014.7ms
+[2026-04-26 01:03:48] [56m] iter   4000 | train: loss=0.1301 cos_sim=0.9474 mse=0.7753 | val: loss=0.1311 cos_sim=0.9470 mse=0.7809 | lr=5.79e-05
+[2026-04-26 01:03:48] [56m] Saved periodic checkpoint to pt/imitator_L8_iter4000.pt
+iter   4000: loss=0.1313 cos=0.0531 mse=0.7828 time=37373.4ms
+[2026-04-26 01:03:49] [56m] speed: 1.07 iter/s
+iter   4020: loss=0.1300 cos=0.0525 mse=0.7750 time=14014.8ms
+iter   4040: loss=0.1302 cos=0.0529 mse=0.7730 time=14056.1ms
+iter   4060: loss=0.1290 cos=0.0520 mse=0.7704 time=14039.9ms
+iter   4080: loss=0.1339 cos=0.0541 mse=0.7976 time=14007.2ms
+iter   4100: loss=0.1290 cos=0.0520 mse=0.7699 time=14076.9ms
+[2026-04-26 01:04:59] [57m] speed: 1.42 iter/s
+iter   4120: loss=0.1366 cos=0.0555 mse=0.8113 time=14066.6ms
+iter   4140: loss=0.1312 cos=0.0532 mse=0.7805 time=14005.4ms
+iter   4160: loss=0.1385 cos=0.0554 mse=0.8312 time=14025.4ms
+iter   4180: loss=0.1444 cos=0.0586 mse=0.8585 time=14068.3ms
+[2026-04-26 01:06:31] [59m] iter   4200 | train: loss=0.1313 cos_sim=0.9470 mse=0.7834 | val: loss=0.1314 cos_sim=0.9468 mse=0.7824 | lr=4.81e-05
+iter   4200: loss=0.1300 cos=0.0527 mse=0.7730 time=36826.3ms
+[2026-04-26 01:06:32] [59m] speed: 1.08 iter/s
+iter   4220: loss=0.1275 cos=0.0514 mse=0.7614 time=14065.8ms
+iter   4240: loss=0.1268 cos=0.0513 mse=0.7556 time=13993.4ms
+iter   4260: loss=0.1333 cos=0.0538 mse=0.7954 time=14043.4ms
+iter   4280: loss=0.1331 cos=0.0538 mse=0.7927 time=14105.8ms
+iter   4300: loss=0.1317 cos=0.0532 mse=0.7856 time=14095.3ms
+[2026-04-26 01:07:42] [1h 0m] speed: 1.42 iter/s
+iter   4320: loss=0.1325 cos=0.0536 mse=0.7890 time=14034.0ms
+iter   4340: loss=0.1393 cos=0.0564 mse=0.8297 time=14098.1ms
+iter   4360: loss=0.1327 cos=0.0535 mse=0.7918 time=14073.5ms
+iter   4380: loss=0.1309 cos=0.0530 mse=0.7795 time=14116.6ms
+[2026-04-26 01:09:15] [1h 2m] iter   4400 | train: loss=0.1331 cos_sim=0.9462 mse=0.7932 | val: loss=0.1277 cos_sim=0.9484 mse=0.7605 | lr=4.03e-05
+  Saved best to pt/imitator_L8.pt (val_loss=0.1277, cos_sim=0.9484)
+iter   4400: loss=0.1315 cos=0.0530 mse=0.7852 time=37061.7ms
+[2026-04-26 01:09:16] [1h 2m] speed: 1.07 iter/s
+iter   4420: loss=0.1375 cos=0.0554 mse=0.8214 time=14131.9ms
+iter   4440: loss=0.1350 cos=0.0548 mse=0.8022 time=14099.5ms
+iter   4460: loss=0.1345 cos=0.0542 mse=0.8028 time=14055.7ms
+iter   4480: loss=0.1358 cos=0.0547 mse=0.8115 time=14290.9ms
+iter   4500: loss=0.1341 cos=0.0540 mse=0.8010 time=14154.6ms
+[2026-04-26 01:10:27] [1h 3m] speed: 1.41 iter/s
+iter   4520: loss=0.1364 cos=0.0548 mse=0.8159 time=14090.0ms
+iter   4540: loss=0.1345 cos=0.0545 mse=0.8008 time=14051.3ms
+iter   4560: loss=0.1366 cos=0.0552 mse=0.8142 time=14425.4ms
+iter   4580: loss=0.1292 cos=0.0519 mse=0.7728 time=14522.6ms
+[2026-04-26 01:12:03] [1h 4m] iter   4600 | train: loss=0.1311 cos_sim=0.9470 mse=0.7810 | val: loss=0.1282 cos_sim=0.9481 mse=0.7632 | lr=3.46e-05
+iter   4600: loss=0.1281 cos=0.0519 mse=0.7612 time=39794.3ms
+[2026-04-26 01:12:04] [1h 4m] speed: 1.03 iter/s
+iter   4620: loss=0.1343 cos=0.0542 mse=0.8004 time=15075.6ms
+iter   4640: loss=0.1349 cos=0.0545 mse=0.8043 time=14090.2ms
+iter   4660: loss=0.1342 cos=0.0541 mse=0.8010 time=14208.5ms
+iter   4680: loss=0.1308 cos=0.0528 mse=0.7799 time=14051.9ms
+iter   4700: loss=0.1232 cos=0.0502 mse=0.7299 time=14093.7ms
+[2026-04-26 01:13:15] [1h 6m] speed: 1.40 iter/s
+iter   4720: loss=0.1278 cos=0.0517 mse=0.7611 time=14065.1ms
+iter   4740: loss=0.1300 cos=0.0527 mse=0.7733 time=14045.3ms
+iter   4760: loss=0.1399 cos=0.0563 mse=0.8355 time=14068.1ms
+iter   4780: loss=0.1290 cos=0.0523 mse=0.7666 time=14067.5ms
+[2026-04-26 01:14:47] [1h 7m] iter   4800 | train: loss=0.1324 cos_sim=0.9465 mse=0.7887 | val: loss=0.1309 cos_sim=0.9471 mse=0.7800 | lr=3.12e-05
+iter   4800: loss=0.1270 cos=0.0515 mse=0.7554 time=36779.6ms
+[2026-04-26 01:14:48] [1h 7m] speed: 1.07 iter/s
+iter   4820: loss=0.1349 cos=0.0545 mse=0.8038 time=14071.3ms
+iter   4840: loss=0.1254 cos=0.0507 mse=0.7468 time=14009.9ms
+iter   4860: loss=0.1317 cos=0.0532 mse=0.7844 time=14076.8ms
+iter   4880: loss=0.1317 cos=0.0533 mse=0.7847 time=14185.9ms
+iter   4900: loss=0.1301 cos=0.0529 mse=0.7728 time=14461.7ms
+[2026-04-26 01:15:59] [1h 8m] speed: 1.41 iter/s
+iter   4920: loss=0.1322 cos=0.0536 mse=0.7868 time=14306.1ms
+iter   4940: loss=0.1271 cos=0.0513 mse=0.7583 time=14400.6ms
+iter   4960: loss=0.1276 cos=0.0517 mse=0.7591 time=14703.6ms
+iter   4980: loss=0.1313 cos=0.0530 mse=0.7835 time=14057.9ms
+
+[2026-04-26 01:17:10] [1h 10m] Training complete.
+  Final iteration: 5000
+  Best val loss: 0.1277
+  Saved final to pt/imitator_L8_final.pt
+  Best checkpoint at pt/imitator_L8.pt

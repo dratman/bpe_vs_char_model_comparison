@@ -1,0 +1,159 @@
+Device: mps
+Loading small model from pt/bpe_16L16H_iter170000.pt
+Loaded 875.5M-param model: n_layer=16, n_head=16, n_embd=2048, block_size=2048, vocab_size=32000
+Loading imitator from pt/imitator_L8.pt
+Imitator: 21.0M parameters (d_model=512, n_layer=6, n_head=8, block_size=512)
+Imitator: d_model=512, n_layer=6, split_layer=8, iter=4400, best_val_loss=0.12768594920635223
+Tokenizer: bpe, vocab=32000
+Loading cached tokens from txt_local/corpus_tokens_32k.pt
+Using 47,742,471 validation tokens
+
+======================================================================
+Rollout sample 1
+======================================================================
+
+Prefix (real text, 64 tokens):
+   and the earliest songbirds have come to stay in spite of inhospitable weather that seems for days to set the calendar back a month, the woods invite you more than the fields. there nature is least under man's restraint and gives the first signs of her reawakening. in windless nooks the sun shines w
+
+Imitator rollout (200 tokens, autoregressive in vector space):
+  ,,,,,,, the,, the,, the,, the,, the,, the,,,,,,,,,,,,,,,,,,,,,,,, the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the
+ the
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+======================================================================
+Rollout sample 2
+======================================================================
+
+Prefix (real text, 64 tokens):
+   it may serve to show how great were the torments from which i was suffering, and how broken was my spirit by misfortunes and the horrors around me, when i say that i determined to make no further effort to live, but rather to accept death as a merciful release. and, indeed, i knew that there was li
+
+Imitator rollout (200 tokens, autoregressive in vector space):
+  ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the the
+
+======================================================================
+Rollout sample 3
+======================================================================
+
+Prefix (real text, 64 tokens):
+   and in spite of the services rendered to the country by these two administrators, the king decided to recall them both in 1682. count de frontenac was replaced as governor by m. lefebvre de la barre, and m. duchesneau by m. de meulles.
+disembarking in
+
+Imitator rollout (200 tokens, autoregressive in vector space):
+   the,,.,,,,,,,,,,,.........................................................................................................................................................................................

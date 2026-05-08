@@ -1,0 +1,54 @@
+Device: mps
+Loading small model from pt/bpe_16L16H_iter170000.pt
+Loaded 875.5M-param model: n_layer=16, n_head=16, n_embd=2048, block_size=2048, vocab_size=32000
+Loading imitator from pt/imitator_L8.pt
+Imitator: 21.0M parameters (d_model=512, n_layer=6, n_head=8, block_size=512)
+Imitator: d_model=512, n_layer=6, split_layer=8, iter=4400, best_val_loss=0.12768594920635223
+Tokenizer: bpe, vocab=32000
+Loading cached tokens from txt_local/corpus_tokens_32k.pt
+Using 47,742,471 validation tokens
+
+======================================================================
+Prompt comparison (75 tokens)
+======================================================================
+
+Actual input text (first 500 chars):
+  prince andrew screwed up his eyes and turned away. pierre, who from the moment prince andrew entered the room had watched him with glad, affectionate eyes, now came up and took his arm. before he looked round prince andrew frowned again, expressing his annoyance with whoever was touching his arm, but when he saw pierre's beaming face he gave him an unexpectedly kind and pleasant smile.
+
+Frozen model's predictions (decoded from real layer-8 vectors):
+  ,, to hair, looked his.
+ turned who had the first of andrew had the room, been the, a eyes inquiring eyes, and turned to to stood his place.
+ he had at, andrew's.. and his surprise. the he there him arm. and he he turned the's face face he was a a affectionate cordial smile friendly smile.
+
+
+Imitator's predictions (decoded from predicted layer-8 vectors):
+   the " " the,
+..." to, not. of... figure of
+ the the
+..,. the,......., was the the the,, the
+ to,,
+., to,.
+ the,,,..,..,..,, theness.
+
+
+Statistics:
+  Mean cosine similarity (real vs predicted vectors): 0.9453
+  Min cosine similarity:  0.8604
+  Max cosine similarity:  0.9920
+  Frozen model top-1 matches actual next token: 27.4%
+  Imitator top-1 matches frozen model top-1:   10.8%
+  Imitator top-1 matches actual next token:    4.1%
+
+  First few disagreements (position: frozen->imitator):
+    pos   0: cos=0.863  frozen=','  imitator=' the'  after '...prince'
+    pos   1: cos=0.935  frozen=','  imitator=' "'  after '...prince andrew'
+    pos   2: cos=0.929  frozen=' to'  imitator=' "'  after '...prince andrew screwed'
+    pos   3: cos=0.966  frozen=' hair'  imitator=' the'  after '...prince andrew screwed up'
+    pos   5: cos=0.979  frozen=' looked'  imitator='
+'  after '... screwed up his eyes'
+    pos   6: cos=0.922  frozen=' his'  imitator='.'  after '... up his eyes and'
+    pos   8: cos=0.979  frozen='
+'  imitator='.'  after '... eyes and turned away'
+    pos   9: cos=0.860  frozen=' turned'  imitator='"'  after '... and turned away.'
+    pos  10: cos=0.967  frozen=' who'  imitator=' to'  after '... turned away. pierre'
+    pos  11: cos=0.962  frozen=' had'  imitator=','  after '... away. pierre,'
