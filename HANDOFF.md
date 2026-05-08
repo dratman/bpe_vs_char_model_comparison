@@ -133,21 +133,21 @@ Last updated: 2026-05-08 by Claude Code Opus (Mac Studio session)
   - `../study_corpus_and_training_2c_char/pt/...continuous.pt`
     — 51M (n_embd=512), val loss 0.826, iter 1.4M
   - Copies on M3 as `pt/char_model_B_best.pt` and `pt/char_model_2c_clean.pt`
-- **M3 repo location:** `/Volumes/RalphDratman/0-Home-Working-on-M3-Pro/bpe_vs_char_model_comparison/`
-  (cloned from Mac Studio, contains all source + checkpoint + corpus)
-- **Shell scripts on M3 (in addition to committed ones):**
-  - `sh/sample_imitator_compare.sh` — compare mode evaluation
-  - `sh/sample_imitator_war_and_peace.sh` — compare on specific Tolstoy passage
-  - `sh/sample_frozen_war_and_peace.sh` — frozen model baseline on Tolstoy
-  - `sh/sample_frozen_detailed.sh` — per-position rank/probability analysis
-  - `sh/sample_frozen_continue.sh` — free generation from Tolstoy prompt
-  - `sh/sample_char_model_detailed.sh` — character model per-position analysis
-  - `sh/sample_char_model_continue.sh` — character model free generation
-  - `sh/sample_char_2c_continue.sh` — study_2c model free generation
-  - `sh/sample_char_wp_continue.sh` — War and Peace model free generation
-  - `sh/train_imitator_L8_full_dim.sh` — 302M imitator at full dimension
-  - `sh/train_char_war_and_peace.sh` — War and Peace character model
-  - `sh/train_char_high_quality.sh` — 152M character model on filtered corpus
+- **M3 work consolidated to Studio (2026-05-08).** A snapshot of the M3
+  working folder was placed at `../bpe_vs_char_model_comparison_M3_2026_05_08/`
+  and merged into Studio in three commits (`a3d7e3f`, `bb15329`, `354d67a`):
+  - char_high_quality `.pt` checkpoints copied into `pt/`
+  - 29 unique M3 terminal logs imported into `terminal_logs/`
+  - `RUN_ON_M3.txt` (imitator setup notes) preserved at repo root
+  - `claude_code_sessions/SESSION_2026_04_20_2245.raw.txt` preserved on
+    disk (gitignored, like all session logs now)
+  - HANDOFF.md updated to mark training complete
+  - All `sh/sample_*` and `sh/train_*` scripts that previously existed
+    only on M3 are now committed to this repo (happened over April–May)
+  - The M3 snapshot folder was then deleted (~14 GB freed)
+- **M3 machine itself** still holds a working clone at
+  `/Volumes/RalphDratman/0-Home-Working-on-M3-Pro/bpe_vs_char_model_comparison/`,
+  not currently active.
 
 ### IMPORTANT LESSONS FROM THIS SESSION
 - **Batch size 16 with 32K vocab and block=2048 crashes** from OOM.
@@ -230,12 +230,14 @@ Review this list at the start of every session. Mark items DONE when complete.
 - [ ] Consolidate this repo into `small_transformer_research` as a subdirectory.
   See memory file `project_repo_consolidation.md` for the plan.
 
-### When character model training completes (M3 and/or Mac Studio)
-- [ ] Run per-position prediction analysis (War and Peace passage) on the
-  new character model — compare to the BPE model's 27% and Model B's 77%
+### Now that char_high_quality training is done (2026-05-07) — unblocked
+- [ ] Run per-position prediction analysis (War and Peace passage) on
+  `pt/char_high_quality.pt` — compare to the BPE model's 27% and Model B's 77%
 - [ ] Run free generation from the War and Peace prompt — compare to
   earlier models that collapsed into junk
 - [ ] Try the "appalpittidax" copying analysis on the new model
+- [ ] Run compare and rollout on the L10 imitator (`pt/imitator_L10_full.pt`,
+  still not done since training in 2026-04-27)
 
 ### Experiments to try
 - [ ] Imitator rollout with a stronger base model (download Llama 3B or similar)
