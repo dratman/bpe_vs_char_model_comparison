@@ -10,6 +10,7 @@ LOG_FILE="${LOG_DIR}/sample_imitator_L10_${TIMESTAMP}.txt"
 mkdir -p "$LOG_DIR"
 
 echo "Output will be saved to: $LOG_FILE"
+echo "You can watch with: tail -f $LOG_FILE"
 echo ""
 
 python3 -u -c "
@@ -55,4 +56,6 @@ print()
 rollout(imitator, small_model, tokenizer, val_tokens,
         split_layer, block_size, device,
         prefix_tokens=64, rollout_tokens=200, num_samples=3)
-" 2>&1 | tee "$LOG_FILE"
+" 2>&1 > "$LOG_FILE"
+
+echo "Done. Results in: $LOG_FILE"
