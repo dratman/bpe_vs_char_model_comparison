@@ -188,10 +188,11 @@ Last updated: 2026-05-08 by Claude Code Opus (Mac Studio session)
 - `corpus_of_gutenberg_novels_cleaned_shuffled_2026_03_03_B.txt` — original 8 GB corpus
 
 ### GitHub
-- Repo: `dratman/small_transformer_research`
-- Local clone: `../small_transformer_research/`
+- Sibling repo for diary entries and shared notes: `dratman/small_transformer_research`
+  (local clone at `../small_transformer_research/`)
+- This repo: `dratman/bpe_vs_char_model_comparison`
+  (origin = https://github.com/dratman/bpe_vs_char_model_comparison.git, master pushed)
 - Auth: via `gh auth login` (configured 2026-04-15)
-- This repo (bpe_vs_char_model_comparison) is NOT pushed to GitHub.
 
 ## Recent Decisions
 
