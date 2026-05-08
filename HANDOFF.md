@@ -170,6 +170,15 @@ Last updated: 2026-05-08 by Claude Code Opus (Mac Studio session)
     `doc/imitator_training_begun_2026_04_28.txt` (typo fix).
   - `git status` is now clean.
 
+- **`comments_on_prior_diaries/` folder added (2026-05-08, commit
+  `72738fd`).** Sibling to `diary/`. Holds second-pass commentary on
+  existing diary entries, written by a Claude instance different from
+  the one that authored the original entry. Naming convention:
+  `comments_on_NNN.md` where NNN is the diary number being commented
+  on. Header records the date and which Claude instance wrote the
+  comments. First entry: `comments_on_090.md` (Claude Code's response
+  to browser-Claude's diary 090 on tokenization as a learned function).
+
 ### IMPORTANT LESSONS FROM THIS SESSION
 - **Batch size 16 with 32K vocab and block=2048 crashes** from OOM.
   Batch=8 runs but memory is tight. Batch=4 is safe.
