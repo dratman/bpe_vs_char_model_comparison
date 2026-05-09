@@ -1,0 +1,74 @@
+Command: python -u py/train.py --checkpoints_to "pt" --input txt_local/corpus_high_quality_uppercase_2026_05_08.txt --output pt/char_uppercase_16L_1280.pt --mode continuous --tokenizer char --precision bfloat16 --n_layer 16 --n_head 8 --n_embd 1280 --block_size 4096 --batch_size 4 --learning_rate 1.5e-4 --warmup_iters 2000 --max_iters 500000 --eval_interval 2000 --eval_iters 20 --save_interval 20000 --log_interval 100 --sample_interval 10000 --val_split 0.1 --dropout 0.0
+Started: Sat May  9 00:38:04 EDT 2026
+========================================
+[2026-05-09 00:38:04] Using device: mps
+[2026-05-09 00:38:04] Using precision: bfloat16 (requested: bfloat16)
+[2026-05-09 00:38:04] Training mode: continuous
+[2026-05-09 00:38:04] Reading input from txt_local/corpus_high_quality_uppercase_2026_05_08.txt
+[2026-05-09 00:38:05] Read 1,265,346,119 characters
+[2026-05-09 00:38:05] Training char tokenizer...
+CharTokenizer: Built vocabulary of 78 characters
+[2026-05-09 00:38:10] Tokenizing entire corpus (1,265,346,119 characters)...
+[2026-05-09 00:38:38] Tokenization complete: 1,265,346,119 tokens
+[2026-05-09 00:38:38] Converting to tensor...
+[2026-05-09 00:39:27] Tensor ready: 1,265,346,119 tokens
+[2026-05-09 00:39:27] Splitting into train and validation sets...
+[2026-05-09 00:39:27] Split complete.
+[2026-05-09 00:39:27] Training tokens: 1,138,811,508
+[2026-05-09 00:39:27] Validation tokens: 126,534,611
+[2026-05-09 00:39:27] Saving tokenizer to pt/char_uppercase_16L_1280_meta.pkl
+[2026-05-09 00:39:27] Initializing new model...
+  Vocabulary size: 78
+number of parameters: 314.94M (softmax attention, tied weights)
+num decayed parameter tensors: 66, with 319,915,520 parameters
+num non-decayed parameter tensors: 130, with 268,800 parameters
+using fused AdamW: False
+/Users/RalphDratman/miniforge3/lib/python3.12/site-packages/torch/amp/autocast_mode.py:332: UserWarning: In MPS autocast, but the target dtype is not supported. Disabling autocast.
+MPS Autocast only supports dtype of torch.bfloat16 currently.
+  warnings.warn(error_message)
+[2026-05-09 00:39:32] Using bfloat16 precision on MPS
+
+[2026-05-09 00:39:32] Starting training...
+Command line: py/train.py --checkpoints_to pt --input txt_local/corpus_high_quality_uppercase_2026_05_08.txt --output pt/char_uppercase_16L_1280.pt --mode continuous --tokenizer char --precision bfloat16 --n_layer 16 --n_head 8 --n_embd 1280 --block_size 4096 --batch_size 4 --learning_rate 1.5e-4 --warmup_iters 2000 --max_iters 500000 --eval_interval 2000 --eval_iters 20 --save_interval 20000 --log_interval 100 --sample_interval 10000 --val_split 0.1 --dropout 0.0
+
+--- Mode and tokenizer ---
+  mode:               continuous
+  tokenizer:          char
+  vocab_size:         78
+  attention type:     softmax
+  precision:          bfloat16
+--- Architecture ---
+  n_layer:            16
+  n_head:             8
+  n_embd:             1280
+  block_size:         4096
+  dropout:            0.0
+  bias:               True  (hardcoded; LayerNorm + Linear bias)
+  tie_weights:        True
+  no_gelu:            False
+--- Training ---
+  batch_size:         4
+  grad_accum_steps:   1
+  max_iters:          500000
+  learning_rate:      1.50e-04 (target after warmup)
+  min_lr (cosine):    1.50e-05
+  warmup_iters:       2000
+  weight_decay:       0.1 (decay tensors), 0.0 (no-decay tensors)  [hardcoded]
+  betas:              (0.9, 0.95)  [hardcoded]
+  grad_clip:          1.0  [hardcoded]
+--- Data ---
+  input:              txt_local/corpus_high_quality_uppercase_2026_05_08.txt
+  val_split:          0.1
+--- Logging ---
+  log_interval:       100
+  eval_interval:      2000
+  eval_iters:         20
+  save_interval:      20000
+  sample_interval:    10000
+  sample_max_tokens:  128
+--- Output ---
+  output:             pt/char_uppercase_16L_1280.pt
+  checkpoints_to:     pt
+============================================================
+[2026-05-09 00:40:34] [1m] Step     0 | Epoch   0.00 | train loss 4.5069 | val loss 4.5032 | lr 0.00e+00
+iter 0: loss 4.5021, time 68432.35ms, mfu -100.00%

@@ -25,7 +25,10 @@ from tokenizer import load_tokenizer
 
 def capitalize_sentences(text):
     """Capitalize first letter, first letter after sentence-ending punctuation
-    (even through a quote mark), and standalone 'i' before a space."""
+    (even through a quote mark), and standalone 'i' before a space.
+
+    Intended for output from lowercase-only models. Skip this for models
+    trained with case preserved — see detect_case_preservation()."""
     if not text:
         return text
     text = text[0].upper() + text[1:] if len(text) > 1 else text.upper()
@@ -33,6 +36,25 @@ def capitalize_sentences(text):
                   lambda m: m.group(1) + ' ' + m.group(2) + m.group(3).upper(), text)
     text = re.sub(r'\bi ', 'I ', text)
     return text
+
+
+def detect_case_preservation(tokenizer):
+    """Return True if the tokenizer's vocabulary contains any uppercase letter.
+
+    Char tokenizers expose itos directly. BPE tokenizers expose their
+    vocab via the underlying HF tokenizer. If detection fails for any
+    reason, return False (the safe default — apply lowercase-pipeline
+    behavior).
+    """
+    try:
+        if tokenizer.tokenizer_type == 'char':
+            return any(c.isupper() for c in tokenizer.itos.values())
+        elif tokenizer.tokenizer_type == 'bpe':
+            vocab = tokenizer.tokenizer.get_vocab()
+            return any(c.isupper() for token in vocab.keys() for c in token)
+    except Exception:
+        pass
+    return False
 
 
 def apply_repetition_penalty(logits, generated_ids, penalty=1.2, window=50):
@@ -288,6 +310,12 @@ def main():
     vocab_size = tokenizer.vocab_size
     tokenizer_type = tokenizer.tokenizer_type
 
+    # Auto-detect whether the model was trained on case-preserved data.
+    # If so, do NOT lowercase the prompt, and do NOT apply post-hoc
+    # capitalize_sentences (the model's own output already has correct
+    # case). Either step would degrade output for a case-preserved model.
+    case_preserved = detect_case_preservation(tokenizer)
+
     # Load corpus for validation if provided
     corpus_words = None
     if args.corpus:
@@ -309,8 +337,10 @@ def main():
     else:
         prompt_text = args.prompt
 
-    # Lowercase prompt for lowercase-only vocabularies (unless disabled)
-    if not args.no_lowercase:
+    # Lowercase prompt for lowercase-only vocabularies, unless either
+    # (a) the user passed --no_lowercase, or
+    # (b) auto-detected the tokenizer is case-preserving.
+    if not args.no_lowercase and not case_preserved:
         prompt_text = prompt_text.lower()
 
     # Strip trailing spaces — BPE attaches spaces to the front of the
@@ -324,7 +354,8 @@ def main():
     best_val = checkpoint.get('best_val_loss')
     val_str = f", val loss: {best_val:.4f}" if best_val else ""
     attn_type = "linear" if model_args.get('use_linear_attention', False) else "softmax"
-    print(f"params: {n_params:.0f}M, attention: {attn_type}, tokenizer: {tokenizer_type} (vocab: {vocab_size}), iter: {iter_num}{val_str}")
+    case_str = ", case-preserved" if case_preserved else ""
+    print(f"params: {n_params:.0f}M, attention: {attn_type}, tokenizer: {tokenizer_type} (vocab: {vocab_size}{case_str}), iter: {iter_num}{val_str}")
     settings = f"temp: {args.temperature}, top_k: {args.top_k}"
     if args.rep_penalty > 0:
         settings += f", rep_penalty: {args.rep_penalty}"
@@ -350,7 +381,8 @@ def main():
             tokens = truncate_at_stop_token(tokens, stop_token_id, prompt_length)
             generated_text = tokenizer.decode(tokens)
             generated_text = generated_text.replace('\n', ' ')
-            generated_text = capitalize_sentences(generated_text)
+            if not case_preserved:
+                generated_text = capitalize_sentences(generated_text)
 
             if corpus_words is not None and args.stop_on_newline:
                 word = generated_text.strip()
@@ -369,7 +401,8 @@ def main():
 
             generated_text = tokenizer.decode(y[0].tolist())
             generated_text = generated_text.replace('\n', ' ')
-            generated_text = capitalize_sentences(generated_text)
+            if not case_preserved:
+                generated_text = capitalize_sentences(generated_text)
 
             if corpus_words is not None and args.stop_on_newline:
                 word = generated_text.strip()

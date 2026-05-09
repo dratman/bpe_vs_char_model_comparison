@@ -1,0 +1,86 @@
+[2026-05-09 00:05:57] Using device: mps
+[2026-05-09 00:05:57] Using precision: bfloat16 (requested: bfloat16)
+[2026-05-09 00:05:57] Training mode: continuous
+[2026-05-09 00:05:57] Reading input from txt_local/corpus_high_quality_uppercase_2026_05_08.txt
+[2026-05-09 00:05:58] Read 1,265,346,119 characters
+[2026-05-09 00:05:58] Training char tokenizer...
+CharTokenizer: Built vocabulary of 78 characters
+[2026-05-09 00:06:03] Tokenizing entire corpus (1,265,346,119 characters)...
+[2026-05-09 00:06:32] Tokenization complete: 1,265,346,119 tokens
+[2026-05-09 00:06:32] Converting to tensor...
+[2026-05-09 00:07:22] Tensor ready: 1,265,346,119 tokens
+[2026-05-09 00:07:22] Splitting into train and validation sets...
+[2026-05-09 00:07:22] Split complete.
+[2026-05-09 00:07:22] Training tokens: 1,138,811,508
+[2026-05-09 00:07:22] Validation tokens: 126,534,611
+[2026-05-09 00:07:22] Saving tokenizer to pt/char_4096_speedtest_16L_1280_meta.pkl
+[2026-05-09 00:07:22] Initializing new model...
+  Vocabulary size: 78
+number of parameters: 314.94M (softmax attention, tied weights)
+num decayed parameter tensors: 66, with 319,915,520 parameters
+num non-decayed parameter tensors: 130, with 268,800 parameters
+using fused AdamW: False
+/Users/RalphDratman/miniforge3/lib/python3.12/site-packages/torch/amp/autocast_mode.py:332: UserWarning: In MPS autocast, but the target dtype is not supported. Disabling autocast.
+MPS Autocast only supports dtype of torch.bfloat16 currently.
+  warnings.warn(error_message)
+[2026-05-09 00:07:27] Using bfloat16 precision on MPS
+
+[2026-05-09 00:07:27] Starting training...
+Mode: continuous
+Tokenizer: char
+Vocabulary size: 78 (+ 1 padding = 79)
+Padding token ID: 78
+Attention type: softmax
+Precision: bfloat16
+Max iterations: 200
+Batch size: 4
+Block size: 4096
+Learning rate: 1.50e-04
+Warmup iters: 2000
+Eval interval: 100
+Save interval: 999999
+Log interval: 10
+Sample interval: 999999
+Checkpoints will be saved to: pt/char_4096_speedtest_16L_1280.pt
+============================================================
+[2026-05-09 00:07:43] [0m] Step     0 | Epoch   0.00 | train loss 4.5286 | val loss 4.5145 | lr 0.00e+00
+iter 0: loss 4.5170, time 22178.07ms, mfu -100.00%
+iter 10: loss 3.4869, time 4175.72ms, mfu 3.64%
+iter 20: loss 2.9627, time 4218.82ms, mfu 3.64%
+iter 30: loss 2.7419, time 4228.17ms, mfu 3.63%
+iter 40: loss 2.6529, time 4194.05ms, mfu 3.63%
+iter 50: loss 2.6780, time 4171.33ms, mfu 3.63%
+iter 60: loss 2.5329, time 4170.78ms, mfu 3.64%
+iter 70: loss 2.5724, time 4187.83ms, mfu 3.64%
+iter 80: loss 2.6745, time 4196.80ms, mfu 3.63%
+iter 90: loss 2.4857, time 4183.27ms, mfu 3.63%
+[2026-05-09 00:14:59] [7m] Step   100 | Epoch   0.00 | train loss 2.5085 | val loss 2.5043 | lr 7.50e-06
+  Saved checkpoint to pt/char_4096_speedtest_16L_1280.pt (best val loss: 2.5043)
+[2026-05-09 00:15:08] [7m] Speed at iter 100 (epoch 0.00): 0.22 iters/sec
+iter 100: loss 2.4666, time 24002.00ms, mfu 3.33%
+iter 110: loss 2.4440, time 4211.66ms, mfu 3.36%
+iter 120: loss 2.4657, time 4175.82ms, mfu 3.39%
+iter 130: loss 2.4918, time 4176.79ms, mfu 3.42%
+iter 140: loss 2.4472, time 4178.25ms, mfu 3.44%
+iter 150: loss 2.4842, time 4168.63ms, mfu 3.46%
+iter 160: loss 2.4894, time 4188.67ms, mfu 3.48%
+iter 170: loss 2.5235, time 4177.53ms, mfu 3.49%
+iter 180: loss 2.4789, time 4216.17ms, mfu 3.50%
+iter 190: loss 2.4895, time 4169.39ms, mfu 3.52%
+
+[2026-05-09 00:22:03] [14m] Training complete!
+Mode: continuous
+Tokenizer: char
+Attention type: softmax
+Final iteration: 200, Final epoch: 0.00
+Best validation loss: 2.5043
+[2026-05-09 00:22:03] Saving final model to pt/char_4096_speedtest_16L_1280_final.pt
+Final model saved to: pt/char_4096_speedtest_16L_1280.pt
+============================================================
+
+[2026-05-09 00:22:07] Final sample from trained model:
+  1. he s t as ban' de rereses an t per waspr bu he ting ataske hatam s wans tho thich t lfuthano kes h Dos and a mpr l t t. Pe g ong
+  2. ho o ne ored athe tond be Maro '. focu, whe thorous the t te d tily ll f ber the llidy id af s sse thakis t the an st h. "I hond
+  3.  tellf htistere tim hor wng s bes Bus tmess ons te these con stincer ak Hinthada ery thintowh the omon th at t s as her t. ar he
+  4. ftamid t w t stitana toris wasthe woss at t s wititts aisstie "ind Mabue st aind othede mod m sera wntassicer as s ingo as he th
+  5. d touta bus pey. one t," are melet co We aromothe alle, d alla andees wit tas het are Therg at. tor, ld tad f r."Igld tey hestal

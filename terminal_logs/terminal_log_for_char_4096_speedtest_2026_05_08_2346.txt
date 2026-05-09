@@ -1,0 +1,86 @@
+[2026-05-08 23:46:16] Using device: mps
+[2026-05-08 23:46:16] Using precision: bfloat16 (requested: bfloat16)
+[2026-05-08 23:46:16] Training mode: continuous
+[2026-05-08 23:46:16] Reading input from txt_local/corpus_high_quality_uppercase_2026_05_08.txt
+[2026-05-08 23:46:16] Read 1,265,346,119 characters
+[2026-05-08 23:46:16] Training char tokenizer...
+CharTokenizer: Built vocabulary of 78 characters
+[2026-05-08 23:46:23] Tokenizing entire corpus (1,265,346,119 characters)...
+[2026-05-08 23:46:51] Tokenization complete: 1,265,346,119 tokens
+[2026-05-08 23:46:51] Converting to tensor...
+[2026-05-08 23:47:39] Tensor ready: 1,265,346,119 tokens
+[2026-05-08 23:47:39] Splitting into train and validation sets...
+[2026-05-08 23:47:39] Split complete.
+[2026-05-08 23:47:39] Training tokens: 1,138,811,508
+[2026-05-08 23:47:39] Validation tokens: 126,534,611
+[2026-05-08 23:47:39] Saving tokenizer to pt/char_4096_speedtest_meta.pkl
+[2026-05-08 23:47:39] Initializing new model...
+  Vocabulary size: 78
+number of parameters: 151.24M (softmax attention, tied weights)
+num decayed parameter tensors: 50, with 155,269,120 parameters
+num non-decayed parameter tensors: 98, with 161,792 parameters
+using fused AdamW: False
+/Users/RalphDratman/miniforge3/lib/python3.12/site-packages/torch/amp/autocast_mode.py:332: UserWarning: In MPS autocast, but the target dtype is not supported. Disabling autocast.
+MPS Autocast only supports dtype of torch.bfloat16 currently.
+  warnings.warn(error_message)
+[2026-05-08 23:47:42] Using bfloat16 precision on MPS
+
+[2026-05-08 23:47:42] Starting training...
+Mode: continuous
+Tokenizer: char
+Vocabulary size: 78 (+ 1 padding = 79)
+Padding token ID: 78
+Attention type: softmax
+Precision: bfloat16
+Max iterations: 200
+Batch size: 4
+Block size: 4096
+Learning rate: 1.50e-04
+Warmup iters: 2000
+Eval interval: 100
+Save interval: 999999
+Log interval: 10
+Sample interval: 999999
+Checkpoints will be saved to: pt/char_4096_speedtest.pt
+============================================================
+[2026-05-08 23:47:50] [0m] Step     0 | Epoch   0.00 | train loss 4.6231 | val loss 4.6059 | lr 0.00e+00
+iter 0: loss 4.6319, time 11389.68ms, mfu -100.00%
+iter 10: loss 3.7649, time 1910.33ms, mfu 4.15%
+iter 20: loss 3.3033, time 1913.65ms, mfu 4.15%
+iter 30: loss 2.8627, time 1950.07ms, mfu 4.15%
+iter 40: loss 2.7058, time 1913.43ms, mfu 4.15%
+iter 50: loss 2.6380, time 1933.50ms, mfu 4.14%
+iter 60: loss 2.6639, time 1913.79ms, mfu 4.14%
+iter 70: loss 2.5410, time 1910.06ms, mfu 4.14%
+iter 80: loss 2.5145, time 1932.31ms, mfu 4.14%
+iter 90: loss 2.5291, time 1926.16ms, mfu 4.14%
+[2026-05-08 23:51:11] [3m] Step   100 | Epoch   0.00 | train loss 2.5076 | val loss 2.5492 | lr 7.50e-06
+  Saved checkpoint to pt/char_4096_speedtest.pt (best val loss: 2.5492)
+[2026-05-08 23:51:15] [3m] Speed at iter 100 (epoch 0.00): 0.47 iters/sec
+iter 100: loss 2.5069, time 12229.20ms, mfu 3.79%
+iter 110: loss 2.7126, time 1916.28ms, mfu 3.82%
+iter 120: loss 2.4963, time 1930.18ms, mfu 3.85%
+iter 130: loss 2.5662, time 1912.72ms, mfu 3.88%
+iter 140: loss 2.5175, time 1918.95ms, mfu 3.91%
+iter 150: loss 2.7496, time 1942.96ms, mfu 3.93%
+iter 160: loss 2.6992, time 1939.47ms, mfu 3.94%
+iter 170: loss 2.4191, time 1946.78ms, mfu 3.96%
+iter 180: loss 2.4573, time 1916.06ms, mfu 3.97%
+iter 190: loss 2.4950, time 1912.07ms, mfu 3.99%
+
+[2026-05-08 23:54:26] [6m] Training complete!
+Mode: continuous
+Tokenizer: char
+Attention type: softmax
+Final iteration: 200, Final epoch: 0.00
+Best validation loss: 2.5492
+[2026-05-08 23:54:26] Saving final model to pt/char_4096_speedtest_final.pt
+Final model saved to: pt/char_4096_speedtest.pt
+============================================================
+
+[2026-05-08 23:54:28] Final sample from trained model:
+  1.   t p oano id mireedim a henereer oraseast. at thenys anng whathas and and thes is fo man agee ing tin as ble oupere "tine, thig
+  2. a hay the t, hede he se he ghe the th ht hesewof rmeoflle dyof s ingwe and thinoruthe rinfanther ber tieand t in boun aperan he 
+  3. intedrppr t boner and ngas rerofr te s or t ure athess ond wineror repare an prsomirathe tererrmale Bus anare bofishantitonnd s 
+  4. asy ed t to. band t ind tedouthad an whem anthere t o t ireis wappaveak Finsesis hetha te hast s an as the whuthar e ccldad qur 
+  5. t Sud herond thoran canur wed Therd nd he we thouthe he is ois ph podlol in mealor, con re ffe lerid Siresonan the peand t a ach
