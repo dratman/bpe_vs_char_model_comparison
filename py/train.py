@@ -818,6 +818,12 @@ def main():
         train_data = None
         val_data = None
 
+    # Free the corpus string — it is no longer referenced for the rest
+    # of main(), and on a multi-day run it would otherwise sit in
+    # main()'s scope holding ~1 GB+ of Python heap that the compressor
+    # and swap then have to manage.
+    del text
+
     # Save metadata
     if not args.resume:
         meta_path = os.path.splitext(args.output)[0] + '_meta.pkl'
