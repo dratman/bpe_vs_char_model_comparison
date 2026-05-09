@@ -179,6 +179,30 @@ Last updated: 2026-05-08 by Claude Code Opus (Mac Studio session)
   comments. First entry: `comments_on_090.md` (Claude Code's response
   to browser-Claude's diary 090 on tokenization as a learned function).
 
+- **Trained-model inventory generated (2026-05-08, commit `247d64c`).**
+  One-shot snapshot of every `.pt` file under `..` (one row per
+  training run, picking the best/final/highest-iter representative).
+  179 runs total, ~637 GB of weights spread across ~38 sibling
+  directories. Each row has: directory, run name, representative file,
+  size, mtime, architecture (n_layer/n_head/n_embd/block_size/vocab_size),
+  tokenizer type (extracted from each run's `_meta.pkl`), iter,
+  best val loss, number of checkpoints in the run, and a generated
+  text sample. Files in `doc/`:
+  - `model_inventory_2026_05_08.md` — markdown source
+  - `model_inventory_2026_05_08.csv` — for Numbers
+  - `model_inventory_2026_05_08.pdf` — landscape A4
+  - `model_inventory_2026_05_08_sortable.html` — click-to-sort in browser
+  - `model_inventory_2026_05_08_samples.txt` — full untruncated samples
+  Sample column is populated for 11 rows (3 in this project's `pt/`,
+  3 in `*_pt/` saved corpora, 4 in `../valuable_checkpoints/`, 1 in
+  `../valuable_checkpoints/B_9GB/` = Model B). The other 168 rows show
+  `N/A` because their training code is in sibling repos (tiny_transformer,
+  nanogpt_*, etc.) whose `model.py` / tokenizer setup diverges from this
+  repo's `py/sample.py` and would need per-codebase samplers to evaluate.
+  Sample params: prompt=`"the old man"`, max_tokens=200, temperature=0.8,
+  seed=42. Generation scripts are in `/tmp/` (not committed); the
+  inventory file artifacts are committed.
+
 ### IMPORTANT LESSONS FROM THIS SESSION
 - **Batch size 16 with 32K vocab and block=2048 crashes** from OOM.
   Batch=8 runs but memory is tight. Batch=4 is safe.
