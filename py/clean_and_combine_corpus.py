@@ -1,23 +1,29 @@
 #!/usr/bin/env python3
 """
-clean_and_combine_corpus.py — Clean Wikipedia text to the Gutenberg
-52-character set and combine with the Gutenberg corpus.
+clean_and_combine_corpus.py — Clean Wikipedia text to match the Gutenberg
+character set and combine with the Gutenberg corpus.
 
 Steps:
   1. Read the Gutenberg high-quality corpus (already clean, pass through)
   2. Read Wikipedia biography text, clean it:
      - Remove "=== TITLE: ... ===" header lines
      - Transliterate accented characters to ASCII (e.g. é -> e)
-     - Lowercase
+     - Optionally lowercase (default: yes; pass --preserve_case to keep
+       capitalization)
      - Replace runs of disallowed characters with a single space
      - Collapse multiple spaces
   3. Write combined corpus
 
+The character set used here matches rebuild_corpus.py's whitelist exactly,
+so the combined corpus has the same vocabulary as a pure-Gutenberg corpus
+built with the same --preserve_case setting.
+
 Usage:
-    python py/clean_and_combine_corpus.py \
-        --gutenberg txt_local/corpus_high_quality_2026_04_26.txt \
-        --wikipedia txt_local/wikipedia_biographies_2026_04_30.txt \
-        --output txt_local/corpus_gutenberg_plus_bios_2026_05_01.txt
+    python py/clean_and_combine_corpus.py \\
+        --gutenberg txt_local/corpus_high_quality_2026_04_26.txt \\
+        --wikipedia txt_local/wikipedia_biographies_2026_04_30.txt \\
+        --output txt_local/corpus_gutenberg_plus_bios_2026_05_01.txt \\
+        [--preserve_case]
 """
 
 import argparse
@@ -27,25 +33,29 @@ import sys
 import unicodedata
 from datetime import datetime
 
-# The allowed characters for prose text (excluding < > | which appear
-# only in the <|endoftext|> separator token)
-ALLOWED_PROSE = set("abcdefghijklmnopqrstuvwxyz0123456789 \n!\"'(),-./:;?")
 
-# For final verification, also allow the separator characters
-ALLOWED_WITH_SEP = ALLOWED_PROSE | {'<', '>', '|'}
+# Character whitelist — must match rebuild_corpus.py's _build_allowed_charset().
+# Excludes < > | which appear only in the <|endoftext|> separator token.
+def _build_allowed_prose(preserve_case):
+    base = " 0123456789\n.,;:!?\'\"-()abcdefghijklmnopqrstuvwxyz"
+    if preserve_case:
+        base += "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    return set(base)
 
 
 def get_timestamp():
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
-def clean_wikipedia_text(text):
+def clean_wikipedia_text(text, allowed_prose):
     """
     Clean Wikipedia text to match the Gutenberg character set.
 
     1. Remove title header lines
     2. Transliterate accented characters to ASCII
-    3. Lowercase
+    3. Optionally lowercase (caller controls via allowed_prose: if uppercase
+       letters are absent, callers should pre-lowercase by passing the
+       lowercase-only allowed_prose set)
     4. Replace runs of disallowed characters with a single space
     5. Collapse multiple spaces
     """
@@ -56,14 +66,15 @@ def clean_wikipedia_text(text):
     normalized = unicodedata.normalize('NFKD', text)
     ascii_approx = normalized.encode('ascii', 'ignore').decode('ascii')
 
-    # Lowercase
-    lowered = ascii_approx.lower()
+    # Lowercase only if the allowed set lacks uppercase letters
+    if 'A' not in allowed_prose:
+        ascii_approx = ascii_approx.lower()
 
     # Replace runs of disallowed characters with single space
     result = []
     in_disallowed = False
-    for c in lowered:
-        if c in ALLOWED_PROSE:
+    for c in ascii_approx:
+        if c in allowed_prose:
             result.append(c)
             in_disallowed = False
         else:
@@ -88,7 +99,15 @@ def main():
                         help='Wikipedia biography text (to be cleaned)')
     parser.add_argument('--output', type=str, required=True,
                         help='Output combined corpus')
+    parser.add_argument('--preserve_case', action='store_true',
+                        help='Keep original capitalization in the cleaned '
+                             'output (default: lowercase). Must match the '
+                             'preserve_case setting used to build the '
+                             'Gutenberg corpus.')
     args = parser.parse_args()
+
+    allowed_prose = _build_allowed_prose(args.preserve_case)
+    allowed_with_sep = allowed_prose | {'<', '>', '|'}
 
     for path in [args.gutenberg, args.wikipedia]:
         if not os.path.exists(path):
@@ -101,9 +120,9 @@ def main():
         gutenberg = f.read()
     print(f"  {len(gutenberg):,} characters")
 
-    # Clean Gutenberg too (remove <, >, | which are not punctuation)
+    # Clean Gutenberg too (remove any chars outside allowed_with_sep)
     gut_chars_before = set(gutenberg)
-    extra = gut_chars_before - ALLOWED_WITH_SEP
+    extra = gut_chars_before - allowed_with_sep
     if extra:
         print(f"  Cleaning {len(extra)} disallowed characters from Gutenberg: {sorted(repr(c) for c in extra)}")
         # Temporarily replace <|endoftext|> markers to protect them
@@ -112,7 +131,7 @@ def main():
         result = []
         in_disallowed = False
         for c in gutenberg:
-            if c in ALLOWED_PROSE:
+            if c in allowed_prose:
                 result.append(c)
                 in_disallowed = False
             else:
@@ -134,13 +153,13 @@ def main():
     print(f"  {len(wiki_raw):,} characters (raw)")
 
     print(f"[{get_timestamp()}] Cleaning Wikipedia text...")
-    wiki_clean = clean_wikipedia_text(wiki_raw)
+    wiki_clean = clean_wikipedia_text(wiki_raw, allowed_prose)
     print(f"  {len(wiki_clean):,} characters (cleaned)")
     print(f"  Removed: {len(wiki_raw) - len(wiki_clean):,} characters")
 
     # Verify cleaned text
     wiki_chars = set(wiki_clean)
-    extra = wiki_chars - ALLOWED_WITH_SEP
+    extra = wiki_chars - allowed_with_sep
     if extra:
         print(f"  ERROR: cleaned text has {len(extra)} characters outside allowed set!")
         sys.exit(1)
@@ -160,7 +179,7 @@ def main():
 
     # Final character set check
     final_chars = set(combined)
-    extra = final_chars - ALLOWED_WITH_SEP
+    extra = final_chars - allowed_with_sep
     if extra:
         print(f"  ERROR: combined text has {len(extra)} characters outside allowed set!")
         for c in sorted(extra, key=ord):

@@ -6,8 +6,8 @@ Reads corpus_keep.txt and checks each file for:
   2. High character noise (dashes, pipes, brackets, encoding artifacts)
 
 Files are on iCloud and may be slow to access. The script has:
-  - 10 second per-file timeout
-  - 30 minute overall timeout
+  - 10 minute per-file timeout (PER_FILE_TIMEOUT below; gives iCloud time
+    to download a cold file)
   - Progress reporting every 500 files
 
 Output: corpus_quality_report.txt with flagged files and reasons.

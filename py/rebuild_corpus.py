@@ -2,38 +2,48 @@
 """
 rebuild_corpus.py — Build a cleaned Gutenberg corpus from individual text files.
 
-Reads corpus_keep.txt (files to include) and corpus_quality_report.txt
+Reads a keep-list (files to include) and corpus_quality_report.txt
 (files to exclude due to noise/dialect), strips Gutenberg headers/footers,
-cleans character-level noise, shuffles at paragraph level, and writes
-the final corpus.
+cleans character-level noise, shuffles books, and writes the final corpus.
 
 Usage:
-    python py/rebuild_corpus.py \
-        --texts_dir /path/to/gutenberg_texts \
-        --keep corpus_keep.txt \
-        --quality_report corpus_quality_report.txt \
-        --output txt_local/corpus_cleaned_YYYY_MM_DD.txt \
-        [--noise_threshold 15] \
-        [--dialect_threshold 0.05] \
-        [--no_shuffle] \
+    python py/rebuild_corpus.py \\
+        --texts_dir /path/to/gutenberg_texts \\
+        --keep corpus_keep.txt \\
+        --quality_report corpus_quality_report.txt \\
+        --output txt_local/corpus_cleaned_YYYY_MM_DD.txt \\
+        [--preserve_case] \\
+        [--manifest manifest.tsv] \\
+        [--noise_threshold 15] \\
+        [--dialect_threshold 0.05] \\
+        [--no_shuffle] \\
         [--seed 42]
 
 The script:
-  1. Reads corpus_keep.txt for the list of files to include
+  1. Reads the keep-list for the list of files to include
   2. Reads corpus_quality_report.txt and removes files above noise/dialect thresholds
-  3. For each kept file: strips Gutenberg header/footer, lowercases, cleans noise
-  4. Splits all text into paragraphs (on blank lines)
-  5. Shuffles paragraphs (reproducible with --seed)
-  6. Writes final corpus
+  3. For each kept file: strips Gutenberg header/footer, cleans noise
+  4. Splits text into paragraphs (on blank lines), keeps order within a book
+  5. Shuffles books (not paragraphs), reproducible with --seed
+  6. Writes the final corpus, books separated by `<|endoftext|>`
 
 Character cleaning:
-  - Lowercase everything
+  - Optionally lowercase everything (default behavior; pass --preserve_case
+    to keep original capitalization)
+  - Transliterate non-decomposable Latin characters (ß→ss, þ→th, ð→d,
+    œ→oe, æ→ae, ø→o, ł→l, etc.) so proper names survive cleaning
   - Normalize Unicode: smart quotes -> straight, em/en dashes -> " -- "
   - Collapse runs of dashes: " - - - " -> " -- "
   - Remove non-prose characters: |{}[]<>~^@#\\_
   - Collapse multiple spaces to one
   - Collapse 3+ newlines to 2
-  - Keep only: a-z, space, newline, and basic punctuation . , ; : ! ? ' " - ( )
+  - Keep only: letters, digits, space, newline, basic punctuation
+    (. , ; : ! ? ' " - ( ))
+
+Reproducibility:
+  - The --manifest flag writes a TSV record of which books went into the
+    corpus and in what (post-shuffle) order. Useful for auditing changes
+    when the input keep-list changes.
 """
 
 import argparse
@@ -132,10 +142,51 @@ def strip_gutenberg_header_footer(text):
     return '\n'.join(lines[header_end:footer_start])
 
 
-def clean_text(text):
-    """Clean a single text: lowercase, normalize chars, remove noise."""
-    # Lowercase
-    text = text.lower()
+# Transliteration map for non-decomposable Latin characters.
+# unicodedata.normalize('NFKD', ...) handles accents on a-z (e.g. é → e +
+# combining acute, then encode('ascii','ignore') drops the combining mark
+# and keeps the base letter). But the characters below have no NFKD
+# decomposition and would otherwise be silently dropped (e.g. straße →
+# strae). Apply this map BEFORE normalize() so the replacement survives
+# the ASCII strip.
+TRANSLITERATION = {
+    '\u00df': 'ss',   # ß  German sharp s
+    '\u00fe': 'th',   # þ  Icelandic thorn
+    '\u00f0': 'd',    # ð  Icelandic eth
+    '\u00e6': 'ae',   # æ  Latin ash
+    '\u0153': 'oe',   # œ  Latin oe ligature
+    '\u00f8': 'o',    # ø  Danish/Norwegian o-stroke
+    '\u0142': 'l',    # ł  Polish l-stroke
+    '\u00de': 'Th',   # Þ
+    '\u00d0': 'D',    # Ð
+    '\u00c6': 'AE',   # Æ
+    '\u0152': 'OE',   # Œ
+    '\u00d8': 'O',    # Ø
+    '\u0141': 'L',    # Ł
+    '\u00bf': '?',    # ¿
+    '\u00a1': '!',    # ¡
+}
+
+
+def _build_allowed_charset(preserve_case):
+    """Final-stage character whitelist."""
+    base = ' 0123456789\n.,;:!?\'"-()abcdefghijklmnopqrstuvwxyz'
+    if preserve_case:
+        base += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    return set(base)
+
+
+def clean_text(text, preserve_case=False):
+    """Clean a single text: optionally lowercase, normalize chars, remove noise."""
+    # Lowercase (unless preserving case)
+    if not preserve_case:
+        text = text.lower()
+
+    # Apply explicit transliteration map for non-decomposable Latin characters.
+    # Done BEFORE NFKD so the substitutions survive the ASCII-strip below.
+    for src_char, dst in TRANSLITERATION.items():
+        if src_char in text:
+            text = text.replace(src_char, dst)
 
     # Normalize Unicode
     # Smart quotes to straight
@@ -146,8 +197,9 @@ def clean_text(text):
     text = text.replace('\u2026', '...')     # ellipsis
     text = text.replace('\u00a0', ' ')       # non-breaking space
 
-    # Remove other non-ASCII (accented chars etc) by decomposing and stripping
-    # Actually, keep common accented letters by normalizing to closest ASCII
+    # NFKD decomposition + ASCII strip handles accented Latin letters
+    # (é → e + combining acute → e). Non-decomposable characters were
+    # already handled by TRANSLITERATION above.
     text = unicodedata.normalize('NFKD', text)
     text = text.encode('ascii', 'ignore').decode('ascii')
 
@@ -176,8 +228,7 @@ def clean_text(text):
     text = text.strip()
 
     # Final filter: keep only allowed characters
-    # a-z, 0-9, space, newline, and basic punctuation
-    allowed = set('abcdefghijklmnopqrstuvwxyz 0123456789\n.,;:!?\'"-()')
+    allowed = _build_allowed_charset(preserve_case)
     text = ''.join(c for c in text if c in allowed)
 
     # Re-collapse spaces after character removal
@@ -199,7 +250,7 @@ ENGLISH_FUNCTION_WORDS = frozenset({
     'he', 'she', 'his', 'her', 'for', 'with', 'not', 'but', 'had',
     'have', 'are', 'be', 'on', 'at', 'by', 'from', 'this', 'which',
     'an', 'or', 'as', 'were', 'been', 'has', 'their', 'would', 'they',
-    'we', 'if', 'my', 'no', 'so', 'did', 'its',
+    'we', 'if', 'my', 'no', 'so', 'did', 'its', 'i',
 })
 
 ENGLISH_MIN_RATIO = 0.10
@@ -208,11 +259,15 @@ ENGLISH_MIN_RATIO = 0.10
 def is_english(text):
     """Return True if text appears to be English based on function word frequency.
     English prose typically has 35-42% function words. Non-English is under 2%.
-    Threshold is set at 10% to be safe."""
+    Threshold is set at 10% to be safe.
+
+    Test is case-insensitive: lowercases each word before lookup so the
+    filter behaves identically for case-preserved and lowercased text.
+    """
     words = text.split()
     if len(words) < 100:
         return True  # too short to judge, keep it
-    eng_count = sum(1 for w in words if w in ENGLISH_FUNCTION_WORDS)
+    eng_count = sum(1 for w in words if w.lower() in ENGLISH_FUNCTION_WORDS)
     return (eng_count / len(words)) >= ENGLISH_MIN_RATIO
 
 
@@ -227,6 +282,11 @@ def main():
     parser.add_argument('--no_shuffle', action='store_true', help='Do not shuffle paragraphs')
     parser.add_argument('--seed', type=int, default=42, help='Random seed for shuffle (default: 42)')
     parser.add_argument('--dry_run', action='store_true', help='Just report stats, do not write output')
+    parser.add_argument('--preserve_case', action='store_true',
+                        help='Keep original capitalization (default: lowercase everything)')
+    parser.add_argument('--manifest', default=None,
+                        help='Optional path to write a TSV manifest of which books went '
+                             'into the corpus, in post-shuffle order. Useful for auditing.')
     args = parser.parse_args()
 
     # Read keep list
@@ -275,7 +335,7 @@ def main():
                 raw = fh.read()
 
             text = strip_gutenberg_header_footer(raw)
-            text = clean_text(text)
+            text = clean_text(text, preserve_case=args.preserve_case)
 
             if not is_english(text):
                 non_english += 1
@@ -336,6 +396,16 @@ def main():
     final_size = os.path.getsize(args.output)
     print(f"\nDone: {args.output} ({final_size/1e9:.2f} GB)")
     print(f"Format: {len(all_books)} books, separated by {SEPARATOR}")
+
+    # Write manifest if requested
+    if args.manifest:
+        print(f"Writing manifest to {args.manifest}...")
+        with open(args.manifest, 'w') as mf:
+            mf.write("position\tfilename\tchar_count\tparagraph_count\n")
+            for i, (fn, paragraphs) in enumerate(all_books):
+                char_count = sum(len(p) for p in paragraphs)
+                mf.write(f"{i}\t{fn}\t{char_count}\t{len(paragraphs)}\n")
+        print(f"Manifest: {len(all_books)} entries")
 
 
 if __name__ == '__main__':

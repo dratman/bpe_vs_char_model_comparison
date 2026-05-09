@@ -44,29 +44,16 @@ REMOVE_SHELVES = {
     'Zoology',
 }
 
-# Bookshelves to KEEP entirely
-KEEP_SHELVES = {
-    'Adventure', 'Animal',  # some animal books are literary (Jack London etc)
-    'Biographies', 'British', 'Camping',
-    'Canada', 'Children\'s', 'Child\'s', 'Christmas',
-    'Crime', 'Current', 'Detective',
-    'Egypt', 'Erotic', 'Fantasy', 'Folklore',
-    'France', 'Gothic', 'Greece', 'Historical',
-    'Horror', 'Humor', 'India', 'Italy',
-    'Latter',  # review these individually
-    'Mexico', 'Mystery', 'Mythology',
-    'Natural', 'Noteworthy', 'Philosophy',
-    'Precursors', 'Romantic', 'Slavery', 'Suffrage',
-    'Travel', 'Western', 'Witchcraft', 'Women\'s',
-    'Africa', 'Argentina', 'Australia', 'Germany',
-    'South', 'United',  # US history etc
-    'US', 'New',
-    'Anarchism',  # political philosophy, literary
-    'Art',  # mixed, but many are literary criticism
-    'Bibliomania',  # book collecting, literary
-    'Canon',
-    'Classical',  # classical literature
-}
+# NOTE: A KEEP_SHELVES set was previously defined here (Adventure, Detective,
+# Mystery, Children's, etc.) but was never read by main(): the classify_by_shelf
+# function returned 'keep' for matching shelves, but main() only acted on the
+# 'remove' verdict, so KEEP_SHELVES was dead code. The intent ("books on these
+# shelves are literary, lean toward keeping them") was already covered by the
+# default-keep behavior — anything not matched by REMOVE_SHELVES or
+# REMOVE_PATTERNS is kept. The set has been removed to avoid misleading future
+# readers. To force a shelf-based override of filename-remove patterns, restore
+# the set and add an explicit `if shelf_verdict == 'keep': keep` branch in
+# main().
 
 # Filename patterns that indicate REMOVAL (case-insensitive)
 REMOVE_PATTERNS = [
@@ -188,17 +175,18 @@ KEEP_PATTERNS = [
 
 
 def classify_by_shelf(shelf):
-    """Return 'keep', 'remove', or None based on bookshelf."""
+    """Return 'remove' or None based on bookshelf.
+
+    Returns 'remove' if the shelf string starts with (or whose first word
+    equals) any entry in REMOVE_SHELVES. Otherwise returns None — the
+    caller treats None as default-keep.
+    """
     if not shelf:
         return None
-    # Check first word of shelf against our lists
     first_word = shelf.split()[0] if shelf else ''
     for s in REMOVE_SHELVES:
         if shelf.startswith(s) or first_word == s:
             return 'remove'
-    for s in KEEP_SHELVES:
-        if shelf.startswith(s) or first_word == s:
-            return 'keep'
     return None
 
 
