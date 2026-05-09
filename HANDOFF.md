@@ -1,6 +1,6 @@
 # Handoff Document
 
-Last updated: 2026-05-08 by Claude Code Opus (Mac Studio session)
+Last updated: 2026-05-09 by Claude Code Opus (Mac Studio session)
 
 ## Current State
 
@@ -27,6 +27,28 @@ Last updated: 2026-05-08 by Claude Code Opus (Mac Studio session)
   - `char_high_quality_meta.pkl`
 - Final samples in the run log are coherent multi-sentence 19th-century-style
   prose (see tail of `terminal_log_from_2026-04-26_through_2026_05_08.txt`)
+
+### Character Model Training (Mac Studio) — STARTED 2026-05-09
+- **Training in progress** — launched 2026-05-09 00:38 EDT, projected
+  ~24 days (500K iters at 4.18 sec/iter measured on the speedtest)
+- Launch script: `sh/train_char_uppercase_16L_1280.sh` (committed)
+- Log: `terminal_logs/terminal_log_for_char_uppercase_16L_1280_2026_05_09_0038.txt`
+- Corpus: `txt_local/corpus_high_quality_uppercase_2026_05_08.txt` (1.27 GB,
+  3,979 books, 78-char vocab, **case preserved**, document-shuffled, seed=42)
+- Architecture: **320M params** (n_layer=16, n_head=8, n_embd=1280, block_size=4096)
+- Tokenizer: character-level, vocab=78
+- batch_size=4, learning_rate=1.5e-4, max_iters=500,000, **bfloat16 on MPS**
+- Output: `pt/char_uppercase_16L_1280.pt` (best) + `pt/char_uppercase_16L_1280_final.pt`
+- Tokens-per-iter: 16,384 (vs char_high_quality's 8,192). Total at 500K iters:
+  8.2 B chars (~6.4 epochs of the 1.27 B-char corpus, ~26 tokens/param)
+- Speed-tested at 4.18 sec/iter steady-state, MFU ~3.5% on M3 Studio MPS
+- Earlier on 2026-05-09 also speed-tested 12L/8H/1024 (151M, 1.92 sec/iter).
+  Logs: `terminal_log_for_char_4096_speedtest_2026_05_08_2346.txt` and
+  `terminal_log_for_char_4096_16L_1280_speedtest_2026_05_09_0006.txt`.
+- **Things to monitor during the run**: train/val gap (should stay <0.05
+  through epoch 4 ≈ iter 310K), loss trajectory (4.5→2.0 by iter ~5K
+  expected), no NaN, disk space (25 intermediate checkpoints × 3.84 GB ≈
+  96 GB; 256 GB free at launch).
 
 ### BPE Model Training (Mac Studio) — STOPPED
 - **Training stopped** 2026-04-27 at iter ~235,000 (epoch 4.48)
@@ -203,6 +225,52 @@ Last updated: 2026-05-08 by Claude Code Opus (Mac Studio session)
   seed=42. Generation scripts are in `/tmp/` (not committed); the
   inventory file artifacts are committed.
 
+- **Corpus rebuilt with case preserved (2026-05-09, commits `a9ce02e`,
+  `ac81d1e`).** New corpus
+  `txt_local/corpus_high_quality_uppercase_2026_05_08.txt` (1.27 GB,
+  3,979 books, 78-char vocab) is the case-preserved equivalent of
+  `corpus_high_quality_2026_04_26.txt` (1.42 GB, 4,430 books, 52-char
+  vocab, lowercase). Lost ~10% of books because the matcher's
+  conservative policy drops books that landed in PG-boilerplate-only
+  signatures. Files added at repo root:
+  `book_index_to_filename.json`, `corpus_haiku_keep.txt`,
+  `corpus_manifest_2026_05_08.tsv`, `unmatched_books.txt`. The new
+  corpus is gitignored under `txt_local/`.
+- **Build-script fixes (2026-05-09, commit `a9ce02e`).** Patched five
+  scripts in `py/` that participate in the corpus pipeline:
+  - `rebuild_corpus.py`: added `--preserve_case` flag, transliteration
+    map for non-decomposable Latin chars (ß, þ, ð, æ, œ, ø, ł, plus
+    uppercase variants — previously silently dropped, e.g. straße →
+    strae), `i` added to English function-word list, case-insensitive
+    is_english, `--manifest` output for auditability.
+  - `clean_and_combine_corpus.py`: added `--preserve_case`, character
+    set aligned with `rebuild_corpus.py` (previously allowed `/`,
+    creating vocab mismatch).
+  - `filter_corpus.py`: removed dead `KEEP_SHELVES` block.
+  - `scan_corpus_quality.py`: docstring fixed (10-min not 10-sec timeout).
+  - `match_book_samples.py` **NEW**: recovers Haiku-decisions
+    index↔filename mapping by Aho-Corasick fuzzy match of sample
+    excerpts against source files. Strips PG headers/footers and
+    demotes multi-match files. Output: `corpus_haiku_keep.txt`.
+- **Training-pipeline tooling improvements (2026-05-09, commit
+  `be52633`).**
+  - `py/train.py` startup banner now prints every CLI arg plus
+    hardcoded weight_decay/betas/grad_clip values, so any training
+    log is self-describing regardless of launch mechanism.
+  - `py/sample.py` auto-detects case-preserved tokenizers. When
+    detected: skip the default prompt-lowercasing AND skip the
+    post-hoc `capitalize_sentences` pass (which would overwrite the
+    model's correct case). `--no_lowercase` flag still honored as
+    manual override. Header line reports "case-preserved" status.
+- **`book_quality_decisions.json` indexing scheme** (a non-obvious thing
+  to know): the Haiku quality-filter step that produced this file is
+  NOT in the repository. Its keys are integer indices (`'0'`-`'6197'`)
+  into `doc/all_book_samples.txt`. Mapping back to source filenames
+  required `py/match_book_samples.py` (text matching). 96.3% of KEEP
+  verdicts (4,282 of 4,430) had clean 1-to-1 matches; 199 KEEP
+  verdicts were demoted as multi-match collisions and 148 had no
+  matching source file (file deleted or sample defective).
+
 ### IMPORTANT LESSONS FROM THIS SESSION
 - **Batch size 16 with 32K vocab and block=2048 crashes** from OOM.
   Batch=8 runs but memory is tight. Batch=4 is safe.
@@ -284,14 +352,29 @@ Review this list at the start of every session. Mark items DONE when complete.
 - [ ] Consolidate this repo into `small_transformer_research` as a subdirectory.
   See memory file `project_repo_consolidation.md` for the plan.
 
-### Now that char_high_quality training is done (2026-05-07) — unblocked
+### While char_uppercase_16L_1280 training is in progress (started 2026-05-09)
+- [ ] Watch train/val divergence around epoch 4 (~iter 310K). If gap stays
+  small, consider extending max_iters; if it widens, plan to stop.
+- [ ] Decide what to do with intermediate checkpoints during the run
+  (~96 GB; clean periodically or keep all 25 for layer-stability analysis
+  per diary 080).
+
+### Analysis on completed char_high_quality.pt (still relevant; lower priority)
 - [ ] Run per-position prediction analysis (War and Peace passage) on
   `pt/char_high_quality.pt` — compare to the BPE model's 27% and Model B's 77%
 - [ ] Run free generation from the War and Peace prompt — compare to
   earlier models that collapsed into junk
-- [ ] Try the "appalpittidax" copying analysis on the new model
+- [ ] Try the "appalpittidax" copying analysis on `pt/char_high_quality.pt`
+  (and later on the case-preserved model once trained)
 - [ ] Run compare and rollout on the L10 imitator (`pt/imitator_L10_full.pt`,
   still not done since training in 2026-04-27)
+
+### Corpus options if/when we want to scale past ~500M params
+- [ ] Recover the 449 books lost in the matcher via multi-excerpt
+  disambiguation (lifts corpus 10–15%)
+- [ ] Add Wikipedia biographies via `clean_and_combine_corpus.py` (already
+  patched for case-preservation; would roughly double the corpus to ~2.5 GB
+  and unlock 800M-1B param models without data starvation)
 
 ### Experiments to try
 - [ ] Imitator rollout with a stronger base model (download Llama 3B or similar)
