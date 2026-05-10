@@ -23,6 +23,5 @@ rsync -avh --quiet \
     "terminal_logs/"
 
 echo "plot…"
-/Users/RalphDratman/miniforge3/bin/python3 py/plot_current_run.py
-
-echo "open plots/current_run_smoothed.png to view"
+/Users/RalphDratman/miniforge3/bin/python3 py/plot_current_run.py \
+    --log "terminal_logs/${LOG_NAME}"
