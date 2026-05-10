@@ -49,17 +49,18 @@ if not iters:
 iters = np.array(iters)
 losses = np.array(losses)
 
-# Smooth with rolling average (window=50 points)
-window = min(50, len(losses))
+# Smooth with rolling average. Window scales with data so smoothing
+# is visible even very early in training.
+window = max(3, min(50, len(losses) // 5))
 smoothed = np.convolve(losses, np.ones(window) / window, mode='valid')
 smoothed_iters = iters[window - 1:]
 
 fig, ax = plt.subplots(figsize=(14, 7))
 
-ax.plot(iters, losses, linewidth=0.3, alpha=0.3, color='limegreen', label='Train loss (raw)')
-ax.plot(smoothed_iters, smoothed, linewidth=1.5, color='darkgreen', label='Train loss (smoothed)')
+ax.plot(iters, losses, linewidth=0.6, alpha=0.6, color='limegreen', label='Train loss (raw)')
+ax.plot(smoothed_iters, smoothed, linewidth=2.0, color='darkgreen', label='Train loss (smoothed)')
 if val_steps:
-    ax.plot(val_steps, val_loss, linewidth=1.5, color='darkred', linestyle='--', label='Val loss')
+    ax.plot(val_steps, val_loss, linewidth=2.0, color='darkred', linestyle='--', label='Val loss')
 
 ax.set_xlabel('Iteration', fontsize=13)
 ax.set_ylabel('Loss (per BPE token)', fontsize=13)
