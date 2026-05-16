@@ -43,13 +43,21 @@ def find_default_log():
 
 
 def parse_log(path):
-    """Return (iters, losses, val_steps, val_epochs, val_train, val_loss)."""
+    """Return (iters, losses, val_steps, val_epochs, val_train, val_loss, max_iters).
+
+    max_iters is parsed from the training banner. Both the new-style
+    banner ("  max_iters:          500000") and the older curated banner
+    ("Max iterations: 500000") are recognized. Falls back to None if
+    neither is found.
+    """
     iter_re = re.compile(r'^iter\s+(\d+):\s+loss\s+([\d.]+)')
     step_re = re.compile(
         r'Step\s+(\d+)\s*\|\s*Epoch\s+([\d.]+)\s*\|.*train loss\s+([\d.]+)\s*\|.*val loss\s+([\d.]+)'
     )
+    max_iters_re = re.compile(r'(?:max_iters:|Max iterations:)\s*(\d+)')
     iters, losses = [], []
     val_steps, val_epochs, val_train, val_loss = [], [], [], []
+    max_iters = None
     with open(path) as f:
         for line in f:
             m = iter_re.match(line)
@@ -63,7 +71,12 @@ def parse_log(path):
                 val_epochs.append(float(m.group(2)))
                 val_train.append(float(m.group(3)))
                 val_loss.append(float(m.group(4)))
-    return iters, losses, val_steps, val_epochs, val_train, val_loss
+                continue
+            if max_iters is None:
+                m = max_iters_re.search(line)
+                if m:
+                    max_iters = int(m.group(1))
+    return iters, losses, val_steps, val_epochs, val_train, val_loss, max_iters
 
 
 def infer_token_label(log_path):
@@ -78,7 +91,7 @@ def main():
     args = parse_args()
     log_path = args.log or find_default_log()
 
-    iters, losses, val_steps, val_epochs, val_train, val_loss = parse_log(log_path)
+    iters, losses, val_steps, val_epochs, val_train, val_loss, max_iters = parse_log(log_path)
     if not iters:
         raise SystemExit(f'No iter lines found in {log_path}')
 
@@ -108,7 +121,19 @@ def main():
     ax.grid(True, alpha=0.3)
 
     if val_epochs:
-        ax.text(0.02, 0.02, f'Epoch: {val_epochs[-1]:.2f}', transform=ax.transAxes,
+        # Use the most recent iter for the iter count; recompute epoch
+        # consistent with that iter so the two numbers are paired.
+        last_iter = int(iters[-1])
+        if val_steps and val_steps[-1] > 0:
+            epoch_per_iter = val_epochs[-1] / val_steps[-1]
+            last_epoch = last_iter * epoch_per_iter
+        else:
+            last_epoch = val_epochs[-1]
+        if max_iters:
+            label = f'Iter {last_iter}/{max_iters}, Epoch {last_epoch:.2f}'
+        else:
+            label = f'Iter {last_iter}, Epoch {last_epoch:.2f}'
+        ax.text(0.02, 0.02, label, transform=ax.transAxes,
                 fontsize=12, color='darkred', verticalalignment='bottom')
 
     # Refresh timestamp in lower-right corner, so a viewer can tell at a
