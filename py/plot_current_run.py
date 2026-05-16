@@ -130,9 +130,9 @@ def main():
         else:
             last_epoch = val_epochs[-1]
         if max_iters:
-            label = f'Iter {last_iter}/{max_iters}, Epoch {last_epoch:.2f}'
+            label = f'Iteration {last_iter:,} of {max_iters:,} -- Epoch {last_epoch:.2f}'
         else:
-            label = f'Iter {last_iter}, Epoch {last_epoch:.2f}'
+            label = f'Iteration {last_iter:,} -- Epoch {last_epoch:.2f}'
         ax.text(0.02, 0.02, label, transform=ax.transAxes,
                 fontsize=12, color='darkred', verticalalignment='bottom')
 
