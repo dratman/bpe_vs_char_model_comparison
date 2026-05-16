@@ -13,17 +13,23 @@
 # different M3 BPE run is started later, edit LOG_NAME and OUT below
 # or generalize this into a parameterized version.
 
-set -e
-
 M3_HOST="RalphDratman@192.168.1.177"
 M3_REPO="0-Home-Working-on-M3-Pro/bpe_vs_char_model_comparison"
 LOG_NAME="terminal_log_for_bpe_uppercase_16L_1280_b2_2026_05_09_0926.txt"
 OUT="plots/bpe_uppercase_16L_1280_b2_loss.png"
 
+# Try to refresh the cached log from the M3. If the M3 is asleep or
+# the network is unreachable, fall through and plot the existing
+# cached copy — better an out-of-date plot than no plot at all.
 echo "rsync M3 log → Studio…"
-rsync -avh --quiet \
+if rsync -avh --quiet --timeout=10 \
+    -e "ssh -o ConnectTimeout=5 -o BatchMode=yes" \
     "${M3_HOST}:${M3_REPO}/terminal_logs/${LOG_NAME}" \
-    "terminal_logs/"
+    "terminal_logs/" ; then
+    echo "rsync OK"
+else
+    echo "rsync failed (M3 may be asleep); plotting from cached log"
+fi
 
 echo "plot…"
 /Users/RalphDratman/miniforge3/bin/python3 py/plot_current_run.py \
