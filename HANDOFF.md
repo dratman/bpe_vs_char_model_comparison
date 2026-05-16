@@ -1,6 +1,6 @@
 # Handoff Document
 
-Last updated: 2026-05-09 by Claude Code Opus (Mac Studio session)
+Last updated: 2026-05-15 by Claude Code Opus (Mac Studio session)
 
 ## Current State
 
@@ -49,6 +49,41 @@ Last updated: 2026-05-09 by Claude Code Opus (Mac Studio session)
   through epoch 4 ≈ iter 310K), loss trajectory (4.5→2.0 by iter ~5K
   expected), no NaN, disk space (25 intermediate checkpoints × 3.84 GB ≈
   96 GB; 256 GB free at launch).
+- **Progress as of 2026-05-15 21:14** (6d 20h elapsed, ~28 % of the run):
+  iter 140,900 / 500,000 (epoch 2.03). Last 3 evals: iter 136K val 0.8094,
+  iter 138K val 0.8076, iter 140K val 0.8161. Train/val tracking
+  together (gap < 0.03). LR has decayed from 1.50e-4 to 1.27e-4 along the
+  cosine schedule. Speed steady at 4.18 sec/iter. No incidents.
+
+### BPE Model Training (M3 laptop) — STARTED 2026-05-09
+- **Training in progress on the M3 laptop**, paralleling the Studio char
+  run for a cross-tokenization comparison at matched character budget.
+- Launch script: `sh/train_bpe_uppercase_16L_1280_b2.sh` (committed)
+- Log on M3: `terminal_logs/terminal_log_for_bpe_uppercase_16L_1280_b2_2026_05_09_0926.txt`
+  (mirror copy on Studio's `terminal_logs/` is refreshed by
+  `sh/plot_m3_bpe_snapshot.sh`; latest mirror was around the early run)
+- Corpus: same as the Studio char run
+  (`txt_local/corpus_high_quality_uppercase_2026_05_08.txt`), rsynced to
+  the M3's `txt_local/` at setup time. MD5 verified matching.
+- Architecture: ~360M params (n_layer=16, n_head=8, n_embd=1280,
+  block_size=4096, vocab=32,000 BPE)
+- Tokenizer: BPE, vocab=32,000 (HuggingFace `tokenizers`)
+- batch_size=2 (started at batch=4 but restarted at batch=2 the same
+  morning when M3 memory pressure was tight), learning_rate=1.06e-4
+  (sqrt-scaled from batch=4's 1.5e-4), max_iters=220,000,
+  bfloat16 on MPS
+- Output: `pt/bpe_uppercase_16L_1280_b2.pt` on the M3
+- Tokens-per-iter: 8,192 BPE tokens (= ~36,864 chars at ~4.5 chars/token).
+  Total at 220K iters: 8.1 B chars (≈ 6.4 corpus epochs, **matched to
+  the Studio char run on total character budget**)
+- Speed: ~6.6 sec/iter steady-state; projection ~17 days wall time
+- M3 SSH: passwordless from Studio (`ssh RalphDratman@192.168.1.177`)
+  via key auth set up 2026-05-09. The M3 sometimes appears unreachable
+  if its display is asleep and network sleep is engaged — wake it up
+  on its side if so.
+- **Last-known progress** (M3 unreachable at the moment of this update;
+  Studio's mirror of the M3 log shows iter ~7,800 / epoch 0.22 at last
+  rsync). Re-snapshot via `sh/plot_m3_bpe_snapshot.sh` to refresh.
 
 ### BPE Model Training (Mac Studio) — STOPPED
 - **Training stopped** 2026-04-27 at iter ~235,000 (epoch 4.48)
@@ -270,6 +305,52 @@ Last updated: 2026-05-09 by Claude Code Opus (Mac Studio session)
   verdicts (4,282 of 4,430) had clean 1-to-1 matches; 199 KEEP
   verdicts were demoted as multi-match collisions and 148 had no
   matching source file (file deleted or sample defective).
+
+- **`del text` fix in `train.py` (2026-05-09, commit `974cc43`).** `main()`
+  loads the full corpus into `text = f.read()` and uses it only through
+  the data-prep step. Previously the variable stayed in scope for the
+  entire (multi-day) run, holding ~1.27 GB of Python heap that the
+  compressor and swap had to manage. Added `del text` right after the
+  data-prep conditional. Applies to every future run; the two in-flight
+  runs (Studio char and M3 BPE) have their own private copies and
+  cannot benefit unless restarted.
+
+- **SSH key authentication Studio → M3 (2026-05-09).** The Studio's
+  `~/.ssh/id_ed25519.pub` is in the M3's `~/.ssh/authorized_keys`. The
+  M3 is at `192.168.1.177` on the Ethernet LAN. From the Studio, run
+  `ssh RalphDratman@192.168.1.177 "..."` for any read-only inspection
+  command, or `rsync` for moving files. The M3 may appear unreachable
+  if its display is asleep and macOS network sleep has engaged — wake
+  it up locally if so. `dratman@github.com` SSH auth is also configured
+  on the M3 (used to clone the repo there at setup time).
+
+- **Plot snapshot infrastructure (2026-05-09, commits `e331c30`,
+  `1abaf52`, `2858a33`).** Two launcher scripts in `sh/` produce
+  refreshed loss plots:
+  - `sh/plot_m3_bpe_snapshot.sh` — rsyncs the M3 BPE training log to
+    Studio's `terminal_logs/`, then plots. Output:
+    `plots/bpe_uppercase_16L_1280_b2_loss.png`.
+  - `sh/plot_studio_char_snapshot.sh` — plots the Studio char log
+    directly (no rsync). Output:
+    `plots/char_uppercase_16L_1280_loss.png`.
+  Both call `py/plot_current_run.py` with `--log` and `--out`. The
+  plotting script's smoothing window scales with data length so the
+  smoothed curve is visible at any stage of training. Plots are
+  gitignored under `plots/`; PNGs are named to mirror their checkpoint
+  (`pt/X.pt` ↔ `plots/X_loss.png`).
+
+- **training-monitor false-alarm fix (2026-05-15).** `~/bin/training_monitor.py`'s
+  `check_memory()` used to trigger an alert whenever `Pages free` from
+  `vm_stat` fell below 2 GB. On a hot-running Mac Studio with 192 GB
+  unified memory, "Pages free" is almost always near zero because macOS
+  fills every spare page with file cache and other reclaimable uses.
+  Changed the threshold to `available_gb < 4` (where available = free
+  + inactive, the actually-reclaimable memory). This is the same notion
+  Activity Monitor uses for its "Memory Pressure" indicator. The
+  script lives at `~/bin/training_monitor.py` outside the repository
+  (consistent with the storage-monitor convention noted in CLAUDE.md);
+  the fix is on the Studio only. If the M3 ever gets the same monitor,
+  copy the script over.
 
 ### IMPORTANT LESSONS FROM THIS SESSION
 - **Batch size 16 with 32K vocab and block=2048 crashes** from OOM.
