@@ -1,11 +1,17 @@
 #!/bin/zsh
 #
 # sample_bpe_uppercase_16L_1280_b2.sh — generate samples from the M3
-# BPE training checkpoint pt/bpe_uppercase_16L_1280_b2.pt.
+# BPE training checkpoint, but **run on the Studio**. The M3 is short
+# on memory while training; sampling there forces the system into
+# swap. The Studio's 192 GB has plenty of headroom.
 #
-# Run from the M3 (where the checkpoint lives). Output goes to a
-# timestamped log in terminal_logs/ on the M3 AND echoes to the
-# terminal via tee.
+# What this script does:
+#   1. rsyncs the M3's best-val checkpoint and its tokenizer metadata
+#      to the Studio's pt/ directory. If the M3 hasn't saved a new
+#      checkpoint since last run, rsync skips the transfer (default
+#      size+mtime check).
+#   2. Runs py/sample.py against the local copy.
+#   3. Tees output to a timestamped log in terminal_logs/.
 #
 # Any extra CLI args pass through to py/sample.py. Example overrides:
 #   sh/sample_bpe_uppercase_16L_1280_b2.sh --prompt "It was a dark and stormy"
@@ -13,26 +19,38 @@
 #   sh/sample_bpe_uppercase_16L_1280_b2.sh --max_tokens 500
 #
 # sample.py auto-detects case-preserved tokenizers (this one is) and
-# disables the default prompt-lowercasing + post-hoc capitalize_sentences.
+# disables prompt-lowercasing + capitalize_sentences accordingly.
 #
 # Note on units: max_tokens here is in BPE tokens, not characters.
 # 300 BPE tokens corresponds to roughly 1,350 characters of generated
 # text at this corpus's ~4.5 chars-per-token ratio.
 
-MODEL="pt/bpe_uppercase_16L_1280_b2.pt"
+M3_HOST="RalphDratman@192.168.1.177"
+M3_REPO="0-Home-Working-on-M3-Pro/bpe_vs_char_model_comparison"
+RUN="bpe_uppercase_16L_1280_b2"
+
+MODEL="pt/${RUN}.pt"
 LOG_DIR="terminal_logs"
 TIMESTAMP=$(date +"%Y_%m_%d_%H%M")
-LOG_FILE="${LOG_DIR}/sample_bpe_uppercase_16L_1280_b2_${TIMESTAMP}.txt"
+LOG_FILE="${LOG_DIR}/sample_${RUN}_${TIMESTAMP}.txt"
+PYTHON=/Users/RalphDratman/miniforge3/bin/python3
 
-mkdir -p "$LOG_DIR"
+mkdir -p "$LOG_DIR" pt
 
+echo "rsync M3 → Studio (skips files that have not changed)…"
+RSYNC_OPTS=(-avh --partial -e "ssh -o ConnectTimeout=5")
+for FILE in "${RUN}.pt" "${RUN}_meta.pkl" "${RUN}_meta.json"; do
+    rsync "${RSYNC_OPTS[@]}" \
+        "${M3_HOST}:${M3_REPO}/pt/${FILE}" \
+        "pt/" || { echo "rsync of ${FILE} failed; cannot sample"; exit 1; }
+done
+
+echo
 echo "model:  $MODEL"
 echo "output: $LOG_FILE"
-echo ""
+echo
 
-# Use `python` from PATH; on the M3 this resolves to the homebrew Python
-# 3.13 that has torch installed (same one the training is running under).
-python py/sample.py \
+"$PYTHON" py/sample.py \
     --model "$MODEL" \
     --num_samples 5 \
     --max_tokens 300 \
