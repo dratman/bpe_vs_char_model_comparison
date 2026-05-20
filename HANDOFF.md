@@ -1,6 +1,7 @@
 # Handoff Document
 
-Last updated: 2026-05-20 by Claude Code Opus (Mac Studio session)
+Last updated: 2026-05-20 08:18 by Claude Code Opus (Mac Studio session) —
+M3 BPE training stopped early
 
 ## Current State
 
@@ -59,13 +60,15 @@ Last updated: 2026-05-20 by Claude Code Opus (Mac Studio session)
   154K. Register more consistently held across each sample. See
   diary 093.
 
-### BPE Model Training (M3 laptop) — STARTED 2026-05-09
-- **Training in progress on the M3 laptop**, paralleling the Studio char
-  run for a cross-tokenization comparison at matched character budget.
+### BPE Model Training (M3 laptop) — STOPPED 2026-05-20
+- **Training stopped early** 2026-05-20 08:15 EDT at iter 145,100 /
+  220,000 (epoch 4.60). Val loss had plateaued for 13 consecutive
+  evaluations past the iter-132K best (no improvement from iter 133K
+  through 145K). Remaining 75K iters would have been ~5.5 more days of
+  M3 compute past the point where val kept improving.
 - Launch script: `sh/train_bpe_uppercase_16L_1280_b2.sh` (committed)
 - Log on M3: `terminal_logs/terminal_log_for_bpe_uppercase_16L_1280_b2_2026_05_09_0926.txt`
-  (mirror copy on Studio's `terminal_logs/` is refreshed by
-  `sh/plot_m3_bpe_snapshot.sh`; latest mirror was around the early run)
+  (mirror on Studio refreshed by `sh/plot_m3_bpe_snapshot.sh`)
 - Corpus: same as the Studio char run
   (`txt_local/corpus_high_quality_uppercase_2026_05_08.txt`), rsynced to
   the M3's `txt_local/` at setup time. MD5 verified matching.
@@ -76,33 +79,30 @@ Last updated: 2026-05-20 by Claude Code Opus (Mac Studio session)
   morning when M3 memory pressure was tight), learning_rate=1.06e-4
   (sqrt-scaled from batch=4's 1.5e-4), max_iters=220,000,
   bfloat16 on MPS
-- Output: `pt/bpe_uppercase_16L_1280_b2.pt` on the M3
-- Tokens-per-iter: 8,192 BPE tokens (= ~36,864 chars at ~4.5 chars/token).
-  Total at 220K iters: 8.1 B chars (≈ 6.4 corpus epochs, **matched to
-  the Studio char run on total character budget**)
-- Speed: ~6.6 sec/iter steady-state; projection ~17 days wall time
-- M3 SSH: passwordless from Studio (`ssh RalphDratman@192.168.1.177`)
-  via key auth set up 2026-05-09. The M3 sometimes appears unreachable
-  if its display is asleep and network sleep is engaged — wake it up
-  on its side if so.
-- **Progress as of 2026-05-20 07:37** (10d 22h elapsed, ~66 % of the run):
-  iter 144,900 / 220,000 (epoch 4.60). Best val 3.4596 at iter 143,000.
-  **IMPORTANT: the train/val gap has widened.** Iter 143K showed train
-  3.14 vs val 3.46 (gap 0.32). Iter 144K showed val 3.6105 — *worse than
-  the best*. The model may be approaching or past its overfitting
-  point on this corpus. The best checkpoint stops getting overwritten
-  if val keeps rising, so it stays at the iter-143K state, but every
-  iter past that is computation that may not help.
-- **Watch the next several evals** and consider stopping early if val
-  loss keeps rising. Currently the run is configured for 220K iters
-  total; the M3 may continue compute past the point where it helps.
+- Speed: ~6.6 sec/iter steady-state; ran 10d 22h total
+- **Best checkpoint: `pt/bpe_uppercase_16L_1280_b2.pt` on M3, val loss
+  3.3657 at iter 132,000 (epoch 4.19), 2026-05-19 08:48.** Per-character
+  loss ~0.77, slightly ahead of the Studio char run at matched corpus
+  exposure. Tokens-per-iter: 8,192 BPE tokens (= ~36,864 chars at ~4.5
+  chars/token). Reached ~5.4 corpus epochs of character budget when
+  stopped (132K iters × 36,864 chars / 1.27 GB corpus).
+- After iter 132K, 13 evals over iters 133K-145K never beat 3.3657.
+  Mean val over that window: ~3.48; latest (iter 145K) was 3.4433.
+  Train loss steady at 3.20-3.30, so train/val gap widened from ~0.15
+  (early run) to 0.25-0.40 — classic overfitting onset.
+- 28 intermediate checkpoints on M3 (iter 5K, 10K, ..., 145K at every
+  5K, ~112 GB total at 4 GB each). See TODO for cleanup decision.
 - **Sample at iter 95K (2026-05-17):** the model produces fluent
   19th-century-style prose with multi-paragraph plot coherence.
-  Per-character loss ~0.77, slightly ahead of the Studio char run at
-  the same approximate corpus exposure. See diary 093.
+  See diary 093. Final samples at iter 145K in the tail of the
+  training log are similarly coherent.
 - **M3 SSH note** (still relevant): when the M3's display is asleep,
   network sleep engages and SSH from the Studio times out. Wake the
-  M3 locally if you need to inspect or sample from it.
+  M3 locally if you need to inspect or sample from it. Since 2026-05-20
+  the snapshot script (`sh/plot_m3_bpe_snapshot.sh`) resolves the M3
+  by mDNS name (`MacBookProM3Max.local`) so it works whether the M3
+  is on Ethernet (was 192.168.1.177) or wifi (was 192.168.1.185 on
+  2026-05-20).
 
 ### BPE Model Training (Mac Studio) — STOPPED
 - **Training stopped** 2026-04-27 at iter ~235,000 (epoch 4.48)
@@ -447,6 +447,14 @@ Last updated: 2026-05-20 by Claude Code Opus (Mac Studio session)
 - **High cosine similarity does not mean good decoded output.** 94.8%
   cosine similarity in 2048-dim space still produces 80%+ wrong tokens
   when decoded through the frozen model's back half.
+- **macOS background-launched processes inherit SIGINT=SIG_IGN.** The
+  `train.sh` wrapper launches python in the background (`python ... &`)
+  and bash/zsh job-control semantics set SIGINT to ignored for
+  background jobs. So `kill -INT $PYTHON_PID` from outside the wrapper is silently
+  dropped — the only signal that worked when stopping the M3 BPE run
+  on 2026-05-20 was SIGTERM (`kill -TERM`). train.py has no SIGTERM
+  handler, so SIGTERM exits immediately; checkpoint state is safe
+  because the save policy only writes on val improvement.
 
 ### Saved checkpoints from prior runs
 - `old_8_GB_corpus_pt/` — old 8 GB corpus run (iters 10K-160K)
@@ -515,19 +523,23 @@ Review this list at the start of every session. Mark items DONE when complete.
   See memory file `project_repo_consolidation.md` for the plan.
 
 ### While trainings are in progress
-- [ ] **Watch M3 BPE val loss in particular.** At iter 144K the val
-  loss jumped from 3.46 to 3.61 (worse than best). Run
-  `sh/plot_m3_bpe_snapshot.sh` periodically to track. If val keeps
-  rising for ~3 more evals, consider stopping the M3 run early —
-  the best checkpoint (`pt/bpe_uppercase_16L_1280_b2.pt`) is what
-  we'd keep for any downstream work anyway.
+- [x] **DONE 2026-05-20.** M3 BPE run stopped early at iter 145,100.
+  Best (iter 132K, val 3.3657) preserved as
+  `pt/bpe_uppercase_16L_1280_b2.pt`.
 - [ ] Watch Studio char train/val divergence around epoch 4 (~iter 310K).
   Currently at epoch 3.33, gap still tight (~0.015). If the gap stays
   small all the way through, consider extending max_iters; if it widens,
   plan to stop.
-- [ ] Decide what to do with intermediate checkpoints during the run
-  (~96 GB; clean periodically or keep all 25 for layer-stability analysis
-  per diary 080).
+- [ ] Decide what to do with intermediate checkpoints from the Studio
+  char run (~96 GB; clean periodically or keep all 25 for
+  layer-stability analysis per diary 080).
+- [ ] **Decide what to do with M3 BPE intermediate checkpoints**
+  (~112 GB across 28 files, iter 5K-145K at every 5K). The best
+  (iter 132K) is already separately saved as
+  `pt/bpe_uppercase_16L_1280_b2.pt`. Layer-stability analysis would
+  benefit from keeping early checkpoints; routine cleanup would free
+  ~100 GB. Either rsync them to `../valuable_checkpoints/` first or
+  delete in place on the M3.
 
 ### Diary + conversation corpus (planned post-training)
 - [ ] **Request Claude.ai data export** (Settings → Privacy → Request
