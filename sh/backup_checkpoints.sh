@@ -25,7 +25,11 @@
 
 set -u   # error on unset variables, but allow individual rsyncs to fail
 
-BACKUP_DIR=/Volumes/Expansion/bpe_vs_char_backups
+# Existing convention on this drive: project backups live under
+# 0_backups_Mac_Studio_Expansion/<project-name>/pt/. This slot already
+# holds older bpe_16L16H checkpoints; the new best-val checkpoints
+# from this repo land alongside them, no filename collisions.
+BACKUP_DIR=/Volumes/Expansion/0_backups_Mac_Studio_Expansion/bpe_vs_char_model_comparison/pt
 M3_HOST=RalphDratman@192.168.1.177
 M3_REPO=0-Home-Working-on-M3-Pro/bpe_vs_char_model_comparison
 CHAR_RUN=char_uppercase_16L_1280
