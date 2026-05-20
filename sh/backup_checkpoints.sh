@@ -3,11 +3,12 @@
 # backup_checkpoints.sh — Back up the in-progress training checkpoints
 # to the external Expansion drive.
 #
-# *** Run from your own terminal on the Studio, NOT via Claude Code. ***
-#
-# Claude Code's sandbox lacks Full Disk Access and cannot reach
-# /Volumes/Expansion. Your shell does. The .pt files do not care which
-# process moves them.
+# Runs from any terminal on the Studio. Requires that the hosting
+# terminal app (iTerm or Terminal) has Full Disk Access granted in
+# System Settings → Privacy & Security → Full Disk Access — otherwise
+# all writes to /Volumes/Expansion are silently denied by macOS TCC.
+# iTerm was granted FDA on 2026-05-20; any child process (including
+# Claude Code) inherits that access.
 #
 # What this script does:
 #   1. Verify /Volumes/Expansion is mounted.
@@ -30,7 +31,9 @@ set -u   # error on unset variables, but allow individual rsyncs to fail
 # holds older bpe_16L16H checkpoints; the new best-val checkpoints
 # from this repo land alongside them, no filename collisions.
 BACKUP_DIR=/Volumes/Expansion/0_backups_Mac_Studio_Expansion/bpe_vs_char_model_comparison/pt
-M3_HOST=RalphDratman@192.168.1.177
+# Resolve the M3 by mDNS name so this works whether the M3 is on
+# Ethernet (was 192.168.1.177) or wifi (was 192.168.1.185 on 2026-05-20).
+M3_HOST=RalphDratman@MacBookProM3Max.local
 M3_REPO=0-Home-Working-on-M3-Pro/bpe_vs_char_model_comparison
 CHAR_RUN=char_uppercase_16L_1280
 BPE_RUN=bpe_uppercase_16L_1280_b2
