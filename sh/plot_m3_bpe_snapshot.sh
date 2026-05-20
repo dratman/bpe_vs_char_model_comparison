@@ -13,7 +13,11 @@
 # different M3 BPE run is started later, edit LOG_NAME and OUT below
 # or generalize this into a parameterized version.
 
-M3_HOST="RalphDratman@192.168.1.177"
+# Resolve the M3 by its mDNS (Bonjour) name rather than a fixed IP, so
+# this works whether the M3 is on Ethernet (was 192.168.1.177) or wifi
+# (was 192.168.1.185 on 2026-05-20). The mDNS name is advertised on
+# either interface as long as the M3 is awake and on the LAN.
+M3_HOST="RalphDratman@MacBookProM3Max.local"
 M3_REPO="0-Home-Working-on-M3-Pro/bpe_vs_char_model_comparison"
 LOG_NAME="terminal_log_for_bpe_uppercase_16L_1280_b2_2026_05_09_0926.txt"
 OUT="plots/bpe_uppercase_16L_1280_b2_loss.png"
