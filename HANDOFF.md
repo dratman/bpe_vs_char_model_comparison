@@ -1,7 +1,8 @@
 # Handoff Document
 
-Last updated: 2026-05-20 09:00 by Claude Code Opus (Mac Studio session) —
-M3 BPE stopped + intermediate checkpoints cleaned up
+Last updated: 2026-05-20 09:35 by Claude Code Opus (Mac Studio session) —
+M3 BPE stopped + intermediate checkpoints cleaned up + valuable_checkpoints
+BPE files backed up to Expansion
 
 ## Current State
 
@@ -459,10 +460,15 @@ M3 BPE stopped + intermediate checkpoints cleaned up
   because the save policy only writes on val improvement.
 
 ### Saved checkpoints from prior runs
-- `old_8_GB_corpus_pt/` — old 8 GB corpus run (iters 10K-160K)
-- `unshuffled_corpus_pt/` — unshuffled 2.5 GB corpus run (iters 10K-50K)
-- `doc_shuffled_batch4_pt/` — failed batch=4 lr=0.0003 run (iters 10K-20K)
+- `old_8_GB_corpus_pt/` — old 8 GB corpus run (iters 10K-160K). Studio only; NOT backed up to Expansion.
+- `unshuffled_corpus_pt/` — unshuffled 2.5 GB corpus run (iters 10K-50K). Studio only; NOT backed up.
+- `doc_shuffled_batch4_pt/` — failed batch=4 lr=0.0003 run (iters 10K-20K). Studio only; NOT backed up.
 - `../valuable_checkpoints/bpe_16L16H_old_corpus_iter160k_Excellent_from_8GB_corpus.pt`
+- **`../valuable_checkpoints/` BPE files backed up to Expansion 2026-05-20.** The four top-level .pt files
+  (bpe_16L16H_32k_vocab_best_val3.35_iter229000.pt, bpe_16L16H_old_corpus_iter160k_Excellent_from_8GB_corpus.pt,
+  bpe_32k_bf16_iter153k_almost_time_to_stop.pt, bpe_32k_bf16_iter163k_epoch3.1.pt — ~38 GB total) were rsynced
+  to `/Volumes/Expansion/0_backups_Mac_Studio_Expansion/valuable_checkpoints/`. The `B_9GB/` (Model B) and `py/`
+  subdirs were already there from an earlier backup.
 
 ### LaunchAgents running
 - `com.ralph.training-monitor` — checks training, memory, thermal every
