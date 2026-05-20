@@ -1,6 +1,6 @@
 # Handoff Document
 
-Last updated: 2026-05-15 by Claude Code Opus (Mac Studio session)
+Last updated: 2026-05-20 by Claude Code Opus (Mac Studio session)
 
 ## Current State
 
@@ -49,11 +49,15 @@ Last updated: 2026-05-15 by Claude Code Opus (Mac Studio session)
   through epoch 4 ≈ iter 310K), loss trajectory (4.5→2.0 by iter ~5K
   expected), no NaN, disk space (25 intermediate checkpoints × 3.84 GB ≈
   96 GB; 256 GB free at launch).
-- **Progress as of 2026-05-15 21:14** (6d 20h elapsed, ~28 % of the run):
-  iter 140,900 / 500,000 (epoch 2.03). Last 3 evals: iter 136K val 0.8094,
-  iter 138K val 0.8076, iter 140K val 0.8161. Train/val tracking
-  together (gap < 0.03). LR has decayed from 1.50e-4 to 1.27e-4 along the
-  cosine schedule. Speed steady at 4.18 sec/iter. No incidents.
+- **Progress as of 2026-05-20 07:37** (11d 7h elapsed, ~46 % of the run):
+  iter 231,800 / 500,000 (epoch 3.33). Best val 0.7774 at iter 230,000.
+  Train/val gap remains tight (~0.015). LR has decayed from 1.50e-4 to
+  9.14e-5 along the cosine schedule. Speed steady at 4.18 sec/iter.
+  No incidents.
+- **Sample at iter 184,000 (2026-05-19):** model produces credible
+  19th-century literary prose with fewer invented words than at iter
+  154K. Register more consistently held across each sample. See
+  diary 093.
 
 ### BPE Model Training (M3 laptop) — STARTED 2026-05-09
 - **Training in progress on the M3 laptop**, paralleling the Studio char
@@ -81,9 +85,24 @@ Last updated: 2026-05-15 by Claude Code Opus (Mac Studio session)
   via key auth set up 2026-05-09. The M3 sometimes appears unreachable
   if its display is asleep and network sleep is engaged — wake it up
   on its side if so.
-- **Last-known progress** (M3 unreachable at the moment of this update;
-  Studio's mirror of the M3 log shows iter ~7,800 / epoch 0.22 at last
-  rsync). Re-snapshot via `sh/plot_m3_bpe_snapshot.sh` to refresh.
+- **Progress as of 2026-05-20 07:37** (10d 22h elapsed, ~66 % of the run):
+  iter 144,900 / 220,000 (epoch 4.60). Best val 3.4596 at iter 143,000.
+  **IMPORTANT: the train/val gap has widened.** Iter 143K showed train
+  3.14 vs val 3.46 (gap 0.32). Iter 144K showed val 3.6105 — *worse than
+  the best*. The model may be approaching or past its overfitting
+  point on this corpus. The best checkpoint stops getting overwritten
+  if val keeps rising, so it stays at the iter-143K state, but every
+  iter past that is computation that may not help.
+- **Watch the next several evals** and consider stopping early if val
+  loss keeps rising. Currently the run is configured for 220K iters
+  total; the M3 may continue compute past the point where it helps.
+- **Sample at iter 95K (2026-05-17):** the model produces fluent
+  19th-century-style prose with multi-paragraph plot coherence.
+  Per-character loss ~0.77, slightly ahead of the Studio char run at
+  the same approximate corpus exposure. See diary 093.
+- **M3 SSH note** (still relevant): when the M3's display is asleep,
+  network sleep engages and SSH from the Studio times out. Wake the
+  M3 locally if you need to inspect or sample from it.
 
 ### BPE Model Training (Mac Studio) — STOPPED
 - **Training stopped** 2026-04-27 at iter ~235,000 (epoch 4.48)
@@ -352,6 +371,68 @@ Last updated: 2026-05-15 by Claude Code Opus (Mac Studio session)
   the fix is on the Studio only. If the M3 ever gets the same monitor,
   copy the script over.
 
+- **Plot auto-refresh wired up (2026-05-16, commits `042fd2c`, `3b17645`,
+  `a08da01`, `a7cf741`).** The pre-existing `com.ralph.loss-plot-updater`
+  LaunchAgent runs every 15 minutes; its script `~/bin/update_plots.sh`
+  now invokes `sh/plot_m3_bpe_snapshot.sh` and
+  `sh/plot_studio_char_snapshot.sh` plus the historical comparison plot.
+  Plots are written to:
+    plots/char_uppercase_16L_1280_loss.png
+    plots/bpe_uppercase_16L_1280_b2_loss.png
+  Each plot shows a "Refreshed YYYY-MM-DD HH:MM" timestamp (lower-right)
+  and an "Iteration X of Y -- Epoch Z" label (lower-left). The M3 BPE
+  snapshot script tolerates rsync failure (M3 asleep) and falls back to
+  the cached log so the plot is still refreshed.
+
+- **Sample scripts for both runs (2026-05-16/17, commits `de5dd63`,
+  `e6f6a8b`).**
+  - `sh/sample_char_uppercase_16L_1280.sh` — runs on the Studio against
+    the local char checkpoint.
+  - `sh/sample_bpe_uppercase_16L_1280_b2.sh` — **runs on the Studio**
+    too: rsyncs the M3's best-val checkpoint and tokenizer metadata
+    over (skipped if unchanged; mtime preserved), then samples
+    locally. Originally ran on the M3 but M3 memory was tight under
+    training load. Rsync skips the ~4.3 GB transfer when the M3 has
+    not saved a new checkpoint.
+  Both scripts pass `$@` through to `py/sample.py`, so prompt /
+  temperature / num_samples / max_tokens can be overridden per call.
+  Both tee output to a timestamped log under `terminal_logs/`.
+
+- **`py/sample.py` case-preservation detection (2026-05-09, commit
+  `be52633`).** Auto-detects whether the loaded tokenizer is case-
+  preserved (any uppercase letter in itos for char, any in vocab keys
+  for BPE) and disables prompt-lowercasing + capitalize_sentences
+  accordingly. Both current models trigger this path.
+
+- **Diary 092 (2026-05-15, commit `e5c4ac7`).** Two-machine
+  operational workflow, macOS memory accounting (wired/available/swap),
+  the `del text` fix, plot infrastructure.
+
+- **Diary 093 (2026-05-17, commit `55e585f`).** Tokenization fixes the
+  level at which the model improvises. Char-level models improvise
+  *words* because their atoms are letters; BPE models improvise
+  *sentences* because their atoms are subwords/words. The choice of
+  tokenization is the choice of where the model's freedom and
+  imperfection should live. Connects to diaries 014/015/035 (the
+  layer-machinery a char model spends on building word recognition)
+  and 074 (topological framing).
+
+- **Pending: requesting Claude.ai and ChatGPT exports (2026-05-19).**
+  Ralph plans to request data exports from both services so a future
+  fine-tuning or specialized-model experiment has a real conversation
+  corpus to work with. Diary entries alone are 358 KB cleaned — far
+  too small. Once the exports arrive (typically 1–2 days), the next
+  session should:
+    - Inspect each zip's structure
+    - Write JSON-to-text converter into the 78-character vocabulary
+    - Report total size and decide whether to mix into a future
+      fine-tuning pass or skip the idea.
+  Catastrophic-forgetting mitigation discussed: rehearsal (mix
+  Gutenberg with the new data at maybe 4:1) + low learning rate
+  (~10x to 100x below the original) + short fine-tuning run.
+  LoRA-style adapters would be the cleaner approach if we ever want
+  guaranteed no-forgetting, but require code changes.
+
 ### IMPORTANT LESSONS FROM THIS SESSION
 - **Batch size 16 with 32K vocab and block=2048 crashes** from OOM.
   Batch=8 runs but memory is tight. Batch=4 is safe.
@@ -433,12 +514,29 @@ Review this list at the start of every session. Mark items DONE when complete.
 - [ ] Consolidate this repo into `small_transformer_research` as a subdirectory.
   See memory file `project_repo_consolidation.md` for the plan.
 
-### While char_uppercase_16L_1280 training is in progress (started 2026-05-09)
-- [ ] Watch train/val divergence around epoch 4 (~iter 310K). If gap stays
-  small, consider extending max_iters; if it widens, plan to stop.
+### While trainings are in progress
+- [ ] **Watch M3 BPE val loss in particular.** At iter 144K the val
+  loss jumped from 3.46 to 3.61 (worse than best). Run
+  `sh/plot_m3_bpe_snapshot.sh` periodically to track. If val keeps
+  rising for ~3 more evals, consider stopping the M3 run early —
+  the best checkpoint (`pt/bpe_uppercase_16L_1280_b2.pt`) is what
+  we'd keep for any downstream work anyway.
+- [ ] Watch Studio char train/val divergence around epoch 4 (~iter 310K).
+  Currently at epoch 3.33, gap still tight (~0.015). If the gap stays
+  small all the way through, consider extending max_iters; if it widens,
+  plan to stop.
 - [ ] Decide what to do with intermediate checkpoints during the run
   (~96 GB; clean periodically or keep all 25 for layer-stability analysis
   per diary 080).
+
+### Diary + conversation corpus (planned post-training)
+- [ ] **Request Claude.ai data export** (Settings → Privacy → Request
+  data export). Expect email with download link in 1–2 days.
+- [ ] **Request ChatGPT data export** (Settings → Data Controls →
+  Export Data). Same timing.
+- [ ] When exports arrive: inspect JSON structure, write converter to
+  the 78-character vocabulary, report total size, decide whether to
+  do a fine-tuning pass. See HANDOFF "Pending" bullet above.
 
 ### Analysis on completed char_high_quality.pt (still relevant; lower priority)
 - [ ] Run per-position prediction analysis (War and Peace passage) on
