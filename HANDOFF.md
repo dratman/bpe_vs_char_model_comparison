@@ -1,8 +1,8 @@
 # Handoff Document
 
-Last updated: 2026-05-20 09:35 by Claude Code Opus (Mac Studio session) —
+Last updated: 2026-05-20 09:40 by Claude Code Opus (Mac Studio session) —
 M3 BPE stopped + intermediate checkpoints cleaned up + valuable_checkpoints
-BPE files backed up to Expansion
+BPE files backed up to Expansion + Studio char best-val number corrected
 
 ## Current State
 
@@ -51,10 +51,13 @@ BPE files backed up to Expansion
   through epoch 4 ≈ iter 310K), loss trajectory (4.5→2.0 by iter ~5K
   expected), no NaN, disk space (25 intermediate checkpoints × 3.84 GB ≈
   96 GB; 256 GB free at launch).
-- **Progress as of 2026-05-20 07:37** (11d 7h elapsed, ~46 % of the run):
-  iter 231,800 / 500,000 (epoch 3.33). Best val 0.7774 at iter 230,000.
-  Train/val gap remains tight (~0.015). LR has decayed from 1.50e-4 to
-  9.14e-5 along the cosine schedule. Speed steady at 4.18 sec/iter.
+- **Progress as of 2026-05-20 09:40** (11d 9h elapsed, ~46 % of the run):
+  iter 232,000 / 500,000 (epoch 3.34). **Best val 0.7720 at iter 226,000**
+  (full-history scan of the log; latest eval at iter 232K showed val
+  0.7881, not a new best). Train/val gap was 0.007 at the best-val
+  state and has widened to ~0.028 at iter 232K, still well within
+  the <0.05 target through epoch 4. LR has decayed from 1.50e-4 to
+  9.06e-5 along the cosine schedule. Speed steady at 4.18 sec/iter.
   No incidents.
 - **Sample at iter 184,000 (2026-05-19):** model produces credible
   19th-century literary prose with fewer invented words than at iter
