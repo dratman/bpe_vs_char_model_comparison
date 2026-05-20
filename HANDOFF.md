@@ -1,7 +1,7 @@
 # Handoff Document
 
-Last updated: 2026-05-20 08:18 by Claude Code Opus (Mac Studio session) —
-M3 BPE training stopped early
+Last updated: 2026-05-20 09:00 by Claude Code Opus (Mac Studio session) —
+M3 BPE stopped + intermediate checkpoints cleaned up
 
 ## Current State
 
@@ -90,8 +90,10 @@ M3 BPE training stopped early
   Mean val over that window: ~3.48; latest (iter 145K) was 3.4433.
   Train loss steady at 3.20-3.30, so train/val gap widened from ~0.15
   (early run) to 0.25-0.40 — classic overfitting onset.
-- 28 intermediate checkpoints on M3 (iter 5K, 10K, ..., 145K at every
-  5K, ~112 GB total at 4 GB each). See TODO for cleanup decision.
+- Intermediate checkpoints cleaned up 2026-05-20 ~08:58: kept only
+  iter 145000 (last save) on the M3 alongside the best-val file.
+  Deleted 28 files (iter 5K-140K at every 5K), freed ~113 GB of M3
+  storage (M3 went from 213 GB → 326 GB free, 89% → 83% used).
 - **Sample at iter 95K (2026-05-17):** the model produces fluent
   19th-century-style prose with multi-paragraph plot coherence.
   See diary 093. Final samples at iter 145K in the tail of the
@@ -533,13 +535,11 @@ Review this list at the start of every session. Mark items DONE when complete.
 - [ ] Decide what to do with intermediate checkpoints from the Studio
   char run (~96 GB; clean periodically or keep all 25 for
   layer-stability analysis per diary 080).
-- [ ] **Decide what to do with M3 BPE intermediate checkpoints**
-  (~112 GB across 28 files, iter 5K-145K at every 5K). The best
-  (iter 132K) is already separately saved as
-  `pt/bpe_uppercase_16L_1280_b2.pt`. Layer-stability analysis would
-  benefit from keeping early checkpoints; routine cleanup would free
-  ~100 GB. Either rsync them to `../valuable_checkpoints/` first or
-  delete in place on the M3.
+- [x] **DONE 2026-05-20.** M3 BPE intermediate checkpoints cleaned up.
+  Kept best (iter 132K) and last (iter 145K); deleted the other 28
+  iter_*.pt files. Freed ~113 GB. No layer-stability analysis planned
+  on the BPE model; if the need arises later, the best/last pair plus
+  the Studio backup is what remains.
 
 ### Diary + conversation corpus (planned post-training)
 - [ ] **Request Claude.ai data export** (Settings → Privacy → Request
