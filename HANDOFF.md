@@ -1,8 +1,7 @@
 # Handoff Document
 
-Last updated: 2026-05-20 09:40 by Claude Code Opus (Mac Studio session) —
-M3 BPE stopped + intermediate checkpoints cleaned up + valuable_checkpoints
-BPE files backed up to Expansion + Studio char best-val number corrected
+Last updated: 2026-05-21 by Claude Code Opus (Mac Studio session) —
+train.py: tokens cache + rolling-save for resume robustness
 
 ## Current State
 
@@ -438,6 +437,46 @@ BPE files backed up to Expansion + Studio char best-val number corrected
   (~10x to 100x below the original) + short fine-tuning run.
   LoRA-style adapters would be the cleaner approach if we ever want
   guaranteed no-forgetting, but require code changes.
+
+- **`py/train.py` resume infrastructure improved (2026-05-21, commit
+  `b874782`).** Two additions to make resume faster and safer:
+  - **Tokens cache (`<output_base>_tokens.pt`).** Fresh training writes
+    the full tokenized stream alongside the checkpoint; on `--resume`,
+    `train.py` loads tokens from this cache instead of re-running
+    `tokenizer.encode()`. Cache is invalidated when a fresh training
+    starts (overwritten unconditionally) and also if the input corpus
+    mtime is newer than the cache mtime. File sizes for the current
+    runs: BPE ~2.2 GB (vocab 32K, dtype long), char ~10 GB (vocab 78,
+    dtype long). Both are gitignored under `pt/`. Banner prints
+    `token_cache: <path> (loaded|rebuilt)` so each training log
+    self-documents.
+  - **Rolling checkpoint (`<output_base>_rolling.pt`).** After every
+    eval (every `eval_interval` iters = 1000 in both current runs),
+    `train.py` writes the full checkpoint dict to
+    `<output_base>_rolling.pt.tmp` and then `os.rename`s to the final
+    path — atomic on the same filesystem, so the file is never
+    partial after a crash. **This is the canonical `--resume` target
+    after an involuntary break.** Worst-case loss on crash is now
+    `eval_interval` iters (~70 min for the BPE run, ~70 min for the
+    char run) instead of `save_interval` iters (5000, several hours).
+    Banner prints the rolling path. Does not affect the two
+    currently-running trainings (their in-memory copies of train.py
+    predate the change); will take effect on the next fresh launch.
+- **Resume troubleshooting context (2026-05-21).** Ralph reported
+  two past resume incidents where "loss looked quite wrong and took
+  hours to get back" — he doesn't remember the iter numbers or
+  checkpoint files used and can't reconstruct from transcripts (the
+  fault that caused the involuntary stop also disrupted the session
+  logs). Suspect list ranked by plausibility of *hours-of-regression*:
+  (1) resumed from `<base>.pt` (best-val, which can be many iters
+  behind the latest) instead of an `_iter*.pt` or now-`_rolling.pt`;
+  (2) optimizer state corruption / not applied; (3) `iter_num` lost
+  during load so LR schedule restarted from warmup; (4) `--val_split`
+  changed between save and resume. The rolling-save change addresses
+  (1) by making the "latest" target obvious; the others would need
+  individual investigation if symptoms recur. RNG state is not saved
+  and not detectable from the standard training log, so its omission
+  is cosmetic rather than correctness-affecting.
 
 ### IMPORTANT LESSONS FROM THIS SESSION
 - **Batch size 16 with 32K vocab and block=2048 crashes** from OOM.
