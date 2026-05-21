@@ -754,10 +754,31 @@ def main():
     if args.mode != 'continuous':
         print(f"[{get_timestamp()}] Padding token ID: {PADDING_TOKEN}")
 
+    # Token-cache status (used for banner). Only set in continuous mode.
+    used_token_cache = False
+    token_cache_path = None
+
     # Prepare data based on mode
     if args.mode == 'continuous':
-        # Continuous mode: tokenize entire corpus, split into train/val
-        all_tokens = prepare_continuous_data(text, tokenizer, args.block_size, debug=args.debug)
+        # Continuous mode: tokenize entire corpus, split into train/val.
+        # Cache the tokenized stream next to the checkpoint so --resume
+        # skips the BPE encode cost (minutes on a multi-GB corpus). Cache
+        # is invalidated when a fresh training starts (we overwrite it on
+        # the non-resume path) and also if the corpus file is newer than
+        # the cache file. On resume with a valid cache, we never call
+        # prepare_continuous_data, so text is unused but still in memory
+        # briefly; it gets freed by the `del text` later in main().
+        token_cache_path = os.path.splitext(args.output)[0] + '_tokens.pt'
+        if args.resume and os.path.exists(token_cache_path) \
+                and os.path.getmtime(token_cache_path) >= os.path.getmtime(args.input):
+            print(f"[{get_timestamp()}] Loading tokenized corpus from cache: {token_cache_path}")
+            all_tokens = torch.load(token_cache_path, map_location='cpu')
+            print(f"[{get_timestamp()}] Loaded {len(all_tokens):,} tokens from cache")
+            used_token_cache = True
+        else:
+            all_tokens = prepare_continuous_data(text, tokenizer, args.block_size, debug=args.debug)
+            print(f"[{get_timestamp()}] Saving tokenized corpus cache: {token_cache_path}")
+            torch.save(all_tokens, token_cache_path)
 
         # Split into train and validation
         print(f"[{get_timestamp()}] Splitting into train and validation sets...")
@@ -963,6 +984,9 @@ def main():
     print(f"--- Data ---")
     print(f"  input:              {args.input}")
     print(f"  val_split:          {args.val_split}")
+    if args.mode == 'continuous':
+        print(f"  token_cache:        {token_cache_path} "
+              f"({'loaded' if used_token_cache else 'rebuilt'})")
     if args.mode == 'sentence':
         print(f"  min_sentence_tokens:{args.min_sentence_tokens}")
         print(f"  max_sentences:      {args.max_sentences}")
@@ -973,9 +997,15 @@ def main():
     print(f"  save_interval:      {args.save_interval}")
     print(f"  sample_interval:    {args.sample_interval}")
     print(f"  sample_max_tokens:  {args.sample_max_tokens}")
+    # Rolling-save path: overwritten via atomic rename after every eval, so
+    # it's always the most-recent durable state. Use this as --resume target
+    # after an involuntary break.
+    rolling_path = os.path.splitext(args.output)[0] + '_rolling.pt'
+
     print(f"--- Output ---")
     print(f"  output:             {args.output}")
     print(f"  checkpoints_to:     {args.checkpoints_to}")
+    print(f"  rolling_save:       {rolling_path} (written every eval_interval)")
     if args.accept_overrides:
         print(f"  accept_overrides:   {args.accept_overrides}")
     if args.resume:
@@ -1059,6 +1089,28 @@ def main():
                     }
                     torch.save(checkpoint, args.output)
                     print(f"  Saved checkpoint to {args.output} (best val loss: {best_val_loss:.4f})")
+
+            # Save rolling checkpoint via atomic rename. Overwrites the prior
+            # rolling save every eval; this is the canonical --resume target
+            # for crash recovery (loses at most eval_interval iters of work).
+            if iter_num > 0:
+                rolling_checkpoint = {
+                    'model': raw_model.state_dict(),
+                    'optimizer': optimizer.state_dict(),
+                    'model_args': model_args,
+                    'iter_num': iter_num,
+                    'best_val_loss': best_val_loss,
+                    'config': vars(args),
+                    'precision': args.precision,
+                    'tokenizer_type': tokenizer.tokenizer_type,
+                    'padding_token': PADDING_TOKEN,
+                    'mode': args.mode,
+                    'val_loss': losses['val'],
+                }
+                tmp_path = rolling_path + '.tmp'
+                torch.save(rolling_checkpoint, tmp_path)
+                os.rename(tmp_path, rolling_path)
+                print(f"  Saved rolling checkpoint to {rolling_path} (iter {iter_num}, val {losses['val']:.4f})")
 
         # Save checkpoint at regular intervals
         if iter_num > 0 and iter_num % args.save_interval == 0:
