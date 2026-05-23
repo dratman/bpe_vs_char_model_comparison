@@ -1,7 +1,8 @@
 # Handoff Document
 
-Last updated: 2026-05-21 by Claude Code Opus (Mac Studio session) —
-train.py: tokens cache + rolling-save for resume robustness
+Last updated: 2026-05-23 by Claude Code Opus 4.7 (M2 MacBook Pro session
+via SSH to Studio) — Studio char progress update at iter 298,200;
+M2 → Studio SSH key auth set up
 
 ## Current State
 
@@ -58,6 +59,20 @@ train.py: tokens cache + rolling-save for resume robustness
   the <0.05 target through epoch 4. LR has decayed from 1.50e-4 to
   9.06e-5 along the cosine schedule. Speed steady at 4.18 sec/iter.
   No incidents.
+- **Progress as of 2026-05-23 13:13** (14d 12h 33m elapsed, ~59.6 % of
+  the run): iter 298,200 / 500,000 (epoch 4.29). **Best val 0.7533 at
+  iter 288,000** (set 2026-05-23 01:19, ~12 h before this update). Five
+  new best-val checkpoints between iter 232K and 288K: 0.7689 (234K),
+  0.7578 (244K), 0.7558 (270K), 0.7556 (280K), 0.7533 (288K). Train/val
+  gap at the latest eval (iter 298K) was 0.058 — a single-eval reading
+  above the <0.05 watch-threshold, but **mean gap over iters 260K-298K
+  is ~0.031**, still under threshold. Four individual evals in this
+  window crossed 0.05 (272K, 276K, 286K, 298K); eval-to-eval variance
+  is large (20-batch evals), so the mean trend matters more than any
+  single reading. Speed steady at 4.15 sec/iter. ETA ~2026-06-02
+  (~10 more days). No incidents. **Decision: keep running.** If no
+  new best-val by iter ~320K AND mean gap stays >0.04, that is the
+  signal to consider stopping.
 - **Sample at iter 184,000 (2026-05-19):** model produces credible
   19th-century literary prose with fewer invented words than at iter
   154K. Register more consistently held across each sample. See
@@ -477,6 +492,21 @@ train.py: tokens cache + rolling-save for resume robustness
   individual investigation if symptoms recur. RNG state is not saved
   and not detectable from the standard training log, so its omission
   is cosmetic rather than correctness-affecting.
+
+- **M2 → Studio SSH key auth set up (2026-05-23).** The M2 MacBook Pro's
+  `~/.ssh/id_ed25519.pub` is now in the Studio's `~/.ssh/authorized_keys`.
+  Studio is reachable as `mac-studio.local` (resolves to 192.168.1.233
+  on Ethernet LAN). Lets a Claude session running on the M2 query Studio
+  state directly: `ssh RalphDratman@mac-studio.local "..."`. The
+  Studio's project lives at
+  `/Users/RalphDratman/0_Home_Folder_Working_Mac_Studio/bpe_vs_char_model_comparison/`.
+  Note: `ssh-copy-id` from the M2 needed the flags
+  `-o PreferredAuthentications=password -o PubkeyAuthentication=no`
+  because the M2 has three keys (id_ed25519, id_rsa, id_rsa-2) and SSH
+  was burning through its auth attempts on those before reaching the
+  password prompt. Also, the interactive password prompt did not work
+  through Claude Code's `!`-prefix shell; running `ssh-copy-id` from
+  a regular Terminal app succeeded.
 
 ### IMPORTANT LESSONS FROM THIS SESSION
 - **Batch size 16 with 32K vocab and block=2048 crashes** from OOM.
