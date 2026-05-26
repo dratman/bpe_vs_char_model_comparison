@@ -27,3 +27,13 @@ of cross-machine action he wants to avoid.
 - Read-only inspection over SSH (`tail` a log, `ls -lh` checkpoints,
   `pgrep` a process) is fine — that's not a git operation and not
   what this rule is about.
+
+**Exception — one-time bootstrap operations:** Setting up a new
+cross-machine sync mechanism (e.g., the dotfiles-style `claude_memory/`
+symlink installed 2026-05-26) sometimes inherently requires a single
+cross-SSH `git pull` followed by filesystem changes on the sibling
+machine. That kind of one-time bootstrap is allowed IF Ralph
+explicitly approves the specific operation first. The conversational
+pattern is: flag the conflict, propose the cross-SSH run as an
+override, get explicit "yes" before proceeding. After bootstrap is
+done, normal one-git-per-machine resumes.
