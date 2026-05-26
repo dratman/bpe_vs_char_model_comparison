@@ -1,0 +1,17 @@
+- [Ralph's background](user_ralph.md) — retired engineer, Wittgenstein, empirical approach to LLM internals
+- [Session practices](feedback_session_practices.md) — always run `date` for timestamps, no trailing summaries
+- [Language preferences](feedback_language_preferences.md) — avoid uneducated vernacular like "where it's at"
+- [Avoid uncommon abbreviations](feedback_avoid_abbreviations.md) — common ones (config, param, repo) fine; spell out uncommon/ambiguous ones (arch → architecture)
+- [Jargon is audience-relative](feedback_jargon_is_audience_relative.md) — gloss technical terms (git, PyTorch, networking) instead of presuming familiarity
+- [Check tools first](feedback_check_tools_before_saying_impossible.md) — never declare a limitation without checking available tools for workarounds
+- [One git per machine](feedback_one_git_per_machine.md) — run git commit/push/pull on the local machine only; don't chain SSH git ops across M3/M2/Studio in one session
+- [pgrep -af self-match](feedback_pgrep_self_match.md) — `pgrep -af <pat>` also matches the calling shell, producing phantom PIDs; use `pgrep -P <ppid>` for real children
+- [BPE training status](project_bpe_training.md) — 16L16H BPE model training since 2026-04-05, stop early on quality
+- [Corpus cleanup plan](project_corpus_cleanup.md) — filter non-literary content from Gutenberg corpus for future training
+- [French corpus plan](project_french_corpus.md) — add French lit from Gutenberg for bilingual training in future corpus
+- [Future training ideas](project_future_training_ideas.md) — corpus mutations: stop-words-only, bilingual, gated-FFN
+- [Imitator experiment](project_imitator_experiment.md) — mid-layer vector prediction: high cosine sim but poor token match, next steps open
+- [Repo consolidation](project_repo_consolidation.md) — plan to merge bpe_vs_char into small_transformer_research, do when training pauses
+- [Backup strategy](project_backup_strategy.md) — big .pt files go to /Volumes/Expansion under 0_backups_Mac_Studio_Expansion/; ordinary files go to git
+- [Model B checkpoint](reference_model_b_checkpoint.md) — character-level reference model in ../valuable_checkpoints/B_9GB/
+- [Gutenberg source files](reference_gutenberg_source_files.md) — individual text files and metadata locations for corpus rebuilding
