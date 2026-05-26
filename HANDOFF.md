@@ -1,8 +1,9 @@
 # Handoff Document
 
-Last updated: 2026-05-23 by Claude Code Opus 4.7 (M2 MacBook Pro session
-via SSH to Studio) — Studio char progress update at iter 298,200;
-M2 → Studio SSH key auth set up
+Last updated: 2026-05-26 by Claude Code Opus 4.7 (M3 MacBook Pro session
+via SSH to Studio) — Studio char progress update at iter 357,500
+(epoch 5.14, best val 0.7284 at iter 342K); M3 → Studio SSH key auth
+confirmed working
 
 ## Current State
 
@@ -73,6 +74,23 @@ M2 → Studio SSH key auth set up
   (~10 more days). No incidents. **Decision: keep running.** If no
   new best-val by iter ~320K AND mean gap stays >0.04, that is the
   signal to consider stopping.
+- **Progress as of 2026-05-26 10:32** (17d 9h 52m elapsed, ~71.5 % of
+  the run): iter 357,500 / 500,000 (epoch 5.14). **Best val 0.7284 at
+  iter 342,000** (set 2026-05-25 16:27, ~18 h before this update).
+  Three new best-val checkpoints since the previous update: 0.7467
+  (306K), 0.7342 (320K), 0.7284 (342K) — so the iter-320K
+  stopping-criterion did NOT fire; training continued finding new
+  bests. **Now 14 evals (iters 344K-356K) past the 342K best with
+  no improvement** (val range 0.7426-0.7677). This is right around
+  the BPE run's stopping pattern (13 non-improving evals), but the
+  earlier inter-best gaps were 10-20K iters, so another best is
+  plausible. Train/val gap mean over iters 330K-356K is ~0.045 —
+  under the 0.05 threshold but borderline. Last six evals' gaps:
+  0.057, 0.043, 0.047, 0.039, 0.037, 0.064. Speed steady at 4.16
+  sec/iter, MFU ~3.5 %. ETA ~2026-06-02 (~7 more days). Process
+  alive (PID 36141 on Studio). **Decision: keep running.** Reassess
+  if (a) no new best by iter ~380K, or (b) mean gap pushes
+  consistently above 0.05.
 - **Sample at iter 184,000 (2026-05-19):** model produces credible
   19th-century literary prose with fewer invented words than at iter
   154K. Register more consistently held across each sample. See
@@ -606,10 +624,11 @@ Review this list at the start of every session. Mark items DONE when complete.
 - [x] **DONE 2026-05-20.** M3 BPE run stopped early at iter 145,100.
   Best (iter 132K, val 3.3657) preserved as
   `pt/bpe_uppercase_16L_1280_b2.pt`.
-- [ ] Watch Studio char train/val divergence around epoch 4 (~iter 310K).
-  Currently at epoch 3.33, gap still tight (~0.015). If the gap stays
-  small all the way through, consider extending max_iters; if it widens,
-  plan to stop.
+- [ ] Watch Studio char train/val divergence. Currently at iter 357K
+  (epoch 5.14); mean gap over last 14 evals (330K-356K) is ~0.045,
+  borderline under the 0.05 watch threshold. Best val 0.7284 at
+  iter 342K, 14 evals plateau-ed since. Reassess at ~iter 380K:
+  if no new best AND mean gap consistently >0.05, plan to stop.
 - [ ] Decide what to do with intermediate checkpoints from the Studio
   char run (~96 GB; clean periodically or keep all 25 for
   layer-stability analysis per diary 080).
