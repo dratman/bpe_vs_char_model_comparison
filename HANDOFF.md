@@ -4,7 +4,9 @@ Last updated: 2026-05-26 by Claude Code Opus 4.7 (M3 MacBook Pro session
 via SSH to Studio) — Studio char progress update at iter 357,500
 (epoch 5.14, best val 0.7284 at iter 342K); M3 → Studio SSH key auth
 confirmed working; `claude_memory/` dotfiles-style sync installed
-on both M3 and Studio
+on both M3 and Studio; M3 BPE training **resumed** from iter 145000 to
+complete the originally-planned 220K cosine schedule (overtraining
+experiment)
 
 ## Current State
 
@@ -142,6 +144,49 @@ on both M3 and Studio
   by mDNS name (`MacBookProM3Max.local`) so it works whether the M3
   is on Ethernet (was 192.168.1.177) or wifi (was 192.168.1.185 on
   2026-05-20).
+
+### BPE Model Resumed Training (M3 laptop) — STARTED 2026-05-26
+- **Resume launched** 2026-05-26 11:59:12 EDT to complete the originally-
+  planned 220,000 iterations. The earlier run (above) stopped at iter
+  145,100 on val-loss plateau; this resume continues from
+  `pt/bpe_uppercase_16L_1280_b2_iter145000.pt` to test whether the
+  overtraining hypothesis (samples grow more memorized as training
+  proceeds past the val-loss minimum) holds quantitatively.
+- Launch script: `sh/train_bpe_uppercase_16L_1280_b2_resumed.sh`
+  (commit `d56bf22`). Identical hyperparameters to the original launch
+  (batch_size=2, lr=1.06e-4 peak, warmup=500, block=4096, eval_interval
+  =1000, save_interval=5000) — only `--output` and `--resume` differ,
+  so original-run artifacts are preserved untouched.
+- Log: `terminal_logs/terminal_log_for_bpe_uppercase_16L_1280_b2_resumed_2026_05_26_1159.txt`
+- Output base: `pt/bpe_uppercase_16L_1280_b2_resumed.pt` (best val of
+  resumed run). Sibling files: `_resumed_rolling.pt`, `_resumed_tokens.pt`,
+  `_resumed_iter<N>.pt` (every 5K iters), `_resumed_final.pt`.
+- **First eval at iter 146000** (2026-05-26 14:03 EDT, 1h 56m after
+  launch): train loss 3.1089, val loss 3.5406, LR 3.49e-5, epoch 4.64.
+  All values within the predicted band; LR matches the cosine
+  continuation within rounding. Resume verified faithful — same model
+  weights, same hyperparameters, same LR schedule, drifting only
+  through the stochastic RNG path because RNG state isn't preserved
+  in the checkpoint.
+- **Per-iter speed:** ~6.5-7 sec/iter, slightly slower than the 6.6
+  sec/iter projection. MFU drifted from 1.47% at startup down to 1.19%
+  by iter 146600 — possibly thermal throttling as the M3 warms up.
+  ETA at this speed: ~2026-06-01 evening.
+- **One artifact in the log:** at the iter-145000 resume-eval, the
+  log claims `best val loss: 3.6013` — but this is **not** a real
+  improvement over the original run's true best (3.3657 at iter 132K).
+  It's because `train.py` treats the first resume-eval as the resumed
+  run's initial best. Any val below 3.6013 in this resumed run (including
+  the original's plateau range of ~3.44) will be saved as a "new best".
+  When comparing best-val numbers across the original-vs-resumed
+  records, compare against the original's true 3.3657, not against this
+  artifact.
+- **Comparison plan when done:** sample from each of {132K best-val,
+  145K stopped, 150K-220K resumed-intermediates} on a fixed prompt set
+  and probe each sample for verbatim-memorization fraction (see also
+  the proposed `py/memorization_probe.py` sketch). If memorization
+  fraction grows monotonically past iter 132K, the overtraining
+  hypothesis is quantitatively confirmed.
 
 ### BPE Model Training (Mac Studio) — STOPPED
 - **Training stopped** 2026-04-27 at iter ~235,000 (epoch 4.48)
