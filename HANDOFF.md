@@ -3,7 +3,8 @@
 Last updated: 2026-05-26 by Claude Code Opus 4.7 (M3 MacBook Pro session
 via SSH to Studio) — Studio char progress update at iter 357,500
 (epoch 5.14, best val 0.7284 at iter 342K); M3 → Studio SSH key auth
-confirmed working
+confirmed working; `claude_memory/` dotfiles-style sync installed
+on both M3 and Studio
 
 ## Current State
 
@@ -525,6 +526,42 @@ confirmed working
   password prompt. Also, the interactive password prompt did not work
   through Claude Code's `!`-prefix shell; running `ssh-copy-id` from
   a regular Terminal app succeeded.
+
+- **M3 → Studio SSH key auth confirmed (2026-05-26).** Passwordless SSH
+  from the M3 to the Studio (`ssh RalphDratman@mac-studio.local`)
+  already worked at the start of this session, even though only the
+  reverse direction (Studio → M3) and (M2 → Studio) had been documented
+  before. Set up at some prior unknown date; useful for any M3-side
+  session that needs to inspect Studio state read-only or run a
+  cross-machine bootstrap (see next bullet).
+
+- **`claude_memory/` dotfiles-style sync installed (2026-05-26, commits
+  `4f25465`, `9f8bafe`).** Claude Code's per-project memory dir used to
+  live at `~/.claude/projects/<slug>/memory/`, separately on each
+  machine (different slug per machine because the project path differs:
+  `0-Home-Working-on-M3-Pro/` on M3 vs `0_Home_Folder_Working_Mac_Studio/`
+  on Studio). Studio had accumulated 16 memory files since April; the
+  M3 had only this session's 2 new feedback files. Memories were not
+  shared across machines.
+  - Reorganized: 17 memory files (Studio's 15 + this session's 2)
+    plus a re-indexed `MEMORY.md` moved into the project repo at
+    `claude_memory/`. Total: 18 files.
+  - On both machines, `~/.claude/projects/<slug>/memory/` is now a
+    symlink to the repo's `claude_memory/`. Same files serve both
+    machines through the existing git workflow.
+  - Going-forward workflow: when memory accumulates on one machine,
+    commit + push from there; pull on the other machine when
+    convenient. Same as the rest of the project — no new sync tool.
+  - One-time bootstrap of the Studio side required a cross-SSH
+    `git pull` from this M3 session, which is the kind of cross-
+    machine git operation the `feedback_one_git_per_machine.md` rule
+    normally forbids. Exemption clause added to that memory file:
+    one-time bootstrap operations are allowed with explicit prior
+    approval from Ralph; normal one-git-per-machine resumes after.
+  - The memory dirs Claude Code creates for other projects on each
+    machine (e.g. `study-corpus-and-training-2c-char` on M3,
+    `study-corpus-and-training-2c-bpe` on Studio) are unaffected.
+    Only this project's memory dir was migrated.
 
 ### IMPORTANT LESSONS FROM THIS SESSION
 - **Batch size 16 with 32K vocab and block=2048 crashes** from OOM.
