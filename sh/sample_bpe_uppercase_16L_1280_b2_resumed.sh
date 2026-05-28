@@ -28,6 +28,8 @@
 M3_HOST="RalphDratman@MacBookProM3Max.local"
 M3_REPO="0-Home-Working-on-M3-Pro/bpe_vs_char_model_comparison"
 RUN="bpe_uppercase_16L_1280_b2_resumed"
+META_BASE="bpe_uppercase_16L_1280_b2"   # tokenizer was not re-saved on resume;
+                                         # meta files keep the pre-resume name
 
 MODEL="pt/${RUN}.pt"
 LOG_DIR="terminal_logs"
@@ -39,10 +41,18 @@ mkdir -p "$LOG_DIR" pt
 
 echo "rsync M3 → Studio (skips files that have not changed)…"
 RSYNC_OPTS=(-avh --partial -e "ssh -o ConnectTimeout=5")
-for FILE in "${RUN}.pt" "${RUN}_meta.pkl" "${RUN}_meta.json"; do
+
+# Model checkpoint: same name on both sides.
+rsync "${RSYNC_OPTS[@]}" \
+    "${M3_HOST}:${M3_REPO}/pt/${RUN}.pt" \
+    "pt/${RUN}.pt" || { echo "rsync of ${RUN}.pt failed; cannot sample"; exit 1; }
+
+# Tokenizer metadata: source is ${META_BASE}_meta.*, but sample.py derives the
+# meta path from the model path, so we rename in transit to ${RUN}_meta.*.
+for EXT in pkl json; do
     rsync "${RSYNC_OPTS[@]}" \
-        "${M3_HOST}:${M3_REPO}/pt/${FILE}" \
-        "pt/" || { echo "rsync of ${FILE} failed; cannot sample"; exit 1; }
+        "${M3_HOST}:${M3_REPO}/pt/${META_BASE}_meta.${EXT}" \
+        "pt/${RUN}_meta.${EXT}" || { echo "rsync of ${META_BASE}_meta.${EXT} failed; cannot sample"; exit 1; }
 done
 
 echo
