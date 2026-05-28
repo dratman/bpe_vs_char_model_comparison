@@ -99,6 +99,21 @@ cosine schedule (overtraining experiment).
   alive (PID 36141 on Studio). **Decision: keep running.** Reassess
   if (a) no new best by iter ~380K, or (b) mean gap pushes
   consistently above 0.05.
+- **Progress as of 2026-05-27 20:44** (18d 20h elapsed, ~77.4 % of
+  the run): iter 386,800 / 500,000 (epoch 5.56). **Still no new best
+  since 0.7284 at iter 342K** — now 22 evals plateau-ed (~2d 3h).
+  Recent val floor sits ~1-2 % above 0.7284 (best non-improving evals:
+  0.7382 at 368K, 0.7394 at 378K, 0.7426 at 354K). Mean train/val gap
+  over the 22-eval plateau is 0.0512; last-10-eval mean 0.0537;
+  last-5-eval mean 0.0496. Slow upward drift in the 10-eval mean
+  (0.0501 → 0.0511 → 0.0585 across the plateau). **Reassessment
+  decision: keep running.** Reasoning: mean val loss is still
+  trending down across the plateau (0.7568 → 0.7468 over the most
+  recent 13 evals vs the immediately-post-best 9 evals), so this
+  reads as noise-floor stagnation with a slow gap drift rather than
+  classic overfitting onset. Next reassessment trigger: gap mean
+  cleanly exceeds 0.06, OR val mean starts trending up, OR no new
+  best by ~iter 430K.
 - **Sample at iter 184,000 (2026-05-19):** model produces credible
   19th-century literary prose with fewer invented words than at iter
   154K. Register more consistently held across each sample. See
@@ -744,11 +759,13 @@ Review this list at the start of every session. Mark items DONE when complete.
 - [x] **DONE 2026-05-20.** M3 BPE run stopped early at iter 145,100.
   Best (iter 132K, val 3.3657) preserved as
   `pt/bpe_uppercase_16L_1280_b2.pt`.
-- [ ] Watch Studio char train/val divergence. Currently at iter 357K
-  (epoch 5.14); mean gap over last 14 evals (330K-356K) is ~0.045,
-  borderline under the 0.05 watch threshold. Best val 0.7284 at
-  iter 342K, 14 evals plateau-ed since. Reassess at ~iter 380K:
-  if no new best AND mean gap consistently >0.05, plan to stop.
+- [ ] Watch Studio char train/val divergence. **Reassessed 2026-05-27
+  at iter 386,800**: criterion borderline-fired (no new best since
+  iter 342K val 0.7284, 22 evals plateau-ed; mean gap 0.0512 over the
+  plateau vs 0.05 threshold). Decision: keep running — mean val still
+  drifting down (noise-floor stagnation, not overfitting). Next
+  reassessment trigger: gap mean >0.06, OR val mean trending up, OR
+  no new best by ~iter 430K. See progress bullet above for details.
 - [ ] Decide what to do with intermediate checkpoints from the Studio
   char run (~96 GB; clean periodically or keep all 25 for
   layer-stability analysis per diary 080).
