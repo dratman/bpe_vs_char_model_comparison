@@ -1,12 +1,17 @@
 # Handoff Document
 
-Last updated: 2026-05-26 by Claude Code Opus 4.7 (M3 MacBook Pro session
-via SSH to Studio) — Studio char progress update at iter 357,500
-(epoch 5.14, best val 0.7284 at iter 342K); M3 → Studio SSH key auth
-confirmed working; `claude_memory/` dotfiles-style sync installed
-on both M3 and Studio; M3 BPE training **resumed** from iter 145000 to
-complete the originally-planned 220K cosine schedule (overtraining
-experiment)
+Last updated: 2026-05-27 by Claude Code Opus 4.7 (M3 MacBook Pro
+session) — sample-on-Studio workflow for the resumed BPE run
+(`sh/sample_bpe_uppercase_16L_1280_b2_resumed.sh`) committed,
+debugged, and confirmed working. Both BPE sample scripts now use
+Bonjour hostname (`MacBookProM3Max.local`) instead of a hardcoded
+M3 IP. First Studio sample of the resumed run completed at iter
+157,000 (val loss 3.3556). Prior 2026-05-26 update: Studio char
+progress at iter 357,500 (epoch 5.14, best val 0.7284 at iter 342K);
+M3 → Studio SSH key auth confirmed working; `claude_memory/`
+dotfiles-style sync installed on both M3 and Studio; M3 BPE training
+**resumed** from iter 145000 to complete the originally-planned 220K
+cosine schedule (overtraining experiment).
 
 ## Current State
 
@@ -187,6 +192,39 @@ experiment)
   the proposed `py/memorization_probe.py` sketch). If memorization
   fraction grows monotonically past iter 132K, the overtraining
   hypothesis is quantitatively confirmed.
+- **Sample-on-Studio workflow for the resumed run is live (2026-05-27,
+  commits `19508a0`, `8ab2d8c`, `244b77b`, `ecd4d5b`).** New script
+  `sh/sample_bpe_uppercase_16L_1280_b2_resumed.sh`, modeled on the
+  earlier `sh/sample_bpe_uppercase_16L_1280_b2.sh`. Two non-obvious
+  quirks worth knowing for any future variant:
+  - **Bonjour hostname, not hardcoded IP.** Both BPE sample scripts now
+    use `RalphDratman@MacBookProM3Max.local` for the rsync source. The
+    original `192.168.1.177` IP was stale — on 2026-05-27 the M3 was at
+    `192.168.1.185` (DHCP reassignment, likely because the M3 was on
+    wifi rather than Ethernet — same situation noted in
+    `sh/backup_checkpoints.sh` and `sh/plot_m3_bpe_snapshot.sh`
+    comments). The `.local` name resolves correctly across interface
+    and DHCP-lease changes.
+  - **Meta files keep the pre-resume name.** When training resumed, the
+    tokenizer wasn't re-saved, so the meta files on the M3 are still
+    `pt/bpe_uppercase_16L_1280_b2_meta.{pkl,json}` (no `_resumed_`).
+    But `py/sample.py` derives the meta path from the model path, so
+    on the Studio it expects `pt/bpe_uppercase_16L_1280_b2_resumed_meta.*`.
+    The script's rsync invocation pulls from the base name and writes
+    to the resumed name in a single step (explicit destination filename
+    rather than a directory destination). If you ever create a `_v3`
+    or further-resumed run from the same tokenizer, do the same trick.
+- **First successful sample from the resumed run (2026-05-27 20:39):**
+  iter 157,000, val loss 3.3556 (BPE per-token, ≈0.75 per-character
+  at this corpus's ~4.5 chars/token — consistent with diary 093's
+  0.77 reading at iter 95K). Five samples generated; four were
+  coherent multi-paragraph 19th-century prose; one (sample 4) degenerated
+  into a `"IIIll."` repetition loop after a short `D.C. D.C. D.C.`
+  header preamble — the kind of low-content high-probability cluster
+  `top_k=40` + `temperature=0.8` occasionally falls into. Lower `top_k`
+  (e.g. 20) or adding `--top_p 0.9` would suppress it if it recurs.
+  Log: `terminal_logs/sample_bpe_uppercase_16L_1280_b2_resumed_2026_05_27_2039.txt`
+  on the Studio.
 
 ### BPE Model Training (Mac Studio) — STOPPED
 - **Training stopped** 2026-04-27 at iter ~235,000 (epoch 4.48)
