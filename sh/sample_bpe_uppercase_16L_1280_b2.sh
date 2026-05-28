@@ -25,7 +25,7 @@
 # 300 BPE tokens corresponds to roughly 1,350 characters of generated
 # text at this corpus's ~4.5 chars-per-token ratio.
 
-M3_HOST="RalphDratman@192.168.1.177"
+M3_HOST="RalphDratman@MacBookProM3Max.local"
 M3_REPO="0-Home-Working-on-M3-Pro/bpe_vs_char_model_comparison"
 RUN="bpe_uppercase_16L_1280_b2"
 
