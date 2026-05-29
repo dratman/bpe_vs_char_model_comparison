@@ -1,17 +1,19 @@
 # Handoff Document
 
-Last updated: 2026-05-27 by Claude Code Opus 4.7 (M3 MacBook Pro
-session) — sample-on-Studio workflow for the resumed BPE run
+Last updated: 2026-05-29 by Claude Code Opus 4.7 (M3 MacBook Pro
+session) — **both trainings set new best-vals since the 2026-05-27
+reassessment.** Studio char: new best 0.7186 at iter 390K (vs prior
+0.7284 at iter 342K, 1.3% improvement). M3 BPE resumed: new best
+3.2652 at iter 168K, which beats the **original-run** best of 3.3657
+at iter 132K by 3.0% — the original-run "plateau" 132K-145K was
+a local one, not the true val minimum, complicating the overtraining
+framing of the resume experiment. Prior 2026-05-27 update:
+sample-on-Studio workflow for the resumed BPE run
 (`sh/sample_bpe_uppercase_16L_1280_b2_resumed.sh`) committed,
 debugged, and confirmed working. Both BPE sample scripts now use
 Bonjour hostname (`MacBookProM3Max.local`) instead of a hardcoded
 M3 IP. First Studio sample of the resumed run completed at iter
-157,000 (val loss 3.3556). Prior 2026-05-26 update: Studio char
-progress at iter 357,500 (epoch 5.14, best val 0.7284 at iter 342K);
-M3 → Studio SSH key auth confirmed working; `claude_memory/`
-dotfiles-style sync installed on both M3 and Studio; M3 BPE training
-**resumed** from iter 145000 to complete the originally-planned 220K
-cosine schedule (overtraining experiment).
+157,000 (val loss 3.3556).
 
 ## Current State
 
@@ -114,6 +116,18 @@ cosine schedule (overtraining experiment).
   classic overfitting onset. Next reassessment trigger: gap mean
   cleanly exceeds 0.06, OR val mean starts trending up, OR no new
   best by ~iter 430K.
+- **Progress as of 2026-05-29 05:47** (20d 5h elapsed, ~83 % of the
+  run): iter 415,100 / 500,000 (epoch 5.97). **New best val 0.7186
+  at iter 390,000** (saved 2026-05-28 00:29, 4.5 h after the prior
+  reassessment) — beats the 0.7284 plateau set 2026-05-25 by 1.3 %.
+  This vindicates the 2026-05-27 keep-running decision. Since the
+  new best, 12 evals plateau-ed (iters 392K-414K, all val > 0.7186,
+  min 0.7240 at 394K, next 0.7268 at 410K). Mean train/val gap over
+  those 12 evals: 0.0554 — same range as before the new best,
+  neither clearly improving nor worsening. None of the reassessment
+  triggers (gap mean >0.06, val mean trending up, no new best by
+  ~iter 430K) have fired yet. Speed steady 4.17 sec/iter. ETA
+  ~2026-06-02 morning.
 - **Sample at iter 184,000 (2026-05-19):** model produces credible
   19th-century literary prose with fewer invented words than at iter
   154K. Register more consistently held across each sample. See
@@ -240,6 +254,34 @@ cosine schedule (overtraining experiment).
   (e.g. 20) or adding `--top_p 0.9` would suppress it if it recurs.
   Log: `terminal_logs/sample_bpe_uppercase_16L_1280_b2_resumed_2026_05_27_2039.txt`
   on the Studio.
+- **Progress as of 2026-05-29 05:47** (2d 17h 41m elapsed since the
+  resume launch on 2026-05-26 11:59, ~44 % of the 75K-iter resume
+  budget): iter 178,000 / 220,000 (epoch 5.65). **New best val 3.2652
+  at iter 168,000** (saved 2026-05-28 09:08). This is the genuine
+  new global minimum across the original + resumed run combined: it
+  beats the original-run best of **3.3657 at iter 132K by 3.0 %**.
+  Implication: the original-run "plateau" at iters 132K-145K that
+  triggered the 2026-05-20 stop-early decision was a *local* plateau,
+  not the true val-loss minimum. Val kept improving past iter 145K
+  through ~iter 168K, with the LR cosine schedule continuing to
+  decay into a productive low-LR regime. Since the iter-168K best,
+  10 evals plateau-ed (iters 169K-178K, all val > 3.2652, range
+  3.36-3.57). Latest eval (iter 178K) val 3.3842, train 3.1280,
+  gap 0.26 (wider than the Studio char gap, as expected with the
+  smaller batch and stronger gradient noise). Speed ~7 sec/iter
+  steady. ETA ~2026-06-01 afternoon (42K iters remaining).
+- **Reframing the overtraining experiment (2026-05-29).** The resume
+  was launched to test "samples grow more memorized as training
+  proceeds past the val-loss minimum." That premise assumed iter 132K
+  was at or near the val-loss minimum. The 3.2652 at iter 168K
+  shows it wasn't — there were ~36K more iters of genuine val
+  improvement after the original stop point. The overtraining
+  comparison plan (sample 132K-best vs 145K-stopped vs intermediates
+  vs 220K-final, look for monotonic memorization growth) is still
+  valid, but the *iter at which val truly stops improving* is now
+  ≥ 168K rather than ~132K. Once training completes, the meaningful
+  contrast points for the memorization probe should be {132K, 168K
+  (new true best), 220K-final}, not the originally-planned brackets.
 
 ### BPE Model Training (Mac Studio) — STOPPED
 - **Training stopped** 2026-04-27 at iter ~235,000 (epoch 4.48)
@@ -760,12 +802,14 @@ Review this list at the start of every session. Mark items DONE when complete.
   Best (iter 132K, val 3.3657) preserved as
   `pt/bpe_uppercase_16L_1280_b2.pt`.
 - [ ] Watch Studio char train/val divergence. **Reassessed 2026-05-27
-  at iter 386,800**: criterion borderline-fired (no new best since
-  iter 342K val 0.7284, 22 evals plateau-ed; mean gap 0.0512 over the
-  plateau vs 0.05 threshold). Decision: keep running — mean val still
-  drifting down (noise-floor stagnation, not overfitting). Next
-  reassessment trigger: gap mean >0.06, OR val mean trending up, OR
-  no new best by ~iter 430K. See progress bullet above for details.
+  at iter 386,800**: criterion borderline-fired; decision: keep
+  running. **Resolved 2026-05-28 00:29** — new best val 0.7186
+  arrived at iter 390K (4.5 h after the reassessment), beating the
+  prior 0.7284 by 1.3 %. As of 2026-05-29 05:47 (iter 415K), 12
+  evals plateau-ed since the new best. Active triggers for next
+  reassessment: gap mean >0.06, OR val mean trending up, OR no new
+  best by ~iter 460K (set 70K iters past the new best, same gap
+  the prior trigger used). See progress bullets above for details.
 - [ ] Decide what to do with intermediate checkpoints from the Studio
   char run (~96 GB; clean periodically or keep all 25 for
   layer-stability analysis per diary 080).
