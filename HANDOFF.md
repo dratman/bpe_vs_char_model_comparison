@@ -1,17 +1,20 @@
 # Handoff Document
 
 Last updated: 2026-06-02 by Claude Code Opus 4.7 (Mac Studio session)
-— **Studio char training COMPLETED 2026-06-02 08:54 EDT.** Final iter
-500,000 (epoch 7.19), best val 0.7152 per-char. 24d 8h wall time, no
-incidents. Char surpasses BPE on per-character loss given the full
-training budget; see diary 094. Backup of final + best checkpoints
-to Expansion still pending (TCC permission for Terminal.app — fix
-or run from a shell with FDA). Prior 2026-05-29 update (still
-relevant for the BPE-resumed run): M3 BPE resumed got a new best
-3.2652 at iter 168K, which beat the original-run best of 3.3657
-at iter 132K by 3.0 % — the original-run "plateau" 132K-145K
-turned out to be local, not the true val minimum, complicating the
-overtraining framing of the resume experiment.
+— **Both trainings are now COMPLETE.** Studio char: completed
+2026-06-02 08:54 EDT at iter 500,000 (epoch 7.19), best val 0.7152
+per-char, 24d 8h wall time. M3 BPE-resumed: completed 2026-06-01
+15:34 EDT at iter 220,000 (epoch 6.99), best val 3.2652 BPE-loss
+(~0.725 per-char) at iter 168K, no improvement in last 52K iters.
+Char wins the per-char comparison by 0.010 (1.4 %) — a much
+narrower margin than the original BPE-stop number (0.748) would
+have suggested. Diary 094 has the analysis (revised to use the
+resumed-run best, not the original-run number). Backup of final +
+best char checkpoints to Expansion still pending (TCC permission
+for Terminal.app — fix or run from a shell with FDA). M3 cleanup
+pending: the resumed-run wrapper scripts (PID 26584, 26585) are
+still alive on the M3 holding `tail -f` on a static log; needs
+`kill -TERM` to clean up.
 
 ## Current State
 
@@ -214,7 +217,28 @@ overtraining framing of the resume experiment.
   is on Ethernet (was 192.168.1.177) or wifi (was 192.168.1.185 on
   2026-05-20).
 
-### BPE Model Resumed Training (M3 laptop) — STARTED 2026-05-26
+### BPE Model Resumed Training (M3 laptop) — COMPLETED 2026-06-01
+- **Training complete** — launched 2026-05-26 11:59:12 EDT, finished
+  2026-06-01 15:34 EDT (6 days 3 hours 28 minutes wall time). Final
+  iter: 220,000 (epoch 6.99). **Best val: 3.2652 BPE-loss at iter
+  168,000** (saved 2026-05-28 09:08, epoch ~5.34). No further best
+  in the last 52K iters (168K → 220K); val bounced in the 3.40-3.51
+  range. Final val (iter 219K): 3.5062. Per-character equivalent of
+  the best: 3.2652 / ~4.5 chars-per-token ≈ **0.725 per-char**.
+  Final samples are coherent multi-sentence 19th-century prose —
+  qualitatively similar to the char model's final samples.
+- **Cross-comparison with the Studio char run, updated:** char best
+  per-char 0.7152 vs BPE-resumed best per-char 0.725. Char still
+  wins by ~0.010 (~1.4 %) but the margin is much narrower than the
+  comparison to BPE-original (0.748) would have suggested. The BPE
+  resume found ~36K iters of genuine val improvement past the
+  original stop at 132K. See diary 094 for the analysis.
+- **M3 cleanup note:** as of 2026-06-02 09:30, the training python
+  exited cleanly but the wrapper scripts (`/bin/zsh sh/train.sh ...`,
+  PID 26584/26585 on the M3) are still alive — they were holding
+  `tail -f` on the now-static log. Same SIGINT-vs-SIGTERM pattern
+  noted in the original BPE stop. To clean up: SSH to M3 and
+  `kill -TERM 26584 26585`.
 - **Resume launched** 2026-05-26 11:59:12 EDT to complete the originally-
   planned 220,000 iterations. The earlier run (above) stopped at iter
   145,100 on val-loss plateau; this resume continues from
