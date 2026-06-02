@@ -1,19 +1,17 @@
 # Handoff Document
 
-Last updated: 2026-05-29 by Claude Code Opus 4.7 (M3 MacBook Pro
-session) — **both trainings set new best-vals since the 2026-05-27
-reassessment.** Studio char: new best 0.7186 at iter 390K (vs prior
-0.7284 at iter 342K, 1.3% improvement). M3 BPE resumed: new best
-3.2652 at iter 168K, which beats the **original-run** best of 3.3657
-at iter 132K by 3.0% — the original-run "plateau" 132K-145K was
-a local one, not the true val minimum, complicating the overtraining
-framing of the resume experiment. Prior 2026-05-27 update:
-sample-on-Studio workflow for the resumed BPE run
-(`sh/sample_bpe_uppercase_16L_1280_b2_resumed.sh`) committed,
-debugged, and confirmed working. Both BPE sample scripts now use
-Bonjour hostname (`MacBookProM3Max.local`) instead of a hardcoded
-M3 IP. First Studio sample of the resumed run completed at iter
-157,000 (val loss 3.3556).
+Last updated: 2026-06-02 by Claude Code Opus 4.7 (Mac Studio session)
+— **Studio char training COMPLETED 2026-06-02 08:54 EDT.** Final iter
+500,000 (epoch 7.19), best val 0.7152 per-char. 24d 8h wall time, no
+incidents. Char surpasses BPE on per-character loss given the full
+training budget; see diary 094. Backup of final + best checkpoints
+to Expansion still pending (TCC permission for Terminal.app — fix
+or run from a shell with FDA). Prior 2026-05-29 update (still
+relevant for the BPE-resumed run): M3 BPE resumed got a new best
+3.2652 at iter 168K, which beat the original-run best of 3.3657
+at iter 132K by 3.0 % — the original-run "plateau" 132K-145K
+turned out to be local, not the true val minimum, complicating the
+overtraining framing of the resume experiment.
 
 ## Current State
 
@@ -41,9 +39,14 @@ M3 IP. First Studio sample of the resumed run completed at iter
 - Final samples in the run log are coherent multi-sentence 19th-century-style
   prose (see tail of `terminal_log_from_2026-04-26_through_2026_05_08.txt`)
 
-### Character Model Training (Mac Studio) — STARTED 2026-05-09
-- **Training in progress** — launched 2026-05-09 00:38 EDT, projected
-  ~24 days (500K iters at 4.18 sec/iter measured on the speedtest)
+### Character Model Training (Mac Studio) — COMPLETED 2026-06-02
+- **Training complete** — launched 2026-05-09 00:38 EDT, finished
+  2026-06-02 08:54 EDT (24 days 8 hours 14 minutes wall time).
+  Final iter: 500,000 (epoch 7.19). **Best validation loss: 0.7152**
+  (≈ 48.9 % per-character probability of correct prediction).
+  Per-step train loss at the end was bouncing in the 0.50-0.60 range
+  on single-batch eval; the noise-floor of single-batch loss isn't
+  meaningful for the model's actual quality, which is captured by val.
 - Launch script: `sh/train_char_uppercase_16L_1280.sh` (committed)
 - Log: `terminal_logs/terminal_log_for_char_uppercase_16L_1280_2026_05_09_0038.txt`
 - Corpus: `txt_local/corpus_high_quality_uppercase_2026_05_08.txt` (1.27 GB,
@@ -128,6 +131,38 @@ M3 IP. First Studio sample of the resumed run completed at iter
   triggers (gap mean >0.06, val mean trending up, no new best by
   ~iter 430K) have fired yet. Speed steady 4.17 sec/iter. ETA
   ~2026-06-02 morning.
+- **Final state (2026-06-02 08:54 EDT, training complete):** iter
+  500,000 / 500,000 (epoch 7.19). **Best val 0.7152 (per-char), set
+  at iter 482,000 (epoch 6.93, 2026-06-01 11:54).** Two more bests
+  were found after the 2026-05-29 update: 0.7152 at iter 482K
+  (the one captured here) plus the iter 390K one already recorded
+  above. Total improvement past the apparent 0.7284 plateau (iter
+  342K, 2026-05-25): Δ 0.0132 over the final 140K iters. No further
+  best in the last 18K iters (482K-500K). Total wall time: 24d 8h
+  14m on Studio MPS at ~4.18 sec/iter throughout. No NaN, no
+  crashes, no resume incidents. Best checkpoint at
+  `pt/char_uppercase_16L_1280.pt`; final at
+  `pt/char_uppercase_16L_1280_final.pt` (3.6 GB each). Final samples
+  in the log are coherent multi-sentence 19th-century prose with
+  proper dialogue structure and held register.
+- **Cross-comparison with the M3 BPE run** (per-character loss, since
+  BPE-token loss and char-token loss aren't directly comparable):
+    - BPE best (original run): 3.3657 BPE-loss at iter 132K, epoch 4.19
+      → ~0.748 per-char
+    - BPE best (resumed run, see below): 3.2652 BPE-loss at iter 168K
+      → ~0.725 per-char
+    - char best: 0.7152 per-char at iter 482K, epoch 6.93
+  At matched epoch (~4.2), char was already at ~0.73 per-char,
+  i.e., already ahead of the original BPE run. Char continued
+  improving for ~3 more epochs while the original BPE run had
+  begun overfitting at epoch 4.6. The BPE-resumed run found a
+  better val (3.2652) past that earlier plateau, narrowing the
+  gap to char but still trailing. **Char surpasses BPE on
+  per-character loss given the full training budget**, even
+  accounting for the resumed BPE run's recovery. See diary 094
+  for the analysis (does not yet incorporate the BPE-resumed
+  best — written before that data was integrated; a follow-up
+  diary may revisit).
 - **Sample at iter 184,000 (2026-05-19):** model produces credible
   19th-century literary prose with fewer invented words than at iter
   154K. Register more consistently held across each sample. See
