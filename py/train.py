@@ -113,6 +113,10 @@ def parse_args():
     parser.add_argument('--no_gelu', action='store_true',
                        help='Disable GELU nonlinearity in MLP (makes it purely linear)')
 
+    # Bias option
+    parser.add_argument('--no_bias', action='store_true',
+                       help='Disable bias terms in every Linear and LayerNorm (LLaMA/PaLM style)')
+
     # Precision option
     parser.add_argument('--precision', type=str, default='float32',
                        choices=['float16', 'float32', 'float64', 'bfloat16'],
@@ -875,7 +879,7 @@ def main():
             n_head=args.n_head,
             n_embd=args.n_embd,
             block_size=args.block_size,
-            bias=True,
+            bias=not args.no_bias,
             vocab_size=model_vocab_size,
             dropout=args.dropout,
             use_linear_attention=args.linear_attention,
@@ -964,9 +968,10 @@ def main():
     print(f"  n_embd:             {args.n_embd}")
     print(f"  block_size:         {args.block_size}")
     print(f"  dropout:            {args.dropout}")
-    print(f"  bias:               True  (hardcoded; LayerNorm + Linear bias)")
+    print(f"  bias:               {not args.no_bias}  (LayerNorm + Linear bias)")
     print(f"  tie_weights:        {not args.untie_weights}")
     print(f"  no_gelu:            {args.no_gelu}")
+    print(f"  no_bias:            {args.no_bias}")
     print(f"--- Training ---")
     print(f"  batch_size:         {args.batch_size}")
     if args.grad_accum_steps > 1:
