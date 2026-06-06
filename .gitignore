@@ -1,6 +1,7 @@
 .DS_Store
 __pycache__/
 *.pyc
+.venv/
 txt_local/
 claude_code_sessions/
 pt/
