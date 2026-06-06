@@ -682,6 +682,25 @@ still alive on the M3 holding `tail -f` on a static log; needs
   layer-machinery a char model spends on building word recognition)
   and 074 (topological framing).
 
+- **Diary 095 (2026-06-02).** Surprisal and pitch:
+  speech, music, and the reading of poems. Cross-domain entry
+  starting from a voice-memo idea — visualize per-word surprisal in
+  prose, connect it to pitch changes in TTS and to key/melody
+  changes in music. Covers the two TTS pitch-handling paradigms
+  (explicit pitch prediction vs. neural-codec token LM), the Smooth
+  Signal Redundancy / Uniform Information Density literature (Aylett
+  & Turk, Jaeger, Bell/Jurafsky, Calhoun, Pate-Goldwater, Talman
+  et al.), the music parallel (Pearce & Wiggins IDyOM, Huron *Sweet
+  Anticipation*), joint text+audio language models (AudioPaLM,
+  Spirit-LM-Expressive, Moshi, GPT-4o), an analysis of Stevens's
+  *Peter Quince at the Clavier*, notes on how poets (Eliot, Stevens,
+  Auden) read their own work flat versus how actors like Burton
+  read Hardy theatrically, and a five-step ladder of next-step
+  experiments (per-word surprisal visualizer at the easy end,
+  Spirit-LM-Expressive-style small-scale joint training at the
+  hard end). No code or model changes; entirely a research-direction
+  entry.
+
 - **Pending: requesting Claude.ai and ChatGPT exports (2026-05-19).**
   Ralph plans to request data exports from both services so a future
   fine-tuning or specialized-model experiment has a real conversation
