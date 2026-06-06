@@ -1,6 +1,16 @@
 # Handoff Document
 
-Last updated: 2026-06-02 by Claude Code Opus 4.7 (Mac Studio session)
+Last updated: 2026-06-06 by Claude Code Opus 4.8 (Linux/CUDA workstation
+session) — text/code-only work this session (no model weights or corpora
+on the Linux box): implemented `py/memorization_probe.py` + wrapper
+`sh/memorization_probe_bpe.sh` (overtraining experiment, ready to run on
+the Studio/M3 — see the BPE-resumed section); fixed a stale, self-
+contradictory line in the char cross-comparison bullet that claimed
+diary 094 didn't incorporate the BPE-resumed best (it does, since commit
+`abaa52c`). Still pending and NOT doable from Linux: char checkpoint
+backup to Expansion, M3 wrapper-process cleanup (PIDs 26584/26585).
+
+Prior update: 2026-06-02 by Claude Code Opus 4.7 (Mac Studio session)
 — **Both trainings are now COMPLETE.** Studio char: completed
 2026-06-02 08:54 EDT at iter 500,000 (epoch 7.19), best val 0.7152
 per-char, 24d 8h wall time. M3 BPE-resumed: completed 2026-06-01
@@ -163,9 +173,9 @@ still alive on the M3 holding `tail -f` on a static log; needs
   gap to char but still trailing. **Char surpasses BPE on
   per-character loss given the full training budget**, even
   accounting for the resumed BPE run's recovery. See diary 094
-  for the analysis (does not yet incorporate the BPE-resumed
-  best — written before that data was integrated; a follow-up
-  diary may revisit).
+  for the analysis (revised 2026-06-02 in commit `abaa52c` to use
+  the BPE-resumed best of 0.725 as the proper apples-to-apples
+  reference — the 094 table and thesis already reflect this).
 - **Sample at iter 184,000 (2026-05-19):** model produces credible
   19th-century literary prose with fewer invented words than at iter
   154K. Register more consistently held across each sample. See
@@ -276,10 +286,27 @@ still alive on the M3 holding `tail -f` on a static log; needs
   artifact.
 - **Comparison plan when done:** sample from each of {132K best-val,
   145K stopped, 150K-220K resumed-intermediates} on a fixed prompt set
-  and probe each sample for verbatim-memorization fraction (see also
-  the proposed `py/memorization_probe.py` sketch). If memorization
-  fraction grows monotonically past iter 132K, the overtraining
-  hypothesis is quantitatively confirmed.
+  and probe each sample for verbatim-memorization fraction. If
+  memorization fraction grows monotonically past iter 132K, the
+  overtraining hypothesis is quantitatively confirmed.
+- **`py/memorization_probe.py` IMPLEMENTED (2026-06-06, Linux workstation
+  session).** No longer a sketch. Measures two cheap, char-comparable
+  signals per checkpoint over a fixed set of corpus passages:
+  (1) *extractable memorization* — exact-match prefix length (in chars)
+  of a GREEDY free continuation vs the true continuation (Carlini-style;
+  the primary signal); (2) *teacher-forced greedy accuracy* — per-token
+  argmax==truth in one forward pass (within-tokenizer trend only). Pass
+  several checkpoints with `--models` for a single iter-sorted comparison
+  table. Reuses sample.py's `generate_local`/`detect_case_preservation`
+  and the same meta-path derivation, so behavior matches the sampling
+  path. Helpers unit-tested on Linux; **not yet run against real weights**
+  (none on the Linux box — needs the Studio/M3). Wrapper
+  `sh/memorization_probe_bpe.sh` stages the three BPE contrast points
+  {132K=`bpe_uppercase_16L_1280_b2.pt`, 168K=`..._b2_resumed.pt`,
+  220K=`..._b2_resumed_final.pt`} from the M3 (same rsync + meta-rename
+  trick as the BPE sample scripts) and runs the probe on the Studio.
+  Per the 2026-05-29 reframing, {132K, 168K, 220K-final} are the right
+  contrast points — 168K is the true val minimum, not 132K.
 - **Sample-on-Studio workflow for the resumed run is live (2026-05-27,
   commits `19508a0`, `8ab2d8c`, `244b77b`, `ecd4d5b`).** New script
   `sh/sample_bpe_uppercase_16L_1280_b2_resumed.sh`, modeled on the
