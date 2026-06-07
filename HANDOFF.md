@@ -39,8 +39,19 @@ pubkey `~/.ssh/id_ed25519.pub` = "ralph.dratman@gmail.com (linux-a6000)";
 enter the Studio password once). Mac username assumed `RalphDratman` (per
 `/Users/RalphDratman`); confirm. NOTE mDNS `.local` does NOT resolve on this
 Linux box (no avahi/nss-mdns daemon) — use the IP `192.168.1.233`, not the
-name. Also still: the memorization probe is committed but **ready to run,
-not yet run**.
+name. **2026-06-06 `ssh-copy-id` from this box FAILED:** `Permission denied`
+then `Too many authentication failures` — the box offered its key(s) before
+the password and hit the server's MaxAuthTries; the username/password combos
+tried (`RalphDratman`, `ralph`, and the invalid space-form `Ralph Dratman`)
+were also rejected. **Next-instance fix:** force the password path offering
+no keys, e.g. `ssh-copy-id -o PubkeyAuthentication=no -o
+PreferredAuthentications=password -o NumberOfPasswordPrompts=3
+<user>@192.168.1.233`, and CONFIRM the Studio's real short username with
+Ralph (the Mac full name "Ralph Dratman" is NOT a valid unix login; the
+short name is likely `ralphdratman` or `ralph`). Until the key is authorized,
+the live-run check (is the no-GELU matched-LR training burning Studio GPU
+right now?) remains **UNRESOLVED**. Also still: the memorization probe is
+committed but **ready to run, not yet run**.
 (3) Side note (not project state): a separate on-screen claude session had
 hung its TUI on a background gnome-terminal tab — looked like a "locked
 keyboard"; resolved by `kill`-ing that claude PID and resuming with
