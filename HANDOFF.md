@@ -1,6 +1,42 @@
 # Handoff Document
 
-Last updated: 2026-06-06 by Claude Code Opus 4.8 (Linux/CUDA workstation
+Last updated: 2026-06-06 by Claude Code Opus 4.8 (Linux/CUDA workstation,
+SSH-from-Mac session) — repo housekeeping only, no model work. (1) Finished
+the GitHub operation a parallel session left open: fast-forward-merged
+branch `memorization-probe-and-handoff-fix` into master (HEAD now
+`fe4b766`), pushed to origin, then deleted that branch (local + remote)
+and removed the working-tree coordination note `temp-message.txt`. master
+now contains `py/memorization_probe.py` + `sh/memorization_probe_bpe.sh`.
+(2) RESOLVED the "test training" question. Mid-session Ralph pushed 3
+commits to origin/master that I integrated by rebasing this handoff commit
+on top (clean, no conflict): `159d0d5` (diary 095), `4360cac` (train.py
+`--no_bias` flag + two no-GELU trial scripts), `410b79a` (matched-LR trial
+script). The "test training" is the **no-GELU MLP ablation** on the Studio
+char model (16L/8H/1280, block 4096, same `corpus_high_quality_uppercase`
+corpus). With GELU off, each MLP collapses to a single rank-1280 linear map
+(params unchanged at 320M). A first 10K-iter trial
+(`sh/train_char_uppercase_16L_1280_no_gelu_trial.sh`) HAS ALREADY RUN on
+Studio MPS (~12h) — per the matched-LR script's own notes it reached val
+~1.84 at iter 8K vs baseline ~1.06, BUT that comparison is confounded by a
+cosine-LR-schedule mismatch (trial max_iters=10K → LR decayed fast; baseline
+used 500K → near-constant LR over its first 10K). Two follow-up scripts are
+now committed but NOT confirmed launched: `..._no_gelu_matched_LR_trial.sh`
+(max_iters=500K so LR matches baseline; stop after ~10K via SIGTERM, or let
+it run ~24d for a full val floor) and `..._no_gelu_no_bias_trial.sh` (also
+sets `--no_bias`, LLaMA/PaLM convention, ~226K fewer params). **OPEN for
+next instance:** is the matched-LR run currently live on the Studio? Git
+can't tell — SSH into the Studio and check `pgrep -af train`,
+`ls -laht pt/*no_gelu*`, `ls -laht terminal_logs | head`. To stop a Studio
+run use SIGTERM (not SIGINT — train.sh backgrounds python which inherits
+SIGINT=SIG_IGN). Studio hostname/IP is NOT in the repo (only the M3's,
+`192.168.1.177`); ask Ralph. Also still: the memorization probe is committed
+but **ready to run, not yet run**.
+(3) Side note (not project state): a separate on-screen claude session had
+hung its TUI on a background gnome-terminal tab — looked like a "locked
+keyboard"; resolved by `kill`-ing that claude PID and resuming with
+`claude --continue`. Hardware was fine throughout.
+
+Prior update: 2026-06-06 by Claude Code Opus 4.8 (Linux/CUDA workstation
 session) — text/code-only work this session (no model weights or corpora
 on the Linux box): implemented `py/memorization_probe.py` + wrapper
 `sh/memorization_probe_bpe.sh` (overtraining experiment, ready to run on
@@ -10,7 +46,7 @@ diary 094 didn't incorporate the BPE-resumed best (it does, since commit
 `abaa52c`). Still pending and NOT doable from Linux: char checkpoint
 backup to Expansion, M3 wrapper-process cleanup (PIDs 26584/26585).
 
-Prior update: 2026-06-02 by Claude Code Opus 4.7 (Mac Studio session)
+Earlier update: 2026-06-02 by Claude Code Opus 4.7 (Mac Studio session)
 — **Both trainings are now COMPLETE.** Studio char: completed
 2026-06-02 08:54 EDT at iter 500,000 (epoch 7.19), best val 0.7152
 per-char, 24d 8h wall time. M3 BPE-resumed: completed 2026-06-01
