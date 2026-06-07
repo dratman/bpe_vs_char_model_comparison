@@ -1,6 +1,51 @@
 # Handoff Document
 
-Last updated: 2026-06-09 by Claude Code Opus 4.7 (1M context) (M2 MacBook
+Last updated: 2026-06-10 by Claude Code Opus 4.7 (1M context) (Mac Studio
+session) — **No-GELU matched-LR run on Studio is at iter 81,500 (epoch
+1.17), descending steadily.** Latest eval (iter 80,000, 2026-06-10 10:22):
+val 0.9889 vs baseline 0.8264 at the same iter — gap narrowed from 0.20
+nats at iter 20K to 0.16 nats now. Speed 4.16 sec/iter, MFU ~3.6%, no
+incidents. ETA for the iter-500K val floor: ~2026-06-30. **Major
+qualitative finding:** the invented-word behavior recorded in diary 096
+(iter-20K samples — *plake*, *culty*, *intivitiate*, *capacific*, *weile*,
+*witnesside*, *midscenes*) has **faded by iter 80K**. iter-80K samples
+contain real English words with semantically incoherent sentences — the
+same failure mode the baseline showed at iter 10K, just shifted later in
+the no-GELU training trajectory. The original diary 096 interpretation
+("GELU is necessary for lexical inventory") has been softened in an
+appended addendum to "GELU is necessary for lexical inventory to develop
+**efficiently**" — the linear MLP also builds one, just ~4× slower in
+corpus exposure. **Diary 096 has been renumbered to diary 098** to
+resolve a numbering collision with the parallel A6000-port diary 096
+(see the 2026-06-09 Linux entry below). **New feedback memory installed:**
+`claude_memory/feedback_git_pull_push_discipline.md` codifies a
+pull-before-edit / test-then-push discipline for model code and a
+pull-at-session-start / push-at-end / append-rather-than-overwrite
+convention for HANDOFF.md, designed to reduce the kind of accumulated
+parallel-edit conflicts that necessitated this merge. This entry also
+incorporates the substance of an earlier Studio session (2026-06-06
+evening) that committed locally but never pushed: **Expansion backups
+COMPLETE** (rsynced 2026-06-06 evening to
+`/Volumes/Expansion/0_backups_Mac_Studio_Expansion/bpe_vs_char_model_comparison/pt/`:
+Studio char best `char_uppercase_16L_1280.pt` iter 482K val 0.7152 Jun 1,
+final `_final.pt` iter 500K Jun 2, M3 BPE-resumed best
+`bpe_uppercase_16L_1280_b2_resumed.pt` iter 168K val 3.2652 May 28,
+final `_resumed_final.pt` iter 220K Jun 1, with `_meta.pkl`/`_meta.json`
+siblings; the May 20 stale `char_uppercase_16L_1280.pt` was overwritten
+by the Jun 1 best as intended; intermediate iter-checkpoints from both
+runs still NOT backed up per the standing TODO). **M3 wrapper-script
+cleanup UNNECESSARY:** PIDs 26584/26585 no longer exist on the M3
+(exited on their own between 2026-06-02 and 2026-06-06), no `kill -TERM`
+needed. **Decision still open from the 2026-06-09 Linux entries:** the
+A6000 box duplicates the Studio no-GELU run. Studio's run has been
+allowed to keep going (now at iter 81,500); the A6000 box has been
+idle since the 12,500-iter benchmark stop. If the A6000 speed
+(0.52 sec/iter vs 4.18) is worth taking advantage of for future runs,
+the no-bias trial (`sh/train_char_uppercase_16L_1280_no_gelu_no_bias_trial.sh`)
+is the natural next candidate to launch there. **OPEN:** the
+memorization probe remains committed but not yet run on either machine.
+
+Earlier: 2026-06-09 by Claude Code Opus 4.7 (1M context) (M2 MacBook
 session, evening — remote troubleshooting only). **Linux A6000 box
 recovered from a kernel panic that hit on first boot after Ralph cycled
 power on it to plug it into a new UPS.** Panic message: `VFS: Unable to
