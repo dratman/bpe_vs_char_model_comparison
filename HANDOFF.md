@@ -28,11 +28,19 @@ next instance:** is the matched-LR run currently live on the Studio? Git
 can't tell — SSH into the Studio and check `pgrep -af train`,
 `ls -laht pt/*no_gelu*`, `ls -laht terminal_logs | head`. To stop a Studio
 run use SIGTERM (not SIGINT — train.sh backgrounds python which inherits
-SIGINT=SIG_IGN). Studio hostname/IP is NOT in the repo (only the M3's,
-`192.168.1.177`), and NOT discoverable on this Linux box either (no
-`~/.ssh/config`, `known_hosts` is hashed, no `/etc/hosts` entry, nothing in
-shell history) — don't re-search, just ask Ralph for it. Also still: the
-memorization probe is committed but **ready to run, not yet run**.
+SIGINT=SIG_IGN). **Studio address (Ralph-confirmed 2026-06-06):
+`studio.local` = `192.168.1.233`.** From this Linux box: it IS routable
+over the wifi LAN (this box is `192.168.1.224/24` on `wlp4s0`, alongside
+the `10.99.99.x` link to the Mac), and its SSH host key is now cached —
+BUT this box is not yet authorized: SSH returns `Permission denied
+(publickey)`. To enable passwordless access, authorize this box's key once
+with `ssh-copy-id RalphDratman@192.168.1.233` (run from `owner@linux-a6000`;
+pubkey `~/.ssh/id_ed25519.pub` = "ralph.dratman@gmail.com (linux-a6000)";
+enter the Studio password once). Mac username assumed `RalphDratman` (per
+`/Users/RalphDratman`); confirm. NOTE mDNS `.local` does NOT resolve on this
+Linux box (no avahi/nss-mdns daemon) — use the IP `192.168.1.233`, not the
+name. Also still: the memorization probe is committed but **ready to run,
+not yet run**.
 (3) Side note (not project state): a separate on-screen claude session had
 hung its TUI on a background gnome-terminal tab — looked like a "locked
 keyboard"; resolved by `kill`-ing that claude PID and resuming with
