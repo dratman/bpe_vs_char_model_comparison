@@ -1,0 +1,359 @@
+Command: /home/owner/miniforge3/envs/bpe_char/bin/python -u py/train.py --checkpoints_to "pt" --input txt_local/corpus_high_quality_uppercase_2026_05_08.txt --output pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda.pt --mode continuous --tokenizer char --precision bfloat16 --n_layer 16 --n_head 8 --n_embd 1280 --block_size 4096 --batch_size 4 --learning_rate 1.5e-4 --warmup_iters 2000 --max_iters 500000 --eval_interval 2000 --eval_iters 20 --save_interval 5000 --log_interval 100 --sample_interval 5000 --val_split 0.1 --dropout 0.0 --no_gelu
+Started: Tue Jun  9 01:39:25 PM EDT 2026
+Python:  /home/owner/miniforge3/envs/bpe_char/bin/python
+Host:    owner-B660M-Pro-RS
+========================================
+[2026-06-09 13:39:26] Using device: cuda
+[2026-06-09 13:39:26] Using precision: bfloat16 (requested: bfloat16)
+[2026-06-09 13:39:26] Training mode: continuous
+[2026-06-09 13:39:26] Reading input from txt_local/corpus_high_quality_uppercase_2026_05_08.txt
+[2026-06-09 13:39:27] Read 1,265,346,119 characters
+[2026-06-09 13:39:27] Training char tokenizer...
+CharTokenizer: Built vocabulary of 78 characters
+[2026-06-09 13:39:30] Tokenizing entire corpus (1,265,346,119 characters)...
+[2026-06-09 13:40:00] Tokenization complete: 1,265,346,119 tokens
+[2026-06-09 13:40:00] Converting to tensor...
+[2026-06-09 13:40:33] Tensor ready: 1,265,346,119 tokens
+[2026-06-09 13:40:33] Saving tokenized corpus cache: pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda_tokens.pt
+[2026-06-09 13:40:38] Splitting into train and validation sets...
+[2026-06-09 13:40:38] Split complete.
+[2026-06-09 13:40:38] Training tokens: 1,138,811,508
+[2026-06-09 13:40:38] Validation tokens: 126,534,611
+[2026-06-09 13:40:38] Saving tokenizer to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda_meta.pkl
+[2026-06-09 13:40:38] Initializing new model...
+  Vocabulary size: 78
+number of parameters: 314.94M (softmax attention, tied weights)
+num decayed parameter tensors: 66, with 319,915,520 parameters
+num non-decayed parameter tensors: 130, with 268,800 parameters
+using fused AdamW: True
+[2026-06-09 13:40:41] Using automatic mixed precision (AMP) with bfloat16
+
+[2026-06-09 13:40:41] Starting training...
+Command line: py/train.py --checkpoints_to pt --input txt_local/corpus_high_quality_uppercase_2026_05_08.txt --output pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda.pt --mode continuous --tokenizer char --precision bfloat16 --n_layer 16 --n_head 8 --n_embd 1280 --block_size 4096 --batch_size 4 --learning_rate 1.5e-4 --warmup_iters 2000 --max_iters 500000 --eval_interval 2000 --eval_iters 20 --save_interval 5000 --log_interval 100 --sample_interval 5000 --val_split 0.1 --dropout 0.0 --no_gelu
+
+--- Mode and tokenizer ---
+  mode:               continuous
+  tokenizer:          char
+  vocab_size:         78
+  attention type:     softmax
+  precision:          bfloat16
+--- Architecture ---
+  n_layer:            16
+  n_head:             8
+  n_embd:             1280
+  block_size:         4096
+  dropout:            0.0
+  bias:               True  (LayerNorm + Linear bias)
+  tie_weights:        True
+  no_gelu:            True
+  no_bias:            False
+--- Training ---
+  batch_size:         4
+  grad_accum_steps:   1
+  max_iters:          500000
+  learning_rate:      1.50e-04 (target after warmup)
+  min_lr (cosine):    1.50e-05
+  warmup_iters:       2000
+  weight_decay:       0.1 (decay tensors), 0.0 (no-decay tensors)  [hardcoded]
+  betas:              (0.9, 0.95)  [hardcoded]
+  grad_clip:          1.0  [hardcoded]
+--- Data ---
+  input:              txt_local/corpus_high_quality_uppercase_2026_05_08.txt
+  val_split:          0.1
+  token_cache:        pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda_tokens.pt (rebuilt)
+--- Logging ---
+  log_interval:       100
+  eval_interval:      2000
+  eval_iters:         20
+  save_interval:      5000
+  sample_interval:    5000
+  sample_max_tokens:  128
+--- Output ---
+  output:             pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda.pt
+  checkpoints_to:     pt
+  rolling_save:       pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda_rolling.pt (written every eval_interval)
+============================================================
+[2026-06-09 13:41:17] [0m] Step     0 | Epoch   0.00 | train loss 4.2927 | val loss 4.2920 | lr 0.00e+00
+iter 0: loss 4.3013, time 36658.63ms, mfu -100.00%
+[2026-06-09 13:42:10] [1m] Speed at iter 100 (epoch 0.00): 1.12 iters/sec
+iter 100: loss 2.5044, time 522.75ms, mfu 29.09%
+[2026-06-09 13:43:04] [2m] Speed at iter 200 (epoch 0.00): 1.87 iters/sec
+iter 200: loss 2.4275, time 539.48ms, mfu 29.00%
+[2026-06-09 13:43:58] [3m] Speed at iter 300 (epoch 0.00): 1.87 iters/sec
+iter 300: loss 2.4421, time 536.42ms, mfu 28.94%
+[2026-06-09 13:44:51] [4m] Speed at iter 400 (epoch 0.01): 1.86 iters/sec
+iter 400: loss 2.3753, time 538.14ms, mfu 28.87%
+[2026-06-09 13:45:45] [5m] Speed at iter 500 (epoch 0.01): 1.88 iters/sec
+iter 500: loss 2.4500, time 540.49ms, mfu 28.80%
+[2026-06-09 13:46:38] [5m] Speed at iter 600 (epoch 0.01): 1.87 iters/sec
+iter 600: loss 2.4502, time 535.32ms, mfu 28.76%
+[2026-06-09 13:47:31] [6m] Speed at iter 700 (epoch 0.01): 1.88 iters/sec
+iter 700: loss 2.4397, time 529.56ms, mfu 28.76%
+[2026-06-09 13:48:25] [7m] Speed at iter 800 (epoch 0.01): 1.86 iters/sec
+iter 800: loss 2.4689, time 537.27ms, mfu 28.71%
+[2026-06-09 13:49:19] [8m] Speed at iter 900 (epoch 0.01): 1.86 iters/sec
+iter 900: loss 2.4724, time 544.78ms, mfu 28.63%
+[2026-06-09 13:50:12] [9m] Speed at iter 1000 (epoch 0.01): 1.86 iters/sec
+iter 1000: loss 2.4175, time 534.08ms, mfu 28.62%
+[2026-06-09 13:51:06] [10m] Speed at iter 1100 (epoch 0.02): 1.88 iters/sec
+iter 1100: loss 2.4869, time 528.77ms, mfu 28.63%
+[2026-06-09 13:51:58] [11m] Speed at iter 1200 (epoch 0.02): 1.89 iters/sec
+iter 1200: loss 2.4237, time 529.03ms, mfu 28.64%
+[2026-06-09 13:52:51] [12m] Speed at iter 1300 (epoch 0.02): 1.89 iters/sec
+iter 1300: loss 2.4090, time 528.01ms, mfu 28.66%
+[2026-06-09 13:53:44] [13m] Speed at iter 1400 (epoch 0.02): 1.89 iters/sec
+iter 1400: loss 2.4190, time 527.65ms, mfu 28.68%
+[2026-06-09 13:54:37] [13m] Speed at iter 1500 (epoch 0.02): 1.89 iters/sec
+iter 1500: loss 2.4665, time 527.84ms, mfu 28.69%
+[2026-06-09 13:55:30] [14m] Speed at iter 1600 (epoch 0.02): 1.89 iters/sec
+iter 1600: loss 2.4201, time 528.23ms, mfu 28.70%
+[2026-06-09 13:56:23] [15m] Speed at iter 1700 (epoch 0.02): 1.89 iters/sec
+iter 1700: loss 2.4187, time 529.59ms, mfu 28.70%
+[2026-06-09 13:57:16] [16m] Speed at iter 1800 (epoch 0.03): 1.89 iters/sec
+iter 1800: loss 2.4673, time 529.26ms, mfu 28.71%
+[2026-06-09 13:58:08] [17m] Speed at iter 1900 (epoch 0.03): 1.89 iters/sec
+iter 1900: loss 2.5931, time 528.47ms, mfu 28.71%
+[2026-06-09 13:59:38] [18m] Step  2000 | Epoch   0.03 | train loss 2.4251 | val loss 2.4157 | lr 1.50e-04
+  Saved checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda.pt (best val loss: 2.4157)
+  Saved rolling checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda_rolling.pt (iter 2000, val 2.4157)
+[2026-06-09 13:59:43] [19m] Speed at iter 2000 (epoch 0.03): 1.05 iters/sec
+iter 2000: loss 2.4535, time 42519.14ms, mfu 25.88%
+[2026-06-09 14:00:36] [19m] Speed at iter 2100 (epoch 0.03): 1.90 iters/sec
+iter 2100: loss 2.4284, time 528.00ms, mfu 26.17%
+[2026-06-09 14:01:29] [20m] Speed at iter 2200 (epoch 0.03): 1.89 iters/sec
+iter 2200: loss 2.3799, time 528.79ms, mfu 26.43%
+[2026-06-09 14:02:22] [21m] Speed at iter 2300 (epoch 0.03): 1.89 iters/sec
+iter 2300: loss 2.4408, time 528.43ms, mfu 26.66%
+[2026-06-09 14:03:15] [22m] Speed at iter 2400 (epoch 0.03): 1.89 iters/sec
+iter 2400: loss 2.4336, time 529.32ms, mfu 26.87%
+[2026-06-09 14:04:08] [23m] Speed at iter 2500 (epoch 0.04): 1.89 iters/sec
+iter 2500: loss 2.3549, time 529.01ms, mfu 27.06%
+[2026-06-09 14:05:01] [24m] Speed at iter 2600 (epoch 0.04): 1.89 iters/sec
+iter 2600: loss 2.3676, time 529.47ms, mfu 27.23%
+[2026-06-09 14:05:53] [25m] Speed at iter 2700 (epoch 0.04): 1.89 iters/sec
+iter 2700: loss 2.3963, time 528.91ms, mfu 27.38%
+[2026-06-09 14:06:46] [26m] Speed at iter 2800 (epoch 0.04): 1.89 iters/sec
+iter 2800: loss 2.3924, time 528.81ms, mfu 27.52%
+[2026-06-09 14:07:39] [26m] Speed at iter 2900 (epoch 0.04): 1.89 iters/sec
+iter 2900: loss 2.3781, time 530.65ms, mfu 27.63%
+[2026-06-09 14:08:32] [27m] Speed at iter 3000 (epoch 0.04): 1.89 iters/sec
+iter 3000: loss 2.3276, time 529.50ms, mfu 27.74%
+[2026-06-09 14:09:25] [28m] Speed at iter 3100 (epoch 0.04): 1.89 iters/sec
+iter 3100: loss 2.3920, time 528.01ms, mfu 27.85%
+[2026-06-09 14:10:18] [29m] Speed at iter 3200 (epoch 0.05): 1.89 iters/sec
+iter 3200: loss 2.3462, time 530.20ms, mfu 27.93%
+[2026-06-09 14:11:11] [30m] Speed at iter 3300 (epoch 0.05): 1.89 iters/sec
+iter 3300: loss 2.3280, time 529.43ms, mfu 28.01%
+[2026-06-09 14:12:04] [31m] Speed at iter 3400 (epoch 0.05): 1.89 iters/sec
+iter 3400: loss 2.2917, time 530.47ms, mfu 28.08%
+[2026-06-09 14:12:57] [32m] Speed at iter 3500 (epoch 0.05): 1.89 iters/sec
+iter 3500: loss 2.3037, time 531.22ms, mfu 28.13%
+[2026-06-09 14:13:50] [33m] Speed at iter 3600 (epoch 0.05): 1.89 iters/sec
+iter 3600: loss 2.2991, time 529.82ms, mfu 28.19%
+[2026-06-09 14:14:43] [34m] Speed at iter 3700 (epoch 0.05): 1.89 iters/sec
+iter 3700: loss 2.1821, time 530.67ms, mfu 28.24%
+[2026-06-09 14:15:36] [34m] Speed at iter 3800 (epoch 0.05): 1.89 iters/sec
+iter 3800: loss 2.2199, time 529.67ms, mfu 28.28%
+[2026-06-09 14:16:29] [35m] Speed at iter 3900 (epoch 0.06): 1.89 iters/sec
+iter 3900: loss 2.1448, time 530.11ms, mfu 28.33%
+[2026-06-09 14:17:59] [37m] Step  4000 | Epoch   0.06 | train loss 2.1907 | val loss 2.1778 | lr 1.50e-04
+  Saved checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda.pt (best val loss: 2.1778)
+  Saved rolling checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda_rolling.pt (iter 4000, val 2.1778)
+[2026-06-09 14:18:08] [37m] Speed at iter 4000 (epoch 0.06): 1.01 iters/sec
+iter 4000: loss 2.1264, time 46966.82ms, mfu 25.52%
+[2026-06-09 14:19:01] [38m] Speed at iter 4100 (epoch 0.06): 1.90 iters/sec
+iter 4100: loss 2.1734, time 528.47ms, mfu 25.85%
+[2026-06-09 14:19:54] [39m] Speed at iter 4200 (epoch 0.06): 1.89 iters/sec
+iter 4200: loss 2.1361, time 529.64ms, mfu 26.14%
+[2026-06-09 14:20:47] [40m] Speed at iter 4300 (epoch 0.06): 1.88 iters/sec
+iter 4300: loss 2.0795, time 530.81ms, mfu 26.39%
+[2026-06-09 14:21:40] [40m] Speed at iter 4400 (epoch 0.06): 1.88 iters/sec
+iter 4400: loss 2.0468, time 530.31ms, mfu 26.62%
+[2026-06-09 14:22:33] [41m] Speed at iter 4500 (epoch 0.06): 1.89 iters/sec
+iter 4500: loss 2.0668, time 529.80ms, mfu 26.83%
+[2026-06-09 14:23:26] [42m] Speed at iter 4600 (epoch 0.07): 1.89 iters/sec
+iter 4600: loss 2.0042, time 529.55ms, mfu 27.02%
+[2026-06-09 14:24:19] [43m] Speed at iter 4700 (epoch 0.07): 1.89 iters/sec
+iter 4700: loss 2.0113, time 529.94ms, mfu 27.18%
+[2026-06-09 14:25:12] [44m] Speed at iter 4800 (epoch 0.07): 1.89 iters/sec
+iter 4800: loss 1.9978, time 529.69ms, mfu 27.34%
+[2026-06-09 14:26:05] [45m] Speed at iter 4900 (epoch 0.07): 1.89 iters/sec
+iter 4900: loss 1.9918, time 529.55ms, mfu 27.48%
+[2026-06-09 14:27:00] [46m] Saved periodic checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda_iter5000.pt (iter 5000, epoch 0.07)
+
+[2026-06-09 14:27:00] [46m] Sampling at iter 5000 (epoch 0.07):
+  1.  he hes le spoll on hand Havilegred thent that thas few ked. Mr. Jas supook, st, and the sand Scluse comeat a in sand what but l
+  2. lan coul. The fores oppery of newition of the doiras estrult refor havers malight cual, with ho ence sing eart to men marming fr
+  3. sond fol! fome, bover obledumts, bolridy gainsirusut fouse, a nowelor laht the sor ying prierep gran ong thoney the to antimly w
+
+[2026-06-09 14:27:03] [46m] Speed at iter 5000 (epoch 0.07): 1.74 iters/sec
+iter 5000: loss 2.1125, time 4972.58ms, mfu 25.03%
+[2026-06-09 14:27:55] [47m] Speed at iter 5100 (epoch 0.07): 1.89 iters/sec
+iter 5100: loss 1.9943, time 530.50ms, mfu 25.40%
+[2026-06-09 14:28:48] [48m] Speed at iter 5200 (epoch 0.07): 1.89 iters/sec
+iter 5200: loss 1.9626, time 529.85ms, mfu 25.73%
+[2026-06-09 14:29:42] [49m] Speed at iter 5300 (epoch 0.08): 1.89 iters/sec
+iter 5300: loss 2.0201, time 529.25ms, mfu 26.03%
+[2026-06-09 14:30:35] [49m] Speed at iter 5400 (epoch 0.08): 1.89 iters/sec
+iter 5400: loss 2.0825, time 529.78ms, mfu 26.30%
+[2026-06-09 14:31:28] [50m] Speed at iter 5500 (epoch 0.08): 1.89 iters/sec
+iter 5500: loss 1.9729, time 530.34ms, mfu 26.54%
+[2026-06-09 14:32:21] [51m] Speed at iter 5600 (epoch 0.08): 1.89 iters/sec
+iter 5600: loss 1.9693, time 530.33ms, mfu 26.75%
+[2026-06-09 14:33:13] [52m] Speed at iter 5700 (epoch 0.08): 1.89 iters/sec
+iter 5700: loss 1.8834, time 531.72ms, mfu 26.93%
+[2026-06-09 14:34:06] [53m] Speed at iter 5800 (epoch 0.08): 1.89 iters/sec
+iter 5800: loss 1.8668, time 529.15ms, mfu 27.12%
+[2026-06-09 14:34:59] [54m] Speed at iter 5900 (epoch 0.08): 1.89 iters/sec
+iter 5900: loss 1.9008, time 529.23ms, mfu 27.28%
+[2026-06-09 14:36:29] [55m] Step  6000 | Epoch   0.09 | train loss 1.9304 | val loss 1.9264 | lr 1.50e-04
+  Saved checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda.pt (best val loss: 1.9264)
+  Saved rolling checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda_rolling.pt (iter 6000, val 1.9264)
+[2026-06-09 14:36:39] [55m] Speed at iter 6000 (epoch 0.09): 1.01 iters/sec
+iter 6000: loss 1.9062, time 46887.41ms, mfu 24.58%
+[2026-06-09 14:37:31] [56m] Speed at iter 6100 (epoch 0.09): 1.90 iters/sec
+iter 6100: loss 1.9642, time 529.85ms, mfu 24.99%
+[2026-06-09 14:38:24] [57m] Speed at iter 6200 (epoch 0.09): 1.89 iters/sec
+iter 6200: loss 1.8719, time 529.28ms, mfu 25.37%
+[2026-06-09 14:39:17] [58m] Speed at iter 6300 (epoch 0.09): 1.89 iters/sec
+iter 6300: loss 1.9123, time 530.45ms, mfu 25.70%
+[2026-06-09 14:40:10] [59m] Speed at iter 6400 (epoch 0.09): 1.89 iters/sec
+iter 6400: loss 1.8593, time 529.66ms, mfu 26.00%
+[2026-06-09 14:41:03] [1h 0m] Speed at iter 6500 (epoch 0.09): 1.89 iters/sec
+iter 6500: loss 1.8111, time 530.76ms, mfu 26.27%
+[2026-06-09 14:41:56] [1h 1m] Speed at iter 6600 (epoch 0.09): 1.89 iters/sec
+iter 6600: loss 1.7957, time 529.10ms, mfu 26.51%
+[2026-06-09 14:42:49] [1h 2m] Speed at iter 6700 (epoch 0.10): 1.89 iters/sec
+iter 6700: loss 1.8075, time 528.62ms, mfu 26.74%
+[2026-06-09 14:43:42] [1h 3m] Speed at iter 6800 (epoch 0.10): 1.89 iters/sec
+iter 6800: loss 1.7896, time 529.02ms, mfu 26.94%
+[2026-06-09 14:44:35] [1h 3m] Speed at iter 6900 (epoch 0.10): 1.89 iters/sec
+iter 6900: loss 1.9005, time 528.98ms, mfu 27.12%
+[2026-06-09 14:45:28] [1h 4m] Speed at iter 7000 (epoch 0.10): 1.89 iters/sec
+iter 7000: loss 1.7812, time 528.45ms, mfu 27.29%
+[2026-06-09 14:46:21] [1h 5m] Speed at iter 7100 (epoch 0.10): 1.89 iters/sec
+iter 7100: loss 1.7011, time 528.16ms, mfu 27.44%
+[2026-06-09 14:47:14] [1h 6m] Speed at iter 7200 (epoch 0.10): 1.89 iters/sec
+iter 7200: loss 1.6905, time 528.77ms, mfu 27.57%
+[2026-06-09 14:48:06] [1h 7m] Speed at iter 7300 (epoch 0.11): 1.89 iters/sec
+iter 7300: loss 1.7587, time 529.91ms, mfu 27.68%
+[2026-06-09 14:48:59] [1h 8m] Speed at iter 7400 (epoch 0.11): 1.89 iters/sec
+iter 7400: loss 1.7875, time 527.98ms, mfu 27.80%
+[2026-06-09 14:49:52] [1h 9m] Speed at iter 7500 (epoch 0.11): 1.89 iters/sec
+iter 7500: loss 1.7851, time 528.78ms, mfu 27.89%
+[2026-06-09 14:50:45] [1h 10m] Speed at iter 7600 (epoch 0.11): 1.89 iters/sec
+iter 7600: loss 1.6092, time 528.68ms, mfu 27.98%
+[2026-06-09 14:51:38] [1h 10m] Speed at iter 7700 (epoch 0.11): 1.89 iters/sec
+iter 7700: loss 1.6634, time 528.31ms, mfu 28.06%
+[2026-06-09 14:52:31] [1h 11m] Speed at iter 7800 (epoch 0.11): 1.89 iters/sec
+iter 7800: loss 1.6449, time 528.44ms, mfu 28.13%
+[2026-06-09 14:53:24] [1h 12m] Speed at iter 7900 (epoch 0.11): 1.89 iters/sec
+iter 7900: loss 1.6170, time 528.60ms, mfu 28.20%
+[2026-06-09 14:54:54] [1h 14m] Step  8000 | Epoch   0.12 | train loss 1.6266 | val loss 1.6346 | lr 1.50e-04
+  Saved checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda.pt (best val loss: 1.6346)
+  Saved rolling checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda_rolling.pt (iter 8000, val 1.6346)
+[2026-06-09 14:55:03] [1h 14m] Speed at iter 8000 (epoch 0.12): 1.01 iters/sec
+iter 8000: loss 1.5954, time 46863.20ms, mfu 25.41%
+[2026-06-09 14:55:56] [1h 15m] Speed at iter 8100 (epoch 0.12): 1.90 iters/sec
+iter 8100: loss 1.9436, time 527.79ms, mfu 25.75%
+[2026-06-09 14:56:49] [1h 16m] Speed at iter 8200 (epoch 0.12): 1.89 iters/sec
+iter 8200: loss 1.6234, time 529.43ms, mfu 26.05%
+[2026-06-09 14:57:42] [1h 17m] Speed at iter 8300 (epoch 0.12): 1.89 iters/sec
+iter 8300: loss 1.9826, time 529.34ms, mfu 26.32%
+[2026-06-09 14:58:35] [1h 17m] Speed at iter 8400 (epoch 0.12): 1.89 iters/sec
+iter 8400: loss 1.5932, time 529.56ms, mfu 26.56%
+[2026-06-09 14:59:27] [1h 18m] Speed at iter 8500 (epoch 0.12): 1.89 iters/sec
+iter 8500: loss 1.5813, time 529.76ms, mfu 26.77%
+[2026-06-09 15:00:20] [1h 19m] Speed at iter 8600 (epoch 0.12): 1.89 iters/sec
+iter 8600: loss 1.5170, time 529.50ms, mfu 26.97%
+[2026-06-09 15:01:13] [1h 20m] Speed at iter 8700 (epoch 0.13): 1.89 iters/sec
+iter 8700: loss 1.5471, time 528.87ms, mfu 27.15%
+[2026-06-09 15:02:06] [1h 21m] Speed at iter 8800 (epoch 0.13): 1.89 iters/sec
+iter 8800: loss 1.6062, time 528.76ms, mfu 27.31%
+[2026-06-09 15:02:59] [1h 22m] Speed at iter 8900 (epoch 0.13): 1.89 iters/sec
+iter 8900: loss 1.5802, time 528.72ms, mfu 27.45%
+[2026-06-09 15:03:52] [1h 23m] Speed at iter 9000 (epoch 0.13): 1.89 iters/sec
+iter 9000: loss 1.4745, time 528.47ms, mfu 27.59%
+[2026-06-09 15:04:45] [1h 24m] Speed at iter 9100 (epoch 0.13): 1.89 iters/sec
+iter 9100: loss 1.5679, time 528.58ms, mfu 27.71%
+[2026-06-09 15:05:38] [1h 24m] Speed at iter 9200 (epoch 0.13): 1.89 iters/sec
+iter 9200: loss 1.5330, time 527.55ms, mfu 27.82%
+[2026-06-09 15:06:30] [1h 25m] Speed at iter 9300 (epoch 0.13): 1.89 iters/sec
+iter 9300: loss 1.4620, time 528.68ms, mfu 27.91%
+[2026-06-09 15:07:23] [1h 26m] Speed at iter 9400 (epoch 0.14): 1.89 iters/sec
+iter 9400: loss 1.4767, time 530.18ms, mfu 27.99%
+[2026-06-09 15:08:16] [1h 27m] Speed at iter 9500 (epoch 0.14): 1.89 iters/sec
+iter 9500: loss 1.4960, time 528.83ms, mfu 28.07%
+[2026-06-09 15:09:09] [1h 28m] Speed at iter 9600 (epoch 0.14): 1.89 iters/sec
+iter 9600: loss 1.4075, time 528.69ms, mfu 28.14%
+[2026-06-09 15:10:02] [1h 29m] Speed at iter 9700 (epoch 0.14): 1.89 iters/sec
+iter 9700: loss 1.4781, time 529.28ms, mfu 28.20%
+[2026-06-09 15:10:55] [1h 30m] Speed at iter 9800 (epoch 0.14): 1.89 iters/sec
+iter 9800: loss 1.4160, time 527.55ms, mfu 28.26%
+[2026-06-09 15:11:48] [1h 31m] Speed at iter 9900 (epoch 0.14): 1.89 iters/sec
+iter 9900: loss 1.5148, time 528.41ms, mfu 28.31%
+[2026-06-09 15:13:17] [1h 32m] Step 10000 | Epoch   0.14 | train loss 1.4579 | val loss 1.4595 | lr 1.50e-04
+  Saved checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda.pt (best val loss: 1.4595)
+  Saved rolling checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda_rolling.pt (iter 10000, val 1.4595)
+[2026-06-09 15:13:29] [1h 32m] Saved periodic checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda_iter10000.pt (iter 10000, epoch 0.14)
+
+[2026-06-09 15:13:29] [1h 32m] Sampling at iter 10000 (epoch 0.14):
+  1.  row, and in is somely with the reason grings of the orning, who how as the locked young with the kind of egraph, accompany has 
+  2. at, Mant wither notice was on the mastifican, which we was insaid up the sider the morning for, the cogratific slying Proposeman
+  3. tan do osespensence on an a ravaile and peteernamen. Instrode bishot to me a me taken the piece nator the fire, can descendertai
+
+[2026-06-09 15:13:31] [1h 32m] Speed at iter 10000 (epoch 0.14): 0.97 iters/sec
+iter 10000: loss 1.4983, time 51222.86ms, mfu 25.51%
+[2026-06-09 15:14:24] [1h 33m] Speed at iter 10100 (epoch 0.15): 1.90 iters/sec
+iter 10100: loss 1.4811, time 529.38ms, mfu 25.83%
+[2026-06-09 15:15:17] [1h 34m] Speed at iter 10200 (epoch 0.15): 1.89 iters/sec
+iter 10200: loss 1.5002, time 530.38ms, mfu 26.12%
+[2026-06-09 15:16:10] [1h 35m] Speed at iter 10300 (epoch 0.15): 1.89 iters/sec
+iter 10300: loss 1.4371, time 530.37ms, mfu 26.37%
+[2026-06-09 15:17:03] [1h 36m] Speed at iter 10400 (epoch 0.15): 1.89 iters/sec
+iter 10400: loss 1.4354, time 528.43ms, mfu 26.61%
+[2026-06-09 15:17:55] [1h 37m] Speed at iter 10500 (epoch 0.15): 1.89 iters/sec
+iter 10500: loss 1.4458, time 528.91ms, mfu 26.83%
+[2026-06-09 15:18:48] [1h 38m] Speed at iter 10600 (epoch 0.15): 1.89 iters/sec
+iter 10600: loss 1.3508, time 527.62ms, mfu 27.03%
+[2026-06-09 15:19:41] [1h 39m] Speed at iter 10700 (epoch 0.15): 1.89 iters/sec
+iter 10700: loss 1.3591, time 527.84ms, mfu 27.21%
+[2026-06-09 15:20:34] [1h 39m] Speed at iter 10800 (epoch 0.16): 1.89 iters/sec
+iter 10800: loss 1.4298, time 529.67ms, mfu 27.36%
+[2026-06-09 15:21:27] [1h 40m] Speed at iter 10900 (epoch 0.16): 1.89 iters/sec
+iter 10900: loss 1.3932, time 528.62ms, mfu 27.50%
+[2026-06-09 15:22:20] [1h 41m] Speed at iter 11000 (epoch 0.16): 1.89 iters/sec
+iter 11000: loss 1.4240, time 528.21ms, mfu 27.63%
+[2026-06-09 15:23:13] [1h 42m] Speed at iter 11100 (epoch 0.16): 1.89 iters/sec
+iter 11100: loss 1.4306, time 530.08ms, mfu 27.73%
+[2026-06-09 15:24:05] [1h 43m] Speed at iter 11200 (epoch 0.16): 1.89 iters/sec
+iter 11200: loss 1.3782, time 528.53ms, mfu 27.84%
+[2026-06-09 15:24:58] [1h 44m] Speed at iter 11300 (epoch 0.16): 1.89 iters/sec
+iter 11300: loss 1.4747, time 528.76ms, mfu 27.93%
+[2026-06-09 15:25:51] [1h 45m] Speed at iter 11400 (epoch 0.16): 1.89 iters/sec
+iter 11400: loss 1.3977, time 530.05ms, mfu 28.01%
+[2026-06-09 15:26:44] [1h 46m] Speed at iter 11500 (epoch 0.17): 1.89 iters/sec
+iter 11500: loss 1.3657, time 528.37ms, mfu 28.09%
+[2026-06-09 15:27:37] [1h 46m] Speed at iter 11600 (epoch 0.17): 1.89 iters/sec
+iter 11600: loss 1.4972, time 529.25ms, mfu 28.15%
+[2026-06-09 15:28:30] [1h 47m] Speed at iter 11700 (epoch 0.17): 1.89 iters/sec
+iter 11700: loss 1.5414, time 529.22ms, mfu 28.21%
+[2026-06-09 15:29:22] [1h 48m] Speed at iter 11800 (epoch 0.17): 1.89 iters/sec
+iter 11800: loss 1.3507, time 527.74ms, mfu 28.27%
+[2026-06-09 15:30:15] [1h 49m] Speed at iter 11900 (epoch 0.17): 1.89 iters/sec
+iter 11900: loss 1.3138, time 527.73ms, mfu 28.33%
+[2026-06-09 15:31:45] [1h 51m] Step 12000 | Epoch   0.17 | train loss 1.3849 | val loss 1.3703 | lr 1.50e-04
+  Saved checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda.pt (best val loss: 1.3703)
+  Saved rolling checkpoint to pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda_rolling.pt (iter 12000, val 1.3703)
+[2026-06-09 15:31:55] [1h 51m] Speed at iter 12000 (epoch 0.17): 1.01 iters/sec
+iter 12000: loss 1.3142, time 46889.72ms, mfu 25.53%
+[2026-06-09 15:32:47] [1h 52m] Speed at iter 12100 (epoch 0.17): 1.90 iters/sec
+iter 12100: loss 1.4014, time 527.86ms, mfu 25.85%
+[2026-06-09 15:33:40] [1h 52m] Speed at iter 12200 (epoch 0.18): 1.89 iters/sec
+iter 12200: loss 1.3958, time 529.83ms, mfu 26.14%
+[2026-06-09 15:34:33] [1h 53m] Speed at iter 12300 (epoch 0.18): 1.89 iters/sec
+iter 12300: loss 1.2961, time 530.62ms, mfu 26.39%
+[2026-06-09 15:35:26] [1h 54m] Speed at iter 12400 (epoch 0.18): 1.88 iters/sec
+iter 12400: loss 1.4974, time 537.06ms, mfu 26.58%
+[2026-06-09 15:36:20] [1h 55m] Speed at iter 12500 (epoch 0.18): 1.86 iters/sec
+iter 12500: loss 1.3236, time 530.88ms, mfu 26.79%

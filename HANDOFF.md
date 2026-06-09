@@ -11,17 +11,38 @@ full bring-up. Summary: installed Miniforge → conda env `bpe_char` (Python
 `nohup`+`disown`, NO `tail -f`, prints PID+log) and
 `sh/train_char_uppercase_16L_1280_no_gelu_matched_LR_trial_CUDA.sh` (bash, calls
 train_cuda.sh, identical hyperparameters, output suffixed `_cuda`). Corpus
-(1.27 GB) rsynced from the Studio (byte-exact). **The no-GELU matched-LR run is
-now LIVE on the A6000** (PID 255921 as launched; output base
-`pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda.pt`): **~0.52 sec/iter, MFU
-~29%** vs the Studio's 4.18 sec/iter / ~3.5% — 500K iters in ~3 days vs ~24.
-GPU ~86°C under load (normal for this card; throttle ~93°C). Stop with
-`kill -TERM <PID>`. **This DUPLICATES the live Studio no-GELU run** (same
-hyperparameters, faster hardware) — OPEN decision: retire the Studio run and let
-the A6000 reach the val floor, or keep both for cross-hardware reproducibility.
-NOTE: `.claude/settings.local.json` got a permissions allowlist this session
-(git-tracked; contains absolute `/home/owner/...` paths — left UNcommitted to
-avoid syncing machine-specific paths via git).
+(1.27 GB) rsynced from the Studio (byte-exact, in `txt_local/`, gitignored).
+
+**STATUS AT HANDOFF — GPU is IDLE, nothing training on this box.** The no-GELU
+matched-LR CUDA run reached **iter 12,500 (loss 1.32, sustained 1.86 it/s over
+~2 h, GPU ~86 °C — normal, throttle ~93 °C)** and was then **STOPPED (SIGTERM)**
+to free the GPU for a throughput benchmark. Output base
+`pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda.pt` (+ `_rolling`/`_tokens`
+in `pt/`, gitignored). Relaunch:
+`sh/train_char_uppercase_16L_1280_no_gelu_matched_LR_trial_CUDA.sh` (starts
+fresh unless pointed at the rolling checkpoint with `--resume`).
+
+**Speed result (the reason this box exists):** A6000 CUDA **~0.52 sec/iter,
+~33,000 tokens/sec** vs the Studio's 4.18 sec/iter / ~3,900 tok/s —
+**~7.8–8.6× faster**. Throughput is nearly batch-independent here (block 4096
+saturates the tensor cores even at batch 4: only +3.2% from batch 4→16); memory
+caps batch at **~16–18** (batch 32 OOMs at 48 GB); real utilization is **~61%**
+of the A6000's own bf16 peak (the logged "29% MFU" is A100-normalized).
+Benchmark tool: `py/benchmark_throughput.py`. Full table + analysis in diary 096.
+
+**OPEN decisions for the next instance:** (a) the A6000 run DUPLICATES the live
+Studio no-GELU run — retire the Studio run (`kill -TERM 75333` ON THE STUDIO) and
+let the A6000 reach the val floor in ~3 days, or keep both for cross-hardware
+reproducibility; (b) restart the A6000 matched run, or leave the box idle now
+that the speed question is answered.
+
+NOTE on config: `.claude/settings.local.json` holds this session's permissions
+allowlist (conda/pip/python/git-read+write/read-only-shell/scoped-ssh/project
+file edits, with rm -rf / reset --hard / force-push / kill denied). It is
+**gitignored** via the global `~/.config/git/ignore` rule
+`**/.claude/settings.local.json`, so it stays local to this box and never syncs
+— no action needed. (Correction to an earlier draft of this entry: the file is
+NOT git-tracked.)
 
 Earlier same day: 2026-06-09 by Claude Code Opus 4.8 (Linux/CUDA workstation
 session) — **RESOLVED the two open questions from the 2026-06-06 handoff:
