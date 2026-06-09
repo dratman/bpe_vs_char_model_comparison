@@ -1,6 +1,29 @@
 # Handoff Document
 
 Last updated: 2026-06-09 by Claude Code Opus 4.8 (Linux/CUDA workstation
+session, later same day) — **The A6000 box is now a working CUDA training node;
+char training launched here ~8× faster than the Studio.** See diary 096 for the
+full bring-up. Summary: installed Miniforge → conda env `bpe_char` (Python
+3.12.13, torch 2.6.0+cu124, numpy, tokenizers — the last is a hard import dep in
+`py/tokenizer.py` even for char runs). `py/train.py` already auto-selects CUDA
+(train.py:661) so no Python changes; only the shell wrappers were ported:
+`sh/train_cuda.sh` (bash port of train.sh — conda-env python via absolute path,
+`nohup`+`disown`, NO `tail -f`, prints PID+log) and
+`sh/train_char_uppercase_16L_1280_no_gelu_matched_LR_trial_CUDA.sh` (bash, calls
+train_cuda.sh, identical hyperparameters, output suffixed `_cuda`). Corpus
+(1.27 GB) rsynced from the Studio (byte-exact). **The no-GELU matched-LR run is
+now LIVE on the A6000** (PID 255921 as launched; output base
+`pt/char_uppercase_16L_1280_no_gelu_matched_lr_cuda.pt`): **~0.52 sec/iter, MFU
+~29%** vs the Studio's 4.18 sec/iter / ~3.5% — 500K iters in ~3 days vs ~24.
+GPU ~86°C under load (normal for this card; throttle ~93°C). Stop with
+`kill -TERM <PID>`. **This DUPLICATES the live Studio no-GELU run** (same
+hyperparameters, faster hardware) — OPEN decision: retire the Studio run and let
+the A6000 reach the val floor, or keep both for cross-hardware reproducibility.
+NOTE: `.claude/settings.local.json` got a permissions allowlist this session
+(git-tracked; contains absolute `/home/owner/...` paths — left UNcommitted to
+avoid syncing machine-specific paths via git).
+
+Earlier same day: 2026-06-09 by Claude Code Opus 4.8 (Linux/CUDA workstation
 session) — **RESOLVED the two open questions from the 2026-06-06 handoff:
 SSH access and the no-GELU live-run check.**
 (1) **SSH from this Linux box to the Studio is now AUTHORIZED.** Ralph ran
