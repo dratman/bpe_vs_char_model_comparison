@@ -107,6 +107,40 @@ the goal is just to get the no-GELU val floor, the A6000 will reach it first and
 the Studio run can be retired; if the goal is cross-hardware reproducibility,
 keeping both is the point. That decision is open.
 
+## Throughput sweep (batch size)
+
+Follow-up benchmark to find the A6000's real ceiling, since results don't matter
+here — only speed does. `py/benchmark_throughput.py` times a faithful training
+step (zero_grad → autocast forward → backward → clip_grad_norm_(1.0) → step) on
+synthetic on-GPU batches, building the model once and reusing it across batch
+sizes. The matched-LR run was stopped at iter 12,500 (still a rock-steady
+1.86 it/s after ~2 h) to free the GPU for this. Fidelity gate: batch 4
+reproduced **502 ms/iter** (vs the real run's 535 ms) and 30.3% A100-MFU (vs the
+logged ~29%), so the synthetic step tracks the real one.
+
+| batch | tokens/iter | ms/iter | tokens/sec | MFU(A100) | MFU(A6000) | peak mem |
+|--:|--:|--:|--:|--:|--:|--:|
+| 4  | 16,384 |   502 | 32,632 | 30.3% | 61.0% | 14.3 GB |
+| 8  | 32,768 |   980 | 33,427 | 31.0% | 62.5% | 24.0 GB |
+| 16 | 65,536 | 1,946 | 33,682 | 31.3% | 62.9% | 43.4 GB |
+| 32 | —      | —     | —      | —     | —     | **OOM** |
+
+Findings:
+- **Throughput is nearly batch-independent here.** tokens/sec rises only +3.2%
+  from batch 4 → 16. At block 4096 the sequence dimension already saturates the
+  tensor cores, so the MPS-era batch=4 was *not* costing throughput on CUDA.
+- **Memory, not compute, is the cap.** ~2.4 GB per batch-unit over a ~4.8 GB
+  base; batch 16 fills 43 of 48 GB, batch 32 OOMs. Max practical batch ~16–18.
+- **Real utilization is ~61%, not 29%.** `estimate_mfu()` normalizes to an
+  A100's 312 TFLOPS; against the A6000's own ~155 TFLOPS dense bf16 peak this
+  workload runs at ~61–63% — genuinely well utilized.
+- The 7.8× cross-hardware speedup (diary table above) holds and is slightly
+  conservative — 8.6× at the A6000's best batch (16).
+
+Practical upshot: keep batch 4 for the matched comparison — raising batch buys
+no throughput on this card, only changes optimization dynamics (and would need
+LR retuning). Memory, not speed, is what would force batch choices here.
+
 ## For the next instance
 
 - Env: `conda activate bpe_char` (torch 2.6.0+cu124). `tokenizers` is a hard
@@ -117,3 +151,5 @@ keeping both is the point. That decision is open.
   checkpoint loses at most `eval_interval` iters).
 - Corpora/checkpoints are NOT in git (gitignored, large). Pull corpora from the
   Studio via rsync as done here.
+- Throughput benchmark: `python py/benchmark_throughput.py --batches 4,8,16,32`
+  (needs the conda env). Faithful training-step timing, no data/checkpoints.
