@@ -1,6 +1,42 @@
 # Handoff Document
 
-Last updated: 2026-06-06 by Claude Code Opus 4.8 (Linux/CUDA workstation,
+Last updated: 2026-06-09 by Claude Code Opus 4.8 (Linux/CUDA workstation
+session) — **RESOLVED the two open questions from the 2026-06-06 handoff:
+SSH access and the no-GELU live-run check.**
+(1) **SSH from this Linux box to the Studio is now AUTHORIZED.** Ralph ran
+`ssh-copy-id -o PubkeyAuthentication=no -o PreferredAuthentications=password
+-o NumberOfPasswordPrompts=3 RalphDratman@192.168.1.233` from a REAL GNOME
+terminal (not Claude Code's `!`-shell — that has no TTY, so ssh fell back to
+the missing GUI `/usr/bin/ssh-askpass` and silently rejected empty passwords;
+same regular-Terminal-required gotcha logged for the M2 on 2026-05-23). This
+box's key (`~/.ssh/id_ed25519.pub`, `SHA256:c6Tng...`) is now in the Studio's
+authorized_keys; passwordless `ssh RalphDratman@192.168.1.233` works (confirmed
+logging in as `RalphDratman` on `Mac-Studio.local`). NOTES for next instance:
+the login is `RalphDratman` (capital R/D, matching `/Users/RalphDratman`) —
+the earlier "is it `ralphdratman`/`ralph`?" worry is settled; ICMP ping to the
+Studio FAILS (macOS firewall stealth mode) even though SSH on port 22 connects
+fine — do NOT use ping to test reachability; mDNS `.local` still does not
+resolve from this box, so use the IP `192.168.1.233`.
+(2) **The no-GELU MLP ablation matched-LR run IS LIVE on the Studio** (PID
+75333, elapsed 2d 21h+ as of this update). Command: `python -u py/train.py
+... --no_gelu --learning_rate 1.5e-4 --warmup_iters 2000 --max_iters 500000`
+→ `pt/char_uppercase_16L_1280_no_gelu_matched_lr.pt`. This is the **matched-LR
+variant** (max_iters=500K so LR stays near-constant), NOT the `--no_bias`
+variant — no-bias was never launched. As of **iter 60,000 / 500,000 (epoch
+0.86, 2026-06-09 11:15): val loss 1.0300, train 1.0126** (gap ~0.017, no
+overfitting), ~4.1 sec/iter, MFU ~3.6%, no NaN; iter-60K samples are loosely
+coherent 19th-C prose. The earlier confounded 10K trial's val ~1.84 at iter 8K
+was indeed largely the fast-LR-decay artifact the handoff suspected: with LR
+matched, the no-GELU model is at val 1.03 by iter 60K and still descending. It
+was NOT stopped at ~10K via SIGTERM — it is being allowed to run toward the
+full val floor (**ETA ~2026-06-30** at this rate). To stop it:
+`kill -TERM 75333` (SIGTERM, not SIGINT — the documented background-job gotcha).
+**OPEN for next instance:** (a) decide let-it-run-to-floor vs. stop-early once
+no-GELU-vs-baseline is clear; (b) the matched-iter comparison still needs the
+baseline char run's val at iter ~60K pulled to quantify what GELU actually
+buys; (c) the memorization probe remains committed-but-not-yet-run.
+
+Prior update: 2026-06-06 by Claude Code Opus 4.8 (Linux/CUDA workstation,
 SSH-from-Mac session) — repo housekeeping only, no model work. (1) Finished
 the GitHub operation a parallel session left open: fast-forward-merged
 branch `memorization-probe-and-handoff-fix` into master (HEAD now
@@ -57,7 +93,7 @@ hung its TUI on a background gnome-terminal tab — looked like a "locked
 keyboard"; resolved by `kill`-ing that claude PID and resuming with
 `claude --continue`. Hardware was fine throughout.
 
-Prior update: 2026-06-06 by Claude Code Opus 4.8 (Linux/CUDA workstation
+Earlier update: 2026-06-06 by Claude Code Opus 4.8 (Linux/CUDA workstation
 session) — text/code-only work this session (no model weights or corpora
 on the Linux box): implemented `py/memorization_probe.py` + wrapper
 `sh/memorization_probe_bpe.sh` (overtraining experiment, ready to run on
@@ -67,7 +103,7 @@ diary 094 didn't incorporate the BPE-resumed best (it does, since commit
 `abaa52c`). Still pending and NOT doable from Linux: char checkpoint
 backup to Expansion, M3 wrapper-process cleanup (PIDs 26584/26585).
 
-Earlier update: 2026-06-02 by Claude Code Opus 4.7 (Mac Studio session)
+Yet earlier update: 2026-06-02 by Claude Code Opus 4.7 (Mac Studio session)
 — **Both trainings are now COMPLETE.** Studio char: completed
 2026-06-02 08:54 EDT at iter 500,000 (epoch 7.19), best val 0.7152
 per-char, 24d 8h wall time. M3 BPE-resumed: completed 2026-06-01
