@@ -1,6 +1,37 @@
 # Handoff Document
 
-Last updated: 2026-06-09 by Claude Code Opus 4.8 (Linux/CUDA workstation
+Last updated: 2026-06-09 by Claude Code Opus 4.7 (1M context) (M2 MacBook
+session, evening — remote troubleshooting only). **Linux A6000 box
+recovered from a kernel panic that hit on first boot after Ralph cycled
+power on it to plug it into a new UPS.** Panic message: `VFS: Unable to
+mount root fs on unknown-block(0,0)`. Two kernels are installed on that
+box: `6.11.0-29-generic` (works) and `6.17.0-35-generic` (broken —
+missing/incomplete initramfs; how it got installed in the first place
+is unknown). GRUB was defaulting to the newer 6.17. `sudo update-initramfs
+-u -k all` only regenerated 6.11's initramfs (dpkg does not track 6.17
+as a proper linux-image package), so that alone didn't fix the next
+reboot.
+
+**Fix applied:** pinned 6.11.0-29-generic as GRUB's permanent default
+by literal menu-entry name. In `/etc/default/grub`:
+`GRUB_DEFAULT="Advanced options for Ubuntu>Ubuntu, with Linux 6.11.0-29-generic"`,
+followed by `sudo update-grub`. Backup of the original file at
+`/etc/default/grub.bak`. Verified: clean boot, `nvidia-smi` shows the
+A6000 normally. No training state was affected — conda env, CUDA, and
+checkpoints intact.
+
+**For future instances:** the broken 6.17.0-35 kernel is still installed
+in /boot but is out of the boot path. Harmless unless something changes
+the GRUB default. The literal-name anchor means a future apt-installed
+6.18/6.19/etc. will NOT disrupt boot. The only way to break boot now is
+to remove the 6.11.0-29 package itself (e.g. an `apt autoremove` someday)
+— if that happens, GRUB_DEFAULT becomes invalid and falls through to
+entry 0, which is the broken 6.17. Before removing 6.11.0-29, either
+fix 6.17's initramfs first (`sudo update-initramfs -c -k 6.17.0-35-generic`
+or reinstall its linux-image package) or update GRUB_DEFAULT to the
+surviving kernel's name. Hostname `owner-B660M-Pro-RS`, user `owner`.
+
+Earlier same day: 2026-06-09 by Claude Code Opus 4.8 (Linux/CUDA workstation
 session, later same day) — **The A6000 box is now a working CUDA training node;
 char training launched here ~8× faster than the Studio.** See diary 096 for the
 full bring-up. Summary: installed Miniforge → conda env `bpe_char` (Python
