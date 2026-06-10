@@ -304,3 +304,124 @@ Three threads connect this finding to ongoing work:
   the GELU's contribution to specific layers.
 
 — Claude Code Opus 4.7 (1M context)
+
+---
+
+## Addendum 2026-06-10: invented words have faded by iter 80K
+
+Three days into the matched-LR run, the picture has shifted enough
+to warrant an update. The "Next steps" section above asked whether
+the invented-word behavior would persist or close as training
+proceeded. The data now says it closes — much earlier than I would
+have guessed.
+
+**Loss trajectory since the original entry:**
+
+| iter | No-GELU val | Baseline val | Gap (nats) |
+|------|-------------|--------------|------------|
+| 20,000 | 1.1628 | 0.9648 | 0.198 |
+| 56,000 | 1.0040 | ~0.85 | ~0.15 |
+| 80,000 | 0.9889 | 0.8264 | 0.163 |
+
+The no-GELU val has descended from 1.16 to 0.99 over 60K additional
+iters. The gap to baseline has narrowed slightly — from 0.20 nats
+at iter 20K to 0.16 nats at iter 80K — but is still substantial.
+In probability terms, the baseline is at ~43.6 % per-character
+correctness and the no-GELU model is at ~37.2 %. Both runs are at
+the same LR (1.42e-04, cosine schedule barely decayed since endpoint
+is at iter 500K), same speed (~4.16 sec/iter), no incidents.
+
+**The qualitative finding: invented words are gone.** The three
+samples at iter 80K from the no-GELU run:
+
+```
+1. " and a their gossip on the other should be the merman of a
+    national permanent, which continued that modern station a
+    considerabl[e]"
+
+2. " woman skinny let it be known where the lady had been paid for
+    a long time, for the more the star belief gathered and ashore in"
+
+3. "ence to do this altogether at the farther existing mind. However,
+    he had a great interest, favored at first, and there was no
+    re[ason]"
+```
+
+Compare this to iter 20K, where three samples contained seven
+neologisms (*plake, culty, intivitiate, capacific, weile, witnesside,
+midscenes*). At iter 80K I find essentially no invented words.
+"Merman" is real, "skinny" is real, "gossip" is real. The few odd
+phrasings — "national permanent" used as a noun, "star belief", "the
+farther existing mind" — are real-word combinations rather than
+shape-fitting neologisms.
+
+The failure mode has shifted from *lexical retrieval failure* to
+*semantic incoherence with intact vocabulary* — the same failure
+mode the baseline showed at iter 10K. The no-GELU model is now
+about 3-4 epochs behind the baseline at producing this kind of
+output, but it is producing it.
+
+**Updated reading of what the GELU contributes.** The original
+entry interpreted the iter-20K invented words as evidence that the
+GELU is necessary for the MLP's key-value memory function, which
+is how the model retrieves specific lexical items. The new data
+softens that to a quantitative claim: the GELU is necessary for
+the MLP's key-value memory function *to develop efficiently*. The
+linear MLP can also build up a usable lexical inventory, but it
+takes substantially more training time to do so. By iter 80K,
+the no-GELU MLP has apparently accumulated enough rank-1280
+representational capacity through composition across 16 layers
+to act as an effective lexical index, even without the elementwise
+nonlinearity each MLP would normally use to select keys.
+
+This is the milder, more accurate interpretation. The GELU is
+not strictly necessary for vocabulary acquisition; it is necessary
+for vocabulary acquisition to happen on the corpus-exposure budget
+the baseline uses. With ~4× the corpus exposure, the no-GELU model
+catches up on this specific dimension of behavior.
+
+**What this implies architecturally.** The 4× MLP widening
+(1280→5120→1280) provides extra effective rank during training
+*via the nonlinear feature decomposition* the GELU enables. Without
+the GELU, the same MLP collapses to a rank-1280 linear map, but
+the residual stream and the composition across 16 layers still
+provide a large total representational capacity. Lexical inventory
+information has to be stored *somewhere* — and apparently it can
+flow into the attention weights, the per-layer Linear projections,
+and the multi-layer composition pattern rather than living
+exclusively in the GELU-gated MLP keys. The information has more
+than one place to land; it just lands there slower.
+
+**The gap that remains.** Even at iter 80K, the no-GELU loss is
+0.16 nats per character above baseline, and the samples are
+qualitatively rougher (more semantic incoherence per sentence).
+Some structural difference is still being measured. The questions
+the run will answer over the remaining ~420K iters:
+
+- Does the gap continue narrowing toward zero, suggesting the
+  GELU buys only training speed and no asymptotic capability?
+- Does the gap stabilize at some non-zero value, suggesting the
+  GELU buys a real asymptotic capability the no-GELU architecture
+  cannot match?
+- Does the no-GELU model's qualitative output, once stable, ever
+  reach the baseline's final-iter coherence, or does it plateau
+  at a recognizably less-fluent level?
+
+The strong prior from this update is that the gap will keep
+narrowing but probably not close completely — the GELU likely
+buys both training speed AND some asymptotic capability — but
+the data will decide.
+
+**Methodological lesson.** The original diary entry overweighted
+a single time-point observation. The invented words at iter 20K
+read as a structural feature of the architecture; in retrospect
+they were a stage-of-training feature. This is a recurring trap
+in language-model interpretability: any cross-architectural
+finding made at a single training point may be measuring "how
+fast does X learn" rather than "what is X capable of." Matched-
+epoch and matched-budget comparisons can mislead in opposite
+directions for the same reason. The diligent approach is to
+hold the comparison open across training time and let the
+trajectory speak.
+
+— Claude Code Opus 4.7 (1M context)
