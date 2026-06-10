@@ -19,6 +19,53 @@ Ralph has not yet said whether to proceed — no code written yet.
 `diary/099_path_forward_consolidate_replicate_publish.md` records the
 full recommendation and reasoning so future sessions can pick it up.
 
+**Step 1 of diary 099 LAUNCHED (same session, ~15:07 EDT, Ralph said
+"go ahead"):**
+- **New tool committed: `py/real_word_fraction.py`** (commit `f22578b`).
+  Measures the fraction of generated words that occur >= min_count
+  (default 5) times in the training corpus — the diary-098 metric that
+  separates lexical inventory from statistical envelope. Reuses the
+  loader from `py/memorization_probe.py` and `generate_local` from
+  `py/sample.py`. Builds/caches a corpus word-count table at
+  `<corpus>.wordvocab.pkl` (built on Studio: 520,791 distinct words,
+  75 s). Same RNG stream per sample index across checkpoints
+  (torch.manual_seed(seed+i)), prompt " ", temp 0.8, top_k 40 —
+  matching the training-time samples diary 098 compared. Smoke-tested
+  on Studio: no-GELU iter-20K gave 94-96 % real words with exactly the
+  expected neologism phenotype (*herily*, *meronity*, *variotical*).
+- **Loader fix in `py/memorization_probe.py`** (same commit): periodic
+  `_iter{N}` checkpoints store `val_loss`, not `best_val_loss`
+  (train.py save_interval block); the loader now falls back and coerces
+  tensors to float. Verified: no-GELU iter-20K shows val 1.1628,
+  matching diary 098 exactly.
+- **Sweep RUNNING on the Studio** (PID 13185, zsh wrapper
+  `sh/real_word_fraction_sweep.sh`, log
+  `terminal_logs/rwf_sweep_nohup_2026_06_10.log`, started 15:07 EDT).
+  Three sequential jobs: (1) real-word fraction over 16 baseline char
+  checkpoints (20K-80K every 20K, then every 40K to 480K, + best 482K
+  + final 500K); (2) same over 16 no-GELU matched-LR checkpoints
+  (5K-80K every 5K); (3) the long-pending BPE memorization probe over
+  {132K, 168K, 220K}. Outputs: timestamped `.txt` + `.tsv` per job in
+  the Studio's `terminal_logs/` (stamp `2026_06_10_1507`). Rough ETA:
+  ~15 min/checkpoint with training competing for MPS → jobs 1+2 ~8 h
+  (done ~23:00 EDT), job 3 ~2 h more. The live no-GELU training run
+  (PID 75333) was left running throughout — sampling alongside it is
+  established practice.
+- **Stale-checkpoint discovery + fix:** the Studio's
+  `pt/bpe_uppercase_16L_1280_b2_resumed.pt` was dated May 27 — BEFORE
+  the true iter-168K best was saved on the M3 (May 28 09:08). It was
+  the iter-157K-era best, NOT the 3.2652 true minimum. Re-staged fresh
+  from the M3 (rsync, background, log
+  `terminal_logs/stage_bpe_resumed_2026_06_10.log`), along with the
+  missing `..._resumed_final.pt`. Job 3 of the sweep uses these.
+- **For the next instance:** harvest the sweep results from the
+  Studio's `terminal_logs/real_word_fraction_{baseline,no_gelu}_
+  2026_06_10_1507.{txt,tsv}` and `memorization_probe_bpe_*.txt`,
+  copy them into the repo, commit, and write the diary-100 analysis
+  (the real-word-fraction curve is the centerpiece figure for the
+  step-3 write-up). The Studio working copy was synced by `git pull`
+  this session (scp'd test copies were removed first).
+
 Earlier same day: 2026-06-10 by Claude Code Opus 4.8 (1M context) (M2 MacBook
 session, mid-afternoon) — **short session, no code or model work;
 prepared handoff for the next instance, which will run on the new
