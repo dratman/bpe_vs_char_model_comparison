@@ -5,6 +5,7 @@
 - [Jargon is audience-relative](feedback_jargon_is_audience_relative.md) — gloss technical terms (git, PyTorch, networking) instead of presuming familiarity
 - [Check tools first](feedback_check_tools_before_saying_impossible.md) — never declare a limitation without checking available tools for workarounds
 - [One git per machine](feedback_one_git_per_machine.md) — run git commit/push/pull on the local machine only; don't chain SSH git ops across M3/M2/Studio in one session
+- [Git pull/push discipline](feedback_git_pull_push_discipline.md) — pull before editing model code, push only after testing; pull at session start and push at session end for HANDOFF.md and diary/; append rather than overwrite the HANDOFF "Last updated" slot
 - [pgrep -af self-match](feedback_pgrep_self_match.md) — `pgrep -af <pat>` also matches the calling shell, producing phantom PIDs; use `pgrep -P <ppid>` for real children
 - [BPE training status](project_bpe_training.md) — 16L16H BPE model training since 2026-04-05, stop early on quality
 - [Corpus cleanup plan](project_corpus_cleanup.md) — filter non-literary content from Gutenberg corpus for future training
