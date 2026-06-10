@@ -15,6 +15,9 @@ real-word-fraction metric, run the memorization probe, use the idle
 A6000 for second-seed replication runs, then write the result up for
 an outside audience once the matched-LR run completes ~2026-06-30).
 Ralph has not yet said whether to proceed — no code written yet.
+**Diary 099 written** (same session, at Ralph's request):
+`diary/099_path_forward_consolidate_replicate_publish.md` records the
+full recommendation and reasoning so future sessions can pick it up.
 
 Earlier same day: 2026-06-10 by Claude Code Opus 4.8 (1M context) (M2 MacBook
 session, mid-afternoon) — **short session, no code or model work;
