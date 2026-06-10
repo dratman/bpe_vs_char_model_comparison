@@ -1,25 +1,98 @@
 # Handoff Document
 
-Last updated: 2026-06-10 by Claude Code Opus 4.7 (1M context) (Mac Studio
-session) — **No-GELU matched-LR run on Studio is at iter 81,500 (epoch
-1.17), descending steadily.** Latest eval (iter 80,000, 2026-06-10 10:22):
-val 0.9889 vs baseline 0.8264 at the same iter — gap narrowed from 0.20
-nats at iter 20K to 0.16 nats now. Speed 4.16 sec/iter, MFU ~3.6%, no
-incidents. ETA for the iter-500K val floor: ~2026-06-30. **Major
-qualitative finding:** the invented-word behavior recorded in diary 096
-(iter-20K samples — *plake*, *culty*, *intivitiate*, *capacific*, *weile*,
-*witnesside*, *midscenes*) has **faded by iter 80K**. iter-80K samples
-contain real English words with semantically incoherent sentences — the
-same failure mode the baseline showed at iter 10K, just shifted later in
-the no-GELU training trajectory. The original diary 096 interpretation
-("GELU is necessary for lexical inventory") has been softened in an
-appended addendum to "GELU is necessary for lexical inventory to develop
-**efficiently**" — the linear MLP also builds one, just ~4× slower in
-corpus exposure. **Diary 096 has been renumbered to diary 098** to
-resolve a numbering collision with the parallel A6000-port diary 096
-(see the 2026-06-09 Linux entry below). **New feedback memory installed:**
-`claude_memory/feedback_git_pull_push_discipline.md` codifies a
-pull-before-edit / test-then-push discipline for model code and a
+Last updated: 2026-06-10 by Claude Code Opus 4.7 (1M context) (M2 MacBook
+session, afternoon) — **interpretability tool added:
+`py/markup_predictions.py`.** Marks up a passage with per-token rank
+(where the actual token fell in the model's predicted distribution) and
+probability under softmax, plus the top-K alternatives at every position.
+Inline color-coded markup (green=rank 1, yellow=rank 2, magenta=rank 3,
+red=rank 4+) and a per-position detail table for low-confidence positions.
+Implementation reuses the loader pattern from `py/memorization_probe.py`
+and `py/sample.py`. Works for both char and BPE tokenizers; designed for
+char where every token is one character and the markup reads inline over
+the passage. Usage:
+```
+python py/markup_predictions.py \
+    --model pt/char_uppercase_16L_1280.pt \
+    --corpus txt_local/corpus_high_quality_uppercase_2026_05_08.txt \
+    --context_chars 512 --mark_chars 200 --seed 42
+```
+Or `--text "..."` for an arbitrary passage. `--no_color` for piping to a
+file. `--show_all` to include high-confidence rows in the detail table.
+
+**Verified working on Studio (MPS) against `pt/char_uppercase_16L_1280.pt`
+(best val 0.7152, iter 482K).** For a 200-char passage at seed 42 (corpus
+offset 239,081,663 — an Oersted/Ampere physics footnote): rank-1 fraction
+74.0 %, rank≤3 fraction 85.5 %, mean p(actual) 0.656, geo-mean 0.406
+(the geo-mean matches `exp(-loss)` semantics; 0.406 vs the model's val-set
+0.489 reflects single-passage noise, not a discrepancy). The hardest
+positions in that passage are the openings of new clauses (`T` in "The
+Medical" — rank 27) and proper-noun letters (`B` in BISCHOF — rank 14),
+which is the expected pattern. Output samples live at the repo root in
+this working tree as `markup_plain.txt` (text-only) and `markup_color.txt`
+(ANSI-colored — `cat` in Terminal to view); neither is committed and the
+script regenerates them, but leaving them untracked for the next instance
+to inspect or delete.
+
+**M2 → Studio SSH:** key-based auth confirmed today (host key for
+192.168.1.233 was added to M2's `~/.ssh/known_hosts` on first connect this
+session; it was missing before — `M2 → Studio SSH key auth set up
+2026-05-23` had set up the keys but not the host-key cache). Passwordless
+`ssh RalphDratman@192.168.1.233` works.
+
+**Pending question Ralph did NOT answer this session:** the 17-day-old
+data-exports reminder (see "Pending: requesting Claude.ai and ChatGPT
+exports (2026-05-19)" bullet below, and the
+`project_pending_reminder_data_exports.md` auto-memory). I asked at the
+end of the markup turn whether he wanted to request the exports now; he
+asked for transfer-prep instead. The reminder memory remains active for
+the next instance.
+
+**For the next instance to know:**
+- The markup script's loader assumes the meta path is derived from the
+  checkpoint path by the same convention `memorization_probe.py` uses
+  (strip `_iter{N}` or `_final` or `_rolling`). Works for the standard
+  outputs from this project's `train.py`. If you point it at an oddly-
+  named checkpoint, that derivation may need extending.
+- On Studio, run with `/Users/RalphDratman/miniforge3/bin/python3` and
+  cwd at the project root — relative imports of `model`, `tokenizer`,
+  `sample` come from `py/`, which `train.py`/`sample.py` already handle
+  the same way.
+- The Studio's working copy of `py/markup_predictions.py` (originally
+  scp'd from M2 for testing) was deleted at end-of-session so the next
+  `git pull` on Studio drops in the committed version cleanly without
+  the "untracked file would be overwritten" warning.
+- **The new `claude_memory/feedback_git_pull_push_discipline.md` rule
+  pulled in during the rebase tells future sessions to `git pull` at
+  session start and `git push` at session end for HANDOFF.md and
+  diary/, and to append (not overwrite) the top "Last updated" slot.
+  Mid-session merge conflicts can still happen when two sessions on
+  different machines edit HANDOFF.md the same day (this one happened
+  here — the Studio session and this M2 session both wrote new top
+  entries for 2026-06-10, and origin's was pushed during this M2
+  session). Resolution pattern: keep BOTH entries at the top of the
+  file in commit-order; do not drop either side's content.**
+
+Earlier same day: 2026-06-10 by Claude Code Opus 4.7 (1M context) (Mac
+Studio session, midday) — **No-GELU matched-LR run on Studio is at iter
+81,500 (epoch 1.17), descending steadily.** Latest eval (iter 80,000,
+2026-06-10 10:22): val 0.9889 vs baseline 0.8264 at the same iter — gap
+narrowed from 0.20 nats at iter 20K to 0.16 nats now. Speed 4.16 sec/iter,
+MFU ~3.6%, no incidents. ETA for the iter-500K val floor: ~2026-06-30.
+**Major qualitative finding:** the invented-word behavior recorded in
+diary 096 (iter-20K samples — *plake*, *culty*, *intivitiate*,
+*capacific*, *weile*, *witnesside*, *midscenes*) has **faded by iter 80K**.
+iter-80K samples contain real English words with semantically incoherent
+sentences — the same failure mode the baseline showed at iter 10K, just
+shifted later in the no-GELU training trajectory. The original diary 096
+interpretation ("GELU is necessary for lexical inventory") has been
+softened in an appended addendum to "GELU is necessary for lexical
+inventory to develop **efficiently**" — the linear MLP also builds one,
+just ~4× slower in corpus exposure. **Diary 096 has been renumbered to
+diary 098** to resolve a numbering collision with the parallel A6000-port
+diary 096 (see the 2026-06-09 Linux entry below). **New feedback memory
+installed:** `claude_memory/feedback_git_pull_push_discipline.md` codifies
+a pull-before-edit / test-then-push discipline for model code and a
 pull-at-session-start / push-at-end / append-rather-than-overwrite
 convention for HANDOFF.md, designed to reduce the kind of accumulated
 parallel-edit conflicts that necessitated this merge. This entry also
