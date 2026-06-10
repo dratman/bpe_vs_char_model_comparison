@@ -46,9 +46,12 @@ full recommendation and reasoning so future sessions can pick it up.
   + final 500K); (2) same over 16 no-GELU matched-LR checkpoints
   (5K-80K every 5K); (3) the long-pending BPE memorization probe over
   {132K, 168K, 220K}. Outputs: timestamped `.txt` + `.tsv` per job in
-  the Studio's `terminal_logs/` (stamp `2026_06_10_1507`). Rough ETA:
-  ~15 min/checkpoint with training competing for MPS → jobs 1+2 ~8 h
-  (done ~23:00 EDT), job 3 ~2 h more. The live no-GELU training run
+  the Studio's `terminal_logs/` (stamp `2026_06_10_1507`). Measured pace:
+  first checkpoint took 23 min (1399 s), slower than the 15-min
+  estimate — revised ETA: jobs 1+2 done ~03:30 EDT 2026-06-11, job 3
+  ~06:00. Ralph confirmed let-it-run-as-is (15:40 EDT). First data
+  point: baseline iter-20K = 99.1 % real words (1515/1528) vs no-GELU
+  iter-20K ~94-96 % in smoke tests — the diary-098 gap, quantified. The live no-GELU training run
   (PID 75333) was left running throughout — sampling alongside it is
   established practice.
 - **Stale-checkpoint discovery + fix:** the Studio's
