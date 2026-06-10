@@ -1,6 +1,36 @@
 # Handoff Document
 
-Last updated: 2026-06-10 by Claude Code Opus 4.7 (1M context) (M2 MacBook
+Last updated: 2026-06-10 by Claude Code Opus 4.8 (1M context) (M2 MacBook
+session, mid-afternoon) — **short session, no code or model work;
+prepared handoff for the next instance, which will run on the new
+Fable 5 model** (Ralph switched the default via `/model fable` during
+this session; the switch takes effect for new sessions, not this one).
+
+State for the next (Fable) instance:
+- **Nothing changed in the project this session.** `git pull` at start
+  was already up to date. The previous entry below (markup tool,
+  2026-06-10 afternoon) is still the latest real work.
+- **Studio no-GELU matched-LR run is presumed still live** (PID 75333;
+  was at iter 81,500 this morning per the entry below). Not re-checked
+  this session. ETA ~2026-06-30. A6000 box presumed still idle.
+- **Data-exports reminder fired and DEFERRED again.** I asked Ralph the
+  yes/no from `claude_memory/project_pending_reminder_data_exports.md`;
+  he chose "defer again." The memory file stays active — the next
+  instance should ask again (one yes/no, nothing bundled with it).
+- **Stray file identified:** `sh/sample_bpe_uppercase_16L_1280_b2 copy.sh`
+  (untracked, dated May 27 19:52) is an intermediate draft of the
+  resumed-run sample script — it has `RUN=..._resumed` but the old
+  hardcoded IP `192.168.1.177`. Fully superseded by the committed
+  `sh/sample_bpe_uppercase_16L_1280_b2_resumed.sh`. Safe to delete,
+  but Ralph has not yet confirmed — ask him (single yes/no) or leave it.
+- `markup_plain.txt` / `markup_color.txt` at the repo root remain
+  untracked sample outputs from the markup tool (see entry below);
+  regenerable, keep or delete freely.
+- Per the session-transition convention in Ralph's global CLAUDE.md:
+  this Opus instance may still be reachable when the Fable instance
+  starts; route any questions through Ralph.
+
+Earlier same day: 2026-06-10 by Claude Code Opus 4.7 (1M context) (M2 MacBook
 session, afternoon) — **interpretability tool added:
 `py/markup_predictions.py`.** Marks up a passage with per-token rank
 (where the actual token fell in the model's predicted distribution) and
