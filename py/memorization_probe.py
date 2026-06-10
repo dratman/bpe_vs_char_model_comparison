@@ -112,6 +112,14 @@ def load_model_and_tokenizer(model_path, device):
     tokenizer = load_tokenizer(meta_path)
     iter_num = checkpoint.get('iter_num', None)
     best_val = checkpoint.get('best_val_loss', None)
+    if best_val is None:
+        # Periodic _iter{N} checkpoints store the at-save eval as
+        # 'val_loss' instead (see train.py's save_interval block).
+        best_val = checkpoint.get('val_loss', None)
+    try:
+        best_val = float(best_val)  # may be stored as a 0-dim tensor
+    except (TypeError, ValueError):
+        best_val = None
     return model, tokenizer, iter_num, best_val
 
 
