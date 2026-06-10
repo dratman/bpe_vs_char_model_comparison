@@ -1,6 +1,22 @@
 # Handoff Document
 
-Last updated: 2026-06-10 by Claude Code Opus 4.8 (1M context) (M2 MacBook
+Last updated: 2026-06-10 by Claude Code Fable 5 (M2 MacBook session,
+mid-afternoon) — **data-exports reminder PERMANENTLY DROPPED by Ralph.**
+Asked the standing yes/no from the auto-memory; Ralph answered "no" to
+requesting the exports, then "yes" to dropping the reminder for good.
+The auto-memory file `project_pending_reminder_data_exports.md` and its
+MEMORY.md index line have been DELETED. No future session should ask
+about Claude.ai/ChatGPT data exports again unless Ralph raises it
+himself. The related "Pending" bullet and TODO checklist items further
+down this file are now marked DROPPED (kept in place for history).
+Also this session: recommended a research path forward to Ralph
+(consolidate the diary-098 GELU/lexical-inventory finding: build the
+real-word-fraction metric, run the memorization probe, use the idle
+A6000 for second-seed replication runs, then write the result up for
+an outside audience once the matched-LR run completes ~2026-06-30).
+Ralph has not yet said whether to proceed — no code written yet.
+
+Earlier same day: 2026-06-10 by Claude Code Opus 4.8 (1M context) (M2 MacBook
 session, mid-afternoon) — **short session, no code or model work;
 prepared handoff for the next instance, which will run on the new
 Fable 5 model** (Ralph switched the default via `/model fable` during
@@ -1017,7 +1033,11 @@ still alive on the M3 holding `tail -f` on a static log; needs
   hard end). No code or model changes; entirely a research-direction
   entry.
 
-- **Pending: requesting Claude.ai and ChatGPT exports (2026-05-19).**
+- **DROPPED 2026-06-10: requesting Claude.ai and ChatGPT exports
+  (originally 2026-05-19).** Ralph declined the exports and asked that
+  the reminder be permanently dropped (see the 2026-06-10 Fable 5 entry
+  at the top of this file). Original plan kept below for history only —
+  do not re-raise unless Ralph brings it up.
   Ralph plans to request data exports from both services so a future
   fine-tuning or specialized-model experiment has a real conversation
   corpus to work with. Diary entries alone are 358 KB cleaned — far
@@ -1240,14 +1260,12 @@ Review this list at the start of every session. Mark items DONE when complete.
   on the BPE model; if the need arises later, the best/last pair plus
   the Studio backup is what remains.
 
-### Diary + conversation corpus (planned post-training)
-- [ ] **Request Claude.ai data export** (Settings → Privacy → Request
-  data export). Expect email with download link in 1–2 days.
-- [ ] **Request ChatGPT data export** (Settings → Data Controls →
-  Export Data). Same timing.
-- [ ] When exports arrive: inspect JSON structure, write converter to
-  the 78-character vocabulary, report total size, decide whether to
-  do a fine-tuning pass. See HANDOFF "Pending" bullet above.
+### Diary + conversation corpus — DROPPED 2026-06-10
+Ralph declined the data exports and permanently dropped the reminder
+(see the 2026-06-10 Fable 5 entry at top). Items kept for history:
+- [dropped] Request Claude.ai data export
+- [dropped] Request ChatGPT data export
+- [dropped] Inspect exports / write converter / fine-tuning decision
 
 ### Analysis on completed char_high_quality.pt (still relevant; lower priority)
 - [ ] Run per-position prediction analysis (War and Peace passage) on
