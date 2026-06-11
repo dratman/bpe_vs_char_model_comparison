@@ -24,6 +24,17 @@ finishes. (See auto-memory `feedback_experiment_queue_autonomy.md`.)
 diary 094); WordPiece pair → loss curves + real-word-fraction sweep +
 samples vs diary 102's preregistered predictions.
 
+**coupler-queue (NEW 2026-06-11 ~10:45):** a browser-Claude "Editor"
+designed a three-actor file-based work queue; repo created at
+https://github.com/dratman/coupler-queue (private, README.md = the
+protocol, folders pending/running/done/failed). Workers are Claude
+Code on the Studio ("mac-mlx") and the Linux box ("linux-cuda"),
+claiming specs by folder-move over plain git. NOT YET CLONED on the
+Studio or Linux box — do that when the Editor's first spec appears
+(or when directed). How this interacts with the HANDOFF experiment
+queue above is still settling; for now HANDOFF tracks long trainings,
+coupler-queue will carry Editor-spec'd items.
+
 Last updated: 2026-06-11 by Claude Code Fable 5 (M2 MacBook session,
 early morning, ~04:40-05:00 EDT) — **diary-099 step 1 COMPLETE: sweep
 finished, results harvested, diaries 100 + 101 written.**
