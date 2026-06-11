@@ -46,15 +46,22 @@ done; A6000 launch BLOCKED on SSH authorization:**
   `pt/char_uppercase_16L_1280_seed2_cuda.pt`. ~3 days on the A6000.
   Check pt/ free space first (~90 GB of intermediates at
   save_interval=20000).
-- **BLOCKER: no SSH path to the A6000 from here.** M2 → owner@
-  192.168.1.224 gets `Permission denied (publickey,password)` (M2's
-  key not in the Linux box's authorized_keys; password can't be typed
-  through a no-TTY shell). Studio → A6000 also fails (host key not
-  cached / no key). Fix = Ralph runs `ssh-copy-id owner@192.168.1.224`
-  in a REAL Terminal window on the M2 (the !-shell-has-no-TTY gotcha
-  documented 2026-05-23 and 2026-06-09). M2 key:
-  `~/.ssh/id_ed25519.pub`. Then: ssh in, `git pull`, check disk, run
-  `sh/train_char_uppercase_16L_1280_seed2_CUDA.sh`.
+- **BLOCKER RESOLVED (~09:30): Ralph ran `ssh-copy-id
+  owner@192.168.1.224` from a real Terminal on the M2; passwordless
+  M2 → A6000 SSH now works.** (Studio → A6000 still NOT set up.)
+- **SEED-2 BASELINE REPLICATION LAUNCHED on the A6000, 09:31 EDT
+  2026-06-11. PID 151814.** Log: `terminal_logs/terminal_log_for_
+  char_uppercase_16L_1280_seed2_cuda_2026_06_11_0931.txt` on the
+  Linux box (repo at `/home/owner/bpe_vs_char_model_comparison`).
+  Launch verified: device cuda, "Seeded torch RNG with --seed 2",
+  78-char vocab matching the baseline, command line byte-identical
+  to the baseline's hyperparameters apart from --output/--seed.
+  Disk: 360 GB free at launch (run will add ~100 GB). Expected
+  ~0.52 sec/iter → 500K iters ≈ 3 days; ETA ~2026-06-14. Stop with
+  `kill -TERM 151814` ON THE LINUX BOX. Key comparison numbers when
+  it finishes: best val vs the Studio baseline's 0.7152 — the spread
+  is the empirical error bar under diary 094's 1.4 % char-vs-BPE
+  margin.
 - Ralph is about to describe a NEW experiment (his words ~09:20); see
   the conversation following this entry's session.
 
