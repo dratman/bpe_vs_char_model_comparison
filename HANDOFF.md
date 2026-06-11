@@ -29,9 +29,13 @@ designed a three-actor file-based work queue; repo created at
 https://github.com/dratman/coupler-queue (private, README.md = the
 protocol, folders pending/running/done/failed). Workers are Claude
 Code on the Studio ("mac-mlx") and the Linux box ("linux-cuda"),
-claiming specs by folder-move over plain git. NOT YET CLONED on the
-Studio or Linux box — do that when the Editor's first spec appears
-(or when directed). How this interacts with the HANDOFF experiment
+claiming specs by folder-move over plain git. CLONED on both workers
+(2026-06-11 ~10:55): Studio at
+`/Users/RalphDratman/0_Home_Folder_Working_Mac_Studio/coupler-queue`,
+Linux at `/home/owner/coupler-queue` — both via SSH remotes
+(`git@github.com:dratman/coupler-queue.git`; https clone FAILS on both
+boxes in non-TTY sessions — no usable credential helper — but both
+have account-level GitHub SSH keys that work). How this interacts with the HANDOFF experiment
 queue above is still settling; for now HANDOFF tracks long trainings,
 coupler-queue will carry Editor-spec'd items.
 
