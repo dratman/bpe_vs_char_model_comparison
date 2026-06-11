@@ -39,7 +39,7 @@ import torch
 from datetime import datetime
 from contextlib import nullcontext
 from model import GPT, GPTConfig
-from tokenizer import CharTokenizer, BPETokenizer, load_tokenizer
+from tokenizer import CharTokenizer, BPETokenizer, WordPieceTokenizer, load_tokenizer
 
 
 # Padding token ID - always at vocab_size
@@ -132,10 +132,17 @@ def parse_args():
 
     # Tokenizer options
     parser.add_argument('--tokenizer', type=str, default='bpe',
-                       choices=['char', 'bpe'],
-                       help='Tokenization scheme: bpe (default) or char')
+                       choices=['char', 'bpe', 'wordpiece'],
+                       help='Tokenization scheme: bpe (default), char, or wordpiece '
+                            '(BERT-style: spaceless word tokens, ## continuations)')
     parser.add_argument('--vocab_size', type=int, default=8192,
-                       help='Vocabulary size for BPE tokenizer (ignored for char)')
+                       help='Vocabulary size for BPE/WordPiece tokenizer (ignored for char)')
+    parser.add_argument('--tokenizer_from', type=str, default=None,
+                       help='Path to an existing _meta.pkl: load that tokenizer instead of '
+                            'training a new one. Guarantees identical tokenization across '
+                            'paired runs (e.g. an ablation and its control) and skips the '
+                            'tokenizer-training time. The tokenizer is still re-saved under '
+                            'this run\'s own output base.')
 
     # Gradient accumulation
     parser.add_argument('--grad_accum_steps', type=int, default=1,
@@ -719,6 +726,8 @@ def main():
         suffix = f'_{args.mode}'  # Mark training mode
         if args.tokenizer == 'bpe':
             suffix += '_bpe'
+        elif args.tokenizer == 'wordpiece':
+            suffix += '_wordpiece'
         suffix += attn_suffix
         if args.untie_weights:
             suffix += '_untied'
@@ -755,17 +764,28 @@ def main():
         print(f"[{get_timestamp()}] Loading tokenizer from {meta_path}")
         tokenizer = load_tokenizer(meta_path)
         vocab_size = tokenizer.vocab_size
+    elif args.tokenizer_from:
+        # Reuse an existing tokenizer (paired-run convention: the
+        # ablation run loads its control's tokenizer so both see the
+        # exact same token stream)
+        print(f"[{get_timestamp()}] Loading tokenizer from {args.tokenizer_from}")
+        tokenizer = load_tokenizer(args.tokenizer_from)
+        if tokenizer.tokenizer_type != args.tokenizer:
+            print(f"Error: --tokenizer_from is a {tokenizer.tokenizer_type} tokenizer "
+                  f"but --tokenizer is {args.tokenizer}")
+            sys.exit(1)
+        vocab_size = tokenizer.vocab_size
     else:
         # Create tokenizer
         print(f"[{get_timestamp()}] Training {args.tokenizer} tokenizer...")
         if args.tokenizer == 'char':
             tokenizer = CharTokenizer()
-            tokenizer.train(text)
-            vocab_size = tokenizer.vocab_size
+        elif args.tokenizer == 'wordpiece':
+            tokenizer = WordPieceTokenizer(vocab_size=args.vocab_size)
         else:  # bpe
             tokenizer = BPETokenizer(vocab_size=args.vocab_size)
-            tokenizer.train(text)
-            vocab_size = tokenizer.vocab_size
+        tokenizer.train(text)
+        vocab_size = tokenizer.vocab_size
 
     # Set padding token (not used in continuous mode)
     PADDING_TOKEN = vocab_size

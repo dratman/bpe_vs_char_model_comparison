@@ -49,7 +49,7 @@ def detect_case_preservation(tokenizer):
     try:
         if tokenizer.tokenizer_type == 'char':
             return any(c.isupper() for c in tokenizer.itos.values())
-        elif tokenizer.tokenizer_type == 'bpe':
+        elif tokenizer.tokenizer_type in ('bpe', 'wordpiece'):
             vocab = tokenizer.tokenizer.get_vocab()
             return any(c.isupper() for token in vocab.keys() for c in token)
     except Exception:
