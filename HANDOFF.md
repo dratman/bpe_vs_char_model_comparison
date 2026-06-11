@@ -1,6 +1,33 @@
 # Handoff Document
 
-Last updated: 2026-06-10 by Claude Code Fable 5 (M2 MacBook session,
+Last updated: 2026-06-11 by Claude Code Fable 5 (M2 MacBook session,
+early morning, ~04:40-05:00 EDT) — **diary-099 step 1 COMPLETE: sweep
+finished, results harvested, diaries 100 + 101 written.**
+- The overnight sweep (launched 2026-06-10 15:07, see the entry below)
+  completed at 04:40 EDT. All result files copied from the Studio into
+  this repo's `terminal_logs/` (stamp `2026_06_10_1507`) and committed.
+- **Diary 100** (`100_real_word_fraction_quantifies_gelu_effect.md`):
+  the real-word-fraction curve. No-GELU climbs 81.0 % (iter 5K) →
+  94.6 % (20K) → 99.0 % (80K); baseline is already at 99.1 % at its
+  first checkpoint (20K) and stays 99.5-100 % throughout. The
+  diary-098 "~4× corpus exposure" estimate lands almost exactly
+  (no-GELU@80K = 99.0 vs baseline@20K = 99.1). Non-words differ in
+  KIND: baseline misses are plausible proper nouns; no-GELU misses are
+  morphological neologisms, still at iter 80K.
+- **Diary 101** (`101_bpe_overtraining_probe_null_result.md`): the
+  long-pending BPE memorization probe ran — **clean null result**.
+  Extractable memorization ≈ 0 at all of {132K, 168K, 220K}: mean
+  matched prefix 0.9-1.2 chars, median 0, extract% 0.0 at every point;
+  teacher-forced acc creeps 34.5→36.7 %. The overtraining/memorization
+  hypothesis is disconfirmed at this scale. **The 2026-06-06 "probe
+  committed but never run" TODO is now CLOSED.**
+- The no-GELU training run (PID 75333) survived the sweep fine and
+  continues (~iter 84K). Next per diary 099: occasional re-runs of the
+  sweep's job 2 on later no-GELU checkpoints; plot the two TSVs
+  (real-word % vs iter) as the write-up centerpiece; step 2 =
+  second-seed replication on the idle A6000.
+
+Earlier: 2026-06-10 by Claude Code Fable 5 (M2 MacBook session,
 mid-afternoon) — **data-exports reminder PERMANENTLY DROPPED by Ralph.**
 Asked the standing yes/no from the auto-memory; Ralph answered "no" to
 requesting the exports, then "yes" to dropping the reminder for good.

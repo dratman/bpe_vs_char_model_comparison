@@ -1,0 +1,90 @@
+Loading corpus word vocab from cache: txt_local/corpus_high_quality_uppercase_2026_05_08.txt.wordvocab.pkl
+device: mps | real word = corpus count >= 5
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter5000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter5000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter5000.pt] 16/16 samples
+  real-word fraction 81.0% (1425/1760 words, 1366s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter10000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter10000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter10000.pt] 16/16 samples
+  real-word fraction 82.5% (1230/1491 words, 1298s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter15000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter15000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter15000.pt] 16/16 samples
+  real-word fraction 92.6% (1383/1494 words, 1289s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter20000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter20000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter20000.pt] 16/16 samples
+  real-word fraction 94.6% (1391/1470 words, 1296s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter25000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter25000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter25000.pt] 16/16 samples
+  real-word fraction 96.2% (1511/1570 words, 1188s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter30000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter30000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter30000.pt] 16/16 samples
+  real-word fraction 96.4% (1479/1534 words, 1304s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter35000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter35000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter35000.pt] 16/16 samples
+  real-word fraction 97.7% (1493/1528 words, 1302s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter40000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter40000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter40000.pt] 16/16 samples
+  real-word fraction 97.3% (1457/1497 words, 1294s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter45000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter45000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter45000.pt] 16/16 samples
+  real-word fraction 97.7% (1464/1498 words, 1295s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter50000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter50000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter50000.pt] 16/16 samples
+  real-word fraction 97.2% (1468/1510 words, 1297s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter55000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter55000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter55000.pt] 16/16 samples
+  real-word fraction 98.6% (1451/1471 words, 1298s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter60000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter60000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter60000.pt] 16/16 samples
+  real-word fraction 98.5% (1492/1514 words, 1268s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter65000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter65000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter65000.pt] 16/16 samples
+  real-word fraction 98.1% (1451/1479 words, 1297s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter70000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter70000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter70000.pt] 16/16 samples
+  real-word fraction 97.9% (1470/1501 words, 1296s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter75000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter75000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter75000.pt] 16/16 samples
+  real-word fraction 98.9% (1470/1486 words, 1302s)
+Sampling: pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter80000.pt
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter80000.pt] 8/16 samples
+    [char_uppercase_16L_1280_no_gelu_matched_lr_iter80000.pt] 16/16 samples
+  real-word fraction 99.0% (1516/1532 words, 1295s)
+
+Real-word fraction — 16 samples x 512 chars per checkpoint, temp=0.8, top_k=40, prompt=' ', seed=42
+Real word = appears >= 5x in corpus_high_quality_uppercase_2026_05_08.txt (first/last word of each sample excluded as boundary-truncated)
+
+     iter        val   words    real%  top non-words (count)  |  checkpoint
+----------------------------------------------------------------------------------------------------
+     5000     2.0801    1760    81.0%  exce(3), tood(3), rould(2), bect(2), nown(2), ened(2), coure(2), eniltion(1), hought(1), scamen(1), sonts(1), thostadise(1), woulat(1), toost(1), thowe(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter5000.pt
+    10000     1.4624    1491    82.5%  inded(2), worken(1), sthe(1), soods(1), sendre(1), sevended(1), sourcess(1), guart(1), starise(1), assantery(1), preconiced(1), resord(1), maining(1), swambled(1), opported(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter10000.pt
+    15000     1.2864    1494    92.6%  colent(1), tillis(1), thistory(1), beneficloy(1), prepost(1), sidewaltar(1), caricolent(1), sailado(1), keaunner(1), hise(1), founters(1), guic(1), guich(1), legious(1), vicy(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter15000.pt
+    20000     1.1628    1470    94.6%  merice(3), archeristral(3), madon's(2), orxious(2), perton(2), herily(1), meronity(1), noop(1), variotical(1), depoired(1), covery(1), entery(1), materian(1), refusally(1), pidstots(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter20000.pt
+    25000     1.1297    1570    96.2%  manuscretion(2), prescy(2), didn's(1), preconces(1), possives(1), bonishing(1), conces(1), carcel(1), contendencies(1), sn't(1), provostu(1), clambing(1), volvers(1), collidinal(1), madell's(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter25000.pt
+    30000     1.0853    1534    96.4%  mendal(2), guara(1), beneficar(1), patiences(1), tentatious(1), humois(1), atlar(1), monthey(1), husburd(1), uninited(1), scuprior(1), elevenly(1), valone(1), friskly(1), renne(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter30000.pt
+    35000     1.0644    1528    97.7%  soort(3), jasaute(3), legated(1), bereard(1), profection(1), coopera(1), murkall(1), mongster(1), mooners(1), denerable(1), villaing(1), parded(1), canalism(1), donners(1), servantas(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter35000.pt
+    40000     1.0581    1497    97.3%  arabitod(2), milinga(2), aguic(1), hunguing(1), fixens(1), launcheoned(1), hospitalands(1), rostoctoctoctoctoctoctoctoctoctoctoctoctoctoctoctoctoctoctoctoctoctories(1), worge(1), aliensworthy(1), turged(1), cookerays(1), milar(1), itemissing(1), pardering(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter40000.pt
+    45000     1.0803    1498    97.7%  amazio(2), friedle(1), sometown(1), hostle(1), bolic(1), bombaster(1), catell(1), excitem(1), supplanaged(1), corpuff(1), murking(1), painstaid(1), gogs(1), piercially(1), buckshaw(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter45000.pt
+    50000     1.0249    1510    97.2%  mession(4), leonary(3), loctus(2), d'arges(1), eleventhe(1), despicate(1), baocie(1), scient(1), conclession(1), hunguys(1), carred(1), proudes(1), hons(1), corrusters(1), commoding(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter50000.pt
+    55000     1.0167    1471    98.6%  colorade(1), gentlemany(1), selectionary(1), beachs(1), stidy(1), propoundly(1), gouf(1), overtimed(1), sodated(1), decisionar(1), orderse(1), worenotic(1), propertype(1), trailoro(1), conful(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter55000.pt
+    60000     1.0300    1514    98.5%  sanctily(2), ferth(1), mordge(1), prehisto(1), prevoling(1), strienting(1), damding(1), reinter(1), spathy(1), merelois(1), watershe(1), striked(1), engeates(1), nonsons(1), newort(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter60000.pt
+    65000     1.0314    1479    98.1%  linnes(2), stulting(1), chartians(1), wabanne(1), beaufors(1), desertive(1), intendisturbed(1), boistered(1), passiming(1), proposedom(1), obliger(1), nanmar(1), pinclouded(1), sederation(1), monarball(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter65000.pt
+    70000     1.0277    1501    97.9%  bunday(3), discardan(2), forelse(2), bradacto(2), biso(1), stidy(1), procial(1), corrusade(1), courtyare(1), bodined(1), alexandrews(1), approfted(1), elosso(1), anaios(1), impassions(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter70000.pt
+    75000     1.0020    1486    98.9%  loost(1), housekneaux(1), pepberry(1), provinter(1), hannai(1), quinted(1), pallory(1), apprecited(1), crespt(1), euphonable(1), chickafford(1), gilmora(1), frits(1), industrmal(1), rochestrong(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter75000.pt
+    80000     0.9889    1532    99.0%  substragged(4), chugh(2), lingings(1), neighblue(1), laroll(1), youthfinday(1), famoly(1), readmass(1), jurusalem(1), redant(1), promontrained(1), meteorganic(1)  |  char_uppercase_16L_1280_no_gelu_matched_lr_iter80000.pt
+
+TSV written: terminal_logs/real_word_fraction_no_gelu_2026_06_10_1507.tsv

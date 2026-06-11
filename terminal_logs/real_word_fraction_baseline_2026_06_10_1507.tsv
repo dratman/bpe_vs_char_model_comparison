@@ -1,0 +1,17 @@
+checkpoint	iter	val_loss	n_words	n_real	real_frac	nonwords
+char_uppercase_16L_1280_iter20000.pt	20000	0.964827	1528	1515	0.991492	buccan:2,grinn's:1,marietta's:1,orine:1,ferrill:1,booto's:1,massache:1,scanding:1,orms:1,reignman:1,bechers:1,christabialities:1
+char_uppercase_16L_1280_iter40000.pt	40000	0.886363	1502	1492	0.993342	costlip:2,horsehairs:1,sterli's:1,sterli:1,musteriously:1,prosgie:1,uncivilisation:1,starrine:1,maccallists:1
+char_uppercase_16L_1280_iter60000.pt	60000	0.847129	1578	1569	0.994297	forley:4,soora:1,tomshen:1,staken:1,steedest:1,tapstaffe:1
+char_uppercase_16L_1280_iter80000.pt	80000	0.826377	1507	1498	0.994028	cartor:1,fermon:1,wuertball:1,navour:1,nurerable:1,gouche:1,boonsborow:1,overflamed:1,coffs:1
+char_uppercase_16L_1280_iter120000.pt	120000	0.823118	1547	1540	0.995475	yenour:4,wolfshed:1,lichtenburg's:1,tersutell:1
+char_uppercase_16L_1280_iter160000.pt	160000	0.799398	1501	1495	0.996003	nestir:1,mayhaw:1,depressaults:1,buenna:1,douanians:1,faitz:1
+char_uppercase_16L_1280_iter200000.pt	200000	0.790378	1525	1523	0.998689	fond's:1,elsement:1
+char_uppercase_16L_1280_iter240000.pt	240000	0.784424	1547	1545	0.998707	copheau:1,hymannics:1
+char_uppercase_16L_1280_iter280000.pt	280000	0.755631	1473	1465	0.994569	diesenair:1,fosselerichtze:1,jegnau:1,beshleheimkausen:1,hanken's:1,lalet:1,giuglio:1,commiserators:1
+char_uppercase_16L_1280_iter320000.pt	320000	0.734236	1495	1494	0.999331	delaboam:1
+char_uppercase_16L_1280_iter360000.pt	360000	0.758165	1497	1495	0.998664	ericseus:1,sinsy:1
+char_uppercase_16L_1280_iter400000.pt	400000	0.732577	1472	1468	0.997283	lossoft:1,howlet's:1,netznegen:1,scoure:1
+char_uppercase_16L_1280_iter440000.pt	440000	0.756222	1509	1506	0.998012	haynau's:1,penrudder:1,cmoody:1
+char_uppercase_16L_1280_iter480000.pt	480000	0.721845	1451	1445	0.995865	zamdovich:1,lakeshop:1,caillen:1,interlarged:1,roemer's:1,montdidier's:1
+char_uppercase_16L_1280.pt	482000	0.715250	1479	1474	0.996619	medville:2,kutshala:1,goodwills:1,eastmost:1
+char_uppercase_16L_1280_final.pt	500000	0.715250	1530	1530	1.000000	

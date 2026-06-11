@@ -1,0 +1,90 @@
+Loading corpus word vocab from cache: txt_local/corpus_high_quality_uppercase_2026_05_08.txt.wordvocab.pkl
+device: mps | real word = corpus count >= 5
+Sampling: pt/char_uppercase_16L_1280_iter20000.pt
+    [char_uppercase_16L_1280_iter20000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter20000.pt] 16/16 samples
+  real-word fraction 99.1% (1515/1528 words, 1399s)
+Sampling: pt/char_uppercase_16L_1280_iter40000.pt
+    [char_uppercase_16L_1280_iter40000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter40000.pt] 16/16 samples
+  real-word fraction 99.3% (1492/1502 words, 1314s)
+Sampling: pt/char_uppercase_16L_1280_iter60000.pt
+    [char_uppercase_16L_1280_iter60000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter60000.pt] 16/16 samples
+  real-word fraction 99.4% (1569/1578 words, 1321s)
+Sampling: pt/char_uppercase_16L_1280_iter80000.pt
+    [char_uppercase_16L_1280_iter80000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter80000.pt] 16/16 samples
+  real-word fraction 99.4% (1498/1507 words, 1269s)
+Sampling: pt/char_uppercase_16L_1280_iter120000.pt
+    [char_uppercase_16L_1280_iter120000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter120000.pt] 16/16 samples
+  real-word fraction 99.5% (1540/1547 words, 1314s)
+Sampling: pt/char_uppercase_16L_1280_iter160000.pt
+    [char_uppercase_16L_1280_iter160000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter160000.pt] 16/16 samples
+  real-word fraction 99.6% (1495/1501 words, 1308s)
+Sampling: pt/char_uppercase_16L_1280_iter200000.pt
+    [char_uppercase_16L_1280_iter200000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter200000.pt] 16/16 samples
+  real-word fraction 99.9% (1523/1525 words, 1274s)
+Sampling: pt/char_uppercase_16L_1280_iter240000.pt
+    [char_uppercase_16L_1280_iter240000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter240000.pt] 16/16 samples
+  real-word fraction 99.9% (1545/1547 words, 1314s)
+Sampling: pt/char_uppercase_16L_1280_iter280000.pt
+    [char_uppercase_16L_1280_iter280000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter280000.pt] 16/16 samples
+  real-word fraction 99.5% (1465/1473 words, 1319s)
+Sampling: pt/char_uppercase_16L_1280_iter320000.pt
+    [char_uppercase_16L_1280_iter320000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter320000.pt] 16/16 samples
+  real-word fraction 99.9% (1494/1495 words, 1322s)
+Sampling: pt/char_uppercase_16L_1280_iter360000.pt
+    [char_uppercase_16L_1280_iter360000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter360000.pt] 16/16 samples
+  real-word fraction 99.9% (1495/1497 words, 1313s)
+Sampling: pt/char_uppercase_16L_1280_iter400000.pt
+    [char_uppercase_16L_1280_iter400000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter400000.pt] 16/16 samples
+  real-word fraction 99.7% (1468/1472 words, 1316s)
+Sampling: pt/char_uppercase_16L_1280_iter440000.pt
+    [char_uppercase_16L_1280_iter440000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter440000.pt] 16/16 samples
+  real-word fraction 99.8% (1506/1509 words, 1312s)
+Sampling: pt/char_uppercase_16L_1280_iter480000.pt
+    [char_uppercase_16L_1280_iter480000.pt] 8/16 samples
+    [char_uppercase_16L_1280_iter480000.pt] 16/16 samples
+  real-word fraction 99.6% (1445/1451 words, 1273s)
+Sampling: pt/char_uppercase_16L_1280.pt
+    [char_uppercase_16L_1280.pt] 8/16 samples
+    [char_uppercase_16L_1280.pt] 16/16 samples
+  real-word fraction 99.7% (1474/1479 words, 1316s)
+Sampling: pt/char_uppercase_16L_1280_final.pt
+    [char_uppercase_16L_1280_final.pt] 8/16 samples
+    [char_uppercase_16L_1280_final.pt] 16/16 samples
+  real-word fraction 100.0% (1530/1530 words, 1315s)
+
+Real-word fraction — 16 samples x 512 chars per checkpoint, temp=0.8, top_k=40, prompt=' ', seed=42
+Real word = appears >= 5x in corpus_high_quality_uppercase_2026_05_08.txt (first/last word of each sample excluded as boundary-truncated)
+
+     iter        val   words    real%  top non-words (count)  |  checkpoint
+----------------------------------------------------------------------------------------------------
+    20000     0.9648    1528    99.1%  buccan(2), grinn's(1), marietta's(1), orine(1), ferrill(1), booto's(1), massache(1), scanding(1), orms(1), reignman(1), bechers(1), christabialities(1)  |  char_uppercase_16L_1280_iter20000.pt
+    40000     0.8864    1502    99.3%  costlip(2), horsehairs(1), sterli's(1), sterli(1), musteriously(1), prosgie(1), uncivilisation(1), starrine(1), maccallists(1)  |  char_uppercase_16L_1280_iter40000.pt
+    60000     0.8471    1578    99.4%  forley(4), soora(1), tomshen(1), staken(1), steedest(1), tapstaffe(1)  |  char_uppercase_16L_1280_iter60000.pt
+    80000     0.8264    1507    99.4%  cartor(1), fermon(1), wuertball(1), navour(1), nurerable(1), gouche(1), boonsborow(1), overflamed(1), coffs(1)  |  char_uppercase_16L_1280_iter80000.pt
+   120000     0.8231    1547    99.5%  yenour(4), wolfshed(1), lichtenburg's(1), tersutell(1)  |  char_uppercase_16L_1280_iter120000.pt
+   160000     0.7994    1501    99.6%  nestir(1), mayhaw(1), depressaults(1), buenna(1), douanians(1), faitz(1)  |  char_uppercase_16L_1280_iter160000.pt
+   200000     0.7904    1525    99.9%  fond's(1), elsement(1)  |  char_uppercase_16L_1280_iter200000.pt
+   240000     0.7844    1547    99.9%  copheau(1), hymannics(1)  |  char_uppercase_16L_1280_iter240000.pt
+   280000     0.7556    1473    99.5%  diesenair(1), fosselerichtze(1), jegnau(1), beshleheimkausen(1), hanken's(1), lalet(1), giuglio(1), commiserators(1)  |  char_uppercase_16L_1280_iter280000.pt
+   320000     0.7342    1495    99.9%  delaboam(1)  |  char_uppercase_16L_1280_iter320000.pt
+   360000     0.7582    1497    99.9%  ericseus(1), sinsy(1)  |  char_uppercase_16L_1280_iter360000.pt
+   400000     0.7326    1472    99.7%  lossoft(1), howlet's(1), netznegen(1), scoure(1)  |  char_uppercase_16L_1280_iter400000.pt
+   440000     0.7562    1509    99.8%  haynau's(1), penrudder(1), cmoody(1)  |  char_uppercase_16L_1280_iter440000.pt
+   480000     0.7218    1451    99.6%  zamdovich(1), lakeshop(1), caillen(1), interlarged(1), roemer's(1), montdidier's(1)  |  char_uppercase_16L_1280_iter480000.pt
+   482000     0.7152    1479    99.7%  medville(2), kutshala(1), goodwills(1), eastmost(1)  |  char_uppercase_16L_1280.pt
+   500000     0.7152    1530   100.0%    |  char_uppercase_16L_1280_final.pt
+
+TSV written: terminal_logs/real_word_fraction_baseline_2026_06_10_1507.tsv

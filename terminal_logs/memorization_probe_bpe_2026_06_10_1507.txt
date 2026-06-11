@@ -1,0 +1,31 @@
+Loading corpus: txt_local/corpus_high_quality_uppercase_2026_05_08.txt
+Corpus length: 1,265,346,119 chars | device: mps
+Probing: pt/bpe_uppercase_16L_1280_b2.pt
+    [bpe_uppercase_16L_1280_b2.pt] 50/200 prompts
+    [bpe_uppercase_16L_1280_b2.pt] 100/200 prompts
+    [bpe_uppercase_16L_1280_b2.pt] 150/200 prompts
+    [bpe_uppercase_16L_1280_b2.pt] 200/200 prompts
+Probing: pt/bpe_uppercase_16L_1280_b2_resumed.pt
+    [bpe_uppercase_16L_1280_b2_resumed.pt] 50/200 prompts
+    [bpe_uppercase_16L_1280_b2_resumed.pt] 100/200 prompts
+    [bpe_uppercase_16L_1280_b2_resumed.pt] 150/200 prompts
+    [bpe_uppercase_16L_1280_b2_resumed.pt] 200/200 prompts
+Probing: pt/bpe_uppercase_16L_1280_b2_resumed_final.pt
+    [bpe_uppercase_16L_1280_b2_resumed_final.pt] 50/200 prompts
+    [bpe_uppercase_16L_1280_b2_resumed_final.pt] 100/200 prompts
+    [bpe_uppercase_16L_1280_b2_resumed_final.pt] 150/200 prompts
+    [bpe_uppercase_16L_1280_b2_resumed_final.pt] 200/200 prompts
+
+Memorization probe — 200 prompts, prompt=512 chars, continuation=256 chars, extract threshold=50 chars, seed=42
+Metric 1 (extractable memorization): exact-match prefix of GREEDY free continuation vs truth, in chars.
+Metric 2 (teacher-forced acc): per-token argmax==truth under teacher forcing (within-tokenizer trend only).
+
+     iter   tok   best_val   mean_chr   med_chr   p95_chr   extract%   tf_acc%  checkpoint
+------------------------------------------------------------------------------------------
+   132000   bpe     3.3657        0.9         0         5       0.0%     34.5%  bpe_uppercase_16L_1280_b2.pt
+   168000   bpe     3.2652        0.9         0         5       0.0%     35.6%  bpe_uppercase_16L_1280_b2_resumed.pt
+   220000   bpe     3.2652        1.2         0         9       0.0%     36.7%  bpe_uppercase_16L_1280_b2_resumed_final.pt
+
+Reading the table: if mean_chr / extract% rise monotonically with iter
+for a single tokenizer, memorization is growing past the val minimum —
+the overtraining hypothesis is quantitatively confirmed.
