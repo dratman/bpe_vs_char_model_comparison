@@ -113,6 +113,14 @@ def parse_args():
     parser.add_argument('--no_gelu', action='store_true',
                        help='Disable GELU nonlinearity in MLP (makes it purely linear)')
 
+    # RNG seed (replication runs)
+    parser.add_argument('--seed', type=int, default=None,
+                       help='Seed torch RNG (init + batch order + sampling). '
+                            'Default None = entropy-seeded, the historical behavior. '
+                            'Set for documented replication runs; note CUDA/MPS kernels '
+                            'are not bitwise deterministic, so same-seed runs still '
+                            'diverge slowly — the seed controls init and data order.')
+
     # Bias option
     parser.add_argument('--no_bias', action='store_true',
                        help='Disable bias terms in every Linear and LayerNorm (LLaMA/PaLM style)')
@@ -660,6 +668,12 @@ def main():
     # Set device
     device = 'cuda' if torch.cuda.is_available() else 'mps' if torch.backends.mps.is_available() else 'cpu'
     print(f"[{get_timestamp()}] Using device: {device}")
+
+    # Seed RNG if requested (covers weight init, torch.randint batch order,
+    # and multinomial sampling — all torch global RNG in this codebase)
+    if args.seed is not None:
+        torch.manual_seed(args.seed)
+        print(f"[{get_timestamp()}] Seeded torch RNG with --seed {args.seed}")
 
     # Set up precision
     precision_map = {
