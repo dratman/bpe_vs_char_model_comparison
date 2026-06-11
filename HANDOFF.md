@@ -27,6 +27,37 @@ finished, results harvested, diaries 100 + 101 written.**
   (real-word % vs iter) as the write-up centerpiece; step 2 =
   second-seed replication on the idle A6000.
 
+Later same morning (~09:30 EDT), same Fable 5 session — **step 2 prep
+done; A6000 launch BLOCKED on SSH authorization:**
+- **Centerpiece figure generated:** `py/plot_real_word_fraction.py`
+  (committed) renders the two TSVs; output at
+  `plots/real_word_fraction_2026_06_10.png` on the M2 (plots/ is
+  gitignored — regenerate anywhere with the script; matplotlib was
+  pip-installed into the M2's miniforge this session).
+- **`py/train.py` now has a `--seed` flag** (default None = historical
+  entropy-seeded behavior). Verified on the Studio with a scratch copy
+  + tiny corpus: two `--seed 2` runs log identical train/val losses,
+  an unseeded run differs. Scratch copy deleted; Studio's tracked
+  train.py untouched (its live run is unaffected anyway — code is
+  loaded at process start).
+- **Second-seed replication script committed:**
+  `sh/train_char_uppercase_16L_1280_seed2_CUDA.sh` — baseline
+  hyperparameters EXACTLY (incl. batch_size=4), `--seed 2`, output
+  `pt/char_uppercase_16L_1280_seed2_cuda.pt`. ~3 days on the A6000.
+  Check pt/ free space first (~90 GB of intermediates at
+  save_interval=20000).
+- **BLOCKER: no SSH path to the A6000 from here.** M2 → owner@
+  192.168.1.224 gets `Permission denied (publickey,password)` (M2's
+  key not in the Linux box's authorized_keys; password can't be typed
+  through a no-TTY shell). Studio → A6000 also fails (host key not
+  cached / no key). Fix = Ralph runs `ssh-copy-id owner@192.168.1.224`
+  in a REAL Terminal window on the M2 (the !-shell-has-no-TTY gotcha
+  documented 2026-05-23 and 2026-06-09). M2 key:
+  `~/.ssh/id_ed25519.pub`. Then: ssh in, `git pull`, check disk, run
+  `sh/train_char_uppercase_16L_1280_seed2_CUDA.sh`.
+- Ralph is about to describe a NEW experiment (his words ~09:20); see
+  the conversation following this entry's session.
+
 Earlier: 2026-06-10 by Claude Code Fable 5 (M2 MacBook session,
 mid-afternoon) — **data-exports reminder PERMANENTLY DROPPED by Ralph.**
 Asked the standing yes/no from the auto-memory; Ralph answered "no" to
