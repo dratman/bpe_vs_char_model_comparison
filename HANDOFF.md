@@ -1,5 +1,29 @@
 # Handoff Document
 
+## EXPERIMENT QUEUE (standing section — keep current on every launch/completion)
+
+Ralph delegated experiment scheduling to Claude on 2026-06-11: Claude
+chooses machine, order, and timing; Ralph supplies questions and
+experiment ideas. Update this section whenever anything launches or
+finishes. (See auto-memory `feedback_experiment_queue_autonomy.md`.)
+
+**Studio (192.168.1.233):** no-GELU char matched-LR run, PID 75333,
+~iter 84K/500K, ETA ~2026-06-30. Then free.
+
+**A6000 (owner@192.168.1.224, ~8× Studio):**
+1. RUNNING: seed-2 char baseline replication (diary 099 step 2a),
+   PID 151814, launched 06-11 09:31, ~0.55 s/iter, ETA ~06-14.
+2. QUEUED (auto-starts via `sh/queue_wordpiece_pair_after_seed2.sh`,
+   nohup'd, log `terminal_logs/queue_wordpiece_pair.log`): WordPiece
+   control run (~1.4 d), then WordPiece no-GELU run (~1.4 d) — the
+   diary 102 pair. ETA pair complete ~06-17.
+3. Candidate next (not yet committed to queue): no-bias trial
+   (diary 099 step 2b); second-seed no-GELU; char memorization probe.
+
+**Harvest when done:** seed-2 → best-val vs 0.7152 (error bar for
+diary 094); WordPiece pair → loss curves + real-word-fraction sweep +
+samples vs diary 102's preregistered predictions.
+
 Last updated: 2026-06-11 by Claude Code Fable 5 (M2 MacBook session,
 early morning, ~04:40-05:00 EDT) — **diary-099 step 1 COMPLETE: sweep
 finished, results harvested, diaries 100 + 101 written.**
