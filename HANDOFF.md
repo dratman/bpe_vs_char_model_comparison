@@ -8,17 +8,26 @@ experiment ideas. Update this section whenever anything launches or
 finishes. (See auto-memory `feedback_experiment_queue_autonomy.md`.)
 
 **Studio (192.168.1.233):** no-GELU char matched-LR run, PID 75333,
-~iter 84K/500K, ETA ~2026-06-30. Then free.
+iter 124K/500K as of 06-12 14:35 (val 0.9643), ETA ~2026-06-30.
+Then free.
 
 **A6000 (owner@192.168.1.224, ~8× Studio):**
-1. RUNNING: seed-2 char baseline replication (diary 099 step 2a),
-   PID 151814, launched 06-11 09:31, ~0.55 s/iter, ETA ~06-14.
-2. QUEUED (auto-starts via `sh/queue_wordpiece_pair_after_seed2.sh`,
-   nohup'd, log `terminal_logs/queue_wordpiece_pair.log`): WordPiece
-   control run (~1.4 d), then WordPiece no-GELU run (~1.4 d) — the
-   diary 102 pair. ETA pair complete ~06-17.
-3. Candidate next (not yet committed to queue): no-bias trial
-   (diary 099 step 2b); second-seed no-GELU; char memorization probe.
+1. **FAILED + KILLED 06-12 ~16:12: seed-2 char replication** (was PID
+   151814). CUDA/AMP training instability — non-monotonic val stuck
+   ~1.5 vs baseline ~0.79 at matched iter, degrading samples, no NaN.
+   See diary 103. Log preserved; its ~80 GB of garbage checkpoints
+   (`pt/char_uppercase_16L_1280_seed2_cuda*`) await Ralph's deletion
+   OK. Re-attempt queued conceptually AFTER the WordPiece pair, with
+   a stability fix (first read train.py's CUDA autocast path; prefer
+   disabling autocast to match MPS's plain-bf16 path).
+2. RUNNING: WordPiece control run (diary 102), PID 892495, launched
+   06-12 16:15 by the queue runner, healthy at startup. **Watch its
+   loss curve for the diary-103 instability signature** (collapse/
+   plateau after ~10K iters). ETA ~1.4 d.
+3. QUEUED (same runner): WordPiece no-GELU run, auto-starts after the
+   control. ETA pair complete ~06-15.
+4. Candidate next: seed-2 re-attempt (stability-fixed); no-bias trial
+   (diary 099 step 2b); char memorization probe.
 
 **Harvest when done:** seed-2 → best-val vs 0.7152 (error bar for
 diary 094); WordPiece pair → loss curves + real-word-fraction sweep +
