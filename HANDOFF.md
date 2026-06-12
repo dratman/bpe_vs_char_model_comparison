@@ -15,9 +15,9 @@ Then free.
 1. **FAILED + KILLED 06-12 ~16:12: seed-2 char replication** (was PID
    151814). CUDA/AMP training instability — non-monotonic val stuck
    ~1.5 vs baseline ~0.79 at matched iter, degrading samples, no NaN.
-   See diary 103. Log preserved; its ~80 GB of garbage checkpoints
-   (`pt/char_uppercase_16L_1280_seed2_cuda*`) await Ralph's deletion
-   OK. Re-attempt queued conceptually AFTER the WordPiece pair, with
+   See diary 103. Log preserved; its checkpoints (~50 GB incl. tokens
+   cache) were DELETED 06-12 16:26 with Ralph's OK — 358 GB now free
+   on the box. Re-attempt queued conceptually AFTER the WordPiece pair, with
    a stability fix (first read train.py's CUDA autocast path; prefer
    disabling autocast to match MPS's plain-bf16 path).
 2. RUNNING: WordPiece control run (diary 102), PID 892495, launched
