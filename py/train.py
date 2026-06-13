@@ -148,6 +148,13 @@ def parse_args():
     parser.add_argument('--grad_accum_steps', type=int, default=1,
                        help='Number of gradient accumulation steps (effective batch = batch_size * grad_accum_steps)')
 
+    # Optimizer numerics
+    parser.add_argument('--no_fused', action='store_true',
+                       help='Force the non-fused AdamW implementation even on CUDA. '
+                            'CUDA defaults to fused=True; MPS/CPU are always non-fused. '
+                            'Use to test whether fused AdamW is the source of the '
+                            'CUDA-vs-MPS training-instability seen in diary 103.')
+
     # Resume option
     parser.add_argument('--resume', type=str, default=None,
                        help='Path to checkpoint to resume training from')
@@ -963,12 +970,14 @@ def main():
     # Set up optimizer
     if args.resume:
         optimizer = model.configure_optimizers(weight_decay=0.1, learning_rate=args.learning_rate,
-                                              betas=(0.9, 0.95), device_type=device)
+                                              betas=(0.9, 0.95), device_type=device,
+                                              allow_fused=not args.no_fused)
         optimizer.load_state_dict(checkpoint['optimizer'])
         print(f"[{get_timestamp()}] Loaded optimizer state from checkpoint")
     else:
         optimizer = model.configure_optimizers(weight_decay=0.1, learning_rate=args.learning_rate,
-                                              betas=(0.9, 0.95), device_type=device)
+                                              betas=(0.9, 0.95), device_type=device,
+                                              allow_fused=not args.no_fused)
 
     # Set up mixed precision training
     ctx = nullcontext()

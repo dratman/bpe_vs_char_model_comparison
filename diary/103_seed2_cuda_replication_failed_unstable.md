@@ -68,3 +68,65 @@ seed semantics — different backend, qualitatively different training.
   replicate. Requires reading train.py's CUDA precision path first.
 
 — Claude Code Fable 5
+
+## Follow-up (2026-06-13) — code-level diagnosis, read-only
+
+Read train.py's full numerics path and model.py's optimizer setup. Two
+corrections and a sharper suspect list.
+
+**The instability is real, not an eval artifact.** The `Step` line's
+*train* loss is also an `eval_iters=20` average (`estimate_loss_continuous`),
+not a single-batch read — and it oscillates in lockstep with val
+(1.31/1.33 → 2.74/2.73 → …). If this were sampling variance the two
+would bounce independently; lockstep means the model's weights are
+genuinely oscillating. Code is otherwise correct: a fresh random batch
+is drawn every iteration (`train.py:1275`; the grad-accum refetch loop
+is inert at the default `grad_accum_steps=1`), grad-clip 1.0 is applied,
+and `scaler` is correctly `None` for bf16 (no GradScaler misuse).
+
+**Correction to the "autocast" reading above.** Both backends use
+`torch.amp.autocast` — `device_type='cuda'` (train.py:978) and
+`device_type='mps'` (train.py:983). MPS is *not* a "plain, non-autocast
+bf16 path." So autocast presence is **not** the CUDA-vs-MPS difference,
+and "disable autocast to match MPS" (candidate (a) above) is based on a
+misreading. The genuine code-level deltas between the two backends are:
+
+1. **Fused AdamW (CUDA-only).** `model.py:configure_optimizers` sets
+   `use_fused = fused_available and device_type == 'cuda'`, so the CUDA
+   runs get `torch.optim.AdamW(..., fused=True)` (banner: "using fused
+   AdamW: True") and the MPS baseline gets the non-fused implementation.
+   PyTorch's fused AdamW has had numerical-correctness regressions across
+   versions. **This is the prime suspect and the cheapest to test.**
+2. **bf16 matmul accumulation on CUDA tensor cores** vs MPS bf16 —
+   different rounding/accumulation under the same autocast wrapper.
+
+**Triangulation across the three runs we have:**
+
+| run | device | lr | AdamW | result |
+|---|---|---|---|---|
+| baseline char | MPS | 1.5e-4 | non-fused | stable |
+| WordPiece (diary 102) | CUDA | 1.06e-4 | fused | stable |
+| seed-2 char | CUDA | 1.5e-4 | fused | **unstable** |
+
+It is *not* lr alone (MPS ran 1.5e-4 fine) and *not* CUDA alone
+(WordPiece is stable on CUDA). The failure needs char-config + lr 1.5e-4
++ CUDA numerics together. All three of {fused AdamW, tensor-core bf16,
+lr-is-marginal} are consistent with this table, so a test run is needed
+to decide between them.
+
+**Test ladder (each ~6–10K iters ≈ 1–2 h to reveal the signature;
+keep `max_iters=500000` so the cosine-LR schedule matches the baseline —
+do NOT shorten max_iters, or you reintroduce the LR-decay confound that
+muddied the no-GELU trial):**
+1. **`--no_fused`** (new flag, added this session; forces non-fused
+   AdamW on CUDA), everything else byte-identical to seed-2. Stable →
+   fused AdamW was the cause; cleanest outcome, preserves hyperparameter
+   matching.
+2. If still unstable: lr 1.06e-4 + warmup 500 (match WordPiece).
+3. If still unstable: one fp32 run to rule bf16 in/out definitively.
+
+Script `sh/train_char_uppercase_16L_1280_seed2_no_fused_CUDA.sh` and
+queue runner `sh/queue_seed2_no_fused_after_wordpiece.sh` (waits on the
+WordPiece-pair queue PID, then launches trial 1) prepared this session.
+
+— Claude Code Opus 4.8 (1M context)

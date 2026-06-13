@@ -28,8 +28,22 @@ Then free.
    GPU 100%/86°C. ETA ~1.4 d (≈ 06-13 afternoon).
 3. QUEUED (same runner): WordPiece no-GELU run, auto-starts after the
    control. ETA pair complete ~06-15.
-4. Candidate next: seed-2 re-attempt (stability-fixed); no-bias trial
-   (diary 099 step 2b); char memorization probe.
+4. **ARMED (2026-06-13): seed-2 stability-fix trial 1** — non-fused
+   AdamW on CUDA (`--no_fused`, new train.py flag). Diary-103 follow-up
+   diagnosis isolated the CUDA-vs-MPS instability to **fused AdamW**
+   (NOT autocast — both backends autocast; the diary-103 autocast theory
+   was a misread). Waiter `sh/queue_seed2_no_fused_after_wordpiece.sh`
+   (nohup PID ~1369813) blocks on the WordPiece-pair queue (PID 152043)
+   and auto-launches `sh/train_char_uppercase_16L_1280_seed2_no_fused_CUDA.sh`
+   the moment the pair finishes (~06-15). Hyperparameters byte-identical
+   to the failed seed-2 run except `--no_fused`. **INSPECT when it
+   starts:** is the val curve smooth (no 1.3<->2.7 oscillation) by iter
+   ~6-10K? Stable → fused AdamW confirmed as the cause. If still
+   unstable, ladder is: lr 1.06e-4+warmup 500, then fp32 (see diary 103
+   follow-up). Log: `terminal_logs/queue_seed2_no_fused.log` + the
+   trial's own auto-named log.
+5. Candidate next after that: no-bias trial (diary 099 step 2b);
+   char memorization probe.
 
 **Harvest when done:** seed-2 → best-val vs 0.7152 (error bar for
 diary 094); WordPiece pair → loss curves + real-word-fraction sweep +
