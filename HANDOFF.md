@@ -21,9 +21,11 @@ Then free.
    a stability fix (first read train.py's CUDA autocast path; prefer
    disabling autocast to match MPS's plain-bf16 path).
 2. RUNNING: WordPiece control run (diary 102), PID 892495, launched
-   06-12 16:15 by the queue runner, healthy at startup. **Watch its
-   loss curve for the diary-103 instability signature** (collapse/
-   plateau after ~10K iters). ETA ~1.4 d.
+   06-12 16:15 by the queue runner. **STABLE through iter 78.6K/220K
+   (epoch 2.50) as of 06-13 02:05** — val descends smoothly
+   5.60→4.32→3.77→3.66 (best ~iter47K)→~3.76, NO diary-103 instability
+   signature (no collapse/plateau, train/val not oscillating). ~3 it/s,
+   GPU 100%/86°C. ETA ~1.4 d (≈ 06-13 afternoon).
 3. QUEUED (same runner): WordPiece no-GELU run, auto-starts after the
    control. ETA pair complete ~06-15.
 4. Candidate next: seed-2 re-attempt (stability-fixed); no-bias trial
@@ -48,7 +50,26 @@ have account-level GitHub SSH keys that work). How this interacts with the HANDO
 queue above is still settling; for now HANDOFF tracks long trainings,
 coupler-queue will carry Editor-spec'd items.
 
-Last updated: 2026-06-11 by Claude Code Fable 5 (M2 MacBook session,
+Last updated: 2026-06-13 by Claude Code Opus 4.8 (1M context) (A6000
+session, ~02:05 EDT) — **state-verification session; independently
+re-confirmed the diary-103 seed-2 failure and committed the A6000 logs.**
+- Read CLAUDE.md + HANDOFF.md, verified live A6000 state. Independently
+  rediscovered the seed-2 instability (val oscillating 1.3–2.7,
+  train/val in lockstep, never tracked the baseline's smooth descent to
+  ~0.80) before pulling — the parallel session had already documented it
+  in diary 103 + the EXPERIMENT QUEUE section above and deleted the
+  garbage checkpoints. Nothing new to add on seed-2; my finding matches.
+- **Committed the three previously-untracked A6000 terminal logs**
+  (seed-2 char, WordPiece control, queue runner) — commit `1fbf958`.
+  These were sitting untracked on the box; now in `terminal_logs/`.
+- **Confirmed the WordPiece control run is STABLE** through iter 78.6K
+  (see EXPERIMENT QUEUE item 2 above for the curve) — the diary-103
+  instability is char/bf16-specific, NOT present in the WordPiece run.
+- Did NOT touch the live training or the GPU. Disk healthy: 321 GB free
+  (26% used). The WordPiece log keeps growing (live); it will need a
+  final re-commit once the run finishes.
+
+Earlier: 2026-06-11 by Claude Code Fable 5 (M2 MacBook session,
 early morning, ~04:40-05:00 EDT) — **diary-099 step 1 COMPLETE: sweep
 finished, results harvested, diaries 100 + 101 written.**
 - The overnight sweep (launched 2026-06-10 15:07, see the entry below)
