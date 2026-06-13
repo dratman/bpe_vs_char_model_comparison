@@ -1,0 +1,15 @@
+[2026-06-11 09:45:57] [queue] waiting for PID 151814 (seed-2 char run) to finish...
+[2026-06-12 16:15:57] [queue] PID 151814 gone.
+[2026-06-12 16:15:57] [queue] launching: sh/train_wordpiece_uppercase_16L_1280_b2_CUDA.sh
+========================================
+Training wrapper (CUDA) started
+Input file:  txt_local/corpus_high_quality_uppercase_2026_05_08.txt
+Python:      /home/owner/miniforge3/envs/bpe_char/bin/python
+Checkpoints: pt
+Log file:    terminal_logs/terminal_log_for_wordpiece_uppercase_16L_1280_b2_cuda_2026_06_12_1615.txt
+========================================
+Training started with PID 892495
+Log:  terminal_logs/terminal_log_for_wordpiece_uppercase_16L_1280_b2_cuda_2026_06_12_1615.txt
+Watch: tail -f terminal_logs/terminal_log_for_wordpiece_uppercase_16L_1280_b2_cuda_2026_06_12_1615.txt
+Stop:  kill -TERM 892495
+[2026-06-12 16:17:57] [queue] PID 892495 healthy; waiting for it to finish...
