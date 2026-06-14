@@ -20,28 +20,38 @@ Then free.
    on the box. Re-attempt queued conceptually AFTER the WordPiece pair, with
    a stability fix (first read train.py's CUDA autocast path; prefer
    disabling autocast to match MPS's plain-bf16 path).
-2. RUNNING: WordPiece control run (diary 102), PID 892495, launched
-   06-12 16:15 by the queue runner. **STABLE through iter 78.6K/220K
-   (epoch 2.50) as of 06-13 02:05** — val descends smoothly
-   5.60→4.32→3.77→3.66 (best ~iter47K)→~3.76, NO diary-103 instability
-   signature (no collapse/plateau, train/val not oscillating). ~3 it/s,
-   GPU 100%/86°C. ETA ~1.4 d (≈ 06-13 afternoon).
-3. QUEUED (same runner): WordPiece no-GELU run, auto-starts after the
-   control. ETA pair complete ~06-15.
-4. **ARMED (2026-06-13): seed-2 stability-fix trial 1** — non-fused
-   AdamW on CUDA (`--no_fused`, new train.py flag). Diary-103 follow-up
-   diagnosis isolated the CUDA-vs-MPS instability to **fused AdamW**
-   (NOT autocast — both backends autocast; the diary-103 autocast theory
-   was a misread). Waiter `sh/queue_seed2_no_fused_after_wordpiece.sh`
-   (nohup PID ~1369813) blocks on the WordPiece-pair queue (PID 152043)
-   and auto-launches `sh/train_char_uppercase_16L_1280_seed2_no_fused_CUDA.sh`
-   the moment the pair finishes (~06-15). Hyperparameters byte-identical
-   to the failed seed-2 run except `--no_fused`. **INSPECT when it
-   starts:** is the val curve smooth (no 1.3<->2.7 oscillation) by iter
-   ~6-10K? Stable → fused AdamW confirmed as the cause. If still
-   unstable, ladder is: lr 1.06e-4+warmup 500, then fp32 (see diary 103
-   follow-up). Log: `terminal_logs/queue_seed2_no_fused.log` + the
-   trial's own auto-named log.
+2. **DONE 06-13 18:36: WordPiece control run** (diary 102), was PID
+   892495. Completed full 220K iters; `pt/wordpiece_uppercase_16L_1280_
+   b2_cuda_final.pt` + iter ckpts through 210K. Stable throughout (no
+   diary-103 oscillation). **LOG GLITCH:** its terminal log stopped
+   recording at iter 80000 (06-13 02:15) while training continued fine
+   (checkpoints kept saving ~every 70 min) — so last *logged* best val
+   is 3.5466 but the TRUE best is better and lives in the checkpoint's
+   `best_val_loss` field (not yet read). Lesson: a quiet log on this box
+   does NOT mean the run died — check checkpoints/PID.
+3. **RUNNING: WordPiece no-GELU run** (ablation), PID 1602516, launched
+   06-13 18:37 right after the control. As of 06-14 12:40: **iter
+   150.5K/220K (epoch 4.78)**, ~3 it/s, GPU 100%/86°C. Best val so far
+   **3.7496**; val gently rising (3.85→3.93 at iter 148-150K) as LR
+   decays — normal late plateau, NOT diary-103 oscillation. ETA ~06-14
+   evening (~18:30-19:00). As preregistered (diary 102), ablation (~3.75)
+   trails control (<3.55) → GELU helps.
+4. **ARMED: seed-2 stability-fix trial 1** — non-fused AdamW on CUDA
+   (`--no_fused`, train.py flag added + pushed in commit bcfa4fc).
+   Diary-103 follow-up isolated the instability to **fused AdamW** (NOT
+   autocast — both backends autocast; diary-103's autocast theory was a
+   misread). Auto-launches `sh/train_char_uppercase_16L_1280_seed2_no_
+   fused_CUDA.sh` when the WordPiece pair finishes (tonight).
+   **WAITER STATE (06-14, messy but safe):** THREE waiters alive —
+   152043 (wordpiece pair) → 1369813 (original no-fused waiter, correct
+   chain); plus a REDUNDANT waiter 2109095 added by mistake this session.
+   To prevent a double-launch, a **pgrep double-launch guard** was added
+   to the trial script (commit pending) so only ONE trial starts. 2109095
+   is harmless; can be killed for tidiness. **INSPECT when the trial
+   starts:** val curve smooth (no 1.3<->2.7 oscillation) by iter ~6-10K?
+   Smooth → fused AdamW confirmed. Else ladder: lr 1.06e-4+warmup 500,
+   then fp32 (diary 103 follow-up). Log:
+   `terminal_logs/queue_seed2_no_fused.log` + the trial's auto-named log.
 5. Candidate next after that: no-bias trial (diary 099 step 2b);
    char memorization probe.
 
@@ -63,6 +73,26 @@ boxes in non-TTY sessions — no usable credential helper — but both
 have account-level GitHub SSH keys that work). How this interacts with the HANDOFF experiment
 queue above is still settling; for now HANDOFF tracks long trainings,
 coupler-queue will carry Editor-spec'd items.
+
+Last updated: 2026-06-14 by Claude Code Opus 4.8 (1M context) (A6000
+session, ~12:45 EDT) — **WordPiece control DONE, no-GELU live; seed-2
+no-fused diagnosis + trial armed (committed bcfa4fc).** See the
+EXPERIMENT QUEUE section at top for live status. Key events this session:
+- Diagnosed the diary-103 seed-2 instability at the code level → **fused
+  AdamW** is the prime suspect (corrected diary 103's autocast theory:
+  both backends autocast). Added `--no_fused` flag, the trial script, and
+  a queue waiter; diary 103 follow-up written. All pushed (bcfa4fc).
+- Discovered the WordPiece control completed 06-13 18:36 (its log glitched
+  silent at iter 80K but training/checkpoints were fine). No-GELU ablation
+  now running, iter ~150K/220K, ETA tonight.
+- **Waiter cleanup needed:** redundant waiter 2109095 added by mistake;
+  trial script now has a pgrep double-launch guard (commit PENDING at
+  session end — verify it got committed). 2109095 killable for tidiness.
+- **Global permissions changed:** `~/.claude/settings.json` now has
+  `permissions.defaultMode: "auto"` (Ralph's choice, 06-13) — routine ops
+  run without prompts; deny list (kill/rm-rf/force-push) still enforced.
+- Session being stopped & restarted 06-14; all training + waiters are
+  nohup/setsid-detached and survive the restart.
 
 Last updated: 2026-06-13 by Claude Code Opus 4.8 (1M context) (A6000
 session, ~02:05 EDT) — **state-verification session; independently

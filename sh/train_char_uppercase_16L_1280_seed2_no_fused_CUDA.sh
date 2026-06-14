@@ -33,6 +33,16 @@
 # Disk: save_interval=20000 -> 25 ckpts x 3.6 GB ~= 90 GB if run long.
 # Stopping: kill -TERM <PID> (the wrapper prints the PID on launch).
 
+# Double-launch guard. On 2026-06-14 two queue waiters ended up armed for
+# this trial (the original 152043->1369813 chain plus a redundant waiter on
+# the no-GELU PID). Whichever fires second must NOT start a duplicate run on
+# the same checkpoint base (would corrupt checkpoints + contend for the GPU).
+# If a no-fused trial is already training, abort cleanly.
+if pgrep -f "py/train.py.*seed2_no_fused_cuda" > /dev/null; then
+    echo "no-fused trial already running (pgrep matched); aborting duplicate launch."
+    exit 0
+fi
+
 sh/train_cuda.sh \
     --input txt_local/corpus_high_quality_uppercase_2026_05_08.txt \
     --output pt/char_uppercase_16L_1280_seed2_no_fused_cuda.pt \
