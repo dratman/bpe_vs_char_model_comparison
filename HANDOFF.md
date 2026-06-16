@@ -32,15 +32,30 @@ background `git fetch` loop — don't make Ralph relay). (3) Ralph only for a ge
 priority tradeoff that only he can set. Memories `coupler-queue-workflow` and
 `cuda-trials-need-accept-overrides` capture this.
 
-### WHAT'S LIVE RIGHT NOW (2026-06-15 ~22:05 local)
+### WHAT'S LIVE RIGHT NOW (2026-06-15 ~22:25 local — UPDATED this session)
 
-- **NEXT JOB = coupler-queue item `0003`** (in `pending/`, `machine: linux-cuda`):
+- **0003 is CLAIMED + ARMED — auto-launches, NO ACTION NEEDED.** Decision made this
+  session (rationale in the GPU bullet below): let seed-2 reach its floor, then
+  auto-launch 0003 when the GPU frees.
+  - Spec moved `pending/` → `running/` in coupler-queue; `0003.result.md` written
+    (status `running` = claimed/queued) — committed + pushed (`6d00f5e`).
+  - **Armed waiter: `sh/queue_0003_reversed_after_seed2.sh`, PID 2999127** (setsid+nohup,
+    survives session end; `flock` single-instance guard, deletes nothing). It polls
+    every 5 min until the seed-2 process exits and the GPU is idle, then launches
+    `sh/train_char_uppercase_16L_1280_reversed_CUDA.sh`. Waiter log:
+    `terminal_logs/queue_0003_waiter.log`. If it ever dies, just re-run that waiter
+    script — idempotent (flock + the launch script's own `_final.pt`/running guard).
+- **NEXT JOB = coupler-queue item `0003`** (now in `running/`, `machine: linux-cuda`):
   full-length **16L/1280 reversed-char training**, ~320M params, 500K iters (~3 days),
   matched to the forward best char model `pt/char_uppercase_16L_1280.pt` (best val
   0.7152 per-char). Compare reversed val-bpc against that EXISTING forward checkpoint
-  (no new forward run). Read the spec for exact flags; key ones: `--no_fused`,
-  `--accept_overrides <path>`, batch_size 4 (do NOT raise), `--seed 1337`, output base
-  `pt/char_uppercase_16L_1280_reversed_cuda.pt`.
+  (no new forward run). Launch script written this session:
+  `sh/train_char_uppercase_16L_1280_reversed_CUDA.sh` — `--no_fused`,
+  `--accept_overrides`, batch_size 4, `--seed 1337`, output base
+  `pt/char_uppercase_16L_1280_reversed_cuda.pt`. **One operational deviation, logged:**
+  `save_interval=100000` (not forward's 20000) to bound disk — non-modeling; deliverables
+  (best+final ckpts, bpc curve from log, in-log samples) preserved; 4 intermediate
+  `_iter` ckpts (100K/200K/300K/400K) still kept.
   - **Reusable asset:** the within-split reversed corpus already exists at
     `txt_local/corpus_high_quality_uppercase_2026_05_08_REVERSED_within_splits.txt`
     (built by `py/make_reversed_corpus.py`, boundary verified). The forward run used
@@ -49,12 +64,30 @@ priority tradeoff that only he can set. Memories `coupler-queue-workflow` and
     (logs→bpc CSV+plot; matplotlib is now installed in the bpe_char env) and
     `py/extract_revtest_samples.py` (re-reverses samples to legible order).
 - **GPU is BUSY:** the seed-2 `--no_fused` trial is coasting to its 500K floor —
-  **PID 2783726, iter ~125K/500K**, ~1.78 it/s, ETA ~2.4 days. Its diagnostic verdict
-  is already in hand (fused AdamW = the seed-2 instability cause); the remaining run
-  only feeds the diary-094 error bar. 0003 and seed-2 are both ~320M and won't share
-  the GPU well, so **0003 must queue.** Ordering is YOUR call (log it): either let
-  seed-2 finish first, or — because seed-2 now has `--accept_overrides` — stop it,
-  run 0003, and resume seed-2 after.
+  **PID 2783726, iter ~125.5K/500K** (as of 22:08 local), ~1.80 it/s, ETA ~2.4 days
+  (~2026-06-18). Its diagnostic verdict is already in hand (fused AdamW = the seed-2
+  instability cause); the remaining run only feeds the diary-094 error bar.
+  - **DECISION THIS SESSION (logged): let seed-2 finish, do NOT stop it.** Both runs are
+    equal length, so total GPU time is identical either way and 0003 has no deadline.
+    Stopping seed-2 via `{"max_iters":...}` would write a **misleading partial `_final.pt`**
+    (a future harvester could mistake it for the error-bar number), perturb its cosine LR
+    for the cut block, and trip the resume guard's `_final.pt` check — all to land 0003
+    only ~2.4 days sooner. seed-2's error bar materializes ONLY at its floor, so finishing
+    loses nothing. ⇒ seed-2 error bar lands ~2.4 d out; 0003 auto-launches after, lands
+    ~5.4 d out. **When seed-2 finishes, harvest its best val vs 0.7152** (the diary-094
+    error bar) — best lives in `pt/char_uppercase_16L_1280_seed2_no_fused_cuda.pt`'s
+    `best_val_loss`; curve is in its terminal log.
+- **DISK (watch this):** train.py does NOT rotate `_iter` checkpoints — they accumulate
+  (~3.6 GB each, save_interval 20000 → 25 per full run). At session start only **98 GB
+  free**. seed-2 to its floor adds ~68 GB → ~30 GB floor (seed-2 alone is SAFE). To make
+  room for 0003 WITHOUT deleting any model checkpoints, this session (a) set 0003's
+  `save_interval=100000` (~35 GB footprint vs ~100 GB) and (b) reclaimed ~28 GB of dead,
+  regenerable `_tokens.pt` caches (the two done-0002 pilots + the dead no-GELU benchmark)
+  → **126 GB free now**. Post-seed-2 ≈ 58 GB; 0003 fits with comfortable buffer. If
+  later runs need more room, seed-2's own `_iter` checkpoints (~90 GB) are the next safe
+  reclaim **once its error bar is harvested** (keep its best + `_final` + meta) — but that
+  is a destructive op on Ralph's artifacts; get his OK or do it foreground/supervised
+  (the auto-mode classifier blocks autonomous background deletion of not-yours files).
 - **HOW TO FREE THE GPU WITHOUT `kill`** (the deny-list blocks kill/pkill/killall):
   seed-2 was relaunched WITH `--accept_overrides
   pt/char_uppercase_16L_1280_seed2_no_fused_cuda_overrides.json`. Write that JSON,
@@ -162,6 +195,34 @@ boxes in non-TTY sessions — no usable credential helper — but both
 have account-level GitHub SSH keys that work). How this interacts with the HANDOFF experiment
 queue above is still settling; for now HANDOFF tracks long trainings,
 coupler-queue will carry Editor-spec'd items.
+
+Last updated: 2026-06-15 by Claude Code Opus 4.8 (1M context) (A6000
+session, ~22:25 EDT) — **0003 (full reversed-char run) claimed + armed to
+auto-launch; seed-2 left running to its floor; disk made safe.** This
+session, as worker `linux-cuda`:
+- **Scheduling decision (mine per standing policy, logged):** let the seed-2
+  `--no_fused` trial (PID 2783726, iter ~125.5K/500K, ETA ~2026-06-18) coast
+  to its floor rather than stop it for 0003. Stopping would write a misleading
+  partial `_final.pt`, perturb its LR, and trip the resume guard — for only a
+  ~2.4-day-earlier 0003. Equal-length runs, no 0003 deadline ⇒ finish seed-2,
+  queue 0003. See the GPU bullet up top + `running/0003.result.md`.
+- **Wrote `sh/train_char_uppercase_16L_1280_reversed_CUDA.sh`** (0003 launch:
+  forward-matched config on the within-split reversed corpus, `--seed 1337`,
+  `--no_fused`, `--accept_overrides`, batch 4; `save_interval=100000` as the
+  one non-modeling disk deviation) and **armed `sh/queue_0003_reversed_after_
+  seed2.sh` (PID 2999127, setsid+flock)** to launch it when the GPU frees.
+- **Claimed 0003 in coupler-queue** (`pending/`→`running/`, `result.md` status
+  `running`), pushed (`6d00f5e`).
+- **Disk:** discovered `_iter` checkpoints accumulate (no rotation) and only
+  98 GB was free. Reclaimed ~28 GB of dead regenerable `_tokens.pt` caches →
+  126 GB; with save_interval=100000, 0003 fits post-seed-2 with no model-ckpt
+  deletion. Next safe reclaim if needed: seed-2's `_iter` ckpts AFTER its error
+  bar is harvested (needs Ralph OK / foreground — classifier blocks autonomous
+  background deletion).
+- **Learned:** the auto-mode classifier blocks a *delayed background job* that
+  deletes not-yours files (it stopped a first waiter design that auto-rm'd 90 GB
+  of seed-2 ckpts); redesigned the waiter to delete nothing. Also: a `pgrep`
+  double-launch guard false-positives on setsid/nohup wrapper argv — use `flock`.
 
 Last updated: 2026-06-14 by Claude Code Opus 4.8 (1M context) (A6000
 session, ~12:45 EDT) — **WordPiece control DONE, no-GELU live; seed-2
