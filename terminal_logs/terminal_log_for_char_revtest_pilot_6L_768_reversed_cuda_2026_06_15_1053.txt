@@ -1,0 +1,559 @@
+Command: /home/owner/miniforge3/envs/bpe_char/bin/python -u py/train.py --checkpoints_to "pt" --input txt_local/corpus_high_quality_uppercase_2026_05_08_REVERSED_within_splits.txt --output pt/char_revtest_pilot_6L_768_reversed_cuda.pt --mode continuous --tokenizer char --precision bfloat16 --n_layer 6 --n_head 6 --n_embd 768 --block_size 256 --batch_size 64 --learning_rate 5e-4 --warmup_iters 200 --max_iters 10000 --eval_interval 200 --eval_iters 20 --save_interval 2000 --log_interval 50 --sample_interval 2000 --val_split 0.1 --dropout 0.0 --seed 1337
+Started: Mon Jun 15 10:53:09 AM EDT 2026
+Python:  /home/owner/miniforge3/envs/bpe_char/bin/python
+Host:    owner-B660M-Pro-RS
+========================================
+[2026-06-15 10:53:10] Using device: cuda
+[2026-06-15 10:53:10] Seeded torch RNG with --seed 1337
+[2026-06-15 10:53:10] Using precision: bfloat16 (requested: bfloat16)
+[2026-06-15 10:53:10] Training mode: continuous
+[2026-06-15 10:53:10] Reading input from txt_local/corpus_high_quality_uppercase_2026_05_08_REVERSED_within_splits.txt
+[2026-06-15 10:53:11] Read 1,265,346,119 characters
+[2026-06-15 10:53:11] Training char tokenizer...
+CharTokenizer: Built vocabulary of 78 characters
+[2026-06-15 10:53:14] Tokenizing entire corpus (1,265,346,119 characters)...
+[2026-06-15 10:53:44] Tokenization complete: 1,265,346,119 tokens
+[2026-06-15 10:53:44] Converting to tensor...
+[2026-06-15 10:54:18] Tensor ready: 1,265,346,119 tokens
+[2026-06-15 10:54:18] Saving tokenized corpus cache: pt/char_revtest_pilot_6L_768_reversed_cuda_tokens.pt
+[2026-06-15 10:54:29] Splitting into train and validation sets...
+[2026-06-15 10:54:29] Split complete.
+[2026-06-15 10:54:29] Training tokens: 1,138,811,508
+[2026-06-15 10:54:29] Validation tokens: 126,534,611
+[2026-06-15 10:54:29] Saving tokenizer to pt/char_revtest_pilot_6L_768_reversed_cuda_meta.pkl
+[2026-06-15 10:54:29] Initializing new model...
+  Vocabulary size: 78
+number of parameters: 42.59M (softmax attention, tied weights)
+num decayed parameter tensors: 26, with 42,723,840 parameters
+num non-decayed parameter tensors: 50, with 61,440 parameters
+using fused AdamW: True
+[2026-06-15 10:54:36] Using automatic mixed precision (AMP) with bfloat16
+
+[2026-06-15 10:54:36] Starting training...
+Command line: py/train.py --checkpoints_to pt --input txt_local/corpus_high_quality_uppercase_2026_05_08_REVERSED_within_splits.txt --output pt/char_revtest_pilot_6L_768_reversed_cuda.pt --mode continuous --tokenizer char --precision bfloat16 --n_layer 6 --n_head 6 --n_embd 768 --block_size 256 --batch_size 64 --learning_rate 5e-4 --warmup_iters 200 --max_iters 10000 --eval_interval 200 --eval_iters 20 --save_interval 2000 --log_interval 50 --sample_interval 2000 --val_split 0.1 --dropout 0.0 --seed 1337
+
+--- Mode and tokenizer ---
+  mode:               continuous
+  tokenizer:          char
+  vocab_size:         78
+  attention type:     softmax
+  precision:          bfloat16
+--- Architecture ---
+  n_layer:            6
+  n_head:             6
+  n_embd:             768
+  block_size:         256
+  dropout:            0.0
+  bias:               True  (LayerNorm + Linear bias)
+  tie_weights:        True
+  no_gelu:            False
+  no_bias:            False
+--- Training ---
+  batch_size:         64
+  grad_accum_steps:   1
+  max_iters:          10000
+  learning_rate:      5.00e-04 (target after warmup)
+  min_lr (cosine):    5.00e-05
+  warmup_iters:       200
+  weight_decay:       0.1 (decay tensors), 0.0 (no-decay tensors)  [hardcoded]
+  betas:              (0.9, 0.95)  [hardcoded]
+  grad_clip:          1.0  [hardcoded]
+--- Data ---
+  input:              txt_local/corpus_high_quality_uppercase_2026_05_08_REVERSED_within_splits.txt
+  val_split:          0.1
+  token_cache:        pt/char_revtest_pilot_6L_768_reversed_cuda_tokens.pt (rebuilt)
+--- Logging ---
+  log_interval:       50
+  eval_interval:      200
+  eval_iters:         20
+  save_interval:      2000
+  sample_interval:    2000
+  sample_max_tokens:  128
+--- Output ---
+  output:             pt/char_revtest_pilot_6L_768_reversed_cuda.pt
+  checkpoints_to:     pt
+  rolling_save:       pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (written every eval_interval)
+============================================================
+[2026-06-15 10:54:40] [0m] Step     0 | Epoch   0.00 | train loss 4.5273 | val loss 4.5280 | lr 0.00e+00
+iter 0: loss 4.5282, time 3834.99ms, mfu -100.00%
+iter 50: loss 2.5112, time 73.57ms, mfu 19.25%
+[2026-06-15 10:54:48] [0m] Speed at iter 100 (epoch 0.00): 8.88 iters/sec
+iter 100: loss 2.4349, time 73.83ms, mfu 19.24%
+iter 150: loss 2.2668, time 74.12ms, mfu 19.23%
+[2026-06-15 10:54:59] [0m] Step   200 | Epoch   0.00 | train loss 2.0401 | val loss 2.0431 | lr 5.00e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 2.0431)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 200, val 2.0431)
+[2026-06-15 10:55:00] [0m] Speed at iter 200 (epoch 0.00): 8.31 iters/sec
+iter 200: loss 2.0361, time 4696.15ms, mfu 17.34%
+iter 250: loss 1.8319, time 74.19ms, mfu 17.51%
+[2026-06-15 10:55:07] [0m] Speed at iter 300 (epoch 0.00): 13.02 iters/sec
+iter 300: loss 1.7229, time 74.75ms, mfu 17.66%
+iter 350: loss 1.6713, time 74.77ms, mfu 17.78%
+[2026-06-15 10:55:18] [0m] Step   400 | Epoch   0.01 | train loss 1.5979 | val loss 1.5958 | lr 5.00e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.5958)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 400, val 1.5958)
+[2026-06-15 10:55:49] [1m] Speed at iter 400 (epoch 0.01): 2.39 iters/sec
+iter 400: loss 1.5969, time 34456.05ms, mfu 16.01%
+iter 450: loss 1.4962, time 74.72ms, mfu 16.30%
+[2026-06-15 10:55:57] [1m] Speed at iter 500 (epoch 0.01): 13.39 iters/sec
+iter 500: loss 1.5235, time 74.38ms, mfu 16.58%
+iter 550: loss 1.4717, time 74.68ms, mfu 16.82%
+[2026-06-15 10:56:08] [1m] Step   600 | Epoch   0.01 | train loss 1.4435 | val loss 1.4434 | lr 4.98e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.4434)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 600, val 1.4434)
+[2026-06-15 10:56:40] [2m] Speed at iter 600 (epoch 0.01): 2.28 iters/sec
+iter 600: loss 1.4820, time 36379.59ms, mfu 15.14%
+iter 650: loss 1.4138, time 74.25ms, mfu 15.53%
+[2026-06-15 10:56:48] [2m] Speed at iter 700 (epoch 0.01): 13.44 iters/sec
+iter 700: loss 1.4255, time 74.55ms, mfu 15.88%
+iter 750: loss 1.3820, time 74.39ms, mfu 16.19%
+[2026-06-15 10:56:59] [2m] Step   800 | Epoch   0.01 | train loss 1.3717 | val loss 1.3742 | lr 4.96e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.3742)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 800, val 1.3742)
+[2026-06-15 10:57:45] [3m] Speed at iter 800 (epoch 0.01): 1.76 iters/sec
+iter 800: loss 1.3713, time 49265.77ms, mfu 14.58%
+iter 850: loss 1.3373, time 74.35ms, mfu 15.03%
+[2026-06-15 10:57:52] [3m] Speed at iter 900 (epoch 0.01): 13.47 iters/sec
+iter 900: loss 1.3232, time 74.56ms, mfu 15.42%
+iter 950: loss 1.3652, time 74.95ms, mfu 15.77%
+[2026-06-15 10:58:03] [3m] Step  1000 | Epoch   0.01 | train loss 1.3379 | val loss 1.3313 | lr 4.93e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.3313)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 1000, val 1.3313)
+[2026-06-15 10:58:49] [4m] Speed at iter 1000 (epoch 0.01): 1.75 iters/sec
+iter 1000: loss 1.3299, time 49608.98ms, mfu 14.20%
+iter 1050: loss 1.2888, time 74.00ms, mfu 14.69%
+[2026-06-15 10:58:57] [4m] Speed at iter 1100 (epoch 0.02): 13.50 iters/sec
+iter 1100: loss 1.2809, time 74.06ms, mfu 15.13%
+iter 1150: loss 1.3708, time 74.33ms, mfu 15.52%
+[2026-06-15 10:59:08] [4m] Step  1200 | Epoch   0.02 | train loss 1.3033 | val loss 1.3043 | lr 4.89e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.3043)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 1200, val 1.3043)
+[2026-06-15 10:59:43] [5m] Speed at iter 1200 (epoch 0.02): 2.15 iters/sec
+iter 1200: loss 1.2936, time 39069.29ms, mfu 13.98%
+iter 1250: loss 1.2728, time 74.26ms, mfu 14.49%
+[2026-06-15 10:59:50] [5m] Speed at iter 1300 (epoch 0.02): 13.46 iters/sec
+iter 1300: loss 1.3041, time 74.41ms, mfu 14.94%
+iter 1350: loss 1.2794, time 74.67ms, mfu 15.34%
+[2026-06-15 11:00:01] [5m] Step  1400 | Epoch   0.02 | train loss 1.2866 | val loss 1.2679 | lr 4.84e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.2679)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 1400, val 1.2679)
+[2026-06-15 11:00:22] [5m] Speed at iter 1400 (epoch 0.02): 3.17 iters/sec
+iter 1400: loss 1.2665, time 24177.68ms, mfu 13.81%
+iter 1450: loss 1.2749, time 74.36ms, mfu 14.34%
+[2026-06-15 11:00:30] [5m] Speed at iter 1500 (epoch 0.02): 13.41 iters/sec
+iter 1500: loss 1.2555, time 74.57ms, mfu 14.80%
+iter 1550: loss 1.2752, time 74.80ms, mfu 15.22%
+[2026-06-15 11:00:41] [6m] Step  1600 | Epoch   0.02 | train loss 1.2556 | val loss 1.2479 | lr 4.78e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.2479)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 1600, val 1.2479)
+[2026-06-15 11:01:02] [6m] Speed at iter 1600 (epoch 0.02): 3.10 iters/sec
+iter 1600: loss 1.2675, time 24891.46ms, mfu 13.70%
+iter 1650: loss 1.2730, time 74.53ms, mfu 14.23%
+[2026-06-15 11:01:09] [6m] Speed at iter 1700 (epoch 0.02): 13.40 iters/sec
+iter 1700: loss 1.2478, time 74.50ms, mfu 14.71%
+iter 1750: loss 1.2850, time 74.80ms, mfu 15.13%
+[2026-06-15 11:01:20] [6m] Step  1800 | Epoch   0.03 | train loss 1.2517 | val loss 1.2426 | lr 4.71e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.2426)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 1800, val 1.2426)
+[2026-06-15 11:01:42] [7m] Speed at iter 1800 (epoch 0.03): 3.06 iters/sec
+iter 1800: loss 1.2562, time 25270.86ms, mfu 13.62%
+iter 1850: loss 1.2418, time 74.40ms, mfu 14.16%
+[2026-06-15 11:01:49] [7m] Speed at iter 1900 (epoch 0.03): 13.39 iters/sec
+iter 1900: loss 1.2229, time 74.95ms, mfu 14.64%
+iter 1950: loss 1.2383, time 74.82ms, mfu 15.07%
+[2026-06-15 11:02:01] [7m] Step  2000 | Epoch   0.03 | train loss 1.2349 | val loss 1.2274 | lr 4.64e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.2274)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 2000, val 1.2274)
+[2026-06-15 11:02:22] [7m] Saved periodic checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_iter2000.pt (iter 2000, epoch 0.03)
+
+[2026-06-15 11:02:22] [7m] Sampling at iter 2000 (epoch 0.03):
+  1. .eralC dna ekuD ot drager ni ,telliW dna nerrab yrevE .tnemnrevoG dna sredael eerf ot huos a dnes ot tfel saw esruoc fo nerdlihc
+  2. .teelf sih no ereht pu ti edam eh ,lla gniraeb tlevesroh ta hguohtla ,tserra tuohtiw dna ,tserof eht ot rettam emos gnitrats yb 
+  3. .mlasp eht ni raed dlo eht evael ew llahS .sesroh eht ni seitnewt ytpme dna nellaf saw ",sregniF" eht fo thgil erew taht ti nehW
+
+[2026-06-15 11:02:22] [7m] Speed at iter 2000 (epoch 0.03): 3.04 iters/sec
+iter 2000: loss 1.2015, time 25491.85ms, mfu 13.57%
+iter 2050: loss 1.2482, time 74.37ms, mfu 14.11%
+[2026-06-15 11:02:30] [7m] Speed at iter 2100 (epoch 0.03): 13.35 iters/sec
+iter 2100: loss 1.1946, time 74.97ms, mfu 14.59%
+iter 2150: loss 1.2085, time 74.95ms, mfu 15.02%
+[2026-06-15 11:02:41] [8m] Step  2200 | Epoch   0.03 | train loss 1.2136 | val loss 1.2110 | lr 4.55e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.2110)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 2200, val 1.2110)
+[2026-06-15 11:02:58] [8m] Speed at iter 2200 (epoch 0.03): 3.53 iters/sec
+iter 2200: loss 1.2725, time 20884.73ms, mfu 13.53%
+iter 2250: loss 1.1996, time 74.51ms, mfu 14.07%
+[2026-06-15 11:03:06] [8m] Speed at iter 2300 (epoch 0.03): 13.36 iters/sec
+iter 2300: loss 1.1945, time 74.90ms, mfu 14.56%
+iter 2350: loss 1.2412, time 74.77ms, mfu 15.00%
+[2026-06-15 11:03:17] [8m] Step  2400 | Epoch   0.03 | train loss 1.1997 | val loss 1.2009 | lr 4.46e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.2009)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 2400, val 1.2009)
+[2026-06-15 11:03:35] [8m] Speed at iter 2400 (epoch 0.03): 3.35 iters/sec
+iter 2400: loss 1.2419, time 22418.40ms, mfu 13.50%
+iter 2450: loss 1.1963, time 74.71ms, mfu 14.05%
+[2026-06-15 11:03:43] [9m] Speed at iter 2500 (epoch 0.04): 13.37 iters/sec
+iter 2500: loss 1.1967, time 75.03ms, mfu 14.53%
+iter 2550: loss 1.1918, time 75.52ms, mfu 14.95%
+[2026-06-15 11:03:54] [9m] Step  2600 | Epoch   0.04 | train loss 1.1936 | val loss 1.1941 | lr 4.37e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.1941)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 2600, val 1.1941)
+[2026-06-15 11:04:13] [9m] Speed at iter 2600 (epoch 0.04): 3.34 iters/sec
+iter 2600: loss 1.2032, time 22509.19ms, mfu 13.46%
+iter 2650: loss 1.2187, time 74.69ms, mfu 14.01%
+[2026-06-15 11:04:20] [9m] Speed at iter 2700 (epoch 0.04): 13.36 iters/sec
+iter 2700: loss 1.1646, time 74.85ms, mfu 14.50%
+iter 2750: loss 1.1936, time 74.80ms, mfu 14.95%
+[2026-06-15 11:04:31] [9m] Step  2800 | Epoch   0.04 | train loss 1.1892 | val loss 1.1871 | lr 4.26e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.1871)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 2800, val 1.1871)
+[2026-06-15 11:04:42] [10m] Speed at iter 2800 (epoch 0.04): 4.56 iters/sec
+iter 2800: loss 1.2012, time 14500.91ms, mfu 13.46%
+iter 2850: loss 1.2147, time 74.97ms, mfu 14.00%
+[2026-06-15 11:04:50] [10m] Speed at iter 2900 (epoch 0.04): 13.34 iters/sec
+iter 2900: loss 1.1744, time 74.97ms, mfu 14.49%
+iter 2950: loss 1.1700, time 75.21ms, mfu 14.93%
+[2026-06-15 11:05:01] [10m] Step  3000 | Epoch   0.04 | train loss 1.1757 | val loss 1.1683 | lr 4.15e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.1683)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 3000, val 1.1683)
+[2026-06-15 11:05:13] [10m] Speed at iter 3000 (epoch 0.04): 4.41 iters/sec
+iter 3000: loss 1.1788, time 15237.27ms, mfu 13.44%
+iter 3050: loss 1.1962, time 75.08ms, mfu 13.99%
+[2026-06-15 11:05:20] [10m] Speed at iter 3100 (epoch 0.04): 13.33 iters/sec
+iter 3100: loss 1.1504, time 75.11ms, mfu 14.47%
+iter 3150: loss 1.1926, time 75.09ms, mfu 14.91%
+[2026-06-15 11:05:31] [10m] Step  3200 | Epoch   0.05 | train loss 1.1717 | val loss 1.1653 | lr 4.04e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.1653)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 3200, val 1.1653)
+[2026-06-15 11:05:47] [11m] Speed at iter 3200 (epoch 0.05): 3.66 iters/sec
+iter 3200: loss 1.2009, time 19860.52ms, mfu 13.43%
+iter 3250: loss 1.1664, time 75.39ms, mfu 13.96%
+[2026-06-15 11:05:55] [11m] Speed at iter 3300 (epoch 0.05): 13.34 iters/sec
+iter 3300: loss 1.1760, time 75.22ms, mfu 14.45%
+iter 3350: loss 1.1402, time 75.12ms, mfu 14.89%
+[2026-06-15 11:06:06] [11m] Step  3400 | Epoch   0.05 | train loss 1.1631 | val loss 1.1517 | lr 3.92e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.1517)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 3400, val 1.1517)
+[2026-06-15 11:06:12] [11m] Speed at iter 3400 (epoch 0.05): 5.76 iters/sec
+iter 3400: loss 1.1966, time 9915.68ms, mfu 13.42%
+iter 3450: loss 1.1994, time 75.03ms, mfu 13.96%
+[2026-06-15 11:06:20] [11m] Speed at iter 3500 (epoch 0.05): 13.29 iters/sec
+iter 3500: loss 1.1604, time 75.32ms, mfu 14.45%
+iter 3550: loss 1.1389, time 75.52ms, mfu 14.88%
+[2026-06-15 11:06:31] [11m] Step  3600 | Epoch   0.05 | train loss 1.1564 | val loss 1.1495 | lr 3.79e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.1495)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 3600, val 1.1495)
+[2026-06-15 11:06:41] [12m] Speed at iter 3600 (epoch 0.05): 4.64 iters/sec
+iter 3600: loss 1.1244, time 14073.65ms, mfu 13.40%
+iter 3650: loss 1.1638, time 75.23ms, mfu 13.94%
+[2026-06-15 11:06:49] [12m] Speed at iter 3700 (epoch 0.05): 12.46 iters/sec
+iter 3700: loss 1.1544, time 75.10ms, mfu 14.43%
+iter 3750: loss 1.1371, time 77.34ms, mfu 14.82%
+[2026-06-15 11:07:00] [12m] Step  3800 | Epoch   0.05 | train loss 1.1501 | val loss 1.1424 | lr 3.66e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.1424)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 3800, val 1.1424)
+[2026-06-15 11:07:07] [12m] Speed at iter 3800 (epoch 0.05): 5.62 iters/sec
+iter 3800: loss 1.1597, time 10312.10ms, mfu 13.35%
+iter 3850: loss 1.1284, time 74.95ms, mfu 13.91%
+[2026-06-15 11:07:15] [12m] Speed at iter 3900 (epoch 0.06): 13.27 iters/sec
+iter 3900: loss 1.1500, time 75.39ms, mfu 14.39%
+iter 3950: loss 1.1139, time 75.42ms, mfu 14.83%
+[2026-06-15 11:07:26] [12m] Step  4000 | Epoch   0.06 | train loss 1.1438 | val loss 1.1427 | lr 3.53e-04
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 4000, val 1.1427)
+[2026-06-15 11:07:27] [12m] Saved periodic checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_iter4000.pt (iter 4000, epoch 0.06)
+
+[2026-06-15 11:07:27] [12m] Sampling at iter 4000 (epoch 0.06):
+  1. .reh peek ot degilbo hguoht sa erew semalf emos dna steerts eht ni yletaidemmi ti detaes dah ehs ;flesreh detaes ehs setunim nev
+  2. .tuo ti detniop dna ,ecnalg a gnitteb yb yek eht dehcnerd eh dna ,detseggus eH .setunim evif dah nworB taht--ti detceted eH .oot
+  3. .retteb yllaer saw hcihw dna ,lla ta erew sehcnert owt eht ,elppuS nehw yletaidemmI .gnideerb eht fo sehcnert lapocsipe eht ot d
+
+[2026-06-15 11:07:27] [12m] Speed at iter 4000 (epoch 0.06): 7.93 iters/sec
+iter 4000: loss 1.1127, time 5133.40ms, mfu 13.38%
+iter 4050: loss 1.1276, time 76.15ms, mfu 13.90%
+[2026-06-15 11:07:35] [12m] Speed at iter 4100 (epoch 0.06): 13.15 iters/sec
+iter 4100: loss 1.1472, time 75.21ms, mfu 14.39%
+iter 4150: loss 1.1614, time 80.85ms, mfu 14.70%
+[2026-06-15 11:07:46] [13m] Step  4200 | Epoch   0.06 | train loss 1.1329 | val loss 1.1381 | lr 3.39e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.1381)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 4200, val 1.1381)
+[2026-06-15 11:08:00] [13m] Speed at iter 4200 (epoch 0.06): 4.00 iters/sec
+iter 4200: loss 1.1230, time 17358.36ms, mfu 13.24%
+iter 4250: loss 1.1086, time 75.00ms, mfu 13.81%
+[2026-06-15 11:08:07] [13m] Speed at iter 4300 (epoch 0.06): 13.28 iters/sec
+iter 4300: loss 1.1233, time 75.28ms, mfu 14.31%
+iter 4350: loss 1.1224, time 75.01ms, mfu 14.76%
+[2026-06-15 11:08:19] [13m] Step  4400 | Epoch   0.06 | train loss 1.1329 | val loss 1.1277 | lr 3.25e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.1277)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 4400, val 1.1277)
+[2026-06-15 11:08:36] [13m] Speed at iter 4400 (epoch 0.06): 3.49 iters/sec
+iter 4400: loss 1.1654, time 21123.58ms, mfu 13.29%
+iter 4450: loss 1.1028, time 74.98ms, mfu 13.85%
+[2026-06-15 11:08:44] [14m] Speed at iter 4500 (epoch 0.06): 13.34 iters/sec
+iter 4500: loss 1.1091, time 75.16ms, mfu 14.35%
+iter 4550: loss 1.1299, time 75.02ms, mfu 14.81%
+[2026-06-15 11:08:55] [14m] Step  4600 | Epoch   0.07 | train loss 1.1225 | val loss 1.1195 | lr 3.11e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.1195)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 4600, val 1.1195)
+[2026-06-15 11:08:56] [14m] Speed at iter 4600 (epoch 0.07): 8.06 iters/sec
+iter 4600: loss 1.1040, time 4959.89ms, mfu 13.35%
+iter 4650: loss 1.1535, time 75.48ms, mfu 13.89%
+[2026-06-15 11:09:04] [14m] Speed at iter 4700 (epoch 0.07): 13.19 iters/sec
+iter 4700: loss 1.1580, time 76.41ms, mfu 14.36%
+iter 4750: loss 1.1306, time 75.82ms, mfu 14.79%
+[2026-06-15 11:09:15] [14m] Step  4800 | Epoch   0.07 | train loss 1.1223 | val loss 1.1132 | lr 2.97e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.1132)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 4800, val 1.1132)
+[2026-06-15 11:09:32] [14m] Speed at iter 4800 (epoch 0.07): 3.49 iters/sec
+iter 4800: loss 1.1064, time 21173.17ms, mfu 13.32%
+iter 4850: loss 1.1308, time 74.97ms, mfu 13.88%
+[2026-06-15 11:09:40] [15m] Speed at iter 4900 (epoch 0.07): 13.32 iters/sec
+iter 4900: loss 1.1032, time 74.98ms, mfu 14.38%
+iter 4950: loss 1.1039, time 75.04ms, mfu 14.83%
+[2026-06-15 11:09:51] [15m] Step  5000 | Epoch   0.07 | train loss 1.1033 | val loss 1.1088 | lr 2.82e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.1088)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 5000, val 1.1088)
+[2026-06-15 11:10:11] [15m] Speed at iter 5000 (epoch 0.07): 3.19 iters/sec
+iter 5000: loss 1.1157, time 23915.03ms, mfu 13.35%
+iter 5050: loss 1.1330, time 74.76ms, mfu 13.91%
+[2026-06-15 11:10:19] [15m] Speed at iter 5100 (epoch 0.07): 13.37 iters/sec
+iter 5100: loss 1.0766, time 74.75ms, mfu 14.41%
+iter 5150: loss 1.1100, time 74.97ms, mfu 14.86%
+[2026-06-15 11:10:30] [15m] Step  5200 | Epoch   0.07 | train loss 1.1092 | val loss 1.1033 | lr 2.68e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.1033)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 5200, val 1.1033)
+[2026-06-15 11:10:44] [16m] Speed at iter 5200 (epoch 0.07): 3.99 iters/sec
+iter 5200: loss 1.1323, time 17623.50ms, mfu 13.38%
+iter 5250: loss 1.1088, time 74.92ms, mfu 13.93%
+[2026-06-15 11:10:51] [16m] Speed at iter 5300 (epoch 0.08): 13.36 iters/sec
+iter 5300: loss 1.1128, time 74.92ms, mfu 14.43%
+iter 5350: loss 1.1020, time 75.78ms, mfu 14.86%
+[2026-06-15 11:11:02] [16m] Step  5400 | Epoch   0.08 | train loss 1.0969 | val loss 1.0931 | lr 2.53e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0931)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 5400, val 1.0931)
+[2026-06-15 11:11:13] [16m] Speed at iter 5400 (epoch 0.08): 4.54 iters/sec
+iter 5400: loss 1.1255, time 14588.66ms, mfu 13.38%
+iter 5450: loss 1.1129, time 75.16ms, mfu 13.93%
+[2026-06-15 11:11:21] [16m] Speed at iter 5500 (epoch 0.08): 13.32 iters/sec
+iter 5500: loss 1.1000, time 75.50ms, mfu 14.41%
+iter 5550: loss 1.1117, time 74.86ms, mfu 14.86%
+[2026-06-15 11:11:32] [16m] Step  5600 | Epoch   0.08 | train loss 1.1019 | val loss 1.0964 | lr 2.39e-04
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 5600, val 1.0964)
+[2026-06-15 11:11:33] [16m] Speed at iter 5600 (epoch 0.08): 8.46 iters/sec
+iter 5600: loss 1.0790, time 4361.87ms, mfu 13.41%
+iter 5650: loss 1.1027, time 75.78ms, mfu 13.94%
+[2026-06-15 11:11:40] [17m] Speed at iter 5700 (epoch 0.08): 13.17 iters/sec
+iter 5700: loss 1.0900, time 75.90ms, mfu 14.41%
+iter 5750: loss 1.0904, time 75.87ms, mfu 14.83%
+[2026-06-15 11:11:51] [17m] Step  5800 | Epoch   0.08 | train loss 1.0912 | val loss 1.0949 | lr 2.25e-04
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 5800, val 1.0949)
+[2026-06-15 11:12:01] [17m] Speed at iter 5800 (epoch 0.08): 4.77 iters/sec
+iter 5800: loss 1.0826, time 13446.89ms, mfu 13.36%
+iter 5850: loss 1.0661, time 75.27ms, mfu 13.91%
+[2026-06-15 11:12:09] [17m] Speed at iter 5900 (epoch 0.08): 13.26 iters/sec
+iter 5900: loss 1.0872, time 75.72ms, mfu 14.39%
+iter 5950: loss 1.0831, time 75.54ms, mfu 14.82%
+[2026-06-15 11:12:20] [17m] Step  6000 | Epoch   0.09 | train loss 1.0928 | val loss 1.0865 | lr 2.11e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0865)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 6000, val 1.0865)
+[2026-06-15 11:12:30] [17m] Saved periodic checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_iter6000.pt (iter 6000, epoch 0.09)
+
+[2026-06-15 11:12:30] [17m] Sampling at iter 6000 (epoch 0.09):
+  1. .deksa eh "?krad eht ni stepmurt sih ot kcab og ot gniog ew era tahW" .ti fo yevrus eht dekram htaerb siH .elbairc yrev ton saw 
+  2. .yad lla shtnom xis-ytriht ,yadnoon ,yadseuT no deneppah tahw sppilihP .rM ot noitnetta on ees lliw I .ti tfel I .ecnatsissa ym 
+  3. ".kcolc a ni sreidlos eht rof tnahc ecnatsid siht ta og ll'ew dna uoy thguos I .tset taht ssorc ot si od ot evah ll'yeht tahw s'
+
+[2026-06-15 11:12:31] [17m] Speed at iter 6000 (epoch 0.09): 4.53 iters/sec
+iter 6000: loss 1.1105, time 14586.49ms, mfu 13.35%
+iter 6050: loss 1.0626, time 75.26ms, mfu 13.90%
+[2026-06-15 11:12:38] [18m] Speed at iter 6100 (epoch 0.09): 13.28 iters/sec
+iter 6100: loss 1.1074, time 77.02ms, mfu 14.35%
+iter 6150: loss 1.0738, time 75.38ms, mfu 14.79%
+[2026-06-15 11:12:49] [18m] Step  6200 | Epoch   0.09 | train loss 1.0818 | val loss 1.0840 | lr 1.97e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0840)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 6200, val 1.0840)
+[2026-06-15 11:12:58] [18m] Speed at iter 6200 (epoch 0.09): 5.04 iters/sec
+iter 6200: loss 1.0846, time 12347.58ms, mfu 13.32%
+iter 6250: loss 1.0525, time 75.28ms, mfu 13.87%
+[2026-06-15 11:13:06] [18m] Speed at iter 6300 (epoch 0.09): 13.27 iters/sec
+iter 6300: loss 1.0952, time 75.30ms, mfu 14.36%
+iter 6350: loss 1.0685, time 75.47ms, mfu 14.80%
+[2026-06-15 11:13:17] [18m] Step  6400 | Epoch   0.09 | train loss 1.0790 | val loss 1.0811 | lr 1.84e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0811)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 6400, val 1.0811)
+[2026-06-15 11:13:37] [19m] Speed at iter 6400 (epoch 0.09): 3.19 iters/sec
+iter 6400: loss 1.0999, time 23877.68ms, mfu 13.33%
+iter 6450: loss 1.1005, time 75.13ms, mfu 13.88%
+[2026-06-15 11:13:44] [19m] Speed at iter 6500 (epoch 0.09): 13.35 iters/sec
+iter 6500: loss 1.0860, time 74.66ms, mfu 14.39%
+iter 6550: loss 1.0551, time 75.01ms, mfu 14.84%
+[2026-06-15 11:13:56] [19m] Step  6600 | Epoch   0.09 | train loss 1.0803 | val loss 1.0805 | lr 1.71e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0805)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 6600, val 1.0805)
+[2026-06-15 11:14:14] [19m] Speed at iter 6600 (epoch 0.09): 3.34 iters/sec
+iter 6600: loss 1.1127, time 22542.82ms, mfu 13.36%
+iter 6650: loss 1.0717, time 74.52ms, mfu 13.93%
+[2026-06-15 11:14:22] [19m] Speed at iter 6700 (epoch 0.10): 13.37 iters/sec
+iter 6700: loss 1.0762, time 74.85ms, mfu 14.43%
+iter 6750: loss 1.0773, time 74.77ms, mfu 14.88%
+[2026-06-15 11:14:33] [19m] Step  6800 | Epoch   0.10 | train loss 1.0740 | val loss 1.0757 | lr 1.58e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0757)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 6800, val 1.0757)
+[2026-06-15 11:14:54] [20m] Speed at iter 6800 (epoch 0.10): 3.15 iters/sec
+iter 6800: loss 1.0721, time 24293.98ms, mfu 13.40%
+iter 6850: loss 1.0945, time 74.79ms, mfu 13.95%
+[2026-06-15 11:15:01] [20m] Speed at iter 6900 (epoch 0.10): 13.38 iters/sec
+iter 6900: loss 1.0477, time 74.59ms, mfu 14.45%
+iter 6950: loss 1.0878, time 75.00ms, mfu 14.90%
+[2026-06-15 11:15:12] [20m] Step  7000 | Epoch   0.10 | train loss 1.0694 | val loss 1.0717 | lr 1.46e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0717)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 7000, val 1.0717)
+[2026-06-15 11:15:26] [20m] Speed at iter 7000 (epoch 0.10): 3.93 iters/sec
+iter 7000: loss 1.0462, time 17990.54ms, mfu 13.41%
+iter 7050: loss 1.0665, time 75.07ms, mfu 13.96%
+[2026-06-15 11:15:34] [20m] Speed at iter 7100 (epoch 0.10): 13.34 iters/sec
+iter 7100: loss 1.0502, time 75.18ms, mfu 14.45%
+iter 7150: loss 1.0219, time 75.17ms, mfu 14.89%
+[2026-06-15 11:15:45] [21m] Step  7200 | Epoch   0.10 | train loss 1.0658 | val loss 1.0719 | lr 1.35e-04
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 7200, val 1.0719)
+[2026-06-15 11:15:46] [21m] Speed at iter 7200 (epoch 0.10): 8.23 iters/sec
+iter 7200: loss 1.0544, time 4709.60ms, mfu 13.43%
+iter 7250: loss 1.0604, time 75.78ms, mfu 13.95%
+[2026-06-15 11:15:54] [21m] Speed at iter 7300 (epoch 0.11): 13.18 iters/sec
+iter 7300: loss 1.0609, time 76.75ms, mfu 14.40%
+iter 7350: loss 1.0851, time 75.82ms, mfu 14.83%
+[2026-06-15 11:16:05] [21m] Step  7400 | Epoch   0.11 | train loss 1.0679 | val loss 1.0617 | lr 1.24e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0617)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 7400, val 1.0617)
+[2026-06-15 11:16:11] [21m] Speed at iter 7400 (epoch 0.11): 5.79 iters/sec
+iter 7400: loss 1.0526, time 9758.40ms, mfu 13.36%
+iter 7450: loss 1.0793, time 76.59ms, mfu 13.88%
+[2026-06-15 11:16:19] [21m] Speed at iter 7500 (epoch 0.11): 13.24 iters/sec
+iter 7500: loss 1.0537, time 75.45ms, mfu 14.36%
+iter 7550: loss 1.0614, time 75.76ms, mfu 14.80%
+[2026-06-15 11:16:30] [21m] Step  7600 | Epoch   0.11 | train loss 1.0609 | val loss 1.0663 | lr 1.13e-04
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 7600, val 1.0663)
+[2026-06-15 11:16:41] [22m] Speed at iter 7600 (epoch 0.11): 4.56 iters/sec
+iter 7600: loss 1.0553, time 14447.90ms, mfu 13.33%
+iter 7650: loss 1.0893, time 77.14ms, mfu 13.83%
+[2026-06-15 11:16:48] [22m] Speed at iter 7700 (epoch 0.11): 13.28 iters/sec
+iter 7700: loss 1.0281, time 75.50ms, mfu 14.32%
+iter 7750: loss 1.0790, time 75.37ms, mfu 14.77%
+[2026-06-15 11:16:59] [22m] Step  7800 | Epoch   0.11 | train loss 1.0589 | val loss 1.0577 | lr 1.04e-04
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0577)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 7800, val 1.0577)
+[2026-06-15 11:17:17] [22m] Speed at iter 7800 (epoch 0.11): 3.42 iters/sec
+iter 7800: loss 1.0251, time 21723.35ms, mfu 13.30%
+iter 7850: loss 1.0454, time 75.75ms, mfu 13.84%
+[2026-06-15 11:17:25] [22m] Speed at iter 7900 (epoch 0.11): 13.34 iters/sec
+iter 7900: loss 1.0731, time 74.83ms, mfu 14.35%
+iter 7950: loss 1.0228, time 75.09ms, mfu 14.80%
+[2026-06-15 11:17:36] [22m] Step  8000 | Epoch   0.12 | train loss 1.0558 | val loss 1.0517 | lr 9.47e-05
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0517)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 8000, val 1.0517)
+[2026-06-15 11:17:45] [23m] Saved periodic checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_iter8000.pt (iter 8000, epoch 0.12)
+
+[2026-06-15 11:17:45] [23m] Sampling at iter 8000 (epoch 0.12):
+  1. .srettel eht deretne eh sa ,selims dna serutaef sih ,yrc ot elbanu deraeppa knab eht ni knus selims eht sa ,htaerb tew ,dilots ,
+  2. .egalliv eht fo tnemecnemmoc eht rof tub ,einneJ sa nwonk saw sihT .semoh rieht ot meht etivni ot ylluferac gniyrt ,ecnedupmi ts
+  3. "?taht ot noitnetta yna evig ot ekil uoy dluoW .taht rof reeuq eb t'ndluohs tI .ecneidua siht eb ereht taht kniht dluohs I .uoy 
+
+[2026-06-15 11:17:45] [23m] Speed at iter 8000 (epoch 0.12): 4.84 iters/sec
+iter 8000: loss 1.0548, time 13196.69ms, mfu 13.33%
+iter 8050: loss 1.0378, time 74.67ms, mfu 13.89%
+[2026-06-15 11:17:53] [23m] Speed at iter 8100 (epoch 0.12): 13.32 iters/sec
+iter 8100: loss 1.0639, time 75.00ms, mfu 14.39%
+iter 8150: loss 1.0774, time 75.12ms, mfu 14.84%
+[2026-06-15 11:18:04] [23m] Step  8200 | Epoch   0.12 | train loss 1.0463 | val loss 1.0515 | lr 8.64e-05
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0515)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 8200, val 1.0515)
+[2026-06-15 11:18:11] [23m] Speed at iter 8200 (epoch 0.12): 5.67 iters/sec
+iter 8200: loss 1.0798, time 10174.91ms, mfu 13.37%
+iter 8250: loss 1.0804, time 75.97ms, mfu 13.90%
+[2026-06-15 11:18:18] [23m] Speed at iter 8300 (epoch 0.12): 13.27 iters/sec
+iter 8300: loss 1.0312, time 75.29ms, mfu 14.39%
+iter 8350: loss 1.0899, time 75.67ms, mfu 14.82%
+[2026-06-15 11:18:29] [23m] Step  8400 | Epoch   0.12 | train loss 1.0563 | val loss 1.0498 | lr 7.90e-05
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0498)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 8400, val 1.0498)
+[2026-06-15 11:18:49] [24m] Speed at iter 8400 (epoch 0.12): 3.27 iters/sec
+iter 8400: loss 1.0477, time 23125.62ms, mfu 13.34%
+iter 8450: loss 1.0464, time 74.81ms, mfu 13.90%
+[2026-06-15 11:18:56] [24m] Speed at iter 8500 (epoch 0.12): 13.34 iters/sec
+iter 8500: loss 1.0367, time 75.28ms, mfu 14.39%
+iter 8550: loss 1.0425, time 75.04ms, mfu 14.84%
+[2026-06-15 11:19:07] [24m] Step  8600 | Epoch   0.12 | train loss 1.0485 | val loss 1.0509 | lr 7.23e-05
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 8600, val 1.0509)
+[2026-06-15 11:19:17] [24m] Speed at iter 8600 (epoch 0.12): 4.73 iters/sec
+iter 8600: loss 1.0423, time 13675.94ms, mfu 13.37%
+iter 8650: loss 1.0894, time 75.00ms, mfu 13.92%
+[2026-06-15 11:19:25] [24m] Speed at iter 8700 (epoch 0.13): 13.32 iters/sec
+iter 8700: loss 1.0598, time 75.07ms, mfu 14.41%
+iter 8750: loss 1.0290, time 75.29ms, mfu 14.85%
+[2026-06-15 11:19:36] [24m] Step  8800 | Epoch   0.13 | train loss 1.0411 | val loss 1.0478 | lr 6.64e-05
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0478)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 8800, val 1.0478)
+[2026-06-15 11:19:49] [25m] Speed at iter 8800 (epoch 0.13): 4.16 iters/sec
+iter 8800: loss 1.0712, time 16587.15ms, mfu 13.38%
+iter 8850: loss 1.0325, time 75.08ms, mfu 13.93%
+[2026-06-15 11:19:56] [25m] Speed at iter 8900 (epoch 0.13): 13.32 iters/sec
+iter 8900: loss 1.0525, time 75.17ms, mfu 14.42%
+iter 8950: loss 1.0538, time 75.33ms, mfu 14.86%
+[2026-06-15 11:20:07] [25m] Step  9000 | Epoch   0.13 | train loss 1.0504 | val loss 1.0389 | lr 6.15e-05
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0389)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 9000, val 1.0389)
+[2026-06-15 11:20:13] [25m] Speed at iter 9000 (epoch 0.13): 5.96 iters/sec
+iter 9000: loss 1.0424, time 9317.64ms, mfu 13.38%
+iter 9050: loss 1.0306, time 75.11ms, mfu 13.93%
+[2026-06-15 11:20:21] [25m] Speed at iter 9100 (epoch 0.13): 13.27 iters/sec
+iter 9100: loss 1.0488, time 75.83ms, mfu 14.41%
+iter 9150: loss 1.0517, time 75.52ms, mfu 14.84%
+[2026-06-15 11:20:32] [25m] Step  9200 | Epoch   0.13 | train loss 1.0413 | val loss 1.0454 | lr 5.74e-05
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 9200, val 1.0454)
+[2026-06-15 11:20:33] [25m] Speed at iter 9200 (epoch 0.13): 8.28 iters/sec
+iter 9200: loss 1.0705, time 4594.53ms, mfu 13.39%
+iter 9250: loss 1.0453, time 75.83ms, mfu 13.92%
+[2026-06-15 11:20:40] [26m] Speed at iter 9300 (epoch 0.13): 13.20 iters/sec
+iter 9300: loss 1.0265, time 75.75ms, mfu 14.39%
+iter 9350: loss 1.0130, time 75.67ms, mfu 14.83%
+[2026-06-15 11:20:52] [26m] Step  9400 | Epoch   0.14 | train loss 1.0448 | val loss 1.0477 | lr 5.41e-05
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 9400, val 1.0477)
+[2026-06-15 11:20:55] [26m] Speed at iter 9400 (epoch 0.14): 6.78 iters/sec
+iter 9400: loss 1.0349, time 7235.14ms, mfu 13.36%
+iter 9450: loss 1.0473, time 75.63ms, mfu 13.90%
+[2026-06-15 11:21:03] [26m] Speed at iter 9500 (epoch 0.14): 13.19 iters/sec
+iter 9500: loss 1.0294, time 76.43ms, mfu 14.36%
+iter 9550: loss 1.0471, time 75.89ms, mfu 14.79%
+[2026-06-15 11:21:14] [26m] Step  9600 | Epoch   0.14 | train loss 1.0360 | val loss 1.0358 | lr 5.18e-05
+  Saved checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda.pt (best val loss: 1.0358)
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 9600, val 1.0358)
+[2026-06-15 11:21:17] [26m] Speed at iter 9600 (epoch 0.14): 6.82 iters/sec
+iter 9600: loss 1.0464, time 7152.02ms, mfu 13.33%
+iter 9650: loss 1.0532, time 75.72ms, mfu 13.87%
+[2026-06-15 11:21:25] [26m] Speed at iter 9700 (epoch 0.14): 13.21 iters/sec
+iter 9700: loss 1.0192, time 75.64ms, mfu 14.36%
+iter 9750: loss 1.0019, time 75.86ms, mfu 14.79%
+[2026-06-15 11:21:36] [26m] Step  9800 | Epoch   0.14 | train loss 1.0437 | val loss 1.0504 | lr 5.05e-05
+  Saved rolling checkpoint to pt/char_revtest_pilot_6L_768_reversed_cuda_rolling.pt (iter 9800, val 1.0504)
+[2026-06-15 11:21:40] [27m] Speed at iter 9800 (epoch 0.14): 6.67 iters/sec
+iter 9800: loss 1.0120, time 7484.63ms, mfu 13.33%
+iter 9850: loss 1.0449, time 75.31ms, mfu 13.87%
+[2026-06-15 11:21:47] [27m] Speed at iter 9900 (epoch 0.14): 13.21 iters/sec
+iter 9900: loss 1.0759, time 75.80ms, mfu 14.36%
+iter 9950: loss 1.0329, time 75.54ms, mfu 14.79%
+
+[2026-06-15 11:21:55] [27m] Training complete!
+Mode: continuous
+Tokenizer: char
+Attention type: softmax
+Final iteration: 10000, Final epoch: 0.14
+Best validation loss: 1.0358
+[2026-06-15 11:21:55] Saving final model to pt/char_revtest_pilot_6L_768_reversed_cuda_final.pt
+Final model saved to: pt/char_revtest_pilot_6L_768_reversed_cuda.pt
+============================================================
+
+[2026-06-15 11:21:55] Final sample from trained model:
+  1. .traeh doog a ,emoclew fo ecneulfni eht yb deifirret neeb evah dluow dna ,tcelaid siht fo tuo denway evah dluoc eh taht tlef ylr
+  2. ".yad yreve ereh emoc ot ereh neeb evah thgim eh taht dekniw os ,deredliweb neeb dah eh retfa ,yraeW dna ,yad yreve werg tsomla 
+  3. .krow sih ot sdnetta taoctsiaw sih tub ,dnaltocS ni renim a saw eH .htaed sih retfa ,sevil rieht fo daeha deremmats gnieb sediug
+  4. .erutan sselpleh fo kool a htiw elbat a no detcelloc eb dluoc yeht taht dna ,seidal eht htiw evol ni tpek saw ehs taht dediced e
+  5. "?ecneicsnoc gnirettilg htiw ti evah t'ndid I dnA .ti fo tseb eht ekam dluow syawla I tuB" .enaJ deirc "!dellik saw I won tuB" .

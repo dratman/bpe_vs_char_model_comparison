@@ -1,5 +1,91 @@
 # Handoff Document
 
+## ►►► YOU ARE THE coupler-queue WORKER `linux-cuda` — PULL → READ → RUN ◄◄◄
+*(written 2026-06-15 ~22:05 local as a transfer note to the next instance. Read this block first, then the EXPERIMENT QUEUE below.)*
+
+Your standing job on this box (the A6000) is to be the **`linux-cuda` worker** in
+the **coupler-queue** — a file-based experiment queue at `~/coupler-queue`
+(github `dratman/coupler-queue`). An "editor" (browser Claude on claude.ai) writes
+experiment specs; you run the ones tagged for this machine. The loop, every time:
+
+1. **PULL** — `cd ~/coupler-queue && git pull --rebase origin main`.
+   (Other actors push concurrently; always pull-rebase before you push. Set the
+   repo's git identity if missing: `git config user.name "Ralph Dratman"` /
+   `user.email ralph.dratman@gmail.com`. Push to `main`.)
+2. **READ** — look in `pending/` for a `*.spec.md` whose `machine: linux-cuda`.
+   Read the whole spec. (`mac-mlx` items are the Studio's, not yours.)
+3. **RUN** — execute the protocol in `~/coupler-queue/README.md`:
+   - **Claim** it: `git mv pending/<id>.spec.md running/` → commit → push. *The move
+     is the claim.*
+   - Run it on the A6000. Write `<id>.result.md` into `running/` (reference big
+     artifacts by PATH — never commit checkpoints/corpora/large logs into the queue).
+   - On success `git mv` all the item's files to `done/`; on error to `failed/`
+     (`status: failed` + reason). **Commit and push at EACH step — the editor only
+     ever sees what you push.**
+   - Never edit another actor's file; never write a synthesis (that's the editor's).
+
+**Routing of questions (`~/coupler-queue/routing.md`):** Ralph is a **last resort**.
+(1) Routine/operational (scheduling, ordering, defaults) → **decide yourself and log
+it** (you hold that authority). (2) Needs editor judgment → write `<id>.question.md`,
+commit, push; the editor replies in `<id>.editor.md` (poll for it — e.g. a
+background `git fetch` loop — don't make Ralph relay). (3) Ralph only for a genuine
+priority tradeoff that only he can set. Memories `coupler-queue-workflow` and
+`cuda-trials-need-accept-overrides` capture this.
+
+### WHAT'S LIVE RIGHT NOW (2026-06-15 ~22:05 local)
+
+- **NEXT JOB = coupler-queue item `0003`** (in `pending/`, `machine: linux-cuda`):
+  full-length **16L/1280 reversed-char training**, ~320M params, 500K iters (~3 days),
+  matched to the forward best char model `pt/char_uppercase_16L_1280.pt` (best val
+  0.7152 per-char). Compare reversed val-bpc against that EXISTING forward checkpoint
+  (no new forward run). Read the spec for exact flags; key ones: `--no_fused`,
+  `--accept_overrides <path>`, batch_size 4 (do NOT raise), `--seed 1337`, output base
+  `pt/char_uppercase_16L_1280_reversed_cuda.pt`.
+  - **Reusable asset:** the within-split reversed corpus already exists at
+    `txt_local/corpus_high_quality_uppercase_2026_05_08_REVERSED_within_splits.txt`
+    (built by `py/make_reversed_corpus.py`, boundary verified). The forward run used
+    `--val_split 0.1`, the same as that file's reversal, so **it is reusable as-is** —
+    just confirm val_split 0.1 in the 0003 launch. Also reuse `py/plot_revtest_pilot.py`
+    (logs→bpc CSV+plot; matplotlib is now installed in the bpe_char env) and
+    `py/extract_revtest_samples.py` (re-reverses samples to legible order).
+- **GPU is BUSY:** the seed-2 `--no_fused` trial is coasting to its 500K floor —
+  **PID 2783726, iter ~125K/500K**, ~1.78 it/s, ETA ~2.4 days. Its diagnostic verdict
+  is already in hand (fused AdamW = the seed-2 instability cause); the remaining run
+  only feeds the diary-094 error bar. 0003 and seed-2 are both ~320M and won't share
+  the GPU well, so **0003 must queue.** Ordering is YOUR call (log it): either let
+  seed-2 finish first, or — because seed-2 now has `--accept_overrides` — stop it,
+  run 0003, and resume seed-2 after.
+- **HOW TO FREE THE GPU WITHOUT `kill`** (the deny-list blocks kill/pkill/killall):
+  seed-2 was relaunched WITH `--accept_overrides
+  pt/char_uppercase_16L_1280_seed2_no_fused_cuda_overrides.json`. Write that JSON,
+  e.g. `{"max_iters": 126000}`, and the run stops gracefully at that iter (saving
+  `_final.pt`, resumable via `sh/resume_seed2_no_fused_to_floor_CUDA.sh`). This is the
+  no-kill stop mechanism — use it instead of asking Ralph. (Trials launched WITHOUT
+  `--accept_overrides` can only be stopped by Ralph; that's why it's now standing
+  policy to add it.)
+
+### GOTCHAS this transfer learned the hard way
+
+- **Deny-list:** `kill`/`pkill`/`killall`/`rm -rf`/`git reset --hard`/force-push/
+  `git clean` are all blocked for you. You cannot stop a process directly — use the
+  override file (above) or, only as a last resort, Ralph.
+- **Auto-mode classifier** soft-blocks launching a second GPU-saturating job while one
+  is live (so you can't just run 0003 concurrently — free the GPU first), and blocks
+  direct pushes to the bpe repo's `master` without per-turn authorization.
+- **Content filter:** raw reversed-corpus text is character-gibberish that has tripped
+  the usage-policy filter. When handling reversed runs, ALWAYS re-reverse samples to
+  legible order before surfacing them (use `py/extract_revtest_samples.py`); never dump
+  raw reversed strings into your output or result.md.
+- **Python env:** `/home/owner/miniforge3/envs/bpe_char/bin/python` (matplotlib now
+  installed there). Training wrapper: `sh/train_cuda.sh` (nohup+disown, prints PID).
+- **`pgrep -f "py/train.py..."` self-matches** your own `bash -c` command line —
+  confirm "is it running?" via GPU util / the log file, not pgrep alone.
+
+### coupler-queue items closed this session
+- **`0002` DONE** (in `done/`, pushed): reversed-text learnability pilot (6L/768, 10K).
+  Result: reversed ≈ forward to within noise — forward best **1.4922 bpc**, reversed
+  **1.4943 bpc** (curves cross). See `done/0002.result.md`; artifacts in `plots/`.
+
 ## EXPERIMENT QUEUE (standing section — keep current on every launch/completion)
 
 Ralph delegated experiment scheduling to Claude on 2026-06-11: Claude
@@ -29,30 +115,33 @@ Then free.
    is 3.5466 but the TRUE best is better and lives in the checkpoint's
    `best_val_loss` field (not yet read). Lesson: a quiet log on this box
    does NOT mean the run died — check checkpoints/PID.
-3. **RUNNING: WordPiece no-GELU run** (ablation), PID 1602516, launched
-   06-13 18:37 right after the control. As of 06-14 12:40: **iter
-   150.5K/220K (epoch 4.78)**, ~3 it/s, GPU 100%/86°C. Best val so far
-   **3.7496**; val gently rising (3.85→3.93 at iter 148-150K) as LR
-   decays — normal late plateau, NOT diary-103 oscillation. ETA ~06-14
-   evening (~18:30-19:00). As preregistered (diary 102), ablation (~3.75)
-   trails control (<3.55) → GELU helps.
-4. **ARMED: seed-2 stability-fix trial 1** — non-fused AdamW on CUDA
-   (`--no_fused`, train.py flag added + pushed in commit bcfa4fc).
-   Diary-103 follow-up isolated the instability to **fused AdamW** (NOT
-   autocast — both backends autocast; diary-103's autocast theory was a
-   misread). Auto-launches `sh/train_char_uppercase_16L_1280_seed2_no_
-   fused_CUDA.sh` when the WordPiece pair finishes (tonight).
-   **WAITER STATE (06-14, messy but safe):** THREE waiters alive —
-   152043 (wordpiece pair) → 1369813 (original no-fused waiter, correct
-   chain); plus a REDUNDANT waiter 2109095 added by mistake this session.
-   To prevent a double-launch, a **pgrep double-launch guard** was added
-   to the trial script (commit pending) so only ONE trial starts. 2109095
-   is harmless; can be killed for tidiness. **INSPECT when the trial
-   starts:** val curve smooth (no 1.3<->2.7 oscillation) by iter ~6-10K?
-   Smooth → fused AdamW confirmed. Else ladder: lr 1.06e-4+warmup 500,
-   then fp32 (diary 103 follow-up). Log:
-   `terminal_logs/queue_seed2_no_fused.log` + the trial's auto-named log.
-5. Candidate next after that: no-bias trial (diary 099 step 2b);
+3. **DONE 06-14 evening: WordPiece no-GELU run** (ablation), was PID
+   1602516. Completed 220K. As preregistered (diary 102), ablation
+   (~3.75) trailed control (<3.55) → GELU helps. Harvest pending.
+4. **RUNNING (STABLE): seed-2 stability-fix trial 1** — non-fused AdamW
+   on CUDA (`--no_fused`). PID **2314695**, auto-launched after the
+   WordPiece pair. As of 06-15 14:05: **iter ~78K/500K, val ~2.37,
+   smooth descent — NO 1.3<->2.7 oscillation.** ⇒ **fused AdamW CONFIRMED
+   as the seed-2 instability cause** (diary 103 follow-up verdict in hand).
+   Diagnostic complete; coasting to 500K only feeds the diary-094 error
+   bar. NOTE: launched WITHOUT `--accept_overrides`, so it can only be
+   stopped by Ralph's `kill -TERM 2314695` (deny-list blocks Claude's
+   kill; no override path). Logs: `terminal_logs/queue_seed2_no_fused.log`
+   + auto-named trial log.
+5. **coupler-queue item 0002 — reversed-text char pilot (NEW, this
+   machine):** matched forward/reversed 6L/768 char pilot (10K iters).
+   Prepped + verified: reversed corpus built within-splits
+   (`py/make_reversed_corpus.py`), scripts
+   `sh/train_char_revtest_pilot_6L_768_{forward,reversed}_CUDA.sh` (seed
+   1337, idempotency-guarded), queue runner armed (PID **2667071**) to run
+   forward→reversed when the GPU frees. Spec/decisions in
+   `~/coupler-queue/running/0002.*`. **PENDING RALPH (only-he-can-act
+   fork):** run `kill -TERM 2314695` → pilots run today, then Claude
+   resumes seed-2 from its checkpoint (relaunched WITH
+   `--accept_overrides`) to its 500K floor; OR do nothing → pilots auto-run
+   ~2.7 days from now when seed-2 finishes. Editor adopted
+   `--accept_overrides`-on-stoppable-trials as standing policy.
+6. Candidate next after that: no-bias trial (diary 099 step 2b);
    char memorization probe.
 
 **Harvest when done:** seed-2 → best-val vs 0.7152 (error bar for

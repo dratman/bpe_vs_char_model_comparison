@@ -760,10 +760,12 @@ def main():
         best_val_loss = checkpoint.get('best_val_loss', float('inf'))
 
         # Load tokenizer from checkpoint metadata
-        # Handle _iter{N} and _final checkpoint names
+        # Handle _iter{N}, _final, and _rolling checkpoint names — they all
+        # share the run's single _meta.pkl (named off the --output base).
         ckpt_base = args.resume.replace('.pt', '')
         ckpt_base = re.sub(r'_iter\d+$', '', ckpt_base)
         ckpt_base = re.sub(r'_final$', '', ckpt_base)
+        ckpt_base = re.sub(r'_rolling$', '', ckpt_base)
         meta_path = ckpt_base + '_meta.pkl'
         if not os.path.exists(meta_path):
             print(f"Error: Metadata file '{meta_path}' not found")

@@ -1,0 +1,17 @@
+[2026-06-14 12:42:35] [queue] waiting for PID 1602516 (WordPiece-pair queue runner) to finish...[2026-06-14 20:54:30] [queue] PID 152043 gone — WordPiece pair complete, GPU should be free.
+[2026-06-14 20:54:30] [queue] launching: sh/train_char_uppercase_16L_1280_seed2_no_fused_CUDA.sh
+no-fused trial already running (pgrep matched); aborting duplicate launch.
+[2026-06-14 20:54:30] [queue] ERROR: could not parse training PID; trial not confirmed launched.
+forge3/envs/bpe_char/bin/python
+Checkpoints: pt
+Log file:    terminal_logs/terminal_log_for_char_uppercase_16L_1280_seed2_no_fused_cuda_2026_06_14_2047.txt
+========================================
+Training started with PID 2314695
+Log:  terminal_logs/terminal_log_for_char_uppercase_16L_1280_seed2_no_fused_cuda_2026_06_14_2047.txt
+Watch: tail -f terminal_logs/terminal_log_for_char_uppercase_16L_1280_seed2_no_fused_cuda_2026_06_14_2047.txt
+Stop:  kill -TERM 2314695
+[2026-06-14 20:49:36] [queue] PID 2314695 healthy after 120 s.
+[2026-06-14 20:49:36] [queue] INSPECT: tail the log and confirm the val curve is smooth
+[2026-06-14 20:49:36] [queue]          (no 1.3<->2.7 oscillation) by iter ~6K-10K, then decide
+[2026-06-14 20:49:36] [queue]          whether to let it run to the floor or 'kill -TERM 2314695'.
+[2026-06-14 20:49:36] [queue] no-fused trial armed and running; queue runner exiting.

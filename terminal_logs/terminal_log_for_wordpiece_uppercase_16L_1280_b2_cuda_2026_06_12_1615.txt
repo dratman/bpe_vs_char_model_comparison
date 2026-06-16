@@ -1977,3 +1977,14 @@ iter 79700: loss 3.1856, time 332.74ms, mfu 22.87%
 iter 79800: loss 3.3679, time 330.59ms, mfu 23.07%
 [2026-06-13 02:13:37] [9h 51m] Speed at iter 79900 (epoch 2.54): 3.02 iters/sec
 iter 79900: loss 3.6468, time 344.89ms, mfu 23.16%
+[2026-06-13 02:14:32] [9h 52m] Step 80000 | Epoch   2.54 | train loss 3.4708 | val loss 3.5738 | lr 7.83e-05
+  Saved rolling checkpoint to pt/wordpiece_uppercase_16L_1280_b2_cuda_rolling.pt (iter 80000, val 3.5738)
+[2026-06-13 02:15:44] [9h 53m] Saved periodic checkpoint to pt/wordpiece_uppercase_16L_1280_b2_cuda_iter80000.pt (iter 80000, epoch 2.54)
+
+[2026-06-13 02:15:44] [9h 53m] Sampling at iter 80000 (epoch 2.54):
+  1. " I'll have to decide, however," said the man, " what shall be done, and what shall be done." " Well, what shall be done?" said Mr Smeaton. " Good, my
+  2. " You're too old to make a good hand at that," the colonel went on, " even if you are a good hand at making. No, I don't think I'm about to make good.
+  3.  " But what has been done? Where have they gone?" " I've been looking for them all the time," said Mrs. Blomley. " You'd better tell me what they want
+
+[2026-06-13 02:15:47] [9h 53m] Speed at iter 80000 (epoch 2.54): 0.77 iters/sec
+iter 80000: loss 3.2118, time 96147.00ms, mfu 20.85%

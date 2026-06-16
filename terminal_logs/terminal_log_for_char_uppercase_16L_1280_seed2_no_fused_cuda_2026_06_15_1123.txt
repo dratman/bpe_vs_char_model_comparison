@@ -1,0 +1,13 @@
+Command: /home/owner/miniforge3/envs/bpe_char/bin/python -u py/train.py --checkpoints_to "pt" --resume pt/char_uppercase_16L_1280_seed2_no_fused_cuda_rolling.pt --accept_overrides pt/char_uppercase_16L_1280_seed2_no_fused_cuda_overrides.json --input txt_local/corpus_high_quality_uppercase_2026_05_08.txt --output pt/char_uppercase_16L_1280_seed2_no_fused_cuda.pt --mode continuous --tokenizer char --precision bfloat16 --n_layer 16 --n_head 8 --n_embd 1280 --block_size 4096 --batch_size 4 --learning_rate 1.5e-4 --warmup_iters 2000 --max_iters 500000 --eval_interval 2000 --eval_iters 20 --save_interval 20000 --log_interval 100 --sample_interval 10000 --val_split 0.1 --dropout 0.0 --seed 2 --no_fused
+Started: Mon Jun 15 11:23:08 AM EDT 2026
+Python:  /home/owner/miniforge3/envs/bpe_char/bin/python
+Host:    owner-B660M-Pro-RS
+========================================
+[2026-06-15 11:23:09] Using device: cuda
+[2026-06-15 11:23:09] Seeded torch RNG with --seed 2
+[2026-06-15 11:23:09] Using precision: bfloat16 (requested: bfloat16)
+[2026-06-15 11:23:09] Training mode: continuous
+[2026-06-15 11:23:09] Reading input from txt_local/corpus_high_quality_uppercase_2026_05_08.txt
+[2026-06-15 11:23:14] Read 1,265,346,119 characters
+[2026-06-15 11:23:14] Resuming from checkpoint: pt/char_uppercase_16L_1280_seed2_no_fused_cuda_rolling.pt
+Error: Metadata file 'pt/char_uppercase_16L_1280_seed2_no_fused_cuda_rolling_meta.pkl' not found
