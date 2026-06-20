@@ -32,6 +32,42 @@ background `git fetch` loop — don't make Ralph relay). (3) Ralph only for a ge
 priority tradeoff that only he can set. Memories `coupler-queue-workflow` and
 `cuda-trials-need-accept-overrides` capture this.
 
+### ★ CURRENT STATE (2026-06-19 ~20:25 local) — supersedes the block below ★
+
+- **STANDING POLICY (Ralph, 2026-06-19): graceful override-file stops are
+  PRE-AUTHORIZED — run them without asking.** Use the whitelisted helper
+  `sh/stop_run_via_override.sh <overrides.json> <max_iters>` (allow-rule added to
+  `.claude/settings.local.json`). The destructive deny-list stays (kill/pkill/killall/
+  rm -rf/git reset --hard/force-push). **Ralph accepts RNG-stream drift on resume.**
+  See memory [[cuda-trials-need-accept-overrides]].
+- **diary-103 follow-up verdict OVERTURNED.** "Fused AdamW is the seed-2 instability
+  cause; `--no_fused` fixes it" is **WRONG**. The seed-2 `--no_fused` run finished but
+  sat at val ~2.40–2.53 for its ENTIRE 500K (min 2.4031) — never near 0.7152. Both
+  fused AND `--no_fused` diverge. Real framing: **big-config (16L/1280, block 4096,
+  batch 4) + CUDA bf16 numerical instability** (the 0002 pilot and the MPS forward
+  baseline train fine; it's backend/precision-specific). Memory:
+  [[big-config-cuda-bf16-instability]]. ⇒ the **diary-094 error bar from seed-2 is
+  VOID.** A formal diary entry (104) documenting this is a TODO.
+- **coupler-queue 0003 (reversed full run) FAILED and is in `failed/`.** It hit the
+  same instability (val 1.20 @12K → ~2.4 plateau), so it's a broken run not a
+  measurement. Stopped gracefully at iter 187000 via its override (Ralph+editor
+  authorized) and moved `running/` → `failed/` (pushed `e174d71`). `_final` kept for
+  post-mortem; do NOT resume that trajectory.
+- **NOW: fp32 diagnostic armed/auto-launching.** Per editor reply (Ralph-approved):
+  `sh/train_char_diag_fp32_16L_1280_forward_CUDA.sh` (forward corpus, big config,
+  `--precision float32` = no autocast, max_iters 500000 so 0-20K LR matches the
+  known-good MPS forward curve; grad-clip already engaged). Waiter
+  `sh/queue_diag_after_0003.sh` (PID 1538628) launches it the moment 0003 frees the
+  GPU. **Decision rule:** fp32 tracks the MPS forward curve past ~1.2 with no
+  divergence → adopt fp32 as the CUDA recipe + launch the full reversed 500K run here;
+  fp32 ALSO diverges → run the reversed job on the Studio/MPS (~24 days, correct).
+  Watch the 0-20K val curve in its log; stop it at ~20K with the override helper.
+- **Queue:** `failed/` = 0003; `running/` empty; 0004 (NoPE pilot) is **mac-mlx**, not
+  ours. The 12-hourly status cron (job `7fb70ae7`, 7:17am/7:17pm EDT, session-only,
+  7-day expiry) prints brief reports to Ralph's always-on monitor.
+- Everything in the block BELOW (dated 2026-06-15) about seed-2 "still running" / 0003
+  "queued behind seed-2" / "fused AdamW confirmed" is **SUPERSEDED** by the above.
+
 ### WHAT'S LIVE RIGHT NOW (2026-06-15 ~22:25 local — UPDATED this session)
 
 - **0003 is CLAIMED + ARMED — auto-launches, NO ACTION NEEDED.** Decision made this
