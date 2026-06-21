@@ -52,6 +52,11 @@ class CausalSelfAttention(nn.Module):
         self.n_head = config.n_head
         self.n_embd = config.n_embd
         self.dropout = config.dropout
+        # Force the attention math to fp32 even under bf16 autocast. The QK^T logits
+        # + softmax (and SDPA) are the bf16 numerical-instability hot spot at long
+        # block sizes on CUDA (diary: big-config CUDA bf16 instability). Keeping only
+        # this in fp32 stabilizes training while the rest of the net stays bf16.
+        self.fp32_attention = getattr(config, 'fp32_attention', False)
         # flash attention make GPU go brrrrr but support is only in PyTorch >= 2.0
         self.flash = hasattr(torch.nn.functional, 'scaled_dot_product_attention')
         if not self.flash:
@@ -70,7 +75,22 @@ class CausalSelfAttention(nn.Module):
         v = v.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
 
         # causal self-attention; Self-attend: (B, nh, T, hs) x (B, nh, hs, T) -> (B, nh, T, T)
-        if self.flash:
+        if self.fp32_attention:
+            # Run only the attention core in fp32 (autocast disabled). Everything
+            # outside this block stays in bf16 under the outer autocast.
+            orig_dtype = x.dtype
+            with torch.autocast(device_type=q.device.type, enabled=False):
+                qf, kf, vf = q.float(), k.float(), v.float()
+                if self.flash:
+                    y = torch.nn.functional.scaled_dot_product_attention(qf, kf, vf, attn_mask=None, dropout_p=self.dropout if self.training else 0, is_causal=True)
+                else:
+                    att = (qf @ kf.transpose(-2, -1)) * (1.0 / math.sqrt(kf.size(-1)))
+                    att = att.masked_fill(self.bias[:,:,:T,:T] == 0, float('-inf'))
+                    att = F.softmax(att, dim=-1)
+                    att = self.attn_dropout(att)
+                    y = att @ vf
+            y = y.to(orig_dtype)
+        elif self.flash:
             # efficient attention using Flash Attention CUDA kernels
             y = torch.nn.functional.scaled_dot_product_attention(q, k, v, attn_mask=None, dropout_p=self.dropout if self.training else 0, is_causal=True)
         else:
@@ -385,6 +405,7 @@ class GPTConfig:
     use_autocorrelation_attention: bool = False  # Set True to use autocorrelation attention
     tie_weights: bool = True  # Tie input embeddings to output projection
     no_gelu: bool = False  # Disable GELU nonlinearity in MLP (makes it purely linear)
+    fp32_attention: bool = False  # Force attention (QK^T/softmax/SDPA) to fp32 even under bf16 autocast — fixes the big-config CUDA bf16 instability
     autocorr_top_k: int = None  # Number of top lags for autocorrelation (None = all)
 
 

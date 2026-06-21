@@ -110,6 +110,10 @@ def parse_args():
                        help='Do not tie input embeddings to output projection')
 
     # GELU option
+    parser.add_argument('--fp32_attention', action='store_true',
+                       help='Force attention (QK^T/softmax/SDPA) to fp32 even under bf16 autocast. '
+                            'Fixes the big-config (16L/1280, block 4096) CUDA bf16 instability while '
+                            'keeping the rest of the net in bf16 for speed.')
     parser.add_argument('--no_gelu', action='store_true',
                        help='Disable GELU nonlinearity in MLP (makes it purely linear)')
 
@@ -929,6 +933,7 @@ def main():
             use_autocorrelation_attention=args.autocorrelation_attention,
             tie_weights=not args.untie_weights,
             no_gelu=args.no_gelu,
+            fp32_attention=args.fp32_attention,
         )
 
         gptconf = GPTConfig(**model_args)
