@@ -32,7 +32,27 @@ background `git fetch` loop — don't make Ralph relay). (3) Ralph only for a ge
 priority tradeoff that only he can set. Memories `coupler-queue-workflow` and
 `cuda-trials-need-accept-overrides` capture this.
 
-### ★ CURRENT STATE (2026-06-19 ~20:25 local) — supersedes the block below ★
+### ★ CURRENT STATE (2026-06-20 ~23:35 local) — supersedes the block below ★
+
+- **REVERSED RE-RUN LAUNCHED with the FIXED recipe** — `sh/train_char_uppercase_16L_1280_reversed_fp32attn_CUDA.sh`,
+  **PID 2335885** (started 23:31). This is the real 0003 measurement: 16L/1280 reversed,
+  bf16 everywhere + **`--fp32_attention`** (attention math forced to fp32), `--no_fused`,
+  seed 1337, max_iters 500000, `--accept_overrides`. ETA ~4-5 days. Watch its early val:
+  it should descend past ~1.2 and keep going (NOT blow up to ~2.4 like the bf16 runs).
+- **fp32-attention recipe IMPLEMENTED + committed (`a5f4b5a`).** `model.py` gained
+  `GPTConfig.fp32_attention` (forces QK^T/softmax/SDPA to fp32 under bf16 autocast; rest
+  of net stays bf16); `train.py` gained `--fp32_attention`. Smoke-tested fwd+bwd OK.
+- **fp32 confirmed as the fix.** The fp32 diagnostic descended monotonically to ~0.97
+  nats by iter ~15K with NO divergence (then crashed on a disk-full checkpoint save —
+  but its job was already done; no re-run of the diagnostic needed).
+- **DISK incident RESOLVED.** `/` hit 100% (pt/ was 380 GB). With Ralph's OK, deleted
+  Tier-1 (~109 GB): void seed-2 `_iter` ckpts, failed-0003 reversed `_iter` ckpts, and 2
+  dead regenerable tokens caches. `/` now 75% used (~109 GB free). All finals/bests/metas
+  kept. **WordPiece `_iter` intermediates (~170 GB) were NOT deleted** (Tier-2, available
+  if space needed again). Watch disk on the new run (save_interval 100000 ~ +37 GB).
+- **FLAG: forward baseline `pt/char_uppercase_16L_1280.pt` (val 0.7152) is NOT on this
+  box** — likely a Studio-only artifact. Not needed to TRAIN the reversed run (compare to
+  the known number 0.7152), but fetch it from the Studio if downstream probing needs it.
 
 - **STANDING POLICY (Ralph, 2026-06-19): graceful override-file stops are
   PRE-AUTHORIZED — run them without asking.** Use the whitelisted helper
