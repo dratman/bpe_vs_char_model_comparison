@@ -275,12 +275,16 @@ New work this session (committed):
   training run.
 - **Result on `pt/char_uppercase_16L_1280.pt`** (best char, iter 482K, val
   0.7152): at the position-after-word readout, separation is *negative*
-  (spelling dominates) through L04, then flips in a sharp band L05→L07 to a
-  plateau ~0.37 (z≈10, p<0.0005) holding L07–L15; from L07 on **all 9 animals**
-  are animal-like, not twin-like — semantics beats spelling despite shared
-  letters. The category region is **assembled mid-network**, not looked up (a
-  char model has no word-vector to look up). Final-letter readout stays weak
-  (peak 0.078) because the deliberately-shared last letter dominates it.
+  (spelling dominates) through L04, then climbs L05→L09 and plateaus ~0.37
+  (z≈10, p<0.0005) from L09 through L15 (peak L13, 0.383). The minimal-pair
+  count saturates earlier: 9/9 by **L07** (5/9 at L06) — i.e. the "animal not
+  twin" *decision* is settled by L07 while the region keeps tightening to L09.
+  Semantics beats spelling despite shared letters. The category region is
+  **assembled mid-network**, not looked up (a char model has no word-vector to
+  look up); the early-negative separation — built in deliberately via the
+  minimal pairs — is what proves the sign-flip is spelling→meaning, not an
+  artifact. Final-letter readout stays weak (peak 0.078) because the
+  deliberately-shared last letter dominates it.
 - **Diary 105** — `diary/105_category_geometry_assembled_mid_network.md`.
   Originated from a Claude.ai conversation Ralph had (2026-06-21) on how models
   detect categories/generalization; this probe answers the char-model version.

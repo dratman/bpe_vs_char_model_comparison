@@ -69,24 +69,36 @@ The **position-after-word** readout is the clean one:
 | L08 | +0.347 | 9.6 | 9/9 |
 | L09–L15 | +0.37 plateau | ~10 | 9/9 |
 
-Three things, in order of importance:
+Three things, in order of importance. Note that two *different* depths
+are doing two *different* jobs — the minimal-pair count and the
+separation magnitude saturate at different layers, and that distinction
+is the entry's whole point:
 
-1. **The category region is real and strongly significant.** From L07
-   onward separation sits around 0.37 at z ≈ 10, p < 0.0005. Animals
-   cluster; objects sit apart.
+1. **The category region is real and strongly significant.** Separation
+   climbs L05→L09 (0.051 → 0.193 → 0.281 → 0.347 → 0.373) and then
+   **plateaus around 0.37 from L09 through L15** (peak L13, 0.383), all
+   at z ≈ 10, p < 0.0005. Animals cluster; objects sit apart.
 
-2. **Semantics beats spelling, cleanly.** From L07 on, **all 9** animals
-   are nearer to the other animals than to their look-alike object —
-   despite shared letters. fox is animal-like, not box-like; mouse is
-   animal-like, not mouth-like. Even the hardest pair, horse/house
-   (the model's weakest animal representation here), lands animal-like.
+2. **Semantics beats spelling, cleanly — and it locks in earlier than
+   the magnitude plateaus.** The minimal-pair count hits **9/9 at L07**
+   (5/9 already at L06) and holds 9/9 thereafter: every animal is nearer
+   to the other animals than to its look-alike object, despite shared
+   letters. fox is animal-like, not box-like; mouse is animal-like, not
+   mouth-like. Even the hardest pair, horse/house (the model's weakest
+   animal representation here), lands animal-like. So the *decision*
+   "this is an animal, not its twin" is settled by L07, while the
+   region keeps *tightening* for two more layers.
 
-3. **The region is assembled in a sharp band, layers 5–7.** Below L05
-   separation is **negative** — the early residual at the after-word
-   position is dominated by the just-seen spelling, so animals (which
-   share letters with their twins) look *less* alike than the twins do.
-   Then in three layers it flips from spelling-dominated to
-   meaning-dominated. The unit gets built, then placed.
+3. **The region is assembled in a sharp band, layers 5–9, and the
+   early-negative separation is positive evidence, not a curiosity.**
+   Below L05 separation is **negative** — and that sign is exactly what
+   the minimal pairs were built to produce: each animal shares letters
+   with its twin, so while spelling dominates (the lower layers) every
+   animal is pulled *toward* its object and *away* from the other
+   animals. The separation only goes positive once meaning overrides
+   surface form. The mid-network sign-flip is therefore what proves the
+   probe is measuring spelling-early / meaning-late, not some artifact
+   of word length or frequency. The unit gets built, then placed.
 
 The **final-letter** readout tells the complementary half of the story:
 it never separates well (peak 0.078 at L09; minpair only 0–3/9). The
