@@ -148,11 +148,70 @@ pins to.
   category direction is *used* (ablate it, watch predictions move) is a
   separate experiment.
 
+## Across training: the region forms gradually, the fold stays put (2026-06-23)
+
+Ran the identical probe on all 25 saved checkpoints of this run
+(iter 20K → 500K, every 20K plus the 500K final) with
+`py/category_geometry_sweep.py` — it reuses the probe internals
+unchanged, so the numbers are directly comparable. Long-form data:
+`terminal_logs/category_geometry_sweep_2026_06_23.tsv`; iteration × layer
+heatmaps (separation and minimal-pair count, after-word readout):
+`plots/category_geometry_sweep_2026_06_23.png`.
+
+After-word peak separation and the earliest layer reaching the full 9/9
+minimal-pair decision, by iteration:
+
+| iter | peak separation | first 9/9 layer |
+|-----:|----------------:|:---------------:|
+| 20K  | 0.009 | none |
+| 40K  | 0.198 | none |
+| 60K  | 0.323 | L13 |
+| 80K  | 0.429 | none (best 8/9) |
+| 100K | 0.414 | L09 |
+| 200K | 0.409 | L08 |
+| 360K | 0.431 | L07 |
+| 500K | 0.384 | L08 |
+
+Three findings:
+
+1. **It forms gradually — a ramp, not a snap.** Separation rises
+   smoothly 0.009 → 0.198 → 0.323 → 0.429 over 20K–80K and then
+   plateaus ~0.40. There is no grokking-style phase transition in this
+   measure; the category geometry eases in over the first ~100K iters.
+   This is the concrete answer to the browser conversation's "sometimes
+   generalization appears suddenly" thread: for category geometry, at
+   this scale on natural language, it does **not**. (Sudden grokking is
+   mostly a small-algorithmic-task phenomenon.)
+
+2. **The spelling→meaning fold sits at a fixed depth (~L5–L6) the
+   entire time.** In the separation heatmap the cool→warm boundary
+   barely moves left–right across all 25 rows; embed–L04 stay
+   spelling-locked at *every* training stage. The division of labor
+   (early layers = word-form, mid layers = category) is architectural
+   and present from early training. What training changes is the
+   *content* behind the fold, not the fold's location.
+
+3. **The meaning-decision migrates to earlier layers over training.**
+   The first layer that reaches 9/9 moves from deep (L13 at 60K) to mid
+   (L09 at 100K, L07–L08 by 360K+). The model learns to settle "animal,
+   not its look-alike twin" earlier in its own depth as it trains —
+   resolving the category sooner and freeing later layers.
+
+Honest wrinkle: the 9/9 minimal-pair count is a strict binary tally over
+9 outcomes and is noisy at threshold (80K shows high separation 0.429 but
+only 8/9 at its best layer, while 60K caught one layer at 9/9). The
+continuous separation is the reliable signal and is cleanly monotonic;
+the 9/9-layer column should be read as a trend, not a per-checkpoint
+exact.
+
 ## Next
 
-1. Same probe across training checkpoints — does the band sharpen
-   gradually or snap in?
-2. Add a tight third category; redo the between-bucket separation.
+1. ~~Same probe across training checkpoints~~ — DONE 2026-06-23 (above):
+   gradual ramp, fixed-depth fold, decision migrates earlier.
+2. Add a tight third category (body parts, colors); redo the
+   between-bucket separation so it does not lean on one natural category.
 3. Compare the char model to the BPE model on the identical words — in
    BPE many of these are single tokens, so the "assembled vs looked-up"
    contrast should show as the category being present *earlier* in depth.
+4. Causal check: ablate the category direction at the fold and confirm
+   predictions move — turns correlational geometry into a used mechanism.

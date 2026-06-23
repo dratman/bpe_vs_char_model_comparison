@@ -290,10 +290,19 @@ New work this session (committed):
   detect categories/generalization; this probe answers the char-model version.
 - Artifacts: `terminal_logs/category_geometry_2026_06_23.tsv` (committed),
   `plots/category_geometry_2026_06_23.png` (heatmap; gitignored/local).
-- **Next steps (open):** run the same probe across saved intermediate
-  checkpoints to watch the L5–L7 band *form over training*; add a second tight
-  contrast category; compare against the BPE model (single tokens there, so the
-  category should appear earlier in depth).
+- **Across-training sweep DONE 2026-06-23:** `py/category_geometry_sweep.py`
+  ran the probe on all 25 checkpoints (iter 20K→500K). Result: the category
+  region forms **gradually** (peak separation 0.009→0.198→0.323→0.429 over
+  20K–80K, then plateaus ~0.40) — a ramp, not a grokking-style snap. The
+  spelling→meaning fold sits at a fixed depth (~L5–L6) at every training stage
+  (embed–L04 stay spelling-locked throughout). The 9/9 minimal-pair decision
+  migrates to earlier layers over training (L13 at 60K → L07–L08 by 360K+).
+  Data `terminal_logs/category_geometry_sweep_2026_06_23.tsv`, heatmap
+  `plots/category_geometry_sweep_2026_06_23.png` (local). Diary 105 updated.
+- **Next steps (open):** add a tight third contrast category (body parts /
+  colors); compare against the BPE model (single tokens there, so the category
+  should appear earlier in depth); causal check — ablate the category direction
+  at the fold and confirm predictions move.
 
 Earlier: 2026-06-15 by Claude Code Opus 4.8 (1M context) (A6000
 session, ~22:25 EDT) — **0003 (full reversed-char run) claimed + armed to
