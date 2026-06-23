@@ -1,0 +1,5 @@
+metric	baseline	category_d	control_mean	control_std
+abl_loo_acc	0.8889	0.7222	0.8556	0.0444
+abl_separation	0.3195	0.2008	0.2970	0.0510
+patch_obj_animalscore	-1.1412	2.0940	-0.9684	0.0824
+ref_animals_animalscore	1.4439			

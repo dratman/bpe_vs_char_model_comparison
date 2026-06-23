@@ -312,9 +312,24 @@ New work this session (committed):
   `readout_positions()` (char behaviour byte-identical — regression-checked).
   Data `terminal_logs/category_geometry_compare_2026_06_23.tsv`, plot
   `plots/category_geometry_compare_2026_06_23.png` (local). Diary 105 updated.
+- **Causal check DONE 2026-06-23:** `py/category_geometry_causal.py`. Direction
+  fit on a broad DISJOINT word list (16 animals/16 objects), causal effect
+  measured on the held-out minimal pairs, readout = the model's next-token
+  output in open contexts (premise: 0.889 LOO-decodable), structure-matched
+  control (random balanced partitions), hooks verified to bite (resid·d̂
+  13.97→0). **Ablation:** removing the category axis drops animal/object
+  prediction accuracy 0.889→0.722 vs the matched control's 0.889→0.856 (~5×
+  larger; partial because category is redundantly encoded — per-layer
+  directions only loosely aligned, mean |cos| 0.43). **Bounded patching**
+  (project-and-replace the category coordinate; additive steering blew the char
+  model out of distribution): setting an object's axis to animal-typical moves
+  its output animal-score −1.14→+2.09 (control −0.97; animal reference +1.44),
+  and continuations flip coherently — box/coat → "strange and wild", cat/dog →
+  "on the table"/"on the stairs". The model USES the direction. Data
+  `terminal_logs/category_geometry_causal_2026_06_23.tsv`. Diary 105 updated.
 - **Next steps (open):** add a tight third contrast category (body parts /
-  colors); causal check — ablate the category direction at the fold and confirm
-  predictions move; optionally sweep the BPE checkpoints too.
+  colors); optionally sweep the BPE checkpoints; the causal mechanism is now
+  established for the char model.
 
 Earlier: 2026-06-15 by Claude Code Opus 4.8 (1M context) (A6000
 session, ~22:25 EDT) — **0003 (full reversed-char run) claimed + armed to

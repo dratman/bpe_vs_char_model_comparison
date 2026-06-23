@@ -262,6 +262,82 @@ word-units and spends its depth refining their relations; the char model
 must manufacture the unit before it can place it, and we can watch
 exactly where (L5–L7) it does so.
 
+## Causal check: the model USES the direction, it does not merely contain it (2026-06-23)
+
+Everything above is correlational geometry. `py/category_geometry_causal.py`
+asks whether the animal direction is causal, with the confounds of the naive
+version fixed:
+- The direction is fit on a **broad, disjoint** word list (16 animals / 16
+  objects: lion, tiger, …, chair, table, …) and the causal effect is measured
+  on the **held-out** minimal-pair words. (Projecting out the axis that
+  separates the very words you then measure is mechanical, not behavioural.)
+- The readout is the model's **output** — its next-token distribution at the
+  end of an **open** context ("The cat " with nothing after, so it predicts
+  freely). Premise verified: animal vs object is **0.889 LOO-decodable** from
+  that output (chance 0.5), so the test is powered. Behaviour, not hidden state.
+- The control is **structure-matched**: the difference-of-means of random
+  balanced 9/9 partitions of the same fit-words (a random unit vector would be
+  a far weaker perturbation and make the axis look special for free).
+- Intervention hooks **return** the modified tensor; the ablation is verified
+  to bite (|residual·d̂| at L15: 13.97 → 0.000).
+
+The per-layer category directions are only loosely aligned (mean |cos| 0.43),
+so each layer's own axis is used (one-direction-everywhere is not justified
+here).
+
+**Ablation** (project the category axis out of every layer, all positions):
+
+| metric | baseline | ablate category-d | ablate matched-control |
+|---|---:|---:|---:|
+| LOO animal/object acc | 0.889 | **0.722** | 0.856 ± 0.044 |
+| output separation | 0.319 | **0.201** | 0.297 ± 0.051 |
+
+Removing the category axis hurts category-prediction ~5× more than the
+structure-matched control. Real, but **partial** — the model does not collapse
+to chance, because it encodes category redundantly (consistent with the loosely
+aligned per-layer directions: there is no single axis to delete).
+
+**Patching** (bounded counterfactual — set the residual's component *along* the
+category axis to the other category's typical value, at every layer; cannot blow
+the residual out of distribution the way additive steering does):
+
+Output animal-score (>0 = animal-ward; axis fit on the disjoint fit-words):
+
+| | animal-score |
+|---|---:|
+| animals (reference) | +1.44 |
+| objects (baseline) | −1.14 |
+| **objects, axis → animal (category)** | **+2.09** |
+| objects, axis → group-0 (matched control) | −0.97 ± 0.08 |
+
+Setting an object's category coordinate to the animal-typical value moves its
+prediction the *whole way* from object to animal (and slightly past); the
+structure-matched control barely moves. And the change is coherent and
+bidirectional in the actual generated text:
+
+```
+box   base         : The box was opened and the conte...
+box   axis->animal : The box was a strange and wild c...
+coat  axis->animal : The coat was a strange and wild c...
+bowl  axis->animal : The bowl was a striking and well-...
+cat   base         : The cat was so angry that she co...
+cat   axis->object : The cat was on the table and the...
+dog   axis->object : The dog was still on the stairs,...
+```
+
+Push the axis toward "animal" and an object becomes "strange and wild";
+push an animal toward "object" and it gets placed "on the table" / "on the
+stairs". The direction the probe found is the one the model **reads** to decide
+whether to continue with animate or inanimate language.
+
+Honest limits: (1) the ablation effect is partial — the category is redundantly
+encoded, so deleting one axis degrades but does not erase it. (2) Additive
+steering (add α·Δ at every layer) blew the char model out of distribution
+("box skkks ks ks…") even at moderate α; the bounded project-and-replace patch
+was the stable tool. (3) The "animal-score" axis is a linear readout fit on the
+fit-words; the worked-text examples are the model-independent check that it is
+not an artifact of that axis.
+
 ## Next
 
 1. ~~Same probe across training checkpoints~~ — DONE 2026-06-23 (above):
@@ -271,5 +347,6 @@ exactly where (L5–L7) it does so.
 3. Compare the char model to the BPE model on the identical words — in
    BPE many of these are single tokens, so the "assembled vs looked-up"
    contrast should show as the category being present *earlier* in depth.
-4. Causal check: ablate the category direction at the fold and confirm
-   predictions move — turns correlational geometry into a used mechanism.
+4. ~~Causal check: ablate the category direction~~ — DONE 2026-06-23 (above):
+   ablation degrades category-prediction ~5× more than a matched control, and
+   bounded patching flips object↔animal continuations. The direction is used.
