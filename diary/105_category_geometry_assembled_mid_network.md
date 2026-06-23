@@ -1,0 +1,146 @@
+# Diary 105 — A character model assembles a category region mid-network, and semantics beats spelling
+
+Date: 2026-06-23
+
+## Where this came from
+
+Ralph had a conversation on Claude.ai (2026-06-21) about how a language
+model detects categories and analogies, which moved — through his own
+pushing — to the real question behind generalization: *why does
+"nearby in the model's space" track "actually similar in the ways that
+matter," rather than just "spelled alike"?* The browser conversation
+told the standard word2vec story ("the cat-vector sits near the
+dog-vector"). But that story assumes the token **is** the word. In our
+character models there is no cat-vector — the embedding table holds only
+single letters. So a category like "animal" cannot be looked up; it has
+to be **assembled in the residual stream**, across layers, after the
+network has recognized c-a-t as a unit. This entry tests whether that
+assembled region exists, where in depth it appears, and — the part that
+makes it mean something for a char model — whether it tracks **meaning**
+or merely **spelling**.
+
+## The design (the minimal-pair control is the whole point)
+
+`py/category_geometry_probe.py`. Two word groups of 9, length-matched,
+arranged as near **minimal pairs** so spelling is pitted directly
+against meaning:
+
+    cat/hat  dog/log  fox/box  owl/bowl  hare/hair
+    goat/coat  mouse/mouth  wolf/wool  horse/house
+
+Every animal shares letters (usually the final letter) with its paired
+object. If "fox" sits with cat/dog/owl and **away** from "box" despite
+the spelling, that is semantics beating surface form.
+
+Each word is read inside 4 carrier sentences whose slot sits at varied
+positions (so the positional signal cancels under frame-averaging). At
+every layer we capture the residual stream at two readout positions:
+(a) the word's **final letter**, and (b) the **position just after** it
+(the model's running summary of the word before it predicts onward).
+Per layer the 18 word vectors are **mean-centered** (this removes the
+dominant shared residual direction that otherwise makes every cosine
+~0.9), L2-normalized, and compared by cosine.
+
+`separation` = mean within-category cosine − mean between-category
+cosine. A **permutation null** (shuffle the animal/object labels 2000×)
+gives the separation a scale (z, p). The **minimal-pair test** asks, for
+each animal, whether it is closer to the centroid of the *other* animals
+than to its surface-twin object (e.g. "9 of 9").
+
+Run on the best Studio char checkpoint
+`pt/char_uppercase_16L_1280.pt` (16 layers, n_embd 1280, iter 482K,
+val 0.7152), read-only on CPU so it did not touch the live no-GELU run.
+Raw table: `terminal_logs/category_geometry_2026_06_23.tsv`; heatmap:
+`plots/category_geometry_2026_06_23.png`.
+
+## Result
+
+The **position-after-word** readout is the clean one:
+
+| layer | separation | z | minpair |
+|------|-----------:|----:|:-------:|
+| embed | −0.101 | −0.8 | 1/9 |
+| L00 | −0.105 | −1.1 | 0/9 |
+| L03 | −0.054 | −1.7 | 0/9 |
+| L04 | −0.034 | −1.2 | 0/9 |
+| **L05** | **+0.051** | **2.5** | 0/9 |
+| **L06** | **+0.193** | **7.6** | 5/9 |
+| **L07** | **+0.281** | **9.5** | 9/9 |
+| L08 | +0.347 | 9.6 | 9/9 |
+| L09–L15 | +0.37 plateau | ~10 | 9/9 |
+
+Three things, in order of importance:
+
+1. **The category region is real and strongly significant.** From L07
+   onward separation sits around 0.37 at z ≈ 10, p < 0.0005. Animals
+   cluster; objects sit apart.
+
+2. **Semantics beats spelling, cleanly.** From L07 on, **all 9** animals
+   are nearer to the other animals than to their look-alike object —
+   despite shared letters. fox is animal-like, not box-like; mouse is
+   animal-like, not mouth-like. Even the hardest pair, horse/house
+   (the model's weakest animal representation here), lands animal-like.
+
+3. **The region is assembled in a sharp band, layers 5–7.** Below L05
+   separation is **negative** — the early residual at the after-word
+   position is dominated by the just-seen spelling, so animals (which
+   share letters with their twins) look *less* alike than the twins do.
+   Then in three layers it flips from spelling-dominated to
+   meaning-dominated. The unit gets built, then placed.
+
+The **final-letter** readout tells the complementary half of the story:
+it never separates well (peak 0.078 at L09; minpair only 0–3/9). The
+reason is built into the minimal pairs — at the final letter the
+strongest signal is the identity of that letter, and the pairs were
+chosen to share it (cat/hat both end "t", fox/box both "x", dog/log both
+"g"). One character later, at the space, the model has *closed* the word
+into a semantic summary and the category emerges. So the assembly is
+visible as a single step: letters at position *i*, category at *i+1*.
+
+## What it says about the question Ralph was chasing
+
+The browser conversation's deep point was that smooth interpolation
+explains gap-filling but not why the joints fall in useful places. This
+probe is a small, direct look at the joints in a char model, and it adds
+a fact the word2vec framing cannot: **the useful joint is not in the
+embedding — it is manufactured mid-network, and at the moment it is
+manufactured it overrides the surface form that the lower layers were
+locked onto.** The model spends its first ~5 layers reading letters and
+its middle layers deciding what kind of thing the letters spelled.
+
+This lines up with the older char-model findings: the layer machinery a
+char model spends building word recognition (diaries 014/015/035), the
+topological framing of tokenization (074), and the L9-region copying
+machinery (088). The 5–7 transition band here is plausibly the same
+real-estate where word-form becomes word-meaning. It is also the
+geometric counterpart of the real-word-fraction work (098/100):
+"invents plausible non-words" is interpolation that has not yet been
+pinned to the lexical region; this entry shows the region the full model
+pins to.
+
+## Honest limits
+
+- Two categories, 9 words each. "Animals" is a tight natural category;
+  "objects" (hat, log, box, hair, coat, mouth, wool, house) is a
+  grab-bag, which is why the object block in the heatmap is looser than
+  the animal block. The separation is driven mostly by the animals
+  cohering, which is the intended test, but a second *tight* contrast
+  category (e.g. body parts, or colors) would sharpen the between-bucket
+  claim.
+- One checkpoint. The natural next step is to run the identical probe
+  across the saved intermediate checkpoints and watch the 5–7 band
+  *form over training* — that turns "where in depth" into "when in
+  training," and is the direct test of the browser conversation's
+  "generalization sometimes appears suddenly" thread.
+- Read-only correlational geometry, not a causal claim. Whether the
+  category direction is *used* (ablate it, watch predictions move) is a
+  separate experiment.
+
+## Next
+
+1. Same probe across training checkpoints — does the band sharpen
+   gradually or snap in?
+2. Add a tight third category; redo the between-bucket separation.
+3. Compare the char model to the BPE model on the identical words — in
+   BPE many of these are single tokens, so the "assembled vs looked-up"
+   contrast should show as the category being present *earlier* in depth.

@@ -252,7 +252,46 @@ have account-level GitHub SSH keys that work). How this interacts with the HANDO
 queue above is still settling; for now HANDOFF tracks long trainings,
 coupler-queue will carry Editor-spec'd items.
 
-Last updated: 2026-06-15 by Claude Code Opus 4.8 (1M context) (A6000
+Last updated: 2026-06-23 by Claude Code Opus 4.8 (1M context) (Mac Studio
+"mac-mlx" session, mid-afternoon) — **new interpretability result + tool: a
+char model assembles a category region mid-network, and semantics beats
+spelling.** Direct request from Ralph this session (not a coupler-queue item).
+Session start: `git pull` brought this Studio clone current — it was 22 commits
+behind; 5 untracked 2026-06-10 terminal logs collided with origin copies but
+were byte-identical, so I removed them and the fast-forward pulled cleanly.
+The no-GELU matched-LR run (PID 75333) is alive and healthy at **iter ~350K /
+500K, best val 0.8504**, still descending (baseline char floor was 0.7152),
+ETA still ~2026-06-30. Storage report 2026-06-21 flags 718 GB of cleanable
+intermediate checkpoints (338 GB in this project's pt/) — not acted on.
+
+New work this session (committed):
+- `py/category_geometry_probe.py` — read-only probe. Reads animal words vs
+  surface-matched object words (minimal pairs: cat/hat, fox/box, mouse/mouth,
+  …) inside 4 carrier frames, captures the residual stream at every layer at
+  two readouts (word's final letter; position just after), mean-centers, and
+  measures whether same-category words cluster. Permutation null (z, p) + a
+  minimal-pair test (is each animal nearer the other animals than its
+  look-alike object?). Defaults to CPU so it never contends with a live MPS
+  training run.
+- **Result on `pt/char_uppercase_16L_1280.pt`** (best char, iter 482K, val
+  0.7152): at the position-after-word readout, separation is *negative*
+  (spelling dominates) through L04, then flips in a sharp band L05→L07 to a
+  plateau ~0.37 (z≈10, p<0.0005) holding L07–L15; from L07 on **all 9 animals**
+  are animal-like, not twin-like — semantics beats spelling despite shared
+  letters. The category region is **assembled mid-network**, not looked up (a
+  char model has no word-vector to look up). Final-letter readout stays weak
+  (peak 0.078) because the deliberately-shared last letter dominates it.
+- **Diary 105** — `diary/105_category_geometry_assembled_mid_network.md`.
+  Originated from a Claude.ai conversation Ralph had (2026-06-21) on how models
+  detect categories/generalization; this probe answers the char-model version.
+- Artifacts: `terminal_logs/category_geometry_2026_06_23.tsv` (committed),
+  `plots/category_geometry_2026_06_23.png` (heatmap; gitignored/local).
+- **Next steps (open):** run the same probe across saved intermediate
+  checkpoints to watch the L5–L7 band *form over training*; add a second tight
+  contrast category; compare against the BPE model (single tokens there, so the
+  category should appear earlier in depth).
+
+Earlier: 2026-06-15 by Claude Code Opus 4.8 (1M context) (A6000
 session, ~22:25 EDT) — **0003 (full reversed-char run) claimed + armed to
 auto-launch; seed-2 left running to its floor; disk made safe.** This
 session, as worker `linux-cuda`:
