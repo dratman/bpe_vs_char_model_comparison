@@ -299,10 +299,22 @@ New work this session (committed):
   migrates to earlier layers over training (L13 at 60K → L07–L08 by 360K+).
   Data `terminal_logs/category_geometry_sweep_2026_06_23.tsv`, heatmap
   `plots/category_geometry_sweep_2026_06_23.png` (local). Diary 105 updated.
+- **Char-vs-BPE comparison DONE 2026-06-23:** `py/category_geometry_compare.py`
+  ran the identical probe on the best same-corpus BPE model
+  (`bpe_uppercase_16L_1280_b2_resumed.pt`, iter 168K). All 18 words are single
+  BPE tokens. Result confirms "assembled vs looked-up": BPE category separation
+  is **positive at the embedding** (+0.065 word-token; char is −0.069 — only a
+  letter there), BPE resolves the category **~3 layers earlier** (after-word
+  0.41/8-of-9 by L04 vs char's 9/9 at L07), BPE **never dips negative** (Ġcat
+  and Ġhat are unrelated tokens — confirming the char early-negative was
+  surface form), and BPE keeps sharpening to 0.77 at L15 while char plateaus
+  ~0.37. To support BPE the probe gained a tokenizer-agnostic
+  `readout_positions()` (char behaviour byte-identical — regression-checked).
+  Data `terminal_logs/category_geometry_compare_2026_06_23.tsv`, plot
+  `plots/category_geometry_compare_2026_06_23.png` (local). Diary 105 updated.
 - **Next steps (open):** add a tight third contrast category (body parts /
-  colors); compare against the BPE model (single tokens there, so the category
-  should appear earlier in depth); causal check — ablate the category direction
-  at the fold and confirm predictions move.
+  colors); causal check — ablate the category direction at the fold and confirm
+  predictions move; optionally sweep the BPE checkpoints too.
 
 Earlier: 2026-06-15 by Claude Code Opus 4.8 (1M context) (A6000
 session, ~22:25 EDT) — **0003 (full reversed-char run) claimed + armed to

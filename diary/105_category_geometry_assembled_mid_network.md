@@ -204,6 +204,64 @@ continuous separation is the reliable signal and is cleanly monotonic;
 the 9/9-layer column should be read as a trend, not a per-checkpoint
 exact.
 
+## Char vs BPE on the same 18 words: assembled vs looked-up (2026-06-23)
+
+Ran the identical probe (same words, frames, mean-centering, null,
+minimal-pair test) on the best same-corpus same-architecture BPE model
+`pt/bpe_uppercase_16L_1280_b2_resumed.pt` (16L, n_embd 1280, vocab 32K,
+iter 168K, val 3.2652 ≈ 0.725 per-char) and compared layer-for-layer to
+the char best. `py/category_geometry_compare.py` (reuses the probe
+internals unchanged; the char column reproduces the numbers above
+exactly). All 18 words are **single tokens** in this BPE vocab (`Ġcat`,
+`Ġhat`, … — verified), so there is no letter-sharing between cat and hat
+at the token level. Data: `terminal_logs/category_geometry_compare_2026_06_23.tsv`;
+plot: `plots/category_geometry_compare_2026_06_23.png`.
+
+| readout / layer | char | bpe |
+|---|---:|---:|
+| word's-own-token @ embed | **−0.069** | **+0.065** |
+| word's-own-token @ L02 | −0.066 (0/9) | 0.107 (8/9) |
+| after-word @ embed | −0.101 | 0.000 |
+| after-word @ L04 | −0.034 (0/9) | **0.406 (8/9)** |
+| after-word @ L07 | 0.281 (9/9) | 0.443 (9/9) |
+| after-word @ L15 | 0.366 | **0.773** |
+
+Four contrasts, all pointing the same way:
+
+1. **In BPE the category is partly *looked up* — it is already present
+   at the embedding.** Word-token separation is **+0.065 at embed** and
+   reaches 8/9 minimal pairs by L02. In the char model the same readout
+   is **−0.069 at embed** (there is no "cat" there, only the letter "t")
+   and does not go positive until L06. This is the cleanest statement of
+   "assembled vs looked-up": a BPE token *is* the word unit, so the
+   king−man+woman-style category geometry can live in the embedding
+   table; a char model has to build the unit first.
+
+2. **BPE resolves the category ~3 layers earlier in depth.** At the
+   after-word readout BPE is already strongly separated (0.41, 8/9) by
+   **L04**, where the char model is still negative; char does not reach
+   9/9 until **L07**. The char model spends its first ~5 layers building
+   the word-unit that the BPE tokenizer supplies for free.
+
+3. **BPE never dips negative — confirming the char early-negative was
+   surface form.** The char model's sub-zero early layers came from the
+   minimal pairs sharing letters (spelling pulls each animal toward its
+   twin). In BPE, `Ġcat` and `Ġhat` are unrelated rows, so that pressure
+   is absent and the curve starts at/above zero at every layer. The
+   single design choice (minimal pairs) explains both models at once.
+
+4. **BPE keeps sharpening through the top layers; char plateaus.** BPE
+   separation climbs 0.27 → 0.66 → 0.77 across L12–L15 while char sits
+   flat at ~0.37. (Caveat: absolute magnitudes are not strictly
+   comparable across two different embedding geometries — the load-bearing
+   facts are the *sign* and the *onset depth*, which are unambiguous.)
+
+This is the geometric counterpart of diary 093's claim that tokenization
+chooses the level at which the model improvises: the BPE model is handed
+word-units and spends its depth refining their relations; the char model
+must manufacture the unit before it can place it, and we can watch
+exactly where (L5–L7) it does so.
+
 ## Next
 
 1. ~~Same probe across training checkpoints~~ — DONE 2026-06-23 (above):

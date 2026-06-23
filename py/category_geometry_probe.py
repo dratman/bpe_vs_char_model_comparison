@@ -145,11 +145,40 @@ def register_residual_hooks(model):
     return store, handles, names
 
 
+def readout_positions(tokenizer, text, slot_start, word):
+    """Return (word_last_pos, after_pos, ids) for the injected word inside
+    `text`. Tokenizer-agnostic so the same probe runs on char and BPE models:
+      - char: 1:1, last position = final letter, after = next char.
+      - bpe/wordpiece: use the HF tokenizer's character offsets; the word's
+        last token is the final piece overlapping the word's char span (for a
+        single-token word that is the word itself), after = the next token.
+    For char, this returns exactly the old (slot_end-1, slot_end) indices, so
+    char behaviour and all prior char numbers are unchanged."""
+    slot_end = slot_start + len(word)
+    if tokenizer.tokenizer_type == "char":
+        for c in text:
+            if c not in tokenizer.stoi:
+                raise ValueError(f"char {c!r} not in vocab (word={word!r})")
+        ids = tokenizer.encode(text)
+        assert len(ids) == len(text), "char tokenizer must be 1:1"
+        return slot_end - 1, slot_end, ids
+    # BPE / WordPiece: offsets from the underlying HF tokenizer
+    enc = tokenizer.tokenizer.encode(text)
+    overlap = [i for i, (a, b) in enumerate(enc.offsets)
+               if a < slot_end and b > slot_start]
+    if not overlap:
+        raise ValueError(f"no token overlaps word {word!r} in {text!r}")
+    last = max(overlap)
+    return last, last + 1, enc.ids
+
+
 @torch.no_grad()
 def collect_word_vectors(model, tokenizer, words, device, layer_names, store):
     """For each word, run it through every frame, capture residuals at the
-    word's final-letter position and the position right after, average across
-    frames. Returns two dicts: vectors[readout][layer] -> (n_words, C) array."""
+    word's last-token position and the position right after, average across
+    frames. Returns two dicts: vectors[readout][layer] -> (n_words, C) array.
+    Readout key 'final' = word's last token (final letter for char); 'after' =
+    the position just after the word."""
     n_words = len(words)
     n_layers = len(layer_names)
     C = model.config.n_embd
@@ -164,17 +193,9 @@ def collect_word_vectors(model, tokenizer, words, device, layer_names, store):
         for frame in FRAMES:
             assert "WORD" in frame
             text = frame.replace("WORD", word)
-            # locate the slot: where 'word' was substituted
             slot_start = frame.index("WORD")
-            final_letter_pos = slot_start + len(word) - 1
-            after_pos = slot_start + len(word)  # the space after the word
-
-            # sanity: every char must be in the char vocabulary
-            for c in text:
-                if c not in tokenizer.stoi:
-                    sys.exit(f"Char {c!r} not in vocab (word={word!r})")
-            ids = tokenizer.encode(text)
-            assert len(ids) == len(text), "char tokenizer must be 1:1"
+            final_pos, after_pos, ids = readout_positions(
+                tokenizer, text, slot_start, word)
             x = torch.tensor(ids, dtype=torch.long, device=device)[None, ...]
 
             store.clear()
@@ -182,7 +203,7 @@ def collect_word_vectors(model, tokenizer, words, device, layer_names, store):
 
             for nm in layer_names:
                 resid = store[nm][0]  # (T, C)
-                acc["final"][nm][wi] += resid[final_letter_pos].float().cpu().numpy()
+                acc["final"][nm][wi] += resid[final_pos].float().cpu().numpy()
                 acc["after"][nm][wi] += resid[after_pos].float().cpu().numpy()
 
     nf = len(FRAMES)
@@ -267,8 +288,8 @@ def main():
 
     print(f"Loading {args.model} on {args.device} ...", flush=True)
     model, tokenizer, ckpt = load_model_and_tokenizer(args.model, args.device)
-    if tokenizer.tokenizer_type != "char":
-        sys.exit(f"This probe is for char models; got {tokenizer.tokenizer_type}")
+    if tokenizer.tokenizer_type not in ("char", "bpe", "wordpiece"):
+        sys.exit(f"Unsupported tokenizer: {tokenizer.tokenizer_type}")
     iter_num = ckpt.get("iter_num", "?")
     best_val = ckpt.get("best_val_loss", None)
     print(f"  {model.config.n_layer} layers, n_embd={model.config.n_embd}, "
