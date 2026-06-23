@@ -299,13 +299,27 @@ def main():
         return tok.decode(x[0].tolist())
     to_ani = patch_fn(dhat, a_proj, names)
     to_obj = patch_fn(dhat, o_proj, names)
+    # structure-matched control patches (random partitions -> their group-0 mean):
+    # the load-bearing check that the TEXT flip is category-specific. Show several
+    # because a single random split of an animal/object pool occasionally lands
+    # more animals on one side and tilts mildly animate; the preponderance (and
+    # the averaged score above) is the honest statement.
+    to_ctrls = []
+    for _ in range(3):
+        perm = rng.permutation(len(fit_words))
+        clab = np.zeros(len(fit_words), int); clab[perm[len(fit_words) // 2:]] = 1
+        _, cdh = diff_means(fit_resid, clab)
+        ct = {nm: float(np.mean(fit_resid[nm][clab == 0] @ cdh[nm])) for nm in names}
+        to_ctrls.append(patch_fn(cdh, ct, names))
     print("\nWorked examples (greedy continuation; bounded category-axis patch):")
     for w in ["box", "coat", "bowl"]:
-        print(f"  {w:5} base         : {cont(w)!r}")
-        print(f"  {w:5} axis->animal : {cont(w, to_ani)!r}")
+        print(f"  {w:5} base           : {cont(w)!r}")
+        print(f"  {w:5} axis->animal   : {cont(w, to_ani)!r}")
+        for j, fc in enumerate(to_ctrls):
+            print(f"  {w:5} CONTROL patch {j} : {cont(w, fc)!r}")
     for w in ["cat", "dog"]:
-        print(f"  {w:5} base         : {cont(w)!r}")
-        print(f"  {w:5} axis->object : {cont(w, to_obj)!r}")
+        print(f"  {w:5} base           : {cont(w)!r}")
+        print(f"  {w:5} axis->object   : {cont(w, to_obj)!r}")
 
     if args.out_tsv:
         with open(args.out_tsv, "w") as f:

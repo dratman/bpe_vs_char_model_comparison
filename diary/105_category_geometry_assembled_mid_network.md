@@ -292,51 +292,66 @@ here).
 | LOO animal/object acc | 0.889 | **0.722** | 0.856 ± 0.044 |
 | output separation | 0.319 | **0.201** | 0.297 ± 0.051 |
 
-Removing the category axis hurts category-prediction ~5× more than the
-structure-matched control. Real, but **partial** — the model does not collapse
-to chance, because it encodes category redundantly (consistent with the loosely
-aligned per-layer directions: there is no single axis to delete).
+Removing the category axis hurts category-prediction more than the
+structure-matched control. The effect is **real but partial** — note the small
+N: 16 of 18 words stay correct after category ablation vs ~15.4 under the
+control, so "more" here is 3 words flipping, not a collapse to chance. The
+model encodes category redundantly (consistent with the loosely aligned
+per-layer directions: there is no single axis to delete), which is itself a
+finding.
 
 **Patching** (bounded counterfactual — set the residual's component *along* the
-category axis to the other category's typical value, at every layer; cannot blow
-the residual out of distribution the way additive steering does):
+category axis to the other category's typical value, at every layer; this cannot
+blow the residual out of distribution the way additive steering does).
 
-Output animal-score (>0 = animal-ward; axis fit on the disjoint fit-words):
+The decisive evidence is the **generated text**, because it is model-independent
+— it does not depend on any axis I chose to measure with. Pushing the category
+coordinate toward "animal" makes an object continue with animate language, and
+pushing an animal toward "object" makes it get placed like a thing — while a
+**structure-matched control patch leaves the object an object**:
+
+```
+box   axis->animal    : The box was a strange and wild c...     <- category
+box   CONTROL x3       : "...opened and the conte" / "...filled with a coarse" / "...set down"
+coat  axis->animal    : The coat was a strange and wild c...    <- category
+coat  CONTROL x3       : "...singular and stran[ge]" / "...of the same color" / "...a small ... col[umn]"
+bowl  axis->animal    : The bowl was a striking and well-...    <- category
+bowl  CONTROL x3       : "...of the cocoanut was full" / "...of pink cheese" / "...of the barrow"
+cat   axis->object    : The cat was on the table and the...     <- category, reversed
+dog   axis->object    : The dog was still on the stairs,...      <- category, reversed
+```
+
+Only the real category axis turns an object "strange and wild" or places an
+animal "on the table". Across three independent structure-matched control
+patches per word, **8 of 9 stay plainly object** (box filled/set down, bowl of
+cocoanut/cheese/barrow); one coat-control mildly tilts ("singular and strange")
+— expected, because a random split of an animal/object pool occasionally lands
+more animals on one side, which is exactly why the *quantitative* control
+averages over partitions (−0.97 ± 0.08, below) and the *text* is read across
+several. The direction the probe found is the one the model **reads** to decide
+between animate and inanimate continuation.
+
+Corroborating number, along a linear readout axis fit on the disjoint fit-words
+(>0 = animal-ward). This *partly* has to move — for the late-layer patches the
+residual→logit map is near-linear, so the hidden category axis maps onto the
+output category axis almost by construction; it is support for the text, not
+independent proof:
 
 | | animal-score |
 |---|---:|
 | animals (reference) | +1.44 |
 | objects (baseline) | −1.14 |
-| **objects, axis → animal (category)** | **+2.09** |
+| objects, axis → animal (category) | +2.09 |
 | objects, axis → group-0 (matched control) | −0.97 ± 0.08 |
 
-Setting an object's category coordinate to the animal-typical value moves its
-prediction the *whole way* from object to animal (and slightly past); the
-structure-matched control barely moves. And the change is coherent and
-bidirectional in the actual generated text:
-
-```
-box   base         : The box was opened and the conte...
-box   axis->animal : The box was a strange and wild c...
-coat  axis->animal : The coat was a strange and wild c...
-bowl  axis->animal : The bowl was a striking and well-...
-cat   base         : The cat was so angry that she co...
-cat   axis->object : The cat was on the table and the...
-dog   axis->object : The dog was still on the stairs,...
-```
-
-Push the axis toward "animal" and an object becomes "strange and wild";
-push an animal toward "object" and it gets placed "on the table" / "on the
-stairs". The direction the probe found is the one the model **reads** to decide
-whether to continue with animate or inanimate language.
-
 Honest limits: (1) the ablation effect is partial — the category is redundantly
-encoded, so deleting one axis degrades but does not erase it. (2) Additive
-steering (add α·Δ at every layer) blew the char model out of distribution
-("box skkks ks ks…") even at moderate α; the bounded project-and-replace patch
-was the stable tool. (3) The "animal-score" axis is a linear readout fit on the
-fit-words; the worked-text examples are the model-independent check that it is
-not an artifact of that axis.
+encoded, so deleting one axis degrades but does not erase it (3 of 18 words).
+(2) Additive steering (add α·Δ at every layer) blew the char model out of
+distribution ("box skkks ks ks…") even at moderate α; the bounded
+project-and-replace patch was the stable tool. (3) The animal-score axis is a
+linear readout and is partly guaranteed to move under patching — which is why
+the controlled, bidirectional *text* is the load-bearing evidence, not the
+number.
 
 ## Next
 
