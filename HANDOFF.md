@@ -327,9 +327,24 @@ New work this session (committed):
   and continuations flip coherently — box/coat → "strange and wild", cat/dog →
   "on the table"/"on the stairs". The model USES the direction. Data
   `terminal_logs/category_geometry_causal_2026_06_23.tsv`. Diary 105 updated.
-- **Next steps (open):** add a tight third contrast category (body parts /
-  colors); optionally sweep the BPE checkpoints; the causal mechanism is now
-  established for the char model.
+- **Family-resemblance test DONE 2026-06-23 → Diary 106:**
+  `py/category_family_resemblance.py`. Tests whether a Wittgensteinian
+  no-common-attribute category ("game": chess/football/whist/riddle) coheres
+  like the shared-attribute "animal". Headline = coherence-above-parts with a
+  permutation null; frequency confound is asymmetric (game words 10–300× rarer,
+  so a "coheres anyway" result is robust). **Graded result:** game coheres above
+  chance but weakly — z≈8 (p<0.001), ~32% of animal's coherence; cross-subtype
+  cosine ≈ 0 (chess and football genuinely not alike) yet still above the
+  contrast baseline = a faint family thread with **no common centre**. 2D picture:
+  animals = one tight blob, games = scattered constellation. Dimensionality was
+  inconclusive (entangled with word frequency). Conclusion: the clean "category
+  = one dialable direction" story holds for the easy case (animal) and degrades
+  exactly as Wittgenstein predicts for the hard case (game), without vanishing.
+  Data `terminal_logs/family_resemblance_2026_06_23.tsv`, figure
+  `plots/family_resemblance_2026_06_23.png` (local).
+- **Next steps (open):** frequency-matched replication of the game test; the
+  same probe on BPE (games as single tokens); a loose-common-attribute category
+  (tool/weapon) to fill the animal↔game spectrum; is the thin game-thread causal.
 
 Earlier: 2026-06-15 by Claude Code Opus 4.8 (1M context) (A6000
 session, ~22:25 EDT) — **0003 (full reversed-char run) claimed + armed to
