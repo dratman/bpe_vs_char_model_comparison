@@ -57,90 +57,28 @@ def detect_case_preservation(tokenizer):
     return False
 
 
-def apply_repetition_penalty(logits, generated_ids, penalty=1.2, window=50):
-    """
-    Reduce repetition by penalizing recently used tokens.
-
-    Args:
-        logits: Raw model outputs [vocab_size]
-        generated_ids: List of token IDs generated so far
-        penalty: Multiplicative penalty (>1.0 suppresses repetition)
-        window: How many recent tokens to consider
-    """
-    # Look at recent tokens (or all if sequence is short)
-    lookback = min(len(generated_ids), window)
-    if lookback == 0:
-        return logits
-
-    recent_tokens = generated_ids[-lookback:]
-
-    # Penalize each recent token proportional to its frequency
-    for token_id in set(recent_tokens):
-        count = recent_tokens.count(token_id)
-        # Apply graduated penalty based on frequency
-        logits[token_id] = logits[token_id] / (penalty ** count)
-
-    return logits
-
-
 @torch.no_grad()
 def generate_local(model, x_init, max_new_tokens, temperature=1.0, top_k=None, rep_penalty=1.0, device='cpu', stop_token_id=None):
     """
-    Generate text from initial prompt with repetition penalty
-    x_init: (1, T) prompt indices
-    stop_token_id: Optional token ID to stop generation (e.g., newline)
-    Returns: (1, T+max_new_tokens)
+    Generate text from an initial prompt (single sequence), with optional
+    repetition penalty and early stop.
+
+    Thin wrapper around GPT.generate() — the single canonical generation loop
+    now lives in model.py. Kept for backward compatibility with callers such as
+    real_word_fraction.py and memorization_probe.py.
+
+    x_init: (1, T) prompt indices.
+    stop_token_id: Optional token ID to stop generation (e.g., newline).
+    device: unused (x_init is already on the model's device); kept for API compat.
+    Returns: (1, T+max_new_tokens) or shorter if stop_token_id fires.
     """
-    x = x_init
-    block_size = model.config.block_size
-    generated_ids = []  # Track generated tokens for repetition penalty
-
-    for _ in range(max_new_tokens):
-        # Crop context if needed
-        if x.size(1) > block_size:
-            idx_cond = x[:, -block_size:]
-        else:
-            idx_cond = x
-
-        # Get model prediction
-        logits, _ = model(idx_cond)
-        logits = logits[:, -1, :]  # (1, vocab_size)
-
-        # Apply repetition penalty if enabled
-        if rep_penalty > 1.0 and len(generated_ids) > 0:
-            logits = apply_repetition_penalty(
-                logits.squeeze(0),
-                generated_ids,
-                penalty=rep_penalty,
-                window=500
-            ).unsqueeze(0)
-
-        # Apply top-k filtering
-        if top_k is not None and top_k > 0:
-            k = min(top_k, logits.size(-1))
-            v, _ = torch.topk(logits, k)
-            logits[logits < v[:, [-1]]] = -float('inf')
-
-        # Apply temperature and sample
-        if temperature <= 0.0:
-            # Greedy decoding
-            idx_next = torch.argmax(logits, dim=-1, keepdim=True)
-        else:
-            # Sample with temperature
-            logits = logits / temperature
-            probs = torch.softmax(logits, dim=-1)
-            idx_next = torch.multinomial(probs, num_samples=1)
-
-        # Track generated token for repetition penalty
-        generated_ids.append(idx_next.item())
-
-        # Check for stop token
-        if stop_token_id is not None and idx_next.item() == stop_token_id:
-            break
-
-        x = torch.cat((x, idx_next), dim=1)
-
-    return x
+    return model.generate(
+        x_init, max_new_tokens,
+        temperature=temperature,
+        top_k=top_k,
+        rep_penalty=rep_penalty,
+        stop_token_id=stop_token_id,
+    )
 
 
 @torch.no_grad()
@@ -148,49 +86,19 @@ def generate_batched(model, x_init, num_samples, max_new_tokens, temperature=1.0
     """
     Generate multiple samples in parallel (batched).
 
-    x_init: (1, T) prompt indices
-    num_samples: number of samples to generate in parallel
-    max_new_tokens: maximum tokens to generate per sample
+    Thin wrapper around GPT.generate(): repeats the prompt across num_samples
+    rows and runs them together. No repetition penalty or early stopping in
+    batched mode (stop tokens are truncated after generation by the caller).
 
-    Returns: (num_samples, T+max_new_tokens)
-
-    Note: Does not support early stopping or repetition penalty in batched mode.
-    Stop tokens are handled after generation by truncating output.
+    x_init: (1, T) prompt indices.
+    Returns: (num_samples, T+max_new_tokens).
     """
-    # Repeat prompt for all samples: (1, T) -> (num_samples, T)
     x = x_init.repeat(num_samples, 1)
-    block_size = model.config.block_size
-
-    for _ in range(max_new_tokens):
-        # Crop context if needed
-        if x.size(1) > block_size:
-            idx_cond = x[:, -block_size:]
-        else:
-            idx_cond = x
-
-        # Get model prediction for all samples at once
-        logits, _ = model(idx_cond)
-        logits = logits[:, -1, :]  # (num_samples, vocab_size)
-
-        # Apply top-k filtering
-        if top_k is not None and top_k > 0:
-            k = min(top_k, logits.size(-1))
-            v, _ = torch.topk(logits, k)
-            logits[logits < v[:, [-1]]] = -float('inf')
-
-        # Apply temperature and sample
-        if temperature <= 0.0:
-            # Greedy decoding
-            idx_next = torch.argmax(logits, dim=-1, keepdim=True)
-        else:
-            # Sample with temperature
-            logits = logits / temperature
-            probs = torch.softmax(logits, dim=-1)
-            idx_next = torch.multinomial(probs, num_samples=1)
-
-        x = torch.cat((x, idx_next), dim=1)
-
-    return x
+    return model.generate(
+        x, max_new_tokens,
+        temperature=temperature,
+        top_k=top_k,
+    )
 
 
 def truncate_at_stop_token(tokens, stop_token_id, prompt_length):

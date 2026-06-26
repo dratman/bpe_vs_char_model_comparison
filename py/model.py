@@ -527,20 +527,78 @@ class GPT(nn.Module):
         mfu = flops_achieved / flops_promised
         return mfu
 
+    @staticmethod
+    def _apply_repetition_penalty(logits_row, generated_ids, penalty, window):
+        """In-place multiplicative repetition penalty on a 1-D logits row.
+
+        Each recently-generated token's logit is divided by penalty ** (its
+        count within the last `window` tokens), suppressing repeats.
+        """
+        lookback = min(len(generated_ids), window)
+        if lookback == 0:
+            return
+        recent = generated_ids[-lookback:]
+        for token_id in set(recent):
+            logits_row[token_id] = logits_row[token_id] / (penalty ** recent.count(token_id))
+
     @torch.no_grad()
-    def generate(self, idx, max_new_tokens, temperature=1.0, top_k=None):
+    def generate(self, idx, max_new_tokens, temperature=1.0, top_k=None,
+                 rep_penalty=1.0, rep_window=500, stop_token_id=None):
         """
         Take a conditioning sequence of indices idx (LongTensor of shape (b,t)) and complete
         the sequence max_new_tokens times, feeding the predictions back into the model each time.
+
+        This is the single canonical generation loop for the project: train.py,
+        sample.py, and the probe scripts all route through it.
+
+        Args:
+            idx: (b, t) prompt token indices, already on the model's device.
+            max_new_tokens: number of tokens to append.
+            temperature: softmax temperature. <= 0 selects greedy (argmax) decoding.
+            top_k: if set and > 0, restrict sampling to the top_k logits.
+            rep_penalty: if > 1.0, divide the logit of each recently-generated
+                token by rep_penalty ** (its count in the window). Tracked per
+                batch row. Applied to raw logits, before top-k.
+            rep_window: how many recent tokens the repetition penalty considers.
+            stop_token_id: if set and batch size is 1, stop as soon as this token
+                is generated (the stop token itself is not appended).
+        Returns:
+            idx: (b, t + n), n <= max_new_tokens (n < max only via stop_token_id).
         """
+        b = idx.size(0)
+        track_rep = rep_penalty > 1.0
+        generated = [[] for _ in range(b)] if track_rep else None
+
         for _ in range(max_new_tokens):
             idx_cond = idx if idx.size(1) <= self.config.block_size else idx[:, -self.config.block_size:]
             logits, _ = self(idx_cond)
-            logits = logits[:, -1, :] / temperature
-            if top_k is not None:
+            logits = logits[:, -1, :]  # (b, vocab) — raw logits
+
+            # Repetition penalty (per row), on raw logits before filtering.
+            if track_rep:
+                for r in range(b):
+                    self._apply_repetition_penalty(logits[r], generated[r], rep_penalty, rep_window)
+
+            # Top-k filtering.
+            if top_k is not None and top_k > 0:
                 v, _ = torch.topk(logits, min(top_k, logits.size(-1)))
                 logits[logits < v[:, [-1]]] = -float('Inf')
-            probs = F.softmax(logits, dim=-1)
-            idx_next = torch.multinomial(probs, num_samples=1)
+
+            # Temperature / sampling. temperature <= 0 means greedy decoding.
+            if temperature <= 0.0:
+                idx_next = torch.argmax(logits, dim=-1, keepdim=True)
+            else:
+                probs = F.softmax(logits / temperature, dim=-1)
+                idx_next = torch.multinomial(probs, num_samples=1)
+
+            if track_rep:
+                for r in range(b):
+                    generated[r].append(idx_next[r].item())
+
+            # Early stop (single-sequence only; batched generation truncates afterward).
+            if stop_token_id is not None and b == 1 and idx_next.item() == stop_token_id:
+                break
+
             idx = torch.cat((idx, idx_next), dim=1)
+
         return idx
