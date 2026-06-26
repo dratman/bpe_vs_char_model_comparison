@@ -32,6 +32,23 @@ background `git fetch` loop — don't make Ralph relay). (3) Ralph only for a ge
 priority tradeoff that only he can set. Memories `coupler-queue-workflow` and
 `cuda-trials-need-accept-overrides` capture this.
 
+### ENVIRONMENT NOTE (2026-06-26) — M2 MacBook home renamed + paths made machine-agnostic
+
+- The **M2 MacBook** home folder was renamed `RalphDratman` → **`RalphDratman_1`**
+  (now `/Users/RalphDratman_1/...`). The **Mac Studio** home is unchanged
+  (`/Users/RalphDratman`). The A6000/Linux box is unchanged.
+- On the MacBook this had broken `python` (the `python`/`pip` shell aliases
+  pointed at the broken system Python 3.9) and PyTorch was not installed.
+  Fixed: aliases in `~/.zshrc` and `~/.bashrc` now point at
+  `/Users/RalphDratman_1/miniforge3/bin/python3`; installed **torch 2.12.1**
+  (MPS verified). Studio still runs torch 2.5.1 (MPS) — unchanged.
+- Commit `71d8b68` made shared repo paths **machine-agnostic** so the same
+  files work on both Macs: 7 `sh/` scripts and 2 `py/` corpus scripts now use
+  `$HOME/miniforge3/bin/python3` / `os.path.expanduser('~/...')` instead of a
+  hardcoded `/Users/RalphDratman/...`. Verified resolving on both Macs.
+  Any remaining literal `/Users/RalphDratman/...` in HANDOFF refers to the
+  **Studio**, not the MacBook.
+
 ### ★ CURRENT STATE (2026-06-20 ~23:35 local) — supersedes the block below ★
 
 - **REVERSED RE-RUN LAUNCHED with the FIXED recipe** — `sh/train_char_uppercase_16L_1280_reversed_fp32attn_CUDA.sh`,
