@@ -49,6 +49,19 @@ priority tradeoff that only he can set. Memories `coupler-queue-workflow` and
   Any remaining literal `/Users/RalphDratman/...` in HANDOFF refers to the
   **Studio**, not the MacBook.
 
+### CODE NOTE (2026-06-26) — generation unified on GPT.generate()
+
+Commit `bd31cf6`: there is now ONE generation loop, `GPT.generate()` in
+`py/model.py`. It gained the features `sample.py` used to implement
+separately — greedy decoding (`temperature <= 0`), repetition penalty
+(`rep_penalty`/`rep_window`, per batch row, before top-k), and
+`stop_token_id` early stop (single-sequence). `generate_local` /
+`generate_batched` in `py/sample.py` are now thin wrappers that delegate
+to `GPT.generate()` (kept for `real_word_fraction.py` /
+`memorization_probe.py`). Verified a seed-1337 training run produces
+bit-identical in-training samples, so `train.py` behavior is unchanged.
+If you add a sampling feature, add it in `GPT.generate()` only.
+
 ### ★ CURRENT STATE (2026-06-20 ~23:35 local) — supersedes the block below ★
 
 - **REVERSED RE-RUN LAUNCHED with the FIXED recipe** — `sh/train_char_uppercase_16L_1280_reversed_fp32attn_CUDA.sh`,
