@@ -36,6 +36,6 @@ else
 fi
 
 echo "plot…"
-/Users/RalphDratman/miniforge3/bin/python3 py/plot_current_run.py \
+$HOME/miniforge3/bin/python3 py/plot_current_run.py \
     --log "terminal_logs/${LOG_NAME}" \
     --out "${OUT}"

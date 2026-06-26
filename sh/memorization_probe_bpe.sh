@@ -53,7 +53,7 @@ M220="bpe_uppercase_16L_1280_b2_resumed_final"   # iter 220K final; meta base = 
 LOG_DIR="terminal_logs"
 TIMESTAMP=$(date +"%Y_%m_%d_%H%M")
 LOG_FILE="${LOG_DIR}/memorization_probe_bpe_${TIMESTAMP}.txt"
-PYTHON=/Users/RalphDratman/miniforge3/bin/python3
+PYTHON=$HOME/miniforge3/bin/python3
 
 mkdir -p "$LOG_DIR" pt
 

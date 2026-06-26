@@ -24,7 +24,7 @@
 # Each job tees to its own timestamped file in terminal_logs/, and the
 # sweeps also write a TSV (one row per checkpoint) for plotting.
 
-PYTHON=/Users/RalphDratman/miniforge3/bin/python3
+PYTHON=$HOME/miniforge3/bin/python3
 CORPUS=txt_local/corpus_high_quality_uppercase_2026_05_08.txt
 TS=$(date +"%Y_%m_%d_%H%M")
 

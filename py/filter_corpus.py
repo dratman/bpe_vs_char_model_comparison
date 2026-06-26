@@ -24,7 +24,7 @@ import csv
 import os
 import re
 
-GUTENBERG_DIR = '/Users/RalphDratman/Library/Mobile Documents/com~apple~CloudDocs/0-HomeFolder-Working-iCloud_A/Gutenberg_Project_Books'
+GUTENBERG_DIR = os.path.expanduser('~/Library/Mobile Documents/com~apple~CloudDocs/0-HomeFolder-Working-iCloud_A/Gutenberg_Project_Books')
 DATA_CSV = os.path.join(GUTENBERG_DIR, 'gutenberg_data.csv')
 TEXTS_DIR = os.path.join(GUTENBERG_DIR, 'gutenberg_texts')
 

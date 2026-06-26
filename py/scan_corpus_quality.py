@@ -17,7 +17,7 @@ import os
 import signal
 import time
 
-TEXTS_DIR = '/Users/RalphDratman/Library/Mobile Documents/com~apple~CloudDocs/0-HomeFolder-Working-iCloud_A/Gutenberg_Project_Books/gutenberg_texts'
+TEXTS_DIR = os.path.expanduser('~/Library/Mobile Documents/com~apple~CloudDocs/0-HomeFolder-Working-iCloud_A/Gutenberg_Project_Books/gutenberg_texts')
 KEEP_LIST = 'corpus_keep.txt'
 OUTPUT = 'corpus_quality_report.txt'
 PER_FILE_TIMEOUT = 10 * 60  # 10 minutes per file (iCloud may need to download)

@@ -35,7 +35,7 @@ MODEL="pt/${RUN}.pt"
 LOG_DIR="terminal_logs"
 TIMESTAMP=$(date +"%Y_%m_%d_%H%M")
 LOG_FILE="${LOG_DIR}/sample_${RUN}_${TIMESTAMP}.txt"
-PYTHON=/Users/RalphDratman/miniforge3/bin/python3
+PYTHON=$HOME/miniforge3/bin/python3
 
 mkdir -p "$LOG_DIR" pt
 

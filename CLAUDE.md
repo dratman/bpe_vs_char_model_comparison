@@ -83,9 +83,17 @@ Most relevant:
   newline boundaries.
 - train.sh uses the --output filename (not --input) for log naming.
 - Training uses python -u for unbuffered output to logs.
-- Python environment: `/Users/RalphDratman/miniforge3/bin/python3`
-  (Python 3.12). Do NOT use `/usr/bin/python3` (system Python 3.9,
-  broken numpy). LaunchAgents must use the full miniforge path.
+- Python environment: `$HOME/miniforge3/bin/python3` (Python 3.12).
+  This resolves correctly on BOTH machines because miniforge lives
+  under each machine's home dir:
+  - M2 MacBook: `/Users/RalphDratman_1/miniforge3/bin/python3`
+  - Mac Studio: `/Users/RalphDratman/miniforge3/bin/python3`
+  Do NOT use `/usr/bin/python3` (system Python 3.9, broken numpy).
+  Scripts and LaunchAgents should use `$HOME/miniforge3/bin/python3`
+  rather than a hardcoded absolute path. NOTE: the M2 MacBook home
+  folder was renamed to `RalphDratman_1` (was `RalphDratman`); any
+  remaining absolute `/Users/RalphDratman/...` paths refer to the
+  Studio, not this MacBook.
 - GitHub repo: `dratman/small_transformer_research` (cloned locally
   at `../small_transformer_research/`). Auth via `gh auth login`.
 
