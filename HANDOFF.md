@@ -32,6 +32,32 @@ background `git fetch` loop — don't make Ralph relay). (3) Ralph only for a ge
 priority tradeoff that only he can set. Memories `coupler-queue-workflow` and
 `cuda-trials-need-accept-overrides` capture this.
 
+### ⚠ STUDIO INCIDENT (2026-06-27 ~01:30) — long char run crashed, disk was full. RESUME PENDING.
+
+**What happened:** the 20-day Studio run `char_uppercase_16L_1280_no_gelu_matched_lr`
+**crashed at iter 422000** (2026-06-26 23:35) inside `torch.save` — the Studio data
+volume was **100% full** (100 MB free), so the checkpoint write failed
+(`PytorchStreamWriter ... file write failed`). The `com.ralph.training-monitor`
+watchdog then alarmed every 5 min ("train.py is NOT running").
+
+**What I did (2026-06-27 ~01:30–01:45):**
+- Silenced the alarm: `launchctl unload ~/Library/LaunchAgents/com.ralph.training-monitor.plist`
+  (it is currently UNLOADED) and killed the running `afplay`/alert loop. Also dropped
+  `~/training_monitor_paused` (with a note) as reboot insurance.
+- Freed disk: deleted **82 intermediate `_iter` checkpoints** of this run (293 GB),
+  KEEPING `…_iter420000.pt`, `…_iter415000.pt`, `…_rolling.pt`, and the best `….pt`.
+  Studio data volume now **84% used, 294 GB free**. No other run/dir touched.
+
+**MORNING TODO (Ralph said resume in the morning):**
+1. Resume training from `pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter420000.pt`
+   (val 0.8376) — only ~2000 iters lost. Use `--resume`. Verify val loss looks sane.
+2. `rm ~/training_monitor_paused` and `launchctl load
+   ~/Library/LaunchAgents/com.ralph.training-monitor.plist` so the watchdog guards
+   the resumed run again.
+3. Optional: storage report flagged ~425 GB MORE cleanable in OTHER dirs, but several
+   (`old_8_GB_corpus_pt`, `unshuffled_corpus_pt`) are "Preserved" per CLAUDE.md — get
+   Ralph's OK before touching those.
+
 ### ENVIRONMENT NOTE (2026-06-26) — M2 MacBook home renamed + paths made machine-agnostic
 
 - The **M2 MacBook** home folder was renamed `RalphDratman` → **`RalphDratman_1`**
