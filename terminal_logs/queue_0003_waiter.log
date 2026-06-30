@@ -1,0 +1,19 @@
+[2026-06-15 22:19:35] Another waiter already running (PIDs: 2998756 2998763 ); exiting.
+[2026-06-15 22:20:22] Waiter armed (PID 2999127). Waiting for seed-2 to free the GPU...
+[2026-06-15 22:20:36] Another waiter already holds the lock; exiting.
+[2026-06-18 13:10:32] seed-2 training process is gone. Confirming GPU is idle...
+[2026-06-18 13:10:32] GPU idle. df avail before launch:
+  56G
+[2026-06-18 13:10:32] Launching 0003 reversed-char training...
+========================================
+Training wrapper (CUDA) started
+Input file:  txt_local/corpus_high_quality_uppercase_2026_05_08_REVERSED_within_splits.txt
+Python:      /home/owner/miniforge3/envs/bpe_char/bin/python
+Checkpoints: pt
+Log file:    terminal_logs/terminal_log_for_char_uppercase_16L_1280_reversed_cuda_2026_06_18_1310.txt
+========================================
+Training started with PID 637541
+Log:  terminal_logs/terminal_log_for_char_uppercase_16L_1280_reversed_cuda_2026_06_18_1310.txt
+Watch: tail -f terminal_logs/terminal_log_for_char_uppercase_16L_1280_reversed_cuda_2026_06_18_1310.txt
+Stop:  kill -TERM 637541
+[2026-06-18 13:10:32] 0003 launch script returned. Waiter done.

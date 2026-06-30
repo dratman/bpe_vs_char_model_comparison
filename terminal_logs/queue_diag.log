@@ -1,0 +1,15 @@
+[2026-06-19 20:20:42] waiting for 0003 to stop (its _final to appear)...
+[2026-06-19 20:26:42] 0003 _final present; waiting for the GPU to free (no py/train.py)...
+[2026-06-19 20:26:42] GPU free. Launching fp32 diagnostic.
+========================================
+Training wrapper (CUDA) started
+Input file:  txt_local/corpus_high_quality_uppercase_2026_05_08.txt
+Python:      /home/owner/miniforge3/envs/bpe_char/bin/python
+Checkpoints: pt
+Log file:    terminal_logs/terminal_log_for_char_diag_fp32_16L_1280_forward_cuda_2026_06_19_2026.txt
+========================================
+Training started with PID 1541902
+Log:  terminal_logs/terminal_log_for_char_diag_fp32_16L_1280_forward_cuda_2026_06_19_2026.txt
+Watch: tail -f terminal_logs/terminal_log_for_char_diag_fp32_16L_1280_forward_cuda_2026_06_19_2026.txt
+Stop:  kill -TERM 1541902
+[2026-06-19 20:28:42] fp32 diagnostic PID 1541902 healthy after 120s. Watch the 0-20K val curve.
