@@ -88,7 +88,25 @@ to `GPT.generate()` (kept for `real_word_fraction.py` /
 bit-identical in-training samples, so `train.py` behavior is unchanged.
 If you add a sampling feature, add it in `GPT.generate()` only.
 
-### ★ CURRENT STATE (2026-06-20 ~23:35 local) — supersedes the block below ★
+### ★★ DONE (2026-06-30) — 0003 reversed re-run COMPLETE; GPU now IDLE ★★
+
+- **The fp32-attention reversed run FINISHED** (500K iters, 9d 9h, stable throughout —
+  the fix held). **Reversed best val 0.7255 nats = 1.0467 bpc @396K** vs the forward
+  floor **0.7152 nats = 1.0318 bpc** → gap **+0.0103 nats (+0.0149 bpc, ~1.4%)**.
+  Reversed text is ~as learnable as forward at full scale, a hair behind (within one
+  seed of noise; forward was unseeded, this used seed 1337). Re-reversed samples fluent.
+- **Result filed** to coupler-queue `failed/0003.rerun-result.md` (pushed) with a
+  note-to-editor asking disposition. Artifacts:
+  `pt/char_uppercase_16L_1280_reversed_fp32attn_cuda.pt` (+ `_final`),
+  `plots/reversed_fp32attn_*` (via `py/analyze_reversed_fp32attn.py`).
+- **GPU is now IDLE.** No linux-cuda work pending (0004 NoPE pilot is mac-mlx). The
+  3-hourly heartbeat (cron `cad7f127`) will flag a false "idle GPU with pending" anomaly
+  because 0004 sits in pending/ but is the Studio's, not ours — expected, not actionable.
+- Open optimization: fp32 attention at block 4096 is slow (~0.63 it/s); fp32-softmax-only
+  or logit-soft-cap could be faster if more reversed-scale runs are wanted. Diary 104 has
+  the full instability diagnosis + fix.
+
+### ★ CURRENT STATE (2026-06-20 ~23:35 local) — superseded by the DONE block above ★
 
 - **REVERSED RE-RUN LAUNCHED with the FIXED recipe** — `sh/train_char_uppercase_16L_1280_reversed_fp32attn_CUDA.sh`,
   **PID 2335885** (started 23:31). This is the real 0003 measurement: 16L/1280 reversed,
