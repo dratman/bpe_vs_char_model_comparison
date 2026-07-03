@@ -51,7 +51,7 @@ To convert loss to probability of correct prediction:
 
 ## Key diary entries
 
-The `diary/` directory contains research entries 001-107.
+The `diary/` directory contains research entries 001-108.
 Most relevant:
 
 - **085**: Corpus rebuild — document-level shuffling (this is the most recent)

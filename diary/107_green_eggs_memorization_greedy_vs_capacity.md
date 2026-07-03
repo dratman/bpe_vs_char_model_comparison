@@ -1,5 +1,10 @@
 # Diary 107 — Memorizing Green Eggs and Ham: greedy decoding reveals it, capacity limits it
 
+> **CORRECTION (see diary 108):** Findings 3 and 4 below are WRONG. The
+> char/block-256 recitation "wall" at char 3040 is the **train/val split
+> boundary** (last 10% held out, never trained on), NOT a capacity limit.
+> Findings 1 and 2 stand. Read diary 108 before trusting this entry.
+
 Date: 2026-06-26
 
 ## Where this came from
