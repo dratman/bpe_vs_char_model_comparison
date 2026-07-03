@@ -43,6 +43,13 @@ Removed `~/training_monitor_paused` and `launchctl load`ed the training-monitor
 watchdog; it now guards the live run. Disk was 85% (289 GB free) at resume.
 The incident record below is retained for history.
 
+**Watchdog improvement (2026-07-03):** `~/bin/training_monitor.py` on the Studio
+was patched so it no longer false-alarms on *normal* completion: if `train.py`
+is not running BUT the latest terminal log ends with "Training complete!", it
+reports "completed normally" instead of alarming. A crash (traceback, no
+completion line) still alarms. Backup at `~/bin/training_monitor.py.bak`. This
+file lives in `~/bin` (Studio-local), NOT in the git repo.
+
 ### ⚠ STUDIO INCIDENT (2026-06-27 ~01:30) — long char run crashed, disk was full. RESUME PENDING.
 
 **What happened:** the 20-day Studio run `char_uppercase_16L_1280_no_gelu_matched_lr`
