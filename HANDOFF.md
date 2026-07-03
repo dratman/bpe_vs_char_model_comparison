@@ -32,6 +32,17 @@ background `git fetch` loop — don't make Ralph relay). (3) Ralph only for a ge
 priority tradeoff that only he can set. Memories `coupler-queue-workflow` and
 `cuda-trials-need-accept-overrides` capture this.
 
+### ✓ STUDIO INCIDENT (2026-06-27) — RESOLVED 2026-07-03 ~01:15: run resumed, watchdog restored
+
+**RESOLUTION (2026-07-03 ~01:15):** Resumed the run from
+`pt/char_uppercase_16L_1280_no_gelu_matched_lr_iter420000.pt` on the Studio
+(PID 95272, launched with the full `$HOME/miniforge3/bin/python3` + `nohup`, all
+original hyperparameters + `--resume`; token cache reused so no re-tokenize).
+Resume eval at iter 420000: train 0.8213 / val 0.8591 — healthy, ~4.2 s/iter.
+Removed `~/training_monitor_paused` and `launchctl load`ed the training-monitor
+watchdog; it now guards the live run. Disk was 85% (289 GB free) at resume.
+The incident record below is retained for history.
+
 ### ⚠ STUDIO INCIDENT (2026-06-27 ~01:30) — long char run crashed, disk was full. RESUME PENDING.
 
 **What happened:** the 20-day Studio run `char_uppercase_16L_1280_no_gelu_matched_lr`
