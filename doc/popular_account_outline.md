@@ -57,6 +57,12 @@ the generalization → honesty → a step forward → why it matters.
     responsibilities; being able to actually *see* how even a small one works —
     and to be honest about the limits — is a small act of not being fooled.
 
+## Constraints for publication
+- **Do NOT use the "Storyland" abridged Alice (file 19033) in the published
+  account.** It is a lesser abridged edition. Any Alice results intended for
+  publication must be generated on the canonical FULL text (Project Gutenberg
+  #11). The abridged-edition sweeps done during exploration are internal only.
+
 ## Notes / open decisions
 - Section 10's non-toy step is being designed now; whatever we choose should also
   earn its place as the account's turn toward the real world.
