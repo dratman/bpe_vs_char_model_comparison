@@ -75,11 +75,23 @@ full 146K novel.)*
 
 ### Pending (as of this entry)
 
-20. **Running:** the full 146K novel trained to 70,000 steps, to see whether the
-    loss flattens to ~0 (memorizes the whole book → greatest length ≥ 146K) or
-    levels off above 0 (a real wall ≤ 146K). That is the definitive answer to the
-    "greatest memorizable length" question. **Verdict to be appended when it
-    lands.**
+20. **VERDICT (full 146K novel, 70,000 steps).** Train-loss trajectory:
+    @10K 0.72 → @20K 0.60 → @30K 0.53 → @40K 0.44 → @50K 0.37 → @60K 0.31 —
+    **still declining, no plateau.** So there is **no sharp capacity cliff**, and
+    "greatest memorizable length" is a *range*, not a number:
+    - Fully memorizes (loss → ~0) up to **~64K**; ~96K essentially too.
+    - **128K–146K never finish** — the loss keeps inching down, ever more slowly,
+      holding the text increasingly imperfectly, without hitting a wall.
+    - Practical answer: **this 0.24M model fully memorizes ~64K–96K characters;
+      beyond that, graceful (never-completing) degradation.**
+
+    **Interpretation:** the *shape* (a gentle, ever-steepening hill, not a cliff)
+    is evidence for the mechanism of diaries 110–111: memory here is a **tuned
+    lookup, not a storage bin.** A bin has a hard edge and overflows; a tuned
+    lookup degrades gracefully — each extra character makes the same shared
+    machinery carry a little more, a little less perfectly. So "how it stores"
+    (sparse switch lookup) and "how much it stores" (soft slope, no wall) are the
+    same fact seen from two sides.
 
 ### Cross-cutting lessons
 
