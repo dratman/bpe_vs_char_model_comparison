@@ -1,104 +1,95 @@
-# BPE vs Character-Level Model Comparison
+# Current work: a popular account of how a tiny LLM completes a small text
 
-## FIRST: Read HANDOFF.md
+*(This file was simplified 2026-07-08 to describe only the current line of work.
+The fuller, older project instructions and HANDOFF.md remain in git history if
+the work ever broadens back out.)*
 
-At the start of every session, read `HANDOFF.md` in the project root.
-It contains the current state of the project and pending tasks. Verify
-each item marked TODO before proceeding with any work.
+## What we are doing right now
 
-During your session, update HANDOFF.md whenever you:
-- Write a diary entry
-- Complete or abandon a task
-- Make a decision that a future instance would need to know
-- Discover something unexpected about the state of the project
+Investigating, from first principles, **how a tiny language model performs one
+small, fully-understandable task: literal completion of a small memorized text**
+— and turning it into a **popular account for a general reader**. Ralph's frame:
 
-Before your session ends, make sure HANDOFF.md is current and committed.
+> *Here is how a tiny LLM does a tiny task — continuing text literally from a
+> small corpus it was trained on. It invents nothing; it just continues from what
+> it memorized.*
 
-## What this project is
+Deliberately reductionist: shrink the model, shrink the text, understand it
+completely, stay honest about scope. This is **not** novel research (the field
+knows this); the value is a **clear, honest, worked example** a reader can trust.
 
-This project trains and compares transformer language models with
-different tokenization: BPE (byte pair encoding) vs character-level
-tokens. The goal is to understand how tokenization affects what a model
-learns internally, building on 80+ diary entries of research into small
-character-level transformer internals.
+**Example text:** `txt_local/Poe_The_Raven.txt` — Poe's "The Raven" (6,226
+chars), canonical/public-domain. (We set Green Eggs and Ham aside — its refrains
+cause confusing repetition — and we do **not** use the Storyland-abridged Alice:
+publication constraint, canonical texts only.)
 
-Ralph's broader research program: understanding the internals of small
-GPT-type language models so humans can learn to interpret and improve them.
+**The account:** living outline at `doc/popular_account_outline.md` (no prose
+drafted yet). Stay honest about scale — a toy, a "true small foothold," NOT "how
+ChatGPT works."
 
-## Models
+## The strongest result so far (the account's key "scene")
 
-### Model B — Character-level (reference, training complete)
-- Architecture: 16 layers, 16 heads, 2048 embedding dim, softmax attention
-- Tokenizer: character-level, vocab size 52
-- Parameters: ~822M
-- Trained to iter 53,500, best val loss: 0.8322
-- Corpus: gutenberg_corpus_MODERN_CLEAN.txt
-- Checkpoint: `../valuable_checkpoints/B_9GB/gutenberg_corpus_MODERN_CLEAN_continuous.pt`
-- Metadata: `../valuable_checkpoints/B_9GB/gutenberg_corpus_MODERN_CLEAN_continuous_meta.pkl`
+A 1-layer model with embedding width cut to **16** (from 128), trained on The
+Raven to a true plateau:
 
-### BPE model — see HANDOFF.md for current training status
+- **char CANNOT memorize it** — hard capacity floor ~1.6 bits/char.
+- **BPE memorizes it completely** — ~0.04 bits/char.
+- Only the tokenizer differs. BPE compresses 6,226 chars → ~2,130 chunks that
+  **fit** under capacity; 6,000 characters don't.
+- So at one fixed tiny size, **tokenization decides whether the model
+  memorizes-and-overfits (BPE — its loss on *unseen* text explodes above random)
+  or is forced to generalize (char — stays below random).** Overfitting requires
+  capacity.
+- Figure `doc/figures/113_d16_char_vs_bpe_capacity.png`; details in
+  `diary/113_...md`.
 
-## Comparing losses between BPE and character models
+Also established: for the *literal* task, a 3-line Python `str.find` lookup
+**beats** the net on every axis (exact vs 99.6%, unlimited capacity, **1 pass vs
+thousands of epochs**, honest "I don't know" at the edge vs confident
+confabulation). The net's only distinctive ability — guessing past the edge of
+memory — is worthless for literal completion and only earns its keep once the
+text is too big to memorize, where the model is forced to learn transferable
+structure. **The benefit is born exactly where memorization dies.**
 
-BPE per-token loss CANNOT be compared directly to character per-token loss.
-The BPE model predicts 1 of 8,192 tokens; the character model predicts 1
-of 52 characters. To compare them, normalize to per-character loss:
+## How to work (this matters most)
 
-    BPE per-character loss = BPE per-token loss / (chars per token)
+- **Interpret, don't just run experiments.** After a result, STOP and say what it
+  *means*; don't reflexively loop into the next run. (Ralph's central critique.)
+- **Train to a definitive plateau before concluding.** Undertraining repeatedly
+  masqueraded as a capacity limit. Log loss finely (e.g. every 500 steps); a real
+  capacity floor is flat *while the learning rate is still healthy*, not just the
+  rate winding down.
+- **Separate a real property of the model from an artifact of the measurement** —
+  that has been the crux of every correction we've made.
+- Ralph sets direction and understands via plain (child-simple) explanations; you
+  do the technical and interpretive heavy lifting. See the memory files for the
+  working relationship (cognitive load, one question at a time, emotional
+  attunement).
 
-To convert loss to probability of correct prediction:
-    probability = e^(-loss)
+## Technical setup
 
-## Key diary entries
+- Python: `$HOME/miniforge3/bin/python3` (= `/Users/RalphDratman_1/miniforge3/bin/python3`).
+  Runs on the Apple GPU (MPS). Never use the system python.
+- Train (the pattern for these tiny models):
+  ```
+  $HOME/miniforge3/bin/python3 -u py/train.py \
+    --input txt_local/Poe_The_Raven.txt --output pt/<name> --checkpoints_to pt \
+    --tokenizer char --mode continuous --n_layer 1 --n_head 4 --n_embd <D> --block_size 256 \
+    --batch_size 32 --max_iters <N> --warmup_iters 100 --learning_rate 1e-3 \
+    --eval_interval 500 --eval_iters 20 --log_interval 1000000 \
+    --sample_interval 100000000 --save_interval 100000000 \
+    --val_split 0.08 --precision float32 --seed 1337
+  ```
+  BPE variant: `--tokenizer bpe --vocab_size 512 --block_size 85` (BPE ≈ 2.9
+  chars/token, so block 85 ≈ 256 chars of context). Integer args only (not `1e9`).
+- The MLP hidden width is hardwired to **4 × n_embd** (so n_embd 16 → 64 "switch"
+  neurons; n_embd 128 → 512).
+- Models → `pt/` (gitignored). Corpora → `txt_local/` (gitignored). `*.png` is
+  gitignored — `git add -f` any figure meant for the account.
+- git: `git pull` at session start, `git push` at session end.
 
-The `diary/` directory contains research entries 001-113.
-Most relevant:
+## Not the current focus
 
-- **085**: Corpus rebuild — document-level shuffling (this is the most recent)
-- **084_B**: Corpus filtering and cleanup pipeline
-- **082_B**: Gated-FFN (SwiGLU) model design for LARQL compatibility
-- **081**: BPE experiment setup, results, and open questions
-- **080**: Thermodynamics of training — layer crystallization order
-- **074**: Hypothesis that tokenization is a topological operation
-- **055**: Dark subspace — exists in char models, absent in BPE models
-- **076**: Layer-by-layer activation analysis of a character model
-- **049**: Synthesis of character model findings
-
-## Project structure
-
-- `py/` — Python source: model.py, train.py, tokenizer.py, sample.py,
-  rebuild_corpus.py, filter_paragraphs.py, plot_train_val_loss.py, etc.
-- `sh/` — Shell scripts for launching training runs
-- `diary/` — Research diary entries
-- `pt/` — Current checkpoints (gitignored, large files)
-- `txt_local/` — Training corpora (gitignored, large files)
-- `terminal_logs/` — Training output logs (committed for history)
-- `plots/` — Generated plots (gitignored)
-- `HANDOFF.md` — Current state and pending tasks (READ THIS FIRST)
-
-## Technical notes
-
-- The BPE tokenizer crashes on strings >~1GB. The encode() method in
-  tokenizer.py chunks large texts into 100 MB pieces, splitting on
-  newline boundaries.
-- train.sh uses the --output filename (not --input) for log naming.
-- Training uses python -u for unbuffered output to logs.
-- Python environment: `$HOME/miniforge3/bin/python3` (Python 3.12).
-  This resolves correctly on BOTH machines because miniforge lives
-  under each machine's home dir:
-  - M2 MacBook: `/Users/RalphDratman_1/miniforge3/bin/python3`
-  - Mac Studio: `/Users/RalphDratman/miniforge3/bin/python3`
-  Do NOT use `/usr/bin/python3` (system Python 3.9, broken numpy).
-  Scripts and LaunchAgents should use `$HOME/miniforge3/bin/python3`
-  rather than a hardcoded absolute path. NOTE: the M2 MacBook home
-  folder was renamed to `RalphDratman_1` (was `RalphDratman`); any
-  remaining absolute `/Users/RalphDratman/...` paths refer to the
-  Studio, not this MacBook.
-- GitHub repo: `dratman/small_transformer_research` (cloned locally
-  at `../small_transformer_research/`). Auth via `gh auth login`.
-
-## Preserved checkpoints
-
-- `old_8_GB_corpus_pt/` — old 8 GB corpus run (iters 10K-160K)
-- `unshuffled_corpus_pt/` — unshuffled 2.5 GB corpus run (iters 10K-50K)
-- `../valuable_checkpoints/bpe_16L16H_old_corpus_iter160k_Excellent_from_8GB_corpus.pt`
+The Mac Studio is running a separate, unrelated long job (a big 16L/1280 char
+model, resumed after a disk-full crash, guarded by the `training-monitor`
+watchdog). It is **not** part of this account work — leave it alone unless asked.
