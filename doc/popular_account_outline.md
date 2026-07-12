@@ -31,6 +31,11 @@ the generalization → honesty → a step forward → why it matters.
 5. **How simple can the brain be? One layer is enough.** The depth surprise; a
    second correction (looked like depth mattered until we trained a shallower
    one). Measure, don't assume.
+   - *Depth buys capacity (not this task).* One layer sufficed here — but that's
+     because the text was small enough to fit. A one-layer brain **cannot**
+     memorize The Raven; a six-layer one **can**. Adding layers raises the
+     ceiling on *how much* can be held, even when the task in front of it never
+     needed the extra depth. (diary 114)
 
 6. **Opening it up — the two helpers.** A fuzzy "where am I" glance (attention),
    then a small committee of switches voting on the next letter (the MLP). Watch
