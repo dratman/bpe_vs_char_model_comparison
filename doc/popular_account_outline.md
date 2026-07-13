@@ -35,7 +35,10 @@ the generalization → honesty → a step forward → why it matters.
      because the text was small enough to fit. A one-layer brain **cannot**
      memorize The Raven; a six-layer one **can**. Adding layers raises the
      ceiling on *how much* can be held, even when the task in front of it never
-     needed the extra depth. (diary 114)
+     needed the extra depth. (diary 114) — And we measured *how many*: memorizing
+     The Raven **begins around 3 layers** and keeps improving smoothly with more.
+     It's a gradual climb, not an on/off switch, and there's no single magic
+     number. (diary 115, fig `115_layers_to_memorize_raven.png`)
 
 6. **Opening it up — the two helpers.** A fuzzy "where am I" glance (attention),
    then a small committee of switches voting on the next letter (the MLP). Watch
