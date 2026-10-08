@@ -1,0 +1,448 @@
+Command: /home/owner/miniforge3/envs/bpe_char/bin/python -u py/train.py --checkpoints_to "pt" (n_embd=20)
+Started: Thu Oct  8 01:50:57 PM EDT 2026
+Python:  /home/owner/miniforge3/envs/bpe_char/bin/python
+Host:    owner-B660M-Pro-RS
+========================================
+[2026-10-08 13:50:58] Using device: cuda
+[2026-10-08 13:50:58] Seeded torch RNG with --seed 1337
+[2026-10-08 13:50:58] Using precision: float32 (requested: float32)
+[2026-10-08 13:50:58] Training mode: word
+[2026-10-08 13:50:58] Reading input from txt_local/yawl_word_list_width_26.txt
+[2026-10-08 13:50:58] Read 2,721,922 characters
+[2026-10-08 13:50:58] Training char tokenizer...
+CharTokenizer: Built vocabulary of 27 characters
+[2026-10-08 13:50:58] Padding token ID: 27
+[2026-10-08 13:50:58] Preparing word blocks from 264097 words...
+[2026-10-08 13:50:59] Created 251710 word blocks
+[2026-10-08 13:50:59] Skipped 12387 words (too long for block_size=17)
+[2026-10-08 13:50:59] Training blocks: 226,539 (3,851,163 tokens)
+[2026-10-08 13:50:59] Validation blocks: 25171
+[2026-10-08 13:50:59] Saving tokenizer to pt/yawl_word_1L1H_e20_untied_cuda_meta.pkl
+[2026-10-08 13:50:59] Initializing new model...
+  Vocabulary size: 27 (+ 1 padding token = 28)
+number of parameters: 0.01M (softmax attention, untied weights)
+num decayed parameter tensors: 7, with 6,260 parameters
+num non-decayed parameter tensors: 10, with 300 parameters
+using fused AdamW: False
+
+[2026-10-08 13:50:59] Starting training...
+Command line: py/train.py --input txt_local/yawl_word_list_width_26.txt --output pt/yawl_word_1L1H_e20_untied_cuda --checkpoints_to pt --mode word --tokenizer char --untie_weights --n_layer 1 --n_head 1 --n_embd 20 --block_size 17 --max_iters 20000 --seed 1337 --no_fused --batch_size 64 --learning_rate 6e-4 --warmup_iters 2000 --dropout 0.0 --val_split 0.1 --precision float32 --eval_interval 500 --eval_iters 20 --save_interval 2500 --log_interval 500 --sample_interval 100000000
+
+--- Mode and tokenizer ---
+  mode:               word
+  tokenizer:          char
+  vocab_size:         27 (+ 1 padding = 28)
+  padding token ID:   27
+  attention type:     softmax
+  precision:          float32
+--- Architecture ---
+  n_layer:            1
+  n_head:             1
+  n_embd:             20
+  block_size:         17
+  dropout:            0.0
+  bias:               True  (LayerNorm + Linear bias)
+  tie_weights:        False
+  no_gelu:            False
+  no_bias:            False
+--- Training ---
+  batch_size:         64
+  grad_accum_steps:   1
+  max_iters:          20000
+  learning_rate:      6.00e-04 (target after warmup)
+  min_lr (cosine):    6.00e-05
+  warmup_iters:       2000
+  weight_decay:       0.1 (decay tensors), 0.0 (no-decay tensors)  [hardcoded]
+  betas:              (0.9, 0.95)  [hardcoded]
+  grad_clip:          1.0  [hardcoded]
+--- Data ---
+  input:              txt_local/yawl_word_list_width_26.txt
+  val_split:          0.1
+--- Logging ---
+  log_interval:       500
+  eval_interval:      500
+  eval_iters:         20
+  save_interval:      2500
+  sample_interval:    100000000
+  sample_max_tokens:  128
+--- Output ---
+  output:             pt/yawl_word_1L1H_e20_untied_cuda
+  checkpoints_to:     pt
+  rolling_save:       pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (written every eval_interval)
+============================================================
+[2026-10-08 13:50:59] [0m] Step     0 | Epoch   0.00 | train loss 3.3173 | val loss 3.3149 | lr 0.00e+00
+iter 0: loss 3.3081, time 184.69ms, mfu -100.00%
+[2026-10-08 13:50:59] [0m] Speed at iter 100 (epoch 0.03): 291.91 iters/sec
+[2026-10-08 13:51:00] [0m] Speed at iter 200 (epoch 0.06): 634.08 iters/sec
+[2026-10-08 13:51:00] [0m] Speed at iter 300 (epoch 0.08): 624.42 iters/sec
+[2026-10-08 13:51:00] [0m] Speed at iter 400 (epoch 0.11): 640.84 iters/sec
+[2026-10-08 13:51:00] [0m] Step   500 | Epoch   0.14 | train loss 2.9011 | val loss 2.9046 | lr 1.50e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.9046)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 500, val 2.9046)
+[2026-10-08 13:51:00] [0m] Speed at iter 500 (epoch 0.14): 588.08 iters/sec
+iter 500: loss 2.8922, time 21.55ms, mfu 0.00%
+[2026-10-08 13:51:00] [0m] Speed at iter 600 (epoch 0.17): 610.40 iters/sec
+[2026-10-08 13:51:00] [0m] Speed at iter 700 (epoch 0.20): 601.33 iters/sec
+[2026-10-08 13:51:01] [0m] Speed at iter 800 (epoch 0.23): 662.25 iters/sec
+[2026-10-08 13:51:01] [0m] Speed at iter 900 (epoch 0.25): 625.17 iters/sec
+[2026-10-08 13:51:01] [0m] Step  1000 | Epoch   0.28 | train loss 2.5212 | val loss 2.5162 | lr 3.00e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.5162)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 1000, val 2.5162)
+[2026-10-08 13:51:01] [0m] Speed at iter 1000 (epoch 0.28): 564.29 iters/sec
+iter 1000: loss 2.5155, time 20.82ms, mfu 0.00%
+[2026-10-08 13:51:01] [0m] Speed at iter 1100 (epoch 0.31): 620.23 iters/sec
+[2026-10-08 13:51:01] [0m] Speed at iter 1200 (epoch 0.34): 620.60 iters/sec
+[2026-10-08 13:51:01] [0m] Speed at iter 1300 (epoch 0.37): 698.27 iters/sec
+[2026-10-08 13:51:01] [0m] Speed at iter 1400 (epoch 0.40): 691.79 iters/sec
+[2026-10-08 13:51:02] [0m] Step  1500 | Epoch   0.42 | train loss 2.3832 | val loss 2.3986 | lr 4.50e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.3986)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 1500, val 2.3986)
+[2026-10-08 13:51:02] [0m] Speed at iter 1500 (epoch 0.42): 611.88 iters/sec
+iter 1500: loss 2.4046, time 20.08ms, mfu 0.00%
+[2026-10-08 13:51:02] [0m] Speed at iter 1600 (epoch 0.45): 680.32 iters/sec
+[2026-10-08 13:51:02] [0m] Speed at iter 1700 (epoch 0.48): 675.65 iters/sec
+[2026-10-08 13:51:02] [0m] Speed at iter 1800 (epoch 0.51): 655.81 iters/sec
+[2026-10-08 13:51:02] [0m] Speed at iter 1900 (epoch 0.54): 671.76 iters/sec
+[2026-10-08 13:51:02] [0m] Step  2000 | Epoch   0.57 | train loss 2.3374 | val loss 2.3420 | lr 6.00e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.3420)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 2000, val 2.3420)
+[2026-10-08 13:51:02] [0m] Speed at iter 2000 (epoch 0.57): 614.91 iters/sec
+iter 2000: loss 2.3838, time 20.21ms, mfu 0.00%
+[2026-10-08 13:51:03] [0m] Speed at iter 2100 (epoch 0.59): 685.86 iters/sec
+[2026-10-08 13:51:03] [0m] Speed at iter 2200 (epoch 0.62): 682.94 iters/sec
+[2026-10-08 13:51:03] [0m] Speed at iter 2300 (epoch 0.65): 693.83 iters/sec
+[2026-10-08 13:51:03] [0m] Speed at iter 2400 (epoch 0.68): 687.02 iters/sec
+[2026-10-08 13:51:03] [0m] Step  2500 | Epoch   0.71 | train loss 2.3089 | val loss 2.3055 | lr 5.99e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.3055)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 2500, val 2.3055)
+[2026-10-08 13:51:03] [0m] Saved periodic checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_iter2500.pt (iter 2500, epoch 0.71)
+[2026-10-08 13:51:03] [0m] Speed at iter 2500 (epoch 0.71): 585.19 iters/sec
+iter 2500: loss 2.3524, time 23.49ms, mfu 0.00%
+[2026-10-08 13:51:03] [0m] Speed at iter 2600 (epoch 0.73): 672.49 iters/sec
+[2026-10-08 13:51:03] [0m] Speed at iter 2700 (epoch 0.76): 688.83 iters/sec
+[2026-10-08 13:51:04] [0m] Speed at iter 2800 (epoch 0.79): 683.68 iters/sec
+[2026-10-08 13:51:04] [0m] Speed at iter 2900 (epoch 0.82): 672.09 iters/sec
+[2026-10-08 13:51:04] [0m] Step  3000 | Epoch   0.85 | train loss 2.2639 | val loss 2.2832 | lr 5.96e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.2832)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 3000, val 2.2832)
+[2026-10-08 13:51:04] [0m] Speed at iter 3000 (epoch 0.85): 585.81 iters/sec
+iter 3000: loss 2.2706, time 23.59ms, mfu 0.00%
+[2026-10-08 13:51:04] [0m] Speed at iter 3100 (epoch 0.88): 630.72 iters/sec
+[2026-10-08 13:51:04] [0m] Speed at iter 3200 (epoch 0.90): 660.72 iters/sec
+[2026-10-08 13:51:04] [0m] Speed at iter 3300 (epoch 0.93): 646.10 iters/sec
+[2026-10-08 13:51:05] [0m] Speed at iter 3400 (epoch 0.96): 639.58 iters/sec
+[2026-10-08 13:51:05] [0m] Step  3500 | Epoch   0.99 | train loss 2.2799 | val loss 2.2588 | lr 5.91e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.2588)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 3500, val 2.2588)
+[2026-10-08 13:51:05] [0m] Speed at iter 3500 (epoch 0.99): 562.00 iters/sec
+iter 3500: loss 2.3212, time 21.02ms, mfu 0.00%
+[2026-10-08 13:51:05] [0m] Speed at iter 3600 (epoch 1.02): 590.32 iters/sec
+[2026-10-08 13:51:05] [0m] Speed at iter 3700 (epoch 1.05): 601.53 iters/sec
+[2026-10-08 13:51:05] [0m] Speed at iter 3800 (epoch 1.07): 710.79 iters/sec
+[2026-10-08 13:51:05] [0m] Speed at iter 3900 (epoch 1.10): 715.45 iters/sec
+[2026-10-08 13:51:06] [0m] Step  4000 | Epoch   1.13 | train loss 2.2445 | val loss 2.2324 | lr 5.84e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.2324)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 4000, val 2.2324)
+[2026-10-08 13:51:06] [0m] Speed at iter 4000 (epoch 1.13): 508.35 iters/sec
+iter 4000: loss 2.2586, time 20.94ms, mfu 0.00%
+[2026-10-08 13:51:06] [0m] Speed at iter 4100 (epoch 1.16): 645.54 iters/sec
+[2026-10-08 13:51:06] [0m] Speed at iter 4200 (epoch 1.19): 636.27 iters/sec
+[2026-10-08 13:51:06] [0m] Speed at iter 4300 (epoch 1.21): 702.92 iters/sec
+[2026-10-08 13:51:06] [0m] Speed at iter 4400 (epoch 1.24): 685.28 iters/sec
+[2026-10-08 13:51:06] [0m] Step  4500 | Epoch   1.27 | train loss 2.2405 | val loss 2.2405 | lr 5.75e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 4500, val 2.2405)
+[2026-10-08 13:51:06] [0m] Speed at iter 4500 (epoch 1.27): 575.52 iters/sec
+iter 4500: loss 2.2248, time 18.94ms, mfu 0.00%
+[2026-10-08 13:51:06] [0m] Speed at iter 4600 (epoch 1.30): 653.86 iters/sec
+[2026-10-08 13:51:07] [0m] Speed at iter 4700 (epoch 1.33): 666.60 iters/sec
+[2026-10-08 13:51:07] [0m] Speed at iter 4800 (epoch 1.36): 659.24 iters/sec
+[2026-10-08 13:51:07] [0m] Speed at iter 4900 (epoch 1.38): 614.41 iters/sec
+[2026-10-08 13:51:07] [0m] Step  5000 | Epoch   1.41 | train loss 2.2348 | val loss 2.2343 | lr 5.64e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 5000, val 2.2343)
+[2026-10-08 13:51:07] [0m] Saved periodic checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_iter5000.pt (iter 5000, epoch 1.41)
+[2026-10-08 13:51:07] [0m] Speed at iter 5000 (epoch 1.41): 514.29 iters/sec
+iter 5000: loss 2.3184, time 20.40ms, mfu 0.00%
+[2026-10-08 13:51:07] [0m] Speed at iter 5100 (epoch 1.44): 587.21 iters/sec
+[2026-10-08 13:51:07] [0m] Speed at iter 5200 (epoch 1.47): 658.73 iters/sec
+[2026-10-08 13:51:08] [0m] Speed at iter 5300 (epoch 1.50): 664.34 iters/sec
+[2026-10-08 13:51:08] [0m] Speed at iter 5400 (epoch 1.53): 666.18 iters/sec
+[2026-10-08 13:51:08] [0m] Step  5500 | Epoch   1.55 | train loss 2.2316 | val loss 2.2228 | lr 5.51e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.2228)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 5500, val 2.2228)
+[2026-10-08 13:51:08] [0m] Speed at iter 5500 (epoch 1.55): 510.13 iters/sec
+iter 5500: loss 2.2114, time 20.98ms, mfu 0.00%
+[2026-10-08 13:51:08] [0m] Speed at iter 5600 (epoch 1.58): 617.75 iters/sec
+[2026-10-08 13:51:08] [0m] Speed at iter 5700 (epoch 1.61): 642.29 iters/sec
+[2026-10-08 13:51:08] [0m] Speed at iter 5800 (epoch 1.64): 656.49 iters/sec
+[2026-10-08 13:51:09] [0m] Speed at iter 5900 (epoch 1.67): 698.66 iters/sec
+[2026-10-08 13:51:09] [0m] Step  6000 | Epoch   1.70 | train loss 2.2055 | val loss 2.2189 | lr 5.37e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.2189)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 6000, val 2.2189)
+[2026-10-08 13:51:09] [0m] Speed at iter 6000 (epoch 1.70): 609.66 iters/sec
+iter 6000: loss 2.2607, time 20.44ms, mfu 0.00%
+[2026-10-08 13:51:09] [0m] Speed at iter 6100 (epoch 1.72): 620.20 iters/sec
+[2026-10-08 13:51:09] [0m] Speed at iter 6200 (epoch 1.75): 690.91 iters/sec
+[2026-10-08 13:51:09] [0m] Speed at iter 6300 (epoch 1.78): 566.59 iters/sec
+[2026-10-08 13:51:09] [0m] Speed at iter 6400 (epoch 1.81): 616.42 iters/sec
+[2026-10-08 13:51:10] [0m] Step  6500 | Epoch   1.84 | train loss 2.2109 | val loss 2.2132 | lr 5.21e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.2132)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 6500, val 2.2132)
+[2026-10-08 13:51:10] [0m] Speed at iter 6500 (epoch 1.84): 496.85 iters/sec
+iter 6500: loss 2.1692, time 23.62ms, mfu 0.00%
+[2026-10-08 13:51:10] [0m] Speed at iter 6600 (epoch 1.86): 670.81 iters/sec
+[2026-10-08 13:51:10] [0m] Speed at iter 6700 (epoch 1.89): 708.69 iters/sec
+[2026-10-08 13:51:10] [0m] Speed at iter 6800 (epoch 1.92): 708.54 iters/sec
+[2026-10-08 13:51:10] [0m] Speed at iter 6900 (epoch 1.95): 663.75 iters/sec
+[2026-10-08 13:51:10] [0m] Step  7000 | Epoch   1.98 | train loss 2.1915 | val loss 2.1833 | lr 5.04e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.1833)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 7000, val 2.1833)
+[2026-10-08 13:51:10] [0m] Speed at iter 7000 (epoch 1.98): 564.91 iters/sec
+iter 7000: loss 2.1734, time 20.51ms, mfu 0.00%
+[2026-10-08 13:51:10] [0m] Speed at iter 7100 (epoch 2.01): 604.40 iters/sec
+[2026-10-08 13:51:11] [0m] Speed at iter 7200 (epoch 2.03): 669.59 iters/sec
+[2026-10-08 13:51:11] [0m] Speed at iter 7300 (epoch 2.06): 630.23 iters/sec
+[2026-10-08 13:51:11] [0m] Speed at iter 7400 (epoch 2.09): 674.15 iters/sec
+[2026-10-08 13:51:11] [0m] Step  7500 | Epoch   2.12 | train loss 2.1964 | val loss 2.2134 | lr 4.85e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 7500, val 2.2134)
+[2026-10-08 13:51:11] [0m] Saved periodic checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_iter7500.pt (iter 7500, epoch 2.12)
+[2026-10-08 13:51:11] [0m] Speed at iter 7500 (epoch 2.12): 515.87 iters/sec
+iter 7500: loss 2.2111, time 21.18ms, mfu 0.00%
+[2026-10-08 13:51:11] [0m] Speed at iter 7600 (epoch 2.15): 626.74 iters/sec
+[2026-10-08 13:51:11] [0m] Speed at iter 7700 (epoch 2.18): 647.38 iters/sec
+[2026-10-08 13:51:12] [0m] Speed at iter 7800 (epoch 2.20): 648.08 iters/sec
+[2026-10-08 13:51:12] [0m] Speed at iter 7900 (epoch 2.23): 641.31 iters/sec
+[2026-10-08 13:51:12] [0m] Step  8000 | Epoch   2.26 | train loss 2.1881 | val loss 2.2192 | lr 4.65e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 8000, val 2.2192)
+[2026-10-08 13:51:12] [0m] Speed at iter 8000 (epoch 2.26): 610.36 iters/sec
+iter 8000: loss 2.2190, time 18.74ms, mfu 0.00%
+[2026-10-08 13:51:12] [0m] Speed at iter 8100 (epoch 2.29): 616.77 iters/sec
+[2026-10-08 13:51:12] [0m] Speed at iter 8200 (epoch 2.32): 684.49 iters/sec
+[2026-10-08 13:51:12] [0m] Speed at iter 8300 (epoch 2.34): 596.42 iters/sec
+[2026-10-08 13:51:13] [0m] Speed at iter 8400 (epoch 2.37): 632.75 iters/sec
+[2026-10-08 13:51:13] [0m] Step  8500 | Epoch   2.40 | train loss 2.1859 | val loss 2.1933 | lr 4.44e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 8500, val 2.1933)
+[2026-10-08 13:51:13] [0m] Speed at iter 8500 (epoch 2.40): 619.56 iters/sec
+iter 8500: loss 2.1459, time 18.55ms, mfu 0.00%
+[2026-10-08 13:51:13] [0m] Speed at iter 8600 (epoch 2.43): 641.05 iters/sec
+[2026-10-08 13:51:13] [0m] Speed at iter 8700 (epoch 2.46): 693.32 iters/sec
+[2026-10-08 13:51:13] [0m] Speed at iter 8800 (epoch 2.49): 678.01 iters/sec
+[2026-10-08 13:51:13] [0m] Speed at iter 8900 (epoch 2.51): 665.31 iters/sec
+[2026-10-08 13:51:13] [0m] Step  9000 | Epoch   2.54 | train loss 2.1835 | val loss 2.1825 | lr 4.22e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.1825)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 9000, val 2.1825)
+[2026-10-08 13:51:13] [0m] Speed at iter 9000 (epoch 2.54): 614.72 iters/sec
+iter 9000: loss 2.2535, time 20.94ms, mfu 0.00%
+[2026-10-08 13:51:14] [0m] Speed at iter 9100 (epoch 2.57): 579.10 iters/sec
+[2026-10-08 13:51:14] [0m] Speed at iter 9200 (epoch 2.60): 683.55 iters/sec
+[2026-10-08 13:51:14] [0m] Speed at iter 9300 (epoch 2.63): 613.84 iters/sec
+[2026-10-08 13:51:14] [0m] Speed at iter 9400 (epoch 2.66): 645.14 iters/sec
+[2026-10-08 13:51:14] [0m] Step  9500 | Epoch   2.68 | train loss 2.1697 | val loss 2.2134 | lr 4.00e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 9500, val 2.2134)
+[2026-10-08 13:51:14] [0m] Speed at iter 9500 (epoch 2.68): 584.33 iters/sec
+iter 9500: loss 2.1424, time 19.51ms, mfu 0.00%
+[2026-10-08 13:51:14] [0m] Speed at iter 9600 (epoch 2.71): 513.12 iters/sec
+[2026-10-08 13:51:15] [0m] Speed at iter 9700 (epoch 2.74): 578.31 iters/sec
+[2026-10-08 13:51:15] [0m] Speed at iter 9800 (epoch 2.77): 655.23 iters/sec
+[2026-10-08 13:51:15] [0m] Speed at iter 9900 (epoch 2.80): 668.57 iters/sec
+[2026-10-08 13:51:15] [0m] Step 10000 | Epoch   2.83 | train loss 2.1718 | val loss 2.1827 | lr 3.77e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 10000, val 2.1827)
+[2026-10-08 13:51:15] [0m] Saved periodic checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_iter10000.pt (iter 10000, epoch 2.83)
+[2026-10-08 13:51:15] [0m] Speed at iter 10000 (epoch 2.83): 562.41 iters/sec
+iter 10000: loss 2.1666, time 20.73ms, mfu 0.00%
+[2026-10-08 13:51:15] [0m] Speed at iter 10100 (epoch 2.85): 622.44 iters/sec
+[2026-10-08 13:51:15] [0m] Speed at iter 10200 (epoch 2.88): 644.06 iters/sec
+[2026-10-08 13:51:16] [0m] Speed at iter 10300 (epoch 2.91): 659.88 iters/sec
+[2026-10-08 13:51:16] [0m] Speed at iter 10400 (epoch 2.94): 606.73 iters/sec
+[2026-10-08 13:51:16] [0m] Step 10500 | Epoch   2.97 | train loss 2.1982 | val loss 2.1731 | lr 3.54e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.1731)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 10500, val 2.1731)
+[2026-10-08 13:51:16] [0m] Speed at iter 10500 (epoch 2.97): 588.45 iters/sec
+iter 10500: loss 2.2438, time 21.12ms, mfu 0.00%
+[2026-10-08 13:51:16] [0m] Speed at iter 10600 (epoch 2.99): 632.27 iters/sec
+[2026-10-08 13:51:16] [0m] Speed at iter 10700 (epoch 3.02): 638.19 iters/sec
+[2026-10-08 13:51:16] [0m] Speed at iter 10800 (epoch 3.05): 697.17 iters/sec
+[2026-10-08 13:51:17] [0m] Speed at iter 10900 (epoch 3.08): 666.00 iters/sec
+[2026-10-08 13:51:17] [0m] Step 11000 | Epoch   3.11 | train loss 2.1778 | val loss 2.1861 | lr 3.30e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 11000, val 2.1861)
+[2026-10-08 13:51:17] [0m] Speed at iter 11000 (epoch 3.11): 613.99 iters/sec
+iter 11000: loss 2.1217, time 18.88ms, mfu 0.00%
+[2026-10-08 13:51:17] [0m] Speed at iter 11100 (epoch 3.14): 624.62 iters/sec
+[2026-10-08 13:51:17] [0m] Speed at iter 11200 (epoch 3.16): 609.56 iters/sec
+[2026-10-08 13:51:17] [0m] Speed at iter 11300 (epoch 3.19): 542.42 iters/sec
+[2026-10-08 13:51:17] [0m] Speed at iter 11400 (epoch 3.22): 590.93 iters/sec
+[2026-10-08 13:51:18] [0m] Step 11500 | Epoch   3.25 | train loss 2.1790 | val loss 2.1775 | lr 3.06e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 11500, val 2.1775)
+[2026-10-08 13:51:18] [0m] Speed at iter 11500 (epoch 3.25): 556.22 iters/sec
+iter 11500: loss 2.2287, time 18.58ms, mfu 0.00%
+[2026-10-08 13:51:18] [0m] Speed at iter 11600 (epoch 3.28): 581.67 iters/sec
+[2026-10-08 13:51:18] [0m] Speed at iter 11700 (epoch 3.31): 669.33 iters/sec
+[2026-10-08 13:51:18] [0m] Speed at iter 11800 (epoch 3.33): 671.86 iters/sec
+[2026-10-08 13:51:18] [0m] Speed at iter 11900 (epoch 3.36): 651.84 iters/sec
+[2026-10-08 13:51:18] [0m] Step 12000 | Epoch   3.39 | train loss 2.1769 | val loss 2.1768 | lr 2.83e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 12000, val 2.1768)
+[2026-10-08 13:51:18] [0m] Speed at iter 12000 (epoch 3.39): 524.11 iters/sec
+iter 12000: loss 2.1121, time 22.15ms, mfu 0.00%
+[2026-10-08 13:51:19] [0m] Speed at iter 12100 (epoch 3.42): 624.89 iters/sec
+[2026-10-08 13:51:19] [0m] Speed at iter 12200 (epoch 3.45): 620.06 iters/sec
+[2026-10-08 13:51:19] [0m] Speed at iter 12300 (epoch 3.47): 696.24 iters/sec
+[2026-10-08 13:51:19] [0m] Speed at iter 12400 (epoch 3.50): 678.51 iters/sec
+[2026-10-08 13:51:19] [0m] Step 12500 | Epoch   3.53 | train loss 2.1562 | val loss 2.1701 | lr 2.60e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.1701)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 12500, val 2.1701)
+[2026-10-08 13:51:19] [0m] Saved periodic checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_iter12500.pt (iter 12500, epoch 3.53)
+[2026-10-08 13:51:19] [0m] Speed at iter 12500 (epoch 3.53): 568.01 iters/sec
+iter 12500: loss 2.1251, time 22.95ms, mfu 0.00%
+[2026-10-08 13:51:19] [0m] Speed at iter 12600 (epoch 3.56): 639.63 iters/sec
+[2026-10-08 13:51:19] [0m] Speed at iter 12700 (epoch 3.59): 691.81 iters/sec
+[2026-10-08 13:51:20] [0m] Speed at iter 12800 (epoch 3.62): 682.09 iters/sec
+[2026-10-08 13:51:20] [0m] Speed at iter 12900 (epoch 3.64): 686.89 iters/sec
+[2026-10-08 13:51:20] [0m] Step 13000 | Epoch   3.67 | train loss 2.1672 | val loss 2.1590 | lr 2.38e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.1590)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 13000, val 2.1590)
+[2026-10-08 13:51:20] [0m] Speed at iter 13000 (epoch 3.67): 602.15 iters/sec
+iter 13000: loss 2.0891, time 22.38ms, mfu 0.00%
+[2026-10-08 13:51:20] [0m] Speed at iter 13100 (epoch 3.70): 664.09 iters/sec
+[2026-10-08 13:51:20] [0m] Speed at iter 13200 (epoch 3.73): 664.65 iters/sec
+[2026-10-08 13:51:20] [0m] Speed at iter 13300 (epoch 3.76): 666.16 iters/sec
+[2026-10-08 13:51:21] [0m] Speed at iter 13400 (epoch 3.79): 686.35 iters/sec
+[2026-10-08 13:51:21] [0m] Step 13500 | Epoch   3.81 | train loss 2.1619 | val loss 2.1508 | lr 2.16e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.1508)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 13500, val 2.1508)
+[2026-10-08 13:51:21] [0m] Speed at iter 13500 (epoch 3.81): 609.09 iters/sec
+iter 13500: loss 2.1663, time 20.51ms, mfu 0.00%
+[2026-10-08 13:51:21] [0m] Speed at iter 13600 (epoch 3.84): 671.12 iters/sec
+[2026-10-08 13:51:21] [0m] Speed at iter 13700 (epoch 3.87): 683.46 iters/sec
+[2026-10-08 13:51:21] [0m] Speed at iter 13800 (epoch 3.90): 677.86 iters/sec
+[2026-10-08 13:51:21] [0m] Speed at iter 13900 (epoch 3.93): 643.99 iters/sec
+[2026-10-08 13:51:21] [0m] Step 14000 | Epoch   3.96 | train loss 2.1582 | val loss 2.1678 | lr 1.95e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 14000, val 2.1678)
+[2026-10-08 13:51:21] [0m] Speed at iter 14000 (epoch 3.96): 618.39 iters/sec
+iter 14000: loss 2.1363, time 18.47ms, mfu 0.00%
+[2026-10-08 13:51:22] [0m] Speed at iter 14100 (epoch 3.98): 681.98 iters/sec
+[2026-10-08 13:51:22] [0m] Speed at iter 14200 (epoch 4.01): 682.86 iters/sec
+[2026-10-08 13:51:22] [0m] Speed at iter 14300 (epoch 4.04): 691.89 iters/sec
+[2026-10-08 13:51:22] [0m] Speed at iter 14400 (epoch 4.07): 680.61 iters/sec
+[2026-10-08 13:51:22] [0m] Step 14500 | Epoch   4.10 | train loss 2.1690 | val loss 2.1697 | lr 1.75e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 14500, val 2.1697)
+[2026-10-08 13:51:22] [0m] Speed at iter 14500 (epoch 4.10): 587.89 iters/sec
+iter 14500: loss 2.1714, time 19.80ms, mfu 0.00%
+[2026-10-08 13:51:22] [0m] Speed at iter 14600 (epoch 4.12): 637.03 iters/sec
+[2026-10-08 13:51:23] [0m] Speed at iter 14700 (epoch 4.15): 679.91 iters/sec
+[2026-10-08 13:51:23] [0m] Speed at iter 14800 (epoch 4.18): 678.09 iters/sec
+[2026-10-08 13:51:23] [0m] Speed at iter 14900 (epoch 4.21): 693.72 iters/sec
+[2026-10-08 13:51:23] [0m] Step 15000 | Epoch   4.24 | train loss 2.1745 | val loss 2.1537 | lr 1.56e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 15000, val 2.1537)
+[2026-10-08 13:51:23] [0m] Saved periodic checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_iter15000.pt (iter 15000, epoch 4.24)
+[2026-10-08 13:51:23] [0m] Speed at iter 15000 (epoch 4.24): 599.24 iters/sec
+iter 15000: loss 2.1737, time 20.67ms, mfu 0.00%
+[2026-10-08 13:51:23] [0m] Speed at iter 15100 (epoch 4.27): 658.26 iters/sec
+[2026-10-08 13:51:23] [0m] Speed at iter 15200 (epoch 4.29): 662.23 iters/sec
+[2026-10-08 13:51:23] [0m] Speed at iter 15300 (epoch 4.32): 678.73 iters/sec
+[2026-10-08 13:51:24] [0m] Speed at iter 15400 (epoch 4.35): 689.66 iters/sec
+[2026-10-08 13:51:24] [0m] Step 15500 | Epoch   4.38 | train loss 2.1766 | val loss 2.1448 | lr 1.39e-04
+  Saved checkpoint to pt/yawl_word_1L1H_e20_untied_cuda (best val loss: 2.1448)
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 15500, val 2.1448)
+[2026-10-08 13:51:24] [0m] Speed at iter 15500 (epoch 4.38): 603.50 iters/sec
+iter 15500: loss 2.1150, time 21.11ms, mfu 0.00%
+[2026-10-08 13:51:24] [0m] Speed at iter 15600 (epoch 4.41): 674.60 iters/sec
+[2026-10-08 13:51:24] [0m] Speed at iter 15700 (epoch 4.44): 679.46 iters/sec
+[2026-10-08 13:51:24] [0m] Speed at iter 15800 (epoch 4.46): 644.27 iters/sec
+[2026-10-08 13:51:24] [0m] Speed at iter 15900 (epoch 4.49): 677.14 iters/sec
+[2026-10-08 13:51:24] [0m] Step 16000 | Epoch   4.52 | train loss 2.1498 | val loss 2.1628 | lr 1.23e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 16000, val 2.1628)
+[2026-10-08 13:51:24] [0m] Speed at iter 16000 (epoch 4.52): 599.00 iters/sec
+iter 16000: loss 2.0879, time 18.78ms, mfu 0.00%
+[2026-10-08 13:51:25] [0m] Speed at iter 16100 (epoch 4.55): 677.57 iters/sec
+[2026-10-08 13:51:25] [0m] Speed at iter 16200 (epoch 4.58): 683.03 iters/sec
+[2026-10-08 13:51:25] [0m] Speed at iter 16300 (epoch 4.60): 689.63 iters/sec
+[2026-10-08 13:51:25] [0m] Speed at iter 16400 (epoch 4.63): 644.30 iters/sec
+[2026-10-08 13:51:25] [0m] Step 16500 | Epoch   4.66 | train loss 2.1397 | val loss 2.1539 | lr 1.09e-04
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 16500, val 2.1539)
+[2026-10-08 13:51:25] [0m] Speed at iter 16500 (epoch 4.66): 592.11 iters/sec
+iter 16500: loss 2.1509, time 19.02ms, mfu 0.00%
+[2026-10-08 13:51:25] [0m] Speed at iter 16600 (epoch 4.69): 684.19 iters/sec
+[2026-10-08 13:51:26] [0m] Speed at iter 16700 (epoch 4.72): 680.94 iters/sec
+[2026-10-08 13:51:26] [0m] Speed at iter 16800 (epoch 4.75): 690.62 iters/sec
+[2026-10-08 13:51:26] [0m] Speed at iter 16900 (epoch 4.77): 685.00 iters/sec
+[2026-10-08 13:51:26] [0m] Step 17000 | Epoch   4.80 | train loss 2.1629 | val loss 2.1534 | lr 9.62e-05
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 17000, val 2.1534)
+[2026-10-08 13:51:26] [0m] Speed at iter 17000 (epoch 4.80): 605.64 iters/sec
+iter 17000: loss 2.1721, time 18.69ms, mfu 0.00%
+[2026-10-08 13:51:26] [0m] Speed at iter 17100 (epoch 4.83): 668.58 iters/sec
+[2026-10-08 13:51:26] [0m] Speed at iter 17200 (epoch 4.86): 671.35 iters/sec
+[2026-10-08 13:51:26] [0m] Speed at iter 17300 (epoch 4.89): 679.08 iters/sec
+[2026-10-08 13:51:27] [0m] Speed at iter 17400 (epoch 4.92): 696.78 iters/sec
+[2026-10-08 13:51:27] [0m] Step 17500 | Epoch   4.94 | train loss 2.1609 | val loss 2.1476 | lr 8.53e-05
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 17500, val 2.1476)
+[2026-10-08 13:51:27] [0m] Saved periodic checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_iter17500.pt (iter 17500, epoch 4.94)
+[2026-10-08 13:51:27] [0m] Speed at iter 17500 (epoch 4.94): 605.66 iters/sec
+iter 17500: loss 2.1921, time 20.59ms, mfu 0.00%
+[2026-10-08 13:51:27] [0m] Speed at iter 17600 (epoch 4.97): 665.68 iters/sec
+[2026-10-08 13:51:27] [0m] Speed at iter 17700 (epoch 5.00): 660.36 iters/sec
+[2026-10-08 13:51:27] [0m] Speed at iter 17800 (epoch 5.03): 680.39 iters/sec
+[2026-10-08 13:51:27] [0m] Speed at iter 17900 (epoch 5.06): 675.40 iters/sec
+[2026-10-08 13:51:28] [0m] Step 18000 | Epoch   5.09 | train loss 2.1530 | val loss 2.1599 | lr 7.63e-05
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 18000, val 2.1599)
+[2026-10-08 13:51:28] [0m] Speed at iter 18000 (epoch 5.09): 614.25 iters/sec
+iter 18000: loss 2.1167, time 18.74ms, mfu 0.00%
+[2026-10-08 13:51:28] [0m] Speed at iter 18100 (epoch 5.11): 686.44 iters/sec
+[2026-10-08 13:51:28] [0m] Speed at iter 18200 (epoch 5.14): 685.89 iters/sec
+[2026-10-08 13:51:28] [0m] Speed at iter 18300 (epoch 5.17): 688.69 iters/sec
+[2026-10-08 13:51:28] [0m] Speed at iter 18400 (epoch 5.20): 654.57 iters/sec
+[2026-10-08 13:51:28] [0m] Step 18500 | Epoch   5.23 | train loss 2.1443 | val loss 2.1541 | lr 6.92e-05
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 18500, val 2.1541)
+[2026-10-08 13:51:28] [0m] Speed at iter 18500 (epoch 5.23): 601.68 iters/sec
+iter 18500: loss 2.2268, time 19.23ms, mfu 0.00%
+[2026-10-08 13:51:28] [0m] Speed at iter 18600 (epoch 5.25): 688.35 iters/sec
+[2026-10-08 13:51:29] [0m] Speed at iter 18700 (epoch 5.28): 685.34 iters/sec
+[2026-10-08 13:51:29] [0m] Speed at iter 18800 (epoch 5.31): 678.96 iters/sec
+[2026-10-08 13:51:29] [0m] Speed at iter 18900 (epoch 5.34): 693.47 iters/sec
+[2026-10-08 13:51:29] [0m] Step 19000 | Epoch   5.37 | train loss 2.1502 | val loss 2.1549 | lr 6.41e-05
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 19000, val 2.1549)
+[2026-10-08 13:51:29] [0m] Speed at iter 19000 (epoch 5.37): 595.69 iters/sec
+iter 19000: loss 2.1185, time 18.72ms, mfu 0.00%
+[2026-10-08 13:51:29] [0m] Speed at iter 19100 (epoch 5.40): 675.06 iters/sec
+[2026-10-08 13:51:29] [0m] Speed at iter 19200 (epoch 5.42): 669.02 iters/sec
+[2026-10-08 13:51:29] [0m] Speed at iter 19300 (epoch 5.45): 687.92 iters/sec
+[2026-10-08 13:51:30] [0m] Speed at iter 19400 (epoch 5.48): 688.51 iters/sec
+[2026-10-08 13:51:30] [0m] Step 19500 | Epoch   5.51 | train loss 2.1564 | val loss 2.1460 | lr 6.10e-05
+  Saved rolling checkpoint to pt/yawl_word_1L1H_e20_untied_cuda_rolling.pt (iter 19500, val 2.1460)
+[2026-10-08 13:51:30] [0m] Speed at iter 19500 (epoch 5.51): 608.68 iters/sec
+iter 19500: loss 2.1944, time 20.00ms, mfu 0.00%
+[2026-10-08 13:51:30] [0m] Speed at iter 19600 (epoch 5.54): 680.38 iters/sec
+[2026-10-08 13:51:30] [0m] Speed at iter 19700 (epoch 5.57): 684.38 iters/sec
+[2026-10-08 13:51:30] [0m] Speed at iter 19800 (epoch 5.59): 684.02 iters/sec
+[2026-10-08 13:51:30] [0m] Speed at iter 19900 (epoch 5.62): 674.44 iters/sec
+
+[2026-10-08 13:51:31] [0m] Training complete!
+Mode: word
+Tokenizer: char
+Attention type: softmax
+Final iteration: 20000, Final epoch: 5.65
+Best validation loss: 2.1448
+[2026-10-08 13:51:31] Saving final model to pt/yawl_word_1L1H_e20_untied_cuda_final.pt
+Final model saved to: pt/yawl_word_1L1H_e20_untied_cuda
+============================================================
+
+[2026-10-08 13:51:31] Final sample from trained model:
+licklaphicizes
+farrefied
+remet
+wein
+discherlarial
+trothy
+subsan
+unnitings
+iattitologies
+refleds
+hispings
+reckariogal
+zeepers
+tennietus
+uncher
+velaigonial
+suellisate
+pricropogric
+spored
+keinduably
+

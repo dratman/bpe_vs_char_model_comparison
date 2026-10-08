@@ -1,0 +1,49 @@
+model	n_embd	iter	n_params	real_frac	novel_real_frac	n_empty	n_overlong	best_val_bpc
+yawl_word_1L1H_e32_untied_cuda_iter2500.pt	32	2500	15104	0.031000		1	0	
+yawl_word_1L1H_e32_untied_cuda_iter5000.pt	32	5000	15104	0.043000		1	0	
+yawl_word_1L1H_e32_untied_cuda_iter7500.pt	32	7500	15104	0.043000		1	0	
+yawl_word_1L1H_e32_untied_cuda_iter10000.pt	32	10000	15104	0.047000		1	0	
+yawl_word_1L1H_e32_untied_cuda_iter12500.pt	32	12500	15104	0.049000		1	0	
+yawl_word_1L1H_e32_untied_cuda_iter15000.pt	32	15000	15104	0.051000		1	0	
+yawl_word_1L1H_e32_untied_cuda_iter17500.pt	32	17500	15104	0.045000		1	0	
+yawl_word_1L1H_e32_untied_cuda_final.pt	32	20000	15104	0.061000		1	0	3.010822
+yawl_word_1L1H_e28_untied_cuda_iter2500.pt	28	2500	11872	0.038000		1	0	
+yawl_word_1L1H_e28_untied_cuda_iter5000.pt	28	5000	11872	0.039000		1	0	
+yawl_word_1L1H_e28_untied_cuda_iter7500.pt	28	7500	11872	0.043000		1	0	
+yawl_word_1L1H_e28_untied_cuda_iter10000.pt	28	10000	11872	0.051000		0	0	
+yawl_word_1L1H_e28_untied_cuda_iter12500.pt	28	12500	11872	0.064000		0	0	
+yawl_word_1L1H_e28_untied_cuda_iter15000.pt	28	15000	11872	0.053000		0	0	
+yawl_word_1L1H_e28_untied_cuda_iter17500.pt	28	17500	11872	0.059000		0	0	
+yawl_word_1L1H_e28_untied_cuda_final.pt	28	20000	11872	0.058000		0	0	3.019931
+yawl_word_1L1H_e24_untied_cuda_iter2500.pt	24	2500	9024	0.028000		1	0	
+yawl_word_1L1H_e24_untied_cuda_iter5000.pt	24	5000	9024	0.043000		1	0	
+yawl_word_1L1H_e24_untied_cuda_iter7500.pt	24	7500	9024	0.039000		0	0	
+yawl_word_1L1H_e24_untied_cuda_iter10000.pt	24	10000	9024	0.045000		0	0	
+yawl_word_1L1H_e24_untied_cuda_iter12500.pt	24	12500	9024	0.049000		0	0	
+yawl_word_1L1H_e24_untied_cuda_iter15000.pt	24	15000	9024	0.057000		0	0	
+yawl_word_1L1H_e24_untied_cuda_iter17500.pt	24	17500	9024	0.039000		0	0	
+yawl_word_1L1H_e24_untied_cuda_final.pt	24	20000	9024	0.054000		0	0	3.053927
+yawl_word_1L1H_e20_untied_cuda_iter2500.pt	20	2500	6560	0.022000		1	0	
+yawl_word_1L1H_e20_untied_cuda_iter5000.pt	20	5000	6560	0.039000		1	0	
+yawl_word_1L1H_e20_untied_cuda_iter7500.pt	20	7500	6560	0.038000		1	0	
+yawl_word_1L1H_e20_untied_cuda_iter10000.pt	20	10000	6560	0.033000		1	0	
+yawl_word_1L1H_e20_untied_cuda_iter12500.pt	20	12500	6560	0.036000		1	0	
+yawl_word_1L1H_e20_untied_cuda_iter15000.pt	20	15000	6560	0.037000		0	0	
+yawl_word_1L1H_e20_untied_cuda_iter17500.pt	20	17500	6560	0.042000		0	0	
+yawl_word_1L1H_e20_untied_cuda_final.pt	20	20000	6560	0.043000		0	0	3.094353
+yawl_word_1L1H_e16_untied_cuda_iter2500.pt	16	2500	4480	0.022000		1	0	
+yawl_word_1L1H_e16_untied_cuda_iter5000.pt	16	5000	4480	0.032000		1	0	
+yawl_word_1L1H_e16_untied_cuda_iter7500.pt	16	7500	4480	0.031000		1	0	
+yawl_word_1L1H_e16_untied_cuda_iter10000.pt	16	10000	4480	0.046000		1	0	
+yawl_word_1L1H_e16_untied_cuda_iter12500.pt	16	12500	4480	0.043000		1	0	
+yawl_word_1L1H_e16_untied_cuda_iter15000.pt	16	15000	4480	0.038000		1	0	
+yawl_word_1L1H_e16_untied_cuda_iter17500.pt	16	17500	4480	0.039000		1	0	
+yawl_word_1L1H_e16_untied_cuda_final.pt	16	20000	4480	0.045000		1	0	3.143401
+yawl_word_1L1H_e12_untied_cuda_iter2500.pt	12	2500	2784	0.019000		2	0	
+yawl_word_1L1H_e12_untied_cuda_iter5000.pt	12	5000	2784	0.018000		1	0	
+yawl_word_1L1H_e12_untied_cuda_iter7500.pt	12	7500	2784	0.029000		1	0	
+yawl_word_1L1H_e12_untied_cuda_iter10000.pt	12	10000	2784	0.026000		1	0	
+yawl_word_1L1H_e12_untied_cuda_iter12500.pt	12	12500	2784	0.030000		0	0	
+yawl_word_1L1H_e12_untied_cuda_iter15000.pt	12	15000	2784	0.032000		0	0	
+yawl_word_1L1H_e12_untied_cuda_iter17500.pt	12	17500	2784	0.030000		0	0	
+yawl_word_1L1H_e12_untied_cuda_final.pt	12	20000	2784	0.033000		0	0	3.225874
