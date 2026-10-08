@@ -106,6 +106,40 @@ to `GPT.generate()` (kept for `real_word_fraction.py` /
 bit-identical in-training samples, so `train.py` behavior is unchanged.
 If you add a sampling feature, add it in `GPT.generate()` only.
 
+### ★★ DONE (2026-10-08) — coupler-queue 0005: residual-stream similarity probe COMPLETE ★★
+
+**What was done (this session, 2026-10-08 ~01:45 EDT):**
+- `py/model.py` — `GPT.forward()` gained `return_hidden_states=False`. When `True`,
+  returns `(logits, loss, hidden_states)` as a 3-tuple. `hidden_states[0]` = post-embedding
+  pre-block-0; `hidden_states[k]` = post-block-(k-1), all pre-final-layernorm. Default
+  `False` is unchanged — existing callers are unaffected.
+- `py/sample.py` — full residual-stream similarity probe added as `--probe build-index`
+  and `--probe match` modes. Supports any loadable checkpoint (char or BPE) by reading
+  model config dynamically. New flags: `--probe_corpus`, `--probe_index`, `--probe_layers`,
+  `--probe_threshold` (default 0.5), `--probe_topk` (default 3), `--probe_query`,
+  `--probe_query_file`, `--probe_output`. Uses per-layer anisotropy correction (subtracts
+  global mean over all reference tokens per layer before cosine comparison). Index format:
+  deterministic `.npz` (fixed ZipInfo timestamp, sorted keys — byte-identical on re-build).
+  Index validation: refuses to run if index was built with a different checkpoint/tokenizer.
+- `corpus/probe_demo/` — 42 plain-text extracts: cooking ×8, electronics ×8, weather ×6,
+  law ×6, astronomy ×6, paraphrase pairs ×4×2 (8 files).
+- `RESULTS.md` — all 6 acceptance tests documented with full output and PASS annotations.
+- coupler-queue 0005: moved `pending/` → `running/`, wrote `running/0005.result.md`,
+  committed+pushed to coupler-queue. (Move to `done/` needed after editor review.)
+
+**Key findings in acceptance tests:**
+- Char-6L: semantic separation builds from layer 2 onward; paraphrase target reaches
+  #2 at layers 4+6. WP-16L: paraphrase target is #2 at every layer including layer 0 —
+  WordPiece tokens carry strong early semantics.
+- AT-4 (identity shift): token 'H' at pos 0 of "Heat a large skillet…" best-matches
+  cooking_01 at layer 0 (character embedding), shifts to law_04 ("Habeas corpus") at
+  layer 2 when 2 chars of context start to integrate, before reverting to cooking
+  semantics at deeper layers in the WP model.
+- AT-5 (byte-identical): confirmed on both models. AT-6 (normal sampling unchanged): confirmed.
+
+**GPU status:** IDLE. No linux-cuda coupler-queue items pending (next items are mac-mlx
+or have no assignment yet).
+
 ### ★★ DONE (2026-06-30) — 0003 reversed re-run COMPLETE; GPU now IDLE ★★
 
 - **The fp32-attention reversed run FINISHED** (500K iters, 9d 9h, stable throughout —

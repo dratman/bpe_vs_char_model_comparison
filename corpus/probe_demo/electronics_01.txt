@@ -1,0 +1,1 @@
+A resistor limits the flow of electric current in a circuit. Its value is measured in ohms and is indicated by colored bands printed on the component body. Placing resistors in series increases total resistance while placing them in parallel decreases it. Always verify the power rating before installing a resistor in a high-current application.

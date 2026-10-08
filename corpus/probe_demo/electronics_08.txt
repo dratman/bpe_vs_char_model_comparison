@@ -1,0 +1,1 @@
+The microcontroller integrates a processor, memory, and input-output peripherals on a single chip. It reads sensor values through analog-to-digital converters and drives actuators through digital output pins. Firmware written in C or assembly is stored in flash memory and executes on reset. Low-power modes allow the device to extend battery life by sleeping between tasks.

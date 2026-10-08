@@ -1,0 +1,1 @@
+The oscilloscope displays waveforms as a function of time on a calibrated screen. Technicians use it to measure voltage amplitude, frequency, and phase relationships between signals. Probes connect the circuit under test to the instrument's input channels. A ten-times probe reduces circuit loading at the cost of reducing signal amplitude by the same factor.

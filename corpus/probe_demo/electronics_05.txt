@@ -1,0 +1,1 @@
+Soldering requires a clean iron tip and the right temperature to form reliable joints. Touch the iron to both the component lead and the pad simultaneously, then apply solder to the joint. A good joint should be shiny and smoothly contoured, not dull or blobby. Flux removes oxides and helps the solder flow, so apply it generously before heating.

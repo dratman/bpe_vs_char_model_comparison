@@ -1,0 +1,1 @@
+The Hertzsprung-Russell diagram plots stellar luminosity against surface temperature. Most stars, including the Sun, lie along the main sequence where hydrogen fusion is the energy source. As a star ages and hydrogen is depleted, it expands into a red giant before shedding its outer layers. The remnant core cools slowly as a white dwarf over billions of years.

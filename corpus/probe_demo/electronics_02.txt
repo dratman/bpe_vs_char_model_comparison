@@ -1,0 +1,1 @@
+The capacitor stores electrical energy in an electrostatic field between two conducting plates. Capacitance is measured in farads, though most practical values are in microfarads or picofarads. In an AC circuit a capacitor passes alternating current while blocking direct current. Electrolytic capacitors are polarized and must be installed with the correct orientation.

@@ -463,7 +463,7 @@ class GPT(nn.Module):
         elif isinstance(module, nn.Embedding):
             torch.nn.init.normal_(module.weight, mean=0.0, std=0.02)
 
-    def forward(self, idx, targets=None):
+    def forward(self, idx, targets=None, return_hidden_states=False):
         device = idx.device
         b, t = idx.size()
         assert t <= self.config.block_size, f"Cannot forward sequence of length {t}, block size is only {self.config.block_size}"
@@ -473,8 +473,13 @@ class GPT(nn.Module):
         tok_emb = self.transformer.wte(idx)
         pos_emb = self.transformer.wpe(pos)
         x = self.transformer.drop(tok_emb + pos_emb)
+        # Residual-stream capture: layer 0 = post-embedding pre-block-0, pre-final-layernorm.
+        if return_hidden_states:
+            hidden_states = [x]
         for block in self.transformer.h:
             x = block(x)
+            if return_hidden_states:
+                hidden_states.append(x)  # layers 1..n_layer, pre-final-layernorm
         x = self.transformer.ln_f(x)
 
         if targets is not None:
@@ -484,6 +489,8 @@ class GPT(nn.Module):
             logits = self.lm_head(x[:, [-1], :])
             loss = None
 
+        if return_hidden_states:
+            return logits, loss, hidden_states
         return logits, loss
 
     def crop_block_size(self, block_size):
