@@ -691,7 +691,11 @@ def main():
     # and multinomial sampling — all torch global RNG in this codebase)
     if args.seed is not None:
         torch.manual_seed(args.seed)
-        print(f"[{get_timestamp()}] Seeded torch RNG with --seed {args.seed}")
+        # Python's random (train/val block shuffle) and numpy must be seeded too,
+        # or the split is not reproducible (found in coupler-queue 0006).
+        random.seed(args.seed)
+        np.random.seed(args.seed)
+        print(f"[{get_timestamp()}] Seeded torch/random/numpy RNG with --seed {args.seed}")
 
     # Set up precision
     precision_map = {
@@ -885,6 +889,20 @@ def main():
 
         print(f"[{get_timestamp()}] Training blocks: {len(train_blocks):,} ({train_tokens:,} tokens)")
         print(f"[{get_timestamp()}] Validation blocks: {len(val_blocks)}")
+
+        # Record the val split so word-level analyses can tell trained-on
+        # words from held-out ones.
+        if args.mode == 'word':
+            val_words_path = os.path.splitext(args.output)[0] + '_val_words.txt'
+            val_words = sorted(
+                tokenizer.decode([t for t in inp if t != PADDING_TOKEN]).strip('\n')
+                for inp, _ in val_blocks
+            )
+            with open(val_words_path, 'w', encoding='utf-8') as vf:
+                vf.write('\n'.join(val_words) + '\n')
+            import hashlib
+            print(f"[{get_timestamp()}] Val words saved to {val_words_path} "
+                  f"(sha256 {hashlib.sha256(chr(10).join(val_words).encode()).hexdigest()[:16]})")
 
         # Placeholders for compatibility
         train_data = None
