@@ -1,0 +1,5106 @@
+[
+ {
+  "arm": "e32_L2",
+  "n_embd": 32,
+  "n_layer": 2,
+  "iter": 5000,
+  "temp": 0.8,
+  "n_params": 27808,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 56,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 6,
+  "real_train": 50,
+  "buckets": {
+   "1-4": {
+    "n": 17,
+    "real": 12
+   },
+   "5-7": {
+    "n": 289,
+    "real": 36
+   },
+   "8-10": {
+    "n": 425,
+    "real": 8
+   },
+   "11-14": {
+    "n": 268,
+    "real": 0
+   }
+  },
+  "mean_gen_len": 8.902902902902904,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "veltaritions",
+   "tarrogenesses",
+   "veantormal",
+   "doudfeninalist",
+   "apisist",
+   "brandy",
+   "chempothalists",
+   "salleing",
+   "corbuts",
+   "togined",
+   "rumprondise",
+   "tubjed",
+   "diieder",
+   "felabliting",
+   "hallseing",
+   "oonstaitive",
+   "nervine",
+   "forchiest",
+   "learines",
+   "mattability"
+  ]
+ },
+ {
+  "arm": "e32_L2",
+  "n_embd": 32,
+  "n_layer": 2,
+  "iter": 5000,
+  "temp": 0.5,
+  "n_params": 27808,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 110,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 16,
+  "real_train": 94,
+  "buckets": {
+   "1-4": {
+    "n": 7,
+    "real": 5
+   },
+   "5-7": {
+    "n": 269,
+    "real": 75
+   },
+   "8-10": {
+    "n": 530,
+    "real": 29
+   },
+   "11-14": {
+    "n": 194,
+    "real": 1
+   }
+  },
+  "mean_gen_len": 8.732,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarized",
+   "tarrogenesses",
+   "vellitations",
+   "dessiest",
+   "acistive",
+   "brandick",
+   "chempores",
+   "salleing",
+   "corbuts",
+   "torised",
+   "respoticise",
+   "tubbler",
+   "stieder",
+   "felargishes",
+   "hallsting",
+   "overstived",
+   "dechroner",
+   "sarchinesses",
+   "learines",
+   "mattines"
+  ]
+ },
+ {
+  "arm": "e32_L2",
+  "n_embd": 32,
+  "n_layer": 2,
+  "iter": 10000,
+  "temp": 0.8,
+  "n_params": 27808,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 64,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 6,
+  "real_train": 58,
+  "buckets": {
+   "1-4": {
+    "n": 14,
+    "real": 12
+   },
+   "5-7": {
+    "n": 278,
+    "real": 39
+   },
+   "8-10": {
+    "n": 474,
+    "real": 13
+   },
+   "11-14": {
+    "n": 233,
+    "real": 0
+   }
+  },
+  "mean_gen_len": 8.882882882882884,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarity",
+   "tranogenesses",
+   "veantorial",
+   "dossies",
+   "apistivaons",
+   "brandar",
+   "chempothalists",
+   "salleing",
+   "corbuts",
+   "thonged",
+   "remads",
+   "tummeder",
+   "diieder",
+   "felarpisms",
+   "hallseitic",
+   "osnestities",
+   "nerorde",
+   "forcahery",
+   "learinations",
+   "mistractiver"
+  ]
+ },
+ {
+  "arm": "e32_L2",
+  "n_embd": 32,
+  "n_layer": 2,
+  "iter": 10000,
+  "temp": 0.5,
+  "n_params": 27808,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 116,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 18,
+  "real_train": 98,
+  "buckets": {
+   "1-4": {
+    "n": 8,
+    "real": 8
+   },
+   "5-7": {
+    "n": 258,
+    "real": 78
+   },
+   "8-10": {
+    "n": 520,
+    "real": 26
+   },
+   "11-14": {
+    "n": 214,
+    "real": 4
+   }
+  },
+  "mean_gen_len": 8.857,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarises",
+   "tranders",
+   "exantorial",
+   "dissies",
+   "apistically",
+   "branticks",
+   "chempothalists",
+   "salleing",
+   "corbuts",
+   "trans",
+   "resprondite",
+   "tranger",
+   "stieles",
+   "felaraism",
+   "halletically",
+   "overstitions",
+   "dechroned",
+   "stranders",
+   "learing",
+   "mistractive"
+  ]
+ },
+ {
+  "arm": "e32_L2",
+  "n_embd": 32,
+  "n_layer": 2,
+  "iter": 15000,
+  "temp": 0.8,
+  "n_params": 27808,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 72,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 5,
+  "real_train": 67,
+  "buckets": {
+   "1-4": {
+    "n": 14,
+    "real": 9
+   },
+   "5-7": {
+    "n": 277,
+    "real": 47
+   },
+   "8-10": {
+    "n": 470,
+    "real": 16
+   },
+   "11-14": {
+    "n": 239,
+    "real": 0
+   }
+  },
+  "mean_gen_len": 8.841,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistarity",
+   "tarroologic",
+   "velnital",
+   "disafenness",
+   "apistivaons",
+   "brandar",
+   "chempothalists",
+   "salleins",
+   "corbuts",
+   "totined",
+   "respostries",
+   "tummed",
+   "disedness",
+   "felateism",
+   "hallseitic",
+   "oonstrip",
+   "nechroner",
+   "swackhers",
+   "learanations",
+   "missiper"
+  ]
+ },
+ {
+  "arm": "e32_L2",
+  "n_embd": 32,
+  "n_layer": 2,
+  "iter": 15000,
+  "temp": 0.5,
+  "n_params": 27808,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 123,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 15,
+  "real_train": 108,
+  "buckets": {
+   "1-4": {
+    "n": 6,
+    "real": 6
+   },
+   "5-7": {
+    "n": 297,
+    "real": 69
+   },
+   "8-10": {
+    "n": 522,
+    "real": 44
+   },
+   "11-14": {
+    "n": 175,
+    "real": 4
+   }
+  },
+  "mean_gen_len": 8.596,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarias",
+   "tarrographist",
+   "vellier",
+   "disaffing",
+   "apistically",
+   "brandiest",
+   "chempothed",
+   "saller",
+   "corbuts",
+   "thonologies",
+   "respostries",
+   "tumpler",
+   "sined",
+   "felate",
+   "halletically",
+   "outs",
+   "decorness",
+   "salchiers",
+   "learanities",
+   "maineping"
+  ]
+ },
+ {
+  "arm": "e32_L2",
+  "n_embd": 32,
+  "n_layer": 2,
+  "iter": 20000,
+  "temp": 0.8,
+  "n_params": 27808,
+  "best_val_bpc": 2.888150747289577,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 68,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 6,
+  "real_train": 62,
+  "buckets": {
+   "1-4": {
+    "n": 15,
+    "real": 13
+   },
+   "5-7": {
+    "n": 274,
+    "real": 41
+   },
+   "8-10": {
+    "n": 484,
+    "real": 13
+   },
+   "11-14": {
+    "n": 227,
+    "real": 1
+   }
+  },
+  "mean_gen_len": 8.82,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "villarity",
+   "tarrogenes",
+   "veantlaman",
+   "doundering",
+   "acistivaons",
+   "brandar",
+   "chempothalings",
+   "salleins",
+   "corbuts",
+   "toonsed",
+   "resprondite",
+   "tummed",
+   "disednessess",
+   "felateir",
+   "hallsers",
+   "oonstrip",
+   "nechroner",
+   "forcahers",
+   "learanations",
+   "mistractiver"
+  ]
+ },
+ {
+  "arm": "e32_L2",
+  "n_embd": 32,
+  "n_layer": 2,
+  "iter": 20000,
+  "temp": 0.5,
+  "n_params": 27808,
+  "best_val_bpc": 2.888150747289577,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 146,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 13,
+  "real_train": 133,
+  "buckets": {
+   "1-4": {
+    "n": 6,
+    "real": 6
+   },
+   "5-7": {
+    "n": 302,
+    "real": 89
+   },
+   "8-10": {
+    "n": 514,
+    "real": 43
+   },
+   "11-14": {
+    "n": 178,
+    "real": 8
+   }
+  },
+  "mean_gen_len": 8.604,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarized",
+   "tarrogenesses",
+   "velutives",
+   "disaffing",
+   "acistically",
+   "brandiest",
+   "chempothilings",
+   "saller",
+   "corbuts",
+   "torised",
+   "respronesses",
+   "tandler",
+   "stiely",
+   "feling",
+   "halletically",
+   "oversting",
+   "decornalized",
+   "salchiest",
+   "learanities",
+   "missiping"
+  ]
+ },
+ {
+  "arm": "e32_L4",
+  "n_embd": 32,
+  "n_layer": 4,
+  "iter": 5000,
+  "temp": 0.8,
+  "n_params": 53216,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 58,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 3,
+  "real_train": 55,
+  "buckets": {
+   "1-4": {
+    "n": 20,
+    "real": 12
+   },
+   "5-7": {
+    "n": 293,
+    "real": 36
+   },
+   "8-10": {
+    "n": 448,
+    "real": 9
+   },
+   "11-14": {
+    "n": 238,
+    "real": 1
+   }
+  },
+  "mean_gen_len": 8.75075075075075,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "viitaritives",
+   "tarrogics",
+   "veantores",
+   "dissies",
+   "apisist",
+   "brandiest",
+   "chempokes",
+   "salleitions",
+   "corbuts",
+   "thoined",
+   "respothenies",
+   "tubilder",
+   "diieder",
+   "felabuiting",
+   "halleers",
+   "oones",
+   "nervine",
+   "sombas",
+   "learinating",
+   "mistability"
+  ]
+ },
+ {
+  "arm": "e32_L4",
+  "n_embd": 32,
+  "n_layer": 4,
+  "iter": 5000,
+  "temp": 0.5,
+  "n_params": 53216,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 95,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 11,
+  "real_train": 84,
+  "buckets": {
+   "1-4": {
+    "n": 10,
+    "real": 7
+   },
+   "5-7": {
+    "n": 334,
+    "real": 70
+   },
+   "8-10": {
+    "n": 487,
+    "real": 18
+   },
+   "11-14": {
+    "n": 169,
+    "real": 0
+   }
+  },
+  "mean_gen_len": 8.49,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritaritions",
+   "tarronics",
+   "veantores",
+   "dessies",
+   "apistive",
+   "brandiest",
+   "chemporations",
+   "saller",
+   "corbuts",
+   "thons",
+   "respotheries",
+   "tubilies",
+   "seieder",
+   "felabiiling",
+   "hallerist",
+   "ounsers",
+   "dechine",
+   "sombates",
+   "learing",
+   "mistable"
+  ]
+ },
+ {
+  "arm": "e32_L4",
+  "n_embd": 32,
+  "n_layer": 4,
+  "iter": 10000,
+  "temp": 0.8,
+  "n_params": 53216,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 81,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 14,
+  "real_train": 67,
+  "buckets": {
+   "1-4": {
+    "n": 28,
+    "real": 20
+   },
+   "5-7": {
+    "n": 294,
+    "real": 46
+   },
+   "8-10": {
+    "n": 426,
+    "real": 12
+   },
+   "11-14": {
+    "n": 251,
+    "real": 3
+   }
+  },
+  "mean_gen_len": 8.735735735735735,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistarity",
+   "tarroologic",
+   "veantores",
+   "disafencialist",
+   "apistity",
+   "brandiest",
+   "chempoker",
+   "salleits",
+   "corbuts",
+   "tolised",
+   "rumpos",
+   "tuffler",
+   "diiedercency",
+   "felat",
+   "hallseitic",
+   "osnessively",
+   "nechroner",
+   "finchiest",
+   "learines",
+   "miscapernuly"
+  ]
+ },
+ {
+  "arm": "e32_L4",
+  "n_embd": 32,
+  "n_layer": 4,
+  "iter": 10000,
+  "temp": 0.5,
+  "n_params": 53216,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 141,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 14,
+  "real_train": 127,
+  "buckets": {
+   "1-4": {
+    "n": 10,
+    "real": 6
+   },
+   "5-7": {
+    "n": 278,
+    "real": 84
+   },
+   "8-10": {
+    "n": 518,
+    "real": 43
+   },
+   "11-14": {
+    "n": 194,
+    "real": 8
+   }
+  },
+  "mean_gen_len": 8.644,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritality",
+   "transologic",
+   "veanting",
+   "dissoring",
+   "apistity",
+   "branding",
+   "chemporation",
+   "saller",
+   "corbating",
+   "transed",
+   "resposses",
+   "transcearing",
+   "scieder",
+   "felating",
+   "halletically",
+   "outs",
+   "dechrose",
+   "stachier",
+   "learing",
+   "miscation"
+  ]
+ },
+ {
+  "arm": "e32_L4",
+  "n_embd": 32,
+  "n_layer": 4,
+  "iter": 15000,
+  "temp": 0.8,
+  "n_params": 53216,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 82,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 6,
+  "real_train": 76,
+  "buckets": {
+   "1-4": {
+    "n": 13,
+    "real": 10
+   },
+   "5-7": {
+    "n": 263,
+    "real": 54
+   },
+   "8-10": {
+    "n": 450,
+    "real": 15
+   },
+   "11-14": {
+    "n": 274,
+    "real": 3
+   }
+  },
+  "mean_gen_len": 9.0,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistaritively",
+   "tarroologic",
+   "veantlamarise",
+   "disafening",
+   "aciolity",
+   "brandiest",
+   "champorations",
+   "salleits",
+   "corbuts",
+   "toons",
+   "remactivities",
+   "tummed",
+   "diiedescency",
+   "felabeiting",
+   "halleticos",
+   "ountrain",
+   "nechroner",
+   "figcamery",
+   "learing",
+   "mischbeanthrix"
+  ]
+ },
+ {
+  "arm": "e32_L4",
+  "n_embd": 32,
+  "n_layer": 4,
+  "iter": 15000,
+  "temp": 0.5,
+  "n_params": 53216,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 126,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 12,
+  "real_train": 114,
+  "buckets": {
+   "1-4": {
+    "n": 7,
+    "real": 5
+   },
+   "5-7": {
+    "n": 220,
+    "real": 73
+   },
+   "8-10": {
+    "n": 512,
+    "real": 38
+   },
+   "11-14": {
+    "n": 261,
+    "real": 10
+   }
+  },
+  "mean_gen_len": 9.103,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarities",
+   "tarroologic",
+   "veaning",
+   "disafering",
+   "acionisms",
+   "brandiest",
+   "champorations",
+   "salleite",
+   "corbets",
+   "torised",
+   "resporting",
+   "tandler",
+   "stieder",
+   "felating",
+   "halletically",
+   "outsolities",
+   "dechrose",
+   "salcabily",
+   "learing",
+   "mischaring"
+  ]
+ },
+ {
+  "arm": "e32_L4",
+  "n_embd": 32,
+  "n_layer": 4,
+  "iter": 20000,
+  "temp": 0.8,
+  "n_params": 53216,
+  "best_val_bpc": 2.8263747510823065,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 94,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 11,
+  "real_train": 83,
+  "buckets": {
+   "1-4": {
+    "n": 18,
+    "real": 15
+   },
+   "5-7": {
+    "n": 286,
+    "real": 61
+   },
+   "8-10": {
+    "n": 460,
+    "real": 14
+   },
+   "11-14": {
+    "n": 236,
+    "real": 4
+   }
+  },
+  "mean_gen_len": 8.765,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "viltarity",
+   "tarrools",
+   "veantlamary",
+   "disafening",
+   "aciolity",
+   "brandy",
+   "chempses",
+   "salleits",
+   "corbuts",
+   "toons",
+   "resposition",
+   "tuffler",
+   "diiedescency",
+   "felat",
+   "hallseits",
+   "ounsopit",
+   "nechrone",
+   "swackhery",
+   "learing",
+   "mischading"
+  ]
+ },
+ {
+  "arm": "e32_L4",
+  "n_embd": 32,
+  "n_layer": 4,
+  "iter": 20000,
+  "temp": 0.5,
+  "n_params": 53216,
+  "best_val_bpc": 2.8263747510823065,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 140,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 12,
+  "real_train": 128,
+  "buckets": {
+   "1-4": {
+    "n": 7,
+    "real": 5
+   },
+   "5-7": {
+    "n": 255,
+    "real": 76
+   },
+   "8-10": {
+    "n": 538,
+    "real": 53
+   },
+   "11-14": {
+    "n": 200,
+    "real": 6
+   }
+  },
+  "mean_gen_len": 8.755,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarities",
+   "transologic",
+   "vellioses",
+   "dissiences",
+   "acionism",
+   "brandiest",
+   "champs",
+   "saller",
+   "corbets",
+   "transed",
+   "resposition",
+   "transcending",
+   "stieder",
+   "felate",
+   "halletical",
+   "outstail",
+   "dechrone",
+   "stackiest",
+   "learing",
+   "mischard"
+  ]
+ },
+ {
+  "arm": "e64_L1",
+  "n_embd": 64,
+  "n_layer": 1,
+  "iter": 5000,
+  "temp": 0.8,
+  "n_params": 54784,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 56,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 4,
+  "real_train": 52,
+  "buckets": {
+   "1-4": {
+    "n": 21,
+    "real": 12
+   },
+   "5-7": {
+    "n": 276,
+    "real": 37
+   },
+   "8-10": {
+    "n": 462,
+    "real": 7
+   },
+   "11-14": {
+    "n": 240,
+    "real": 0
+   }
+  },
+  "mean_gen_len": 8.844844844844845,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "viltaritively",
+   "tarrogless",
+   "veantorial",
+   "dissies",
+   "acisist",
+   "brandicated",
+   "chempothalists",
+   "salleins",
+   "corbuts",
+   "toticids",
+   "resposses",
+   "tubjed",
+   "diienesses",
+   "felabbiring",
+   "halletically",
+   "oonsopitic",
+   "nechroner",
+   "swackhes",
+   "leikineting",
+   "mistablenthy"
+  ]
+ },
+ {
+  "arm": "e64_L1",
+  "n_embd": 64,
+  "n_layer": 1,
+  "iter": 5000,
+  "temp": 0.5,
+  "n_params": 54784,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 118,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 9,
+  "real_train": 109,
+  "buckets": {
+   "1-4": {
+    "n": 9,
+    "real": 7
+   },
+   "5-7": {
+    "n": 310,
+    "real": 94
+   },
+   "8-10": {
+    "n": 521,
+    "real": 16
+   },
+   "11-14": {
+    "n": 160,
+    "real": 1
+   }
+  },
+  "mean_gen_len": 8.55,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritaritions",
+   "tarrogeness",
+   "exanters",
+   "dissies",
+   "acistitions",
+   "spantic",
+   "champhant",
+   "sallet",
+   "corbuts",
+   "toring",
+   "suppers",
+   "tantere",
+   "scientice",
+   "selaters",
+   "disseeitist",
+   "outs",
+   "decornal",
+   "signameted",
+   "alling",
+   "missite"
+  ]
+ },
+ {
+  "arm": "e64_L1",
+  "n_embd": 64,
+  "n_layer": 1,
+  "iter": 10000,
+  "temp": 0.8,
+  "n_params": 54784,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 75,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 5,
+  "real_train": 70,
+  "buckets": {
+   "1-4": {
+    "n": 21,
+    "real": 17
+   },
+   "5-7": {
+    "n": 256,
+    "real": 47
+   },
+   "8-10": {
+    "n": 446,
+    "real": 10
+   },
+   "11-14": {
+    "n": 276,
+    "real": 1
+   }
+  },
+  "mean_gen_len": 9.006006006006006,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritaritively",
+   "tranograms",
+   "veantorialist",
+   "doundering",
+   "apistity",
+   "brandarches",
+   "chempothalists",
+   "salleins",
+   "corbuts",
+   "toting",
+   "rematones",
+   "tummed",
+   "diieder",
+   "felateisms",
+   "hallsers",
+   "oonsopitive",
+   "nechroner",
+   "filcahes",
+   "leavinations",
+   "mistraving"
+  ]
+ },
+ {
+  "arm": "e64_L1",
+  "n_embd": 64,
+  "n_layer": 1,
+  "iter": 10000,
+  "temp": 0.5,
+  "n_params": 54784,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 152,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 5,
+  "real_train": 147,
+  "buckets": {
+   "1-4": {
+    "n": 10,
+    "real": 8
+   },
+   "5-7": {
+    "n": 266,
+    "real": 92
+   },
+   "8-10": {
+    "n": 479,
+    "real": 45
+   },
+   "11-14": {
+    "n": 245,
+    "real": 7
+   }
+  },
+  "mean_gen_len": 8.904,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritanisms",
+   "tranograms",
+   "vennitally",
+   "doundering",
+   "apitist",
+   "branding",
+   "chempotherings",
+   "saller",
+   "corbuts",
+   "trans",
+   "respeticities",
+   "tranger",
+   "disenticities",
+   "fellipities",
+   "halleticisms",
+   "overspitive",
+   "decordent",
+   "sollabers",
+   "learing",
+   "mistrach"
+  ]
+ },
+ {
+  "arm": "e64_L1",
+  "n_embd": 64,
+  "n_layer": 1,
+  "iter": 15000,
+  "temp": 0.8,
+  "n_params": 54784,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 77,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 8,
+  "real_train": 69,
+  "buckets": {
+   "1-4": {
+    "n": 16,
+    "real": 14
+   },
+   "5-7": {
+    "n": 282,
+    "real": 46
+   },
+   "8-10": {
+    "n": 461,
+    "real": 16
+   },
+   "11-14": {
+    "n": 241,
+    "real": 1
+   }
+  },
+  "mean_gen_len": 8.853,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistarity",
+   "tarnograms",
+   "veantormal",
+   "disafeship",
+   "apisist",
+   "brandical",
+   "chempothe",
+   "salleins",
+   "corbuts",
+   "togined",
+   "rumplondine",
+   "tuffler",
+   "diiener",
+   "felateism",
+   "halletical",
+   "ountopitives",
+   "nechroner",
+   "forcahes",
+   "learinations",
+   "misalping"
+  ]
+ },
+ {
+  "arm": "e64_L1",
+  "n_embd": 64,
+  "n_layer": 1,
+  "iter": 15000,
+  "temp": 0.5,
+  "n_params": 54784,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 166,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 18,
+  "real_train": 148,
+  "buckets": {
+   "1-4": {
+    "n": 10,
+    "real": 8
+   },
+   "5-7": {
+    "n": 283,
+    "real": 94
+   },
+   "8-10": {
+    "n": 525,
+    "real": 55
+   },
+   "11-14": {
+    "n": 182,
+    "real": 9
+   }
+  },
+  "mean_gen_len": 8.671,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritaritively",
+   "tarnograms",
+   "vely",
+   "disafest",
+   "apitist",
+   "brandical",
+   "champothering",
+   "saller",
+   "corbuts",
+   "tounders",
+   "respostries",
+   "tubbler",
+   "stiendometers",
+   "felate",
+   "halletical",
+   "overspires",
+   "decorder",
+   "subcants",
+   "learing",
+   "maisable"
+  ]
+ },
+ {
+  "arm": "e64_L1",
+  "n_embd": 64,
+  "n_layer": 1,
+  "iter": 20000,
+  "temp": 0.8,
+  "n_params": 54784,
+  "best_val_bpc": 2.8191433965614783,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 89,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 10,
+  "real_train": 79,
+  "buckets": {
+   "1-4": {
+    "n": 22,
+    "real": 17
+   },
+   "5-7": {
+    "n": 274,
+    "real": 57
+   },
+   "8-10": {
+    "n": 447,
+    "real": 14
+   },
+   "11-14": {
+    "n": 257,
+    "real": 1
+   }
+  },
+  "mean_gen_len": 8.868,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "viltarity",
+   "tarnograms",
+   "veantormal",
+   "doundering",
+   "aciolity",
+   "brandars",
+   "champoths",
+   "salleitic",
+   "corbuts",
+   "totinads",
+   "respostries",
+   "tubilder",
+   "disendometers",
+   "felateis",
+   "halls",
+   "oonsopitive",
+   "nechroner",
+   "forcahes",
+   "leavinations",
+   "misalping"
+  ]
+ },
+ {
+  "arm": "e64_L1",
+  "n_embd": 64,
+  "n_layer": 1,
+  "iter": 20000,
+  "temp": 0.5,
+  "n_params": 54784,
+  "best_val_bpc": 2.8191433965614783,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 178,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 11,
+  "real_train": 167,
+  "buckets": {
+   "1-4": {
+    "n": 11,
+    "real": 9
+   },
+   "5-7": {
+    "n": 259,
+    "real": 94
+   },
+   "8-10": {
+    "n": 505,
+    "real": 61
+   },
+   "11-14": {
+    "n": 225,
+    "real": 14
+   }
+  },
+  "mean_gen_len": 8.821,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "prisaritively",
+   "tarnographic",
+   "vely",
+   "disafes",
+   "aciology",
+   "brandies",
+   "champotes",
+   "saller",
+   "corbits",
+   "tounders",
+   "respostries",
+   "tubbled",
+   "stienderers",
+   "fellipities",
+   "hallopically",
+   "overstities",
+   "nectroner",
+   "stackiest",
+   "leadinations",
+   "missines"
+  ]
+ },
+ {
+  "arm": "e64_L2",
+  "n_embd": 64,
+  "n_layer": 2,
+  "iter": 5000,
+  "temp": 0.8,
+  "n_params": 104768,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 65,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 9,
+  "real_train": 56,
+  "buckets": {
+   "1-4": {
+    "n": 23,
+    "real": 13
+   },
+   "5-7": {
+    "n": 271,
+    "real": 42
+   },
+   "8-10": {
+    "n": 459,
+    "real": 10
+   },
+   "11-14": {
+    "n": 246,
+    "real": 0
+   }
+  },
+  "mean_gen_len": 8.883883883883884,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "villarity",
+   "tranographirs",
+   "velnitalia",
+   "dissies",
+   "acists",
+   "brandy",
+   "chempokea",
+   "salleins",
+   "corbuts",
+   "tooised",
+   "resprondine",
+   "tundler",
+   "diieders",
+   "felateism",
+   "halletical",
+   "oonstail",
+   "nechroner",
+   "swackhers",
+   "learinating",
+   "macalping"
+  ]
+ },
+ {
+  "arm": "e64_L2",
+  "n_embd": 64,
+  "n_layer": 2,
+  "iter": 5000,
+  "temp": 0.5,
+  "n_params": 104768,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 147,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 11,
+  "real_train": 136,
+  "buckets": {
+   "1-4": {
+    "n": 5,
+    "real": 4
+   },
+   "5-7": {
+    "n": 288,
+    "real": 94
+   },
+   "8-10": {
+    "n": 537,
+    "real": 48
+   },
+   "11-14": {
+    "n": 170,
+    "real": 1
+   }
+  },
+  "mean_gen_len": 8.628,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarial",
+   "trandological",
+   "velettally",
+   "dissies",
+   "acisting",
+   "brandies",
+   "champoration",
+   "saller",
+   "corbuts",
+   "trained",
+   "resprendiness",
+   "tundler",
+   "scieders",
+   "felated",
+   "halletical",
+   "ounstail",
+   "decordent",
+   "salcas",
+   "learinations",
+   "macaller"
+  ]
+ },
+ {
+  "arm": "e64_L2",
+  "n_embd": 64,
+  "n_layer": 2,
+  "iter": 10000,
+  "temp": 0.8,
+  "n_params": 104768,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 90,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 11,
+  "real_train": 79,
+  "buckets": {
+   "1-4": {
+    "n": 19,
+    "real": 13
+   },
+   "5-7": {
+    "n": 268,
+    "real": 54
+   },
+   "8-10": {
+    "n": 491,
+    "real": 18
+   },
+   "11-14": {
+    "n": 222,
+    "real": 5
+   }
+  },
+  "mean_gen_len": 8.781,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarity",
+   "tranograms",
+   "velnital",
+   "doundering",
+   "apistracons",
+   "brandary",
+   "chempokes",
+   "salleins",
+   "corbutants",
+   "toonsed",
+   "rumples",
+   "tubulge",
+   "scieder",
+   "fellhoir",
+   "hallsers",
+   "osnessitic",
+   "nechrone",
+   "swackhers",
+   "leaving",
+   "misaged"
+  ]
+ },
+ {
+  "arm": "e64_L2",
+  "n_embd": 64,
+  "n_layer": 2,
+  "iter": 10000,
+  "temp": 0.5,
+  "n_params": 104768,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 166,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 15,
+  "real_train": 151,
+  "buckets": {
+   "1-4": {
+    "n": 4,
+    "real": 3
+   },
+   "5-7": {
+    "n": 266,
+    "real": 97
+   },
+   "8-10": {
+    "n": 536,
+    "real": 52
+   },
+   "11-14": {
+    "n": 194,
+    "real": 14
+   }
+  },
+  "mean_gen_len": 8.803,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarial",
+   "transologic",
+   "vennital",
+   "disadent",
+   "apistracons",
+   "brandary",
+   "champiest",
+   "saller",
+   "corbutants",
+   "transed",
+   "rematonist",
+   "tubularise",
+   "scienthos",
+   "felletism",
+   "hallotical",
+   "overspitch",
+   "neotrone",
+   "subcantly",
+   "lowning",
+   "maised"
+  ]
+ },
+ {
+  "arm": "e64_L2",
+  "n_embd": 64,
+  "n_layer": 2,
+  "iter": 15000,
+  "temp": 0.8,
+  "n_params": 104768,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 115,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 15,
+  "real_train": 100,
+  "buckets": {
+   "1-4": {
+    "n": 16,
+    "real": 13
+   },
+   "5-7": {
+    "n": 288,
+    "real": 72
+   },
+   "8-10": {
+    "n": 463,
+    "real": 25
+   },
+   "11-14": {
+    "n": 233,
+    "real": 5
+   }
+  },
+  "mean_gen_len": 8.835,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarity",
+   "tarbonesses",
+   "velnitally",
+   "doumfest",
+   "acidistations",
+   "brandars",
+   "chempokes",
+   "saller",
+   "corputs",
+   "tooched",
+   "remactions",
+   "tumbler",
+   "disenticates",
+   "fellhoir",
+   "hallstitu",
+   "oonstain",
+   "neotrone",
+   "filchiest",
+   "leaving",
+   "misavers"
+  ]
+ },
+ {
+  "arm": "e64_L2",
+  "n_embd": 64,
+  "n_layer": 2,
+  "iter": 15000,
+  "temp": 0.5,
+  "n_params": 104768,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 228,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 20,
+  "real_train": 208,
+  "buckets": {
+   "1-4": {
+    "n": 9,
+    "real": 8
+   },
+   "5-7": {
+    "n": 235,
+    "real": 107
+   },
+   "8-10": {
+    "n": 488,
+    "real": 90
+   },
+   "11-14": {
+    "n": 268,
+    "real": 23
+   }
+  },
+  "mean_gen_len": 9.126,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "prisarinesses",
+   "tarbonesses",
+   "velotorial",
+   "disadential",
+   "acidist",
+   "brandicular",
+   "champiest",
+   "salter",
+   "corputants",
+   "toons",
+   "reprosers",
+   "tumbler",
+   "scienthoses",
+   "fellipitation",
+   "hallowing",
+   "outstain",
+   "decordent",
+   "salchiest",
+   "learing",
+   "misaged"
+  ]
+ },
+ {
+  "arm": "e64_L2",
+  "n_embd": 64,
+  "n_layer": 2,
+  "iter": 20000,
+  "temp": 0.8,
+  "n_params": 104768,
+  "best_val_bpc": 2.7183710222016697,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 111,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 11,
+  "real_train": 100,
+  "buckets": {
+   "1-4": {
+    "n": 15,
+    "real": 13
+   },
+   "5-7": {
+    "n": 276,
+    "real": 60
+   },
+   "8-10": {
+    "n": 462,
+    "real": 32
+   },
+   "11-14": {
+    "n": 247,
+    "real": 6
+   }
+  },
+  "mean_gen_len": 8.875,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistarity",
+   "tarrools",
+   "velnital",
+   "disafening",
+   "acidistations",
+   "brandary",
+   "chempores",
+   "sallei",
+   "corbuts",
+   "tooised",
+   "remads",
+   "tuffler",
+   "disentrites",
+   "felateism",
+   "halloeism",
+   "oonestitive",
+   "nechrone",
+   "forces",
+   "leaving",
+   "mistravanthy"
+  ]
+ },
+ {
+  "arm": "e64_L2",
+  "n_embd": 64,
+  "n_layer": 2,
+  "iter": 20000,
+  "temp": 0.5,
+  "n_params": 104768,
+  "best_val_bpc": 2.7183710222016697,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 237,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 18,
+  "real_train": 219,
+  "buckets": {
+   "1-4": {
+    "n": 7,
+    "real": 6
+   },
+   "5-7": {
+    "n": 230,
+    "real": 114
+   },
+   "8-10": {
+    "n": 496,
+    "real": 90
+   },
+   "11-14": {
+    "n": 267,
+    "real": 27
+   }
+  },
+  "mean_gen_len": 9.149,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primatic",
+   "transpecial",
+   "velotomia",
+   "disadentialist",
+   "acidist",
+   "branding",
+   "chemister",
+   "salter",
+   "corputants",
+   "torine",
+   "reprosses",
+   "tubalize",
+   "sciendoms",
+   "fellipitation",
+   "hallowing",
+   "outstruted",
+   "decordent",
+   "salcanise",
+   "learing",
+   "misconding"
+  ]
+ },
+ {
+  "arm": "e64_L4",
+  "n_embd": 64,
+  "n_layer": 4,
+  "iter": 5000,
+  "temp": 0.8,
+  "n_params": 204736,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 70,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 4,
+  "real_train": 66,
+  "buckets": {
+   "1-4": {
+    "n": 21,
+    "real": 13
+   },
+   "5-7": {
+    "n": 305,
+    "real": 50
+   },
+   "8-10": {
+    "n": 466,
+    "real": 7
+   },
+   "11-14": {
+    "n": 207,
+    "real": 0
+   }
+  },
+  "mean_gen_len": 8.623623623623624,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "viltarity",
+   "tarrograms",
+   "velnital",
+   "dissient",
+   "acistivaons",
+   "brandars",
+   "chemptanalists",
+   "saller",
+   "corbuts",
+   "totically",
+   "remactions",
+   "tumpler",
+   "scied",
+   "felateism",
+   "hylestical",
+   "oonsopitic",
+   "nechrone",
+   "forcahes",
+   "learinations",
+   "mistability"
+  ]
+ },
+ {
+  "arm": "e64_L4",
+  "n_embd": 64,
+  "n_layer": 4,
+  "iter": 5000,
+  "temp": 0.5,
+  "n_params": 204736,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 156,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 15,
+  "real_train": 141,
+  "buckets": {
+   "1-4": {
+    "n": 3,
+    "real": 3
+   },
+   "5-7": {
+    "n": 345,
+    "real": 107
+   },
+   "8-10": {
+    "n": 465,
+    "real": 36
+   },
+   "11-14": {
+    "n": 187,
+    "real": 10
+   }
+  },
+  "mean_gen_len": 8.541,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarial",
+   "transpectic",
+   "vellinate",
+   "dissination",
+   "acistivations",
+   "brandiest",
+   "chemptations",
+   "saller",
+   "corbuts",
+   "toring",
+   "reparting",
+   "tumpler",
+   "stieles",
+   "felletion",
+   "hyperering",
+   "oonsopitic",
+   "nectroned",
+   "stackiest",
+   "learing",
+   "mistractives"
+  ]
+ },
+ {
+  "arm": "e64_L4",
+  "n_embd": 64,
+  "n_layer": 4,
+  "iter": 10000,
+  "temp": 0.8,
+  "n_params": 204736,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 98,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 7,
+  "real_train": 91,
+  "buckets": {
+   "1-4": {
+    "n": 17,
+    "real": 14
+   },
+   "5-7": {
+    "n": 260,
+    "real": 60
+   },
+   "8-10": {
+    "n": 462,
+    "real": 21
+   },
+   "11-14": {
+    "n": 260,
+    "real": 3
+   }
+  },
+  "mean_gen_len": 8.995995995995996,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistarity",
+   "tarafolles",
+   "veanizations",
+   "dissoennesses",
+   "apists",
+   "brandars",
+   "chemptahs",
+   "saller",
+   "corbuts",
+   "tooched",
+   "rumpish",
+   "tuated",
+   "snieless",
+   "felating",
+   "halls",
+   "oonestitive",
+   "neotrone",
+   "swackhead",
+   "learines",
+   "mistablenesses"
+  ]
+ },
+ {
+  "arm": "e64_L4",
+  "n_embd": 64,
+  "n_layer": 4,
+  "iter": 10000,
+  "temp": 0.5,
+  "n_params": 204736,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 159,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 10,
+  "real_train": 149,
+  "buckets": {
+   "1-4": {
+    "n": 6,
+    "real": 6
+   },
+   "5-7": {
+    "n": 215,
+    "real": 77
+   },
+   "8-10": {
+    "n": 490,
+    "real": 62
+   },
+   "11-14": {
+    "n": 289,
+    "real": 14
+   }
+  },
+  "mean_gen_len": 9.243,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritation",
+   "taralless",
+   "vellishes",
+   "dissosting",
+   "apistive",
+   "brandarizes",
+   "chemptations",
+   "saller",
+   "corbutants",
+   "toringues",
+   "resposed",
+   "tantler",
+   "stied",
+   "felating",
+   "hallopite",
+   "overspired",
+   "neotrope",
+   "salchings",
+   "learing",
+   "missending"
+  ]
+ },
+ {
+  "arm": "e64_L4",
+  "n_embd": 64,
+  "n_layer": 4,
+  "iter": 15000,
+  "temp": 0.8,
+  "n_params": 204736,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 132,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 8,
+  "real_train": 124,
+  "buckets": {
+   "1-4": {
+    "n": 20,
+    "real": 12
+   },
+   "5-7": {
+    "n": 277,
+    "real": 63
+   },
+   "8-10": {
+    "n": 447,
+    "real": 43
+   },
+   "11-14": {
+    "n": 256,
+    "real": 14
+   }
+  },
+  "mean_gen_len": 8.894,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistarity",
+   "tarrool",
+   "vellisations",
+   "disaffiniation",
+   "acidis",
+   "brandars",
+   "chemps",
+   "saller",
+   "corputants",
+   "toons",
+   "remarknesses",
+   "tumbler",
+   "sciedial",
+   "felatoid",
+   "hallselin",
+   "oones",
+   "neotrone",
+   "swackhead",
+   "leaving",
+   "misaveranthy"
+  ]
+ },
+ {
+  "arm": "e64_L4",
+  "n_embd": 64,
+  "n_layer": 4,
+  "iter": 15000,
+  "temp": 0.5,
+  "n_params": 204736,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 237,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 17,
+  "real_train": 220,
+  "buckets": {
+   "1-4": {
+    "n": 6,
+    "real": 4
+   },
+   "5-7": {
+    "n": 216,
+    "real": 85
+   },
+   "8-10": {
+    "n": 472,
+    "real": 103
+   },
+   "11-14": {
+    "n": 306,
+    "real": 45
+   }
+  },
+  "mean_gen_len": 9.311,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primatical",
+   "transpections",
+   "vellisations",
+   "disafficialist",
+   "acidis",
+   "branditized",
+   "chemister",
+   "saller",
+   "corputants",
+   "torched",
+   "respoted",
+   "turbler",
+   "scienticians",
+   "fellish",
+   "hallowing",
+   "overstitches",
+   "neotrope",
+   "salcahes",
+   "leaving",
+   "misconding"
+  ]
+ },
+ {
+  "arm": "e64_L4",
+  "n_embd": 64,
+  "n_layer": 4,
+  "iter": 20000,
+  "temp": 0.8,
+  "n_params": 204736,
+  "best_val_bpc": 2.641595387116749,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 129,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 13,
+  "real_train": 116,
+  "buckets": {
+   "1-4": {
+    "n": 19,
+    "real": 13
+   },
+   "5-7": {
+    "n": 272,
+    "real": 65
+   },
+   "8-10": {
+    "n": 453,
+    "real": 36
+   },
+   "11-14": {
+    "n": 256,
+    "real": 15
+   }
+  },
+  "mean_gen_len": 8.952,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarity",
+   "tarrool",
+   "velatorial",
+   "disafficialist",
+   "apistically",
+   "brandars",
+   "chemiothalists",
+   "saller",
+   "corbutants",
+   "toons",
+   "respotarial",
+   "tubular",
+   "diiedescents",
+   "felantism",
+   "halloeing",
+   "oonstair",
+   "nechrose",
+   "swackhead",
+   "leaving",
+   "misavaculure"
+  ]
+ },
+ {
+  "arm": "e64_L4",
+  "n_embd": 64,
+  "n_layer": 4,
+  "iter": 20000,
+  "temp": 0.5,
+  "n_params": 204736,
+  "best_val_bpc": 2.641595387116749,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 271,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 24,
+  "real_train": 247,
+  "buckets": {
+   "1-4": {
+    "n": 5,
+    "real": 5
+   },
+   "5-7": {
+    "n": 219,
+    "real": 105
+   },
+   "8-10": {
+    "n": 453,
+    "real": 105
+   },
+   "11-14": {
+    "n": 323,
+    "real": 56
+   }
+  },
+  "mean_gen_len": 9.326,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primatic",
+   "transpections",
+   "velationalist",
+   "disafficial",
+   "acidise",
+   "brandarizers",
+   "chemiotherapy",
+   "salarized",
+   "corbutants",
+   "torched",
+   "respondently",
+   "tubeler",
+   "stied",
+   "fellish",
+   "hallowing",
+   "outstair",
+   "decordent",
+   "salatively",
+   "leaving",
+   "missines"
+  ]
+ },
+ {
+  "arm": "e128_L1",
+  "n_embd": 128,
+  "n_layer": 1,
+  "iter": 5000,
+  "temp": 0.8,
+  "n_params": 207872,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 92,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 8,
+  "real_train": 84,
+  "buckets": {
+   "1-4": {
+    "n": 16,
+    "real": 12
+   },
+   "5-7": {
+    "n": 311,
+    "real": 61
+   },
+   "8-10": {
+    "n": 459,
+    "real": 19
+   },
+   "11-14": {
+    "n": 213,
+    "real": 0
+   }
+  },
+  "mean_gen_len": 8.663663663663664,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "viltaritives",
+   "tranolless",
+   "veantormal",
+   "douses",
+   "acisis",
+   "brandickers",
+   "chempothalists",
+   "salleitioning",
+   "corbuts",
+   "toonsed",
+   "respoticite",
+   "tuatler",
+   "scieder",
+   "felateism",
+   "hallseitor",
+   "oonses",
+   "nechrone",
+   "sigcames",
+   "learinating",
+   "mistractives"
+  ]
+ },
+ {
+  "arm": "e128_L1",
+  "n_embd": 128,
+  "n_layer": 1,
+  "iter": 5000,
+  "temp": 0.5,
+  "n_params": 207872,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 169,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 9,
+  "real_train": 160,
+  "buckets": {
+   "1-4": {
+    "n": 10,
+    "real": 10
+   },
+   "5-7": {
+    "n": 321,
+    "real": 98
+   },
+   "8-10": {
+    "n": 494,
+    "real": 55
+   },
+   "11-14": {
+    "n": 175,
+    "real": 6
+   }
+  },
+  "mean_gen_len": 8.511,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarility",
+   "trans",
+   "veanital",
+   "desensive",
+   "aciolity",
+   "branding",
+   "chempotherists",
+   "saller",
+   "corbuts",
+   "toonsed",
+   "respers",
+   "tranger",
+   "scieder",
+   "selligities",
+   "hallositic",
+   "overs",
+   "necrocommun",
+   "signates",
+   "learing",
+   "mistractive"
+  ]
+ },
+ {
+  "arm": "e128_L1",
+  "n_embd": 128,
+  "n_layer": 1,
+  "iter": 10000,
+  "temp": 0.8,
+  "n_params": 207872,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 84,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 8,
+  "real_train": 76,
+  "buckets": {
+   "1-4": {
+    "n": 18,
+    "real": 13
+   },
+   "5-7": {
+    "n": 253,
+    "real": 55
+   },
+   "8-10": {
+    "n": 466,
+    "real": 15
+   },
+   "11-14": {
+    "n": 262,
+    "real": 1
+   }
+  },
+  "mean_gen_len": 9.033033033033034,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vintarity",
+   "transolubly",
+   "vellioned",
+   "dissiest",
+   "apikist",
+   "brandars",
+   "chempothalists",
+   "saller",
+   "corbuts",
+   "toons",
+   "rematone",
+   "tuffler",
+   "scieles",
+   "felateism",
+   "hallseitists",
+   "oons",
+   "nechrone",
+   "forcabras",
+   "leavines",
+   "miscraving"
+  ]
+ },
+ {
+  "arm": "e128_L1",
+  "n_embd": 128,
+  "n_layer": 1,
+  "iter": 10000,
+  "temp": 0.5,
+  "n_params": 207872,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 173,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 11,
+  "real_train": 162,
+  "buckets": {
+   "1-4": {
+    "n": 11,
+    "real": 11
+   },
+   "5-7": {
+    "n": 257,
+    "real": 99
+   },
+   "8-10": {
+    "n": 498,
+    "real": 55
+   },
+   "11-14": {
+    "n": 234,
+    "real": 8
+   }
+  },
+  "mean_gen_len": 8.892,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "prisations",
+   "transal",
+   "vellionised",
+   "dissiest",
+   "apistically",
+   "brands",
+   "champotherings",
+   "saller",
+   "corbuts",
+   "transed",
+   "reparticise",
+   "transcraft",
+   "stieless",
+   "felating",
+   "halls",
+   "outs",
+   "neophyse",
+   "stackier",
+   "learing",
+   "miscracing"
+  ]
+ },
+ {
+  "arm": "e128_L1",
+  "n_embd": 128,
+  "n_layer": 1,
+  "iter": 15000,
+  "temp": 0.8,
+  "n_params": 207872,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 126,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 13,
+  "real_train": 113,
+  "buckets": {
+   "1-4": {
+    "n": 20,
+    "real": 13
+   },
+   "5-7": {
+    "n": 284,
+    "real": 80
+   },
+   "8-10": {
+    "n": 455,
+    "real": 32
+   },
+   "11-14": {
+    "n": 241,
+    "real": 1
+   }
+  },
+  "mean_gen_len": 8.814,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarily",
+   "transolubly",
+   "veantormal",
+   "disafening",
+   "aciolity",
+   "brandars",
+   "chempothalists",
+   "salleins",
+   "corbuts",
+   "thoised",
+   "rumplendities",
+   "tummed",
+   "disederments",
+   "felating",
+   "hallseism",
+   "oonses",
+   "neovide",
+   "swackhaly",
+   "leavines",
+   "mistrain"
+  ]
+ },
+ {
+  "arm": "e128_L1",
+  "n_embd": 128,
+  "n_layer": 1,
+  "iter": 15000,
+  "temp": 0.5,
+  "n_params": 207872,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 215,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 25,
+  "real_train": 190,
+  "buckets": {
+   "1-4": {
+    "n": 8,
+    "real": 8
+   },
+   "5-7": {
+    "n": 245,
+    "real": 97
+   },
+   "8-10": {
+    "n": 509,
+    "real": 80
+   },
+   "11-14": {
+    "n": 238,
+    "real": 30
+   }
+  },
+  "mean_gen_len": 8.963,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primatic",
+   "transpections",
+   "vellion",
+   "disafes",
+   "acionization",
+   "brandars",
+   "chempotherists",
+   "salter",
+   "corbuts",
+   "theistically",
+   "resposition",
+   "tummed",
+   "stields",
+   "felletist",
+   "halls",
+   "outstone",
+   "decording",
+   "similiest",
+   "leavines",
+   "mischaring"
+  ]
+ },
+ {
+  "arm": "e128_L1",
+  "n_embd": 128,
+  "n_layer": 1,
+  "iter": 20000,
+  "temp": 0.8,
+  "n_params": 207872,
+  "best_val_bpc": 2.6897957607955125,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 128,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 9,
+  "real_train": 119,
+  "buckets": {
+   "1-4": {
+    "n": 16,
+    "real": 12
+   },
+   "5-7": {
+    "n": 294,
+    "real": 74
+   },
+   "8-10": {
+    "n": 450,
+    "real": 36
+   },
+   "11-14": {
+    "n": 240,
+    "real": 6
+   }
+  },
+  "mean_gen_len": 8.864,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarily",
+   "tarnolled",
+   "vellionisation",
+   "doublenesses",
+   "aciolity",
+   "brandars",
+   "chempothalists",
+   "salleins",
+   "corbuts",
+   "toonsed",
+   "rumplending",
+   "tuffler",
+   "diseducted",
+   "felicoid",
+   "hallseism",
+   "oonsecutively",
+   "nechrone",
+   "forcalised",
+   "leavines",
+   "mistractnesses"
+  ]
+ },
+ {
+  "arm": "e128_L1",
+  "n_embd": 128,
+  "n_layer": 1,
+  "iter": 20000,
+  "temp": 0.5,
+  "n_params": 207872,
+  "best_val_bpc": 2.6897957607955125,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 227,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 18,
+  "real_train": 209,
+  "buckets": {
+   "1-4": {
+    "n": 4,
+    "real": 4
+   },
+   "5-7": {
+    "n": 249,
+    "real": 98
+   },
+   "8-10": {
+    "n": 514,
+    "real": 97
+   },
+   "11-14": {
+    "n": 233,
+    "real": 28
+   }
+  },
+  "mean_gen_len": 8.999,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primatic",
+   "transally",
+   "vellionist",
+   "despositions",
+   "aciding",
+   "brandars",
+   "chemporates",
+   "saller",
+   "corbuts",
+   "torised",
+   "respots",
+   "tubular",
+   "stields",
+   "felletis",
+   "halloer",
+   "outstant",
+   "nechrometric",
+   "salcabilities",
+   "leaving",
+   "mischousnesses"
+  ]
+ },
+ {
+  "arm": "e128_L2",
+  "n_embd": 128,
+  "n_layer": 2,
+  "iter": 5000,
+  "temp": 0.8,
+  "n_params": 406144,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 100,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 6,
+  "real_train": 94,
+  "buckets": {
+   "1-4": {
+    "n": 21,
+    "real": 16
+   },
+   "5-7": {
+    "n": 311,
+    "real": 59
+   },
+   "8-10": {
+    "n": 438,
+    "real": 23
+   },
+   "11-14": {
+    "n": 229,
+    "real": 2
+   }
+  },
+  "mean_gen_len": 8.66966966966967,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "viltarity",
+   "tarrools",
+   "velnisations",
+   "disafesing",
+   "aciolity",
+   "brandiest",
+   "chemps",
+   "saller",
+   "corbuts",
+   "thoined",
+   "resposses",
+   "tuatler",
+   "disension",
+   "felat",
+   "hallstits",
+   "oonersively",
+   "nechrometrix",
+   "salcahes",
+   "learing",
+   "maishburnship"
+  ]
+ },
+ {
+  "arm": "e128_L2",
+  "n_embd": 128,
+  "n_layer": 2,
+  "iter": 5000,
+  "temp": 0.5,
+  "n_params": 406144,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 185,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 11,
+  "real_train": 174,
+  "buckets": {
+   "1-4": {
+    "n": 10,
+    "real": 9
+   },
+   "5-7": {
+    "n": 316,
+    "real": 108
+   },
+   "8-10": {
+    "n": 469,
+    "real": 59
+   },
+   "11-14": {
+    "n": 205,
+    "real": 9
+   }
+  },
+  "mean_gen_len": 8.612,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarialism",
+   "tarrools",
+   "velvisations",
+   "disaffiniation",
+   "aciositions",
+   "brandiest",
+   "chemboard",
+   "saller",
+   "corbuts",
+   "thonsed",
+   "resposses",
+   "tailler",
+   "scientically",
+   "share",
+   "halleting",
+   "overstitches",
+   "decorder",
+   "salcas",
+   "learing",
+   "macrophonic"
+  ]
+ },
+ {
+  "arm": "e128_L2",
+  "n_embd": 128,
+  "n_layer": 2,
+  "iter": 10000,
+  "temp": 0.8,
+  "n_params": 406144,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 121,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 9,
+  "real_train": 112,
+  "buckets": {
+   "1-4": {
+    "n": 11,
+    "real": 8
+   },
+   "5-7": {
+    "n": 276,
+    "real": 66
+   },
+   "8-10": {
+    "n": 472,
+    "real": 37
+   },
+   "11-14": {
+    "n": 240,
+    "real": 10
+   }
+  },
+  "mean_gen_len": 8.8988988988989,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarity",
+   "tarrodecists",
+   "velnitarians",
+   "disafening",
+   "apistically",
+   "brandiest",
+   "cheviousnesses",
+   "salleits",
+   "corbutness",
+   "totiness",
+   "remartnesses",
+   "tubeler",
+   "disenship",
+   "felic",
+   "hallstite",
+   "oonsepitches",
+   "nechrometrix",
+   "filcahes",
+   "leaving",
+   "maingadonths"
+  ]
+ },
+ {
+  "arm": "e128_L2",
+  "n_embd": 128,
+  "n_layer": 2,
+  "iter": 10000,
+  "temp": 0.5,
+  "n_params": 406144,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 253,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 19,
+  "real_train": 234,
+  "buckets": {
+   "1-4": {
+    "n": 4,
+    "real": 4
+   },
+   "5-7": {
+    "n": 227,
+    "real": 103
+   },
+   "8-10": {
+    "n": 518,
+    "real": 117
+   },
+   "11-14": {
+    "n": 251,
+    "real": 29
+   }
+  },
+  "mean_gen_len": 9.106,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primaticizes",
+   "tarroughts",
+   "vellically",
+   "dissientialist",
+   "acidistical",
+   "brandiest",
+   "cheving",
+   "sallet",
+   "corputative",
+   "toring",
+   "reproving",
+   "tubelier",
+   "stiends",
+   "felletisms",
+   "hallochin",
+   "overstitches",
+   "nechrometric",
+   "stackhally",
+   "leaving",
+   "mainters"
+  ]
+ },
+ {
+  "arm": "e128_L2",
+  "n_embd": 128,
+  "n_layer": 2,
+  "iter": 15000,
+  "temp": 0.8,
+  "n_params": 406144,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 172,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 11,
+  "real_train": 161,
+  "buckets": {
+   "1-4": {
+    "n": 16,
+    "real": 13
+   },
+   "5-7": {
+    "n": 254,
+    "real": 77
+   },
+   "8-10": {
+    "n": 464,
+    "real": 66
+   },
+   "11-14": {
+    "n": 266,
+    "real": 16
+   }
+  },
+  "mean_gen_len": 8.999,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "villarity",
+   "tarrowlessly",
+   "velnishly",
+   "disaffinial",
+   "apistically",
+   "brandars",
+   "chemizes",
+   "salter",
+   "corbuts",
+   "toons",
+   "rumples",
+   "tubular",
+   "disentrates",
+   "felicyisms",
+   "halloeism",
+   "ooners",
+   "necrophorus",
+   "swackhead",
+   "leaving",
+   "misavour"
+  ]
+ },
+ {
+  "arm": "e128_L2",
+  "n_embd": 128,
+  "n_layer": 2,
+  "iter": 15000,
+  "temp": 0.5,
+  "n_params": 406144,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 317,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 28,
+  "real_train": 289,
+  "buckets": {
+   "1-4": {
+    "n": 4,
+    "real": 4
+   },
+   "5-7": {
+    "n": 194,
+    "real": 103
+   },
+   "8-10": {
+    "n": 451,
+    "real": 123
+   },
+   "11-14": {
+    "n": 351,
+    "real": 87
+   }
+  },
+  "mean_gen_len": 9.541,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primalities",
+   "tarrowless",
+   "velnishly",
+   "disaffinial",
+   "acidises",
+   "brandariness",
+   "champiest",
+   "salter",
+   "corbitants",
+   "torched",
+   "respots",
+   "tubular",
+   "stientic",
+   "felicitries",
+   "hallooms",
+   "overspired",
+   "necrophore",
+   "salcant",
+   "leafinesses",
+   "misconcentry"
+  ]
+ },
+ {
+  "arm": "e128_L2",
+  "n_embd": 128,
+  "n_layer": 2,
+  "iter": 20000,
+  "temp": 0.8,
+  "n_params": 406144,
+  "best_val_bpc": 2.547740842905246,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 200,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 15,
+  "real_train": 185,
+  "buckets": {
+   "1-4": {
+    "n": 16,
+    "real": 13
+   },
+   "5-7": {
+    "n": 238,
+    "real": 78
+   },
+   "8-10": {
+    "n": 473,
+    "real": 89
+   },
+   "11-14": {
+    "n": 273,
+    "real": 20
+   }
+  },
+  "mean_gen_len": 9.05,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistarian",
+   "tarafally",
+   "velnishly",
+   "disaffiniation",
+   "acidiserosis",
+   "brandars",
+   "chemister",
+   "saller",
+   "corbits",
+   "toonsed",
+   "remarries",
+   "tubular",
+   "disentraines",
+   "felicino",
+   "halloeism",
+   "oons",
+   "necrophore",
+   "forcehes",
+   "leafing",
+   "misavour"
+  ]
+ },
+ {
+  "arm": "e128_L2",
+  "n_embd": 128,
+  "n_layer": 2,
+  "iter": 20000,
+  "temp": 0.5,
+  "n_params": 406144,
+  "best_val_bpc": 2.547740842905246,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 400,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 32,
+  "real_train": 368,
+  "buckets": {
+   "1-4": {
+    "n": 4,
+    "real": 4
+   },
+   "5-7": {
+    "n": 198,
+    "real": 112
+   },
+   "8-10": {
+    "n": 473,
+    "real": 191
+   },
+   "11-14": {
+    "n": 325,
+    "real": 93
+   }
+  },
+  "mean_gen_len": 9.448,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primaticizes",
+   "transmissions",
+   "vernities",
+   "disaffingual",
+   "acidifies",
+   "brandardial",
+   "champiest",
+   "salter",
+   "corbite",
+   "toots",
+   "respots",
+   "tubular",
+   "stields",
+   "fellation",
+   "hallooms",
+   "outstrip",
+   "necrophore",
+   "salanders",
+   "leafing",
+   "miscaping"
+  ]
+ },
+ {
+  "arm": "e128_L4",
+  "n_embd": 128,
+  "n_layer": 4,
+  "iter": 5000,
+  "temp": 0.8,
+  "n_params": 802688,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 93,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 8,
+  "real_train": 85,
+  "buckets": {
+   "1-4": {
+    "n": 18,
+    "real": 12
+   },
+   "5-7": {
+    "n": 271,
+    "real": 54
+   },
+   "8-10": {
+    "n": 487,
+    "real": 24
+   },
+   "11-14": {
+    "n": 223,
+    "real": 3
+   }
+  },
+  "mean_gen_len": 8.791791791791791,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarity",
+   "transolles",
+   "vellitals",
+   "disafening",
+   "apistherosis",
+   "brandy",
+   "chemphang",
+   "salleins",
+   "corbuts",
+   "thoised",
+   "remarticite",
+   "tuffler",
+   "stienesses",
+   "felangist",
+   "hallsers",
+   "ounsopit",
+   "nechrone",
+   "forcahers",
+   "leistive",
+   "maiseperning"
+  ]
+ },
+ {
+  "arm": "e128_L4",
+  "n_embd": 128,
+  "n_layer": 4,
+  "iter": 5000,
+  "temp": 0.5,
+  "n_params": 802688,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 161,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 19,
+  "real_train": 142,
+  "buckets": {
+   "1-4": {
+    "n": 10,
+    "real": 10
+   },
+   "5-7": {
+    "n": 238,
+    "real": 86
+   },
+   "8-10": {
+    "n": 494,
+    "real": 56
+   },
+   "11-14": {
+    "n": 258,
+    "real": 9
+   }
+  },
+  "mean_gen_len": 9.079,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "prisarial",
+   "transplays",
+   "feanting",
+   "dissienting",
+   "apistherosis",
+   "brandies",
+   "chemizes",
+   "saller",
+   "corouts",
+   "thermatos",
+   "resposses",
+   "tuffler",
+   "stienesses",
+   "felangist",
+   "halletics",
+   "outsometric",
+   "neching",
+   "stackiest",
+   "learing",
+   "mailed"
+  ]
+ },
+ {
+  "arm": "e128_L4",
+  "n_embd": 128,
+  "n_layer": 4,
+  "iter": 10000,
+  "temp": 0.8,
+  "n_params": 802688,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 130,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 17,
+  "real_train": 113,
+  "buckets": {
+   "1-4": {
+    "n": 21,
+    "real": 13
+   },
+   "5-7": {
+    "n": 251,
+    "real": 60
+   },
+   "8-10": {
+    "n": 464,
+    "real": 51
+   },
+   "11-14": {
+    "n": 263,
+    "real": 6
+   }
+  },
+  "mean_gen_len": 8.97097097097097,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "villarity",
+   "tarrools",
+   "veletoses",
+   "doubles",
+   "apistheropism",
+   "brandarches",
+   "chemizes",
+   "sallet",
+   "corbutants",
+   "toots",
+   "rumpishness",
+   "tubelle",
+   "diied",
+   "felaboiting",
+   "hallseison",
+   "oons",
+   "nechrone",
+   "forcas",
+   "leavingly",
+   "mainboding"
+  ]
+ },
+ {
+  "arm": "e128_L4",
+  "n_embd": 128,
+  "n_layer": 4,
+  "iter": 10000,
+  "temp": 0.5,
+  "n_params": 802688,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 258,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 16,
+  "real_train": 242,
+  "buckets": {
+   "1-4": {
+    "n": 9,
+    "real": 7
+   },
+   "5-7": {
+    "n": 200,
+    "real": 89
+   },
+   "8-10": {
+    "n": 475,
+    "real": 115
+   },
+   "11-14": {
+    "n": 316,
+    "real": 47
+   }
+  },
+  "mean_gen_len": 9.363,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primations",
+   "tarroom",
+   "velatorial",
+   "disaffing",
+   "acidist",
+   "brandarches",
+   "chamports",
+   "sallet",
+   "corbutants",
+   "toots",
+   "reprovers",
+   "tubelle",
+   "stielders",
+   "felantities",
+   "halloping",
+   "outstail",
+   "neotrope",
+   "stachors",
+   "learing",
+   "mainsper"
+  ]
+ },
+ {
+  "arm": "e128_L4",
+  "n_embd": 128,
+  "n_layer": 4,
+  "iter": 15000,
+  "temp": 0.8,
+  "n_params": 802688,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 202,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 24,
+  "real_train": 178,
+  "buckets": {
+   "1-4": {
+    "n": 13,
+    "real": 12
+   },
+   "5-7": {
+    "n": 239,
+    "real": 74
+   },
+   "8-10": {
+    "n": 457,
+    "real": 81
+   },
+   "11-14": {
+    "n": 291,
+    "real": 35
+   }
+  },
+  "mean_gen_len": 9.125,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primarity",
+   "tarrowless",
+   "velnesses",
+   "doubles",
+   "apistherosity",
+   "brandarches",
+   "chemizahs",
+   "saller",
+   "corbuts",
+   "toonsaws",
+   "remarked",
+   "tuffler",
+   "disentrained",
+   "felantism",
+   "halloaing",
+   "oonists",
+   "nechromer",
+   "forcement",
+   "levelier",
+   "misavourning"
+  ]
+ },
+ {
+  "arm": "e128_L4",
+  "n_embd": 128,
+  "n_layer": 4,
+  "iter": 15000,
+  "temp": 0.5,
+  "n_params": 802688,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 360,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 21,
+  "real_train": 339,
+  "buckets": {
+   "1-4": {
+    "n": 4,
+    "real": 4
+   },
+   "5-7": {
+    "n": 175,
+    "real": 92
+   },
+   "8-10": {
+    "n": 466,
+    "real": 172
+   },
+   "11-14": {
+    "n": 355,
+    "real": 92
+   }
+  },
+  "mean_gen_len": 9.613,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primarised",
+   "tarrowed",
+   "vennies",
+   "disaffining",
+   "apistherosity",
+   "brandars",
+   "champots",
+   "saller",
+   "corbitants",
+   "toots",
+   "reproducing",
+   "turbler",
+   "stiener",
+   "felicist",
+   "halloaing",
+   "overspit",
+   "necrophoran",
+   "salcinesses",
+   "leaving",
+   "mainspersons"
+  ]
+ },
+ {
+  "arm": "e128_L4",
+  "n_embd": 128,
+  "n_layer": 4,
+  "iter": 20000,
+  "temp": 0.8,
+  "n_params": 802688,
+  "best_val_bpc": 2.506191726265951,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 272,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 25,
+  "real_train": 247,
+  "buckets": {
+   "1-4": {
+    "n": 13,
+    "real": 12
+   },
+   "5-7": {
+    "n": 249,
+    "real": 100
+   },
+   "8-10": {
+    "n": 454,
+    "real": 116
+   },
+   "11-14": {
+    "n": 284,
+    "real": 44
+   }
+  },
+  "mean_gen_len": 9.063,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistailism",
+   "tarrowless",
+   "vellicate",
+   "disaffinishing",
+   "acidificons",
+   "brandarched",
+   "chemiteer",
+   "salleifs",
+   "corbuts",
+   "thorned",
+   "remanticize",
+   "tuffler",
+   "scientist",
+   "felageing",
+   "hallstitic",
+   "oons",
+   "nechrometric",
+   "filchiest",
+   "leafinesses",
+   "misavourning"
+  ]
+ },
+ {
+  "arm": "e128_L4",
+  "n_embd": 128,
+  "n_layer": 4,
+  "iter": 20000,
+  "temp": 0.5,
+  "n_params": 802688,
+  "best_val_bpc": 2.506191726265951,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 463,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 30,
+  "real_train": 433,
+  "buckets": {
+   "1-4": {
+    "n": 5,
+    "real": 5
+   },
+   "5-7": {
+    "n": 140,
+    "real": 88
+   },
+   "8-10": {
+    "n": 483,
+    "real": 220
+   },
+   "11-14": {
+    "n": 372,
+    "real": 150
+   }
+  },
+  "mean_gen_len": 9.783,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primated",
+   "transmitter",
+   "vellicate",
+   "disaffining",
+   "acidification",
+   "brandarched",
+   "chemiteer",
+   "sallenned",
+   "corbutants",
+   "thristing",
+   "respondent",
+   "tubelle",
+   "stiedding",
+   "felicits",
+   "halloping",
+   "outstart",
+   "neotrope",
+   "stackhander",
+   "leaflift",
+   "misadverning"
+  ]
+ },
+ {
+  "arm": "e256_L1",
+  "n_embd": 256,
+  "n_layer": 1,
+  "iter": 5000,
+  "temp": 0.8,
+  "n_params": 808960,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 95,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 6,
+  "real_train": 89,
+  "buckets": {
+   "1-4": {
+    "n": 16,
+    "real": 14
+   },
+   "5-7": {
+    "n": 276,
+    "real": 57
+   },
+   "8-10": {
+    "n": 457,
+    "real": 18
+   },
+   "11-14": {
+    "n": 250,
+    "real": 6
+   }
+  },
+  "mean_gen_len": 8.84084084084084,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "viltarity",
+   "tarrograms",
+   "veantorial",
+   "dossferynaming",
+   "acists",
+   "brandarches",
+   "chempted",
+   "salleins",
+   "corbuts",
+   "totined",
+   "rumplendine",
+   "tubalder",
+   "diiedisce",
+   "felattis",
+   "hallsticular",
+   "oonsecity",
+   "nechroom",
+   "forcahes",
+   "learniating",
+   "mainged"
+  ]
+ },
+ {
+  "arm": "e256_L1",
+  "n_embd": 256,
+  "n_layer": 1,
+  "iter": 5000,
+  "temp": 0.5,
+  "n_params": 808960,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 161,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 13,
+  "real_train": 148,
+  "buckets": {
+   "1-4": {
+    "n": 4,
+    "real": 4
+   },
+   "5-7": {
+    "n": 252,
+    "real": 90
+   },
+   "8-10": {
+    "n": 557,
+    "real": 56
+   },
+   "11-14": {
+    "n": 187,
+    "real": 11
+   }
+  },
+  "mean_gen_len": 8.765,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarities",
+   "transhing",
+   "vennities",
+   "desenting",
+   "acidist",
+   "brandictions",
+   "chempted",
+   "sallet",
+   "corouts",
+   "totiners",
+   "respot",
+   "tuballe",
+   "scienesses",
+   "felate",
+   "halletical",
+   "overstic",
+   "nechander",
+   "stackhers",
+   "learnish",
+   "maingering"
+  ]
+ },
+ {
+  "arm": "e256_L1",
+  "n_embd": 256,
+  "n_layer": 1,
+  "iter": 10000,
+  "temp": 0.8,
+  "n_params": 808960,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 113,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 11,
+  "real_train": 102,
+  "buckets": {
+   "1-4": {
+    "n": 18,
+    "real": 13
+   },
+   "5-7": {
+    "n": 308,
+    "real": 66
+   },
+   "8-10": {
+    "n": 442,
+    "real": 28
+   },
+   "11-14": {
+    "n": 231,
+    "real": 6
+   }
+  },
+  "mean_gen_len": 8.731731731731731,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistarity",
+   "tarabolist",
+   "veangeals",
+   "douses",
+   "apisies",
+   "brandiest",
+   "chemist",
+   "saller",
+   "corbuts",
+   "togised",
+   "rumpited",
+   "tubilder",
+   "disenthrones",
+   "felate",
+   "hallseitis",
+   "oonsecut",
+   "nechrone",
+   "simplier",
+   "leaving",
+   "mistability"
+  ]
+ },
+ {
+  "arm": "e256_L1",
+  "n_embd": 256,
+  "n_layer": 1,
+  "iter": 10000,
+  "temp": 0.5,
+  "n_params": 808960,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 226,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 18,
+  "real_train": 208,
+  "buckets": {
+   "1-4": {
+    "n": 9,
+    "real": 7
+   },
+   "5-7": {
+    "n": 268,
+    "real": 96
+   },
+   "8-10": {
+    "n": 542,
+    "real": 103
+   },
+   "11-14": {
+    "n": 181,
+    "real": 20
+   }
+  },
+  "mean_gen_len": 8.671,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarial",
+   "tarangless",
+   "vernish",
+   "disadenesses",
+   "apistically",
+   "brandishness",
+   "champing",
+   "saller",
+   "corbuts",
+   "tonine",
+   "respots",
+   "turbled",
+   "scienesses",
+   "fessivisions",
+   "hallooms",
+   "outstant",
+   "neoplane",
+   "signant",
+   "anisance",
+   "maing"
+  ]
+ },
+ {
+  "arm": "e256_L1",
+  "n_embd": 256,
+  "n_layer": 1,
+  "iter": 15000,
+  "temp": 0.8,
+  "n_params": 808960,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 142,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 9,
+  "real_train": 133,
+  "buckets": {
+   "1-4": {
+    "n": 12,
+    "real": 11
+   },
+   "5-7": {
+    "n": 269,
+    "real": 72
+   },
+   "8-10": {
+    "n": 440,
+    "real": 46
+   },
+   "11-14": {
+    "n": 278,
+    "real": 13
+   }
+  },
+  "mean_gen_len": 9.027027027027026,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistarity",
+   "tarrodeces",
+   "veantoses",
+   "doubles",
+   "apists",
+   "brandiest",
+   "chemizes",
+   "saller",
+   "corbutants",
+   "tooing",
+   "repactnesses",
+   "tubilder",
+   "swields",
+   "feliction",
+   "hallseitz",
+   "oonsecutric",
+   "nechrone",
+   "swackiest",
+   "leadines",
+   "mistractnesses"
+  ]
+ },
+ {
+  "arm": "e256_L1",
+  "n_embd": 256,
+  "n_layer": 1,
+  "iter": 15000,
+  "temp": 0.5,
+  "n_params": 808960,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 263,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 22,
+  "real_train": 241,
+  "buckets": {
+   "1-4": {
+    "n": 5,
+    "real": 5
+   },
+   "5-7": {
+    "n": 216,
+    "real": 100
+   },
+   "8-10": {
+    "n": 505,
+    "real": 116
+   },
+   "11-14": {
+    "n": 274,
+    "real": 42
+   }
+  },
+  "mean_gen_len": 9.189,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primatised",
+   "transpectic",
+   "velvitalised",
+   "disaffiniable",
+   "acidist",
+   "brandiest",
+   "chemists",
+   "saller",
+   "corbutants",
+   "toothers",
+   "repacks",
+   "tubelle",
+   "stieless",
+   "felicity",
+   "hallowing",
+   "overspirates",
+   "nechanometer",
+   "saltability",
+   "leading",
+   "mistrain"
+  ]
+ },
+ {
+  "arm": "e256_L1",
+  "n_embd": 256,
+  "n_layer": 1,
+  "iter": 20000,
+  "temp": 0.8,
+  "n_params": 808960,
+  "best_val_bpc": 2.5941550047721487,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 170,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 13,
+  "real_train": 157,
+  "buckets": {
+   "1-4": {
+    "n": 17,
+    "real": 14
+   },
+   "5-7": {
+    "n": 276,
+    "real": 81
+   },
+   "8-10": {
+    "n": 460,
+    "real": 57
+   },
+   "11-14": {
+    "n": 247,
+    "real": 18
+   }
+  },
+  "mean_gen_len": 8.865,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primarity",
+   "tarrowers",
+   "velvitals",
+   "doubles",
+   "apists",
+   "brandictional",
+   "chemister",
+   "saller",
+   "corbutants",
+   "tooing",
+   "remarknowing",
+   "tuffled",
+   "disentice",
+   "felicitous",
+   "hallseith",
+   "oonsesses",
+   "nechanoer",
+   "swaftiers",
+   "leafines",
+   "misavacrity"
+  ]
+ },
+ {
+  "arm": "e256_L1",
+  "n_embd": 256,
+  "n_layer": 1,
+  "iter": 20000,
+  "temp": 0.5,
+  "n_params": 808960,
+  "best_val_bpc": 2.5941550047721487,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 319,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 27,
+  "real_train": 292,
+  "buckets": {
+   "1-4": {
+    "n": 3,
+    "real": 3
+   },
+   "5-7": {
+    "n": 235,
+    "real": 128
+   },
+   "8-10": {
+    "n": 501,
+    "real": 130
+   },
+   "11-14": {
+    "n": 261,
+    "real": 58
+   }
+  },
+  "mean_gen_len": 9.11,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primatises",
+   "tarrowing",
+   "vernitional",
+   "disaffing",
+   "apistically",
+   "brandictions",
+   "champiest",
+   "saller",
+   "corpots",
+   "toots",
+   "respots",
+   "tubilder",
+   "stievers",
+   "felicities",
+   "halloeic",
+   "outstant",
+   "nechanter",
+   "saling",
+   "leafines",
+   "missionanthing"
+  ]
+ },
+ {
+  "arm": "e256_L2",
+  "n_embd": 256,
+  "n_layer": 2,
+  "iter": 5000,
+  "temp": 0.8,
+  "n_params": 1598720,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 119,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 6,
+  "real_train": 113,
+  "buckets": {
+   "1-4": {
+    "n": 15,
+    "real": 14
+   },
+   "5-7": {
+    "n": 279,
+    "real": 70
+   },
+   "8-10": {
+    "n": 445,
+    "real": 29
+   },
+   "11-14": {
+    "n": 260,
+    "real": 6
+   }
+  },
+  "mean_gen_len": 8.895895895895896,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "prisality",
+   "translectic",
+   "veanies",
+   "disafes",
+   "acidist",
+   "branthes",
+   "chemporth",
+   "sallei",
+   "corbutants",
+   "toons",
+   "rumplendise",
+   "tuffler",
+   "diiedescency",
+   "felate",
+   "hallseils",
+   "oonstail",
+   "nechrone",
+   "salcanising",
+   "leasing",
+   "mistractives"
+  ]
+ },
+ {
+  "arm": "e256_L2",
+  "n_embd": 256,
+  "n_layer": 2,
+  "iter": 5000,
+  "temp": 0.5,
+  "n_params": 1598720,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 220,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 16,
+  "real_train": 204,
+  "buckets": {
+   "1-4": {
+    "n": 9,
+    "real": 8
+   },
+   "5-7": {
+    "n": 216,
+    "real": 88
+   },
+   "8-10": {
+    "n": 520,
+    "real": 101
+   },
+   "11-14": {
+    "n": 255,
+    "real": 23
+   }
+  },
+  "mean_gen_len": 9.098,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "prisality",
+   "translicks",
+   "exanticise",
+   "disafes",
+   "acidist",
+   "branticular",
+   "chemists",
+   "sallerisation",
+   "corbutants",
+   "tricked",
+   "resignable",
+   "transgearing",
+   "stiending",
+   "fels",
+   "halloping",
+   "outstail",
+   "decordant",
+   "stackhers",
+   "leasing",
+   "mistractive"
+  ]
+ },
+ {
+  "arm": "e256_L2",
+  "n_embd": 256,
+  "n_layer": 2,
+  "iter": 10000,
+  "temp": 0.8,
+  "n_params": 1598720,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 202,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 21,
+  "real_train": 181,
+  "buckets": {
+   "1-4": {
+    "n": 18,
+    "real": 15
+   },
+   "5-7": {
+    "n": 278,
+    "real": 86
+   },
+   "8-10": {
+    "n": 447,
+    "real": 74
+   },
+   "11-14": {
+    "n": 256,
+    "real": 27
+   }
+  },
+  "mean_gen_len": 8.93093093093093,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primarity",
+   "tarrowed",
+   "velnitarians",
+   "disafestioning",
+   "apisis",
+   "brandy",
+   "chemizations",
+   "salter",
+   "corbutants",
+   "toons",
+   "rumpish",
+   "tubular",
+   "disentice",
+   "felate",
+   "halletically",
+   "oons",
+   "neovide",
+   "swackhead",
+   "leafines",
+   "misavournths"
+  ]
+ },
+ {
+  "arm": "e256_L2",
+  "n_embd": 256,
+  "n_layer": 2,
+  "iter": 10000,
+  "temp": 0.5,
+  "n_params": 1598720,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 331,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 26,
+  "real_train": 305,
+  "buckets": {
+   "1-4": {
+    "n": 4,
+    "real": 3
+   },
+   "5-7": {
+    "n": 223,
+    "real": 122
+   },
+   "8-10": {
+    "n": 463,
+    "real": 128
+   },
+   "11-14": {
+    "n": 310,
+    "real": 78
+   }
+  },
+  "mean_gen_len": 9.299,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primarity",
+   "tarrowed",
+   "vernicular",
+   "disaffiniation",
+   "apistheticity",
+   "branches",
+   "cheers",
+   "salterisation",
+   "corbitance",
+   "torist",
+   "respotten",
+   "tubelle",
+   "scienes",
+   "felderies",
+   "halletically",
+   "overstricks",
+   "decolonize",
+   "subclinise",
+   "leafinesses",
+   "missenting"
+  ]
+ },
+ {
+  "arm": "e256_L2",
+  "n_embd": 256,
+  "n_layer": 2,
+  "iter": 15000,
+  "temp": 0.8,
+  "n_params": 1598720,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 272,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 21,
+  "real_train": 251,
+  "buckets": {
+   "1-4": {
+    "n": 12,
+    "real": 12
+   },
+   "5-7": {
+    "n": 228,
+    "real": 93
+   },
+   "8-10": {
+    "n": 468,
+    "real": 122
+   },
+   "11-14": {
+    "n": 291,
+    "real": 45
+   }
+  },
+  "mean_gen_len": 9.162162162162161,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistable",
+   "tarrowls",
+   "velvisals",
+   "disaffing",
+   "acidifies",
+   "brandishes",
+   "chemizes",
+   "salter",
+   "corbets",
+   "toticids",
+   "respotten",
+   "tubular",
+   "disenthralls",
+   "felantism",
+   "halloed",
+   "oons",
+   "nechedal",
+   "forcibles",
+   "levish",
+   "misaverring"
+  ]
+ },
+ {
+  "arm": "e256_L2",
+  "n_embd": 256,
+  "n_layer": 2,
+  "iter": 15000,
+  "temp": 0.5,
+  "n_params": 1598720,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 494,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 48,
+  "real_train": 446,
+  "buckets": {
+   "1-4": {
+    "n": 5,
+    "real": 5
+   },
+   "5-7": {
+    "n": 144,
+    "real": 97
+   },
+   "8-10": {
+    "n": 480,
+    "real": 234
+   },
+   "11-14": {
+    "n": 371,
+    "real": 158
+   }
+  },
+  "mean_gen_len": 9.722,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primaria",
+   "transplantary",
+   "venniling",
+   "disaffing",
+   "acidifies",
+   "brandishes",
+   "chemister",
+   "salter",
+   "corbets",
+   "toticides",
+   "respotten",
+   "tubularizing",
+   "stievers",
+   "fellowing",
+   "hallocks",
+   "overspired",
+   "necrophobia",
+   "stackings",
+   "levish",
+   "mischarging"
+  ]
+ },
+ {
+  "arm": "e256_L2",
+  "n_embd": 256,
+  "n_layer": 2,
+  "iter": 20000,
+  "temp": 0.8,
+  "n_params": 1598720,
+  "best_val_bpc": 2.4251209964583826,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 354,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 14,
+  "real_train": 340,
+  "buckets": {
+   "1-4": {
+    "n": 14,
+    "real": 13
+   },
+   "5-7": {
+    "n": 248,
+    "real": 103
+   },
+   "8-10": {
+    "n": 451,
+    "real": 162
+   },
+   "11-14": {
+    "n": 286,
+    "real": 76
+   }
+  },
+  "mean_gen_len": 9.092092092092091,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistarias",
+   "tarrowless",
+   "velvis",
+   "disafestioning",
+   "acidifies",
+   "brandishes",
+   "chemister",
+   "saller",
+   "corbitants",
+   "totically",
+   "responsorships",
+   "tuft",
+   "disenthral",
+   "felah",
+   "halloed",
+   "oons",
+   "neching",
+   "swackier",
+   "leadinesses",
+   "misaverring"
+  ]
+ },
+ {
+  "arm": "e256_L2",
+  "n_embd": 256,
+  "n_layer": 2,
+  "iter": 20000,
+  "temp": 0.5,
+  "n_params": 1598720,
+  "best_val_bpc": 2.4251209964583826,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 572,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 38,
+  "real_train": 534,
+  "buckets": {
+   "1-4": {
+    "n": 3,
+    "real": 3
+   },
+   "5-7": {
+    "n": 146,
+    "real": 102
+   },
+   "8-10": {
+    "n": 465,
+    "real": 269
+   },
+   "11-14": {
+    "n": 386,
+    "real": 198
+   }
+  },
+  "mean_gen_len": 9.855,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primately",
+   "transposes",
+   "vernalization",
+   "disaffing",
+   "acidifies",
+   "brandishes",
+   "champores",
+   "salterization",
+   "corbitance",
+   "trichometric",
+   "responsors",
+   "tubular",
+   "stied",
+   "fellowing",
+   "halloed",
+   "outstart",
+   "decordant",
+   "salivation",
+   "leading",
+   "misadding"
+  ]
+ },
+ {
+  "arm": "e256_L4",
+  "n_embd": 256,
+  "n_layer": 4,
+  "iter": 5000,
+  "temp": 0.8,
+  "n_params": 3178240,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 111,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 11,
+  "real_train": 100,
+  "buckets": {
+   "1-4": {
+    "n": 26,
+    "real": 18
+   },
+   "5-7": {
+    "n": 243,
+    "real": 51
+   },
+   "8-10": {
+    "n": 468,
+    "real": 32
+   },
+   "11-14": {
+    "n": 262,
+    "real": 10
+   }
+  },
+  "mean_gen_len": 8.987987987987989,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "pritarial",
+   "tarrools",
+   "veantlies",
+   "disaffining",
+   "apisistrons",
+   "brandiest",
+   "champorth",
+   "saller",
+   "corbuts",
+   "toticulation",
+   "remantlesses",
+   "tuffler",
+   "scied",
+   "felibuities",
+   "halmseito",
+   "oons",
+   "nechrone",
+   "swackhery",
+   "leaving",
+   "mistracknesses"
+  ]
+ },
+ {
+  "arm": "e256_L4",
+  "n_embd": 256,
+  "n_layer": 4,
+  "iter": 5000,
+  "temp": 0.5,
+  "n_params": 3178240,
+  "best_val_bpc": null,
+  "ckpt_iter": 5000,
+  "n": 1000,
+  "real": 202,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 20,
+  "real_train": 182,
+  "buckets": {
+   "1-4": {
+    "n": 8,
+    "real": 7
+   },
+   "5-7": {
+    "n": 220,
+    "real": 92
+   },
+   "8-10": {
+    "n": 483,
+    "real": 70
+   },
+   "11-14": {
+    "n": 289,
+    "real": 33
+   }
+  },
+  "mean_gen_len": 9.245,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "prinarial",
+   "transolums",
+   "exhantiest",
+   "disanting",
+   "apistically",
+   "brandiest",
+   "chamports",
+   "saller",
+   "corbuts",
+   "toticulation",
+   "reprosidialize",
+   "tumpler",
+   "stielders",
+   "festigitation",
+   "halms",
+   "outstant",
+   "decordent",
+   "strankers",
+   "leafing",
+   "mainster"
+  ]
+ },
+ {
+  "arm": "e256_L4",
+  "n_embd": 256,
+  "n_layer": 4,
+  "iter": 10000,
+  "temp": 0.8,
+  "n_params": 3178240,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 206,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 9,
+  "real_train": 197,
+  "buckets": {
+   "1-4": {
+    "n": 18,
+    "real": 16
+   },
+   "5-7": {
+    "n": 269,
+    "real": 92
+   },
+   "8-10": {
+    "n": 428,
+    "real": 72
+   },
+   "11-14": {
+    "n": 284,
+    "real": 26
+   }
+  },
+  "mean_gen_len": 9.015015015015015,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistarian",
+   "taranologic",
+   "veantly",
+   "disaffinity",
+   "acidiserosis",
+   "brandary",
+   "champorators",
+   "sallet",
+   "corbating",
+   "toking",
+   "rumpish",
+   "tuffler",
+   "sciends",
+   "fellhoises",
+   "halloaism",
+   "oons",
+   "nechrone",
+   "finalizes",
+   "leasinesses",
+   "mistrading"
+  ]
+ },
+ {
+  "arm": "e256_L4",
+  "n_embd": 256,
+  "n_layer": 4,
+  "iter": 10000,
+  "temp": 0.5,
+  "n_params": 3178240,
+  "best_val_bpc": null,
+  "ckpt_iter": 10000,
+  "n": 1000,
+  "real": 331,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 22,
+  "real_train": 309,
+  "buckets": {
+   "1-4": {
+    "n": 2,
+    "real": 2
+   },
+   "5-7": {
+    "n": 175,
+    "real": 93
+   },
+   "8-10": {
+    "n": 447,
+    "real": 141
+   },
+   "11-14": {
+    "n": 376,
+    "real": 95
+   }
+  },
+  "mean_gen_len": 9.713,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "prioritises",
+   "taranologic",
+   "vennies",
+   "disaffinity",
+   "acidities",
+   "branches",
+   "champers",
+   "salter",
+   "corbating",
+   "toothed",
+   "respots",
+   "turbler",
+   "stiener",
+   "fellopitation",
+   "halloaise",
+   "outstain",
+   "neotrophic",
+   "subclimating",
+   "leasing",
+   "mainture"
+  ]
+ },
+ {
+  "arm": "e256_L4",
+  "n_embd": 256,
+  "n_layer": 4,
+  "iter": 15000,
+  "temp": 0.8,
+  "n_params": 3178240,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 333,
+  "empty": 1,
+  "overlong": 0,
+  "real_val": 32,
+  "real_train": 301,
+  "buckets": {
+   "1-4": {
+    "n": 16,
+    "real": 12
+   },
+   "5-7": {
+    "n": 242,
+    "real": 99
+   },
+   "8-10": {
+    "n": 470,
+    "real": 161
+   },
+   "11-14": {
+    "n": 271,
+    "real": 61
+   }
+  },
+  "mean_gen_len": 9.084084084084084,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "vistases",
+   "tarrowless",
+   "veantling",
+   "disaffignants",
+   "acidist",
+   "brandy",
+   "chemps",
+   "salleted",
+   "corbets",
+   "toting",
+   "responsioner",
+   "tuffler",
+   "disendowed",
+   "felsheit",
+   "hallutinos",
+   "oones",
+   "necrophobia",
+   "swackiest",
+   "leavingly",
+   "misadder"
+  ]
+ },
+ {
+  "arm": "e256_L4",
+  "n_embd": 256,
+  "n_layer": 4,
+  "iter": 15000,
+  "temp": 0.5,
+  "n_params": 3178240,
+  "best_val_bpc": null,
+  "ckpt_iter": 15000,
+  "n": 1000,
+  "real": 524,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 35,
+  "real_train": 489,
+  "buckets": {
+   "1-4": {
+    "n": 6,
+    "real": 6
+   },
+   "5-7": {
+    "n": 156,
+    "real": 113
+   },
+   "8-10": {
+    "n": 475,
+    "real": 242
+   },
+   "11-14": {
+    "n": 363,
+    "real": 163
+   }
+  },
+  "mean_gen_len": 9.713,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "privatizes",
+   "transplays",
+   "vernical",
+   "disaffignants",
+   "acidities",
+   "brandiest",
+   "champoons",
+   "salleted",
+   "corbets",
+   "trichometric",
+   "responsioned",
+   "tubular",
+   "scientifies",
+   "fellability",
+   "halloes",
+   "outstand",
+   "decorate",
+   "swathers",
+   "leading",
+   "misadd"
+  ]
+ },
+ {
+  "arm": "e256_L4",
+  "n_embd": 256,
+  "n_layer": 4,
+  "iter": 20000,
+  "temp": 0.8,
+  "n_params": 3178240,
+  "best_val_bpc": 2.375484567644915,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 427,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 25,
+  "real_train": 402,
+  "buckets": {
+   "1-4": {
+    "n": 14,
+    "real": 14
+   },
+   "5-7": {
+    "n": 222,
+    "real": 105
+   },
+   "8-10": {
+    "n": 463,
+    "real": 199
+   },
+   "11-14": {
+    "n": 301,
+    "real": 109
+   }
+  },
+  "mean_gen_len": 9.204,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primarines",
+   "tarrowedly",
+   "velvitimates",
+   "disaffignants",
+   "apishly",
+   "brandishees",
+   "chemistem",
+   "sallet",
+   "corbitative",
+   "totillations",
+   "remarked",
+   "tubiferous",
+   "disendowers",
+   "feling",
+   "hallucinoses",
+   "oons",
+   "necrophobia",
+   "swackiest",
+   "leafing",
+   "misaverring"
+  ]
+ },
+ {
+  "arm": "e256_L4",
+  "n_embd": 256,
+  "n_layer": 4,
+  "iter": 20000,
+  "temp": 0.5,
+  "n_params": 3178240,
+  "best_val_bpc": 2.375484567644915,
+  "ckpt_iter": 20000,
+  "n": 1000,
+  "real": 641,
+  "empty": 0,
+  "overlong": 0,
+  "real_val": 36,
+  "real_train": 605,
+  "buckets": {
+   "1-4": {
+    "n": 2,
+    "real": 2
+   },
+   "5-7": {
+    "n": 141,
+    "real": 99
+   },
+   "8-10": {
+    "n": 470,
+    "real": 298
+   },
+   "11-14": {
+    "n": 387,
+    "real": 242
+   }
+  },
+  "mean_gen_len": 9.829,
+  "mean_train_len": 8.969286083190974,
+  "samples": [
+   "primarines",
+   "transmittal",
+   "velvets",
+   "disaffirmance",
+   "acidification",
+   "brandisher",
+   "champsies",
+   "salter",
+   "corbities",
+   "totillation",
+   "responsories",
+   "tuberculise",
+   "stieves",
+   "feling",
+   "hallucinoses",
+   "outstart",
+   "necrophobia",
+   "stackhouse",
+   "leaflike",
+   "missionarian"
+  ]
+ }
+]
