@@ -49,11 +49,12 @@ def parse_log(path):
     return series
 
 
-def read_tsv(path):
+def read_tsv(paths):
     rows = {}
-    with open(path) as f:
-        for r in csv.DictReader(f, delimiter="\t"):
-            rows[r["checkpoint"]] = r
+    for path in paths:
+        with open(path) as f:
+            for r in csv.DictReader(f, delimiter="\t"):
+                rows[r["checkpoint"]] = r
     return rows
 
 
@@ -116,7 +117,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--log_pe", required=True)
     ap.add_argument("--log_nope", required=True)
-    ap.add_argument("--tsv", required=True)
+    ap.add_argument("--tsv", nargs="+", required=True)
     ap.add_argument("--samples_dir", required=True)
     ap.add_argument("--corpus", required=True)
     ap.add_argument("--min_count", type=int, default=5)
@@ -153,7 +154,8 @@ def main():
     rwf = {"pe": {}, "nope": {}}
     for name, r in rows.items():
         arm = "nope" if "_nope_mps" in name else "pe"  # every name has "char_nope_pilot"
-        if "_iter" in name and r["iter"]:
+        # periodic _iterN saves, plus _final (= iter 10000; no _iter10000 is written)
+        if ("_iter" in name or "_final" in name) and r["iter"]:
             rwf[arm][int(r["iter"])] = float(r["real_frac"])
     print("\nreal-word fraction (same sampling seeds both arms):")
     print(f"{'iter':>6} {'PE':>7} {'NoPE':>7}")
@@ -190,7 +192,7 @@ def main():
         for k in range(1, len(w) + 1):
             prefixes.add(w[:k])
     for fn in sorted(os.listdir(a.samples_dir)):
-        if not fn.endswith(".samples.txt") or "_iter" not in fn:
+        if not fn.endswith(".samples.txt") or ("_iter" not in fn and "_final" not in fn):
             continue
         n, nr, by_len, div, edit = signature(os.path.join(a.samples_dir, fn), real, prefixes)
         nw = n - nr
