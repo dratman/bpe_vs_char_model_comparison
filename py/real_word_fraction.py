@@ -118,6 +118,7 @@ def sample_checkpoint(model_path, vocab, min_count, args, device):
     nonwords = Counter()
     n_words = 0
     n_real = 0
+    samples = []
 
     for i in range(args.num_samples):
         # Same RNG stream per sample index across every checkpoint.
@@ -140,6 +141,7 @@ def sample_checkpoint(model_path, vocab, min_count, args, device):
             stop_token_id=None,
         )
         gen_text = tokenizer.decode(y[0].tolist()[len(prompt_ids):])
+        samples.append(gen_text)
 
         for w in extract_scorable_words(gen_text):
             n_words += 1
@@ -165,6 +167,7 @@ def sample_checkpoint(model_path, vocab, min_count, args, device):
         'n_real': n_real,
         'frac': (n_real / n_words) if n_words else 0.0,
         'nonwords': nonwords,
+        'samples': samples,
     }
 
 
@@ -195,6 +198,10 @@ def main():
                         help='How many most-frequent non-words to print per checkpoint')
     parser.add_argument('--tsv', type=str, default=None,
                         help='Optional path to write one TSV row per checkpoint for plotting')
+    parser.add_argument('--samples_out', type=str, default=None,
+                        help='Optional directory: write each checkpoint\'s generated samples '
+                             'to <dir>/<checkpoint basename>.samples.txt (samples separated by '
+                             'a line of 40 "=" characters), for later error-signature analysis')
     parser.add_argument('--progress_every', type=int, default=0,
                         help='Print progress to stderr every N samples (0=silent)')
     args = parser.parse_args()
@@ -224,6 +231,12 @@ def main():
               f"({r['n_real']}/{r['n_words']} words, {time.time() - t0:.0f}s)",
               file=sys.stderr, flush=True)
         results.append(r)
+        if args.samples_out:
+            os.makedirs(args.samples_out, exist_ok=True)
+            out = os.path.join(args.samples_out,
+                               os.path.basename(mp).replace('.pt', '') + '.samples.txt')
+            with open(out, 'w', encoding='utf-8') as f:
+                f.write(('\n' + '=' * 40 + '\n').join(r['samples']))
 
     results.sort(key=lambda r: (r['iter'] is None, r['iter'] if r['iter'] is not None else 0))
 
