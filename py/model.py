@@ -405,6 +405,7 @@ class GPTConfig:
     use_autocorrelation_attention: bool = False  # Set True to use autocorrelation attention
     tie_weights: bool = True  # Tie input embeddings to output projection
     no_gelu: bool = False  # Disable GELU nonlinearity in MLP (makes it purely linear)
+    no_pos_emb: bool = False  # NoPE: no positional embedding at all (no wpe parameter, no position term in the graph); causal mask kept
     fp32_attention: bool = False  # Force attention (QK^T/softmax/SDPA) to fp32 even under bf16 autocast — fixes the big-config CUDA bf16 instability
     autocorr_top_k: int = None  # Number of top lags for autocorrelation (None = all)
 
@@ -430,6 +431,11 @@ class GPT(nn.Module):
 
         # init all weights
         self.apply(self._init_weights)
+        # NoPE: wpe was built only so the init above draws the same RNG stream as
+        # a PE model with the same seed (every other weight gets an identical
+        # init). Remove it now so the model has no positional parameter at all.
+        if getattr(config, 'no_pos_emb', False):
+            del self.transformer['wpe']
         # apply special scaled init to the residual projections, per GPT-2 paper
         for pn, p in self.named_parameters():
             if pn.endswith('c_proj.weight'):
@@ -451,7 +457,7 @@ class GPT(nn.Module):
         For non-embedding count (default), the position embeddings get subtracted.
         """
         n_params = sum(p.numel() for p in self.parameters())
-        if non_embedding:
+        if non_embedding and 'wpe' in self.transformer:
             n_params -= self.transformer.wpe.weight.numel()
         return n_params
 
@@ -471,8 +477,11 @@ class GPT(nn.Module):
 
         # forward the GPT model itself
         tok_emb = self.transformer.wte(idx)
-        pos_emb = self.transformer.wpe(pos)
-        x = self.transformer.drop(tok_emb + pos_emb)
+        if getattr(self.config, 'no_pos_emb', False):
+            x = self.transformer.drop(tok_emb)  # NoPE: token embeddings only
+        else:
+            pos_emb = self.transformer.wpe(pos)
+            x = self.transformer.drop(tok_emb + pos_emb)
         # Residual-stream capture: layer 0 = post-embedding pre-block-0, pre-final-layernorm.
         if return_hidden_states:
             hidden_states = [x]
@@ -496,7 +505,8 @@ class GPT(nn.Module):
     def crop_block_size(self, block_size):
         assert block_size <= self.config.block_size
         self.config.block_size = block_size
-        self.transformer.wpe.weight = nn.Parameter(self.transformer.wpe.weight[:block_size])
+        if 'wpe' in self.transformer:
+            self.transformer.wpe.weight = nn.Parameter(self.transformer.wpe.weight[:block_size])
         for block in self.transformer.h:
             if hasattr(block.attn, 'bias'):
                 block.attn.bias = block.attn.bias[:,:,:block_size,:block_size]

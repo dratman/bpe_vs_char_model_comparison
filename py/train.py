@@ -116,6 +116,9 @@ def parse_args():
                             'keeping the rest of the net in bf16 for speed.')
     parser.add_argument('--no_gelu', action='store_true',
                        help='Disable GELU nonlinearity in MLP (makes it purely linear)')
+    parser.add_argument('--no_pos_emb', action='store_true',
+                       help='NoPE: no positional embedding (no wpe parameter, token embeddings only); '
+                            'the causal mask is kept, so position can only be recovered implicitly')
 
     # RNG seed (replication runs)
     parser.add_argument('--seed', type=int, default=None,
@@ -951,6 +954,7 @@ def main():
             use_autocorrelation_attention=args.autocorrelation_attention,
             tie_weights=not args.untie_weights,
             no_gelu=args.no_gelu,
+            no_pos_emb=args.no_pos_emb,
             fp32_attention=args.fp32_attention,
         )
 
@@ -969,8 +973,11 @@ def main():
 
             # Forward the GPT model itself
             tok_emb = self.transformer.wte(idx)
-            pos_emb = self.transformer.wpe(pos)
-            x = self.transformer.drop(tok_emb + pos_emb)
+            if getattr(self.config, 'no_pos_emb', False):
+                x = self.transformer.drop(tok_emb)
+            else:
+                pos_emb = self.transformer.wpe(pos)
+                x = self.transformer.drop(tok_emb + pos_emb)
             for block in self.transformer.h:
                 x = block(x)
             x = self.transformer.ln_f(x)
@@ -1039,6 +1046,8 @@ def main():
     print(f"  bias:               {not args.no_bias}  (LayerNorm + Linear bias)")
     print(f"  tie_weights:        {not args.untie_weights}")
     print(f"  no_gelu:            {args.no_gelu}")
+    print(f"  no_pos_emb:         {getattr(model.config, 'no_pos_emb', False)}  "
+          f"(wpe parameter present: {'wpe' in model.transformer})")
     print(f"  no_bias:            {args.no_bias}")
     print(f"--- Training ---")
     print(f"  batch_size:         {args.batch_size}")
