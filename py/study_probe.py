@@ -25,14 +25,15 @@ KINDS = ('prose', 'morphology', 'short_sentence', 'repetition')
 
 
 class ProbeRunner:
-    def __init__(self, probe_path, tokenizer, device, chunk=8):
+    def __init__(self, probe_path, tokenizer, device, max_input=None, chunk=8):
         with open(probe_path, encoding='utf-8') as f:
             data = json.load(f)
         self.passages = data['passages']
         self.device = device
         self.chunk = chunk
         self.kinds = [p['kind'] for p in self.passages]
-        self.n_chars = [len(p['text']) for p in self.passages]
+        self.n_chars = []    # characters covered by the (possibly truncated) token sequence
+        self.n_truncated = 0
         self.ids = []        # list of 1-D long tensors (full token sequence, length n_i)
         self.rep_k = []      # token index where the second copy starts (repetition passages) else None
         for p in self.passages:
@@ -48,9 +49,19 @@ class ProbeRunner:
             else:
                 ids = tokenizer.encode(text)
                 k = p['repeat_offset'] if p['kind'] == 'repetition' else None
+            covered = len(text)
+            if max_input is not None and len(ids) > max_input + 1:
+                # BPE passage longer than the model context: score only the first max_input
+                # predictions; bits/char then uses the characters those tokens cover.
+                ids = ids[:max_input + 1]
+                covered = offs[max_input][1]
+                self.n_truncated += 1
+            self.n_chars.append(covered)
             self.ids.append(torch.tensor(ids, dtype=torch.long))
             self.rep_k.append(k)
         self.n_layer = None
+        if self.n_truncated:
+            print(f"ProbeRunner: {self.n_truncated} passages truncated to {max_input} input tokens")
 
     @torch.no_grad()
     def run(self, model, ctx):
@@ -68,7 +79,7 @@ class ProbeRunner:
         bits = {k: 0.0 for k in kinds}
         chars = {k: 0 for k in kinds}
         rep_bits_first = rep_bits_second = 0.0
-        rep_chars = 0
+        rep_chars_first = rep_chars_second = 0
 
         N = len(self.passages)
         for c0 in range(0, N, self.chunk):
@@ -145,15 +156,16 @@ class ProbeRunner:
                     # token t_m (m>=1) is predicted at input m-1
                     rep_bits_first += float(nll_bits[b, :k - 1].sum())
                     rep_bits_second += float(nll_bits[b, k - 1:lens[b]].sum())
-                    rep_chars += self.passages[i]['repeat_offset']
+                    rep_chars_first += self.passages[i]['repeat_offset']
+                    rep_chars_second += self.n_chars[i] - self.passages[i]['repeat_offset']
 
         out = dict(
             attn_entropy={k: (ent_sum[k] / max(row_cnt[k], 1)).tolist() for k in kinds},
             attn_eff_n={k: (eff_sum[k] / max(row_cnt[k], 1)).tolist() for k in kinds},
             bpc={k: bits[k] / chars[k] for k in kinds},
             induction=(ind_sum / max(ind_cnt, 1)).tolist(),
-            rep_first_bpc=rep_bits_first / rep_chars,
-            rep_second_bpc=rep_bits_second / rep_chars,
+            rep_first_bpc=rep_bits_first / rep_chars_first,
+            rep_second_bpc=rep_bits_second / rep_chars_second,
         )
         out['rep_improvement_bpc'] = out['rep_first_bpc'] - out['rep_second_bpc']
         if was_training:

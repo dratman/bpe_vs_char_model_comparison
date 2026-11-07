@@ -1193,7 +1193,7 @@ def main():
     probe = None
     probe_log_path = None
     if args.probe_batch:
-        probe = study_probe.ProbeRunner(args.probe_batch, tokenizer, device)
+        probe = study_probe.ProbeRunner(args.probe_batch, tokenizer, device, max_input=args.block_size)
         probe_log_path = os.path.join(run_dir, 'probe_log.jsonl')
         print(f"[{get_timestamp()}] Probe batch {args.probe_batch}: every {args.probe_interval} steps -> {probe_log_path}")
     prev_w = None          # pre-step copies of the block weight matrices (for the update-size probe)
