@@ -830,6 +830,7 @@ def main():
         ckpt_base = re.sub(r'_iter\d+$', '', ckpt_base)
         ckpt_base = re.sub(r'_final$', '', ckpt_base)
         ckpt_base = re.sub(r'_rolling$', '', ckpt_base)
+        ckpt_base = re.sub(r'_resume$', '', ckpt_base)  # study-mode in-place resumable checkpoint
         meta_path = ckpt_base + '_meta.pkl'
         if not os.path.exists(meta_path):
             print(f"Error: Metadata file '{meta_path}' not found")
@@ -1206,11 +1207,49 @@ def main():
         return [[(n, p) for n, p in blk.named_parameters() if p.dim() >= 2]
                 for blk in raw_model.transformer.h]
 
+    def do_probe(iter_num, lr):
+        nonlocal prev_w, peak_train_alloc, peak_train_reserved
+        rec = dict(step=iter_num, chars_seen=chars_seen_at(iter_num),
+                   train_loss=(loss.item() if loss is not None else None),
+                   lr=lr, last_step_lr=last_lr)
+        if device == 'cuda':
+            peak_train_alloc = max(peak_train_alloc, torch.cuda.max_memory_allocated())
+            peak_train_reserved = max(peak_train_reserved, torch.cuda.max_memory_reserved())
+            torch.cuda.reset_peak_memory_stats()
+        if prev_w is not None:
+            upd = []
+            for layer_mats, layer_prev in zip(block_matrices(), prev_w):
+                rels = [((p.detach() - layer_prev[n]).norm() / p.detach().norm()).item()
+                        for n, p in layer_mats]
+                upd.append(sum(rels) / len(rels))
+            rec['update_rel'] = upd
+            prev_w = None
+        else:
+            rec['update_rel'] = None
+        rec.update(probe.run(raw_model, ctx))
+        if device == 'cuda':
+            rec['mem'] = dict(train_peak_alloc=peak_train_alloc, train_peak_reserved=peak_train_reserved,
+                              probe_peak_alloc=torch.cuda.max_memory_allocated(),
+                              probe_peak_reserved=torch.cuda.max_memory_reserved())
+            torch.cuda.reset_peak_memory_stats()
+        with open(probe_log_path, 'a') as f:
+            f.write(json.dumps(rec) + '\n')
+        print(f"[{get_timestamp()}] Probe logged at step {iter_num}: bpc " +
+              ' '.join(f"{k}={v:.3f}" for k, v in rec['bpc'].items()))
+
+    batch_hashes = []
+
     def get_study_batch():
-        return get_batch_study(train_data, args.batch_size, args.block_size, data_gen, device)
+        xb, yb = get_batch_study(train_data, args.batch_size, args.block_size, data_gen, device)
+        if len(batch_hashes) < 20:
+            import hashlib
+            batch_hashes.append(hashlib.sha1(xb.cpu().numpy().tobytes()).hexdigest()[:12])
+            if len(batch_hashes) == 20:
+                print(f"[{get_timestamp()}] First 20 training batches sha1[:12]: {' '.join(batch_hashes)}")
+        return xb, yb
 
     if study and args.resume and 'data_gen_state' in checkpoint:
-        data_gen.set_state(checkpoint['data_gen_state'])
+        data_gen.set_state(checkpoint['data_gen_state'].cpu())
 
     # Get first batch
     if study:
@@ -1248,33 +1287,7 @@ def main():
         # Study: snapshot (exact step) and probe pass, before any update of this iteration
         maybe_snapshot(iter_num)
         if probe is not None and iter_num % args.probe_interval == 0:
-            rec = dict(step=iter_num, chars_seen=chars_seen_at(iter_num),
-                       train_loss=(loss.item() if loss is not None else None),
-                       lr=lr, last_step_lr=last_lr)
-            if device == 'cuda':
-                peak_train_alloc = max(peak_train_alloc, torch.cuda.max_memory_allocated())
-                peak_train_reserved = max(peak_train_reserved, torch.cuda.max_memory_reserved())
-                torch.cuda.reset_peak_memory_stats()
-            if prev_w is not None:
-                upd = []
-                for layer_mats, layer_prev in zip(block_matrices(), prev_w):
-                    rels = [((p.detach() - layer_prev[n]).norm() / p.detach().norm()).item()
-                            for n, p in layer_mats]
-                    upd.append(sum(rels) / len(rels))
-                rec['update_rel'] = upd
-                prev_w = None
-            else:
-                rec['update_rel'] = None
-            rec.update(probe.run(raw_model, ctx))
-            if device == 'cuda':
-                rec['mem'] = dict(train_peak_alloc=peak_train_alloc, train_peak_reserved=peak_train_reserved,
-                                  probe_peak_alloc=torch.cuda.max_memory_allocated(),
-                                  probe_peak_reserved=torch.cuda.max_memory_reserved())
-                torch.cuda.reset_peak_memory_stats()
-            with open(probe_log_path, 'a') as f:
-                f.write(json.dumps(rec) + '\n')
-            print(f"[{get_timestamp()}] Probe logged at step {iter_num}: bpc " +
-                  ' '.join(f"{k}={v:.3f}" for k, v in rec['bpc'].items()))
+            do_probe(iter_num, lr)
 
         # Evaluate
         if iter_num % args.eval_interval == 0:
@@ -1489,6 +1502,8 @@ def main():
 
     # Snapshot at the final step if requested (loop exits before the top-of-loop check)
     maybe_snapshot(iter_num)
+    if probe is not None and iter_num % args.probe_interval == 0 and iter_num > resume_iter:
+        do_probe(iter_num, lr)
 
     # Final save
     final_epoch = calculate_epoch(iter_num, args.batch_size * args.grad_accum_steps, args.block_size, train_tokens)
