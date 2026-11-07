@@ -31,6 +31,7 @@ import os
 import sys
 import time
 import math
+import json
 import pickle
 import re
 import random
@@ -40,6 +41,8 @@ from datetime import datetime
 from contextlib import nullcontext
 from model import GPT, GPTConfig
 from tokenizer import CharTokenizer, BPETokenizer, WordPieceTokenizer, load_tokenizer
+import study_data
+import study_probe
 
 
 # Padding token ID - always at vocab_size
@@ -127,6 +130,29 @@ def parse_args():
                             'Set for documented replication runs; note CUDA/MPS kernels '
                             'are not bitwise deterministic, so same-seed runs still '
                             'diverge slowly — the seed controls init and data order.')
+
+    # Study switches (coupler-queue 0012). All default to off = historical behaviour.
+    parser.add_argument('--init_seed', type=int, default=None,
+                       help='Seed for initial weights only (torch global RNG, set just before the '
+                            'model is built). Falls back to --seed.')
+    parser.add_argument('--data_seed', type=int, default=None,
+                       help='Seed for data order (own torch.Generator, study mode) and the '
+                            'train/val split (python/numpy RNG). Falls back to --seed.')
+    parser.add_argument('--heldout_frac', type=float, default=0.0,
+                       help='STUDY MODE (continuous only): hold out the last this-fraction of the '
+                            'corpus BY CHARACTER OFFSET (same text for any tokenizer); training uses '
+                            'only the rest, validation is the held-out region. Overrides --val_split. '
+                            'Token streams are cached in --study_cache_dir. 0 = off.')
+    parser.add_argument('--study_cache_dir', type=str, default='pt/study0012',
+                       help='Directory for the study-mode token cache')
+    parser.add_argument('--snapshot_steps', type=str, default=None,
+                       help='File of step numbers (comma/space/newline separated); weights-only fp32 '
+                            'snapshots are saved into the output directory at exactly those steps '
+                            '(snap_step<step>_chars<chars seen>.pt)')
+    parser.add_argument('--probe_batch', type=str, default=None,
+                       help='Probe-batch JSON (doc/0012_probe_batch.json); enables probe logging')
+    parser.add_argument('--probe_interval', type=int, default=250,
+                       help='Run the probe batch every this many steps (needs --probe_batch)')
 
     # Bias option
     parser.add_argument('--no_bias', action='store_true',
@@ -414,10 +440,19 @@ def get_batch_continuous(data, batch_size, block_size, device='cpu'):
     Randomly samples starting positions and extracts block_size chunks.
     """
     ix = torch.randint(len(data) - block_size, (batch_size,))
-    x = torch.stack([data[i:i+block_size] for i in ix])
-    y = torch.stack([data[i+1:i+1+block_size] for i in ix])
+    x = torch.stack([data[i:i+block_size] for i in ix]).long()
+    y = torch.stack([data[i+1:i+1+block_size] for i in ix]).long()
     x, y = x.to(device), y.to(device)
     return x, y
+
+
+def get_batch_study(data, batch_size, block_size, generator, device='cpu'):
+    """Study-mode batch: window starts drawn from a dedicated generator (data_seed), so the
+    data order is independent of the init seed and of every other use of the global RNG."""
+    ix = torch.randint(len(data) - block_size - 1, (batch_size,), generator=generator)
+    idx = ix[:, None] + torch.arange(block_size + 1)[None, :]
+    w = data[idx].long()
+    return w[:, :-1].to(device), w[:, 1:].to(device)
 
 
 @torch.no_grad()
@@ -699,6 +734,24 @@ def main():
         random.seed(args.seed)
         np.random.seed(args.seed)
         print(f"[{get_timestamp()}] Seeded torch/random/numpy RNG with --seed {args.seed}")
+    if args.data_seed is not None:
+        random.seed(args.data_seed)
+        np.random.seed(args.data_seed)
+    study = args.heldout_frac > 0
+    if study and args.mode != 'continuous':
+        print("Error: --heldout_frac requires --mode continuous")
+        sys.exit(1)
+    run_dir = os.path.dirname(args.output) if args.output else '.'
+    data_gen = None
+    if study:
+        data_gen = torch.Generator()
+        ds = args.data_seed if args.data_seed is not None else args.seed
+        if ds is not None:
+            data_gen.manual_seed(ds)
+        else:
+            data_gen.seed()
+        print(f"[{get_timestamp()}] STUDY MODE: held-out fraction {args.heldout_frac} (by character offset), "
+              f"data_seed {ds}, init_seed {args.init_seed if args.init_seed is not None else args.seed}")
 
     # Set up precision
     precision_map = {
@@ -827,7 +880,22 @@ def main():
         # prepare_continuous_data, so text is unused but still in memory
         # briefly; it gets freed by the `del text` later in main().
         token_cache_path = os.path.splitext(args.output)[0] + '_tokens.pt'
-        if args.resume and os.path.exists(token_cache_path) \
+        if study:
+            tok_path = args.tokenizer_from
+            if tok_path is None:
+                tok_path = os.path.splitext(args.output)[0] + '_meta.pkl'
+            train_data, val_data, study_info = study_data.load_or_build_tokens(
+                text, args.input, tokenizer, tok_path, args.study_cache_dir, args.heldout_frac)
+            chars_per_token = study_info['chars_per_token_train']
+            train_tokens = len(train_data)
+            print(f"[{get_timestamp()}] Study data: train {len(train_data):,} tokens "
+                  f"({study_info['train_chars']:,} chars), held-out {len(val_data):,} tokens "
+                  f"({study_info['heldout_chars']:,} chars), {chars_per_token:.4f} chars/token")
+            train_blocks = None
+            val_blocks = None
+            used_token_cache = True
+            all_tokens = None
+        elif args.resume and os.path.exists(token_cache_path) \
                 and os.path.getmtime(token_cache_path) >= os.path.getmtime(args.input):
             print(f"[{get_timestamp()}] Loading tokenized corpus from cache: {token_cache_path}")
             all_tokens = torch.load(token_cache_path, map_location='cpu')
@@ -838,20 +906,21 @@ def main():
             print(f"[{get_timestamp()}] Saving tokenized corpus cache: {token_cache_path}")
             torch.save(all_tokens, token_cache_path)
 
-        # Split into train and validation
-        print(f"[{get_timestamp()}] Splitting into train and validation sets...")
-        n = len(all_tokens)
-        n_val = int(n * args.val_split)
-        n_train = n - n_val
+        # Split into train and validation (study mode already split by character offset)
+        if not study:
+            print(f"[{get_timestamp()}] Splitting into train and validation sets...")
+            n = len(all_tokens)
+            n_val = int(n * args.val_split)
+            n_train = n - n_val
 
-        train_data = all_tokens[:n_train]
-        val_data = all_tokens[n_train:]
-        print(f"[{get_timestamp()}] Split complete.")
+            train_data = all_tokens[:n_train]
+            val_data = all_tokens[n_train:]
+            print(f"[{get_timestamp()}] Split complete.")
 
-        train_tokens = len(train_data)
+            train_tokens = len(train_data)
 
-        print(f"[{get_timestamp()}] Training tokens: {len(train_data):,}")
-        print(f"[{get_timestamp()}] Validation tokens: {len(val_data):,}")
+            print(f"[{get_timestamp()}] Training tokens: {len(train_data):,}")
+            print(f"[{get_timestamp()}] Validation tokens: {len(val_data):,}")
 
         # Placeholders for compatibility
         train_blocks = None
@@ -959,6 +1028,9 @@ def main():
         )
 
         gptconf = GPTConfig(**model_args)
+        if args.init_seed is not None:
+            torch.manual_seed(args.init_seed)
+            print(f"[{get_timestamp()}] Seeded torch RNG with --init_seed {args.init_seed} (initial weights)")
         model = GPT(gptconf)
         model.to(device)
 
@@ -1099,8 +1171,51 @@ def main():
     iter_num = resume_iter
     running_mfu = -1.0
 
+    # ---- Study instrumentation (all off unless the switches are given) ----
+    snap_steps = set()
+    if args.snapshot_steps:
+        with open(args.snapshot_steps) as f:
+            snap_steps = {int(t) for t in re.split(r'[,\s]+', f.read().strip()) if t}
+        print(f"[{get_timestamp()}] Snapshots at {len(snap_steps)} steps -> {run_dir}")
+    chars_per_step_nominal = (args.batch_size * args.grad_accum_steps * args.block_size *
+                              (chars_per_token if study else 1.0))
+
+    def chars_seen_at(step):
+        return int(round(step * chars_per_step_nominal))
+
+    def maybe_snapshot(step):
+        if step in snap_steps and step >= resume_iter:
+            fn = os.path.join(run_dir, f"snap_step{step:06d}_chars{chars_seen_at(step)}.pt")
+            if not os.path.exists(fn):
+                torch.save({k: v.detach().float().cpu() for k, v in raw_model.state_dict().items()}, fn)
+                print(f"[{get_timestamp()}] Saved snapshot {fn}")
+
+    probe = None
+    probe_log_path = None
+    if args.probe_batch:
+        probe = study_probe.ProbeRunner(args.probe_batch, tokenizer, device)
+        probe_log_path = os.path.join(run_dir, 'probe_log.jsonl')
+        print(f"[{get_timestamp()}] Probe batch {args.probe_batch}: every {args.probe_interval} steps -> {probe_log_path}")
+    prev_w = None          # pre-step copies of the block weight matrices (for the update-size probe)
+    peak_train_alloc = 0
+    peak_train_reserved = 0
+    last_lr = None
+    loss = None
+
+    def block_matrices():
+        return [[(n, p) for n, p in blk.named_parameters() if p.dim() >= 2]
+                for blk in raw_model.transformer.h]
+
+    def get_study_batch():
+        return get_batch_study(train_data, args.batch_size, args.block_size, data_gen, device)
+
+    if study and args.resume and 'data_gen_state' in checkpoint:
+        data_gen.set_state(checkpoint['data_gen_state'])
+
     # Get first batch
-    if args.mode == 'continuous':
+    if study:
+        X, Y = get_study_batch()
+    elif args.mode == 'continuous':
         X, Y = get_batch_continuous(train_data, args.batch_size, args.block_size, device)
     else:
         X, Y = get_batch(train_blocks, args.batch_size, device)
@@ -1130,6 +1245,37 @@ def main():
         for param_group in optimizer.param_groups:
             param_group['lr'] = lr
 
+        # Study: snapshot (exact step) and probe pass, before any update of this iteration
+        maybe_snapshot(iter_num)
+        if probe is not None and iter_num % args.probe_interval == 0:
+            rec = dict(step=iter_num, chars_seen=chars_seen_at(iter_num),
+                       train_loss=(loss.item() if loss is not None else None),
+                       lr=lr, last_step_lr=last_lr)
+            if device == 'cuda':
+                peak_train_alloc = max(peak_train_alloc, torch.cuda.max_memory_allocated())
+                peak_train_reserved = max(peak_train_reserved, torch.cuda.max_memory_reserved())
+                torch.cuda.reset_peak_memory_stats()
+            if prev_w is not None:
+                upd = []
+                for layer_mats, layer_prev in zip(block_matrices(), prev_w):
+                    rels = [((p.detach() - layer_prev[n]).norm() / p.detach().norm()).item()
+                            for n, p in layer_mats]
+                    upd.append(sum(rels) / len(rels))
+                rec['update_rel'] = upd
+                prev_w = None
+            else:
+                rec['update_rel'] = None
+            rec.update(probe.run(raw_model, ctx))
+            if device == 'cuda':
+                rec['mem'] = dict(train_peak_alloc=peak_train_alloc, train_peak_reserved=peak_train_reserved,
+                                  probe_peak_alloc=torch.cuda.max_memory_allocated(),
+                                  probe_peak_reserved=torch.cuda.max_memory_reserved())
+                torch.cuda.reset_peak_memory_stats()
+            with open(probe_log_path, 'a') as f:
+                f.write(json.dumps(rec) + '\n')
+            print(f"[{get_timestamp()}] Probe logged at step {iter_num}: bpc " +
+                  ' '.join(f"{k}={v:.3f}" for k, v in rec['bpc'].items()))
+
         # Evaluate
         if iter_num % args.eval_interval == 0:
             if args.mode == 'continuous':
@@ -1156,7 +1302,7 @@ def main():
             # Save best model
             if losses['val'] < best_val_loss:
                 best_val_loss = losses['val']
-                if iter_num > 0:
+                if iter_num > 0 and not study:
                     checkpoint = {
                         'model': raw_model.state_dict(),
                         'optimizer': optimizer.state_dict(),
@@ -1175,7 +1321,7 @@ def main():
             # Save rolling checkpoint via atomic rename. Overwrites the prior
             # rolling save every eval; this is the canonical --resume target
             # for crash recovery (loses at most eval_interval iters of work).
-            if iter_num > 0:
+            if iter_num > 0 and not study:
                 rolling_checkpoint = {
                     'model': raw_model.state_dict(),
                     'optimizer': optimizer.state_dict(),
@@ -1194,8 +1340,21 @@ def main():
                 os.rename(tmp_path, rolling_path)
                 print(f"  Saved rolling checkpoint to {rolling_path} (iter {iter_num}, val {losses['val']:.4f})")
 
+        # Study: one resumable checkpoint per run, overwritten in place at --save_interval
+        if study and iter_num > 0 and iter_num % args.save_interval == 0:
+            resume_file = os.path.splitext(args.output)[0] + '_resume.pt'
+            torch.save({
+                'model': raw_model.state_dict(), 'optimizer': optimizer.state_dict(),
+                'model_args': model_args, 'iter_num': iter_num, 'best_val_loss': best_val_loss,
+                'config': vars(args), 'precision': args.precision,
+                'tokenizer_type': tokenizer.tokenizer_type, 'padding_token': PADDING_TOKEN,
+                'mode': args.mode, 'data_gen_state': data_gen.get_state(),
+            }, resume_file + '.tmp')
+            os.replace(resume_file + '.tmp', resume_file)
+            print(f"[{get_timestamp()}] Saved resumable checkpoint {resume_file} (iter {iter_num})")
+
         # Save checkpoint at regular intervals
-        if iter_num > 0 and iter_num % args.save_interval == 0:
+        if iter_num > 0 and iter_num % args.save_interval == 0 and not study:
             checkpoint_file = os.path.splitext(args.output)[0] + f'_iter{iter_num}.pt'
             checkpoint = {
                 'model': raw_model.state_dict(),
@@ -1268,7 +1427,9 @@ def main():
 
             # Get next batch for next micro-step (except on last step)
             if micro_step < args.grad_accum_steps - 1:
-                if args.mode == 'continuous':
+                if study:
+                    X, Y = get_study_batch()
+                elif args.mode == 'continuous':
                     X, Y = get_batch_continuous(train_data, args.batch_size, args.block_size, device)
                 else:
                     X, Y = get_batch(train_blocks, args.batch_size, device)
@@ -1279,6 +1440,10 @@ def main():
 
         # Unscaled loss for logging (sum of micro_losses = original scale)
         loss = micro_loss * args.grad_accum_steps
+
+        if probe is not None and (iter_num + 1) % args.probe_interval == 0:
+            prev_w = [{n: p.detach().clone() for n, p in layer} for layer in block_matrices()]
+        last_lr = lr
 
         if scaler is not None:
             scaler.unscale_(optimizer)
@@ -1299,7 +1464,8 @@ def main():
             speed_dt = time.time() - speed_t0
             epoch = calculate_epoch(iter_num, args.batch_size * args.grad_accum_steps, args.block_size, train_tokens)
             elapsed = format_elapsed(training_start_time)
-            print(f"[{get_timestamp()}] [{elapsed}] Speed at iter {iter_num} (epoch {epoch:.2f}): {100/speed_dt:.2f} iters/sec")
+            print(f"[{get_timestamp()}] [{elapsed}] Speed at iter {iter_num} (epoch {epoch:.2f}): {100/speed_dt:.2f} iters/sec"
+                  + (f" | {100/speed_dt*chars_per_step_nominal:,.0f} chars/sec (nominal)" if study else ""))
             speed_t0 = time.time()
 
         # Loss logging
@@ -1314,10 +1480,15 @@ def main():
         local_iter_num += 1
 
         # Get next batch
-        if args.mode == 'continuous':
+        if study:
+            X, Y = get_study_batch()
+        elif args.mode == 'continuous':
             X, Y = get_batch_continuous(train_data, args.batch_size, args.block_size, device)
         else:
             X, Y = get_batch(train_blocks, args.batch_size, device)
+
+    # Snapshot at the final step if requested (loop exits before the top-of-loop check)
+    maybe_snapshot(iter_num)
 
     # Final save
     final_epoch = calculate_epoch(iter_num, args.batch_size * args.grad_accum_steps, args.block_size, train_tokens)

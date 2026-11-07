@@ -57,6 +57,10 @@ class CausalSelfAttention(nn.Module):
         # block sizes on CUDA (diary: big-config CUDA bf16 instability). Keeping only
         # this in fp32 stabilizes training while the rest of the net stays bf16.
         self.fp32_attention = getattr(config, 'fp32_attention', False)
+        # Instrumentation (coupler-queue 0012): when set to a callable, forward() computes the
+        # explicit fp32 attention matrix (B, nh, T, T) and passes it to this hook instead of
+        # using the fused kernel. Used only for probe passes; None (default) = unchanged behaviour.
+        self.attn_probe = None
         # flash attention make GPU go brrrrr but support is only in PyTorch >= 2.0
         self.flash = hasattr(torch.nn.functional, 'scaled_dot_product_attention')
         if not self.flash:
@@ -75,7 +79,18 @@ class CausalSelfAttention(nn.Module):
         v = v.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
 
         # causal self-attention; Self-attend: (B, nh, T, hs) x (B, nh, hs, T) -> (B, nh, T, T)
-        if self.fp32_attention:
+        if self.attn_probe is not None:
+            orig_dtype = x.dtype
+            with torch.autocast(device_type=q.device.type, enabled=False):
+                qf, kf, vf = q.float(), k.float(), v.float()
+                att = (qf @ kf.transpose(-2, -1)) * (1.0 / math.sqrt(kf.size(-1)))
+                causal = torch.ones(T, T, dtype=torch.bool, device=att.device).tril()
+                att = att.masked_fill(~causal, float('-inf'))
+                att = F.softmax(att, dim=-1)
+                self.attn_probe(att)
+                y = att @ vf
+            y = y.to(orig_dtype)
+        elif self.fp32_attention:
             # Run only the attention core in fp32 (autocast disabled). Everything
             # outside this block stays in bf16 under the outer autocast.
             orig_dtype = x.dtype
