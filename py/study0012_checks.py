@@ -25,7 +25,7 @@ def main():
     ap.add_argument('--snapshot', required=True, help='glob')
     ap.add_argument('--compare_step', type=int, required=True)
     ap.add_argument('--tokenizer_from', required=True)
-    ap.add_argument('--probe_batch', default='doc/0012_probe_batch.json')
+    ap.add_argument('--probe_batch', default='doc/0013_probe_batch_v2.json')
     args = ap.parse_args()
     snap = sorted(glob.glob(args.snapshot))[0]
     ck = torch.load(os.path.join(args.run_dir, 'model_final.pt'), map_location='cpu', weights_only=False)
