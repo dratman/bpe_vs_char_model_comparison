@@ -1,0 +1,557 @@
+{
+ "meta": {
+  "corpus": "/home/owner/bpe_vs_char_model_comparison/txt_local/corpus_high_quality_uppercase_2026_05_08.txt",
+  "corpus_chars": 1265346119,
+  "heldout_frac": 0.01,
+  "heldout_cut_offset": 1252692657,
+  "seed": 20261107,
+  "passage_chars": 1024,
+  "bpe_vocab_size": 8192,
+  "kinds": {
+   "prose": 16,
+   "morphology": 16,
+   "short_sentence": 16,
+   "repetition": 16
+  },
+  "scoring": {
+   "morphology": "count of lowercase words (len>=4) ending in -ing/-ed/-s/-es/-ly/-ness/-tion or starting un-/re-/dis-, per 1024-char window; top 16 non-overlapping tiled windows",
+   "short_sentence": "lowest mean sentence length in words (split on . ! ?), among windows with >=12 sentences",
+   "prose": "16 random non-overlapping windows starting at a word start",
+   "repetition": "period of exactly 512 chars ' w1 w2 .. wk' (words uniform from the 1000 most common words of the training text), repeated twice"
+  },
+  "filter": "windows must be >=88% letters+spaces and <=8 newlines (except repetition)",
+  "version": 2,
+  "derived_from": "doc/0012_probe_batch.json (sha256 419289c10a0830ca52ceddcd9740e50c6d5d9fbe1da8e3cfac76fea97596d7ca)",
+  "short_sentence_v2": "lowest mean sentence length among windows with >=12 sentences, after rejecting windows with >2 'X.' initials, a CHAPTER/BOOK/PART/ACT/SCENE/roman-numeral line, >1 colon, >25% short (<30 char) complete lines, <2 sentences of >=3 words; then requiring a quotation mark or >=8 sentences of >=3 words"
+ },
+ "passages": [
+  {
+   "kind": "prose",
+   "held_offset": 9472469,
+   "corpus_offset": 1262165126,
+   "text": "masses. The Dublin club leaders are there. The troops were speedily overpowered; many refused to act.\n\"The military at Carrick have shown disaffection, and have been driven back, and their quarters fired.\n\"At Kilkenny the contest is proceeding, and here the mob are also said to be successful.\nThe writer of this History was in Dublin at that time, and remembers the city being thrown into a state of great excitement by the foregoing intelligence. The alarm was, however, of short duration, as the citizens of the Irish capital were better acquainted with the disposition of the people, and the probability of their sustaining a close contest with the troops. Besides, there existed confidence in the loyalty of the police, whether Roman Catholic or Protestant. An incident occurred in Dublin which greatly strengthened that confidence; it was thus related in the papers of the day:--\"A policeman who attempted to arrest three of the club-men, who were armed, was stabbed in several places, and now lies dangerously wounded",
+   "morph_score": 35,
+   "mean_sentence_words": 18.56
+  },
+  {
+   "kind": "prose",
+   "held_offset": 11087548,
+   "corpus_offset": 1263780205,
+   "text": "plunder shall not be retained. A blanket will be spread out here in front of me, and the regiment will pass along before me by twos. Each man, as he files by, will empty out the contents of his pockets, and swear solemnly that he has retained no object of spoil, whatever. After that is over, I shall have an inspection of kits and, if any article of value is found concealed, I will hand over its owner to the provost marshal, to be shot forthwith.\"\nThe operation took upwards of two hours. At Herrara's suggestion a table was brought out, a crucifix placed upon it, and each man as he came up, after emptying out his pockets, swore solemnly, laying his hand upon the table, that he had given up all the spoil he had collected.\nTerence could not help smiling at the scene the regiment presented, before the men began to file past. No small proportion of the men stripped off their coats, and unwound from their bodies rolls of silk, costly veils, and other stuffs of which they had taken possession. All these were laid dow",
+   "morph_score": 34,
+   "mean_sentence_words": 21.11
+  },
+  {
+   "kind": "prose",
+   "held_offset": 6380417,
+   "corpus_offset": 1259073074,
+   "text": "however, gave Caroline an opportunity of retaliation, which, as will be seen, she was not backward in exercising.\nThe first public act of the new king was to summon a council, at which the emblems of office, having been surrendered by the officers of the crown, were immediately restored to their former possessors. His majesty then made a declaration, in which, after having alluded to the demise of his father, and his own long exercise of the royal prerogative, he remarked that \"nothing but the support which he had received from parliament and the country, in times most eventful and circumstances most arduous, could inspire him with that confidence which his present situation demanded.\" He added, that he trusted the experience of the past would satisfy all classes of his people, that it would ever be his desire to promote their prosperity and happiness, as well as to maintain unimpaired the religion, laws, and liberties of the kingdom. This declaration, at the request of the council, was made public; and on Mo",
+   "morph_score": 32,
+   "mean_sentence_words": 34.6
+  },
+  {
+   "kind": "prose",
+   "held_offset": 7407422,
+   "corpus_offset": 1260100079,
+   "text": "elected in that portion of the empire, not more than twelve were Conservatives; nor could half that number be termed \"apostles of pledges.\" In Ireland, however, the Whigs were not so successful. O'Connell had denounced the ministers, even while the reform bill was in progress, as acting with insult and injustice towards Ireland in the measure of change meted out to her; and the refusal to abolish the Protestant established church in Ireland had converted him and his adherents into declared enemies. All their energies, therefore, were employed to return members who would either drive ministers from the helm, or drive them to sacrifice the church, and repeal the union. The consequence of his agitation was, that, while Mr. O'Connell was himself elected for Dublin, he brought over with him when parliament met some half-dozen of his own immediate relations, besides various demagogical dependents, as the representatives of Ireland. O'Connell's manners and language on this occasion were violent in the extreme. In a ",
+   "morph_score": 36,
+   "mean_sentence_words": 20.5
+  },
+  {
+   "kind": "prose",
+   "held_offset": 574395,
+   "corpus_offset": 1253267052,
+   "text": "let me linger by thy side; 'Nita, Juanita, be thou my own fair bride.\"\nThe song ceased and the murmur of the river came more clearly. Harry was drawn deeper and deeper into the old dim past. Lying there in the gorge, with only the river to be seen, the wilderness came back, and the whole land was clothed with the mighty forests. He brought himself back with an effort, when he saw Jarvis looking at him and smiling.\n\"'Tain't so bad down here on a spring night, is it, Harry?\" he said. \"Always purvidin', as I said, that it don't rain.\"\n\"Where did you get that song, Sam?\" asked Harry--they had already fallen into the easy habit of calling one another by their first names.\n\"From a travelin' feller that wandered up into our mount'ins. He could play it an' sing it most beautiful, an' I took to it right off. It grips you about the heart some way or other, an' it sounds best when you are out at night on a river like this. Harry, I know that you're goin' through our mountins to git to Richmond an' the war. Me an' that l",
+   "morph_score": 21,
+   "mean_sentence_words": 13.4
+  },
+  {
+   "kind": "prose",
+   "held_offset": 2514660,
+   "corpus_offset": 1255207317,
+   "text": "They were given the use of an internment camp which German war detenus had vacated, and with the help of Mr. B.C. Chatterjee, who was well known to that particular class of Indians for having constantly appeared as counsel for the defendants in the innumerable political prosecutions of the preceding decade, and had himself formed an Indian Committee for a similar purpose, they induced a large number of these young fellows to come to them. They were at first rather distrustful, but Mr. Chatterjee's political past and the warm-hearted sympathy of Mr. Rahu, an Indian Y.M.C.A. worker who was placed in charge of the hostel, soon disarmed their suspicions. They learnt to appraise at their real value the malicious rumours set afoot to prejudice them against their new friends, and began to respond cordially to a generous treatment, physical and moral, which was so unlike all that they had heard about Western methods. They were given food and lodging, newspapers, magazines, and books, and, when necessary, medical advi",
+   "morph_score": 31,
+   "mean_sentence_words": 13.23
+  },
+  {
+   "kind": "prose",
+   "held_offset": 12276084,
+   "corpus_offset": 1264968741,
+   "text": "The operator told her, with what Mary V called a perfectly intolerable tone of spite, that her \"party\" could not be located for her at present, as he had left town.\n\"And I hope to goodness he stays!\" gritted Mary V, slamming the receiver on its hook. \"With dad acting the way he did and treating Johnny like a dog, and with Johnny acting worse than dad does and treating me as if I were to blame for everything, I just wish men had never been born. I don't see what use they are in the world, except to drive a person raving distracted. Now, dad, just see what you have done!\" She confronted Sudden like a small fury. \"You wanted to teach Johnny a lesson, and you refused to let me see him while he was in jail, just because he told you to go somewhere. And you know perfectly well that you swore worse about him. And he did not plan to elope. He--he just did it because I was right there and--handy. And now see what you've done! You wouldn't let me go to him, and now he's out, and he has left town, and nobody knows where",
+   "morph_score": 21,
+   "mean_sentence_words": 15.62
+  },
+  {
+   "kind": "prose",
+   "held_offset": 10200922,
+   "corpus_offset": 1262893579,
+   "text": "was on terms of intimacy with this remarkable man, and can testify that his powers of conversation were as varied and rare as his talents in the pulpit, and as a writer on religious subjects.\nHome Affairs: General excitement at the beginning of the year..... Declaration of War against Russia..... The Court..... Tidings of the loss of Captain Franklin..... Cholera..... Ireland: Party animosities and murders...... Colonies: Their General peace and prosperity..... Foreign Relations: The French Alliance..... War with Russia..... Battles by sea and land..... Dreadful sufferings of the British Army..... Parliament: Contests concerning the conduct of the war..... Break-up of the Aberdeen government..... lord Palmerston premier..... Deaths of Eminent Persons.\nThe year 1854 opened gloomily upon the United Kingdom. Sickness prevailed; bad harvests in western and southern Europe caused a dearth of food; and there was reason to fear that the fleets and armies of England and France would encounter those of Russia in open ",
+   "morph_score": 34,
+   "mean_sentence_words": 8.61
+  },
+  {
+   "kind": "prose",
+   "held_offset": 5240094,
+   "corpus_offset": 1257932751,
+   "text": "and people, under the limited principality of one personage, denominated Count. The Netherlander had shown an heroic devotion to his mother, Maria Theresa, and were warmly attached to his own person. Animated, however, by a restless spirit of innovation, he dared to interfere with their ancient privileges and religion--two objects of which they were particularly tenacious--and thus created a spirit of disaffection throughout all the Low Countries. Under the plea of reform he made innovations in their ecclesiastical establishments; suppressed the most venerated judicial institutions; appointed new and despotic tribunals; subverted the legislature, by abrogating the power of the assembly of states, and instituted a general government, with a court minister at its head; and finally attacked the clerical order, by overthrowing those institutions which were the very nursery of its priesthood. These sacrilegious acts roused the choler of the people; open rebellion was the natural result; and the people were victori",
+   "morph_score": 42,
+   "mean_sentence_words": 30.4
+  },
+  {
+   "kind": "prose",
+   "held_offset": 4091052,
+   "corpus_offset": 1256783709,
+   "text": "called; in Jersey the populace took possession of the treasury; and in Philadelphia, the very Quakers renounced their principles of peace, and took up arms as volunteers, under the pretence of self-defence. It was in this state of affairs that Lord North's conciliatory propositions arrived. These were read first in the assembly of Pennsylvania by governor Penn, who expressed an anxious wish that all due consideration should be given them, and that, if possible, they might become instruments of restoring tranquillity to the country. It was determined by the assembly of Pennsylvania, however, that the union of the colonies to which they were pledged should not be deserted. Similar results followed the reading of them in other provincial assemblies, and all concurred in referring them to the general congress, which was in itself a rejection, since its legality would never be acknowledged by the British parliament.\nThe general congress met on the 10th of May. Its first acts were to frame resolutions for organisin",
+   "morph_score": 36,
+   "mean_sentence_words": 23.43
+  },
+  {
+   "kind": "prose",
+   "held_offset": 3649889,
+   "corpus_offset": 1256342546,
+   "text": "of Pitt to an earldom as \"a fall up stairs\"--a fall which hurt him so much, that he would never be able to stand upright again. By his acceptance of a coronet, in truth, he greatly diminished his popularity. Burke undermined his influence in the city by two clever publications: in the first of these he gave an account of the late short administration, and in the second he gave a humorous and ironical reply to it, in which the disingenuous conduct of their successors was ably exposed. The wit of Chesterfield ably seconded the pen of Burke; and the Earl of Chatham soon found that though he was dignified by the king, he had shorn himself of all his honours in the sight of the people. The influence which the Earl of Bute was supposed to have had over him tended still more to blight his fair fame. He was taunted with being a willing agent of men whom he did not esteem, and his acceptance of a peerage was a never-failing source of invective. Moreover, in his negociations with his brother-in-law, Lord Temple, he had",
+   "morph_score": 24,
+   "mean_sentence_words": 26.71
+  },
+  {
+   "kind": "prose",
+   "held_offset": 11543162,
+   "corpus_offset": 1264235819,
+   "text": "dread. He could contrive to deal with them when he knew exactly what he wanted and could point it out; but in such a matter as this, requiring explanation and consultation, Matthew felt that he must be sure of a man behind the counter. So he would go to Lawson's, where Samuel or his son would wait on him.\nAlas! Matthew did not know that Samuel, in the recent expansion of his business, had set up a lady clerk also; she was a niece of his wife's and a very dashing young person indeed, with a huge, drooping pompadour, big, rolling brown eyes, and a most extensive and bewildering smile. She was dressed with exceeding smartness and wore several bangle bracelets that glittered and rattled and tinkled with every movement of her hands. Matthew was covered with confusion at finding her there at all; and those bangles completely wrecked his wits at one fell swoop.\n\"What can I do for you this evening, Mr. Cuthbert?\" Miss Lucilla Harris inquired, briskly and ingratiatingly, tapping the counter with both hands.\n\"Have you ",
+   "morph_score": 38,
+   "mean_sentence_words": 16.45
+  },
+  {
+   "kind": "prose",
+   "held_offset": 1197290,
+   "corpus_offset": 1253889947,
+   "text": "inquiry, talk, waiting, telephoning, with the same gentleman, a little fagged and with a kind of weary apathy in his eyes, returning by the short cut from the station across Claverings park to resume his connection with his abandoned roots. The essential process of the interval had been the correction of Mr. Britling's temporary delusion that the government of the British Empire is either intelligent, instructed, or wise.\nThe great \"Business as Usual\" phase was already passing away, and London was in the full tide of recruiting enthusiasm. That tide was breaking against the most miserable arrangements for enlistment it is possible to imagine. Overtaxed and not very competent officers, whose one idea of being very efficient was to refuse civilian help and be very, very slow and circumspect and very dignified and overbearing, sat in dirty little rooms and snarled at this unheard-of England that pressed at door and window for enrolment. Outside every recruiting office crowds of men and youths waited, leaning aga",
+   "morph_score": 37,
+   "mean_sentence_words": 23.57
+  },
+  {
+   "kind": "prose",
+   "held_offset": 9347373,
+   "corpus_offset": 1262040030,
+   "text": "to supply the labour market in British Guiana, at the expense of that colony; and, as our correspondent learned, at a rate which even reached the Negro himself, against whom they came to compete. Many agents were employed in their importation, and large bounties were given; such temptations led parties to crowd the colony with numbers of miserable persons, quite unable to perform any laborious employment. It was the general opinion that, owing to physical inability, scarcely one in a hundred of these Coolies was fit for manual labour; and whilst our correspondent was at Demerara a law was issued by the governor granting permission for labourers to enter Guiana from certain countries only, omitting the East Indies. The wretchedness of these immigrant Coolies was truly distressing; numbers of them might be seen wandering about, and living in the open air on charity, in George Town, congregating about the market-house and elsewhere, many of them covered with sores, and all but naked. Hospitals were subsequently ",
+   "morph_score": 37,
+   "mean_sentence_words": 33.0
+  },
+  {
+   "kind": "prose",
+   "held_offset": 5224796,
+   "corpus_offset": 1257917453,
+   "text": "the mischief we have clone to that unhappy continent; let us put an end at once to this inhuman traffic, and stop this effusion of human blood. The true way to virtue is to avoid temptation; let us, therefore, withdraw from these wretched Africans those temptations to fraud, violence, cruelty, and injustice which the slave-trade furnishes. Wherever the sun shines let us go round the world with him, diffusing our beneficence; but let us not traffic only that we may set kings against their subjects, and subjects against their kings, sowing discord in every village, fear and terror in every family, urging millions of our fellow-creatures to hunt each other for slaves, creating fairs and markets for human flesh through one whole continent of the world, and, under the name of policy, concealing from ourselves all the base iniquity of such a traffic.\" Mr. Pitt expressed his warm approbation of the manner in which the subject had been brought before the house, and confessed that the slave-trade must be abolished: an",
+   "morph_score": 32,
+   "mean_sentence_words": 34.4
+  },
+  {
+   "kind": "prose",
+   "held_offset": 1084316,
+   "corpus_offset": 1253776973,
+   "text": "go right up to London to-day. To an address in Bloomsbury. Then they will tell me how to go to Germany. I must pack and I must get the taxi-cab from the junction and I must go. Why are there no trains on the branch line on Sundays for me to go by it?\"\nAt lunch he talked politics. \"I am entirely opposed to the war,\" he said. \"I am entirely opposed to any war.\"\n\"Then why go?\" asked Mr. Britling. \"Stay here with us. We all like you. Stay here and do not answer your mobilisation summons.\"\n\"But then I shall lose all my country. I shall lose my papers. I shall be outcast. I must go.\"\n\"I suppose a man should go with his own country,\" Mr. Britling reflected.\n\"If there was only one language in all the world, none of such things would happen,\" Herr Heinrich declared. \"There would be no English, no Germans, no Russians.\"\n\"Or Idoists,\" said Herr Heinrich. \"I am not convinced of which. In some ways Ido is much better.\"\n\"Perhaps there would have to be a war between Ido and Esperanto to settle it,\" said Teddy.\n\"Who shall we",
+   "morph_score": 26,
+   "mean_sentence_words": 7.56
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 6578316,
+   "corpus_offset": 1259270973,
+   "text": "be referred to a select committee. This motion led to a debate, which, by adjournment, continued two evenings. In this debate Mr. Huskisson was compelled to vindicate the leading part he had taken in the measure under consideration, in which he was ably supported by Mr. Canning. This motion was lost; but soon afterwards Mr. Huskisson was obliged to vindicate the late policy pursued respecting the shipping interest and navigation laws. This arose from the complaints of the shipowners and others connected with the shipping interests, who believed themselves to be affected by the late navigation laws. They complained especially of the system which had been adopted of removing discriminating duties, and allowing articles of merchandise to be imported in foreign vessels, under the same burthens as if they had been imported in British bottoms, on condition of reciprocity in regard to ourselves. They contended in numerous petitions to parliament that such a reciprocal removal of discriminating duties was ruinous to ",
+   "morph_score": 60,
+   "mean_sentence_words": 16.1
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 2969008,
+   "corpus_offset": 1255661665,
+   "text": "pressed through the streets, staggering, confused, breaking into a run and turning to fire on their assailants as they retreated.\nHarassed, bleeding and exhausted, the regiment at last reached the Baltimore Ohio station. The fight continued without pause. Volleys of stones were hurled into the cars, shattering windows and paneling. The troops were ordered to lie down on the floors and keep their heads below the line of the windows. Maddened men pressed to the car windows, cursing and yelling their defiance. For half a mile along the tracks the crowd struggled and shouted, piling the rails with new obstructions as fast as policemen could remove them. Through a steady roar of hoots, yells and curses the train at last pulled slowly out, the troops pouring a volley into the crowd.\nIn this first irregular battle of the sections the Massachusetts regiment lost four killed and thirty-six wounded. The Baltimoreans lost twelve killed and an unknown number wounded.\nA wave of tremendous excitement swept the State of Mar",
+   "morph_score": 57,
+   "mean_sentence_words": 15.27
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 3525706,
+   "corpus_offset": 1256218363,
+   "text": "commonage, guaranteed to them in their leases; but afterwards the commons were enclosed, and no recompense was made to the tenants by the landlords. Thus provoked, and being joined by the idle and dissolute, these unhappy people sought to redress their own wrongs by acts of violence. Fences were destroyed, horses and arms were seized, cattle were maltreated, and obnoxious persons, especially tithe-proctors, were exposed to their vengeance. Many were stripped naked, and made to ride on horses with saddles formed of the skins of hedgehogs, or buried up to their chins in holes lined with thorns that were trodden down closely to their bodies. From their outrageous violence these people obtained the name of \"Levellers,\" but afterwards, from the circumstance of their wearing white shirts over their clothes for the purpose of disguise, they were termed \"White Boys.\" Their outrages demanded the strong arm of the law, and the royal troops were employed in their suppression. Many suffered the extreme penalty of the law",
+   "morph_score": 57,
+   "mean_sentence_words": 23.71
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 8884091,
+   "corpus_offset": 1261576748,
+   "text": "for every 100 value, those of British possessions were only to pay 5. By a third resolution the duties of customs, chargeable upon certain goods, wares, and merchandise imported into the United Kingdom, were to cease and determine. These goods, wares, and merchandise were--living animals: viz., asses, goats, kids, oxen, and bulls; cows, calves, horses, mares, geldings, colts, foals, mules, sheep, lambs, swine, and hogs, and sucking-pigs; bacon; beef (fresh and salted); bottles of earth and stone; casts of busts, statues, or figures; caviare; cranberries; cotton manufactures, not being articles wholly or in part made up, not otherwise charged with duty; enamel; gelatine; glue; hay; hides, tawed, curried, or in any way dressed, not otherwise enumerated; ink for printers; inkle (wrought); lamp-black; linen, manufactures of linen, or of linen mixed with cotton, or with wool, not particularly enumerated, or otherwise charged with duty, not being articles wholly or in part made up; magna-grocia ware; manuscripts; m",
+   "morph_score": 56,
+   "mean_sentence_words": 39.25
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 3400403,
+   "corpus_offset": 1256093060,
+   "text": "carrying out the Mayor's orders to destroy the liquor. Others decided that the best way to destroy it was to drink it. The gutters ran with liquor and the fumes filled the air.\nTo the rear guard of Lee's army under Ewell was left the task of blowing up the vessels in the James, and destroying the bridges across the river. The thunder of exploding mines and torpedoes now shook the earth. The ships were blown to atoms and the wharves fired.\nIn vain the Mayor protested against the firing of the great warehouses. Orders were orders, and the soldiers obeyed. The warehouses were fired, the sparks leaped to the surrounding buildings and the city was in flames.\nAs day dawned a black pall of smoke obscured the heavens. The sun's rays lighted the banks of rolling smoke with lurid glare. The roar of the conflagration now drowned all other sounds.\nThe upper part of Main Street was choked with pillagers--men with drays, some with bags, some rolling their stolen barrels painfully up the hills.\nA small squadron of Federal c",
+   "morph_score": 54,
+   "mean_sentence_words": 12.93
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 3127198,
+   "corpus_offset": 1255819855,
+   "text": "the noses of her guns.\nThe dim star-lit world with its fading moon suddenly burst into sheets of blinding, roaring flame. The mortar batteries moored in range, opened instantly in response--their eleven-inch shells, glowing with phosphorescent halo, circled and screamed and fell.\nThe black hulls belched their broadsides of yellow flame now. From battlement and casemate of forts rolled the thunder of their batteries, sending their heavy shots smashing into the wooden hulls.\nThrough the flaming jaws of hell, the fleet, with lungs throbbing with every pound of steam, dashed and passed the forts!\nFarragut led in the Hartford. But his work had only begun. He had scarcely reckoned on the little Confederate fleet. He found them a serious proposition.\nSuddenly above the flash and roar and the batteries of the forts and over the broadsides of the ships leaped a wall of fire straight into the sky.\nSlowly but surely the flaming heavens moved down on the attacking fleet lighting the yellow waters with unearthly glare.\nTh",
+   "morph_score": 53,
+   "mean_sentence_words": 12.92
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 7974129,
+   "corpus_offset": 1260666786,
+   "text": "an address to the crown, on the appointment of a minister of education; but neither this motion nor those of Messrs. Hume, Roebuck, and Clay, noticed at the opening of this article, were brought forward this session.\nFrom the last report of the commissioners of the poor-laws, which was made up to July, 1837, it appeared that up to that period, of 18,433 parishes or townships in England, 12,132 had been united under the provisions of the poor-law act. These parishes or townships contained a population of above ten millions and a half; while the number of those not yet included contained a population of two millions and a half. In Wales, of 1049 parishes, twenty-eight only remained not yet united. Those which were not yet brought under the new system chiefly consisted of extensive and populous parishes, administering relief to the poor under local acts; a few others united for rating and settlement; while others were included in the unions established under Gilbert's act. The report stated that the progress of ",
+   "morph_score": 53,
+   "mean_sentence_words": 24.57
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 8335625,
+   "corpus_offset": 1261028282,
+   "text": "to have the means of taking air and exercise at such times as should be deemed necessary by the surgeon, and was to be furnished with the means of moral and religious instruction, and with suitable books, as well as with labour or employment. All prisoners were to be divided into the following classes: namely, debtors in those prisons in which debtors might be lawfully confined; prisoners committed for trial; prisoners convicted and sentenced to hard labour; prisoners convicted and not sentenced to hard labour; and prisoners not included in either of the foregoing classes.\nMOTION FOR A COMMITTEE OF THE WHOLE HOUSE TO CONSIDER THE NATIONAL PETITION.\nOn the 12th of July Mr. Attwood moved for a committee of the whole house, to take into consideration a \"National Petition,\" which had been presented on the 14th of June. In making this motion, Mr. Attwood stated this petition was signed by 1,200,000 persons of the working classes. In it the petitioners urged five demands: namely, universal suffrage, vote by ballot,",
+   "morph_score": 53,
+   "mean_sentence_words": 21.25
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 2118440,
+   "corpus_offset": 1254811097,
+   "text": "require for their devotions, for everything centres in Kali-Kata round the popular shrine sacred to Kali, the black goddess of destruction, with a protruding blood-red tongue, who wears a necklace of human skulls and a belt of human hands and tongues, and, holding in one of her many hands a severed human head, tramples under foot the dead bodies of her victims. From the ghats, or long flights of steps, that descend to the muddy waters of a narrow creek which claims a more or less remote connection with the sacred Ganges, crowds of pious Hindus go through their ablutions in accordance with a long and complicated ritual, whilst high-caste ladies perform them in mid-stream out of covered boats and behind curtains deftly drawn to protect their purdah. Past an ancient banyan tree, from whose branches streamers of coloured stuffs depend with other votive offerings from grateful mothers who have not prayed for male offspring in vain, past the minor shrines of many favourite deities, a road lined with closely packed ",
+   "morph_score": 52,
+   "mean_sentence_words": 57.0
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 2967984,
+   "corpus_offset": 1255660641,
+   "text": "on April 19, to send a regiment through the streets of Baltimore to invade the South, and the indignant wrath of her citizens could not be controlled by the mayor or police. The street cars on which they were riding across town to the Camden station were thrown from the tracks. The crowds jammed the streets and shouted their curses in the face of the advancing volunteers. Stones were hurled into their ranks and two soldiers dropped. A volley was poured into the crowd and several fell dead and wounded.\nThe crowd went mad. Revolvers were drawn and fired point blank into the ranks of the soldiers and those who were unarmed rushed to arm themselves. From Frederic to Smith Streets the firing on both sides continued with the regular crash of battle. Citizens were falling, but even the unarmed men continued to press forward and hurl stones into the ranks of the New Englanders.\nThe troops began to yield before the determined onslaughts of the infuriated crowds, bewildered and apparently without real commanders. They ",
+   "morph_score": 52,
+   "mean_sentence_words": 15.91
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 6391383,
+   "corpus_offset": 1259084040,
+   "text": "third repealed various clauses in certain acts, which constituted the offences specified in them capital, and which were converted into simple felonies. Among the offences thus modified were, that of taking away any woman, whether maid, wife, or widow, for the sake of her fortune; the receiving of stolen goods; the destroying of trees, breaking down banks of rivers, and wounding of cattle; the sending of threatening letters; and all the capital offences created by the marriage act and laws of bankruptcy. For these offences, transportation, imprisonment, or hard labour were substituted for death, at the discretion of the judges. Thus the statute-book of England was purified from many grievous stains; but it was still blotted by many imperfections, and even to this day it contains much that requires purging by enlightened legislators.\nAfter having rendered important service to his country by his efforts to establish a system for detecting and remedying abuses in charitable funds and establishments, Mr. Brougham",
+   "morph_score": 52,
+   "mean_sentence_words": 26.67
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 8882039,
+   "corpus_offset": 1261574696,
+   "text": "in lieu of duties of customs then chargeable on certain articles, reduced duties were, from the passing of the bill, to be exacted. These articles consisted of what might be termed the necessaries and luxuries of life; and the duties were reduced on some to the amount of one hundred per cent. The articles enumerated in the resolution were agates, or cornelians; ale and beer; almonds; amber (manufactures of); arrowroot; band-string twist; bailey, pearled; bast-ropes; twines, and strands; beads: coral; crystal; jet; beer or mum; blacking; brass manufactures; brass (powder of); brocade of gold or silver; bronze (manufactures of); bronze-powder; buck-wheat: butter; buttons; candles; canes; carriages of all sorts; casks; cassiva-powder; catlings; cheese; china or porcelain; cider; citron; clocks; copper manufactures; copper or brass wire; cotton; crayons; crystal (cut and manufactured); cucumbers; fish; gauze of thread; hair, manufactures of hair or goats' wool, c.; hams; harp-strings; hats or bonnets of straw, si",
+   "morph_score": 52,
+   "mean_sentence_words": 38.25
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 3900601,
+   "corpus_offset": 1256593258,
+   "text": "put an end to anarchy, and the frequent troubles of Poland, that induced them to take this step; and they asserted that it was their intention of placing the ancient constitution of Poland and the national liberties upon a sure foundation. But their assertions ill agreed with their actions: all the world knew their motives, and that it was self alone which made them take such deep interest in the affairs of Poland. Nay, their very manifestoes declared their real designs. Cities, towns, provinces, rivers, and Mountains were to be taken from her, and placed under their own fostering care. But then it was stated by them, this was only done out of mercy to the nation. Having limited their kingdom thus, they promised that they would discharge the Poles from all other debts, dues, and demands, and for ever respect the integrity of the remnant of their dominions. Thus preaching peace, though war was in their hearts, the three powers invited the Poles of all ranks and orders to put up their swords, and to banish the ",
+   "morph_score": 51,
+   "mean_sentence_words": 25.43
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 7114494,
+   "corpus_offset": 1259807151,
+   "text": "menaces and demands, disturbances took place throughout the country. Lurking incendiaries wreaked their vengeance on property, the destruction of which only tended to aggravate the prevailing distress. Night after night they lighted up conflagrations, by which a large quantity of grain, and even of live stock, was consumed. Bands of men, also, still more daring than the incendiary, attacked machinery of all kinds, particularly thrashing machines, the use of which became so unpopular that insurance-offices refused a policy to those who kept them on their premises. The military force was increased in the disturbed counties, and a proclamation was issued, offering a reward of five hundred pounds for the conviction of an incendiary. A special commission, also, was ordered to proceed into those counties where the outrages were committed. The first offenders that were seized, being tried before county magistrates, met with lenity, from commiseration for their starving condition. But this only increased the evil; an",
+   "morph_score": 51,
+   "mean_sentence_words": 19.5
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 8619124,
+   "corpus_offset": 1261311781,
+   "text": "by which the union was to be assailed. This body, which was styled the National Loyal Repeal Association, consisted of associates, members, and volunteers. The distinction of these classes was marked out by money-payments; for it was the \"rent\" to which the agitator was mainly looking. Thus associates were to pay one shilling each; while members were to pay one pound each. Cards were issued to all sections of the association; but those issued to members, or those who paid the most \"rent,\" were distinct from the rest. This card bore the names of four places in Ireland, the scenes of fights in which the Irish had conquered either the Danes or the English. A printed document described these victories. In another part of the card the geographical position of Ireland was contrasted with various states with the following words underneath:--\"Ireland has not a parliament.\" The card further set forth the revenue expended by Ireland during the last great war in France, and stated that the commander-in-chief, and two-th",
+   "morph_score": 51,
+   "mean_sentence_words": 18.89
+  },
+  {
+   "kind": "morphology",
+   "held_offset": 10331379,
+   "corpus_offset": 1263024036,
+   "text": "Russian and Turkish empires, the western waters and shores of Russia were also the scenes of sanguinary contests. The vast fleet which, under the command of Admiral Dundas, proceeded rather too late in the spring to the Baltic, accomplished some important enterprises. The troops and stations of the Russians on the shores of Finland were shelled. Landing-parties ascended the creeks and rivers, and burned great quantities of naval stores, and destroyed or captured numerous small vessels, military or commercial. Sweaborg was bombarded, and a large portion of the fortifications destroyed, and many of their defenders slain. Cronstadt was approached as in the previous year; but was pronounced to be impregnable to the means at the disposal of the allies, vast as they were. The want of gun-boats and vessels of light draught was the chief ingredient in the elements of discomfiture which affected the allies. Throughout the year the allies hemmed in the Russian ships in their unassailable harbours of refuge, or as at Sw",
+   "morph_score": 51,
+   "mean_sentence_words": 20.62
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 1306110,
+   "corpus_offset": 1253998767,
+   "text": "was not thinking of Mr. Britling. She was talking of something else.\nShe was saying: \"It should not have been known I was here. There are spies everywhere. Everywhere. There is a spy now--or a lump very like a spy. They pretend it is a hot-water bottle. Pretext.... Oh, yes! I admit--absurd. But I have been pursued by spies. Endless spies. Endless, endless spies. Their devices are almost incredible.... He has never forgiven me....\n\"All this on account of a carpet. A palace carpet. Over which I had no control. I spoke my mind. He knew I knew of it. I never concealed it. So I was hunted. For years he had meditated revenge. Now he has it. But at what a cost! And they call him Emperor. Emperor!\n\"His arm is withered; his son--imbecile. He will die--without dignity....\"\nHer voice weakened, but it was evident she wanted to say something more.\n\"I'm here,\" said Mr. Britling. \"Your nephew Hughie.\"\nShe became suddenly an earnest, tender human being. \"My dear!\" she said, and seemed to search for something in her mind and ",
+   "morph_score": 29,
+   "mean_sentence_words": 5.0
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 5758632,
+   "corpus_offset": 1258451289,
+   "text": "trebling of all the assessed taxes. This measure met with strenuous opposition from a few members; but the bill passed by a large majority.\nRedemption of the Land-Tax, c. Irish Rebellion..... Invasion of Belgium..... Expedition to Minorca..... Battle of the Nile, c. Meeting of Parliament..... Income Tax sanctioned, c. Treaty with Russia..... Union with Ireland considered..... Prorogation of Parliament..... Campaign in Italy..... Campaign in Egypt..... Establishment of the Consular Government in France..... Affairs of India..... Meeting of Parliament..... Parliamentary Discussions..... Union with Ireland completed..... Prorogation of Parliament..... Campaign in Italy..... Capture of Malta..... Naval Operations..... Meeting of Parliament..... Motions for Peace, c.\nEarly this session Pitt proposed and carried a bill for the redemption of the land-tax. This was followed by a bill, proposed by Mr. Dundas, for enabling his majesty to call out a portion of the supplementary militia. A second bill was also carried, t",
+   "morph_score": 39,
+   "mean_sentence_words": 5.07
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 6449984,
+   "corpus_offset": 1259142641,
+   "text": "of Verona, and the Duke of Wellington was deputed to take that place. His grace nobly endeavoured to stem the despotic acts of the sovereigns assembled; but all his endeavours proved unavailing.\nThey still pursued the despotic measures they had commenced, and Spain especially was doomed to feel their tyranny.\nMeeting of Parliament..... Affairs of Agriculture and Commerce..... The Supplies..... The Catholic Question..... Affairs in Ireland..... Motions to Reform the Criminal Law..... Motion to Reform the Scotch Representation..... New Loudon Bridge Bill..... Motion respecting the Duty on the Leeward Islands..... Expenses of the Coronation..... Munificence of George IV...... Irish Tithe Commutation Bill, c.--Prorogation of Parliament..... State of the Country..... Meeting of Parliament..... Attack on Ministers with Reference to Spain, c. Financial Statements..... The Trade Question..... Alien Bill, c. Discussion on the Revolt in Demarara,c. State of the British Colonies..... East India Affairs.\nParliament reass",
+   "morph_score": 41,
+   "mean_sentence_words": 5.58
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 297760,
+   "corpus_offset": 1252990417,
+   "text": "Mason's Devoted Colored Servant. COLONEL ARTHUR WINCHESTER, Dick Mason's Regimental Commander. COLONEL LEONIDAS TALBOT, Commander of the Invincibles, a Southern Regiment. LIEUTENANT COLONEL HECTOR ST. HILAIRE, Second in Command of the Invincibles. ALAN HERTFORD, A Northern Cavalry Leader. PHILIP SHERBURNE, A Southern Cavalry Leader. WILLIAM J. SHEPARD, A Northern Spy. DANIEL WHITLEY, A Northern Sergeant and Veteran of the Plains. GEORGE WARNER, A Vermont Youth Who Loves Mathematics. FRANK PENNINGTON, A Nebraska Youth, Friend of Dick Mason. ARTHUR ST. CLAIR, A Native of Charleston, Friend of Harry Kenton. TOM LANGDON, Friend of Harry Kenton. GEORGE DALTON, Friend of Harry Kenton. BILL SKELLY, Mountaineer and Guerrilla. TOM SLADE, A Guerrilla Chief. SAM JARVIS, The Singing Mountaineer. IKE SIMMONS, Jarvis' Nephew. AUNT \"SUSE,\" A Centenarian and Prophetess. BILL PETTY, A Mountaineer and Guide. JULIEN DE LANGEAIS, A Musician and Soldier from Louisiana. JOHN CARRINGTON, Famous Northern Artillery Officer. DR. RUSSE",
+   "morph_score": 18,
+   "mean_sentence_words": 5.69
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 913847,
+   "corpus_offset": 1253606504,
+   "text": "She had English eyes--merciful eyes....\nThe English light, the English air, are merciful....\nThey tolerate old things and slow things and imperfect apprehensions. They aren't always getting at you....\nThey don't laugh at you.... At least--they laugh differently....\nWas England the tolerant country? With its kind eyes and its wary sidelong look. Toleration. In which everything mellowed and nothing was destroyed. A soft country. A country with a passion for imperfection. A padded country....\nEngland--all stuffed with soft feathers ... under one's ear. A pillow--with soft, kind Corners ... Beautiful rounded Corners.... Dear, dear Corners. Cissie Corners. Corners. Could there be a better family?\nHarps playing two-steps, and kind angels wrapped in moonlight.\nVery softly I and you, One turn, two turn, three turn, too. Off we go!....\nBreakfast was in the open air, and a sunny, easy-going feast. Then the small boys laid hands on Mr. Direck and showed him the pond and the boats, while Mr. Britling strolled about the l",
+   "morph_score": 39,
+   "mean_sentence_words": 5.75
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 10220398,
+   "corpus_offset": 1262913055,
+   "text": "its constituent regiments:--\nFirst Division.--Lieut.-gen. the Duke of Cambridge. First Brigade (under the command of Major-general Bentinck).--Grenadier Guards, 3rd battalion; Coldstream Guards, 1st battalion; Scots Fusilier Guards, 1st battalion. Second Brigade (under the command of Major-general Sir Colin Campbell).--42nd Royal regiment, or \"Royal Highland Watch;\" 78th regiment (Rosshire Buffs); 93rd, or Sutherland regiment.\nSecond Division.--Lieut.-gen. Sir De Lacy Evans. First Brigade (under the command of Major-gen. Pennefatuer).--30th regiment; 55th regiment; 95th regiment (a new regiment). The old 95th served throughout the Peninsula and at Waterloo. Second Brigade (under the command of Brigadier-general Adams).--41st regiment (Welsh); 47th regiment (The Lancashire); 49th regiment (The Princess Charlotte's).\nThird Division.--Lieut.-gen. Sir Richard England. First Brigade (under the command of Brigadier-general Ryhe).--1st regiment (The Royal regiment, formerly called Royal Scots); 28th regiment (North ",
+   "morph_score": 31,
+   "mean_sentence_words": 5.79
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 4572414,
+   "corpus_offset": 1257265071,
+   "text": "self-denial, to carry such a plan of economical reform.\nBurke's Plan of Economical Reform..... Rejection of Lord Shelburne's Motion for a Commission of Accounts...... Ministerial Bill for Commission of Accounts..... Bill for excluding Contractors from Parliament rejected..... Motions regarding Places and Pensions..... Political Altercations..... Debates on the Increase of Crown Influence..... Lord North's Proposal respecting the East India Company..... General Conway's Plan of Reconciliation with America..... Popular Rage against the Catholics; Riots in London, etc...... Measures adopted by Parliament arising out of the London Riots..... Parliament Prorogued..... Trial of Lord George Gordon and the Rioters..... Admiral Rodney's success against the Spaniards..... Armed Neutrality..... Rodney engages the French Fleet..... Expedition against South Carolina..... Battle of Camden, etc...... Affairs at New York..... Treason of Arnold and Fate of Major Andre..... Maritime Losses sustained by the British..... War wit",
+   "morph_score": 33,
+   "mean_sentence_words": 5.91
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 5192821,
+   "corpus_offset": 1257885478,
+   "text": "Impeachment of Warren Hastings..... Parliament prorogued..... Continental Affairs..... State of Parties in England..... Meeting of Parliament..... Debates on the Test and Corporation Acts..... Mr. Flood's Motion for Reform in Parliament..... East India Affairs..... Pitt's financial Statement, etc...... The Slave-Trade Question..... Disputes with Spain..... Impeachment of Warren Hastings..... Parliament prorogued and dissolved..... Settlement of Disputes with Spain..... Continental Affairs..... Progress of revolutionary Principles in England..... War in India..... Meeting of Parliament.\nMr. Cornwall, the speaker of the house, having expired on the 2nd of January, business received a temporary interruption. On the 5th of that month William Wyndham Grenville was proposed as his successor by the friends of administration, and Sir Gilbert Elliot, by the Whigs. The former was chosen by a majority of two hundred and fifteen against one hundred and forty-four.\nOn the day that the election of speaker took place, Pitt ",
+   "morph_score": 34,
+   "mean_sentence_words": 5.96
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 6664639,
+   "corpus_offset": 1259357296,
+   "text": "an amended form; and Lord Althorp adopted, this suggestion, and withdrew the resolutions for the present. Subsequently Mr. Littleton again proposed the resolutions for the regulation of committees on private bills which had been passed by the late parliament, and they were all adopted.\nDeath of the Duke of York..... Meeting of Parliament..... Catholic Question..... The Corn-laws..... Dissolution of the Ministry..... Re-assembling of Parliament..... Explanations of, and Hostility to the Ministry..... Opinions of His Majesty on the Catholic Question..... Motion on the Chancellor's Jurisdiction in Bankruptcy..... Motion regarding the Stamp Duty and Cheap Publications..... The Corn-law Question..... Financial Statements..... Corrupt Boroughs..... The Game-laws..... The Court of Chancery..... Prorogation of Parliament..... Death of Mr. Canning..... Administration of Lord Goderich..... Review of Foreign Policy.\nThe earliest public event of the year was the death of the Duke of York, the heir presumptive of the crow",
+   "morph_score": 34,
+   "mean_sentence_words": 5.96
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 940535,
+   "corpus_offset": 1253633192,
+   "text": "again! This time will do it!\nCecily away to the left had worked round Mr. Raeburn once more. Teddy, realising that things were serious, was tearing back to attack her.\nMr. Direck supported with silent intentness. \"Centre!\" cried Mr. Britling. \"Cen-tre!\"\n\"Mr. Direck!\" came her voice, full of confidence. (Of such moments is the heroic life.) The ball shot behind the hurtling Teddy. Mr. Direck stopped it with his foot, a trick he had just learnt from the eldest Britling son. He was neither slow nor hasty. He was in the half-circle, and the way to the goal was barred only by the dust-cloak lady and Mr. Lawrence Carmine. He made as if to shoot to Mr. Carmine's left and then smacked the ball, with the swiftness of a serpent's stroke, to his right.\nHe'd done it! Mr. Carmine's stick and feet were a yard away.\nThen hard on this wild triumph came a flash of horror. One can't see everything. His eye following the ball's trajectory....\nDirectly in its line of flight was the perambulator.\nThe ball missed the legs of the l",
+   "morph_score": 25,
+   "mean_sentence_words": 6.06
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 1491990,
+   "corpus_offset": 1254184647,
+   "text": "And they have killed Teddy and Hugh....\n\"They have killed millions. Millions--who had fathers and mothers and wives and sweethearts....\"\n\"Somehow I can't talk about this to Edith. It is ridiculous, I know. But in some way I can't.... It isn't fair to her. If I could, I would.... Quite soon after we were married I ceased to talk to her. I mean talking really and simply--as I do to you. And it's never come back. I don't know why.... And particularly I can't talk to her of Hugh.... Little things, little shadows of criticism, but enough to make it impossible.... And I go about thinking about Hugh, and what has happened to him sometimes... as though I was stifling.\"\n\"That's queer.... But perhaps--a son is different. Now I come to think of it--I've never talked of Mary.... Not to any one ever. I've never thought of that before. But I haven't. I couldn't. No. Losing a lover, that's a thing for oneself. I've been through that, you see. But a son's more outside you. Altogether. And more your own making. It's not losin",
+   "morph_score": 27,
+   "mean_sentence_words": 6.2
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 5086003,
+   "corpus_offset": 1257778660,
+   "text": "and France..... Pitt's Plan of Financial Reform..... Motion for the Repeal of the Corporation and Test Acts..... Affairs of the Prince of Wales..... Motion for Inquiry into the Abuses of the Post-Office..... Impeachment of Warren Hastings..... Parliament Prorogued..... Continental Affairs..... Meeting of Parliament..... Dispute between Government and the East India Company..... Pitt's Financial Measures--Additions made to the Bill for trying Controverted Elections..... Claims of the American Royalists, c. The Slave-Trade Question..... Charge against Sir Elijah Impey..... Impeachment of Warren Hastings..... Parliament Prorogued..... Continental Alliances..... Derangement of His Majesty..... Meeting of Parliament..... Debates on the regency\nParliament met on the 23rd of January. During the preceding year Fredrick the Great passed off the stage of life, having previously involved the French and English governments in disagreements, concerning the troubles which still existed in the Netherlands. No mention was ma",
+   "morph_score": 41,
+   "mean_sentence_words": 6.27
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 10221422,
+   "corpus_offset": 1262914079,
+   "text": "Gloucester), during the present century this regiment has been Irish; 38th regiment (1st Staffordshire). Second Brigade (under the command of Brigadier-general Sir J. Campbell).--44th regiment (East Essex), during the present century this regiment has been an Irish one; 56th regiment (West Essex); 68th regiment (Durham Light Infantry).\nFourth Division.--Lieut.-gen. Sir George Cathgakt. First Brigade (under the command of the senior Lieut.-col., as Brigadier).--20th regiment (East Devonshire); 21st regiment (Royal North British Fusiliers); 1st battalion Rifle Brigade. Second Brigade (under the command of the senior Lieut.-col., as Brigadier).--63rd regiment (West Suffolk); 46th regiment (South Devonshire): 57th regiment (West Middlesex).\nFifth, or Light Division.--Lieut.-gen. Sir George Brown. First Brigade (under the command of Brigadier-general Goldie).--Royal Rifle Brigade, 2nd battalion; 7th Royal Fusiliers; 23rd Royal Welsh Fusiliers; 33rd regiment (Duke of Wellington's own). Second Brigade (under the com",
+   "morph_score": 24,
+   "mean_sentence_words": 6.39
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 3914993,
+   "corpus_offset": 1256607650,
+   "text": "for the Christmas recess.\nThe Caribbs of St. Vincents..... Petition of Naval Officers..... Subscription to the Thirty-nine Articles..... Debates on East India Measures..... The Session closed..... Proceedings in the City..... Continental Politics-Irish Affairs..... Disputes with the American Colonies..... Meeting of Parliament..... Early Measures in this Session..... The Bostonian Petition..... Parliamentary Proceedings against America..... Bill for the Administration of Canada..... Prorogation of Parliament..... Proceedings at Boston..... General Election..... Meeting of the New Parliament.\nBefore the Christmas holidays, Alderman Trecothick mentioned in the house that the island of St. Vincent had been made a scene of iniquity and cruelty: our troops having committed against the Caribbs, a defenceless and innocent people, the most shocking barbarities. Other members spoke on the same subject, and said that the troops had been barbarously made to suffer even more evils than those they inflicted on the Indians",
+   "morph_score": 43,
+   "mean_sentence_words": 6.41
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 4380373,
+   "corpus_offset": 1257073030,
+   "text": "in England..... Meeting of Parliament..... Committee for taking the State of the Nation into Consideration..... Burke's Motion relative to the Employment of Indians..... Committee of Evidence in the House of Lords..... Lord North's Conciliatory Bills..... Intimation of the French Treaty with America..... Investigation of the State of the Navy..... Motion for excluding Contractors from Parliament..... Revision of the Trade of Ireland..... Bill for the Relief of the Roman Catholics..... Lord Chatham's last Appearance in the House of Lords..... Death of Lord Chatham, and posthumous Honours to his Memory..... The Duke of Richmond's Motion resumed..... The Session closed..... Proceedings in France..... Naval Operations in the British Channel..... Disgraceful Infraction of the Convention of Saratoga..... Lafayette's Expedition to Canada..... Unfortunate Action under Lafayette..... Sir Henry Clinton takes the Command of the British Troops..... Arrival of the Commissioners in America with the Conciliatory Bills..... ",
+   "morph_score": 36,
+   "mean_sentence_words": 6.41
+  },
+  {
+   "kind": "short_sentence",
+   "held_offset": 5359190,
+   "corpus_offset": 1258051847,
+   "text": "the English constitution, and it may serve as a warning to deter men from the exhibition of that malignant party-spirit which reflects disgrace on the best cause. \"Let your moderation be known unto all men.\"\nMeeting of Parliament..... Debates on the Russian Armament..... Debate on the Affairs of India..... Pitt's Financial Statement..... The Slave-Trade Question..... London Police Act..... Act to relieve the Scotch Episcopalians, c. Sheridan's motion respecting the Royal Burghs of Scotland..... Debates on Parliamentary Reform, c. Trial of Hastings, e...... Bill respecting the New Forest and Timber for the Navy..... Prorogation of Parliament..... Changes in the Ministry..... East India Affairs..... Progress of the French Revolution..... Affairs of Poland..... State of the Public Mind in England..... Meeting of Parliament..... The Alien Bill, c. Execution of the French King.\nThe British parliament did not assemble until the 31st of January. The first topic mentioned in the king's speech was the marriage of his ",
+   "morph_score": 32,
+   "mean_sentence_words": 6.42
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " saw turned german over five grew knew cried shall change set carefully less project turning because ten worth fight forth wrote station desire subject ii from after visit sister chief paper wind end fire ye quarter our duty ten heads probably when fine minutes young remained lake right without minutes other nobody fellow sister friends terrible garden books remained live may society art hours laid strong door thought only pay tried done just as themselves either thus bank returned parliament common instant saw turned german over five grew knew cried shall change set carefully less project turning because ten worth fight forth wrote station desire subject ii from after visit sister chief paper wind end fire ye quarter our duty ten heads probably when fine minutes young remained lake right without minutes other nobody fellow sister friends terrible garden books remained live may society art hours laid strong door thought only pay tried done just as themselves either thus bank returned parliament common instant",
+   "bpe_repeat_token_index": 84,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " so says filled need large massachusett circumstance walked straight beside according who for caught be things wind get trouble kill lives caught society back sight fighting wished blood taking behind wall does crowd taken very does six wood made wall green rich nine followed fire indians caught course hand twenty living south forward head themselves france mind help spot on clock places by remained colony wounded company shall does lines england live appeared journey even arms british mean doing front best so says filled need large massachusett circumstance walked straight beside according who for caught be things wind get trouble kill lives caught society back sight fighting wished blood taking behind wall does crowd taken very does six wood made wall green rich nine followed fire indians caught course hand twenty living south forward head themselves france mind help spot on clock places by remained colony wounded company shall does lines england live appeared journey even arms british mean doing front best",
+   "bpe_repeat_token_index": 88,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " fact any great early save head seemed noticed paid where home especially presently british one arm camp grew where project peace let william standing late ask about private opposite spoke return friend unless put broke question human crowd board chief plan rose wait times meet trying window yards my decided how places small alone pretty poor wild especially project entirely space field find met walk la men would up all months story terrible school party character followed rest ten became general sky turned fact any great early save head seemed noticed paid where home especially presently british one arm camp grew where project peace let william standing late ask about private opposite spoke return friend unless put broke question human crowd board chief plan rose wait times meet trying window yards my decided how places small alone pretty poor wild especially project entirely space field find met walk la men would up all months story terrible school party character followed rest ten became general sky turned",
+   "bpe_repeat_token_index": 86,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " train whatever although command ought sea certainly bound slowly take answer done attempt reach front darkness particular forth west soul no person joan result follow immediately towards working part best officers he truth massachusett knowledge what less grass be of officer die march opposite work asked have every late through order silent until cause cause covered speech made says light difficult beside darkness scarcely mrs hours call plan our through heavy pretty long round business attention lady says train whatever although command ought sea certainly bound slowly take answer done attempt reach front darkness particular forth west soul no person joan result follow immediately towards working part best officers he truth massachusett knowledge what less grass be of officer die march opposite work asked have every late through order silent until cause cause covered speech made says light difficult beside darkness scarcely mrs hours call plan our through heavy pretty long round business attention lady says",
+   "bpe_repeat_token_index": 82,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " general like desire stood hear do finished no them jack no latter known west natural kill tears these office wife room weather walk ah themselves attention had father mile hand towards off lost supposed third therefore arm shall work form you various ears greater move lady particular room behind malone knowing built sitting besides makes running three wait carried fall for tom slowly light joan present air natural sea seems learned one speaking dinner bank th care none ready pay for majesty bit unless july general like desire stood hear do finished no them jack no latter known west natural kill tears these office wife room weather walk ah themselves attention had father mile hand towards off lost supposed third therefore arm shall work form you various ears greater move lady particular room behind malone knowing built sitting besides makes running three wait carried fall for tom slowly light joan present air natural sea seems learned one speaking dinner bank th care none ready pay for majesty bit unless july",
+   "bpe_repeat_token_index": 90,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " horses thousand state various sense course condition change kill action presently bed wasn guns ii governor place dark isn part generally know understand cause hardly anything hear wish save ve been half point love seemed direction point under just church form henry plan stay struck dropped kells talking giving own name away myself fast part account kind governor merely east soldiers top supposed done poor table why feet reach stop caught must peace future time wasn although he book grew off something line horses thousand state various sense course condition change kill action presently bed wasn guns ii governor place dark isn part generally know understand cause hardly anything hear wish save ve been half point love seemed direction point under just church form henry plan stay struck dropped kells talking giving own name away myself fast part account kind governor merely east soldiers top supposed done poor table why feet reach stop caught must peace future time wasn although he book grew off something line",
+   "bpe_repeat_token_index": 87,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " money most meant train woman herself spite influence person certainly opened case as letter listen sun matter number perfect lips court into fact hope upon many everybody terms project king sight professor wife guard watch years situation from help get society ten words dear declared wonder th set people distance loved sent moving fine july tom fight following won somewhat gutenberg lying english bound neck ago mounted fifty need places plain food day gone ll feeling next conversation hot river th since to money most meant train woman herself spite influence person certainly opened case as letter listen sun matter number perfect lips court into fact hope upon many everybody terms project king sight professor wife guard watch years situation from help get society ten words dear declared wonder th set people distance loved sent moving fine july tom fight following won somewhat gutenberg lying english bound neck ago mounted fifty need places plain food day gone ll feeling next conversation hot river th since to",
+   "bpe_repeat_token_index": 88,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " regard de remained according ill british minutes also camp look head often seems neither very fact thousand heads inside couldn also scene matter were sort circumstance allowed supposed story cause few below boat box less queen walls effect his third take re natural thing black castle return rest truth drew general further dog believe came hold wonder captain still sometimes natural smile might dr mile got known along back person grass although shore purpose laid low ago believe after allowed kept first am regard de remained according ill british minutes also camp look head often seems neither very fact thousand heads inside couldn also scene matter were sort circumstance allowed supposed story cause few below boat box less queen walls effect his third take re natural thing black castle return rest truth drew general further dog believe came hold wonder captain still sometimes natural smile might dr mile got known along back person grass although shore purpose laid low ago believe after allowed kept first am",
+   "bpe_repeat_token_index": 85,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " class answer happened bright our own made who front take jack moving by hill but interest number us wanted south whole their now character say saw whether between sun bear he out won more top truth wanted nine ought real no mountains cannot class child wood led captain th opportunity instead wrong its queen carried miss right saying grace been our taking sky none little sir whatever goes followed unless itself face set shall allowed children orders more felt door close last upon she heard so joy high paris class answer happened bright our own made who front take jack moving by hill but interest number us wanted south whole their now character say saw whether between sun bear he out won more top truth wanted nine ought real no mountains cannot class child wood led captain th opportunity instead wrong its queen carried miss right saying grace been our taking sky none little sir whatever goes followed unless itself face set shall allowed children orders more felt door close last upon she heard so joy high paris",
+   "bpe_repeat_token_index": 90,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " says replied visit wonder later over couldn start carefully myself nature quickly rose it minutes leave good started two ye want secret her are happened lips every fast under moment beyond having away drew eight yourself who try cry shook with arm please reason trade officer does always english when sound know ready forth knowledge one jean son below george expected summer jack running experience an such le church certainly game couldn nobody outside camp ll art conversation manner from ah bound first whom says replied visit wonder later over couldn start carefully myself nature quickly rose it minutes leave good started two ye want secret her are happened lips every fast under moment beyond having away drew eight yourself who try cry shook with arm please reason trade officer does always english when sound know ready forth knowledge one jean son below george expected summer jack running experience an such le church certainly game couldn nobody outside camp ll art conversation manner from ah bound first whom",
+   "bpe_repeat_token_index": 89,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " laughed shook major army town pale lady along two age known time last poor live without kells till food royal shall waiting he presently food dear friend united various father nine warm bring de high turn yes situation winter brother year heart usual bright cause already weather pleasant space off better showed iii crowd up most should nature killed forth shook and eight persons supposed like sight distance long sound several especially taken continued child boys child kill above made hard attempt surprise laughed shook major army town pale lady along two age known time last poor live without kells till food royal shall waiting he presently food dear friend united various father nine warm bring de high turn yes situation winter brother year heart usual bright cause already weather pleasant space off better showed iii crowd up most should nature killed forth shook and eight persons supposed like sight distance long sound several especially taken continued child boys child kill above made hard attempt surprise",
+   "bpe_repeat_token_index": 86,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " following change hall english some him covered laid started hard gone steps stay given sight mountains added ears sleep peace right killed speaking seven professor united while returned what discovered unless been looked did beyond finally broke various colonel own arm remain made considered boy ve lower both every green reply at started not perhaps far garden said early toward indian cry now says my beginning person appearance looks simple thing ordered safe began germany remained village words least been following change hall english some him covered laid started hard gone steps stay given sight mountains added ears sleep peace right killed speaking seven professor united while returned what discovered unless been looked did beyond finally broke various colonel own arm remain made considered boy ve lower both every green reply at started not perhaps far garden said early toward indian cry now says my beginning person appearance looks simple thing ordered safe began germany remained village words least been",
+   "bpe_repeat_token_index": 85,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " paper no closed mouth account brother port rich ever quite want help am years instead massachusett once know port pleasure seen best round looked subject deal plain were london snow wife don our ii year taken every carried answered take understand come ve state hill ll game outside nothing important scene speech step station carry station dr going bright city world strength meant usual off orders seeing getting july called second below wrong doubt without times walls wrong soul especially son and public so paper no closed mouth account brother port rich ever quite want help am years instead massachusett once know port pleasure seen best round looked subject deal plain were london snow wife don our ii year taken every carried answered take understand come ve state hill ll game outside nothing important scene speech step station carry station dr going bright city world strength meant usual off orders seeing getting july called second below wrong doubt without times walls wrong soul especially son and public so",
+   "bpe_repeat_token_index": 89,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " colonies business fact worth time american blue ago leaving hour noticed crowd until some pleasure now youth beauty whatever supposed rich matter project miss speech three might somewhat give well poor last sudden dr had just poor men act like new attack change always wood summer henry bill surprise crowd making governor free soon lady bright early if james wished blood yes voice yards trouble iii turning going royal turn ly no part because gutenberg west grace supposed need presently way circumstance kept colonies business fact worth time american blue ago leaving hour noticed crowd until some pleasure now youth beauty whatever supposed rich matter project miss speech three might somewhat give well poor last sudden dr had just poor men act like new attack change always wood summer henry bill surprise crowd making governor free soon lady bright early if james wished blood yes voice yards trouble iii turning going royal turn ly no part because gutenberg west grace supposed need presently way circumstance kept",
+   "bpe_repeat_token_index": 92,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " appearance those river leave but had top greatest everything history friend states go broke trees going lay war terms carefully kill thirty happy known saying yes her less afternoon living had strength especially spite force one died henry boy you as sort building attention glass third feet visit queen lieutenant soldiers direction others twenty very learned use send spirit foot opened are however whose me strength country story closed escape without garden trees every gave forest quick action heads at cry appearance those river leave but had top greatest everything history friend states go broke trees going lay war terms carefully kill thirty happy known saying yes her less afternoon living had strength especially spite force one died henry boy you as sort building attention glass third feet visit queen lieutenant soldiers direction others twenty very learned use send spirit foot opened are however whose me strength country story closed escape without garden trees every gave forest quick action heads at cry",
+   "bpe_repeat_token_index": 83,
+   "bpe_aligned": true
+  },
+  {
+   "kind": "repetition",
+   "held_offset": null,
+   "corpus_offset": null,
+   "repeat_offset": 512,
+   "text": " two people all met iii mountains fear nine houses quarter clear lady beyond entered james started heart dick shook white office killed stopped led thus doing back wild matter she july in direction opposite garden straight number thou step closed late tone information caught opportunity nine suddenly dinner joy fire interest boat well mean blood came day finally top away clock they why hands then ran neck object silence scarcely england love moving because changed bed reply every closed afterwards turned ll two people all met iii mountains fear nine houses quarter clear lady beyond entered james started heart dick shook white office killed stopped led thus doing back wild matter she july in direction opposite garden straight number thou step closed late tone information caught opportunity nine suddenly dinner joy fire interest boat well mean blood came day finally top away clock they why hands then ran neck object silence scarcely england love moving because changed bed reply every closed afterwards turned ll",
+   "bpe_repeat_token_index": 88,
+   "bpe_aligned": true
+  }
+ ]
+}

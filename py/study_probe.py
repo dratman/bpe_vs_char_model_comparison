@@ -7,8 +7,11 @@ with the model's own tokenizer and, on request, runs it through a model under to
 
   * per layer / head / passage kind: mean attention entropy and mean effective number of attended
     positions (mean of e^H per query row; rows 1..n-2 of the input, row 0 is trivially 0);
-  * loss per passage kind in bits per character (total bits / len(text), 1024 per passage;
-    the first token/char of a passage is unscored: there is no context for it);
+  * loss per passage kind in bits per character. v2 probe batch (coupler-queue 0013): both tokenizers
+    are scored on the IDENTICAL character span of each passage, given the identical preceding text
+    (spans from the sidecar <probe>_spans.json: the characters after BPE token 0 up to the last BPE
+    token predicted inside the BPE window and inside the char window). bits/char = bits over exactly
+    those characters / span length. A batch without a sidecar (v1) falls back to the 0012 behaviour;
   * induction score per layer/head on repetition passages: mean attention from every second-copy
     input position j (token j equals token j-k) to key position j-k+1;
   * repetition improvement: bits/char of the second copy vs the first copy (each over 512 chars).
@@ -17,6 +20,7 @@ No random numbers are drawn, so the training RNG state is untouched.
 """
 import json
 import math
+import os
 
 import torch
 import torch.nn.functional as F
@@ -32,11 +36,25 @@ class ProbeRunner:
         self.device = device
         self.chunk = chunk
         self.kinds = [p['kind'] for p in self.passages]
-        self.n_chars = []    # characters covered by the (possibly truncated) token sequence
+        self.n_chars = []    # characters in the scored span
         self.n_truncated = 0
-        self.ids = []        # list of 1-D long tensors (full token sequence, length n_i)
+        self.ids = []        # list of 1-D long tensors (input + target tokens, length n_in + 1)
+        self.lo = []         # first input position whose target is scored
+        self.split = []      # input position that predicts the first element of the second copy
         self.rep_k = []      # token index where the second copy starts (repetition passages) else None
-        for p in self.passages:
+        span_path = probe_path[:-len('.json')] + '_spans.json' if probe_path.endswith('.json') else None
+        spans = None
+        if span_path and os.path.exists(span_path):
+            with open(span_path) as f:
+                sp = json.load(f)
+            spans = sp['spans']
+            ctxs = sp['meta']
+            want = ctxs['bpe_ctx'] if tokenizer.tokenizer_type == 'bpe' else ctxs['char_ctx']
+            assert max_input is None or max_input == want, \
+                f"spans were built for context {want}, run uses block_size {max_input}"
+            assert len(spans) == len(self.passages)
+        self.spans = spans
+        for i, p in enumerate(self.passages):
             text = p['text']
             if tokenizer.tokenizer_type == 'bpe':
                 enc = tokenizer.tokenizer.encode(text)
@@ -44,24 +62,41 @@ class ProbeRunner:
                 k = None
                 if p['kind'] == 'repetition':
                     ro = p['repeat_offset']
-                    k = next(i for i, (a, b) in enumerate(offs) if a >= ro)
+                    k = next(j for j, (a, b) in enumerate(offs) if a >= ro)
                     assert len(ids) == 2 * k and ids[:k] == ids[k:], "repetition passage not token-aligned"
             else:
                 ids = tokenizer.encode(text)
                 k = p['repeat_offset'] if p['kind'] == 'repetition' else None
-            covered = len(text)
-            if max_input is not None and len(ids) > max_input + 1:
-                # BPE passage longer than the model context: score only the first max_input
-                # predictions; bits/char then uses the characters those tokens cover.
-                ids = ids[:max_input + 1]
-                covered = offs[max_input][1]
-                self.n_truncated += 1
+            ro = p.get('repeat_offset')
+            if spans is not None:
+                s0, e0 = spans[i]['start'], spans[i]['end']
+                if tokenizer.tokenizer_type == 'bpe':
+                    m = spans[i]['bpe_pred_tokens']
+                    assert offs[1][0] == s0 and offs[m][1] == e0, "span does not match BPE token offsets"
+                    ids = ids[:m + 1]
+                    lo, split = 0, (k - 1 if k is not None else None)
+                else:
+                    ids = ids[:e0]               # inputs chars 0..e0-2 predict chars 1..e0-1
+                    lo, split = s0 - 1, (ro - 1 if ro is not None else None)
+                covered = e0 - s0
+            else:                                # v1 behaviour
+                covered = len(text)
+                if max_input is not None and len(ids) > max_input + 1:
+                    ids = ids[:max_input + 1]
+                    covered = offs[max_input][1]
+                    self.n_truncated += 1
+                lo, split = 0, (k - 1 if k is not None else None)
             self.n_chars.append(covered)
             self.ids.append(torch.tensor(ids, dtype=torch.long))
+            self.lo.append(lo)
+            self.split.append(split)
             self.rep_k.append(k)
         self.n_layer = None
         if self.n_truncated:
             print(f"ProbeRunner: {self.n_truncated} passages truncated to {max_input} input tokens")
+        if spans is not None:
+            print(f"ProbeRunner: shared scored spans from {span_path} "
+                  f"(span chars min/mean/max {min(self.n_chars)}/{sum(self.n_chars)/len(self.n_chars):.1f}/{max(self.n_chars)})")
 
     @torch.no_grad()
     def run(self, model, ctx):
@@ -99,7 +134,7 @@ class ProbeRunner:
             # but we keep rows 1..n-1 inclusive of last predicting row)
             row_ok = torch.zeros(len(idxs), T, dtype=torch.bool, device=self.device)
             for b in range(len(idxs)):
-                row_ok[b, 1:lens[b]] = True
+                row_ok[b, max(1, self.lo[idxs[b]]):lens[b]] = True
             kind_of = [self.kinds[i] for i in idxs]
             kind_masks = {k: torch.tensor([kk == k for kk in kind_of], device=self.device) for k in kinds}
 
@@ -149,15 +184,21 @@ class ProbeRunner:
             nll_bits = nll / math.log(2.0)
             for b, i in enumerate(idxs):
                 kname = self.kinds[i]
-                bits[kname] += float(nll_bits[b, :lens[b]].sum())
+                lo = self.lo[i]
+                bits[kname] += float(nll_bits[b, lo:lens[b]].sum())
                 chars[kname] += self.n_chars[i]
                 if kname == 'repetition':
-                    k = self.rep_k[i]
-                    # token t_m (m>=1) is predicted at input m-1
-                    rep_bits_first += float(nll_bits[b, :k - 1].sum())
-                    rep_bits_second += float(nll_bits[b, k - 1:lens[b]].sum())
-                    rep_chars_first += self.passages[i]['repeat_offset']
-                    rep_chars_second += self.n_chars[i] - self.passages[i]['repeat_offset']
+                    sp = self.split[i]
+                    ro = self.passages[i]['repeat_offset']
+                    # target m (m>=1) is predicted at input m-1; first copy = inputs lo..sp-1
+                    rep_bits_first += float(nll_bits[b, lo:sp].sum())
+                    rep_bits_second += float(nll_bits[b, sp:lens[b]].sum())
+                    if self.spans is not None:
+                        rep_chars_first += ro - self.spans[i]['start']
+                        rep_chars_second += self.spans[i]['end'] - ro
+                    else:
+                        rep_chars_first += ro
+                        rep_chars_second += self.n_chars[i] - ro
 
         out = dict(
             attn_entropy={k: (ent_sum[k] / max(row_cnt[k], 1)).tolist() for k in kinds},

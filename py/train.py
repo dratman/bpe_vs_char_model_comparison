@@ -153,6 +153,11 @@ def parse_args():
                        help='Probe-batch JSON (doc/0012_probe_batch.json); enables probe logging')
     parser.add_argument('--probe_interval', type=int, default=250,
                        help='Run the probe batch every this many steps (needs --probe_batch)')
+    parser.add_argument('--diverge_margin', type=float, default=0.0,
+                       help='Study mode: stop and mark the run diverged if held-out val bpc rises more '
+                            'than this far above its minimum (0 = off); NaN/inf also stops it')
+    parser.add_argument('--final_weights_only', action='store_true',
+                       help='Study mode: the final _final.pt holds model weights only (no optimizer)')
 
     # Bias option
     parser.add_argument('--no_bias', action='store_true',
@@ -465,6 +470,27 @@ def estimate_loss_continuous(model, train_data, val_data, batch_size, block_size
         for k in range(eval_iters):
             X, Y = get_batch_continuous(data, batch_size, block_size, device)
             logits, loss = model(X, Y)
+            losses[k] = loss.item()
+        out[split] = losses.mean()
+    model.train()
+    return out
+
+
+@torch.no_grad()
+def estimate_loss_study(model, train_data, val_data, batch_size, block_size, eval_iters, device, seed, ctx):
+    """Study-mode eval: a dedicated generator, re-seeded from --data_seed at every call, so the
+    same eval windows are used at every step and in every run with that seed (val = held-out region).
+    Returns mean loss in nats per token."""
+    out = {}
+    model.eval()
+    for j, (split, data) in enumerate([('train', train_data), ('val', val_data)]):
+        g = torch.Generator()
+        g.manual_seed(seed + 1_000_003 + j)
+        losses = torch.zeros(eval_iters)
+        for k in range(eval_iters):
+            X, Y = get_batch_study(data, batch_size, block_size, g, device)
+            with ctx:
+                _, loss = model(X, Y)
             losses[k] = loss.item()
         out[split] = losses.mean()
     model.train()
@@ -1237,6 +1263,20 @@ def main():
         print(f"[{get_timestamp()}] Probe logged at step {iter_num}: bpc " +
               ' '.join(f"{k}={v:.3f}" for k, v in rec['bpc'].items()))
 
+    val_bpt = (1.0 / math.log(2.0) / (study_info['heldout_chars'] / study_info['heldout_tokens'])) if study else None
+    study_eval_seed = (args.data_seed if args.data_seed is not None else (args.seed or 0))
+    val_hist = []            # (step, val bpc)
+    status = dict(diverged=False, reason=None)
+
+    def do_study_eval():
+        """Held-out val loss -> bits per character (val bpc = loss_nats * log2(e) / held-out chars per token)."""
+        ls = estimate_loss_study(model, train_data, val_data, args.batch_size, args.block_size,
+                                 args.eval_iters, device, study_eval_seed, ctx)
+        ls['val_bpc'] = float(ls['val']) * val_bpt
+        if not (math.isnan(ls['val_bpc']) or math.isinf(ls['val_bpc'])):
+            val_hist.append((iter_num, ls['val_bpc']))
+        return ls
+
     batch_hashes = []
 
     def get_study_batch():
@@ -1291,7 +1331,9 @@ def main():
 
         # Evaluate
         if iter_num % args.eval_interval == 0:
-            if args.mode == 'continuous':
+            if study:
+                losses = do_study_eval()
+            elif args.mode == 'continuous':
                 losses = estimate_loss_continuous(model, train_data, val_data,
                                                   args.batch_size, args.block_size, args.eval_iters, device)
             else:
@@ -1299,10 +1341,17 @@ def main():
                                        args.batch_size, args.eval_iters, device)
             epoch = calculate_epoch(iter_num, args.batch_size * args.grad_accum_steps, args.block_size, train_tokens)
             elapsed = format_elapsed(training_start_time)
-            print(f"[{get_timestamp()}] [{elapsed}] Step {iter_num:5d} | Epoch {epoch:6.2f} | train loss {losses['train']:.4f} | val loss {losses['val']:.4f} | lr {lr:.2e}")
+            print(f"[{get_timestamp()}] [{elapsed}] Step {iter_num:5d} | Epoch {epoch:6.2f} | train loss {losses['train']:.4f} | val loss {losses['val']:.4f}{(' | val bpc %.4f' % losses['val_bpc']) if study else ''} | lr {lr:.2e}")
 
             # Check for NaN
-            if math.isnan(losses['train']) or math.isnan(losses['val']):
+            if study and args.diverge_margin > 0 and val_hist and val_hist[-1][0] == iter_num:
+                vmin = min(v for _, v in val_hist)
+                if val_hist[-1][1] > vmin + args.diverge_margin:
+                    status.update(diverged=True, reason=f"val bpc {val_hist[-1][1]:.4f} > min {vmin:.4f} + {args.diverge_margin} at step {iter_num}")
+                    print(f"DIVERGED: {status['reason']}")
+                    break
+            if math.isnan(losses['train']) or math.isnan(losses['val']) or math.isinf(losses['val']):
+                status.update(diverged=True, reason=f"NaN/inf loss at step {iter_num}")
                 print("\n" + "!" * 60)
                 print("WARNING: NaN detected in loss! Stopping training.")
                 print("!" * 60)
@@ -1429,6 +1478,7 @@ def main():
             # Check for NaN
             if torch.isnan(micro_loss):
                 print(f"\n" + "!" * 60)
+                status.update(diverged=True, reason=f"NaN training loss at step {iter_num}")
                 print(f"WARNING: NaN detected at iteration {iter_num}! Stopping training.")
                 print("!" * 60)
                 break
@@ -1454,7 +1504,7 @@ def main():
         # Unscaled loss for logging (sum of micro_losses = original scale)
         loss = micro_loss * args.grad_accum_steps
 
-        if probe is not None and (iter_num + 1) % args.probe_interval == 0:
+        if probe is not None and ((iter_num + 1) % args.probe_interval == 0 or iter_num + 1 == args.max_iters):
             prev_w = [{n: p.detach().clone() for n, p in layer} for layer in block_matrices()]
         last_lr = lr
 
@@ -1502,8 +1552,21 @@ def main():
 
     # Snapshot at the final step if requested (loop exits before the top-of-loop check)
     maybe_snapshot(iter_num)
-    if probe is not None and iter_num % args.probe_interval == 0 and iter_num > resume_iter:
-        do_probe(iter_num, lr)
+    if probe is not None and iter_num > resume_iter and (iter_num % args.probe_interval == 0 or not status['diverged']):
+        do_probe(iter_num, lr)      # study mode also probes at the final step
+    if study and not status['diverged'] and not (val_hist and val_hist[-1][0] == iter_num):
+        fl = do_study_eval()
+        print(f"Final held-out val loss {float(fl['val']):.4f} (val bpc {fl['val_bpc']:.4f}) at step {iter_num}")
+    if study:
+        summary = dict(steps_done=iter_num, max_iters=args.max_iters, learning_rate=args.learning_rate,
+                       tokenizer=args.tokenizer, block_size=args.block_size, diverged=status['diverged'],
+                       diverged_reason=status['reason'],
+                       final_val_bpc=(val_hist[-1][1] if val_hist else None),
+                       min_val_bpc=(min(v for _, v in val_hist) if val_hist else None),
+                       val_history=val_hist, eval_windows=args.eval_iters * args.batch_size,
+                       train_seconds=time.time() - training_start_time)
+        with open(os.path.join(run_dir, 'run_summary.json'), 'w') as f:
+            json.dump(summary, f)
 
     # Final save
     final_epoch = calculate_epoch(iter_num, args.batch_size * args.grad_accum_steps, args.block_size, train_tokens)
@@ -1519,7 +1582,7 @@ def main():
     if iter_num > 0:
         final_checkpoint = {
             'model': raw_model.state_dict(),
-            'optimizer': optimizer.state_dict(),
+            'optimizer': None if (study and args.final_weights_only) else optimizer.state_dict(),
             'model_args': model_args,
             'iter_num': iter_num,
             'best_val_loss': best_val_loss,

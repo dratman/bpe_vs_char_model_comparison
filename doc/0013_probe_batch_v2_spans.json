@@ -1,0 +1,522 @@
+{
+ "meta": {
+  "bpe_ctx": 256,
+  "char_ctx": 1003,
+  "probe_sha256": "61b751fdc5a496f0bd0f9bdd96cb81a2affd918642ddbd35784302cac3c00368",
+  "rule": "start = end of BPE token 0; end = end of last BPE token that is predicted inside the BPE window (<= bpe_ctx predictions) and ends within char_ctx characters"
+ },
+ "spans": [
+  {
+   "index": 0,
+   "kind": "prose",
+   "start": 1,
+   "end": 999,
+   "length": 998,
+   "bpe_pred_tokens": 227
+  },
+  {
+   "index": 1,
+   "kind": "prose",
+   "start": 2,
+   "end": 1000,
+   "length": 998,
+   "bpe_pred_tokens": 245
+  },
+  {
+   "index": 2,
+   "kind": "prose",
+   "start": 3,
+   "end": 1001,
+   "length": 998,
+   "bpe_pred_tokens": 222
+  },
+  {
+   "index": 3,
+   "kind": "prose",
+   "start": 1,
+   "end": 1002,
+   "length": 1001,
+   "bpe_pred_tokens": 228
+  },
+  {
+   "index": 4,
+   "kind": "prose",
+   "start": 3,
+   "end": 983,
+   "length": 980,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 5,
+   "kind": "prose",
+   "start": 4,
+   "end": 1000,
+   "length": 996,
+   "bpe_pred_tokens": 234
+  },
+  {
+   "index": 6,
+   "kind": "prose",
+   "start": 3,
+   "end": 983,
+   "length": 980,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 7,
+   "kind": "prose",
+   "start": 3,
+   "end": 999,
+   "length": 996,
+   "bpe_pred_tokens": 247
+  },
+  {
+   "index": 8,
+   "kind": "prose",
+   "start": 3,
+   "end": 1000,
+   "length": 997,
+   "bpe_pred_tokens": 235
+  },
+  {
+   "index": 9,
+   "kind": "prose",
+   "start": 1,
+   "end": 998,
+   "length": 997,
+   "bpe_pred_tokens": 230
+  },
+  {
+   "index": 10,
+   "kind": "prose",
+   "start": 2,
+   "end": 1003,
+   "length": 1001,
+   "bpe_pred_tokens": 248
+  },
+  {
+   "index": 11,
+   "kind": "prose",
+   "start": 1,
+   "end": 996,
+   "length": 995,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 12,
+   "kind": "prose",
+   "start": 2,
+   "end": 1003,
+   "length": 1001,
+   "bpe_pred_tokens": 235
+  },
+  {
+   "index": 13,
+   "kind": "prose",
+   "start": 2,
+   "end": 1002,
+   "length": 1000,
+   "bpe_pred_tokens": 223
+  },
+  {
+   "index": 14,
+   "kind": "prose",
+   "start": 3,
+   "end": 1002,
+   "length": 999,
+   "bpe_pred_tokens": 235
+  },
+  {
+   "index": 15,
+   "kind": "prose",
+   "start": 2,
+   "end": 917,
+   "length": 915,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 16,
+   "kind": "morphology",
+   "start": 2,
+   "end": 1001,
+   "length": 999,
+   "bpe_pred_tokens": 229
+  },
+  {
+   "index": 17,
+   "kind": "morphology",
+   "start": 1,
+   "end": 1001,
+   "length": 1000,
+   "bpe_pred_tokens": 232
+  },
+  {
+   "index": 18,
+   "kind": "morphology",
+   "start": 1,
+   "end": 997,
+   "length": 996,
+   "bpe_pred_tokens": 238
+  },
+  {
+   "index": 19,
+   "kind": "morphology",
+   "start": 3,
+   "end": 812,
+   "length": 809,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 20,
+   "kind": "morphology",
+   "start": 1,
+   "end": 1002,
+   "length": 1001,
+   "bpe_pred_tokens": 251
+  },
+  {
+   "index": 21,
+   "kind": "morphology",
+   "start": 3,
+   "end": 999,
+   "length": 996,
+   "bpe_pred_tokens": 253
+  },
+  {
+   "index": 22,
+   "kind": "morphology",
+   "start": 2,
+   "end": 1002,
+   "length": 1000,
+   "bpe_pred_tokens": 232
+  },
+  {
+   "index": 23,
+   "kind": "morphology",
+   "start": 2,
+   "end": 1003,
+   "length": 1001,
+   "bpe_pred_tokens": 244
+  },
+  {
+   "index": 24,
+   "kind": "morphology",
+   "start": 2,
+   "end": 1003,
+   "length": 1001,
+   "bpe_pred_tokens": 254
+  },
+  {
+   "index": 25,
+   "kind": "morphology",
+   "start": 2,
+   "end": 1001,
+   "length": 999,
+   "bpe_pred_tokens": 223
+  },
+  {
+   "index": 26,
+   "kind": "morphology",
+   "start": 2,
+   "end": 995,
+   "length": 993,
+   "bpe_pred_tokens": 228
+  },
+  {
+   "index": 27,
+   "kind": "morphology",
+   "start": 2,
+   "end": 830,
+   "length": 828,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 28,
+   "kind": "morphology",
+   "start": 1,
+   "end": 1003,
+   "length": 1002,
+   "bpe_pred_tokens": 229
+  },
+  {
+   "index": 29,
+   "kind": "morphology",
+   "start": 3,
+   "end": 1001,
+   "length": 998,
+   "bpe_pred_tokens": 222
+  },
+  {
+   "index": 30,
+   "kind": "morphology",
+   "start": 2,
+   "end": 1003,
+   "length": 1001,
+   "bpe_pred_tokens": 225
+  },
+  {
+   "index": 31,
+   "kind": "morphology",
+   "start": 1,
+   "end": 1001,
+   "length": 1000,
+   "bpe_pred_tokens": 232
+  },
+  {
+   "index": 32,
+   "kind": "short_sentence",
+   "start": 3,
+   "end": 910,
+   "length": 907,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 33,
+   "kind": "short_sentence",
+   "start": 1,
+   "end": 920,
+   "length": 919,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 34,
+   "kind": "short_sentence",
+   "start": 2,
+   "end": 914,
+   "length": 912,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 35,
+   "kind": "short_sentence",
+   "start": 1,
+   "end": 608,
+   "length": 607,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 36,
+   "kind": "short_sentence",
+   "start": 3,
+   "end": 945,
+   "length": 942,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 37,
+   "kind": "short_sentence",
+   "start": 3,
+   "end": 824,
+   "length": 821,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 38,
+   "kind": "short_sentence",
+   "start": 4,
+   "end": 941,
+   "length": 937,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 39,
+   "kind": "short_sentence",
+   "start": 1,
+   "end": 938,
+   "length": 937,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 40,
+   "kind": "short_sentence",
+   "start": 2,
+   "end": 914,
+   "length": 912,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 41,
+   "kind": "short_sentence",
+   "start": 2,
+   "end": 866,
+   "length": 864,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 42,
+   "kind": "short_sentence",
+   "start": 3,
+   "end": 974,
+   "length": 971,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 43,
+   "kind": "short_sentence",
+   "start": 3,
+   "end": 904,
+   "length": 901,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 44,
+   "kind": "short_sentence",
+   "start": 1,
+   "end": 849,
+   "length": 848,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 45,
+   "kind": "short_sentence",
+   "start": 3,
+   "end": 988,
+   "length": 985,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 46,
+   "kind": "short_sentence",
+   "start": 2,
+   "end": 953,
+   "length": 951,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 47,
+   "kind": "short_sentence",
+   "start": 3,
+   "end": 922,
+   "length": 919,
+   "bpe_pred_tokens": 256
+  },
+  {
+   "index": 48,
+   "kind": "repetition",
+   "start": 4,
+   "end": 998,
+   "length": 994,
+   "bpe_pred_tokens": 164
+  },
+  {
+   "index": 49,
+   "kind": "repetition",
+   "start": 3,
+   "end": 1002,
+   "length": 999,
+   "bpe_pred_tokens": 171
+  },
+  {
+   "index": 50,
+   "kind": "repetition",
+   "start": 5,
+   "end": 998,
+   "length": 993,
+   "bpe_pred_tokens": 167
+  },
+  {
+   "index": 51,
+   "kind": "repetition",
+   "start": 6,
+   "end": 995,
+   "length": 989,
+   "bpe_pred_tokens": 159
+  },
+  {
+   "index": 52,
+   "kind": "repetition",
+   "start": 8,
+   "end": 1000,
+   "length": 992,
+   "bpe_pred_tokens": 174
+  },
+  {
+   "index": 53,
+   "kind": "repetition",
+   "start": 7,
+   "end": 1000,
+   "length": 993,
+   "bpe_pred_tokens": 169
+  },
+  {
+   "index": 54,
+   "kind": "repetition",
+   "start": 6,
+   "end": 1002,
+   "length": 996,
+   "bpe_pred_tokens": 170
+  },
+  {
+   "index": 55,
+   "kind": "repetition",
+   "start": 7,
+   "end": 1002,
+   "length": 995,
+   "bpe_pred_tokens": 165
+  },
+  {
+   "index": 56,
+   "kind": "repetition",
+   "start": 6,
+   "end": 1000,
+   "length": 994,
+   "bpe_pred_tokens": 173
+  },
+  {
+   "index": 57,
+   "kind": "repetition",
+   "start": 5,
+   "end": 999,
+   "length": 994,
+   "bpe_pred_tokens": 171
+  },
+  {
+   "index": 58,
+   "kind": "repetition",
+   "start": 8,
+   "end": 1002,
+   "length": 994,
+   "bpe_pred_tokens": 168
+  },
+  {
+   "index": 59,
+   "kind": "repetition",
+   "start": 10,
+   "end": 999,
+   "length": 989,
+   "bpe_pred_tokens": 165
+  },
+  {
+   "index": 60,
+   "kind": "repetition",
+   "start": 6,
+   "end": 995,
+   "length": 989,
+   "bpe_pred_tokens": 172
+  },
+  {
+   "index": 61,
+   "kind": "repetition",
+   "start": 9,
+   "end": 1002,
+   "length": 993,
+   "bpe_pred_tokens": 180
+  },
+  {
+   "index": 62,
+   "kind": "repetition",
+   "start": 11,
+   "end": 998,
+   "length": 987,
+   "bpe_pred_tokens": 160
+  },
+  {
+   "index": 63,
+   "kind": "repetition",
+   "start": 4,
+   "end": 1003,
+   "length": 999,
+   "bpe_pred_tokens": 171
+  }
+ ]
+}
