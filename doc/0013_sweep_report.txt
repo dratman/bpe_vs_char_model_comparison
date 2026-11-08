@@ -1,0 +1,33 @@
+| tokenizer | length | lr | final val bpc | final probe prose bpc | diverged | wall-clock |
+|---|---|---|---|---|---|---|
+| bpe | 3050 | 0.00025 | 1.4940 | 1.5245 | no | 2m50s |
+| bpe | 3050 | 0.0005 | 1.4362 | 1.4643 | no | 2m49s |
+| bpe | 3050 | 0.001 | 1.3902 | 1.4160 | no | 2m50s |
+| bpe | 3050 | 0.002 | 1.3767 | 1.3996 | no | 2m50s |
+| bpe | 3050 | 0.004 | 1.4614 | 1.4869 | no | 2m49s |
+| bpe | 12200 | 0.00025 | 1.2799 | 1.3121 | no | 10m58s |
+| bpe | 12200 | 0.0005 | 1.2581 | 1.2907 | no | 10m57s |
+| bpe | 12200 | 0.001 | 1.2366 | 1.2666 | no | 10m58s |
+| bpe | 12200 | 0.002 | 1.2346 | 1.2620 | no | 10m58s |
+| bpe | 12200 | 0.004 | 1.3977 | 1.4269 | no | 10m56s |
+| char | 3050 | 0.00025 | 1.6304 | 1.6417 | no | 12m35s |
+| char | 3050 | 0.0005 | 1.5409 | 1.5632 | no | 12m34s |
+| char | 3050 | 0.001 | 1.4963 | 1.5153 | no | 12m36s |
+| char | 3050 | 0.002 | 1.4371 | 1.4551 | no | 12m35s |
+| char | 3050 | 0.004 | 1.4768 | 1.4983 | no | 12m36s |
+| char | 12200 | 0.00025 | 1.3893 | 1.4162 | no | 49m28s |
+| char | 12200 | 0.0005 | 1.3522 | 1.3788 | no | 49m29s |
+| char | 12200 | 0.001 | 1.3329 | 1.3527 | no | 49m27s |
+| char | 12200 | 0.002 | 1.2961 | 1.3147 | no | 49m28s |
+| char | 12200 | 0.004 | 1.3118 | 1.3273 | no | 49m28s |
+best bpe 3050: lr 0.002  val bpc 1.3767
+best bpe 12200: lr 0.002  val bpc 1.2346
+best char 3050: lr 0.002  val bpc 1.4371
+best char 12200: lr 0.002  val bpc 1.2961
+20% optima: bpe 0.002, char 0.002; ratio 1; geometric mean 0.00200
+decision rule: within a factor of 2 -> candidate shared rate 0.002
+
+Check B at lr 0.002 (20% length): per-layer mean relative update, ratio char/bpe by phase
+  warmup (<610)  steps   2: per-layer median char/bpe = 0.82 0.89 0.91 0.87 0.89 0.92 0.92 0.90
+  610-4000       steps  13: per-layer median char/bpe = 0.77 0.95 0.93 0.98 1.02 1.04 1.15 1.26
+  4000-end       steps  34: per-layer median char/bpe = 0.79 0.90 0.96 1.00 0.98 0.99 1.04 1.12
